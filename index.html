@@ -67,6 +67,7 @@ input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px 
 .tag.bevestigd { display: none; }
 .tag.bron { background: var(--accent-soft); color: var(--accent); }
 .tag.aanname { background: var(--warn-bg); color: var(--warn); }
+.tag.zelf { background: rgba(176, 152, 255, 0.16); color: #c4b3ff; }
 
 /* keuzeschakelaar */
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); align-self: flex-start; flex-wrap: wrap; }
@@ -418,8 +419,9 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
   <section>
     <h2>Aannames</h2>
     <div class="keyline">
-      <span><span class="tag bron">bron</span> officiële bron of eerdere berekening</span>
-      <span><span class="tag aanname">aanname</span> startwaarde om te controleren</span>
+      <span><span class="tag bron">bron</span> officiële bron online, gecontroleerd bij het maken van dit dashboard</span>
+      <span><span class="tag aanname">aanname</span> standaardwaarde, controleer of die bij jullie past</span>
+      <span><span class="tag zelf">zelf invullen</span> gegevens die je zelf weet of moet opzoeken</span>
     </div>
     <div class="card" style="display:flex;flex-direction:column;gap:22px" id="assumptions"></div>
     <details class="table-view">
@@ -554,31 +556,31 @@ function runModel(p) {
     aowNetto: 1084, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67
   };
   var PRIMARY = [
-    { k: 'startkapitaal', label: 'Startkapitaal', unit: '€', min: 200000, max: 1500000, step: 5000, tag: 'bevestigd' },
-    { k: 'budget', label: 'Maandbudget netto, alles inbegrepen', unit: '€ per maand', min: 1500, max: 5000, step: 25, tag: 'bevestigd' },
-    { k: 'werk', label: 'Bijverdienen netto per maand', unit: '€ per maand tot 67', min: 0, max: 3000, step: 50, tag: 'aanname' }
+    { k: 'startkapitaal', label: 'Startkapitaal', unit: '€', min: 200000, max: 1500000, step: 5000, tag: 'zelf' },
+    { k: 'budget', label: 'Maandbudget netto, alles inbegrepen', unit: '€ per maand', min: 1500, max: 5000, step: 25, tag: 'zelf' },
+    { k: 'werk', label: 'Bijverdienen netto per maand', unit: '€ per maand tot 67', min: 0, max: 3000, step: 50, tag: 'zelf' }
   ];
   var GROUPS = [
-    { name: 'Partner 1: <span class="n1"></span>', fields: [
-      { k: 'leeftijdPaul', label: 'Leeftijd', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'bevestigd', hint: 'Huidige leeftijd.' },
+    { name: '<span class="pn1"></span>', fields: [
+      { k: 'leeftijdPaul', label: 'Leeftijd op dit moment', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'zelf', hint: 'Jouw leeftijd op dit moment, in hele jaren.' },
       { k: 'aowPaul', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Verwachte AOW-leeftijd voor jouw geboortejaar, zie svb.nl. Kan nog worden bijgesteld.' },
-      { k: 'pensioenPaul', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'bron', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
-      { k: 'pensioenLeeftijd', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
+      { k: 'pensioenPaul', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'zelf', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
+      { k: 'pensioenLeeftijd', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'zelf', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
     ] },
-    { name: 'Partner 2: <span class="n2"></span>', fields: [
-      { k: 'leeftijdDiana', label: 'Leeftijd', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'bevestigd', hint: 'Huidige leeftijd.' },
+    { name: '<span class="pn2"></span>', fields: [
+      { k: 'leeftijdDiana', label: 'Leeftijd op dit moment', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'zelf', hint: 'Jouw leeftijd op dit moment, in hele jaren.' },
       { k: 'aowDiana', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Verwachte AOW-leeftijd voor jouw geboortejaar, zie svb.nl. Kan nog worden bijgesteld.' },
-      { k: 'pensioenDiana', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'bron', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
-      { k: 'pensioenLeeftijdDiana', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
+      { k: 'pensioenDiana', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'zelf', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
+      { k: 'pensioenLeeftijdDiana', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'zelf', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
     ] },
     { name: 'Looptijd en AOW', fields: [
       { k: 'aowNetto', label: 'AOW netto per persoon per maand', unit: '€', min: 0, max: 2000, step: 1, tag: 'bron', hint: 'Samenwonend, volledige AOW, netto met heffingskorting, SVB 1 juli 2026.' },
-      { k: 'eindleeftijd', label: 'Leeftijd waarop het kapitaal mag zijn opgebruikt', unit: 'jaar', min: 80, max: 105, step: 1, tag: 'bevestigd', hint: 'Geldt voor de partner die je bij de ingrediënten kiest bij Looptijd. Het scenario loopt tot die partner deze leeftijd bereikt.' },
-      { k: 'restkapitaal', label: 'Gewenst restkapitaal op die leeftijd', unit: '€', min: 0, max: 1000000, step: 10000, tag: 'bevestigd', hint: 'Nul betekent dat het kapitaal opgebruikt mag zijn.' }
+      { k: 'eindleeftijd', label: 'Leeftijd waarop het kapitaal mag zijn opgebruikt', unit: 'jaar', min: 80, max: 105, step: 1, tag: 'zelf', hint: 'Geldt voor de partner die je bij de ingrediënten kiest bij Looptijd. Het scenario loopt tot die partner deze leeftijd bereikt.' },
+      { k: 'restkapitaal', label: 'Gewenst restkapitaal op die leeftijd', unit: '€', min: 0, max: 1000000, step: 10000, tag: 'zelf', hint: 'Nul betekent dat het kapitaal opgebruikt mag zijn.' }
     ] },
     { name: 'Inflatie en kosten', fields: [
-      { k: 'inflatie', label: 'Inflatie per jaar', unit: '%', min: 0, max: 8, step: 0.1, tag: 'bevestigd', hint: 'Standaard 2,4%, gebaseerd op het historische gemiddelde.' },
-      { k: 'kosten', label: 'Beleggingskosten per jaar', unit: '% van vermogen', min: 0, max: 3, step: 0.05, tag: 'bron', hint: 'Fondskosten en platform, uit de eerdere berekening in dit project. Belasting zit hier niet in.' }
+      { k: 'inflatie', label: 'Inflatie per jaar', unit: '%', min: 0, max: 8, step: 0.1, tag: 'aanname', hint: 'Standaard 2,4%, gebaseerd op het historische gemiddelde.' },
+      { k: 'kosten', label: 'Beleggingskosten per jaar', unit: '% van vermogen', min: 0, max: 3, step: 0.05, tag: 'aanname', hint: 'Fondskosten en platform. Vul de kosten van jullie eigen belegging in. Belasting zit hier niet in.' }
     ] }
   ];
   /* prijsniveaus 2025, EU27 = 100, Eurostat via SSB (voorlopig). min = kortste directe vlucht vanaf Amsterdam in minuten */
@@ -608,6 +610,8 @@ function runModel(p) {
   function applyNames() {
     Array.prototype.forEach.call(document.querySelectorAll('.n1'), function (e) { e.textContent = nm1(); });
     Array.prototype.forEach.call(document.querySelectorAll('.n2'), function (e) { e.textContent = nm2(); });
+    Array.prototype.forEach.call(document.querySelectorAll('.pn1'), function (e) { e.textContent = (names.n1 || '').trim() ? 'Partner 1: ' + nm1() : 'Partner 1'; });
+    Array.prototype.forEach.call(document.querySelectorAll('.pn2'), function (e) { e.textContent = (names.n2 || '').trim() ? 'Partner 2: ' + nm2() : 'Partner 2'; });
   }
   var RHO = 0.2, SIMN = 4000;
   var ASSET = [
@@ -660,7 +664,7 @@ function runModel(p) {
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function $(id) { return document.getElementById(id); }
 
-  function tagHtml(t) { return '<span class="tag ' + t + '">' + t + '</span>'; }
+  function tagHtml(t) { return '<span class="tag ' + t + '">' + (t === 'zelf' ? 'zelf invullen' : t) + '</span>'; }
   function seg(name, opts) {
     return '<div class="seg" role="radiogroup">' + opts.map(function (o) {
       return '<label class="seg-opt"><input type="radio" name="' + name + '" value="' + o.v + '"><span>' + o.l + '</span></label>';
@@ -677,7 +681,7 @@ function runModel(p) {
     '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Box 3 (belasting over vermogen)</span>' + tagHtml('aanname') + '</div>' +
     seg('box3', [{ v: '1', l: 'Gewogen' }, { v: '2', l: 'Nu (2026)' }, { v: '3', l: 'Slecht (2027)' }, { v: '0', l: 'Uit' }]) +
     '<p class="hint" id="b3-hint"></p></div>' +
-    '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Looptijd tot de eindleeftijd van</span>' + tagHtml('bevestigd') + '</div>' +
+    '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Looptijd tot de eindleeftijd van</span>' + tagHtml('zelf') + '</div>' +
     seg('eindDiana', [{ v: '1', l: '<span class="n2"></span>' }, { v: '0', l: '<span class="n1"></span>' }]) +
     '<p class="hint">De eindleeftijd zelf pas je aan onder Aannames. Het scenario loopt tot die partner de eindleeftijd bereikt.</p></div>';
   $('assumptions').innerHTML = GROUPS.map(function (g) {
@@ -1136,13 +1140,15 @@ function runModel(p) {
     el.addEventListener('click', function () { var k = el.getAttribute('data-k'); fanShow[k] = !fanShow[k]; renderFan(); });
   });
 
+  var keyVisible = true;
   function renderMini(m) {
     var el = $('mini'); if (!el) return;
     var cls = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : 'bad');
+    el.classList.toggle('show', !keyVisible && state.budget > 0);
     el.innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> kans op slagen</span><span>Nodig <b>' + short(m.req0) + '</b></span><span>Maximaal <b>' + eur(m.maxBudget) + '</b> per maand</span>';
   }
   if (window.IntersectionObserver) {
-    new IntersectionObserver(function (es) { $('mini').classList.toggle('show', !es[0].isIntersecting); }).observe($('key'));
+    new IntersectionObserver(function (es) { keyVisible = es[0].isIntersecting; $('mini').classList.toggle('show', !keyVisible && state.budget > 0); }).observe($('key'));
   }
 
   function update() {
