@@ -273,6 +273,8 @@ h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transf
   .mini { padding: 6px 12px; gap: 2px 12px; }
   .mini b { font-size: 14px; }
   button.reset { min-height: 44px; }
+  .tbl table { font-size: 12.5px; min-width: 0; }
+  .tbl th, .tbl td { padding: 6px 4px; font-size: 11px; }
   .fan-head { gap: 8px; }
   .fan-head .seg { display: inline-flex; align-self: flex-start; }
   .fan-head .seg-opt span { padding: 12px 14px; }
@@ -343,7 +345,7 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
   <div class="folds">
     <h2 class="more">Zo komt de uitslag tot stand</h2>
   <details class="fold">
-    <summary><span class="fold-t"><h2>Kapitaal in goede en slechte jaren</h2><span class="fold-s">Hoe ver de uitkomsten uiteen kunnen lopen</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <summary><span class="fold-t"><h2>Kapitaalverloop in goede en slechte jaren</h2><span class="fold-s">Bandbreedte van het kapitaal, met kans op slagen en maandelijkse opname</span></span><span class="chev" aria-hidden="true"></span></summary>
     <div class="fold-body">    
     <p class="sub" id="fan-sub"></p>
     <div class="fan-head">
@@ -351,7 +353,8 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
         <label class="seg-opt"><input type="radio" name="fanMode" value="nominal"><span>Nominaal</span></label>
         <label class="seg-opt"><input type="radio" name="fanMode" value="real" checked><span>Reëel</span></label>
       </div>
-      <div class="fan-box"><b id="fan-wr"></b><span>Opname in jaar 1</span></div>
+      <div class="fan-box"><b id="fan-succ"></b><span>Kans op slagen</span></div>
+      <div class="fan-box"><b id="fan-wr"></b><span id="fan-wr-s">Opname in jaar 1</span></div>
       <div class="fan-box" id="fan-assump"></div>
       <div class="fan-ctl"><button type="button" id="zin" aria-label="Inzoomen">+</button><button type="button" id="zout" aria-label="Uitzoomen">−</button></div>
     </div>
@@ -364,6 +367,10 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
       <span><i class="mark"></i>AOW-leeftijd</span>
     </div>
     <p class="hint" id="fan-note"></p>
+    <details class="table-view">
+      <summary>Bekijk per jaar als tabel</summary>
+      <div class="tbl" id="tbl"></div>
+    </details>
     </div>
   </details>
   <details class="fold">
@@ -374,22 +381,6 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
     <h3 class="subh" id="pf-tbl-h"></h3>
     <div class="tbl" id="pf-tbl"></div>
     <p class="hint" id="pf-note"></p>
-    </div>
-  </details>
-  <details class="fold">
-    <summary><span class="fold-t"><h2>Kapitaalverloop</h2><span class="fold-s">Jaar voor jaar hoe het kapitaal verloopt</span></span><span class="chev" aria-hidden="true"></span></summary>
-    <div class="fold-body">    
-    <p class="sub" id="chart-sub"></p>
-    <div class="legend">
-      <span><i></i>Jullie kapitaal</span>
-      <span><i class="dash"></i>Minimaal nodig om nooit onder nul te komen</span>
-      <span><i class="mark"></i>AOW-leeftijd</span>
-    </div>
-    <div class="chart" id="chart"></div>
-    <details class="table-view">
-      <summary>Bekijk als tabel</summary>
-      <div class="tbl" id="tbl"></div>
-    </details>
     </div>
   </details>
   <details class="fold">
@@ -889,9 +880,9 @@ function runModel(p) {
     idx.push(m.N);
     idx.forEach(function (t) {
       var draw = t < m.N ? m.draws[t] : null;
-      rows += '<tr><td>' + esc(nm1()) + ' ' + (state.leeftijdPaul + t) + ' · ' + esc(nm2()) + ' ' + (state.leeftijdDiana + t) + '</td><td class="' + (m.K[t] < 0 ? 'neg' : '') + '">' + eur(m.K[t]) + '</td><td>' + eur(m.R[t]) + '</td><td>' + (draw === null ? '–' : eur(draw)) + '</td></tr>';
+      rows += '<tr><td>' + (state.leeftijdPaul + t) + ' · ' + (state.leeftijdDiana + t) + '</td><td class="' + (m.K[t] < 0 ? 'neg' : '') + '">' + eur(m.K[t]) + '</td><td>' + eur(m.R[t]) + '</td><td>' + (draw === null ? '–' : eur(draw / 12)) + '</td><td>' + (draw === null ? '–' : eur(m.taxes[t])) + '</td></tr>';
     });
-    $('tbl').innerHTML = '<table><thead><tr><th>Leeftijd</th><th>Kapitaal</th><th>Minimaal nodig</th><th>Opname per jaar</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    $('tbl').innerHTML = '<p class="hint">Leeftijd van ' + esc(nm1()) + ' · ' + esc(nm2()) + '. Kapitaal bij gemiddeld rendement. Opname per maand: wat er na AOW en pensioen nog uit het kapitaal gaat; een min betekent dat er geld overblijft.</p><table><thead><tr><th>Leeftijd</th><th>Kapitaal</th><th>Minimaal nodig</th><th>Opname p/m</th><th>Box 3 p/j</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
   function renderLadder(m) {
@@ -1128,10 +1119,12 @@ function runModel(p) {
     hit.addEventListener('pointermove', show);
     hit.addEventListener('pointerdown', show);
     hit.addEventListener('pointerleave', function () { hv.style.display = 'none'; tip.style.display = 'none'; });
-    $('fan-wr').textContent = pct(m.eersteJaarOpname, 1);
+    $('fan-succ').textContent = pct(curSucc, 0);
+    $('fan-wr').textContent = eur(m.draws[0] / 12);
+    $('fan-wr-s').textContent = 'Opname per maand in jaar 1 (' + pct(m.eersteJaarOpname, 1) + ' van het kapitaal per jaar)';
     $('fan-assump').innerHTML = '<span class="ft">Aannames portefeuille</span><ul><li>' + Math.round(pf.w[0] * 100) + '% aandelen, ' + Math.round(pf.w[1] * 100) + '% obligaties, ' + Math.round(pf.w[2] * 100) + '% sparen</li><li>' + pct(state.kosten / 100, 1) + ' kosten per jaar</li><li>' + (B3LABEL[state.box3] || B3LABEL[1]) + '</li></ul>';
-    $('fan-sub').textContent = 'Zo kan het kapitaal verlopen als de rendementen wisselen, bij de portefeuille “' + pf.n.toLowerCase() + '”: ' + nf.format(SIMN) + ' doorrekeningen. Hoe donkerder de band, hoe waarschijnlijker. Tik of beweeg over de grafiek voor cijfers.';
-    $('fan-note').textContent = nominal ? 'Nominaal: bedragen zoals ze op dat moment op de rekening staan, bij ' + pct(infl, 1) + ' inflatie per jaar.' : 'Reîl: in euro’s van vandaag, zodat bedragen over de jaren vergelijkbaar blijven.';
+    $('fan-sub').textContent = 'Zo kan het kapitaal verlopen als de rendementen wisselen, bij de portefeuille “' + pf.n.toLowerCase() + '”: ' + nf.format(SIMN) + ' doorrekeningen. Elk jaar gaat de maandelijkse opname uit het kapitaal, na aftrek van AOW en pensioen, en daarvan gaat ook box 3 af. Hoe donkerder de band, hoe waarschijnlijker. Tik of beweeg over de grafiek voor cijfers.';
+    $('fan-note').textContent = nominal ? 'Nominaal: bedragen zoals ze op dat moment op de rekening staan, bij ' + pct(infl, 1) + ' inflatie per jaar.' : 'Reëel: in euro’s van vandaag, zodat bedragen over de jaren vergelijkbaar blijven.';
     Array.prototype.forEach.call(document.querySelectorAll('#fan-legend .lg'), function (el) { el.classList.toggle('off', !fanShow[el.getAttribute('data-k')]); });
   }
   Array.prototype.forEach.call(document.querySelectorAll('input[name="fanMode"]'), function (r) {
@@ -1163,8 +1156,7 @@ function runModel(p) {
     curSucc = simQuick(m, portStat(effIdx()), params()).succ;
     simText = 'Kans op slagen bij wisselende rendementen (' + portStat(effIdx()).n.toLowerCase() + '): ' + pct(curSucc, 0) + '.';
     renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
-    $('chart-sub').textContent = 'Jaarlijkse stappen tot ' + youngestName() + ' ' + state.eindleeftijd + ' is, onderaan staat de leeftijd van ' + youngestName() + '. Rendement na kosten en inflatie, voor belasting: ' + pct(m.g, 1) + ' per jaar.';
-    renderChart(m); renderTable(m); renderLadder(m);
+    renderTable(m); renderLadder(m);
     scheduleSim(false);
     persist();
   }
@@ -1176,12 +1168,12 @@ function runModel(p) {
   update();
   scheduleSim(true);
   var rt, lastW = 0;
-  function onResize() { clearTimeout(rt); rt = setTimeout(function () { var w = $('chart').clientWidth; if (last && w !== lastW) { lastW = w; renderChart(last); renderFan(); } }, 120); }
+  function onResize() { clearTimeout(rt); rt = setTimeout(function () { var w = $('fan').clientWidth; if (last && w !== lastW) { lastW = w; renderFan(); } }, 120); }
   Array.prototype.forEach.call(document.querySelectorAll('details.fold'), function (d) {
-    d.addEventListener('toggle', function () { if (d.open && last) { lastW = 0; renderChart(last); renderFan(); } });
+    d.addEventListener('toggle', function () { if (d.open && last) { lastW = 0; renderFan(); } });
   });
   window.addEventListener('resize', onResize);
-  if (window.ResizeObserver) new ResizeObserver(onResize).observe($('chart'));
+  if (window.ResizeObserver) new ResizeObserver(onResize).observe($('fan'));
 })();
 </script>
 </body>
