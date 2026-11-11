@@ -3,34 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Knopen tellen</title>
+<title>Knopen tellen V2</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: smalle kolom met bedieningsstrook bovenaan, uitkomst direct eronder, daarna fiscale vergelijking, grafiek, ladder en aannames. */
 :root {
-  --bg: #000000;
-  --surface: #0B0F10;
-  --surface2: #151B1D;
-  --ink: #EDF2F1;
-  --ink2: #B4C0C1;
-  --muted: #8A9A9C;
-  --line: #263033;
-  --grid: #1C2426;
-  --accent: #58B4BE;
-  --accent-soft: #14333A;
-  --good: #62C28A;
-  --good-bg: #12281A;
-  --warn: #E0A84C;
-  --warn-bg: #2D220C;
-  --bad: #E57A7A;
-  --bad-bg: #331818;
+  /* Take Stock V2: donkergroen met zand en koper, een horizon met een kronkelende weg als kop. */
+  --bg: #0D1A15;
+  --surface: #13241D;
+  --surface2: #1A2F26;
+  --ink: #F3ECDB;
+  --ink2: #D6CBB0;
+  --muted: #A59C84;
+  --line: #2B4438;
+  --grid: #1E3329;
+  --accent: #DDBB87;
+  --accent-soft: #2C3A2A;
+  --copper: #CF8553;
+  --good: #8FD3A4;
+  --good-bg: #123022;
+  --warn: #E8B45C;
+  --warn-bg: #352A10;
+  --bad: #F08A76;
+  --bad-bg: #3A1F19;
+  --hill1: #1B3328;
+  --hill2: #15291F;
+  --hill3: #101F18;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Hanken Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-num: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   color-scheme: dark;
 }
-html { background: #000; }
+html { background: var(--bg); }
 * { box-sizing: border-box; }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5;
@@ -67,7 +72,7 @@ input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px 
 .tag.bevestigd { display: none; }
 .tag.bron { background: var(--accent-soft); color: var(--accent); }
 .tag.aanname { background: var(--warn-bg); color: var(--warn); }
-.tag.zelf { background: rgba(176, 152, 255, 0.16); color: #c4b3ff; }
+.tag.zelf { background: rgba(150, 196, 224, 0.16); color: #A8CFE6; }
 
 /* keuzeschakelaar */
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); align-self: flex-start; flex-wrap: wrap; }
@@ -240,6 +245,34 @@ footer .tag a:hover { text-decoration: underline; }
   .knob input[type="number"] { width: 116px; }
 }
 
+
+/* Take Stock V2: merk, horizon en introductie */
+:root { --brand: var(--copper); }
+.brandbar { display: flex; flex-direction: column; gap: 16px; }
+.brandrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.wordmark { font-family: var(--f-display); font-size: 25px; font-weight: 700; letter-spacing: -0.015em; line-height: 1; }
+.v2 { font-family: var(--f-num); font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; letter-spacing: 0.06em; }
+.hashtag { font-size: 16px; font-weight: 700; color: #1E1209; background: var(--brand); padding: 9px 16px; border-radius: 99px; text-decoration: none; letter-spacing: 0.01em; white-space: nowrap; }
+.hashtag:hover { filter: brightness(1.08); }
+.hashtag:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.hero { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: linear-gradient(180deg, #0D1A15 0%, #14271E 58%, #1E3226 100%); padding: 28px 24px 150px; min-height: 280px; }
+.hero-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; max-width: 34rem; }
+.hero h1 { font-size: 38px; line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
+.hero h1 span { color: var(--accent); }
+.steps { margin: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--ink2); font-size: 15px; }
+.horizon { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; }
+.intro { display: flex; flex-direction: column; gap: 12px; }
+.intro h2 { font-size: 20px; }
+.route { list-style: none; margin: 0 0 0 7px; padding: 0 0 0 22px; border-left: 2px dashed var(--line); display: flex; flex-direction: column; gap: 10px; }
+.route li { position: relative; color: var(--ink); font-size: 16px; }
+.route li::before { content: ""; position: absolute; left: -30px; top: 0.42em; width: 10px; height: 10px; border-radius: 50%; background: var(--copper); box-shadow: 0 0 0 4px var(--bg); }
+.readmore summary { cursor: pointer; display: inline-block; font-weight: 600; font-size: 14px; color: var(--accent); padding: 8px 0; min-height: 44px; }
+.readmore summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.readmore-body { display: flex; flex-direction: column; gap: 10px; max-width: 60ch; color: var(--ink2); border-left: 2px solid var(--copper); padding-left: 14px; margin-top: 2px; }
+.readmore-body p { margin: 0; }
+.readmore-body b { color: var(--ink); }
+@media (max-width: 560px) { .wordmark { font-size: 22px; } .hashtag { font-size: 15px; padding: 8px 14px; } .hero { padding: 22px 18px 130px; } .hero h1 { font-size: 30px; } .horizon { height: 130px; } }
 /* uitklapbare inzichten */
 .folds { display: flex; flex-direction: column; gap: 10px; }
 h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 2px 2px; }
@@ -321,121 +354,572 @@ h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transf
 hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width: 100%; }
 .partners { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px 22px; }
 .partners input[type="text"] { width: 100%; text-align: left; font-family: var(--f-body); }
-.mini { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: none; justify-content: center; gap: 4px 18px; flex-wrap: wrap; padding: 8px 16px; background: #000; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink2); }
+.mini { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: none; justify-content: center; gap: 4px 18px; flex-wrap: wrap; padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink2); }
 .mini.show { display: flex; }
 .mini b { font-family: var(--f-num); font-weight: 500; font-size: 15px; color: var(--ink); }
 .mini .good { color: var(--good); } .mini .warn { color: var(--warn); } .mini .bad { color: var(--bad); }
 .seg-opt span span { display: inline; padding: 0; color: inherit; font-weight: inherit; background: none; }
+
+/* ===== Take Stock V2 als app: pagina's, navigatie, dashboard, stappen, introductie en rondleiding ===== */
+:root { --sage: #8FB89A; --sky: #8FB3C9; --tipmuted: #5E6B62; }
+[hidden] { display: none !important; }
+body { padding: 0 0 56px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 61; background: var(--bg); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); border-bottom: 1px solid var(--line); }
+.topbar-in { max-width: 1040px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a.brand { color: var(--ink); text-decoration: none; }
+.topbar .wordmark { font-size: 21px; }
+.tabs { display: flex; gap: 4px; margin-left: auto; }
+.tabs a { display: flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 99px; color: var(--ink2); text-decoration: none; font-weight: 600; font-size: 14px; }
+.tabs a svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tabs a:hover { color: var(--ink); background: var(--surface); }
+.tabs a[aria-current="page"] { background: var(--surface2); color: var(--ink); }
+.tabs a[aria-current="page"] svg { stroke: var(--copper); }
+.tabs a:focus-visible, a.brand:focus-visible, .nlink:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mini { position: static; border-bottom: 0; border-top: 1px solid var(--line); padding-block: 7px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1040px; margin: 0 auto; display: block; padding-top: 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.page { display: flex; flex-direction: column; gap: 18px; }
+.page-head { display: flex; flex-direction: column; gap: 4px; }
+.page-head h1 { font-size: 30px; }
+
+/* knoppen */
+.btn { font-family: var(--f-body); font-size: 15px; font-weight: 600; border-radius: 99px; padding: 10px 20px; min-height: 44px; cursor: pointer; border: 1px solid transparent; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; }
+.btn.primary { background: var(--copper); color: #1E1209; }
+.btn.primary:hover { filter: brightness(1.07); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { background: var(--surface2); }
+.btn.link { background: transparent; color: var(--accent); padding-inline: 6px; }
+.btn[disabled] { opacity: .4; cursor: default; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* dashboard */
+.dash { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.dash > * { min-width: 0; }
+.empty-cta { display: none; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-color: color-mix(in srgb, var(--copper) 45%, var(--line)); }
+.empty-cta h2 { font-size: 19px; margin-bottom: 4px; }
+.empty-text { flex: 1 1 280px; min-width: 0; }
+html.is-empty .empty-cta { display: flex; }
+.status { display: flex; flex-direction: column; gap: 10px; }
+.status.good { border-color: color-mix(in srgb, var(--good) 40%, var(--line)); }
+.status.warn { border-color: color-mix(in srgb, var(--warn) 40%, var(--line)); }
+.status.bad { border-color: color-mix(in srgb, var(--bad) 40%, var(--line)); }
+.status .verdict { background: transparent; border: 0; padding: 0; }
+.gauge { width: 100%; max-width: 260px; align-self: center; }
+.gauge svg { display: block; width: 100%; height: auto; }
+.gauge .g-bg { fill: none; stroke: var(--surface2); stroke-width: 15; stroke-linecap: round; }
+.gauge .g-val { fill: none; stroke-width: 15; stroke-linecap: round; }
+.gauge .g-val.good { stroke: var(--good); } .gauge .g-val.warn { stroke: var(--warn); } .gauge .g-val.bad { stroke: var(--bad); }
+.gauge .g-tick { stroke: var(--ink2); stroke-width: 1.6; opacity: .8; }
+.gauge .g-num { font-family: var(--f-num); font-size: 34px; font-weight: 500; fill: var(--ink); text-anchor: middle; }
+.gauge .g-lbl { font-family: var(--f-body); font-size: 12px; fill: var(--muted); text-anchor: middle; }
+.g-key { margin: -4px 0 0; text-align: center; font-size: 12px; color: var(--muted); }
+.panel { display: flex; flex-direction: column; gap: 12px; }
+.panel-head { display: flex; flex-direction: column; gap: 4px; }
+.panel-head h2 { font-size: 19px; }
+.panel p { margin: 0; }
+.panel .chart { background: transparent; border: 0; padding: 0; }
+.ph { min-height: 200px; display: grid; place-items: center; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; padding: 24px; font-size: 14px; }
+.chart .f-aow, .sw.f-aow { fill: var(--accent); background: var(--accent); }
+.chart .f-pen, .sw.f-pen { fill: var(--sage); background: var(--sage); }
+.chart .f-wk, .sw.f-wk { fill: var(--sky); background: var(--sky); }
+.chart .f-cap, .sw.f-cap { fill: var(--copper); background: var(--copper); }
+.chart .f-bud { stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 5 4; fill: none; }
+.chart .f-hl { fill: var(--ink); opacity: .08; }
+.sw.box { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.next { display: flex; flex-direction: column; gap: 10px; }
+.next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.nlink { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: var(--ink); }
+.nlink span { color: var(--muted); font-size: 13.5px; }
+.nlink b::after { content: " →"; color: var(--copper); }
+.nlink:hover { background: var(--surface2); }
+@media (min-width: 900px) {
+  .dash { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .dash > .empty-cta, .dash > .panel, .dash > .next { grid-column: 1 / -1; }
+  .dash > .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; }
+}
+
+/* inzicht */
+.empty-note { display: none; }
+.empty-note p { margin: 0; color: var(--ink2); }
+.empty-note a { color: var(--accent); }
+html.is-empty .empty-note { display: block; }
+html.is-empty .needs-data { display: none; }
+
+/* invullen in stappen */
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress span { display: block; height: 100%; width: 20%; background: var(--copper); transition: width .25s ease; }
+.stepper { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.stepper button { display: flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--line); color: var(--ink2); border-radius: 99px; padding: 5px 14px 5px 5px; font-family: var(--f-body); font-size: 13.5px; font-weight: 600; cursor: pointer; min-height: 40px; white-space: nowrap; }
+.stepper .num { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--surface2); color: var(--ink2); font-family: var(--f-num); font-size: 13px; }
+.stepper button.done .num { background: color-mix(in srgb, var(--copper) 30%, var(--surface2)); color: var(--ink); }
+.stepper button[aria-current="step"] { border-color: var(--copper); color: var(--ink); }
+.stepper button[aria-current="step"] .num { background: var(--copper); color: #1E1209; }
+.stepper button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.step { display: flex; flex-direction: column; gap: 16px; }
+.step-head { display: flex; flex-direction: column; gap: 4px; }
+.step-k { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--copper); font-weight: 600; }
+.step-head h2 { font-size: 23px; }
+.cols2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.pcard { display: flex; flex-direction: column; gap: 14px; }
+.pcard h3 { margin: 0; font-size: 13px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink2); font-weight: 600; }
+.step .knob .hint { margin: 0; }
+#fan-succ-box { display: none; }
+.status #v-sim, .status .verdict-head .scope:nth-child(2) { display: none; }
+.step .knobs > .knob.wide:first-child { border-top: 0; padding-top: 0; }
+.step-nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-top: 4px; }
+.step-nav #step-next { margin-left: auto; }
+
+/* introductie */
+.modal { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; background: rgba(4, 10, 8, 0.78); padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.modal[hidden] { display: none; }
+.modal-card { width: min(560px, 100%); max-height: 100%; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45); }
+.modal-hero { position: relative; height: 150px; background: linear-gradient(180deg, #0D1A15 0%, #14271E 60%, #1E3226 100%); border-radius: 20px 20px 0 0; overflow: hidden; }
+.modal-hero .horizon { height: 150px; }
+.modal-brand { position: absolute; left: 20px; top: 16px; display: flex; align-items: center; gap: 8px; }
+.modal-brand .wordmark { font-size: 20px; }
+.modal-body { padding: 18px 22px 20px; display: flex; flex-direction: column; gap: 12px; }
+.pay { font-size: 27px; line-height: 1.1; letter-spacing: -0.02em; }
+.pay span { color: var(--accent); }
+.q-h { margin: 6px 0 0; font-family: var(--f-display); font-size: 17px; font-weight: 600; }
+.modal .route li { font-size: 15px; }
+.modal-actions { display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 4px; }
+
+/* rondleiding */
+.tour { position: fixed; inset: 0; z-index: 95; }
+.tour[hidden] { display: none; }
+.tour-spot { position: fixed; border-radius: 14px; box-shadow: 0 0 0 9999px rgba(4, 10, 8, 0.76); outline: 2px solid var(--copper); outline-offset: 2px; pointer-events: none; }
+.tour-tip { position: fixed; width: min(340px, calc(100vw - 32px)); background: var(--ink); color: var(--bg); border-radius: 14px; padding: 16px 16px 12px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45); display: flex; flex-direction: column; gap: 6px; }
+.tour-tip h3 { margin: 0; font-family: var(--f-display); font-size: 18px; color: var(--bg); }
+.tour-tip p { margin: 0; font-size: 14.5px; line-height: 1.45; }
+.tour-count { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tipmuted); }
+.tour-arrow { position: absolute; width: 14px; height: 14px; background: var(--ink); transform: rotate(45deg); }
+.tour-arrow.up { top: -7px; }
+.tour-arrow.down { bottom: -7px; }
+.tour-arrow.none { display: none; }
+.tour-actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.tour-actions .sp { flex: 1 1 0; }
+.tour-tip .btn { min-height: 40px; padding: 8px 14px; font-size: 14px; }
+.tour-tip .btn.ghost { color: var(--bg); border-color: color-mix(in srgb, var(--bg) 30%, transparent); }
+.tour-tip .btn.ghost:hover { background: color-mix(in srgb, var(--bg) 8%, transparent); }
+.tour-tip .btn.link { color: var(--tipmuted); }
+.tour-tip .btn:focus-visible { outline-color: var(--bg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tour-spot { transition: top .25s ease, left .25s ease, width .25s ease, height .25s ease; }
+  .modal:not([hidden]) .modal-card { animation: pop .28s ease-out; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+}
+
+/* telefoon: tabbalk onderin */
+@media (max-width: 760px) {
+  body { padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+  .topbar-in { justify-content: space-between; }
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 70; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: var(--surface); border-top: 1px solid var(--line); padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); }
+  .tabs a { flex-direction: column; justify-content: center; gap: 3px; padding: 6px 2px; font-size: 11.5px; border-radius: 12px; min-height: 54px; }
+  .tabs a svg { width: 21px; height: 21px; }
+  .topbar .wordmark { font-size: 19px; }
+  .topbar .hashtag { font-size: 14px; padding: 7px 12px; }
+  .page-head h1 { font-size: 26px; }
+  .stepper .lbl { display: none; }
+  .stepper button { padding-right: 5px; }
+  #fan-assump { display: none; }
+  .pay { font-size: 24px; }
+  .gauge { max-width: 210px; }
+  .modal-hero, .modal-hero .horizon { height: 120px; }
+}
+@media (max-width: 380px) { .topbar .v2 { display: none; } }
+
+/* ===== Knopen tellen V2: licht pastelthema, knopen als beeldtaal ===== */
+:root {
+  /* Layout: app met vaste kopbalk, pagina's als kaartenstapel op een zachte pastelgrond; knopen en een leren buidel als terugkerend beeld */
+  --bg: #F3F7FB;
+  --surface: #FFFFFF;
+  --surface2: #EDF3F9;
+  --ink: #1D2B3A;
+  --ink2: #3D4D5F;
+  --muted: #5D6C7C;
+  --line: #DAE4EE;
+  --grid: #E7EDF4;
+  --accent: #2F6DAE;
+  --accent-soft: #E2EDF8;
+  --copper: #985A32;
+  --good: #22764A;
+  --good-bg: #E3F3E9;
+  --warn: #93600F;
+  --warn-bg: #FAEFD8;
+  --bad: #B0392F;
+  --bad-bg: #FAE4E0;
+  --pblue: #8DB8E8;
+  --peach: #F2A97E;
+  --sage: #9ED3B4;
+  --sky: #C9B8EE;
+  --butter: #F5D98B;
+  --tipmuted: #A9BACB;
+  --shadow: 0 1px 2px rgba(29, 43, 58, 0.04), 0 8px 24px rgba(29, 43, 58, 0.06);
+  color-scheme: light;
+}
+html, body { background: var(--bg); color: var(--ink); }
+.app-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(42rem 30rem at -8% -10%, rgba(141, 184, 232, 0.30), transparent 70%),
+    radial-gradient(36rem 26rem at 108% 18%, rgba(242, 169, 126, 0.20), transparent 70%),
+    radial-gradient(40rem 30rem at 50% 115%, rgba(158, 211, 180, 0.24), transparent 70%),
+    var(--bg); }
+body::before { background: var(--surface); }
+.card, .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
+.card { padding: 20px; }
+.kpi { padding: 14px 16px; }
+.kpi .k-label { color: var(--muted); }
+
+/* kopbalk en navigatie */
+.topbar { background: rgba(255, 255, 255, 0.96); border-bottom: 1px solid var(--line); }
+.topbar .wordmark { white-space: nowrap; }
+.brand .bmark { width: 34px; height: 34px; display: block; }
+.topbar .wordmark { color: var(--ink); }
+.v2 { color: var(--accent); border-color: var(--line); background: var(--surface); }
+.tabs a { color: var(--ink2); }
+.tabs a:hover { background: var(--surface2); color: var(--ink); }
+.tabs a[aria-current="page"] { background: var(--accent-soft); color: var(--accent); }
+.tabs a[aria-current="page"] svg { stroke: var(--accent); }
+.hashtag { background: var(--copper); color: #FFFFFF; box-shadow: 0 4px 14px rgba(152, 90, 50, 0.25); }
+.hashtag:focus-visible { outline-color: var(--accent); }
+.mini { background: rgba(255, 255, 255, 0.92); }
+.btn.primary { background: var(--accent); color: #FFFFFF; box-shadow: 0 4px 14px rgba(47, 109, 174, 0.22); }
+.btn.ghost { color: var(--ink); border-color: var(--line); background: var(--surface); }
+.btn.ghost:hover { background: var(--surface2); }
+.btn.link { color: var(--accent); }
+.seg { background: var(--surface2); border-color: var(--line); border-radius: 12px; }
+.seg-opt span { color: var(--ink2); }
+.seg-opt input:checked + span { background: var(--accent); color: #FFFFFF; }
+input[type="number"], input[type="text"] { background: var(--surface); border-color: #CBD7E3; border-radius: 10px; }
+input[type="range"] { accent-color: var(--accent); }
+.tag.bron { background: var(--accent-soft); color: var(--accent); }
+.tag.aanname { background: var(--warn-bg); color: var(--warn); }
+.tag.zelf { background: #EEE8FB; color: #5A45A6; }
+.tip { background: var(--surface); border-color: var(--line); box-shadow: 0 10px 30px rgba(29, 43, 58, 0.14); }
+.ph { background: repeating-linear-gradient(135deg, transparent 0 12px, rgba(141, 184, 232, 0.08) 12px 24px); border-color: #C9D7E5; }
+.krow.std { background: var(--surface2); }
+.eyebrow { color: var(--copper); }
+
+/* overzicht: kop met buidel */
+.ov-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 8px; padding: 0; overflow: hidden;
+  background: linear-gradient(120deg, #FFFFFF 0%, #EEF5FC 48%, #F8EFE6 100%); }
+.ov-text { padding: 26px 8px 26px 26px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ov-text h1 { font-size: 34px; line-height: 1.08; letter-spacing: -0.02em; }
+.ov-text .sub { color: var(--ink2); }
+.ov-art { align-self: end; min-width: 0; }
+.pouch-art { display: block; width: 100%; height: auto; }
+
+/* status met meter en knopenrij */
+.status { gap: 12px; }
+.status.good { border-color: color-mix(in srgb, var(--good) 35%, var(--line)); }
+.status.warn { border-color: color-mix(in srgb, var(--warn) 35%, var(--line)); }
+.status.bad { border-color: color-mix(in srgb, var(--bad) 35%, var(--line)); }
+.gauge .g-bg { stroke: var(--surface2); }
+.gauge .g-tick { stroke: var(--muted); }
+.knoprij { display: grid; grid-template-columns: repeat(10, minmax(0, 22px)); gap: 6px 6px; justify-content: center; color: #C3D0DD; }
+.knoprij svg { width: 100%; height: auto; display: block; }
+.knoprij-t { margin: 0; text-align: center; font-size: 13px; color: var(--ink2); }
+
+/* panelen en grafieken */
+.panel-head h2 { font-size: 20px; }
+.chart .f-aow, .sw.f-aow { fill: var(--pblue); background: var(--pblue); }
+.chart .f-pen, .sw.f-pen { fill: var(--sage); background: var(--sage); }
+.chart .f-wk, .sw.f-wk { fill: var(--sky); background: var(--sky); }
+.chart .f-cap, .sw.f-cap { fill: var(--peach); background: var(--peach); }
+.chart .f-bud { stroke: var(--ink); }
+.next-grid .nlink { position: relative; overflow: hidden; padding: 18px 18px 18px 64px; min-height: 92px; justify-content: center; }
+.nlink .nb { position: absolute; left: 16px; top: 50%; width: 34px; height: 34px; transform: translateY(-50%); }
+.nlink:nth-child(1) { background: linear-gradient(135deg, #FFFFFF, #E8F1FB); }
+.nlink:nth-child(2) { background: linear-gradient(135deg, #FFFFFF, #E9F6EF); }
+.nlink:nth-child(3) { background: linear-gradient(135deg, #FFFFFF, #FCEFE6); }
+.nlink b::after { color: var(--accent); }
+.empty-cta { background: linear-gradient(120deg, #FFFFFF, #EAF2FB); border-color: #C9DAEC; }
+
+/* invullen */
+.stepper button { background: var(--surface); border-color: var(--line); color: var(--ink2); }
+.stepper .num { background: var(--surface2); color: var(--ink2); }
+.stepper button.done .num { background: transparent; color: transparent; position: relative; }
+.stepper button.done .num::after { content: ""; position: absolute; inset: 1px; border-radius: 50%; background:
+  radial-gradient(circle at 38% 38%, #5E8FC6 0 1.6px, transparent 2px), radial-gradient(circle at 62% 38%, #5E8FC6 0 1.6px, transparent 2px),
+  radial-gradient(circle at 38% 62%, #5E8FC6 0 1.6px, transparent 2px), radial-gradient(circle at 62% 62%, #5E8FC6 0 1.6px, transparent 2px), var(--pblue);
+  box-shadow: inset 0 0 0 1.5px #5E8FC6, inset 0 0 0 5px var(--pblue), inset 0 0 0 6px rgba(94, 143, 198, 0.6); }
+.stepper button[aria-current="step"] { border-color: var(--accent); color: var(--ink); }
+.stepper button[aria-current="step"] .num { background: var(--accent); color: #FFFFFF; }
+.progress { background: var(--surface2); height: 6px; border-radius: 3px; }
+.progress span { background: linear-gradient(90deg, var(--pblue), var(--accent)); }
+.step-k { color: var(--copper); }
+.check { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; cursor: pointer; min-height: 40px; }
+.check input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; }
+.pcard .dep { display: flex; flex-direction: column; gap: 14px; }
+.only-note { font-size: 13px; color: var(--muted); margin: 0; }
+html.one-person .only2 { display: none !important; }
+html:not(.one-person) .only1 { display: none !important; }
+
+/* over en introductie */
+.hero { background: linear-gradient(120deg, #FFFFFF 0%, #EEF5FC 50%, #F8EFE6 100%); border-color: var(--line); padding: 26px 24px 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-height: 0; box-shadow: var(--shadow); }
+.hero h1 { color: var(--ink); }
+.hero h1 span, .pay span { color: var(--accent); }
+.hero .ov-art { margin: 0 -24px; }
+.route { border-left-color: #C9D7E5; }
+.route li::before { width: 14px; height: 14px; left: -32px; top: 0.3em; background:
+  radial-gradient(circle at 38% 38%, #D47F50 0 1.2px, transparent 1.6px), radial-gradient(circle at 62% 38%, #D47F50 0 1.2px, transparent 1.6px),
+  radial-gradient(circle at 38% 62%, #D47F50 0 1.2px, transparent 1.6px), radial-gradient(circle at 62% 62%, #D47F50 0 1.2px, transparent 1.6px), var(--peach);
+  box-shadow: 0 0 0 1.5px #D47F50, 0 0 0 5px var(--surface); }
+.page .route li::before { box-shadow: 0 0 0 1.5px #D47F50, 0 0 0 5px var(--bg); }
+.readmore-body { border-left-color: var(--peach); }
+.modal { background: rgba(29, 43, 58, 0.42); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.modal-card { background: var(--surface); border-color: var(--line); box-shadow: 0 30px 80px rgba(29, 43, 58, 0.28); }
+.modal-hero { height: auto; background: linear-gradient(120deg, #EEF5FC 0%, #F8EFE6 100%); padding-top: 44px; }
+.modal-brand .wordmark { color: var(--ink); white-space: nowrap; }
+.modal-brand .bmark { width: 30px; height: 30px; display: block; }
+@media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: end; } .hero .hero-text { padding-bottom: 30px; align-self: center; } .hero .ov-art { margin: 0 -24px 0 0; } }
+.modal-actions { position: sticky; bottom: -20px; background: linear-gradient(180deg, rgba(255,255,255,0), var(--surface) 30%); padding: 18px 0 20px; margin-bottom: -20px; }
+.tour-spot { box-shadow: 0 0 0 9999px rgba(29, 43, 58, 0.52); outline-color: var(--accent); }
+.tour-tip { background: var(--ink); color: #FFFFFF; }
+.tour-tip h3 { color: #FFFFFF; }
+.tour-arrow { background: var(--ink); }
+.tour-count { color: var(--tipmuted); }
+.tour-tip .btn.primary { background: #FFFFFF; color: var(--ink); box-shadow: none; }
+.tour-tip .btn.ghost { color: #FFFFFF; border-color: rgba(255, 255, 255, 0.35); background: transparent; }
+.tour-tip .btn.ghost:hover { background: rgba(255, 255, 255, 0.08); }
+.tour-tip .btn.link { color: var(--tipmuted); }
+.tour-tip .btn:focus-visible { outline-color: #FFFFFF; }
+footer a, .keyline a, .empty-note a { color: var(--accent); }
+
+@media (max-width: 760px) {
+  .tabs { background: rgba(255, 255, 255, 0.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 -6px 20px rgba(29, 43, 58, 0.06); }
+  .ov-hero { grid-template-columns: minmax(0, 1fr); }
+  .ov-art { order: -1; margin-top: 4px; }
+  .ov-text { padding: 4px 20px 22px; }
+  .ov-text h1 { font-size: 28px; }
+  .topbar .wordmark { font-size: 18px; }
+  .modal-hero { height: auto !important; padding-top: 40px; }
+  .gauge { max-width: 190px; }
+  .card { padding: 16px; }
+  .knoprij { grid-template-columns: repeat(10, minmax(0, 20px)); gap: 5px; }
+}
 </style>
 </head>
 <body>
 
-<div class="mini" id="mini" aria-live="off"></div>
-<div class="wrap">
-  <header>
-    <p class="eyebrow">Knopen tellen · versie 0.9</p>
-    <h1>Startkapitaal tegen maandbudget</h1>
-    <p class="lede">Bovenaan staat de uitslag. Onder de lijn staan de ingrediënten: pas die aan en alles erboven rekent mee. Bedragen zijn in euro's van vandaag.</p>
-  </header>
+<div class="app-bg" aria-hidden="true"></div>
+<header class="topbar" id="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#overzicht" aria-label="Knopen tellen, naar het overzicht">
+      <svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg>
+      <span class="wordmark">Knopen tellen</span><span class="v2">V2</span>
+    </a>
+    <nav class="tabs" aria-label="Pagina's">
+      <a href="#overzicht" id="tab-overzicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/></svg><span>Overzicht</span></a>
+      <a href="#invullen" id="tab-invullen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15zM13 7l4 4"/></svg><span>Invullen</span></a>
+      <a href="#inzicht" id="tab-inzicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19c4-1 5-8 8-8s4 4 8 2M4 5v14h16"/></svg><span>Inzicht</span></a>
+      <a href="#over" id="tab-over"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>Over</span></a>
+    </nav>
+    <a class="hashtag" href="https://www.instagram.com/explore/tags/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a>
+  </div>
+  <div class="mini" id="mini" aria-live="off"></div>
+</header>
 
-  <div class="stack" id="results">
-    <section aria-label="Uitkomst" aria-live="polite" id="key">
-      <div class="verdict good" id="verdict"></div>
-      <div class="kpis" id="kpis"></div>
-    </section>
-  <div class="folds">
-    <h2 class="more">Zo komt de uitslag tot stand</h2>
-  <details class="fold">
-    <summary><span class="fold-t"><h2>Kapitaalverloop in goede en slechte jaren</h2><span class="fold-s">Bandbreedte van het kapitaal, met kans op slagen en maandelijkse opname</span></span><span class="chev" aria-hidden="true"></span></summary>
-    <div class="fold-body">    
-    <p class="sub" id="fan-sub"></p>
-    <div class="fan-head">
-      <div class="seg" role="radiogroup" aria-label="Weergave">
-        <label class="seg-opt"><input type="radio" name="fanMode" value="nominal"><span>Nominaal</span></label>
-        <label class="seg-opt"><input type="radio" name="fanMode" value="real" checked><span>Reëel</span></label>
+<main class="wrap">
+
+  <section class="page" id="page-overzicht" aria-labelledby="ov-h">
+    <div class="card ov-hero">
+      <div class="ov-text">
+        <span class="eyebrow">Overzicht</span>
+        <h1 id="ov-h" data-j2="Hoe staan jullie ervoor?">Hoe sta je ervoor?</h1>
+        <p class="sub" id="ov-sub"></p>
       </div>
-      <div class="fan-box"><b id="fan-succ"></b><span>Kans op slagen</span></div>
-      <div class="fan-box"><b id="fan-wr"></b><span id="fan-wr-s">Opname in jaar 1</span></div>
-      <div class="fan-box" id="fan-assump"></div>
-      <div class="fan-ctl"><button type="button" id="zin" aria-label="Inzoomen">+</button><button type="button" id="zout" aria-label="Uitzoomen">−</button></div>
+      <div class="ov-art"><svg class="pouch-art" viewBox="10 92 630 278" role="img" aria-label="Een leren buidel waaruit knopen over tafel rollen" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="lth-ov" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C08A5F"/><stop offset=".55" stop-color="#A2683F"/><stop offset="1" stop-color="#7C4A2A"/></linearGradient><radialGradient id="mouth-ov" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#3B2213"/><stop offset="1" stop-color="#6A3F22"/></radialGradient><linearGradient id="tbl-ov" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEE3"/><stop offset="1" stop-color="#EBDCCB"/></linearGradient></defs><path d="M-10 214 C 160 198 470 196 650 210 L650 390 L-10 390 Z" fill="url(#tbl-ov)"/><path d="M-10 246 C 150 238 420 252 650 242" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.55"/><path d="M-10 284 C 150 278 420 290 650 280" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.47"/><path d="M-10 326 C 150 322 420 332 650 322" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.39"/><path d="M-10 362 C 150 360 420 368 650 358" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.31"/><ellipse cx="190" cy="300" rx="150" ry="26" fill="#1D2B3A" opacity=".10"/><path d="M58 262 C 34 220 44 160 98 132 C 150 105 214 112 258 150 C 272 162 284 176 292 190 C 300 206 296 226 282 238 C 252 266 200 292 140 296 C 102 298 74 286 58 262 Z" fill="url(#lth-ov)"/><path d="M96 170 C 130 150 180 150 222 168" fill="none" stroke="#D8A97F" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M86 236 C 130 252 190 250 240 230" fill="none" stroke="#6B3C20" stroke-width="2.4" stroke-linecap="round" opacity=".45"/><path d="M74 214 C 70 186 82 160 108 146" fill="none" stroke="#E2B98F" stroke-width="5" stroke-linecap="round" opacity=".35"/><path d="M70 258 C 50 222 58 170 104 146 C 150 122 208 128 248 160" fill="none" stroke="#F1D3B0" stroke-width="1.8" stroke-dasharray="6 5" opacity=".9"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="url(#mouth-ov)"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="none" stroke="#C99467" stroke-width="4"/><path d="M262 160 C 250 132 230 118 206 112" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M206 112 C 186 108 170 118 168 132 C 166 148 184 150 190 140" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M270 250 C 290 286 318 300 344 302" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><circle cx="346" cy="302" r="6" fill="#5B341D"/><path d="M346 306 l -6 16 M346 306 l 0 18 M346 306 l 6 16" stroke="#5B341D" stroke-width="2.4" stroke-linecap="round"/><g transform="translate(278.0 196.0) rotate(20) scale(1 0.80)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="2.9" r="1.3" fill="#5E8FC6"/></g><g transform="translate(290.0 216.0) rotate(-10) scale(1 0.80)"><ellipse cx="2" cy="3.1" rx="9.2" ry="5.0" fill="#1D2B3A" opacity=".10"/><circle r="9.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="6.5" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.1" cy="-3.8" rx="2.9" ry="1.4" fill="#fff" opacity=".45"/><circle cx="-2.3" cy="0.0" r="1.3" fill="#D47F50"/><circle cx="2.3" cy="0.0" r="1.3" fill="#D47F50"/></g><g transform="translate(318.0 238.0) rotate(1) scale(1 0.93)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(346.0 222.0) rotate(10) scale(1 0.90)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#9C86D2" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#9C86D2"/><circle cx="3.1" cy="0.0" r="1.4" fill="#9C86D2"/></g><g transform="translate(372.0 252.0) rotate(-31) scale(1 0.92)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#5E8FC6" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="4.7" r="2.2" fill="#5E8FC6"/></g><g transform="translate(404.0 232.0) rotate(-28) scale(1 0.86)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D1B25E" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D1B25E"/></g><g transform="translate(420.0 274.0) rotate(-33) scale(1 0.93)"><ellipse cx="2" cy="5.6" rx="16.3" ry="8.8" fill="#1D2B3A" opacity=".10"/><circle r="16.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.4"/><circle r="11.5" fill="none" stroke="#D98AA0" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.6" cy="-6.7" rx="5.1" ry="2.6" fill="#fff" opacity=".45"/><circle cx="-4.2" cy="0.0" r="1.9" fill="#D98AA0"/><circle cx="4.2" cy="0.0" r="1.9" fill="#D98AA0"/></g><g transform="translate(452.0 248.0) rotate(-13) scale(1 0.82)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(478.0 286.0) rotate(15) scale(1 0.87)"><ellipse cx="2" cy="7.0" rx="20.4" ry="11.0" fill="#1D2B3A" opacity=".10"/><circle r="20.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.8"/><circle r="14.4" fill="none" stroke="#D47F50" stroke-width="1.2" opacity=".75"/><ellipse cx="-7.0" cy="-8.4" rx="6.4" ry="3.2" fill="#fff" opacity=".45"/><circle cx="-5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="-5.2" cy="5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="5.2" r="2.4" fill="#D47F50"/></g><g transform="translate(506.0 252.0) rotate(-10) scale(1 0.83)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#74AFC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#74AFC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#74AFC6"/></g><g transform="translate(534.0 300.0) rotate(14) scale(1 0.83)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(560.0 262.0) rotate(32) scale(1 0.83)"><ellipse cx="2" cy="5.9" rx="17.3" ry="9.4" fill="#1D2B3A" opacity=".10"/><circle r="17.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.5"/><circle r="12.2" fill="none" stroke="#9C86D2" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.9" cy="-7.1" rx="5.4" ry="2.7" fill="#fff" opacity=".45"/><circle cx="-4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="-4.4" cy="4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="4.4" r="2.0" fill="#9C86D2"/></g><g transform="translate(592.0 296.0) rotate(-12) scale(1 0.90)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#5E8FC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#5E8FC6"/></g><g transform="translate(604.0 330.0) rotate(34) scale(1 0.93)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#D1B25E" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="4.7" r="2.2" fill="#D1B25E"/></g><g transform="translate(360.0 300.0) rotate(33) scale(1 0.89)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(440.0 330.0) rotate(-34) scale(1 0.94)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#74AFC6" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="3.9" r="1.8" fill="#74AFC6"/></g><g transform="translate(520.0 344.0) rotate(-35) scale(1 0.89)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#D98AA0" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="0.0" r="1.6" fill="#D98AA0"/><circle cx="3.4" cy="0.0" r="1.6" fill="#D98AA0"/></g><g transform="translate(300.0 318.0) rotate(-23) scale(1 0.85)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D47F50"/></g></svg></div>
     </div>
-    <div class="chart" id="fan"></div>
-    <div class="legend" id="fan-legend">
-      <span><span class="sw med"></span>Midden</span>
-      <span class="lg" data-k="likely"><span class="sw s3"></span>Waarschijnlijk (middelste 50%)</span>
-      <span class="lg" data-k="less"><span class="sw s2"></span>Minder waarschijnlijk (80%)</span>
-      <span class="lg" data-k="rare"><span class="sw s1"></span>Zeldzaam (95%)</span>
-      <span><i class="mark"></i>AOW-leeftijd</span>
+    <div class="dash">
+      <div class="card empty-cta">
+        <div class="empty-text">
+          <h2>Nog niets ingevuld</h2>
+          <p class="sub">In vijf korte stappen vul je in wat er nu is, wat je per maand wilt besteden en wat er later binnenkomt. Daarmee krijg je inzicht, en daarna kun je gaan schuiven met de knoppen.</p>
+        </div>
+        <a class="btn primary" href="#invullen">Begin met invullen</a>
+      </div>
+      <div class="card status" id="status-card" aria-live="polite">
+        <div class="gauge" id="gauge"></div>
+        <p class="g-key">Streepje 75%: krap haalbaar · streepje 90%: ruim haalbaar</p>
+        <div class="knoprij" id="knoprij" aria-hidden="true"></div>
+        <p class="knoprij-t" id="knoprij-t"></p>
+        <div class="verdict" id="verdict"></div>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
+        <div class="panel-head"><h2 id="fan-h" data-j2="Verloop van jullie vermogen">Verloop van je vermogen</h2><p class="sub" id="fan-sub"></p></div>
+        <div class="fan-head">
+          <div class="seg" role="radiogroup" aria-label="Weergave">
+            <label class="seg-opt"><input type="radio" name="fanMode" value="nominal"><span>Nominaal</span></label>
+            <label class="seg-opt"><input type="radio" name="fanMode" value="real" checked><span>Reëel</span></label>
+          </div>
+          <div class="fan-box" id="fan-succ-box"><b id="fan-succ"></b><span>Kans op slagen</span></div>
+          <div class="fan-box"><b id="fan-wr"></b><span id="fan-wr-s">Opname in jaar 1</span></div>
+          <div class="fan-box" id="fan-assump"></div>
+          <div class="fan-ctl"><button type="button" id="zin" aria-label="Inzoomen">+</button><button type="button" id="zout" aria-label="Uitzoomen">−</button></div>
+        </div>
+        <div class="chart" id="fan"></div>
+        <div class="legend" id="fan-legend">
+          <span><span class="sw med"></span>Midden</span>
+          <span class="lg" data-k="likely"><span class="sw s3"></span>Waarschijnlijk (middelste 50%)</span>
+          <span class="lg" data-k="less"><span class="sw s2"></span>Minder waarschijnlijk (80%)</span>
+          <span class="lg" data-k="rare"><span class="sw s1"></span>Zeldzaam (95%)</span>
+          <span><i class="mark"></i>AOW-leeftijd</span>
+        </div>
+        <p class="hint" id="fan-note"></p>
+        <details class="table-view">
+          <summary>Bekijk per jaar als tabel</summary>
+          <div class="tbl" id="tbl"></div>
+        </details>
+      </section>
+      <section class="card panel" id="panel-flow" aria-labelledby="flow-h">
+        <div class="panel-head"><h2 id="flow-h" data-j2="Wat willen jullie per maand te besteden hebben, en waar komt dat vandaan?">Wat wil je per maand te besteden hebben, en waar komt dat vandaan?</h2><p class="sub">Per jaar, in euro's van vandaag: het deel uit AOW, pensioen en werk, en het deel dat uit het vermogen komt. Tik of beweeg over een staaf voor cijfers.</p></div>
+        <div class="chart" id="flow"></div>
+        <div class="legend">
+          <span><span class="sw box f-aow"></span>AOW</span>
+          <span><span class="sw box f-pen"></span>Pensioen</span>
+          <span><span class="sw box f-wk"></span>Bijverdienen</span>
+          <span><span class="sw box f-cap"></span>Uit vermogen</span>
+          <span><i class="dash"></i>Te besteden per maand</span>
+        </div>
+      </section>
+      <section class="next" aria-labelledby="next-h">
+        <h2 class="more" id="next-h">Meer inzicht</h2>
+        <div class="next-grid">
+          <a class="card nlink" href="#inzicht" data-scroll="sec-pf"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><b>Portefeuilles vergelijken</b><span>Defensief, gemiddeld en agressief naast elkaar</span></a>
+          <a class="card nlink" href="#inzicht" data-scroll="sec-ladder"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.4"/><circle r="6" fill="none" stroke="#6FAF8C" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="2.2" r="1.1" fill="#6FAF8C"/></svg></span><b>Ander te besteden budget</b><span>Wat meer of minder per maand vraagt</span></a>
+          <a class="card nlink" href="#inzicht" data-scroll="sec-koop"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><b>Koopkracht per land</b><span>Wat het te besteden budget elders waard is</span></a>
+        </div>
+      </section>
     </div>
-    <p class="hint" id="fan-note"></p>
-    <details class="table-view">
-      <summary>Bekijk per jaar als tabel</summary>
-      <div class="tbl" id="tbl"></div>
-    </details>
-    </div>
-  </details>
-  <details class="fold">
-    <summary><span class="fold-t"><h2>Hoe de portefeuilles zich gedragen</h2><span class="fold-s">Wat defensief, gemiddeld en agressief beleggen doen</span></span><span class="chev" aria-hidden="true"></span></summary>
-    <div class="fold-body">    
-    <p class="sub" id="pf-sub"></p>
-    <div class="cmp" id="pf"></div>
-    <h3 class="subh" id="pf-tbl-h"></h3>
-    <div class="tbl" id="pf-tbl"></div>
-    <p class="hint" id="pf-note"></p>
-    </div>
-  </details>
-  <details class="fold">
-    <summary><span class="fold-t"><h2>Benodigd kapitaal per maandbudget</h2><span class="fold-s">Wat andere maandbudgetten vragen</span></span><span class="chev" aria-hidden="true"></span></summary>
-    <div class="fold-body">    
-    <p class="sub">Zelfde aannames, alleen het maandbudget verschilt. De middelste rij is jullie huidige budget.</p>
-    <div class="ladder" id="ladder"></div>
-    <div class="lnote"><span><span class="capkey"></span>Jullie startkapitaal</span><span><span class="st ok">✓</span> haalbaar</span><span><span class="st no">✕</span> tekort</span></div>
-    </div>
-  </details>
-  <details class="fold">
-    <summary><span class="fold-t"><h2>Wat jullie geld waard is per land</h2><span class="fold-s">Wat dit maandbudget in andere landen oplevert</span></span><span class="chev" aria-hidden="true"></span></summary>
-    <div class="fold-body">    
-    <p class="sub">Dit rekent mee met het maandbudget bij de ingrediënten. In Nederland is dat bedrag de standaard: 100% koopkracht. Per land staat hoeveel Nederlandse koopkracht datzelfde bedrag daar oplevert, en hoeveel jullie daar nodig hebben voor dezelfde levensstijl. Alleen landen waar de kortste directe vlucht vanaf Amsterdam binnen 2,5 uur ligt.</p>
-    <div class="rank" id="koop"></div>
-    <p class="insight" id="koop-insight"></p>
-    <p class="hint" id="koop-note"></p>
-    </div>
-  </details>
-  </div>
-  </div>
-
-  <hr class="cut">
-
-  <section id="ingredients">
-    <h2>Ingrediënten</h2>
-    <p class="sub">Alles hieronder is invoer. Alles staat nog op nul. Vul jullie namen en gegevens in. Niets wordt opgeslagen buiten jullie eigen browser.</p>
-    <div class="card partners" id="partners">
-      <div class="field"><div class="ftop"><label for="nm-1">Partner 1:</label></div><input id="nm-1" type="text" maxlength="20" autocomplete="off" placeholder="Naam"></div>
-      <div class="field"><div class="ftop"><label for="nm-2">Partner 2:</label></div><input id="nm-2" type="text" maxlength="20" autocomplete="off" placeholder="Naam"></div>
-    </div>
-    <div class="card knobs" id="knobs"></div>
   </section>
 
-  <section>
-    <h2>Aannames</h2>
-    <div class="keyline">
-      <span><span class="tag bron">bron</span> officiële bron online, gecontroleerd bij het maken van dit dashboard</span>
-      <span><span class="tag aanname">aanname</span> standaardwaarde, controleer of die bij jullie past</span>
-      <span><span class="tag zelf">zelf invullen</span> gegevens die je zelf weet of moet opzoeken</span>
+  <section class="page" id="page-invullen" aria-labelledby="in-h" hidden>
+    <div class="page-head">
+      <h1 id="in-h">Invullen</h1>
+      <p class="sub">Vijf korte stappen. Alles rekent direct mee en blijft alleen in deze browser bewaard.</p>
     </div>
-    <div class="card" style="display:flex;flex-direction:column;gap:22px" id="assumptions"></div>
-    <details class="table-view">
-      <summary>Marktaannames en bronnen</summary>
-      <div class="tbl" id="pf-assump"></div>
-    </details>
-    <button class="reset" id="reset" type="button">Zet alles terug naar de startwaarden</button>
+    <div class="progress" aria-hidden="true"><span id="prog"></span></div>
+    <ol class="stepper" id="stepper" aria-label="Stappen"></ol>
+    <div id="steps"></div>
+    <div class="step-nav">
+      <button class="btn ghost" type="button" id="step-prev">Vorige</button>
+      <button class="btn primary" type="button" id="step-next">Volgende</button>
+    </div>
   </section>
 
-  <footer>
-    <span>Volgende stappen: hefbomen bij een tekort en de twee woonpaden naast elkaar.</span>
-    <span>Bronnen: <a href="https://www.sra.nl/nieuws/259001/2026/01/box-3-percentages-vrijstellingen-en-bedragen-2026" target="_blank" rel="noopener">SRA, box 3 in 2026</a> · <a href="https://www.eerstekamer.nl/nieuws/20261006/mondeling_overleg_over_box_3" target="_blank" rel="noopener">Eerste Kamer, overleg box 3 (6 okt 2026)</a> · <a href="https://www.sra.nl/nieuws/004501/2026/09/nog-geen-duidelijkheid-over-box-3-vanaf-2028" target="_blank" rel="noopener">SRA, box 3 september 2026</a> · <a href="https://www.sra.nl/nieuws/259001/2026/02/tweede-kamer-akkoord-met-nieuw-box-3-stelsel-vanaf-2028" target="_blank" rel="noopener">SRA, box 3 vanaf 2028</a> · <a href="https://bieb.knab.nl/pensioen/aow-dit-zijn-de-regels-en-de-bedragen?hsLang=nl" target="_blank" rel="noopener">Knab, AOW-bedragen</a> · <a href="https://rekenmachinepro.nl/blog/aow-leeftijd-uitleg/" target="_blank" rel="noopener">Rekenmachinepro, AOW-leeftijd</a> · <a href="https://www.ssb.no/en/priser-og-prisindekser/konsumpriser/statistikk/sammenlikning-av-prisniva-i-europa" target="_blank" rel="noopener">Eurostat prijsniveaus 2025, via SSB</a> · <a href="https://www.invesco.com/apac/en/institutional/insights/multi-asset/long-term-capital-market-assumptions.html" target="_blank" rel="noopener">Invesco, marktverwachtingen 2026</a> · <a href="https://www.vanguardmexico.com/en/home/insights/economic-market-outlook/vanguard-capital-markets-model-forecasts-2026" target="_blank" rel="noopener">Vanguard, marktverwachtingen</a> · <a href="https://research-center.amundi.com/article/capital-market-assumptions-2026" target="_blank" rel="noopener">Amundi, marktverwachtingen 2026</a> · <a href="https://www.portfoliolab.app/blog/capital-market-assumptions-consensus" target="_blank" rel="noopener">Portfoliolab, consensus 18 bureaus</a> · <a href="https://tradingeconomics.com/germany/government-bond-yield/news/589838" target="_blank" rel="noopener">Trading Economics, Bund en ECB</a> · <a href="https://www.nsi.bg/en/press-release/ravnishta-na-potrebitelski-ceni-v-es-9366" target="_blank" rel="noopener">NSI, prijsniveaus EU 2025</a> · vliegtijden: <a href="https://www.flightconnections.com/flights-from-ams-to-bcn" target="_blank" rel="noopener">Flightconnections</a>, <a href="https://www.airportoverview.com/routes/AMS/BIO" target="_blank" rel="noopener">Airportoverview</a>. Geen belasting- of beleggingsadvies.</span>
-    <span class="tag"><a href="https://www.instagram.com/explore/tags/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a></span>
-  </footer>
+  <section class="page" id="page-inzicht" aria-labelledby="iz-h" hidden>
+    <div class="page-head">
+      <h1 id="iz-h">Inzicht</h1>
+      <p class="sub">Verdieping bij het overzicht: wat andere keuzes betekenen, nu en op langere termijn.</p>
+    </div>
+    <div class="card empty-note"><p>Vul eerst bij <a href="#invullen">Invullen</a> het startkapitaal in en wat je per maand wilt besteden. Daarna verschijnen hier de vergelijkingen.</p></div>
+    <section class="card panel needs-data" id="sec-pf" aria-labelledby="pf-h">
+      <div class="panel-head"><h2 id="pf-h">Hoe de portefeuilles zich gedragen</h2><p class="sub" id="pf-sub"></p></div>
+      <div class="cmp" id="pf"></div>
+      <h3 class="subh" id="pf-tbl-h"></h3>
+      <div class="tbl" id="pf-tbl"></div>
+      <p class="hint" id="pf-note"></p>
+    </section>
+    <section class="card panel needs-data" id="sec-ladder" aria-labelledby="ld-h">
+      <div class="panel-head"><h2 id="ld-h">Benodigd vermogen per te besteden budget</h2><p class="sub">Zelfde aannames, alleen het bedrag dat per maand te besteden is verschilt. De middelste rij is het huidige bedrag.</p></div>
+      <div class="ladder" id="ladder"></div>
+      <div class="lnote"><span><span class="capkey"></span>Startkapitaal</span><span><span class="st ok">✓</span> haalbaar</span><span><span class="st no">✕</span> tekort</span></div>
+    </section>
+    <section class="card panel needs-data" id="sec-koop" aria-labelledby="kp-h">
+      <div class="panel-head"><h2 id="kp-h">Wat het te besteden budget waard is per land</h2><p class="sub">In Nederland is het te besteden budget de standaard: 100% koopkracht. Per land staat hoeveel Nederlandse koopkracht datzelfde bedrag daar oplevert, en wat er nodig is voor dezelfde levensstijl. Alleen landen binnen 2,5 uur vliegen vanaf Amsterdam.</p></div>
+      <div class="rank" id="koop"></div>
+      <p class="insight" id="koop-insight"></p>
+      <p class="hint" id="koop-note"></p>
+    </section>
+  </section>
+
+  <section class="page" id="page-over" aria-labelledby="ab-h" hidden>
+    <section class="hero" aria-label="Knopen tellen">
+      <div class="hero-text">
+        <h1 id="ab-h">Tijd om de knopen<br><span>te tellen.</span></h1>
+        <p class="steps"><span>Weet waar je staat.</span> <span>Ontdek wat je kunt.</span> <span>Bepaal waar je naartoe wilt.</span></p>
+      </div>
+      <div class="ov-art"><svg class="pouch-art" viewBox="10 92 630 278" role="img" aria-label="Een leren buidel waaruit knopen over tafel rollen" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="lth-ab" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C08A5F"/><stop offset=".55" stop-color="#A2683F"/><stop offset="1" stop-color="#7C4A2A"/></linearGradient><radialGradient id="mouth-ab" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#3B2213"/><stop offset="1" stop-color="#6A3F22"/></radialGradient><linearGradient id="tbl-ab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEE3"/><stop offset="1" stop-color="#EBDCCB"/></linearGradient></defs><path d="M-10 214 C 160 198 470 196 650 210 L650 390 L-10 390 Z" fill="url(#tbl-ab)"/><path d="M-10 246 C 150 238 420 252 650 242" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.55"/><path d="M-10 284 C 150 278 420 290 650 280" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.47"/><path d="M-10 326 C 150 322 420 332 650 322" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.39"/><path d="M-10 362 C 150 360 420 368 650 358" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.31"/><ellipse cx="190" cy="300" rx="150" ry="26" fill="#1D2B3A" opacity=".10"/><path d="M58 262 C 34 220 44 160 98 132 C 150 105 214 112 258 150 C 272 162 284 176 292 190 C 300 206 296 226 282 238 C 252 266 200 292 140 296 C 102 298 74 286 58 262 Z" fill="url(#lth-ab)"/><path d="M96 170 C 130 150 180 150 222 168" fill="none" stroke="#D8A97F" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M86 236 C 130 252 190 250 240 230" fill="none" stroke="#6B3C20" stroke-width="2.4" stroke-linecap="round" opacity=".45"/><path d="M74 214 C 70 186 82 160 108 146" fill="none" stroke="#E2B98F" stroke-width="5" stroke-linecap="round" opacity=".35"/><path d="M70 258 C 50 222 58 170 104 146 C 150 122 208 128 248 160" fill="none" stroke="#F1D3B0" stroke-width="1.8" stroke-dasharray="6 5" opacity=".9"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="url(#mouth-ab)"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="none" stroke="#C99467" stroke-width="4"/><path d="M262 160 C 250 132 230 118 206 112" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M206 112 C 186 108 170 118 168 132 C 166 148 184 150 190 140" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M270 250 C 290 286 318 300 344 302" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><circle cx="346" cy="302" r="6" fill="#5B341D"/><path d="M346 306 l -6 16 M346 306 l 0 18 M346 306 l 6 16" stroke="#5B341D" stroke-width="2.4" stroke-linecap="round"/><g transform="translate(278.0 196.0) rotate(20) scale(1 0.80)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="2.9" r="1.3" fill="#5E8FC6"/></g><g transform="translate(290.0 216.0) rotate(-10) scale(1 0.80)"><ellipse cx="2" cy="3.1" rx="9.2" ry="5.0" fill="#1D2B3A" opacity=".10"/><circle r="9.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="6.5" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.1" cy="-3.8" rx="2.9" ry="1.4" fill="#fff" opacity=".45"/><circle cx="-2.3" cy="0.0" r="1.3" fill="#D47F50"/><circle cx="2.3" cy="0.0" r="1.3" fill="#D47F50"/></g><g transform="translate(318.0 238.0) rotate(-22) scale(1 0.88)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(346.0 222.0) rotate(33) scale(1 0.86)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#9C86D2" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#9C86D2"/><circle cx="3.1" cy="0.0" r="1.4" fill="#9C86D2"/></g><g transform="translate(372.0 252.0) rotate(-17) scale(1 0.83)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#5E8FC6" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="4.7" r="2.2" fill="#5E8FC6"/></g><g transform="translate(404.0 232.0) rotate(33) scale(1 0.90)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D1B25E" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D1B25E"/></g><g transform="translate(420.0 274.0) rotate(7) scale(1 0.83)"><ellipse cx="2" cy="5.6" rx="16.3" ry="8.8" fill="#1D2B3A" opacity=".10"/><circle r="16.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.4"/><circle r="11.5" fill="none" stroke="#D98AA0" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.6" cy="-6.7" rx="5.1" ry="2.6" fill="#fff" opacity=".45"/><circle cx="-4.2" cy="0.0" r="1.9" fill="#D98AA0"/><circle cx="4.2" cy="0.0" r="1.9" fill="#D98AA0"/></g><g transform="translate(452.0 248.0) rotate(-32) scale(1 0.89)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(478.0 286.0) rotate(39) scale(1 0.84)"><ellipse cx="2" cy="7.0" rx="20.4" ry="11.0" fill="#1D2B3A" opacity=".10"/><circle r="20.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.8"/><circle r="14.4" fill="none" stroke="#D47F50" stroke-width="1.2" opacity=".75"/><ellipse cx="-7.0" cy="-8.4" rx="6.4" ry="3.2" fill="#fff" opacity=".45"/><circle cx="-5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="-5.2" cy="5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="5.2" r="2.4" fill="#D47F50"/></g><g transform="translate(506.0 252.0) rotate(28) scale(1 0.87)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#74AFC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#74AFC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#74AFC6"/></g><g transform="translate(534.0 300.0) rotate(0) scale(1 0.88)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(560.0 262.0) rotate(18) scale(1 0.86)"><ellipse cx="2" cy="5.9" rx="17.3" ry="9.4" fill="#1D2B3A" opacity=".10"/><circle r="17.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.5"/><circle r="12.2" fill="none" stroke="#9C86D2" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.9" cy="-7.1" rx="5.4" ry="2.7" fill="#fff" opacity=".45"/><circle cx="-4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="-4.4" cy="4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="4.4" r="2.0" fill="#9C86D2"/></g><g transform="translate(592.0 296.0) rotate(-9) scale(1 0.92)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#5E8FC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#5E8FC6"/></g><g transform="translate(604.0 330.0) rotate(-9) scale(1 0.83)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#D1B25E" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="4.7" r="2.2" fill="#D1B25E"/></g><g transform="translate(360.0 300.0) rotate(-2) scale(1 0.88)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(440.0 330.0) rotate(3) scale(1 0.91)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#74AFC6" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="3.9" r="1.8" fill="#74AFC6"/></g><g transform="translate(520.0 344.0) rotate(-4) scale(1 0.89)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#D98AA0" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="0.0" r="1.6" fill="#D98AA0"/><circle cx="3.4" cy="0.0" r="1.6" fill="#D98AA0"/></g><g transform="translate(300.0 318.0) rotate(-31) scale(1 0.83)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D47F50"/></g></svg></div>
+    </section>
+    <section class="intro" aria-labelledby="ab-q">
+      <h2 id="ab-q">Weet je eigenlijk wel…</h2>
+      <ul class="route">
+        <li>Hoe je er financieel voor staat?</li>
+        <li>Hoeveel financiële ruimte je nu hebt én later?</li>
+        <li>Hoe je vermogen zich de komende jaren kan ontwikkelen?</li>
+        <li>Welke keuzes je financieel kunt maken?</li>
+        <li>Wat er mogelijk wordt als je andere keuzes maakt?</li>
+      </ul>
+    </section>
+    <section class="card panel" aria-labelledby="ab-g">
+      <h2 id="ab-g">De gedachte achter Knopen tellen</h2>
+      <p>Knopen tellen is een persoonlijke financiële cockpit die inzicht geeft in je vermogen, financiële ruimte en toekomstige mogelijkheden.</p>
+      <p>Het brengt je huidige financiële positie in kaart en helpt je vooruit te kijken. Je verkent scenario's, rekent mogelijkheden door en ziet wat verschillende keuzes betekenen voor je financiële toekomst.</p>
+      <p>Het gaat niet alleen om wat je hebt opgebouwd, maar vooral om wat je daarmee kunt bereiken.</p>
+      <div class="btn-row">
+        <button class="btn ghost" type="button" id="btn-intro">Bekijk de introductie opnieuw</button>
+        <button class="btn ghost" type="button" id="btn-tour">Start de rondleiding</button>
+      </div>
+    </section>
+    <footer>
+      <span>Bronnen: <a href="https://www.sra.nl/nieuws/259001/2026/01/box-3-percentages-vrijstellingen-en-bedragen-2026" target="_blank" rel="noopener">SRA, box 3 in 2026</a> · <a href="https://www.eerstekamer.nl/nieuws/20261006/mondeling_overleg_over_box_3" target="_blank" rel="noopener">Eerste Kamer, overleg box 3 (6 okt 2026)</a> · <a href="https://www.sra.nl/nieuws/004501/2026/09/nog-geen-duidelijkheid-over-box-3-vanaf-2028" target="_blank" rel="noopener">SRA, box 3 september 2026</a> · <a href="https://www.sra.nl/nieuws/259001/2026/02/tweede-kamer-akkoord-met-nieuw-box-3-stelsel-vanaf-2028" target="_blank" rel="noopener">SRA, box 3 vanaf 2028</a> · <a href="https://bieb.knab.nl/pensioen/aow-dit-zijn-de-regels-en-de-bedragen?hsLang=nl" target="_blank" rel="noopener">Knab, AOW-bedragen</a> · <a href="https://rekenmachinepro.nl/blog/aow-leeftijd-uitleg/" target="_blank" rel="noopener">Rekenmachinepro, AOW-leeftijd</a> · <a href="https://www.ssb.no/en/priser-og-prisindekser/konsumpriser/statistikk/sammenlikning-av-prisniva-i-europa" target="_blank" rel="noopener">Eurostat prijsniveaus 2025, via SSB</a> · <a href="https://www.invesco.com/apac/en/institutional/insights/multi-asset/long-term-capital-market-assumptions.html" target="_blank" rel="noopener">Invesco, marktverwachtingen 2026</a> · <a href="https://www.vanguardmexico.com/en/home/insights/economic-market-outlook/vanguard-capital-markets-model-forecasts-2026" target="_blank" rel="noopener">Vanguard, marktverwachtingen</a> · <a href="https://research-center.amundi.com/article/capital-market-assumptions-2026" target="_blank" rel="noopener">Amundi, marktverwachtingen 2026</a> · <a href="https://www.portfoliolab.app/blog/capital-market-assumptions-consensus" target="_blank" rel="noopener">Portfoliolab, consensus 18 bureaus</a> · <a href="https://tradingeconomics.com/germany/government-bond-yield/news/589838" target="_blank" rel="noopener">Trading Economics, Bund en ECB</a> · <a href="https://www.nsi.bg/en/press-release/ravnishta-na-potrebitelski-ceni-v-es-9366" target="_blank" rel="noopener">NSI, prijsniveaus EU 2025</a> · vliegtijden: <a href="https://www.flightconnections.com/flights-from-ams-to-bcn" target="_blank" rel="noopener">Flightconnections</a>, <a href="https://www.airportoverview.com/routes/AMS/BIO" target="_blank" rel="noopener">Airportoverview</a>.</span>
+      <span>Knopen tellen geeft inzicht, geen belasting- of beleggingsadvies.</span>
+      <span class="tag"><a href="https://www.instagram.com/explore/tags/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a></span>
+    </footer>
+  </section>
+
+</main>
+
+<div class="modal" id="intro" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h">
+    <div class="modal-hero">
+      <svg class="pouch-art" viewBox="10 92 630 278" role="img" aria-label="Een leren buidel waaruit knopen over tafel rollen" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="lth-in" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C08A5F"/><stop offset=".55" stop-color="#A2683F"/><stop offset="1" stop-color="#7C4A2A"/></linearGradient><radialGradient id="mouth-in" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#3B2213"/><stop offset="1" stop-color="#6A3F22"/></radialGradient><linearGradient id="tbl-in" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEE3"/><stop offset="1" stop-color="#EBDCCB"/></linearGradient></defs><path d="M-10 214 C 160 198 470 196 650 210 L650 390 L-10 390 Z" fill="url(#tbl-in)"/><path d="M-10 246 C 150 238 420 252 650 242" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.55"/><path d="M-10 284 C 150 278 420 290 650 280" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.47"/><path d="M-10 326 C 150 322 420 332 650 322" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.39"/><path d="M-10 362 C 150 360 420 368 650 358" fill="none" stroke="#D9C5AF" stroke-width="1.2" opacity="0.31"/><ellipse cx="190" cy="300" rx="150" ry="26" fill="#1D2B3A" opacity=".10"/><path d="M58 262 C 34 220 44 160 98 132 C 150 105 214 112 258 150 C 272 162 284 176 292 190 C 300 206 296 226 282 238 C 252 266 200 292 140 296 C 102 298 74 286 58 262 Z" fill="url(#lth-in)"/><path d="M96 170 C 130 150 180 150 222 168" fill="none" stroke="#D8A97F" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M86 236 C 130 252 190 250 240 230" fill="none" stroke="#6B3C20" stroke-width="2.4" stroke-linecap="round" opacity=".45"/><path d="M74 214 C 70 186 82 160 108 146" fill="none" stroke="#E2B98F" stroke-width="5" stroke-linecap="round" opacity=".35"/><path d="M70 258 C 50 222 58 170 104 146 C 150 122 208 128 248 160" fill="none" stroke="#F1D3B0" stroke-width="1.8" stroke-dasharray="6 5" opacity=".9"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="url(#mouth-in)"/><ellipse cx="282" cy="206" rx="22" ry="36" transform="rotate(-18 282 206)" fill="none" stroke="#C99467" stroke-width="4"/><path d="M262 160 C 250 132 230 118 206 112" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M206 112 C 186 108 170 118 168 132 C 166 148 184 150 190 140" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><path d="M270 250 C 290 286 318 300 344 302" fill="none" stroke="#5B341D" stroke-width="5" stroke-linecap="round"/><circle cx="346" cy="302" r="6" fill="#5B341D"/><path d="M346 306 l -6 16 M346 306 l 0 18 M346 306 l 6 16" stroke="#5B341D" stroke-width="2.4" stroke-linecap="round"/><g transform="translate(278.0 196.0) rotate(20) scale(1 0.80)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#5E8FC6"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#5E8FC6"/><circle cx="2.9" cy="2.9" r="1.3" fill="#5E8FC6"/></g><g transform="translate(290.0 216.0) rotate(-10) scale(1 0.80)"><ellipse cx="2" cy="3.1" rx="9.2" ry="5.0" fill="#1D2B3A" opacity=".10"/><circle r="9.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="6.5" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.1" cy="-3.8" rx="2.9" ry="1.4" fill="#fff" opacity=".45"/><circle cx="-2.3" cy="0.0" r="1.3" fill="#D47F50"/><circle cx="2.3" cy="0.0" r="1.3" fill="#D47F50"/></g><g transform="translate(318.0 238.0) rotate(13) scale(1 0.84)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(346.0 222.0) rotate(3) scale(1 0.84)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#9C86D2" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#9C86D2"/><circle cx="3.1" cy="0.0" r="1.4" fill="#9C86D2"/></g><g transform="translate(372.0 252.0) rotate(22) scale(1 0.87)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#5E8FC6" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#5E8FC6"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#5E8FC6"/><circle cx="4.7" cy="4.7" r="2.2" fill="#5E8FC6"/></g><g transform="translate(404.0 232.0) rotate(-31) scale(1 0.91)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D1B25E" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D1B25E"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D1B25E"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D1B25E"/></g><g transform="translate(420.0 274.0) rotate(33) scale(1 0.91)"><ellipse cx="2" cy="5.6" rx="16.3" ry="8.8" fill="#1D2B3A" opacity=".10"/><circle r="16.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.4"/><circle r="11.5" fill="none" stroke="#D98AA0" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.6" cy="-6.7" rx="5.1" ry="2.6" fill="#fff" opacity=".45"/><circle cx="-4.2" cy="0.0" r="1.9" fill="#D98AA0"/><circle cx="4.2" cy="0.0" r="1.9" fill="#D98AA0"/></g><g transform="translate(452.0 248.0) rotate(0) scale(1 0.86)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(478.0 286.0) rotate(4) scale(1 0.89)"><ellipse cx="2" cy="7.0" rx="20.4" ry="11.0" fill="#1D2B3A" opacity=".10"/><circle r="20.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.8"/><circle r="14.4" fill="none" stroke="#D47F50" stroke-width="1.2" opacity=".75"/><ellipse cx="-7.0" cy="-8.4" rx="6.4" ry="3.2" fill="#fff" opacity=".45"/><circle cx="-5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="-5.2" r="2.4" fill="#D47F50"/><circle cx="-5.2" cy="5.2" r="2.4" fill="#D47F50"/><circle cx="5.2" cy="5.2" r="2.4" fill="#D47F50"/></g><g transform="translate(506.0 252.0) rotate(34) scale(1 0.92)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#74AFC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#74AFC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#74AFC6"/></g><g transform="translate(534.0 300.0) rotate(-32) scale(1 0.92)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#6FAF8C" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#6FAF8C"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#6FAF8C"/><circle cx="3.9" cy="3.9" r="1.8" fill="#6FAF8C"/></g><g transform="translate(560.0 262.0) rotate(-6) scale(1 0.88)"><ellipse cx="2" cy="5.9" rx="17.3" ry="9.4" fill="#1D2B3A" opacity=".10"/><circle r="17.0" fill="#C9B8EE" stroke="#9C86D2" stroke-width="1.5"/><circle r="12.2" fill="none" stroke="#9C86D2" stroke-width="1.0" opacity=".75"/><ellipse cx="-5.9" cy="-7.1" rx="5.4" ry="2.7" fill="#fff" opacity=".45"/><circle cx="-4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="-4.4" r="2.0" fill="#9C86D2"/><circle cx="-4.4" cy="4.4" r="2.0" fill="#9C86D2"/><circle cx="4.4" cy="4.4" r="2.0" fill="#9C86D2"/></g><g transform="translate(592.0 296.0) rotate(-32) scale(1 0.83)"><ellipse cx="2" cy="4.2" rx="12.2" ry="6.6" fill="#1D2B3A" opacity=".10"/><circle r="12.0" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.2"/><circle r="8.6" fill="none" stroke="#5E8FC6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.2" cy="-5.0" rx="3.8" ry="1.9" fill="#fff" opacity=".45"/><circle cx="-3.1" cy="0.0" r="1.4" fill="#5E8FC6"/><circle cx="3.1" cy="0.0" r="1.4" fill="#5E8FC6"/></g><g transform="translate(604.0 330.0) rotate(-1) scale(1 0.90)"><ellipse cx="2" cy="6.3" rx="18.4" ry="9.9" fill="#1D2B3A" opacity=".10"/><circle r="18.0" fill="#F5D98B" stroke="#D1B25E" stroke-width="1.6"/><circle r="13.0" fill="none" stroke="#D1B25E" stroke-width="1.1" opacity=".75"/><ellipse cx="-6.3" cy="-7.6" rx="5.8" ry="2.9" fill="#fff" opacity=".45"/><circle cx="-4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="-4.7" r="2.2" fill="#D1B25E"/><circle cx="-4.7" cy="4.7" r="2.2" fill="#D1B25E"/><circle cx="4.7" cy="4.7" r="2.2" fill="#D1B25E"/></g><g transform="translate(360.0 300.0) rotate(17) scale(1 0.85)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#FFFFFF" stroke="#B9C7D6" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#B9C7D6" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="-3.4" r="1.6" fill="#B9C7D6"/><circle cx="-3.4" cy="3.4" r="1.6" fill="#B9C7D6"/><circle cx="3.4" cy="3.4" r="1.6" fill="#B9C7D6"/></g><g transform="translate(440.0 330.0) rotate(9) scale(1 0.93)"><ellipse cx="2" cy="5.2" rx="15.3" ry="8.2" fill="#1D2B3A" opacity=".10"/><circle r="15.0" fill="#A9D6E8" stroke="#74AFC6" stroke-width="1.3"/><circle r="10.8" fill="none" stroke="#74AFC6" stroke-width="0.9" opacity=".75"/><ellipse cx="-5.2" cy="-6.3" rx="4.8" ry="2.4" fill="#fff" opacity=".45"/><circle cx="-3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="-3.9" r="1.8" fill="#74AFC6"/><circle cx="-3.9" cy="3.9" r="1.8" fill="#74AFC6"/><circle cx="3.9" cy="3.9" r="1.8" fill="#74AFC6"/></g><g transform="translate(520.0 344.0) rotate(4) scale(1 0.82)"><ellipse cx="2" cy="4.5" rx="13.3" ry="7.2" fill="#1D2B3A" opacity=".10"/><circle r="13.0" fill="#F6B8C8" stroke="#D98AA0" stroke-width="1.2"/><circle r="9.4" fill="none" stroke="#D98AA0" stroke-width="0.8" opacity=".75"/><ellipse cx="-4.5" cy="-5.5" rx="4.2" ry="2.1" fill="#fff" opacity=".45"/><circle cx="-3.4" cy="0.0" r="1.6" fill="#D98AA0"/><circle cx="3.4" cy="0.0" r="1.6" fill="#D98AA0"/></g><g transform="translate(300.0 318.0) rotate(19) scale(1 0.86)"><ellipse cx="2" cy="3.8" rx="11.2" ry="6.1" fill="#1D2B3A" opacity=".10"/><circle r="11.0" fill="#F2A97E" stroke="#D47F50" stroke-width="1.2"/><circle r="7.9" fill="none" stroke="#D47F50" stroke-width="0.8" opacity=".75"/><ellipse cx="-3.8" cy="-4.6" rx="3.5" ry="1.8" fill="#fff" opacity=".45"/><circle cx="-2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="-2.9" r="1.3" fill="#D47F50"/><circle cx="-2.9" cy="2.9" r="1.3" fill="#D47F50"/><circle cx="2.9" cy="2.9" r="1.3" fill="#D47F50"/></g></svg>
+      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark">Knopen tellen</span><span class="v2">V2</span></span>
+    </div>
+    <div class="modal-body">
+      <h2 id="intro-h" class="pay">Tijd om de knopen<br><span>te tellen.</span></h2>
+      <p class="steps"><span>Weet waar je staat.</span> <span>Ontdek wat je kunt.</span> <span>Bepaal waar je naartoe wilt.</span></p>
+      <h3 class="q-h">Weet je eigenlijk wel…</h3>
+      <ul class="route">
+        <li>Hoe je er financieel voor staat?</li>
+        <li>Hoeveel financiële ruimte je nu hebt én later?</li>
+        <li>Hoe je vermogen zich de komende jaren kan ontwikkelen?</li>
+        <li>Welke keuzes je financieel kunt maken?</li>
+        <li>Wat er mogelijk wordt als je andere keuzes maakt?</li>
+      </ul>
+      <details class="readmore">
+        <summary>Lees meer</summary>
+        <div class="readmore-body">
+          <p><b>De gedachte achter Knopen tellen.</b> Knopen tellen is een persoonlijke financiële cockpit die inzicht geeft in je vermogen, financiële ruimte en toekomstige mogelijkheden.</p>
+          <p>Het brengt je huidige financiële positie in kaart en helpt je vooruit te kijken. Je verkent scenario's, rekent mogelijkheden door en ziet wat verschillende keuzes betekenen voor je financiële toekomst.</p>
+          <p>Het gaat niet alleen om wat je hebt opgebouwd, maar vooral om wat je daarmee kunt bereiken.</p>
+        </div>
+      </details>
+      <div class="modal-actions">
+        <button class="btn link" type="button" id="intro-skip">Overslaan</button>
+        <button class="btn primary" type="button" id="intro-go">Laat zien hoe het werkt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tour" id="tour" hidden>
+  <div class="tour-spot" id="tour-spot"></div>
+  <div class="tour-tip" id="tour-tip" role="dialog" aria-modal="true" aria-labelledby="tour-h">
+    <span class="tour-arrow" id="tour-arrow"></span>
+    <span class="tour-count" id="tour-count"></span>
+    <h3 id="tour-h"></h3>
+    <p id="tour-p"></p>
+    <div class="tour-actions">
+      <button class="btn link" type="button" id="tour-skip">Sluiten</button>
+      <span class="sp"></span>
+      <button class="btn ghost" type="button" id="tour-prev">Vorige</button>
+      <button class="btn primary" type="button" id="tour-next">Volgende</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -444,11 +928,15 @@ function runModel(p) {
   /* box 3 voor fiscale partners. 1 = gewogen (75% van gunstig naar slecht), 2 = 2026 forfaitair, 3 = 2027-voorstel forfaitair */
   var B3SET = { 1: { vrij: 78825, beleg: 0.0731 }, 2: { vrij: 118714, beleg: 0.06 }, 3: { vrij: 61692, beleg: 0.0787 } };
   var b3s = B3SET[p.box3] || B3SET[1];
-  var BOX3 = { tarief: 0.36, vrij: b3s.vrij, spaar: 0.0128, beleg: b3s.beleg };
+  /* een of twee personen; standaard twee. Bij een persoon geldt de halve heffingsvrije voet en de AOW voor alleenstaanden */
+  var two = p.personen !== 1;
+  var BOX3 = { tarief: 0.36, vrij: two ? b3s.vrij : b3s.vrij / 2, spaar: 0.0128, beleg: b3s.beleg };
+  var aowBedrag = two ? p.aowNetto : (p.aowNettoAlleen !== undefined ? p.aowNettoAlleen : p.aowNetto);
+  var aowOnP = p.aowAanP !== 0, aowOnD = two && p.aowAanD !== 0, penOnP = p.pensAanP !== 0, penOnD = two && p.pensAanD !== 0;
   var b = p.bruto / 100, c = p.kosten / 100, i = p.inflatie / 100;
   var ageP = p.leeftijdPaul, ageD = p.leeftijdDiana;
   /* looptijd loopt tot Diana (standaard) of Paul de eindleeftijd bereikt */
-  var youngest = p.eindDiana === 0 ? ageP : ageD; /* referentieleeftijd */
+  var youngest = (p.eindDiana === 0 || !two) ? ageP : ageD; /* referentieleeftijd */
   var N = Math.max(1, Math.round(p.eindleeftijd - youngest));
   var grow = (1 + b - c) / (1 + i);
 
@@ -457,12 +945,12 @@ function runModel(p) {
   var inc = [];
   for (var t = 0; t < N; t++) {
     var x = 0;
-    x += 12 * p.aowNetto * clamp01(ageP + t + 1 - p.aowPaul);
-    x += 12 * p.aowNetto * clamp01(ageD + t + 1 - p.aowDiana);
-    x += 12 * p.pensioenPaul * clamp01(ageP + t + 1 - p.pensioenLeeftijd);
-    x += 12 * p.pensioenDiana * clamp01(ageD + t + 1 - (p.pensioenLeeftijdDiana !== undefined ? p.pensioenLeeftijdDiana : p.pensioenLeeftijd));
+    if (aowOnP) x += 12 * aowBedrag * clamp01(ageP + t + 1 - p.aowPaul);
+    if (aowOnD) x += 12 * aowBedrag * clamp01(ageD + t + 1 - p.aowDiana);
+    if (penOnP) x += 12 * p.pensioenPaul * clamp01(ageP + t + 1 - p.pensioenLeeftijd);
+    if (penOnD) x += 12 * p.pensioenDiana * clamp01(ageD + t + 1 - (p.pensioenLeeftijdDiana !== undefined ? p.pensioenLeeftijdDiana : p.pensioenLeeftijd));
     /* bijverdienen: netto per maand zolang minstens een van beiden onder de werkgrens is */
-    if (p.werk > 0 && (ageP + t < (p.werkTot || 67) || ageD + t < (p.werkTot || 67))) x += 12 * p.werk;
+    if (p.werk > 0 && (ageP + t < (p.werkTot || 67) || (two && ageD + t < (p.werkTot || 67)))) x += 12 * p.werk;
     inc.push(x);
   }
 
@@ -553,11 +1041,12 @@ function runModel(p) {
     startkapitaal: 0, budget: 0, werk: 0, box3: 1, eindDiana: 1,
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 68, aowDiana: 68, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
-    aowNetto: 1084, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67
+    aowNetto: 1084, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67,
+    personen: 1, aowNettoAlleen: 1582, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1
   };
   var PRIMARY = [
     { k: 'startkapitaal', label: 'Startkapitaal', unit: '€', min: 200000, max: 1500000, step: 5000, tag: 'zelf' },
-    { k: 'budget', label: 'Maandbudget netto, alles inbegrepen', unit: '€ per maand', min: 1500, max: 5000, step: 25, tag: 'zelf' },
+    { k: 'budget', label: '<span data-j2="Wat willen jullie per maand te besteden hebben?">Wat wil je per maand te besteden hebben?</span>', aria: 'Te besteden per maand', unit: '€ netto per maand', min: 1500, max: 5000, step: 25, tag: 'zelf' },
     { k: 'werk', label: 'Bijverdienen netto per maand', unit: '€ per maand tot 67', min: 0, max: 3000, step: 50, tag: 'zelf' }
   ];
   var GROUPS = [
@@ -574,13 +1063,14 @@ function runModel(p) {
       { k: 'pensioenLeeftijdDiana', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'zelf', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
     ] },
     { name: 'Looptijd en AOW', fields: [
-      { k: 'aowNetto', label: 'AOW netto per persoon per maand', unit: '€', min: 0, max: 2000, step: 1, tag: 'bron', hint: 'Samenwonend, volledige AOW, netto met heffingskorting, SVB 1 juli 2026.' },
+      { k: 'aowNetto', label: 'AOW netto per persoon per maand', unit: '€', min: 0, max: 2000, step: 1, tag: 'bron', hint: 'Samenwonend, volledige AOW, netto met loonheffingskorting, SVB 1 juli 2026.' },
+      { k: 'aowNettoAlleen', label: 'AOW netto per maand', unit: '€', min: 0, max: 3000, step: 1, tag: 'bron', hint: 'Alleenstaand, volledige AOW, netto met loonheffingskorting, SVB 1 juli 2026.' },
       { k: 'eindleeftijd', label: 'Leeftijd waarop het kapitaal mag zijn opgebruikt', unit: 'jaar', min: 80, max: 105, step: 1, tag: 'zelf', hint: 'Geldt voor de partner die je bij de ingrediënten kiest bij Looptijd. Het scenario loopt tot die partner deze leeftijd bereikt.' },
       { k: 'restkapitaal', label: 'Gewenst restkapitaal op die leeftijd', unit: '€', min: 0, max: 1000000, step: 10000, tag: 'zelf', hint: 'Nul betekent dat het kapitaal opgebruikt mag zijn.' }
     ] },
     { name: 'Inflatie en kosten', fields: [
       { k: 'inflatie', label: 'Inflatie per jaar', unit: '%', min: 0, max: 8, step: 0.1, tag: 'aanname', hint: 'Standaard 2,4%, gebaseerd op het historische gemiddelde.' },
-      { k: 'kosten', label: 'Beleggingskosten per jaar', unit: '% van vermogen', min: 0, max: 3, step: 0.05, tag: 'aanname', hint: 'Fondskosten en platform. Vul de kosten van jullie eigen belegging in. Belasting zit hier niet in.' }
+      { k: 'kosten', label: 'Beleggingskosten per jaar', unit: '% van vermogen', min: 0, max: 3, step: 0.05, tag: 'aanname', hint: 'Fondskosten en platform. Vul de kosten van de eigen belegging in. Belasting zit hier niet in.' }
     ] }
   ];
   /* prijsniveaus 2025, EU27 = 100, Eurostat via SSB (voorlopig). min = kortste directe vlucht vanaf Amsterdam in minuten */
@@ -597,20 +1087,29 @@ function runModel(p) {
     { n: 'Oostenrijk', via: 'Wenen', min: 105, tijd: '1u45', tot: 113.0, eten: 109.5, wonen: 113.4, rest: 116.8 }
   ];
   var B3LABEL = { 0: 'box 3 uit', 1: 'box 3 gewogen (75% richting slecht)', 2: 'box 3 forfaitair 2026', 3: 'box 3 forfaitair 2027-voorstel' };
-  var B3HINT = {
-    0: 'Box 3 wordt niet meegerekend.',
-    1: 'Lijn tussen de drie voorstellen, van gunstig (belasting op winst bij verkoop) via het huidige forfait (2026) naar slecht (2027-voorstel blijft gelden). Dit scenario zit op 75% richting slecht: €78.825 heffingsvrij voor jullie samen en 36% over een forfaitair rendement van 7,31%. Dat kost ongeveer €39k meer startkapitaal dan nu.',
-    2: 'Het huidige stelsel: 36% over een forfaitair rendement van 6,00% op beleggingen, €118.714 heffingsvrij voor jullie samen.',
-    3: 'Slechtste geval: het 2027-voorstel blijft gelden. €61.692 heffingsvrij voor jullie samen, 36% over een forfaitair rendement van 7,87%.'
-  };
-  var SEGK = ['box3', 'eindDiana', 'portfolio'];
+  function B3H(k) {
+    var two = state.personen !== 1, wie = two ? 'voor jullie samen' : 'voor jou', h = function (v) { return eur(two ? v : v / 2); };
+    if (k === 0) return 'Box 3 wordt niet meegerekend.';
+    if (k === 2) return 'Het huidige stelsel: 36% over een forfaitair rendement van 6,00% op beleggingen, ' + h(118714) + ' heffingsvrij ' + wie + '.';
+    if (k === 3) return 'Slechtste geval: het 2027-voorstel blijft gelden. ' + h(61692) + ' heffingsvrij ' + wie + ', 36% over een forfaitair rendement van 7,87%.';
+    return 'Lijn tussen de drie voorstellen, van gunstig (belasting op winst bij verkoop) via het huidige forfait (2026) naar slecht (2027-voorstel blijft gelden). Dit scenario zit op 75% richting slecht: ' + h(78825) + ' heffingsvrij ' + wie + ' en 36% over een forfaitair rendement van 7,31%.';
+  }
+
+  var SEGK = ['box3', 'eindDiana', 'portfolio', 'personen'];
+  var CHK = ['aowAanP', 'aowAanD', 'pensAanP', 'pensAanD'];
+  function two() { return state.personen !== 1; }
+  function J(t2, t1) { return two() ? t2 : t1; }
   var names = { n1: '', n2: '' };
-  function nm1() { return (names.n1 || '').replace(/[<>&"]/g, '').trim() || 'Partner 1'; }
+  function nm1() { return (names.n1 || '').replace(/[<>&"]/g, '').trim() || (state.personen === 1 ? 'Jij' : 'Partner 1'); }
   function nm2() { return (names.n2 || '').replace(/[<>&"]/g, '').trim() || 'Partner 2'; }
   function applyNames() {
     Array.prototype.forEach.call(document.querySelectorAll('.n1'), function (e) { e.textContent = nm1(); });
     Array.prototype.forEach.call(document.querySelectorAll('.n2'), function (e) { e.textContent = nm2(); });
-    Array.prototype.forEach.call(document.querySelectorAll('.pn1'), function (e) { e.textContent = (names.n1 || '').trim() ? 'Partner 1: ' + nm1() : 'Partner 1'; });
+    var tw = state.personen !== 1;
+    document.documentElement.classList.toggle('one-person', !tw);
+    Array.prototype.forEach.call(document.querySelectorAll('.pn1'), function (e) { e.textContent = tw ? ((names.n1 || '').trim() ? 'Partner 1: ' + nm1() : 'Partner 1') : ((names.n1 || '').trim() ? nm1() : 'Jij'); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-j2]'), function (e) { if (e.getAttribute('data-j1') === null) e.setAttribute('data-j1', e.innerHTML); e.innerHTML = tw ? e.getAttribute('data-j2') : e.getAttribute('data-j1'); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-dep]'), function (e) { e.hidden = state[e.getAttribute('data-dep')] === 0; });
     Array.prototype.forEach.call(document.querySelectorAll('.pn2'), function (e) { e.textContent = (names.n2 || '').trim() ? 'Partner 2: ' + nm2() : 'Partner 2'; });
   }
   var RHO = 0.2, SIMN = 4000;
@@ -638,7 +1137,7 @@ function runModel(p) {
     return { n: pf.n, w: w, mu: mu, sd: Math.sqrt(v) };
   }
   var simText = '', curSucc = 0;
-  var KEY = 'buitenleven-leeg-v01';
+  var KEY = 'takestock-v2-v01';
   var autoIdx = 2, autoInfo = null;
   function effIdx() { return state.portfolio || autoIdx; }
   var state = {};
@@ -651,6 +1150,7 @@ function runModel(p) {
       if (typeof v === 'number' && isFinite(v)) state[k] = v;
     });
   } catch (e) {}
+  try { var sv0 = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv0 && sv0.state && sv0.state.personen === undefined) state.personen = 2; } catch (e) {}
   function persist() { try { localStorage.setItem(KEY, JSON.stringify({ state: state, names: names })); } catch (e) {} }
 
   var nf = new Intl.NumberFormat('nl-NL', { maximumFractionDigits: 0 });
@@ -670,26 +1170,78 @@ function runModel(p) {
       return '<label class="seg-opt"><input type="radio" name="' + name + '" value="' + o.v + '"><span>' + o.l + '</span></label>';
     }).join('') + '</div>';
   }
-  $('knobs').innerHTML = PRIMARY.map(function (f) {
+  /* ---------- invullen in stappen ---------- */
+  var FIELD = {};
+  PRIMARY.forEach(function (f) { FIELD[f.k] = f; });
+  GROUPS.forEach(function (g) { g.fields.forEach(function (f) { FIELD[f.k] = f; }); });
+  FIELD.startkapitaal.hint = 'Vermogen dat er nu is om van te leven: spaargeld en beleggingen samen.';
+  FIELD.budget.hint = 'Het doel: netto per maand, alles inbegrepen. Wonen, boodschappen, reizen en een reservering voor onverwachte kosten. Knopen tellen rekent uit of dat lukt en waar het geld vandaan komt.';
+  FIELD.werk.hint = 'Optioneel. Netto per maand, tot 67 jaar (bij twee personen zolang een van beiden jonger is dan 67).';
+  FIELD.eindleeftijd.hint = 'Tot deze leeftijd moet het vermogen reiken. Bij twee personen geldt dit voor de partner die hierboven is gekozen.';
+  function knobHtml(k) {
+    var f = FIELD[k];
     return '<div class="knob"><div class="knob-top"><label class="t" for="n-' + f.k + '">' + f.label + '</label>' + tagHtml(f.tag) + '</div>' +
       '<div class="knob-top"><span class="unit">' + f.unit + '</span><input id="n-' + f.k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"></div>' +
-      '<input id="r-' + f.k + '" type="range" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '" aria-label="' + f.label + '"></div>';
-  }).join('') +
-    '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Portefeuille (beleggingsmix)</span>' + tagHtml('aanname') + '</div>' +
-    seg('portfolio', [{ v: '0', l: 'Automatisch' }, { v: '1', l: 'Defensief' }, { v: '2', l: 'Gemiddeld' }, { v: '3', l: 'Agressief' }]) +
-    '<p class="hint" id="pf-hint"></p></div>' +
-    '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Box 3 (belasting over vermogen)</span>' + tagHtml('aanname') + '</div>' +
-    seg('box3', [{ v: '1', l: 'Gewogen' }, { v: '2', l: 'Nu (2026)' }, { v: '3', l: 'Slecht (2027)' }, { v: '0', l: 'Uit' }]) +
-    '<p class="hint" id="b3-hint"></p></div>' +
-    '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">Looptijd tot de eindleeftijd van</span>' + tagHtml('zelf') + '</div>' +
-    seg('eindDiana', [{ v: '1', l: '<span class="n2"></span>' }, { v: '0', l: '<span class="n1"></span>' }]) +
-    '<p class="hint">De eindleeftijd zelf pas je aan onder Aannames. Het scenario loopt tot die partner de eindleeftijd bereikt.</p></div>';
-  $('assumptions').innerHTML = GROUPS.map(function (g) {
-    return '<div class="group"><h3>' + g.name + '</h3><div class="fields">' + g.fields.map(function (f) {
-      return '<div class="field"><div class="ftop"><label for="n-' + f.k + '">' + f.label + '</label>' + tagHtml(f.tag) + '</div>' +
-        '<div class="inrow"><input id="n-' + f.k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"><span class="unit">' + f.unit + '</span></div>' +
-        '<p class="hint">' + esc(f.hint) + '</p></div>';
-    }).join('') + '</div></div>';
+      '<input id="r-' + f.k + '" type="range" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '" aria-label="' + (f.aria || f.label) + '">' +
+      (f.hint ? '<p class="hint">' + esc(f.hint) + '</p>' : '') + '</div>';
+  }
+  function fieldHtml(k) {
+    var f = FIELD[k];
+    return '<div class="field"><div class="ftop"><label for="n-' + f.k + '">' + f.label + '</label>' + tagHtml(f.tag) + '</div>' +
+      '<div class="inrow"><input id="n-' + f.k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"><span class="unit">' + f.unit + '</span></div>' +
+      (f.hint ? '<p class="hint">' + esc(f.hint) + '</p>' : '') + '</div>';
+  }
+  function segBlock(title, tag, name, opts, hintId, hintText) {
+    return '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">' + title + '</span>' + tagHtml(tag) + '</div>' +
+      seg(name, opts) + '<p class="hint"' + (hintId ? ' id="' + hintId + '"' : '') + '>' + (hintText || '') + '</p></div>';
+  }
+  var STEPS = [
+    { t: 'Wie', h: '<span data-j2="Wie zijn jullie?">Wie ben je?</span>', s: 'Kies eerst voor hoeveel personen je rekent. Namen zijn optioneel, ze maken de grafieken en teksten persoonlijker en blijven in deze browser.',
+      html: function () {
+        return '<div class="card knobs">' + segBlock('Aantal personen', 'zelf', 'personen', [{ v: '1', l: '1 persoon' }, { v: '2', l: '2 personen' }], '', 'Bij twee personen telt het programma twee keer AOW en pensioen, en de heffingsvrije voet voor fiscale partners.') + '</div>' +
+          '<div class="cols2">' + [1, 2].map(function (n) {
+          return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
+            '<div class="field"><div class="ftop"><label for="nm-' + n + '">Naam</label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" placeholder="Partner ' + n + '"></div>' +
+            fieldHtml(n === 1 ? 'leeftijdPaul' : 'leeftijdDiana') + '</div>';
+        }).join('') + '</div>';
+      } },
+    { t: 'Vermogen en budget', h: 'Vermogen en maandbudget', s: 'Wat er nu is, en wat er per maand netto uitgaat.',
+      html: function () { return '<div class="card knobs">' + knobHtml('startkapitaal') + knobHtml('budget') + knobHtml('werk') + '</div>'; } },
+    { t: 'AOW en pensioen', h: 'AOW en pensioen', s: 'Inkomen dat later binnenkomt. Zet uit wat niet van toepassing is. De bedragen staan op mijnpensioenoverzicht.nl en svb.nl.',
+      html: function () {
+        return '<div class="cols2">' + [1, 2].map(function (n) {
+          var s = n === 1 ? 'P' : 'D', ka = n === 1 ? 'aowPaul' : 'aowDiana', kp = n === 1 ? ['pensioenPaul', 'pensioenLeeftijd'] : ['pensioenDiana', 'pensioenLeeftijdDiana'];
+          return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
+            '<label class="check"><input type="checkbox" id="c-aowAan' + s + '"> Heeft recht op AOW</label>' +
+            '<div class="dep" data-dep="aowAan' + s + '">' + fieldHtml(ka) + '</div>' +
+            '<label class="check"><input type="checkbox" id="c-pensAan' + s + '"> Heeft pensioen opgebouwd</label>' +
+            '<div class="dep" data-dep="pensAan' + s + '">' + kp.map(fieldHtml).join('') + '</div></div>';
+        }).join('') + '</div><div class="card pcard"><h3><span data-j2="AOW-bedrag voor allebei">AOW-bedrag</span></h3><div class="only2">' + fieldHtml('aowNetto') + '</div><div class="only1">' + fieldHtml('aowNettoAlleen') + '</div></div>';
+      } },
+    { t: 'Keuzes', h: 'Keuzes', s: 'Hoe het vermogen belegd is, welke box 3-regels gelden en tot wanneer het moet reiken.',
+      html: function () {
+        return '<div class="card knobs">' +
+          segBlock('Portefeuille (beleggingsmix)', 'aanname', 'portfolio', [{ v: '0', l: 'Automatisch' }, { v: '1', l: 'Defensief' }, { v: '2', l: 'Gemiddeld' }, { v: '3', l: 'Agressief' }], 'pf-hint') +
+          segBlock('Box 3 (belasting over vermogen)', 'aanname', 'box3', [{ v: '1', l: 'Gewogen' }, { v: '2', l: 'Nu (2026)' }, { v: '3', l: 'Slecht (2027)' }, { v: '0', l: 'Uit' }], 'b3-hint') +
+          '<div class="only2" style="display:contents">' + segBlock('Looptijd tot de eindleeftijd van', 'zelf', 'eindDiana', [{ v: '1', l: '<span class="n2"></span>' }, { v: '0', l: '<span class="n1"></span>' }], '', 'Het scenario loopt tot die partner de eindleeftijd hieronder bereikt.') + '</div>' +
+          '<div class="knob wide"><div class="fields">' + fieldHtml('eindleeftijd') + fieldHtml('restkapitaal') + '</div></div></div>';
+      } },
+    { t: 'Aannames', h: 'Overige aannames', s: 'Standaardwaarden. Laat ze staan of pas ze aan.',
+      html: function () {
+        return '<div class="keyline">' +
+          '<span><span class="tag bron">bron</span> officiële bron online, gecontroleerd bij het maken van dit dashboard</span>' +
+          '<span><span class="tag aanname">aanname</span> standaardwaarde, <span data-j2="controleer of die bij jullie past">controleer of die bij je past</span></span>' +
+          '<span><span class="tag zelf">zelf invullen</span> gegevens die je zelf weet of moet opzoeken</span></div>' +
+          '<div class="card"><div class="fields">' + fieldHtml('inflatie') + fieldHtml('kosten') + '</div></div>' +
+          '<details class="table-view"><summary>Marktaannames en bronnen</summary><div class="tbl" id="pf-assump"></div></details>' +
+          '<button class="reset" id="reset" type="button">Zet alle getallen terug naar de startwaarden</button>';
+      } }
+  ];
+  $('steps').innerHTML = STEPS.map(function (st, i) {
+    return '<div class="step" id="step-' + (i + 1) + '"' + (i ? ' hidden' : '') + '><div class="step-head"><span class="step-k">Stap ' + (i + 1) + ' van ' + STEPS.length + '</span><h2>' + st.h + '</h2><p class="sub">' + st.s + '</p></div>' + st.html() + '</div>';
+  }).join('');
+  $('stepper').innerHTML = STEPS.map(function (st, i) {
+    return '<li><button type="button" data-go="' + (i + 1) + '" aria-label="Stap ' + (i + 1) + ': ' + st.t + '"><span class="num">' + (i + 1) + '</span><span class="lbl">' + st.t + '</span></button></li>';
   }).join('');
 
   function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = val; }); }
@@ -709,7 +1261,12 @@ function runModel(p) {
       r.addEventListener('change', function () { if (r.checked) { state[nm] = parseInt(r.value, 10); update(); } });
     });
   });
+  CHK.forEach(function (k) {
+    var c = $('c-' + k); if (!c) return;
+    c.addEventListener('change', function () { state[k] = c.checked ? 1 : 0; update(); });
+  });
   function syncInputs() {
+    CHK.forEach(function (k) { var c = $('c-' + k); if (c) c.checked = state[k] !== 0; });
     Object.keys(DEF).forEach(function (k) {
       if (SEGK.indexOf(k) >= 0) return;
       ['n-' + k, 'r-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = state[k]; });
@@ -724,7 +1281,11 @@ function runModel(p) {
   });
 
   var last = null;
-  function youngestName() { return state.eindDiana === 0 ? nm1() : nm2(); }
+  function youngestName() { return (state.eindDiana === 0 || state.personen === 1) ? nm1() : nm2(); }
+  function refTxt() { return state.personen === 1 ? 'je ' + state.eindleeftijd + 'e' : youngestName() + ' ' + state.eindleeftijd; }
+  function ageTxt(t) { return state.personen === 1 ? esc(nm1()) + ' ' + (state.leeftijdPaul + t) : esc(nm1()) + ' ' + (state.leeftijdPaul + t) + ' · ' + esc(nm2()) + ' ' + (state.leeftijdDiana + t); }
+  function ageShort(t) { return state.personen === 1 ? String(state.leeftijdPaul + t) : (state.leeftijdPaul + t) + ' · ' + (state.leeftijdDiana + t); }
+  function aowAmt() { return state.personen === 1 ? state.aowNettoAlleen : state.aowNetto; }
   function params(over) {
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
@@ -737,7 +1298,7 @@ function runModel(p) {
   function renderVerdict(m) {
     if (state.budget <= 0) {
       var e0 = $('verdict'); e0.className = 'verdict';
-      e0.innerHTML = '<div class="verdict-head"><span class="pill">Nog niet ingevuld</span></div><p class="verdict-text">Vul hieronder bij Ingrediënten eerst het startkapitaal en het maandbudget in. Daarna verschijnen hier de kans op slagen en de overige uitkomsten.</p><p class="hint" id="v-sim" style="margin-top:6px"></p>';
+      e0.innerHTML = '<div class="verdict-head"><span class="pill">Nog niet ingevuld</span></div><p class="verdict-text">Zodra het startkapitaal is ingevuld en wat je per maand wilt besteden, zie je hier de kans dat het vermogen het volhoudt.</p><p class="hint" id="v-sim" style="margin-top:6px"></p>';
       return;
     }
     var cls, label, icon;
@@ -747,10 +1308,12 @@ function runModel(p) {
     else { cls = 'bad'; label = 'Niet haalbaar'; icon = '✕'; }
     var yn = youngestName(), text;
     if (m.buffer >= 0) {
-      text = 'Met ' + eur(state.startkapitaal) + ' en ' + eur(state.budget) + ' per maand houden jullie het vol tot ' + yn + ' ' + state.eindleeftijd + ' is. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.';
+      text = two() ? 'Met ' + eur(state.startkapitaal) + ' en ' + eur(state.budget) + ' per maand te besteden houden jullie het vol tot ' + yn + ' ' + state.eindleeftijd + ' is. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.'
+        : 'Met ' + eur(state.startkapitaal) + ' en ' + eur(state.budget) + ' per maand te besteden hou je het vol tot je ' + state.eindleeftijd + ' bent. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.';
     } else {
       var age = m.youngest + (m.emptyAt === null ? m.N : m.emptyAt);
-      text = 'Het kapitaal is op rond de tijd dat ' + yn + ' ' + age + ' wordt. Jullie missen ' + eur(-m.marge) + ' aan startkapitaal, of het budget moet omlaag naar ' + eur(m.maxBudget) + ' per maand.';
+      text = two() ? 'Het vermogen is op rond de tijd dat ' + yn + ' ' + age + ' wordt. Jullie missen ' + eur(-m.marge) + ' aan startkapitaal, of het te besteden budget moet omlaag naar ' + eur(m.maxBudget) + ' per maand.'
+        : 'Het vermogen is op rond de tijd dat je ' + age + ' wordt. Je mist ' + eur(-m.marge) + ' aan startkapitaal, of het te besteden budget moet omlaag naar ' + eur(m.maxBudget) + ' per maand.';
     }
     var basis = 'Nederland, ' + (B3LABEL[state.box3] || B3LABEL[1]);
     var el = $('verdict');
@@ -761,14 +1324,14 @@ function runModel(p) {
   function renderKpis(m) {
     var room = m.maxBudget - state.budget;
     var items = [
-      { l: 'Kans op slagen', v: pct(curSucc, 0), s: 'bij wisselende rendementen, ' + portStat(effIdx()).n.toLowerCase(), c: curSucc >= 0.9 ? 'pos' : (curSucc < 0.75 ? 'neg' : '') },
+      { l: 'Resterend vermogen op de eindleeftijd', v: eur(m.K[m.N]), s: 'bij gemiddeld rendement, in euro’s van vandaag', c: m.K[m.N] < 0 ? 'neg' : '' },
       { l: 'Benodigd startkapitaal', v: eur(m.req0), s: 'bij ' + eur(state.budget) + ' per maand', c: '' },
       { l: m.marge >= 0 ? 'Buffer' : 'Tekort', v: (m.marge >= 0 ? '+' : '') + eur(m.marge), s: m.marge >= 0 ? pct(m.buffer, 0) + ' boven het minimum' : pct(-m.marge / m.req0, 0) + ' onder het minimum', c: m.marge >= 0 ? 'pos' : 'neg' },
-      { l: 'Maximaal maandbudget', v: eur(m.maxBudget), s: 'bij ' + eur(state.startkapitaal) + ' (' + (room >= 0 ? '+' : '−') + eur(Math.abs(room)) + ' per maand t.o.v. nu)', c: '' },
-      { l: 'Opname in jaar 1', v: pct(m.eersteJaarOpname, 1), s: 'van het startkapitaal, voor de AOW', c: '' },
+      { l: 'Maximaal te besteden maandbudget', v: eur(m.maxBudget), s: 'bij ' + eur(state.startkapitaal) + ' (' + (room >= 0 ? '+' : '−') + eur(Math.abs(room)) + ' per maand t.o.v. nu)', c: '' },
+      { l: 'Opname vanaf de start (jaar 1)', v: pct(m.eersteJaarOpname, 1), s: 'van het startkapitaal per jaar, ' + eur(m.draws[0] / 12) + ' per maand', c: '' },
       { l: 'Belasting in jaar 1', v: eur(m.belastingJaar1), s: B3LABEL[state.box3] || B3LABEL[1], c: '' }
     ];
-    if (state.budget <= 0) items = items.map(function (i) { return { l: i.l, v: '–', s: '', c: '' }; });
+    if (state.budget <= 0) items = items.map(function (i) { return { l: (i.l === 'Buffer' || i.l === 'Tekort') ? 'Buffer of tekort' : i.l, v: '–', s: '', c: '' }; });
     $('kpis').innerHTML = items.map(function (i) {
       return '<div class="kpi"><span class="k-label">' + i.l + '</span><span class="k-val ' + i.c + '">' + i.v + '</span><span class="k-sub">' + i.s + '</span></div>';
     }).join('');
@@ -786,8 +1349,8 @@ function runModel(p) {
       return { r: r, koop: X * NLP.tot / r.tot, need: X * r.tot / NLP.tot };
     }).sort(function (a, b) { return b.koop - a.koop; });
     var mx = rows[0].koop * 1.04;
-    var html = '<div class="krow std"><div><div class="rname">Nederland <span class="chip">jullie standaard</span></div><div class="track"><div class="bar" style="width:' + (X / mx * 100).toFixed(1) + '%"></div></div>' +
-      '<div class="rdet">Jullie maandbudget is hier 100% koopkracht.</div></div><div class="rv">' + eur(X) + '<small>100%</small></div></div>';
+    var html = '<div class="krow std"><div><div class="rname">Nederland <span class="chip">' + J('jullie standaard', 'je standaard') + '</span></div><div class="track"><div class="bar" style="width:' + (X / mx * 100).toFixed(1) + '%"></div></div>' +
+      '<div class="rdet">' + J('Jullie te besteden budget', 'Je te besteden budget') + ' is hier 100% koopkracht.</div></div><div class="rv">' + eur(X) + '<small>100%</small></div></div>';
     rows.forEach(function (o) {
       var r = o.r, up = (o.koop / X - 1) * 100;
       html += '<div class="krow"><div><div class="rname">' + r.n + '<span class="chip dim">✈ ' + r.tijd + ' naar ' + r.via + '</span></div>' +
@@ -799,7 +1362,7 @@ function runModel(p) {
     $('koop').innerHTML = html;
     var t3 = rows.slice(0, 3).map(function (o) { return o.r.n + ' (' + (o.koop / X >= 1 ? '+' : '−') + Math.abs(Math.round((o.koop / X - 1) * 100)) + '%)'; }).join(', ');
     var south = rows.filter(function (o) { return ['Spanje', 'Italië', 'Kroatië', 'Frankrijk'].indexOf(o.r.n) >= 0; }).map(function (o) { return o.r.n + ' ' + (o.koop / X >= 1 ? '+' : '−') + Math.abs(Math.round((o.koop / X - 1) * 100)) + '%'; }).join(', ');
-    $('koop-insight').textContent = 'Het meeste voor jullie geld: ' + t3 + '. Van de zuidelijke landen: ' + south + '.';
+    $('koop-insight').textContent = 'Het meeste voor ' + J('jullie', 'je') + ' geld: ' + t3 + '. Van de zuidelijke landen: ' + south + '.';
     $('koop-note').textContent = 'Bron: Eurostat, prijsniveau van alles wat huishoudens kopen, 2025 (voorlopig), EU = 100, Nederland ' + NLP.tot + '. Het zijn landgemiddelden. In kustplaatsen, grote steden en voor nieuwkomers liggen prijzen vaak hoger, vooral voor huur. Zorg is niet apart bekeken. Portugal valt af op 2u50 vliegen naar Porto, Slowakije heeft geen directe vlucht.';
   }
 
@@ -884,9 +1447,9 @@ function runModel(p) {
     idx.push(m.N);
     idx.forEach(function (t) {
       var draw = t < m.N ? m.draws[t] : null;
-      rows += '<tr><td>' + (state.leeftijdPaul + t) + ' · ' + (state.leeftijdDiana + t) + '</td><td class="' + (m.K[t] < 0 ? 'neg' : '') + '">' + eur(m.K[t]) + '</td><td>' + eur(m.R[t]) + '</td><td>' + (draw === null ? '–' : eur(draw / 12)) + '</td><td>' + (draw === null ? '–' : eur(m.taxes[t])) + '</td></tr>';
+      rows += '<tr><td>' + ageShort(t) + '</td><td class="' + (m.K[t] < 0 ? 'neg' : '') + '">' + eur(m.K[t]) + '</td><td>' + eur(m.R[t]) + '</td><td>' + (draw === null ? '–' : eur(draw / 12)) + '</td><td>' + (draw === null ? '–' : eur(m.taxes[t])) + '</td></tr>';
     });
-    $('tbl').innerHTML = '<p class="hint">Leeftijd van ' + esc(nm1()) + ' · ' + esc(nm2()) + '. Kapitaal bij gemiddeld rendement. Opname per maand: wat er na AOW en pensioen nog uit het kapitaal gaat; een min betekent dat er geld overblijft.</p><table><thead><tr><th>Leeftijd</th><th>Kapitaal</th><th>Minimaal nodig</th><th>Opname p/m</th><th>Box 3 p/j</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    $('tbl').innerHTML = '<p class="hint">Leeftijd van ' + (state.personen === 1 ? esc(nm1()) : esc(nm1()) + ' · ' + esc(nm2())) + '. Kapitaal bij gemiddeld rendement. Opname per maand: wat er na AOW en pensioen nog uit het kapitaal gaat; een min betekent dat er geld overblijft.</p><table><thead><tr><th>Leeftijd</th><th>Kapitaal</th><th>Minimaal nodig</th><th>Opname p/m</th><th>Box 3 p/j</th></tr></thead><tbody>' + rows + '</tbody></table>';
   }
 
   function renderLadder(m) {
@@ -973,7 +1536,7 @@ function runModel(p) {
         ['Verwacht rendement, bruto', pct(pf.mu, 1)],
         ['Schommeling per jaar', pct(pf.sd, 1)],
         ['Startkapitaal nodig, gemiddeld verloop', eur(m.req0)],
-        ['Maximaal maandbudget', eur(m.maxBudget)],
+        ['Maximaal te besteden maandbudget', eur(m.maxBudget)],
         ['Kapitaal aan het eind, midden', short(sim.q(sim.last, 0.5))],
         ['Kapitaal aan het eind, 1 op 20 pech', short(sim.q(sim.last, 0.05))]
       ];
@@ -982,7 +1545,7 @@ function runModel(p) {
         rows.push([sh.n, res.fail !== undefined ? 'op bij ' + ref + ' ' + res.fail : (res.ok ? short(res.end) + ' over' : short(res.end) + ', onder gewenst rest')]);
       });
       html += '<div class="cmp-card' + (cur ? ' cur' : '') + '"><h3>' + pf.n + (cur ? ' <span class="chip dim">' + (state.portfolio ? 'gekozen' : 'automatisch gekozen') + '</span>' : '') + '</h3>' +
-        '<span class="cmp-big">' + pct(sim.succ, 0) + '</span><span class="cmp-delta">kans dat het kapitaal reikt tot ' + ref + ' ' + state.eindleeftijd + ' ' + chip + '</span>' +
+        '<span class="cmp-big">' + pct(sim.succ, 0) + '</span><span class="cmp-delta">kans dat het vermogen reikt tot ' + refTxt() + ' ' + chip + '</span>' +
         rows.map(function (r) { return '<div class="kv"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('') + '</div>';
     });
     $('pf').innerHTML = html;
@@ -1053,6 +1616,13 @@ function runModel(p) {
   var FQ = [0.025, 0.10, 0.25, 0.5, 0.75, 0.90, 0.975];
   var FLAB = ['Zeer goed (1 op 40)', 'Goed (1 op 10)', 'Boven midden (1 op 4)', 'Midden', 'Onder midden (1 op 4)', 'Slecht (1 op 10)', 'Zeer slecht (1 op 40)'];
   function renderFan() {
+    if (state.budget <= 0) {
+      var h0 = $('fan'); if (h0) h0.innerHTML = '<div class="ph">Zodra het startkapitaal is ingevuld en wat je per maand wilt besteden, zie je hier hoe het vermogen zich kan ontwikkelen in goede en slechte jaren.</div>';
+      $('fan-succ').textContent = '–'; $('fan-wr').textContent = '–'; $('fan-wr-s').textContent = 'Opname per maand in jaar 1';
+      $('fan-assump').innerHTML = '<span class="ft">Aannames portefeuille</span><ul><li>volgen na het invullen</li></ul>';
+      $('fan-sub').textContent = 'Hoe het vermogen kan verlopen bij wisselende rendementen.'; $('fan-note').textContent = '';
+      return;
+    }
     var host = $('fan'); if (!host || !fanSrc) return;
     var m = fanSrc.m, sim = fanSrc.sim, pf = fanSrc.pf, N = m.N, infl = state.inflatie / 100, nominal = fanMode === 'nominal', ref = youngestName();
     var rows = [], t, maxP90 = 0;
@@ -1091,9 +1661,9 @@ function runModel(p) {
     s += '</g>';
     s += '<line class="zero" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(0) + '" y2="' + y(0) + '"/>';
     var marks = [
-      { t: state.aowDiana - state.leeftijdDiana, n: nm2() + ' ' + state.aowDiana },
-      { t: state.aowPaul - state.leeftijdPaul, n: nm1() + ' ' + state.aowPaul }
-    ].filter(function (q) { return q.t > 0 && q.t <= N; }).sort(function (p, q) { return p.t - q.t; });
+      { t: state.aowDiana - state.leeftijdDiana, n: nm2() + ' ' + state.aowDiana, on: state.personen !== 1 && state.aowAanD !== 0 },
+      { t: state.aowPaul - state.leeftijdPaul, n: nm1() + ' ' + state.aowPaul, on: state.aowAanP !== 0 }
+    ].filter(function (q) { return q.on && q.t > 0 && q.t <= N; }).sort(function (p, q) { return p.t - q.t; });
     marks.forEach(function (q, i) {
       var close = i > 0 && Math.abs(x(q.t) - x(marks[i - 1].t)) < 78, anchorEnd = x(q.t) > W - 70;
       s += '<line class="mk" x1="' + x(q.t) + '" x2="' + x(q.t) + '" y1="' + (mt - 2) + '" y2="' + y(0) + '"/>';
@@ -1113,7 +1683,7 @@ function runModel(p) {
       var c = hv.querySelector('circle'); c.setAttribute('cx', cx); c.setAttribute('cy', Math.max(mt, Math.min(y(0), y(rows[i][3]))));
       var z = sim.zero(i);
       tip.style.display = '';
-      tip.innerHTML = '<b>' + esc(nm1()) + ' ' + (state.leeftijdPaul + i) + ' · ' + esc(nm2()) + ' ' + (state.leeftijdDiana + i) + '</b>' +
+      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' +
         rows[i].map(function (v, k) { return '<div class="row"><span>' + FLAB[k] + '</span><span>' + eur(rows[i][6 - k]) + '</span></div>'; }).join('') +
         '<div class="row"><span>Kans dat het op is</span><span>' + pct(z, 0) + '</span></div>';
       var sc = rc.width / W, left = cx * sc + 12;
@@ -1127,7 +1697,7 @@ function runModel(p) {
     $('fan-wr').textContent = eur(m.draws[0] / 12);
     $('fan-wr-s').textContent = 'Opname per maand in jaar 1 (' + pct(m.eersteJaarOpname, 1) + ' van het kapitaal per jaar)';
     $('fan-assump').innerHTML = '<span class="ft">Aannames portefeuille</span><ul><li>' + Math.round(pf.w[0] * 100) + '% aandelen, ' + Math.round(pf.w[1] * 100) + '% obligaties, ' + Math.round(pf.w[2] * 100) + '% sparen</li><li>' + pct(state.kosten / 100, 1) + ' kosten per jaar</li><li>' + (B3LABEL[state.box3] || B3LABEL[1]) + '</li></ul>';
-    $('fan-sub').textContent = 'Zo kan het kapitaal verlopen als de rendementen wisselen, bij de portefeuille “' + pf.n.toLowerCase() + '”: ' + nf.format(SIMN) + ' doorrekeningen. Elk jaar gaat de maandelijkse opname uit het kapitaal, na aftrek van AOW en pensioen, en daarvan gaat ook box 3 af. Hoe donkerder de band, hoe waarschijnlijker. Tik of beweeg over de grafiek voor cijfers.';
+    $('fan-sub').textContent = 'Zo kan het vermogen verlopen als de rendementen wisselen, bij de portefeuille “' + pf.n.toLowerCase() + '”, ' + nf.format(SIMN) + ' doorrekeningen. Elk jaar gaat eerst de opname uit het vermogen en daarna box 3. Hoe donkerder de band, hoe waarschijnlijker. Tik of beweeg over de grafiek voor cijfers.';
     $('fan-note').textContent = nominal ? 'Nominaal: bedragen zoals ze op dat moment op de rekening staan, bij ' + pct(infl, 1) + ' inflatie per jaar.' : 'Reëel: in euro’s van vandaag, zodat bedragen over de jaren vergelijkbaar blijven.';
     Array.prototype.forEach.call(document.querySelectorAll('#fan-legend .lg'), function (el) { el.classList.toggle('off', !fanShow[el.getAttribute('data-k')]); });
   }
@@ -1140,29 +1710,129 @@ function runModel(p) {
     el.addEventListener('click', function () { var k = el.getAttribute('data-k'); fanShow[k] = !fanShow[k]; renderFan(); });
   });
 
-  var keyVisible = true;
+  /* ---------- interface-instellingen per kijker ---------- */
+  var ui = { introSeen: false, step: 1 };
+  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; } } catch (e) {}
+  function saveUi() { try { localStorage.setItem(KEY + '-ui', JSON.stringify(ui)); } catch (e) {} }
+
+  var route = 'overzicht';
+  function updMini() { $('mini').classList.toggle('show', route !== 'overzicht' && state.budget > 0); }
   function renderMini(m) {
     var el = $('mini'); if (!el) return;
     var cls = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : 'bad');
-    el.classList.toggle('show', !keyVisible && state.budget > 0);
-    el.innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> kans op slagen</span><span>Nodig <b>' + short(m.req0) + '</b></span><span>Maximaal <b>' + eur(m.maxBudget) + '</b> per maand</span>';
+    el.innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> kans op slagen</span><span>Nodig <b>' + short(m.req0) + '</b></span><span>Max. te besteden <b>' + eur(m.maxBudget) + '</b> p/m</span>';
+    updMini();
   }
-  if (window.IntersectionObserver) {
-    new IntersectionObserver(function (es) { keyVisible = es[0].isIntersecting; $('mini').classList.toggle('show', !keyVisible && state.budget > 0); }).observe($('key'));
+
+  /* ---------- meter: kans op slagen ---------- */
+  function renderGauge() {
+    var g = $('gauge'), card = $('status-card'); if (!g) return;
+    var empty = state.budget <= 0, v = empty ? 0 : curSucc;
+    var cls = empty ? '' : (v >= 0.9 ? 'good' : (v >= 0.75 ? 'warn' : 'bad'));
+    card.className = 'card status ' + cls;
+    function pt(f, r) { var a = Math.PI * (1 - f); return [100 + r * Math.cos(a), 104 - r * Math.sin(a)]; }
+    var arc = 'M16 104 A84 84 0 0 1 184 104';
+    var s = '<svg viewBox="0 0 200 124" role="img" aria-label="Kans op slagen: ' + (empty ? 'nog niet berekend' : pct(v, 0)) + '">';
+    s += '<path d="' + arc + '" class="g-bg"/>';
+    if (!empty && v > 0.004) s += '<path d="' + arc + '" class="g-val ' + cls + '" pathLength="100" stroke-dasharray="' + (v * 100).toFixed(1) + ' 100"/>';
+    [0.75, 0.9].forEach(function (f) { var a = pt(f, 74), b = pt(f, 94); s += '<line class="g-tick" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; });
+    s += '<text x="100" y="96" class="g-num">' + (empty ? '–' : Math.round(v * 100) + '%') + '</text>';
+    s += '<text x="100" y="120" class="g-lbl">kans op slagen</text></svg>';
+    g.innerHTML = s;
+    var n = empty ? 0 : Math.round(v * 20), kr = '';
+    for (var i = 0; i < 20; i++) kr += i < n ? KNOP[i % KNOP.length] : KNOP0;
+    $('knoprij').innerHTML = kr;
+    $('knoprij-t').textContent = empty ? 'Elke knoop staat voor een mogelijke toekomst. Na het invullen zie je hoeveel er goed aflopen.'
+      : 'In ' + n + ' van de 20 knopen reikt het vermogen tot ' + refTxt() + '. Elke knoop staat voor een mogelijke toekomst.';
+  }
+  var KNOP = ["<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#8DB8E8\" stroke=\"#5E8FC6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#5E8FC6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#5E8FC6\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F2A97E\" stroke=\"#D47F50\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D47F50\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D47F50\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#9ED3B4\" stroke=\"#6FAF8C\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#6FAF8C\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#6FAF8C\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#C9B8EE\" stroke=\"#9C86D2\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#9C86D2\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#9C86D2\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F5D98B\" stroke=\"#D1B25E\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D1B25E\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D1B25E\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F6B8C8\" stroke=\"#D98AA0\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D98AA0\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D98AA0\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#FFFFFF\" stroke=\"#B9C7D6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#B9C7D6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#B9C7D6\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#A9D6E8\" stroke=\"#74AFC6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#74AFC6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#74AFC6\"/></svg>"], KNOP0 = "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"currentColor\"/></svg>";
+
+  /* ---------- grafiek: waar het maandbudget vandaan komt ---------- */
+  function cl01(x) { return Math.max(0, Math.min(1, x)); }
+  function renderFlow(m) {
+    var host = $('flow'); if (!host) return;
+    if (state.budget <= 0) { host.innerHTML = '<div class="ph">Zodra is ingevuld wat je per maand wilt besteden, zie je hier per jaar welk deel uit AOW, pensioen en werk komt, en welk deel uit het vermogen.</div>'; return; }
+    var N = m.N, rows = [], t, mx = state.budget;
+    for (t = 0; t < N; t++) {
+      var aP = state.leeftijdPaul + t, aD = state.leeftijdDiana + t;
+      var tw = state.personen !== 1;
+      var aow = aowAmt() * ((state.aowAanP !== 0 ? cl01(aP + 1 - state.aowPaul) : 0) + (tw && state.aowAanD !== 0 ? cl01(aD + 1 - state.aowDiana) : 0));
+      var pen = (state.pensAanP !== 0 ? state.pensioenPaul * cl01(aP + 1 - state.pensioenLeeftijd) : 0) + (tw && state.pensAanD !== 0 ? state.pensioenDiana * cl01(aD + 1 - state.pensioenLeeftijdDiana) : 0);
+      var wk = (state.werk > 0 && (aP < 67 || (tw && aD < 67))) ? state.werk : 0;
+      var inc = aow + pen + wk;
+      rows.push({ aow: aow, pen: pen, wk: wk, inc: inc, cap: Math.max(0, state.budget - inc) });
+      mx = Math.max(mx, inc);
+    }
+    var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 230 : 270;
+    var ml = 52, mr = 14, mt = 14, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
+    var tk = niceTicks(0, mx * 1.1, 4), ymax = Math.max(mx * 1.1, tk.ticks[tk.ticks.length - 1]);
+    function y(v) { return mt + (1 - v / ymax) * ph; }
+    var bw = pw / N, gap = Math.min(3, bw * 0.22);
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Te besteden budget per jaar, verdeeld over AOW, pensioen, bijverdienen en vermogen">';
+    tk.ticks.forEach(function (v) {
+      s += '<line class="grid" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(v) + '" y2="' + y(v) + '"/>';
+      s += '<text x="' + (ml - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + (v >= 1000 ? '€' + (v / 1000).toFixed(v % 1000 ? 1 : 0).replace('.', ',') + 'k' : '€' + v) + '</text>';
+    });
+    s += '<rect id="flowhl" class="f-hl" x="0" y="' + mt + '" width="' + bw + '" height="' + ph + '" style="display:none"/>';
+    rows.forEach(function (r, i) {
+      var x0 = ml + i * bw + gap / 2, w = Math.max(1, bw - gap), base = 0;
+      [['aow', 'f-aow'], ['pen', 'f-pen'], ['wk', 'f-wk'], ['cap', 'f-cap']].forEach(function (p) {
+        var v = r[p[0]]; if (v <= 0.5) return;
+        s += '<rect class="' + p[1] + '" x="' + x0.toFixed(1) + '" y="' + y(base + v).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + (y(base) - y(base + v)).toFixed(1) + '"/>';
+        base += v;
+      });
+    });
+    s += '<line class="f-bud" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(state.budget) + '" y2="' + y(state.budget) + '"/>';
+    s += '<line class="zero" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(0) + '" y2="' + y(0) + '"/>';
+    for (var a = Math.ceil(m.youngest / 5) * 5; a < m.youngest + N; a += 5) {
+      var tt = a - m.youngest, cx = ml + (tt + 0.5) * bw;
+      if (cx - ml < 22) continue;
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + a + '</text>';
+    }
+    s += '<text x="' + ml + '" y="' + (H - 10) + '" text-anchor="start" class="lbl">' + m.youngest + '</text>';
+    s += '<rect id="flowhit" x="' + ml + '" y="' + mt + '" width="' + pw + '" height="' + ph + '" fill="transparent"/>';
+    s += '</svg><div class="tip" id="flowtip" style="display:none"></div>';
+    host.innerHTML = s;
+    var hit = $('flowhit'), hl = $('flowhl'), tip = $('flowtip');
+    function show(ev) {
+      var rc = host.querySelector('svg').getBoundingClientRect();
+      var px = (ev.clientX - rc.left) * (W / rc.width);
+      var i = Math.max(0, Math.min(N - 1, Math.floor((px - ml) / bw))), r = rows[i];
+      hl.style.display = ''; hl.setAttribute('x', ml + i * bw);
+      var line = function (l, v) { return '<div class="row"><span>' + l + '</span><span>' + eur(v) + '</span></div>'; };
+      tip.style.display = '';
+      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' +
+        line('AOW', r.aow) + line('Pensioen', r.pen) + (r.wk > 0 ? line('Bijverdienen', r.wk) : '') + line('Uit vermogen', r.cap) +
+        (r.inc > state.budget ? line('Over boven het te besteden budget', r.inc - state.budget) : '');
+      var sc = rc.width / W, cx = (ml + (i + 0.5) * bw) * sc, left = cx + 12;
+      if (left + 210 > rc.width) left = cx - 210 - 12;
+      tip.style.left = Math.max(4, left) + 'px'; tip.style.top = '10px';
+    }
+    hit.addEventListener('pointermove', show);
+    hit.addEventListener('pointerdown', show);
+    hit.addEventListener('pointerleave', function () { hl.style.display = 'none'; tip.style.display = 'none'; });
+  }
+
+  function renderHead(m) {
+    var el = $('ov-sub'); if (!el) return;
+    if (state.budget <= 0) { el.textContent = 'Nog leeg. Na het invullen zie je hier waar je staat, hoe je vermogen zich kan ontwikkelen en waar het geld vandaan komt dat je per maand wilt besteden.'; return; }
+    el.textContent = 'Startkapitaal ' + eur(state.startkapitaal) + ', ' + eur(state.budget) + ' per maand te besteden, tot ' + (two() ? youngestName() + ' ' + state.eindleeftijd + ' is' : 'je ' + state.eindleeftijd + ' bent') + '. Alle bedragen in euro’s van vandaag.';
   }
 
   function update() {
     applyNames();
+    document.documentElement.classList.toggle('is-empty', state.budget <= 0);
     if (state.portfolio === 0) { autoInfo = pickAuto(); autoIdx = autoInfo.idx; } else autoInfo = null;
     var pfh = $('pf-hint'), pst = portStat(effIdx());
     if (pfh) pfh.textContent = (autoInfo ? 'Gekozen: ' + pst.n + ' (kans op slagen ' + pct(autoInfo.succ, 0) + '). Automatisch kiest de portefeuille met de hoogste kans op slagen bij de huidige instellingen. Bij minder dan 1 procentpunt verschil wint de portefeuille met het meeste kapitaal aan het eind. ' : pst.n + ': ') + Math.round(pst.w[0] * 100) + '% aandelen, ' + Math.round(pst.w[1] * 100) + '% obligaties, ' + Math.round(pst.w[2] * 100) + '% sparen. Verwacht rendement ' + pct(pst.mu, 1) + ' bruto per jaar, schommeling ongeveer ' + pct(pst.sd, 0) + ' per jaar.';
-    var bh = $('b3-hint'); if (bh) bh.textContent = B3HINT[state.box3] || B3HINT[1];
+    var bh = $('b3-hint'); if (bh) bh.textContent = B3H(state.box3);
     var m = runModel(params());
     last = m;
     curSucc = simQuick(m, portStat(effIdx()), params()).succ;
     simText = 'Kans op slagen bij wisselende rendementen (' + portStat(effIdx()).n.toLowerCase() + '): ' + pct(curSucc, 0) + '.';
-    renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
+    renderHead(m); renderGauge(); renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
     renderTable(m); renderLadder(m);
+    if (route === 'overzicht') renderFlow(m);
     scheduleSim(false);
     persist();
   }
@@ -1170,16 +1840,165 @@ function runModel(p) {
     var el = $('nm-' + n); el.value = names['n' + n];
     el.addEventListener('input', function () { names['n' + n] = el.value.slice(0, 20); update(); });
   });
+
+  /* ---------- stappen ---------- */
+  var curStep = 1;
+  function showStep(n, scroll) {
+    curStep = Math.max(1, Math.min(STEPS.length, n));
+    STEPS.forEach(function (st, i) { $('step-' + (i + 1)).hidden = i + 1 !== curStep; });
+    Array.prototype.forEach.call(document.querySelectorAll('#stepper button'), function (b) {
+      var k = parseInt(b.getAttribute('data-go'), 10);
+      if (k === curStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+      b.classList.toggle('done', k < curStep);
+    });
+    $('prog').style.width = (curStep / STEPS.length * 100) + '%';
+    $('step-prev').style.visibility = curStep === 1 ? 'hidden' : '';
+    $('step-next').textContent = curStep === STEPS.length ? 'Bekijk het overzicht' : 'Volgende: ' + STEPS[curStep].t.toLowerCase();
+    ui.step = curStep; saveUi();
+    if (scroll) window.scrollTo(0, 0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#stepper button'), function (b) {
+    b.addEventListener('click', function () { showStep(parseInt(b.getAttribute('data-go'), 10), true); });
+  });
+  $('step-prev').addEventListener('click', function () { showStep(curStep - 1, true); });
+  $('step-next').addEventListener('click', function () {
+    if (curStep < STEPS.length) showStep(curStep + 1, true); else location.hash = '#overzicht';
+  });
+
+  /* ---------- pagina's ---------- */
+  var ROUTES = ['overzicht', 'invullen', 'inzicht', 'over'], pendingScroll = null;
+  function go() {
+    var h = (location.hash || '').replace('#', '');
+    route = ROUTES.indexOf(h) >= 0 ? h : 'overzicht';
+    ROUTES.forEach(function (r) {
+      $('page-' + r).hidden = r !== route;
+      var tb = $('tab-' + r);
+      if (r === route) tb.setAttribute('aria-current', 'page'); else tb.removeAttribute('aria-current');
+    });
+    updMini();
+    if (route === 'overzicht' && last) { lastW = 0; renderFan(); renderFlow(last); }
+    window.scrollTo(0, 0);
+    if (pendingScroll && $(pendingScroll)) { var id = pendingScroll; pendingScroll = null; setTimeout(function () { $(id).scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); }, 30); }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-scroll]'), function (a) {
+    a.addEventListener('click', function () { pendingScroll = a.getAttribute('data-scroll'); });
+  });
+  window.addEventListener('hashchange', go);
+
   syncInputs();
+  showStep(ui.step, false);
+  go();
   update();
   scheduleSim(true);
   var rt, lastW = 0;
-  function onResize() { clearTimeout(rt); rt = setTimeout(function () { var w = $('fan').clientWidth; if (last && w !== lastW) { lastW = w; renderFan(); } }, 120); }
-  Array.prototype.forEach.call(document.querySelectorAll('details.fold'), function (d) {
-    d.addEventListener('toggle', function () { if (d.open && last) { lastW = 0; renderFan(); } });
-  });
+  function onResize() {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      var w = $('fan').clientWidth;
+      if (last && route === 'overzicht' && w !== lastW) { lastW = w; renderFan(); renderFlow(last); }
+      if (tourI >= 0) placeTour(false);
+    }, 120);
+  }
   window.addEventListener('resize', onResize);
   if (window.ResizeObserver) new ResizeObserver(onResize).observe($('fan'));
+
+  /* ---------- introductie ---------- */
+  var lastFocus = null;
+  function openIntro() {
+    lastFocus = document.activeElement;
+    $('intro').hidden = false;
+    setTimeout(function () { $('intro-go').focus({ preventScroll: true }); var mc = document.querySelector('.modal-card'); if (mc) mc.scrollTop = 0; }, 30);
+  }
+  function closeIntro(thenTour) {
+    $('intro').hidden = true;
+    ui.introSeen = true; saveUi();
+    if (thenTour) startTour(); else if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $('intro-skip').addEventListener('click', function () { closeIntro(false); });
+  $('intro-go').addEventListener('click', function () { closeIntro(true); });
+  $('btn-intro').addEventListener('click', openIntro);
+  $('btn-tour').addEventListener('click', function () { startTour(); });
+  function trap(container, ev) {
+    var f = Array.prototype.filter.call(container.querySelectorAll('button, summary, a[href], input'), function (e) { return e.offsetParent !== null; });
+    if (!f.length) return;
+    var first = f[0], lastEl = f[f.length - 1];
+    if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); lastEl.focus(); }
+    else if (!ev.shiftKey && document.activeElement === lastEl) { ev.preventDefault(); first.focus(); }
+  }
+
+  /* ---------- rondleiding ---------- */
+  var TOUR = [
+    { el: 'status-card', h: 'In één oogopslag', p: 'Hier zie je hoe je ervoor staat: de kans dat je vermogen het volhoudt tot de leeftijd die je kiest. Elke knoop staat voor een mogelijke toekomst. Zolang er niets is ingevuld, blijft dit leeg.' },
+    { el: 'kpis', h: 'De kerncijfers', p: 'Wat er aan het eind over is, welk startkapitaal nodig is, je buffer of tekort, het maximaal te besteden maandbudget en wat er vanaf de start uit je vermogen gaat.' },
+    { el: 'fan', h: 'Je vermogen in de komende jaren', p: 'Hoe het vermogen zich kan ontwikkelen in goede en slechte jaren. De middenlijn is het meest waarschijnlijke verloop.' },
+    { el: 'flow', h: 'Wat wil je per maand te besteden hebben, en waar komt dat vandaan?', p: 'Per jaar het deel uit AOW, pensioen en werk, en het deel dat uit je vermogen komt.' },
+    { el: 'tab-inzicht', h: 'Verdieping', p: 'Bij Inzicht vergelijk je portefeuilles, zie je wat een ander te besteden budget per maand vraagt en wat dat budget aan koopkracht waard is in andere landen.' },
+    { el: 'tab-over', h: 'Over Knopen tellen', p: 'Hier lees je de gedachte achter de app, staan de bronnen en start je deze rondleiding opnieuw.' },
+    { el: 'tab-invullen', h: 'Hier begin je', p: 'In vijf korte stappen vul je een paar gegevens in. Daarmee krijg je inzicht, en daarna kun je gaan schuiven met de knoppen.', last: 'Begin met invullen' }
+  ];
+  var tourI = -1;
+  function startTour() {
+    if (route !== 'overzicht') { location.hash = '#overzicht'; }
+    $('tour').hidden = false;
+    tourI = 0;
+    setTimeout(function () { placeTour(true); $('tour-next').focus(); }, 60);
+  }
+  function endTour(toInvullen) {
+    $('tour').hidden = true; tourI = -1;
+    if (toInvullen) { showStep(1, false); location.hash = '#invullen'; }
+  }
+  function placeTour(scroll) {
+    if (tourI < 0) return;
+    var st = TOUR[tourI], el = $(st.el);
+    $('tour-count').textContent = 'Stap ' + (tourI + 1) + ' van ' + TOUR.length;
+    $('tour-h').textContent = st.h;
+    $('tour-p').textContent = st.p;
+    $('tour-prev').style.visibility = tourI === 0 ? 'hidden' : '';
+    $('tour-next').textContent = st.last || 'Volgende';
+    var fixed = st.el.indexOf('tab-') === 0;
+    if (scroll && !fixed) {
+      var r0 = el.getBoundingClientRect();
+      window.scrollBy(0, r0.top + r0.height / 2 - innerHeight * 0.38);
+    }
+    var r = el.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = innerHeight, pad = 6;
+    var top = Math.max(4, r.top - pad), left = Math.max(4, r.left - pad), bottom = Math.min(vh - 4, r.bottom + pad), right = Math.min(vw - 4, r.right + pad);
+    var sp = $('tour-spot');
+    sp.style.top = top + 'px'; sp.style.left = left + 'px'; sp.style.width = (right - left) + 'px'; sp.style.height = Math.max(0, bottom - top) + 'px';
+    var tip = $('tour-tip'), arrow = $('tour-arrow');
+    tip.style.visibility = 'hidden'; tip.style.top = '0px'; tip.style.left = '0px';
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var below = vh - bottom - 16 >= th, above = top - 16 >= th;
+    var tl = Math.min(vw - tw - 16, Math.max(16, (left + right) / 2 - tw / 2)), tt, dir;
+    if (below) { tt = bottom + 12; dir = 'up'; }
+    else if (above) { tt = top - 12 - th; dir = 'down'; }
+    else { tt = vh - th - 16; dir = 'none'; }
+    tip.style.left = tl + 'px'; tip.style.top = tt + 'px';
+    arrow.className = 'tour-arrow ' + dir;
+    arrow.style.left = Math.max(14, Math.min(tw - 28, (left + right) / 2 - tl - 7)) + 'px';
+    tip.style.visibility = '';
+  }
+  $('tour-next').addEventListener('click', function () {
+    if (TOUR[tourI].last) { endTour(true); return; }
+    tourI++; placeTour(true);
+  });
+  $('tour-prev').addEventListener('click', function () { if (tourI > 0) { tourI--; placeTour(true); } });
+  $('tour-skip').addEventListener('click', function () { endTour(false); });
+  window.addEventListener('scroll', function () { if (tourI >= 0) placeTour(false); }, { passive: true });
+  document.addEventListener('keydown', function (ev) {
+    if (!$('intro').hidden) {
+      if (ev.key === 'Escape') closeIntro(false);
+      else if (ev.key === 'Tab') trap($('intro'), ev);
+      return;
+    }
+    if (tourI >= 0) {
+      if (ev.key === 'Escape') endTour(false);
+      else if (ev.key === 'ArrowRight') $('tour-next').click();
+      else if (ev.key === 'ArrowLeft') $('tour-prev').click();
+      else if (ev.key === 'Tab') trap($('tour-tip'), ev);
+    }
+  });
+
+  if (!ui.introSeen) openIntro();
 })();
 </script>
 </body>
