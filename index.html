@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Knopen tellen V2</title>
+<title>Knopen tellen V3</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -721,6 +721,38 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
   .modal-hero img { height: 150px; }
   .ec-img { flex: 1 1 100%; min-height: 140px; }
 }
+
+/* V3: snel rekenen en advies */
+.snel { display: flex; flex-direction: row; gap: 20px; align-items: stretch; flex-wrap: wrap; }
+.dash > .snel, .dash > .advies { grid-column: 1 / -1; }
+
+.snel .ec-img { flex: 0 0 240px; }
+.snel-body { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.snel-body h2 { font-size: 22px; }
+.snel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px 20px; margin-top: 6px; }
+.qp { display: flex; flex-direction: column; gap: 8px; }
+.flabel { font-weight: 600; font-size: 14px; }
+.opt { font-weight: 400; color: var(--muted); }
+.snel .seg { align-self: flex-start; }
+.advies { display: flex; flex-direction: column; gap: 10px; background: linear-gradient(120deg, #FFFFFF 0%, #EEF5FC 60%, #F8F1E8 100%); border-color: #C9DAEC; }
+.adv-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.adv-top h2 { font-size: 22px; }
+.adv-big { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+.adv-big b { font-family: var(--f-num); font-size: 34px; font-weight: 500; color: var(--accent); line-height: 1.05; }
+.adv-big span { font-size: 13px; color: var(--muted); }
+.adv-p { margin: 0; max-width: 70ch; }
+.adv-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; color: var(--ink2); font-size: 14px; max-width: 74ch; }
+.havebar { display: flex; flex-direction: column; gap: 6px; }
+.havebar p { margin: 0; font-weight: 600; }
+.hb-track { height: 12px; border-radius: 6px; background: var(--surface2); overflow: hidden; border: 1px solid var(--line); }
+.hb-fill { height: 100%; background: linear-gradient(90deg, var(--sage), #5FAF83); border-radius: 6px; }
+@media (max-width: 760px) {
+  .snel { padding: 0 !important; gap: 0; }
+  .snel .ec-img { flex: 1 1 100%; min-height: 150px; border-radius: 18px 18px 0 0; }
+  .snel-body { padding: 16px; }
+  .adv-big { align-items: flex-start; text-align: left; }
+  .adv-big b { font-size: 30px; }
+}
 </style>
 </head>
 <body>
@@ -730,7 +762,7 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
   <div class="topbar-in">
     <a class="brand" href="#overzicht" aria-label="Knopen tellen, naar het overzicht">
       <svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg>
-      <span class="wordmark">Knopen tellen</span><span class="v2">V2</span>
+      <span class="wordmark">Knopen tellen</span><span class="v2">V3</span>
     </a>
     <nav class="tabs" aria-label="Pagina's">
       <a href="#overzicht" id="tab-overzicht"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/></svg><span>Overzicht</span></a>
@@ -755,14 +787,23 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
       <div class="ov-art photo"><img src="img/buidel.jpg" alt="Een leren buidel waaruit knopen over een houten tafel rollen"></div>
     </div>
     <div class="dash">
-      <div class="card empty-cta">
+      <section class="card snel" id="snel" aria-labelledby="snel-h">
         <div class="ec-img"><img src="img/boekje.jpg" alt="Een opengeslagen notitieboekje met knopen in rijtjes"></div>
-        <div class="empty-text">
-          <h2>Nog niets ingevuld</h2>
-          <p class="sub">In vijf korte stappen vul je in wat er nu is, wat je per maand wilt besteden en wat er later binnenkomt. Daarmee krijg je inzicht, en daarna kun je gaan schuiven met de knoppen.</p>
+        <div class="snel-body">
+          <span class="eyebrow">Snel rekenen</span>
+          <h2 id="snel-h"><span data-j2="Wat hebben jullie nodig?">Wat heb je nodig?</span></h2>
+          <p class="sub">Vul je leeftijd in en wat je per maand wilt besteden. De rest vult de app zelf in: AOW volgens de wettelijke regels, de gemiddelde levensverwachting en een pot die op het eind leeg mag zijn.</p>
+          <div class="snel-grid">
+            <div class="field"><span class="flabel">Voor hoeveel personen?</span>
+              <div class="seg" role="radiogroup" aria-label="Aantal personen"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span>1 persoon</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span>2 personen</span></label></div></div>
+            <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit">jaar</span></div></div><div class="seg" role="radiogroup" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span>Man</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span>Vrouw</span></label></div></div>
+            <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit">jaar</span></div></div><div class="seg" role="radiogroup" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span>Man</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span>Vrouw</span></label></div></div>
+            <div class="field"><label for="q-budget"><span data-j2="Wat willen jullie per maand te besteden hebben?">Wat wil je per maand te besteden hebben?</span></label><div class="inrow"><input id="q-budget" type="number" inputmode="decimal" min="0" step="25" placeholder="bijvoorbeeld 2500"><span class="unit">€ netto per maand</span></div></div>
+            <div class="field"><label for="q-startkapitaal"><span data-j2="Vermogen dat jullie nu hebben">Vermogen dat je nu hebt</span> <span class="opt">(mag leeg)</span></label><div class="inrow"><input id="q-startkapitaal" type="number" inputmode="decimal" min="0" step="1000" placeholder="0"><span class="unit">€</span></div></div>
+          </div>
         </div>
-        <a class="btn primary" href="#invullen">Begin met invullen</a>
-      </div>
+      </section>
+      <section class="card advies" id="advies" aria-live="polite" hidden></section>
       <div class="card status" id="status-card" aria-live="polite">
         <div class="gauge" id="gauge"></div>
         <p class="g-key">Streepje 75%: krap haalbaar · streepje 90%: ruim haalbaar</p>
@@ -909,7 +950,7 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h">
     <div class="modal-hero">
       <img src="img/pad.jpg" alt="Een kronkelend pad met knopen naar de horizon">
-      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark">Knopen tellen</span><span class="v2">V2</span></span>
+      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark">Knopen tellen</span><span class="v2">V3</span></span>
     </div>
     <div class="modal-body">
       <h2 id="intro-h" class="pay">Tijd om de knopen<br><span>te tellen.</span></h2>
@@ -1074,8 +1115,32 @@ function runModel(p) {
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 68, aowDiana: 68, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
     aowNetto: 1084, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67,
-    personen: 1, aowNettoAlleen: 1582, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1
+    personen: 1, aowNettoAlleen: 1582, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
+    geslP: -1, geslD: -1, autoAow: 1, autoEind: 1
   };
+  /* resterende levensverwachting, CBS-levenstafel 2024 (via lifetable.de), mannen en vrouwen */
+  var LE_M = [61.48, 56.60, 51.71, 46.84, 42.01, 37.23, 32.54, 27.95, 23.52, 19.31, 15.36, 11.76, 8.54, 5.85, 3.79];
+  var LE_V = [64.18, 59.23, 54.31, 49.40, 44.52, 39.69, 34.91, 30.25, 25.71, 21.34, 17.22, 13.36, 9.80, 6.73, 4.34];
+  function remLE(age, g) {
+    function f(a) {
+      if (age <= 20) return a[0] + (20 - age);
+      if (age >= 90) return Math.max(1.5, a[14] - (age - 90) * 0.25);
+      var i = Math.floor((age - 20) / 5), x = (age - 20 - i * 5) / 5;
+      return a[i] + (a[i + 1] - a[i]) * x;
+    }
+    return g === 0 ? f(LE_M) : (g === 1 ? f(LE_V) : (f(LE_M) + f(LE_V)) / 2);
+  }
+  /* AOW-leeftijd per geboortejaar: vastgesteld t/m 2031, daarna de verwachting bij de koppeling aan de levensverwachting */
+  var AOWP = [[1959, 67], [1960, 67], [1961, 67.25], [1966, 67.25], [1974, 68], [1980, 68.5], [1987, 69], [1995, 69.75], [2010, 70.75]];
+  function aowFor(age) {
+    var by = 2026 - age;
+    if (by <= 1959) return 67;
+    for (var i = 1; i < AOWP.length; i++) if (by <= AOWP[i][0]) {
+      var a = AOWP[i - 1], b = AOWP[i], x = (by - a[0]) / (b[0] - a[0]);
+      return Math.round((a[1] + (b[1] - a[1]) * x) * 4) / 4;
+    }
+    return 70.75;
+  }
   var PRIMARY = [
     { k: 'startkapitaal', label: 'Startkapitaal', unit: '€', min: 200000, max: 1500000, step: 5000, tag: 'zelf' },
     { k: 'budget', label: '<span data-j2="Wat willen jullie per maand te besteden hebben?">Wat wil je per maand te besteden hebben?</span>', aria: 'Te besteden per maand', unit: '€ netto per maand', min: 1500, max: 5000, step: 25, tag: 'zelf' },
@@ -1084,13 +1149,13 @@ function runModel(p) {
   var GROUPS = [
     { name: '<span class="pn1"></span>', fields: [
       { k: 'leeftijdPaul', label: 'Leeftijd op dit moment', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'zelf', hint: 'Jouw leeftijd op dit moment, in hele jaren.' },
-      { k: 'aowPaul', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Verwachte AOW-leeftijd voor jouw geboortejaar, zie svb.nl. Kan nog worden bijgesteld.' },
+      { k: 'aowPaul', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Rekent de app automatisch uit je leeftijd: vastgesteld tot 2031, daarna de verwachting volgens de wettelijke koppeling aan de levensverwachting. Pas aan als je je eigen AOW-datum weet (svb.nl).' },
       { k: 'pensioenPaul', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'zelf', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
       { k: 'pensioenLeeftijd', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'zelf', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
     ] },
     { name: '<span class="pn2"></span>', fields: [
       { k: 'leeftijdDiana', label: 'Leeftijd op dit moment', unit: 'jaar', min: 30, max: 80, step: 1, tag: 'zelf', hint: 'Jouw leeftijd op dit moment, in hele jaren.' },
-      { k: 'aowDiana', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Verwachte AOW-leeftijd voor jouw geboortejaar, zie svb.nl. Kan nog worden bijgesteld.' },
+      { k: 'aowDiana', label: 'AOW-leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'bron', hint: 'Rekent de app automatisch uit je leeftijd: vastgesteld tot 2031, daarna de verwachting volgens de wettelijke koppeling aan de levensverwachting. Pas aan als je je eigen AOW-datum weet (svb.nl).' },
       { k: 'pensioenDiana', label: 'Pensioen netto per maand', unit: '€', min: 0, max: 4000, step: 5, tag: 'zelf', hint: 'Netto per maand zonder AOW, uit mijnpensioenoverzicht.nl. Overzichtsbedragen zijn niet geïndexeerd en worden als euro’s van vandaag behandeld.' },
       { k: 'pensioenLeeftijdDiana', label: 'Pensioen gaat in op leeftijd', unit: 'jaar', min: 60, max: 72, step: 0.25, tag: 'zelf', hint: 'Ingangsleeftijd volgens het pensioenoverzicht.' }
     ] },
@@ -1139,6 +1204,8 @@ function runModel(p) {
     Array.prototype.forEach.call(document.querySelectorAll('.n2'), function (e) { e.textContent = nm2(); });
     var tw = state.personen !== 1;
     document.documentElement.classList.toggle('one-person', !tw);
+    Array.prototype.forEach.call(document.querySelectorAll('.pq1'), function (e) { e.textContent = tw ? 'Leeftijd ' + ((names.n1 || '').trim() ? nm1() : 'partner 1') : 'Je leeftijd'; });
+    Array.prototype.forEach.call(document.querySelectorAll('.pq2'), function (e) { e.textContent = 'Leeftijd ' + ((names.n2 || '').trim() ? nm2() : 'partner 2'); });
     Array.prototype.forEach.call(document.querySelectorAll('.pn1'), function (e) { e.textContent = tw ? ((names.n1 || '').trim() ? 'Partner 1: ' + nm1() : 'Partner 1') : ((names.n1 || '').trim() ? nm1() : 'Jij'); });
     Array.prototype.forEach.call(document.querySelectorAll('[data-j2]'), function (e) { if (e.getAttribute('data-j1') === null) e.setAttribute('data-j1', e.innerHTML); e.innerHTML = tw ? e.getAttribute('data-j2') : e.getAttribute('data-j1'); });
     Array.prototype.forEach.call(document.querySelectorAll('[data-dep]'), function (e) { e.hidden = state[e.getAttribute('data-dep')] === 0; });
@@ -1169,7 +1236,7 @@ function runModel(p) {
     return { n: pf.n, w: w, mu: mu, sd: Math.sqrt(v) };
   }
   var simText = '', curSucc = 0;
-  var KEY = 'takestock-v2-v01';
+  var KEY = 'knopentellen-v3-v01';
   var autoIdx = 2, autoInfo = null;
   function effIdx() { return state.portfolio || autoIdx; }
   var state = {};
@@ -1209,7 +1276,7 @@ function runModel(p) {
   FIELD.startkapitaal.hint = 'Vermogen dat er nu is om van te leven: spaargeld en beleggingen samen.';
   FIELD.budget.hint = 'Het doel: netto per maand, alles inbegrepen. Wonen, boodschappen, reizen en een reservering voor onverwachte kosten. Knopen tellen rekent uit of dat lukt en waar het geld vandaan komt.';
   FIELD.werk.hint = 'Optioneel. Netto per maand, tot 67 jaar (bij twee personen zolang een van beiden jonger is dan 67).';
-  FIELD.eindleeftijd.hint = 'Tot deze leeftijd moet het vermogen reiken. Bij twee personen geldt dit voor de partner die hierboven is gekozen.';
+  FIELD.eindleeftijd.hint = 'Automatisch de gemiddelde levensverwachting (CBS-levenstafel 2024) bij je leeftijd en geslacht. De helft van de mensen leeft langer: kies een hogere leeftijd voor meer marge. Bij twee personen geldt dit voor de partner die hierboven is gekozen.';
   function knobHtml(k) {
     var f = FIELD[k];
     return '<div class="knob"><div class="knob-top"><label class="t" for="n-' + f.k + '">' + f.label + '</label>' + tagHtml(f.tag) + '</div>' +
@@ -1223,6 +1290,11 @@ function runModel(p) {
       '<div class="inrow"><input id="n-' + f.k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"><span class="unit">' + f.unit + '</span></div>' +
       (f.hint ? '<p class="hint">' + esc(f.hint) + '</p>' : '') + '</div>';
   }
+  function segK(name, key, opts) {
+    return '<div class="seg" role="radiogroup">' + opts.map(function (o) {
+      return '<label class="seg-opt"><input type="radio" name="' + name + '" data-k="' + key + '" value="' + o.v + '"><span>' + o.l + '</span></label>';
+    }).join('') + '</div>';
+  }
   function segBlock(title, tag, name, opts, hintId, hintText) {
     return '<div class="knob wide"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px">' + title + '</span>' + tagHtml(tag) + '</div>' +
       seg(name, opts) + '<p class="hint"' + (hintId ? ' id="' + hintId + '"' : '') + '>' + (hintText || '') + '</p></div>';
@@ -1234,7 +1306,8 @@ function runModel(p) {
           '<div class="cols2">' + [1, 2].map(function (n) {
           return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
             '<div class="field"><div class="ftop"><label for="nm-' + n + '">Naam</label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" placeholder="Partner ' + n + '"></div>' +
-            fieldHtml(n === 1 ? 'leeftijdPaul' : 'leeftijdDiana') + '</div>';
+            fieldHtml(n === 1 ? 'leeftijdPaul' : 'leeftijdDiana') +
+            '<div class="field"><span class="flabel">Geslacht</span>' + segK('s-gesl' + n, n === 1 ? 'geslP' : 'geslD', [{ v: '0', l: 'Man' }, { v: '1', l: 'Vrouw' }]) + '<p class="hint">Voor de levensverwachting, die de app als eindleeftijd gebruikt.</p></div></div>';
         }).join('') + '</div>';
       } },
     { t: 'Vermogen en budget', h: 'Vermogen en maandbudget', s: 'Wat er nu is, en wat er per maand netto uitgaat.',
@@ -1256,7 +1329,7 @@ function runModel(p) {
           segBlock('Portefeuille (beleggingsmix)', 'aanname', 'portfolio', [{ v: '0', l: 'Automatisch' }, { v: '1', l: 'Defensief' }, { v: '2', l: 'Gemiddeld' }, { v: '3', l: 'Agressief' }], 'pf-hint') +
           segBlock('Box 3 (belasting over vermogen)', 'aanname', 'box3', [{ v: '1', l: 'Gewogen' }, { v: '2', l: 'Nu (2026)' }, { v: '3', l: 'Slecht (2027)' }, { v: '0', l: 'Uit' }], 'b3-hint') +
           '<div class="only2" style="display:contents">' + segBlock('Looptijd tot de eindleeftijd van', 'zelf', 'eindDiana', [{ v: '1', l: '<span class="n2"></span>' }, { v: '0', l: '<span class="n1"></span>' }], '', 'Het scenario loopt tot die partner de eindleeftijd hieronder bereikt.') + '</div>' +
-          '<div class="knob wide"><div class="fields">' + fieldHtml('eindleeftijd') + fieldHtml('restkapitaal') + '</div></div></div>';
+          '<div class="knob wide"><div class="fields">' + fieldHtml('eindleeftijd') + fieldHtml('restkapitaal') + '</div><button class="reset" id="auto-reset" type="button">Zet AOW-leeftijd en eindleeftijd weer op automatisch</button></div></div>';
       } },
     { t: 'Aannames', h: 'Overige aannames', s: 'Standaardwaarden. Laat ze staan of pas ze aan.',
       html: function () {
@@ -1276,7 +1349,7 @@ function runModel(p) {
     return '<li><button type="button" data-go="' + (i + 1) + '" aria-label="Stap ' + (i + 1) + ': ' + st.t + '"><span class="num">' + (i + 1) + '</span><span class="lbl">' + st.t + '</span></button></li>';
   }).join('');
 
-  function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = val; }); }
+  function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = val; }); }
   function bind(k) {
     var n = $('n-' + k);
     if (n) n.addEventListener('input', function () {
@@ -1287,6 +1360,25 @@ function runModel(p) {
     var r = $('r-' + k);
     if (r) r.addEventListener('input', function () { setNum(k, parseFloat(r.value)); update(); });
   }
+  ['aowPaul', 'aowDiana'].forEach(function (k) { var e = $('n-' + k); if (e) e.addEventListener('input', function () { state.autoAow = 0; }); });
+  (function () { var e = $('n-eindleeftijd'); if (e) e.addEventListener('input', function () { state.autoEind = 0; }); })();
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="eindDiana"]'), function (r) { r.addEventListener('change', function () { state.autoEind = 0; }); });
+  ['leeftijdPaul', 'leeftijdDiana', 'budget', 'startkapitaal'].forEach(function (k) {
+    var e = $('q-' + k); if (!e) return;
+    e.addEventListener('input', function () {
+      var v = parseFloat(String(e.value).replace(',', '.'));
+      if (e.value === '' && (k === 'startkapitaal' || k === 'budget')) v = 0;
+      if (!isFinite(v)) return;
+      setNum(k, v); update();
+    });
+  });
+  document.addEventListener('change', function (ev) {
+    var r = ev.target;
+    if (!r.matches || !r.matches('input[data-k]') || !r.checked) return;
+    var k = r.getAttribute('data-k');
+    state[k] = parseInt(r.value, 10);
+    update();
+  });
   Object.keys(DEF).forEach(function (k) { if (SEGK.indexOf(k) < 0) bind(k); });
   SEGK.forEach(function (nm) {
     Array.prototype.forEach.call(document.querySelectorAll('input[name="' + nm + '"]'), function (r) {
@@ -1298,15 +1390,18 @@ function runModel(p) {
     c.addEventListener('change', function () { state[k] = c.checked ? 1 : 0; update(); });
   });
   function syncInputs() {
+    setTimeout(function () { ['budget', 'startkapitaal'].forEach(function (k) { var e = $('q-' + k); if (e && document.activeElement !== e && !(state[k] > 0)) e.value = ''; }); }, 0);
+    Array.prototype.forEach.call(document.querySelectorAll('input[data-k]'), function (r) { r.checked = parseInt(r.value, 10) === state[r.getAttribute('data-k')]; });
     CHK.forEach(function (k) { var c = $('c-' + k); if (c) c.checked = state[k] !== 0; });
     Object.keys(DEF).forEach(function (k) {
       if (SEGK.indexOf(k) >= 0) return;
-      ['n-' + k, 'r-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = state[k]; });
+      ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = state[k]; });
     });
     SEGK.forEach(function (nm) {
       Array.prototype.forEach.call(document.querySelectorAll('input[name="' + nm + '"]'), function (r) { r.checked = parseInt(r.value, 10) === state[nm]; });
     });
   }
+  (function () { var b = $('auto-reset'); if (b) b.addEventListener('click', function () { state.autoAow = 1; state.autoEind = 1; update(); }); })();
   $('reset').addEventListener('click', function () {
     Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
     syncInputs(); update();
@@ -1318,9 +1413,41 @@ function runModel(p) {
   function ageTxt(t) { return state.personen === 1 ? esc(nm1()) + ' ' + (state.leeftijdPaul + t) : esc(nm1()) + ' ' + (state.leeftijdPaul + t) + ' · ' + esc(nm2()) + ' ' + (state.leeftijdDiana + t); }
   function ageShort(t) { return state.personen === 1 ? String(state.leeftijdPaul + t) : (state.leeftijdPaul + t) + ' · ' + (state.leeftijdDiana + t); }
   function aowAmt() { return state.personen === 1 ? state.aowNettoAlleen : state.aowNetto; }
+  var adv = null;
+  function capEff() { return state.startkapitaal > 0 ? state.startkapitaal : (adv ? adv.c90 : 0); }
+  function applyAuto() {
+    if (state.autoAow) { state.aowPaul = aowFor(state.leeftijdPaul); state.aowDiana = aowFor(state.leeftijdDiana); }
+    if (state.autoEind) {
+      var r1 = remLE(state.leeftijdPaul, state.geslP);
+      if (state.personen === 1) { state.eindDiana = 0; state.eindleeftijd = Math.round(state.leeftijdPaul + r1); }
+      else {
+        var r2 = remLE(state.leeftijdDiana, state.geslD);
+        if (r2 >= r1) { state.eindDiana = 1; state.eindleeftijd = Math.round(state.leeftijdDiana + r2); }
+        else { state.eindDiana = 0; state.eindleeftijd = Math.round(state.leeftijdPaul + r1); }
+      }
+    }
+  }
+  /* advies: kleinste vermogen waarmee 90% van de doorrekeningen het haalt, over de drie portefeuilles */
+  function c90For(m, pf, p) {
+    function q(c) { p.startkapitaal = c; return simQuick(m, pf, p).succ; }
+    var lo = 0, hi = Math.max(m.req0 * 2, 50000), g = 0;
+    while (q(hi) < 0.9 && g++ < 8) { lo = hi; hi *= 2; }
+    for (var i = 0; i < 13; i++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) hi = mid; else lo = mid; }
+    return hi;
+  }
+  function computeAdvice(extra, only) {
+    var best = null;
+    (only ? [only] : [1, 2, 3]).forEach(function (i) {
+      var pf = portStat(i), ov = { startkapitaal: 0, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true, eindleeftijd: state.eindleeftijd + (extra || 0) };
+      var m = runModel(params(ov)), c = c90For(m, pf, params(ov));
+      if (!best || c < best.c90) best = { c90: Math.ceil(c / 1000) * 1000, req0: m.req0, pf: i, eind: state.eindleeftijd + (extra || 0) };
+    });
+    return best;
+  }
   function params(over) {
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
+    p.startkapitaal = capEff();
     var ps = portStat(effIdx());
     p.bruto = ps.mu * 100; p.spaarDeel = ps.w[2] * 100;
     if (over) Object.keys(over).forEach(function (k) { p[k] = over[k]; });
@@ -1340,8 +1467,8 @@ function runModel(p) {
     else { cls = 'bad'; label = 'Niet haalbaar'; icon = '✕'; }
     var yn = youngestName(), text;
     if (m.buffer >= 0) {
-      text = two() ? 'Met ' + eur(state.startkapitaal) + ' en ' + eur(state.budget) + ' per maand te besteden houden jullie het vol tot ' + yn + ' ' + state.eindleeftijd + ' is. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.'
-        : 'Met ' + eur(state.startkapitaal) + ' en ' + eur(state.budget) + ' per maand te besteden hou je het vol tot je ' + state.eindleeftijd + ' bent. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.';
+      text = two() ? 'Met ' + eur(capEff()) + ' en ' + eur(state.budget) + ' per maand te besteden houden jullie het vol tot ' + yn + ' ' + state.eindleeftijd + ' is. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.'
+        : 'Met ' + eur(capEff()) + ' en ' + eur(state.budget) + ' per maand te besteden hou je het vol tot je ' + state.eindleeftijd + ' bent. Aan het eind is er nog ' + eur(m.K[m.N]) + ' over.';
     } else {
       var age = m.youngest + (m.emptyAt === null ? m.N : m.emptyAt);
       text = two() ? 'Het vermogen is op rond de tijd dat ' + yn + ' ' + age + ' wordt. Jullie missen ' + eur(-m.marge) + ' aan startkapitaal, of het te besteden budget moet omlaag naar ' + eur(m.maxBudget) + ' per maand.'
@@ -1359,7 +1486,7 @@ function runModel(p) {
       { l: 'Resterend vermogen op de eindleeftijd', v: eur(m.K[m.N]), s: 'bij gemiddeld rendement, in euro’s van vandaag', c: m.K[m.N] < 0 ? 'neg' : '' },
       { l: 'Benodigd startkapitaal', v: eur(m.req0), s: 'bij ' + eur(state.budget) + ' per maand', c: '' },
       { l: m.marge >= 0 ? 'Buffer' : 'Tekort', v: (m.marge >= 0 ? '+' : '') + eur(m.marge), s: m.marge >= 0 ? pct(m.buffer, 0) + ' boven het minimum' : pct(-m.marge / m.req0, 0) + ' onder het minimum', c: m.marge >= 0 ? 'pos' : 'neg' },
-      { l: 'Maximaal te besteden maandbudget', v: eur(m.maxBudget), s: 'bij ' + eur(state.startkapitaal) + ' (' + (room >= 0 ? '+' : '−') + eur(Math.abs(room)) + ' per maand t.o.v. nu)', c: '' },
+      { l: 'Maximaal te besteden maandbudget', v: eur(m.maxBudget), s: 'bij ' + eur(capEff()) + ' (' + (room >= 0 ? '+' : '−') + eur(Math.abs(room)) + ' per maand t.o.v. nu)', c: '' },
       { l: 'Opname vanaf de start (jaar 1)', v: pct(m.eersteJaarOpname, 1), s: 'van het startkapitaal per jaar, ' + eur(m.draws[0] / 12) + ' per maand', c: '' },
       { l: 'Belasting in jaar 1', v: eur(m.belastingJaar1), s: B3LABEL[state.box3] || B3LABEL[1], c: '' }
     ];
@@ -1487,11 +1614,11 @@ function runModel(p) {
   function renderLadder(m) {
     var step = 250, rows = [];
     for (var i = -3; i <= 3; i++) { var b = state.budget + i * step; if (b >= 500) rows.push({ b: b, cur: i === 0, req: m.requiredFor(b) }); }
-    var mx = Math.max(state.startkapitaal, Math.max.apply(null, rows.map(function (r) { return r.req; }))) * 1.06 || 1;
+    var mx = Math.max(capEff(), Math.max.apply(null, rows.map(function (r) { return r.req; }))) * 1.06 || 1;
     $('ladder').innerHTML = rows.map(function (r) {
-      var ok = r.req <= state.startkapitaal;
+      var ok = r.req <= capEff();
       return '<div class="lrow' + (r.cur ? ' cur' : '') + '"><span class="lb">' + eur(r.b) + '</span>' +
-        '<div class="track"><div class="bar" style="width:' + (r.req / mx * 100).toFixed(1) + '%"></div><div class="cap" style="left:calc(' + (state.startkapitaal / mx * 100).toFixed(1) + '% - 1px)"></div></div>' +
+        '<div class="track"><div class="bar" style="width:' + (r.req / mx * 100).toFixed(1) + '%"></div><div class="cap" style="left:calc(' + (capEff() / mx * 100).toFixed(1) + '% - 1px)"></div></div>' +
         '<span class="lv">' + short(r.req) + ' <span class="st ' + (ok ? 'ok' : 'no') + '" aria-label="' + (ok ? 'haalbaar' : 'tekort') + '">' + (ok ? '✓' : '✕') + '</span></span></div>';
     }).join('');
   }
@@ -1665,7 +1792,7 @@ function runModel(p) {
     }
     var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 280 : 340;
     var ml = 52, mr = 14, mt = 16, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
-    var ymax = Math.max(maxP90 * 1.12, state.startkapitaal * 1.05) * Math.pow(1.45, -fanZoom);
+    var ymax = Math.max(maxP90 * 1.12, capEff() * 1.05) * Math.pow(1.45, -fanZoom);
     function x(i) { return ml + (i / N) * pw; }
     function y(v) { return mt + (1 - v / ymax) * ph; }
     var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Bandbreedte van het kapitaal per leeftijd">';
@@ -1847,12 +1974,47 @@ function runModel(p) {
 
   function renderHead(m) {
     var el = $('ov-sub'); if (!el) return;
-    if (state.budget <= 0) { el.textContent = 'Nog leeg. Na het invullen zie je hier waar je staat, hoe je vermogen zich kan ontwikkelen en waar het geld vandaan komt dat je per maand wilt besteden.'; return; }
-    el.textContent = 'Startkapitaal ' + eur(state.startkapitaal) + ', ' + eur(state.budget) + ' per maand te besteden, tot ' + (two() ? youngestName() + ' ' + state.eindleeftijd + ' is' : 'je ' + state.eindleeftijd + ' bent') + '. Alle bedragen in euro’s van vandaag.';
+    if (state.budget <= 0) { el.textContent = 'Vul hieronder bij Snel rekenen je leeftijd in en wat je per maand wilt besteden.'; return; }
+    if (false) { el.textContent = 'Nog leeg. Na het invullen zie je hier waar je staat, hoe je vermogen zich kan ontwikkelen en waar het geld vandaan komt dat je per maand wilt besteden.'; return; }
+    el.textContent = (state.startkapitaal > 0 ? 'Startkapitaal ' + eur(capEff()) : 'Nog geen vermogen ingevuld: het overzicht rekent met ' + eur(capEff()) + ', het bedrag waarmee je met 90% kans uitkomt') + ', ' + eur(state.budget) + ' per maand te besteden, tot ' + (two() ? youngestName() + ' ' + state.eindleeftijd + ' is' : 'je ' + state.eindleeftijd + ' bent') + '. Alle bedragen in euro’s van vandaag.';
   }
 
+  function renderAdvies() {
+    var el = $('advies'); if (!el) return;
+    if (!adv) { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false;
+    var tw = two(), have = state.startkapitaal, need = adv.c90;
+    var tot = tw ? 'tot ' + youngestName() + ' ' + state.eindleeftijd + ' is' : 'tot je ' + state.eindleeftijd + 'e';
+    var g1 = state.geslP, g2 = state.geslD, gl = function (g) { return g === 0 ? 'man' : (g === 1 ? 'vrouw' : 'persoon'); };
+    var basis = state.autoEind
+      ? (tw ? 'De eindleeftijd is de gemiddelde levensverwachting van wie van jullie naar verwachting het langst leeft' : 'De eindleeftijd ' + state.eindleeftijd + ' is de gemiddelde levensverwachting voor een ' + gl(g1) + ' van ' + state.leeftijdPaul) + ' (CBS 2024).'
+      : 'De eindleeftijd ' + state.eindleeftijd + ' is zelf gekozen.';
+    var pens = [];
+    if (state.pensAanP !== 0 && state.pensioenPaul > 0) pens.push(eur(state.pensioenPaul) + ' pensioen' + (tw ? ' voor ' + nm1() : ''));
+    if (tw && state.pensAanD !== 0 && state.pensioenDiana > 0) pens.push(eur(state.pensioenDiana) + ' pensioen voor ' + nm2());
+    var aow = (state.aowAanP !== 0 ? 'AOW vanaf ' + String(state.aowPaul).replace('.', ',') + (tw ? ' (' + nm1() + ')' : '') : '') + (tw && state.aowAanD !== 0 ? (state.aowAanP !== 0 ? ' en ' : 'AOW vanaf ') + String(state.aowDiana).replace('.', ',') + ' (' + nm2() + ')' : '');
+    var html = '<div class="adv-top"><div><span class="eyebrow">Advies</span><h2>' + J('Dit hebben jullie nodig', 'Dit heb je nodig') + '</h2></div>' +
+      '<div class="adv-big"><b>' + eur(need) + '</b><span>vermogen vanaf nu, met 90% kans genoeg</span></div></div>' +
+      '<p class="adv-p">Om ' + eur(state.budget) + ' per maand te besteden ' + tot + '. Bij gemiddeld rendement is het minimaal ' + eur(adv.req0) + '. De beste beleggingsmix hiervoor is ' + portStat(adv.pf).n.toLowerCase() + '.</p>' +
+      '<ul class="adv-list"><li>' + (aow || 'Geen AOW') + (pens.length ? ', ' + pens.join(' en ') : ', geen pensioen') + '. Het vermogen mag op het eind op zijn.</li>' +
+      '<li>' + basis + '</li>' +
+      (adv.long ? '<li>' + (tw ? 'Duurt het 5 jaar langer' : 'Leef je 5 jaar langer') + ', tot ' + adv.long.eind + ', dan is met 90% kans ' + eur(adv.long.c90) + ' nodig.</li>' : '') + '</ul>';
+    if (have > 0) {
+      var f = Math.min(1, have / need), gap = need - have;
+      html += '<div class="havebar"><div class="hb-track"><div class="hb-fill" style="width:' + (f * 100).toFixed(1) + '%"></div></div>' +
+        '<p>' + (gap > 0 ? J('Jullie hebben ', 'Je hebt ') + eur(have) + ': ' + pct(have / need, 0) + ' van wat nodig is. Er moet nog ' + eur(gap) + ' bij.'
+          : J('Jullie hebben ', 'Je hebt ') + eur(have) + ': genoeg, met ' + eur(-gap) + ' over.') + '</p></div>';
+    } else {
+      html += '<p class="hint">Het overzicht hieronder rekent nu met ' + eur(need) + '. Vul bij "' + J('Vermogen dat jullie nu hebben', 'Vermogen dat je nu hebt') + '" in wat er al is, dan zie je hoeveel er nog bij moet.</p>';
+    }
+    el.innerHTML = html;
+  }
   function update() {
     applyNames();
+    applyAuto();
+    syncInputs();
+    if (state.budget > 0) { adv = computeAdvice(0); adv.long = computeAdvice(5, adv.pf); } else adv = null;
+    renderAdvies();
     document.documentElement.classList.toggle('is-empty', state.budget <= 0);
     if (state.portfolio === 0) { autoInfo = pickAuto(); autoIdx = autoInfo.idx; } else autoInfo = null;
     var pfh = $('pf-hint'), pst = portStat(effIdx());
@@ -1960,13 +2122,14 @@ function runModel(p) {
 
   /* ---------- rondleiding ---------- */
   var TOUR = [
+    { el: 'snel', h: 'Snel rekenen', p: 'Vul je leeftijd in en wat je per maand wilt besteden. De app vult de rest zelf in, zoals AOW en levensverwachting, en laat meteen zien hoeveel vermogen je nodig hebt.' },
     { el: 'status-card', h: 'In één oogopslag', p: 'Hier zie je hoe je ervoor staat: de kans dat je vermogen het volhoudt tot de leeftijd die je kiest. Elke knoop staat voor een mogelijke toekomst. Zolang er niets is ingevuld, blijft dit leeg.' },
     { el: 'kpis', h: 'De kerncijfers', p: 'Wat er aan het eind over is, welk startkapitaal nodig is, je buffer of tekort, het maximaal te besteden maandbudget en wat er vanaf de start uit je vermogen gaat.' },
     { el: 'fan', h: 'Je vermogen in de komende jaren', p: 'Hoe het vermogen zich kan ontwikkelen in goede en slechte jaren. De middenlijn is het meest waarschijnlijke verloop.' },
     { el: 'flow', h: 'Wat wil je per maand te besteden hebben, en waar komt dat vandaan?', p: 'Per jaar het deel uit AOW, pensioen en werk, en het deel dat uit je vermogen komt.' },
     { el: 'tab-inzicht', h: 'Verdieping', p: 'Bij Inzicht vergelijk je portefeuilles, zie je wat een ander te besteden budget per maand vraagt en wat dat budget aan koopkracht waard is in andere landen.' },
     { el: 'tab-over', h: 'Over Knopen tellen', p: 'Hier lees je de gedachte achter de app, staan de bronnen en start je deze rondleiding opnieuw.' },
-    { el: 'tab-invullen', h: 'Hier begin je', p: 'In vijf korte stappen vul je een paar gegevens in. Daarmee krijg je inzicht, en daarna kun je gaan schuiven met de knoppen.', last: 'Begin met invullen' }
+    { el: 'tab-invullen', h: 'Verfijnen', p: 'Wil je het preciezer? In vijf korte stappen vul je ook pensioen, bijverdienen en je eigen keuzes in. Daarmee krijg je inzicht, en daarna kun je gaan schuiven met de knoppen.', last: 'Aan de slag' }
   ];
   var tourI = -1;
   function startTour() {
@@ -1977,7 +2140,7 @@ function runModel(p) {
   }
   function endTour(toInvullen) {
     $('tour').hidden = true; tourI = -1;
-    if (toInvullen) { showStep(1, false); location.hash = '#invullen'; }
+    if (toInvullen) { location.hash = '#overzicht'; setTimeout(function () { var s = $('snel'); if (s) s.scrollIntoView({ block: 'center' }); var a = $('q-leeftijdPaul'); if (a) a.focus({ preventScroll: true }); }, 120); }
   }
   function placeTour(scroll) {
     if (tourI < 0) return;
