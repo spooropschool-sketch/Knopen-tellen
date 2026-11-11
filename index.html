@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Knopen tellen</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -59,7 +64,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; ma
 input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .tag { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 99px; letter-spacing: 0.02em; white-space: nowrap; }
-.tag.bevestigd { background: var(--good-bg); color: var(--good); }
+.tag.bevestigd { display: none; }
 .tag.bron { background: var(--accent-soft); color: var(--accent); }
 .tag.aanname { background: var(--warn-bg); color: var(--warn); }
 
@@ -233,6 +238,46 @@ footer .tag a:hover { text-decoration: underline; }
   .lrow { grid-template-columns: 54px 1fr 96px; gap: 8px; }
   .knob input[type="number"] { width: 116px; }
 }
+
+/* uitklapbare inzichten */
+.folds { display: flex; flex-direction: column; gap: 10px; }
+h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin: 0 2px 2px; }
+.fold { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); min-width: 0; }
+.fold > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; min-height: 60px; cursor: pointer; border-radius: 12px; }
+.fold > summary::-webkit-details-marker { display: none; }
+.fold-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fold-t h2 { font-size: 17px; }
+.fold-s { font-size: 13px; color: var(--muted); }
+.chev { flex: none; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin: 0 4px 3px 0; transition: transform .15s; }
+.fold[open] > summary .chev { transform: rotate(-135deg); margin: 4px 4px 0 0; }
+.fold[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.fold-body { display: flex; flex-direction: column; gap: 12px; padding: 4px 16px 16px; min-width: 0; }
+/* telefoon */
+@media (max-width: 560px) {
+  body { padding-block: 16px 32px; font-size: 16px; }
+  .wrap { gap: 20px; }
+  .stack { gap: 18px; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .kpi { padding: 10px 12px; }
+  .kpi .k-val { font-size: 19px; }
+  .kpi .k-sub { font-size: 12px; }
+  input[type="number"], input[type="text"] { font-size: 16px; min-height: 44px; padding: 8px 10px; }
+  .partners input[type="text"] { font-size: 16px; }
+  .seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-self: stretch; }
+  .seg-opt span { padding: 12px 10px; text-align: center; font-size: 14px; }
+  input[type="range"] { height: 40px; }
+  .fold > summary { padding: 12px 14px; }
+  .fold-body { padding: 2px 12px 14px; }
+  .card { padding: 14px; }
+  .knobs { gap: 20px; }
+  .mini { padding: 6px 12px; gap: 2px 12px; }
+  .mini b { font-size: 14px; }
+  button.reset { min-height: 44px; }
+  .fan-head { gap: 8px; }
+  .fan-head .seg { display: inline-flex; align-self: flex-start; }
+  .fan-head .seg-opt span { padding: 12px 14px; }
+  .fan-ctl button { min-width: 44px; min-height: 44px; }
+}
 @media (prefers-reduced-motion: no-preference) {
   .bar { transition: width 0.25s ease; }
 }
@@ -273,12 +318,14 @@ footer .tag a:hover { text-decoration: underline; }
 hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width: 100%; }
 .partners { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px 22px; }
 .partners input[type="text"] { width: 100%; text-align: left; font-family: var(--f-body); }
-.mini { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: none; justify-content: center; gap: 4px 18px; flex-wrap: wrap; padding: 8px 16px; background: rgba(0,0,0,0.94); border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink2); }
+.mini { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: none; justify-content: center; gap: 4px 18px; flex-wrap: wrap; padding: 8px 16px; background: #000; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink2); }
 .mini.show { display: flex; }
 .mini b { font-family: var(--f-num); font-weight: 500; font-size: 15px; color: var(--ink); }
 .mini .good { color: var(--good); } .mini .warn { color: var(--warn); } .mini .bad { color: var(--bad); }
 .seg-opt span span { display: inline; padding: 0; color: inherit; font-weight: inherit; background: none; }
 </style>
+</head>
+<body>
 
 <div class="mini" id="mini" aria-live="off"></div>
 <div class="wrap">
@@ -293,9 +340,11 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
       <div class="verdict good" id="verdict"></div>
       <div class="kpis" id="kpis"></div>
     </section>
-
-  <section>
-    <h2>Kapitaal in goede en slechte jaren</h2>
+  <div class="folds">
+    <h2 class="more">Zo komt de uitslag tot stand</h2>
+  <details class="fold">
+    <summary><span class="fold-t"><h2>Kapitaal in goede en slechte jaren</h2><span class="fold-s">Hoe ver de uitkomsten uiteen kunnen lopen</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <div class="fold-body">    
     <p class="sub" id="fan-sub"></p>
     <div class="fan-head">
       <div class="seg" role="radiogroup" aria-label="Weergave">
@@ -315,19 +364,21 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
       <span><i class="mark"></i>AOW-leeftijd</span>
     </div>
     <p class="hint" id="fan-note"></p>
-  </section>
-
-  <section>
-    <h2>Hoe de portefeuilles zich gedragen</h2>
+    </div>
+  </details>
+  <details class="fold">
+    <summary><span class="fold-t"><h2>Hoe de portefeuilles zich gedragen</h2><span class="fold-s">Wat defensief, gemiddeld en agressief beleggen doen</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <div class="fold-body">    
     <p class="sub" id="pf-sub"></p>
     <div class="cmp" id="pf"></div>
     <h3 class="subh" id="pf-tbl-h"></h3>
     <div class="tbl" id="pf-tbl"></div>
     <p class="hint" id="pf-note"></p>
-  </section>
-
-  <section>
-    <h2>Kapitaalverloop</h2>
+    </div>
+  </details>
+  <details class="fold">
+    <summary><span class="fold-t"><h2>Kapitaalverloop</h2><span class="fold-s">Jaar voor jaar hoe het kapitaal verloopt</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <div class="fold-body">    
     <p class="sub" id="chart-sub"></p>
     <div class="legend">
       <span><i></i>Jullie kapitaal</span>
@@ -339,22 +390,26 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
       <summary>Bekijk als tabel</summary>
       <div class="tbl" id="tbl"></div>
     </details>
-  </section>
-
-  <section>
-    <h2>Benodigd kapitaal per maandbudget</h2>
+    </div>
+  </details>
+  <details class="fold">
+    <summary><span class="fold-t"><h2>Benodigd kapitaal per maandbudget</h2><span class="fold-s">Wat andere maandbudgetten vragen</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <div class="fold-body">    
     <p class="sub">Zelfde aannames, alleen het maandbudget verschilt. De middelste rij is jullie huidige budget.</p>
     <div class="ladder" id="ladder"></div>
     <div class="lnote"><span><span class="capkey"></span>Jullie startkapitaal</span><span><span class="st ok">✓</span> haalbaar</span><span><span class="st no">✕</span> tekort</span></div>
-  </section>
-
-  <section>
-    <h2>Wat jullie geld waard is per land</h2>
+    </div>
+  </details>
+  <details class="fold">
+    <summary><span class="fold-t"><h2>Wat jullie geld waard is per land</h2><span class="fold-s">Wat dit maandbudget in andere landen oplevert</span></span><span class="chev" aria-hidden="true"></span></summary>
+    <div class="fold-body">    
     <p class="sub">Dit rekent mee met het maandbudget bij de ingrediënten. In Nederland is dat bedrag de standaard: 100% koopkracht. Per land staat hoeveel Nederlandse koopkracht datzelfde bedrag daar oplevert, en hoeveel jullie daar nodig hebben voor dezelfde levensstijl. Alleen landen waar de kortste directe vlucht vanaf Amsterdam binnen 2,5 uur ligt.</p>
     <div class="rank" id="koop"></div>
     <p class="insight" id="koop-insight"></p>
     <p class="hint" id="koop-note"></p>
-  </section>
+    </div>
+  </details>
+  </div>
   </div>
 
   <hr class="cut">
@@ -372,7 +427,6 @@ hr.cut { border: 0; border-top: 3px solid var(--accent); margin: 14px 0 0; width
   <section>
     <h2>Aannames</h2>
     <div class="keyline">
-      <span><span class="tag bevestigd">bevestigd</span> door jullie opgegeven</span>
       <span><span class="tag bron">bron</span> officiële bron of eerdere berekening</span>
       <span><span class="tag aanname">aanname</span> startwaarde om te controleren</span>
     </div>
@@ -532,7 +586,7 @@ function runModel(p) {
       { k: 'restkapitaal', label: 'Gewenst restkapitaal op die leeftijd', unit: '€', min: 0, max: 1000000, step: 10000, tag: 'bevestigd', hint: 'Nul betekent dat het kapitaal opgebruikt mag zijn.' }
     ] },
     { name: 'Inflatie en kosten', fields: [
-      { k: 'inflatie', label: 'Inflatie per jaar', unit: '%', min: 0, max: 8, step: 0.1, tag: 'bevestigd', hint: 'Bevestigd door jullie: 2,4%, gebaseerd op het historische gemiddelde.' },
+      { k: 'inflatie', label: 'Inflatie per jaar', unit: '%', min: 0, max: 8, step: 0.1, tag: 'bevestigd', hint: 'Standaard 2,4%, gebaseerd op het historische gemiddelde.' },
       { k: 'kosten', label: 'Beleggingskosten per jaar', unit: '% van vermogen', min: 0, max: 3, step: 0.05, tag: 'bron', hint: 'Fondskosten en platform, uit de eerdere berekening in dit project. Belasting zit hier niet in.' }
     ] }
   ];
@@ -1123,7 +1177,12 @@ function runModel(p) {
   scheduleSim(true);
   var rt, lastW = 0;
   function onResize() { clearTimeout(rt); rt = setTimeout(function () { var w = $('chart').clientWidth; if (last && w !== lastW) { lastW = w; renderChart(last); renderFan(); } }, 120); }
+  Array.prototype.forEach.call(document.querySelectorAll('details.fold'), function (d) {
+    d.addEventListener('toggle', function () { if (d.open && last) { lastW = 0; renderChart(last); renderFan(); } });
+  });
   window.addEventListener('resize', onResize);
   if (window.ResizeObserver) new ResizeObserver(onResize).observe($('chart'));
 })();
 </script>
+</body>
+</html>
