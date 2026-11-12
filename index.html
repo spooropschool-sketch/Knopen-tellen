@@ -417,10 +417,8 @@ html.is-empty .empty-cta { display: flex; }
 .gauge .g-bg { fill: none; stroke: var(--surface2); stroke-width: 15; stroke-linecap: round; }
 .gauge .g-val { fill: none; stroke-width: 15; stroke-linecap: round; }
 .gauge .g-val.good { stroke: var(--good); } .gauge .g-val.warn { stroke: var(--warn); } .gauge .g-val.bad { stroke: var(--bad); }
-.gauge .g-tick { stroke: var(--ink2); stroke-width: 1.6; opacity: .8; }
 .gauge .g-num { font-family: var(--f-num); font-size: 34px; font-weight: 500; fill: var(--ink); text-anchor: middle; }
 .gauge .g-lbl { font-family: var(--f-body); font-size: 12px; fill: var(--muted); text-anchor: middle; }
-.g-key { margin: -4px 0 0; text-align: center; font-size: 12px; color: var(--muted); }
 .panel { display: flex; flex-direction: column; gap: 12px; }
 .panel-head { display: flex; flex-direction: column; gap: 4px; }
 .panel-head h2 { font-size: 19px; }
@@ -624,10 +622,6 @@ input[type="range"] { accent-color: var(--accent); }
 .status.warn { border-color: color-mix(in srgb, var(--warn) 35%, var(--line)); }
 .status.bad { border-color: color-mix(in srgb, var(--bad) 35%, var(--line)); }
 .gauge .g-bg { stroke: var(--surface2); }
-.gauge .g-tick { stroke: var(--muted); }
-.knoprij { display: grid; grid-template-columns: repeat(10, minmax(0, 22px)); gap: 6px 6px; justify-content: center; color: #C3D0DD; }
-.knoprij svg { width: 100%; height: auto; display: block; }
-.knoprij-t { margin: 0; text-align: center; font-size: 13px; color: var(--ink2); }
 
 /* panelen en grafieken */
 .panel-head h2 { font-size: 20px; }
@@ -638,9 +632,9 @@ input[type="range"] { accent-color: var(--accent); }
 .chart .f-bud { stroke: var(--ink); }
 .next-grid .nlink { position: relative; overflow: hidden; padding: 18px 18px 18px 64px; min-height: 92px; justify-content: center; }
 .nlink .nb { position: absolute; left: 16px; top: 50%; width: 34px; height: 34px; transform: translateY(-50%); }
-.nlink:nth-child(1) { background: linear-gradient(135deg, #FFFFFF, #E8F1FB); }
-.nlink:nth-child(2) { background: linear-gradient(135deg, #FFFFFF, #E9F6EF); }
-.nlink:nth-child(3) { background: linear-gradient(135deg, #FFFFFF, #FCEFE6); }
+.nlink:nth-child(1) { background: linear-gradient(135deg, #FFFFFF, var(--tint-pf)); }
+.nlink:nth-child(2) { background: linear-gradient(135deg, #FFFFFF, var(--tint-ld)); }
+.nlink:nth-child(3) { background: linear-gradient(135deg, #FFFFFF, var(--tint-kp)); }
 .nlink b::after { color: var(--accent); }
 .empty-cta { background: linear-gradient(120deg, #FFFFFF, #EAF2FB); border-color: #C9DAEC; }
 
@@ -705,7 +699,6 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
   .modal-hero { height: auto !important; padding-top: 40px; }
   .gauge { max-width: 190px; }
   .card { padding: 16px; }
-  .knoprij { grid-template-columns: repeat(10, minmax(0, 20px)); gap: 5px; }
 }
 
 /* beelden uit Canva */
@@ -943,7 +936,6 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .ov-main .adv-top h2 { font-size: 36px; line-height: 1.08; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
 .ov-main:has(.adv-in:not([hidden])) .ovm-head .eyebrow { color: var(--muted); }
 .ov-main:has(.adv-in:not([hidden])) .ovm-head h1 { font-size: 21px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); }
-.ov-main:has(.adv-in:not([hidden])) .ovm-head .sub { font-size: 14px; color: var(--muted); }
 @media (max-width: 760px) {
   .ov-main .adv-top h2 { font-size: 30px; }
   .ov-main:has(.adv-in:not([hidden])) .ovm-head h1 { font-size: 19px; }
@@ -952,6 +944,59 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
   .ov-main .adv-top h2 { font-size: 27px; }
   .ov-main:has(.adv-in:not([hidden])) .ovm-head h1 { font-size: 18px; }
 }
+
+/* overzicht in vakjes: drie gegevens naast elkaar, label erboven */
+.ov-main .ov-tiles { margin: 0 24px 0 28px; padding: 4px 0 18px; display: flex; flex-direction: column; gap: 8px; }
+.ovt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.ovt { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding: 11px 14px 12px; background: var(--surface2); border: 1px solid var(--line); border-radius: 12px; }
+.ovt.auto { border-style: dashed; border-color: #B9C9DA; }
+.ovt-l { font-size: 11.5px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.ovt-v { font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 500; line-height: 1.15; color: var(--ink2); overflow-wrap: anywhere; }
+.ovt-s { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+.ovt-note { margin: 0; font-size: 12.5px; color: var(--muted); }
+@media (min-width: 761px) { .ov-main:has(.ov-tiles:not([hidden])) .ovm-art { min-height: 170px; } }
+@media (max-width: 760px) { .ov-main .ov-tiles { margin: 0 18px 0; padding-bottom: 16px; } }
+@media (max-width: 560px) {
+  .ovt-row { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .ovt { flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; padding: 10px 14px; }
+  .ovt-v { font-size: 19px; }
+  .ovt-s { flex-basis: 100%; }
+}
+
+/* zes vakken: benodigd startkapitaal en buffer samen als totaal */
+.k-split { display: flex; height: 8px; border-radius: 4px; overflow: hidden; background: var(--surface2); margin: 2px 0; }
+.k-split i { display: block; height: 100%; }
+.k-split .ks-need { background: var(--accent); }
+.k-split .ks-buf { background: var(--good); }
+.k-split .ks-short { background: var(--bad); }
+.k-split.hl-need .ks-buf, .k-split.hl-need .ks-short, .k-split.hl-buf .ks-need { opacity: 0.28; }
+
+/* info bij nominaal en reëel */
+.fan-head { position: relative; }
+.info-btn { flex: none; align-self: flex-start; width: 38px; height: 38px; display: inline-grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--accent); cursor: pointer; }
+.info-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.info-btn:hover, .info-btn[aria-expanded="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.info-btn:focus-visible, .fp-x:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fan-pop { position: absolute; z-index: 25; left: 0; top: calc(100% + 8px); width: min(400px, 100%); padding: 14px 16px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(29, 43, 58, 0.18); display: flex; flex-direction: column; gap: 10px; }
+.fp-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.fp-top h3 { margin: 0; font-family: var(--f-display); font-size: 17px; font-weight: 600; }
+.fp-x { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--ink2); font-size: 16px; cursor: pointer; }
+.fp-x:hover { background: var(--surface2); }
+.fan-pop dl { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.fan-pop dt { font-weight: 600; font-size: 14px; }
+.fan-pop dd { margin: 2px 0 0; font-size: 14px; color: var(--ink2); }
+@media (max-width: 560px) { .info-btn { width: 44px; height: 44px; } }
+
+/* inzicht: dezelfde knoopkleur en lichte gloed als de kaarten onderaan het overzicht */
+:root { --tint-pf: #E8F1FB; --tint-ld: #E9F6EF; --tint-kp: #FCEFE6; }
+#sec-pf { background: linear-gradient(135deg, #FFFFFF, var(--tint-pf)); }
+#sec-ladder { background: linear-gradient(135deg, #FFFFFF, var(--tint-ld)); }
+#sec-koop { background: linear-gradient(135deg, #FFFFFF, var(--tint-kp)); }
+.panel-head.has-nb { display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 4px 12px; }
+.panel-head.has-nb .nb { grid-column: 1; grid-row: 1; width: 34px; height: 34px; display: block; }
+.panel-head.has-nb .nb svg { display: block; width: 100%; height: 100%; }
+.panel-head.has-nb h2 { grid-column: 2; grid-row: 1; }
+.panel-head.has-nb .sub { grid-column: 1 / -1; }
 
 </style>
 </head>
@@ -988,13 +1033,11 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
           <div class="ovm-head"><span class="eyebrow" data-t="tab.overview"></span><h1 id="ov-h" data-t="ov.h"></h1><p class="sub" id="ov-sub"></p><a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden></a></div>
           <div class="ovm-art"><img src="img/buidel.jpg" alt="" data-t-alt="alt.pouch"></div>
         </div>
+        <div class="ov-tiles" id="ov-tiles" hidden></div>
         <div class="adv-in" id="advies" aria-live="polite" hidden></div>
       </section>
       <div class="card status" id="status-card" aria-live="polite">
         <div class="gauge" id="gauge"></div>
-        <p class="g-key" data-t="g.key"></p>
-        <div class="knoprij" id="knoprij" aria-hidden="true"></div>
-        <p class="knoprij-t" id="knoprij-t"></p>
         <div class="verdict" id="verdict"></div>
         <p class="srcline" data-src="le,mkt"></p>
       </div>
@@ -1005,6 +1048,8 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
             <label class="seg-opt"><input type="radio" name="fanMode" value="nominal"><span data-t="fan.nominal"></span></label>
             <label class="seg-opt"><input type="radio" name="fanMode" value="real" checked><span data-t="fan.real"></span></label>
           </div>
+          <button type="button" class="info-btn" id="fan-info" aria-expanded="false" aria-controls="fan-pop" data-t-aria="fan.info"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/></svg></button>
+          <div class="fan-pop" id="fan-pop" role="dialog" aria-labelledby="fan-pop-h" hidden></div>
           <div class="fan-box" id="fan-succ-box"><b id="fan-succ"></b><span data-t="w.success"></span></div>
           <div class="fan-box"><b id="fan-wr"></b><span id="fan-wr-s"></span></div>
           <div class="fan-box" id="fan-assump"></div>
@@ -1018,7 +1063,6 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
           <span class="lg" data-k="rare"><span class="sw s1"></span><span data-t="fan.lg.rare"></span></span>
           <span><i class="mark"></i><span data-t="fan.lg.spAge"></span></span>
         </div>
-        <p class="hint" id="fan-note"></p>
         <p class="srcline" data-src="mkt,le,tax"></p>
         <details class="table-view">
           <summary data-t="tbl.summary"></summary>
@@ -1106,7 +1150,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
     </div>
     <div class="card empty-note"><p data-t="iz.empty"></p></div>
     <section class="card panel needs-data" id="sec-pf" aria-labelledby="pf-h">
-      <div class="panel-head"><h2 id="pf-h" data-t="pf.h"></h2><p class="sub" id="pf-sub"></p></div>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><h2 id="pf-h" data-t="pf.h"></h2><p class="sub" id="pf-sub"></p></div>
       <div class="cmp" id="pf"></div>
       <h3 class="subh" id="pf-tbl-h"></h3>
       <div class="tbl" id="pf-tbl"></div>
@@ -1114,13 +1158,13 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
       <p class="srcline" data-src="mkt,tax"></p>
     </section>
     <section class="card panel needs-data" id="sec-ladder" aria-labelledby="ld-h">
-      <div class="panel-head"><h2 id="ld-h" data-t="ld.h"></h2><p class="sub" data-t="ld.sub"></p></div>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.4"/><circle r="6" fill="none" stroke="#6FAF8C" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="2.2" r="1.1" fill="#6FAF8C"/></svg></span><h2 id="ld-h" data-t="ld.h"></h2><p class="sub" data-t="ld.sub"></p></div>
       <div class="ladder" id="ladder"></div>
       <div class="lnote"><span><span class="capkey"></span><span data-t="ld.cap"></span></span><span><span class="st ok">✓</span> <span data-t="ld.ok"></span></span><span><span class="st no">✕</span> <span data-t="ld.no"></span></span></div>
       <p class="srcline" data-src="mkt,sp,tax"></p>
     </section>
     <section class="card panel needs-data" id="sec-koop" aria-labelledby="kp-h">
-      <div class="panel-head"><h2 id="kp-h" data-t="kp.h"></h2><p class="sub" id="kp-sub"></p></div>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><h2 id="kp-h" data-t="kp.h"></h2><p class="sub" id="kp-sub"></p></div>
       <div class="rank" id="koop"></div>
       <p class="insight" id="koop-insight"></p>
       <p class="hint" id="koop-note"></p>
@@ -2973,7 +3017,28 @@ Object.assign(I18N.en, {
  "st2.t": "About you",
  "st2.h": "A little more about you",
  "st2.s": "Names make the charts and texts more personal. Side income counts until 67. Both are optional.",
- "goal.sub": "Fill in the steps below. Your answer updates as you go."
+ "goal.sub": "Fill in the steps below. Your answer updates as you go.",
+ "ov.k.cap": "Savings",
+ "ov.k.capAuto": "Not entered, this amount gives a 90% chance",
+ "ov.k.bud": "Budget per month",
+ "ov.k.end": "End age",
+ "ov.k.endOf": "of {n}",
+ "ov.k.today": "All amounts in today’s money.",
+ "mini.need90": "Needed for 90% chance",
+ "v.lead": "The chance of success is {l} ({p}).",
+ "v.lvl.good": "high",
+ "v.lvl.warn": "fair",
+ "v.lvl.risky": "low",
+ "v.lvl.bad": "very low",
+ "v.risk": "If returns disappoint, the money runs out early in {f} of 100 cases.",
+ "v.ok": "With average returns your money lasts {r}, with {c} and {b} a month to spend. You’d then still have {e} left at the end.",
+ "fan.info": "Explain nominal and real",
+ "fan.infoH": "Nominal or real?",
+ "fan.infoNom": "Includes inflation ({p} a year). Amounts are what will show on the account at the time: they grow, but buy less.",
+ "fan.infoReal": "Prices stay the same. Amounts are in today’s money, so you see what they can buy and can compare the years fairly.",
+ "k.needOf": "of your {t}, at {b} a month",
+ "k.bufSum": "{t} minus {n} needed: {p} above the minimum",
+ "k.shortSum": "{t} minus {n} needed: {p} below the minimum"
 });
 
 Object.assign(I18N.nl, {
@@ -2988,7 +3053,30 @@ Object.assign(I18N.nl, {
  "st2.h": "Nog wat meer over jou",
  "st2.h_2": "Nog wat meer over jullie",
  "st2.s": "Namen maken grafieken en teksten persoonlijker. Bijverdiensten tellen mee tot 67. Beide zijn optioneel.",
- "goal.sub": "Vul de stappen hieronder in. Je antwoord rekent meteen mee."
+ "goal.sub": "Vul de stappen hieronder in. Je antwoord rekent meteen mee.",
+ "ov.k.cap": "Startkapitaal",
+ "ov.k.capAuto": "Nog niet ingevuld, dit bedrag geeft 90% kans",
+ "ov.k.bud": "Budget per maand",
+ "ov.k.end": "Eindleeftijd",
+ "ov.k.endOf": "van {n}",
+ "ov.k.today": "Alle bedragen in geld van vandaag.",
+ "mini.need90": "Nodig voor 90% kans",
+ "v.lead": "De kans op slagen is {l} ({p}).",
+ "v.lvl.good": "hoog",
+ "v.lvl.warn": "redelijk",
+ "v.lvl.risky": "laag",
+ "v.lvl.bad": "erg laag",
+ "v.risk": "Valt het rendement tegen, dan is het geld in {f} van de 100 gevallen eerder op.",
+ "v.ok": "Bij gemiddeld rendement hou je het vol {r}, met {c} en {b} per maand te besteden. Aan het eind is er dan nog {e} over.",
+ "v.ok_2": "Bij gemiddeld rendement houden jullie het vol {r}, met {c} en {b} per maand te besteden. Aan het eind hebben jullie dan nog {e} over.",
+ "fan.info": "Uitleg nominaal en reëel",
+ "fan.infoH": "Nominaal of reëel?",
+ "fan.infoNom": "Rekent mee met inflatie ({p} per jaar). De bedragen zijn zoals ze dan op de rekening staan: ze worden hoger, maar je kunt er minder voor kopen.",
+ "fan.infoReal": "De prijzen blijven gelijk. De bedragen zijn in geld van vandaag, zodat je ziet wat je ervoor kunt kopen en de jaren goed kunt vergelijken.",
+ "k.needOf": "van je {t}, bij {b} per maand",
+ "k.needOf_2": "van jullie {t}, bij {b} per maand",
+ "k.bufSum": "{t} min {n} benodigd: {p} boven het minimum",
+ "k.shortSum": "{t} min {n} benodigd: {p} onder het minimum"
 });
 
 Object.assign(I18N.de, {
@@ -3001,7 +3089,28 @@ Object.assign(I18N.de, {
  "st2.t": "Zu Ihnen",
  "st2.h": "Noch etwas mehr zu Ihnen",
  "st2.s": "Namen machen Grafiken und Texte persönlicher. Ein Nebenverdienst zählt bis 67. Beides ist optional.",
- "goal.sub": "Füllen Sie die Schritte unten aus. Ihre Antwort rechnet sofort mit."
+ "goal.sub": "Füllen Sie die Schritte unten aus. Ihre Antwort rechnet sofort mit.",
+ "ov.k.cap": "Vermögen",
+ "ov.k.capAuto": "Nicht eingegeben, dieser Betrag reicht mit 90 % Wahrscheinlichkeit",
+ "ov.k.bud": "Budget pro Monat",
+ "ov.k.end": "Endalter",
+ "ov.k.endOf": "von {n}",
+ "ov.k.today": "Alle Beträge in heutigem Geld.",
+ "mini.need90": "Nötig für 90 % Erfolgschance",
+ "v.lead": "Die Erfolgschance ist {l} ({p}).",
+ "v.lvl.good": "hoch",
+ "v.lvl.warn": "mittel",
+ "v.lvl.risky": "niedrig",
+ "v.lvl.bad": "sehr niedrig",
+ "v.risk": "Fallen die Renditen schlechter aus, ist das Geld in {f} von 100 Fällen früher aufgebraucht.",
+ "v.ok": "Bei durchschnittlicher Rendite reicht Ihr Geld {r}, mit {c} und {b} pro Monat zum Ausgeben. Am Ende hätten Sie dann noch {e} übrig.",
+ "fan.info": "Nominal und real erklärt",
+ "fan.infoH": "Nominal oder real?",
+ "fan.infoNom": "Berücksichtigt die Inflation ({p} pro Jahr). Die Beträge sind so, wie sie dann auf dem Konto stehen: Sie werden höher, aber man kann weniger dafür kaufen.",
+ "fan.infoReal": "Die Preise bleiben gleich. Die Beträge sind in heutigem Geld, sodass Sie sehen, was Sie dafür kaufen können, und die Jahre gut vergleichen können.",
+ "k.needOf": "von Ihren {t}, bei {b} pro Monat",
+ "k.bufSum": "{t} minus {n} benötigt: {p} über dem Minimum",
+ "k.shortSum": "{t} minus {n} benötigt: {p} unter dem Minimum"
 });
 
 Object.assign(I18N.fr, {
@@ -3014,7 +3123,28 @@ Object.assign(I18N.fr, {
  "st2.t": "Vous",
  "st2.h": "Encore un peu sur vous",
  "st2.s": "Les prénoms rendent les graphiques et les textes plus personnels. Les revenus d’appoint comptent jusqu’à 67 ans. Les deux sont facultatifs.",
- "goal.sub": "Remplissez les étapes ci-dessous. Votre réponse se met à jour au fur et à mesure."
+ "goal.sub": "Remplissez les étapes ci-dessous. Votre réponse se met à jour au fur et à mesure.",
+ "ov.k.cap": "Patrimoine",
+ "ov.k.capAuto": "Non saisi, ce montant suffit avec 90 % de chances",
+ "ov.k.bud": "Budget par mois",
+ "ov.k.end": "Âge final",
+ "ov.k.endOf": "de {n}",
+ "ov.k.today": "Tous les montants en argent d’aujourd’hui.",
+ "mini.need90": "Nécessaire pour 90 % de chances",
+ "v.lead": "La chance de réussite est {l} ({p}).",
+ "v.lvl.good": "élevée",
+ "v.lvl.warn": "correcte",
+ "v.lvl.risky": "faible",
+ "v.lvl.bad": "très faible",
+ "v.risk": "Si les rendements déçoivent, l’argent s’épuise plus tôt dans {f} cas sur 100.",
+ "v.ok": "Avec un rendement moyen, votre argent tient {r}, avec {c} et {b} par mois à dépenser. Il vous resterait alors encore {e} à la fin.",
+ "fan.info": "Expliquer nominal et réel",
+ "fan.infoH": "Nominal ou réel ?",
+ "fan.infoNom": "Tient compte de l’inflation ({p} par an). Les montants sont ceux qui figureront alors sur le compte : ils augmentent, mais permettent d’acheter moins.",
+ "fan.infoReal": "Les prix restent les mêmes. Les montants sont en argent d’aujourd’hui : vous voyez ce qu’ils permettent d’acheter et comparez bien les années.",
+ "k.needOf": "sur vos {t}, pour {b} par mois",
+ "k.bufSum": "{t} moins {n} nécessaires : {p} au-dessus du minimum",
+ "k.shortSum": "{t} moins {n} nécessaires : {p} sous le minimum"
 });
 
 Object.assign(I18N.es, {
@@ -3029,7 +3159,30 @@ Object.assign(I18N.es, {
  "st2.h": "Un poco más sobre ti",
  "st2.h_2": "Un poco más sobre vosotros",
  "st2.s": "Los nombres hacen más personales los gráficos y los textos. Los ingresos extra cuentan hasta los 67. Ambos son opcionales.",
- "goal.sub": "Rellena los pasos de abajo. Tu respuesta se actualiza al momento."
+ "goal.sub": "Rellena los pasos de abajo. Tu respuesta se actualiza al momento.",
+ "ov.k.cap": "Patrimonio",
+ "ov.k.capAuto": "No indicado, esta cantidad alcanza con un 90 % de probabilidad",
+ "ov.k.bud": "Presupuesto al mes",
+ "ov.k.end": "Edad final",
+ "ov.k.endOf": "de {n}",
+ "ov.k.today": "Todos los importes en dinero de hoy.",
+ "mini.need90": "Necesario para 90 % de probabilidad",
+ "v.lead": "La probabilidad de éxito es {l} ({p}).",
+ "v.lvl.good": "alta",
+ "v.lvl.warn": "aceptable",
+ "v.lvl.risky": "baja",
+ "v.lvl.bad": "muy baja",
+ "v.risk": "Si la rentabilidad decepciona, el dinero se agota antes en {f} de cada 100 casos.",
+ "v.ok": "Con una rentabilidad media, tu dinero alcanza {r}, con {c} y {b} al mes para gastar. Al final aún te quedarían {e}.",
+ "v.ok_2": "Con una rentabilidad media, vuestro dinero alcanza {r}, con {c} y {b} al mes para gastar. Al final aún os quedarían {e}.",
+ "fan.info": "Explicación de nominal y real",
+ "fan.infoH": "¿Nominal o real?",
+ "fan.infoNom": "Tiene en cuenta la inflación ({p} al año). Los importes son los que aparecerán entonces en la cuenta: crecen, pero compran menos.",
+ "fan.infoReal": "Los precios se mantienen. Los importes están en dinero de hoy, así ves lo que puedes comprar con ellos y comparas bien los años.",
+ "k.needOf": "de tus {t}, para {b} al mes",
+ "k.needOf_2": "de vuestros {t}, para {b} al mes",
+ "k.bufSum": "{t} menos {n} necesarios: {p} por encima del mínimo",
+ "k.shortSum": "{t} menos {n} necesarios: {p} por debajo del mínimo"
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -3594,9 +3747,22 @@ Object.assign(I18N.es, {
   function renderHead() {
     var el = $('ov-sub'); if (!el) return;
     var st = $('ov-start'); if (st) st.hidden = state.budget > 0;
-    if (state.budget <= 0) { el.textContent = t('ov.subEmpty'); return; }
-    el.innerHTML = (state.startkapitaal > 0 ? t('ov.subCap', { c: eur(capEff()) }) : t('ov.subNoCap', { c: eur(capEff()) })) + ' ' +
-      t('ov.subRest', { b: eur(state.budget), r: esc(refTxt()), country: cName(prefs.country) });
+    var tl = $('ov-tiles');
+    if (state.budget <= 0) { el.hidden = false; el.textContent = t('ov.subEmpty'); if (tl) { tl.hidden = true; tl.innerHTML = ''; } return; }
+    el.hidden = true; el.textContent = '';
+    if (!tl) return;
+    var hasCap = state.startkapitaal > 0;
+    var endAge = fmtAge(state.eindleeftijd);
+    if (/^\d+$/.test(endAge)) endAge += ' ' + t1('u.years');
+    function tile(label, val, sub, cls) {
+      return '<div class="ovt' + (cls ? ' ' + cls : '') + '"><span class="ovt-l">' + label + '</span><b class="ovt-v">' + val + '</b>' + (sub ? '<span class="ovt-s">' + sub + '</span>' : '') + '</div>';
+    }
+    tl.innerHTML = '<div class="ovt-row">' +
+      tile(t1('ov.k.cap'), eur(capEff()), hasCap ? '' : t1('ov.k.capAuto'), hasCap ? '' : 'auto') +
+      tile(t1('ov.k.bud'), eur(state.budget), '') +
+      tile(t1('ov.k.end'), endAge, two() ? t1('ov.k.endOf', { n: esc(youngestName()) }) : '') +
+      '</div><p class="ovt-note">' + t1('ov.k.today') + '</p>';
+    tl.hidden = false;
   }
   function renderAdvies() {
     var el = $('advies'); if (!el) return;
@@ -3641,27 +3807,41 @@ Object.assign(I18N.es, {
     else if (curSucc >= 0.75) { cls = 'warn'; label = t1('v.warn'); icon = '!'; }
     else if (curSucc >= 0.5) { cls = 'bad'; label = t1('v.risky'); icon = '✕'; }
     else { cls = 'bad'; label = t1('v.bad'); icon = '✕'; }
+    var lvl = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : (curSucc >= 0.5 ? 'risky' : 'bad'));
+    var lead = '<strong>' + t1('v.lead', { l: t1('v.lvl.' + lvl), p: pct(curSucc, 0) }) + '</strong> ';
     var text;
-    if (m.buffer >= 0) text = t('v.ok', { c: eur(capEff()), b: eur(state.budget), r: esc(refTxt()), e: eur(m.K[m.N]) });
-    else {
+    if (m.buffer >= 0) {
+      text = t('v.ok', { c: eur(capEff()), b: eur(state.budget), r: esc(refTxt()), e: eur(m.K[m.N]) });
+      var fail = Math.round((1 - curSucc) * 100);
+      if (fail > 0) text += ' ' + t1('v.risk', { f: fail });
+    } else {
       var age = m.youngest + (m.emptyAt === null ? m.N : m.emptyAt);
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(-m.marge), mb: eur(m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(-m.marge), mb: eur(m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (state.werk > 0 ? '<span class="scope">' + t1('v.work', { w: eur(state.werk) }) + '</span>' : '') + '</div><p class="verdict-text">' + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (state.werk > 0 ? '<span class="scope">' + t1('v.work', { w: eur(state.werk) }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
   }
   function renderKpis(m) {
     var room = m.maxBudget - state.budget, empty = state.budget <= 0;
+    var haveR = Math.round(capEff()), needR = Math.round(m.req0), bufR = haveR - needR;
+    var link = !empty && state.startkapitaal > 0 && haveR > 0 && needR > 0;
+    function split(hl) {
+      var a = bufR >= 0 ? needR / haveR : haveR / needR;
+      return '<span class="k-split hl-' + hl + '" aria-hidden="true"><i class="ks-need" style="width:' + (a * 100).toFixed(1) + '%"></i><i class="' + (bufR >= 0 ? 'ks-buf' : 'ks-short') + '" style="width:' + ((1 - a) * 100).toFixed(1) + '%"></i></span>';
+    }
     var items = [
       { l: t1('k.end'), v: eur(m.K[m.N]), s: t1('k.endS'), c: m.K[m.N] < 0 ? 'neg' : '' },
-      { l: t1('k.need'), v: eur(m.req0), s: t1('k.needS', { b: eur(state.budget) }), c: '' },
-      { l: empty ? t1('k.bufOrShort') : (m.marge >= 0 ? t1('k.buffer') : t1('k.short')), v: (m.marge >= 0 ? '+' : '') + eur(m.marge), s: m.marge >= 0 ? t1('k.bufS', { p: pct(m.buffer, 0) }) : t1('k.shortS', { p: pct(-m.marge / m.req0, 0) }), c: m.marge >= 0 ? 'pos' : 'neg' },
+      { l: t1('k.need'), v: eur(needR), s: link ? t('k.needOf', { t: eur(haveR), b: eur(state.budget) }) : t1('k.needS', { b: eur(state.budget) }), c: '', bar: link ? split('need') : '' },
+      { l: empty ? t1('k.bufOrShort') : (bufR >= 0 ? t1('k.buffer') : t1('k.short')), v: (bufR >= 0 ? '+' : '') + eur(bufR),
+        s: link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(m.buffer, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-m.marge / m.req0, 0) }))
+          : (bufR >= 0 ? t1('k.bufS', { p: pct(m.buffer, 0) }) : t1('k.shortS', { p: pct(-m.marge / m.req0, 0) })),
+        c: bufR >= 0 ? 'pos' : 'neg', bar: link ? split('buf') : '' },
       { l: t1('k.max'), v: eur(m.maxBudget), s: t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
       { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1('k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
       { l: t1('k.tax'), v: eur(m.belastingJaar1), s: taxLabel(), c: '' }
     ];
     if (empty) items = items.map(function (i) { return { l: i.l, v: '–', s: '', c: '' }; });
-    $('kpis').innerHTML = items.map(function (i) { return '<div class="kpi"><span class="k-label">' + i.l + '</span><span class="k-val ' + i.c + '">' + i.v + '</span><span class="k-sub">' + i.s + '</span></div>'; }).join('') +
+    $('kpis').innerHTML = items.map(function (i) { return '<div class="kpi"><span class="k-label">' + i.l + '</span><span class="k-val ' + i.c + '">' + i.v + '</span>' + (i.bar || '') + '<span class="k-sub">' + i.s + '</span></div>'; }).join('') +
       '<p class="srcline kpi-src">' + srcLine('sp,tax,mkt,le') + '</p>';
   }
   function renderKoop() {
@@ -3778,7 +3958,7 @@ Object.assign(I18N.es, {
       host.innerHTML = '<div class="ph">' + t('fan.empty') + '</div>';
       $('fan-succ').textContent = '–'; $('fan-wr').textContent = '–'; $('fan-wr-s').textContent = t1('fan.wr');
       $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.assumpLater') + '</li></ul>';
-      $('fan-sub').textContent = t1('fan.subEmpty'); $('fan-note').textContent = '';
+      $('fan-sub').textContent = t1('fan.subEmpty');
       return;
     }
     if (!fanSrc) return;
@@ -3849,38 +4029,44 @@ Object.assign(I18N.es, {
     $('fan-wr-s').textContent = t1('fan.wrS', { p: pct(m.eersteJaarOpname, 1) });
     $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.mix', { a: Math.round(pf.w[0] * 100), b: Math.round(pf.w[1] * 100), c: Math.round(pf.w[2] * 100) }) + '</li><li>' + t1('fan.costs', { p: pct(state.kosten / 100, 1) }) + '</li><li>' + taxLabel() + '</li></ul>';
     $('fan-sub').textContent = t1('fan.sub', { pf: pf.n.toLowerCase(), n: num(SIMN, 0) });
-    $('fan-note').textContent = nominal ? t1('fan.noteNom', { p: pct(infl, 1) }) : t1('fan.noteReal');
     each('#fan-legend .lg', function (el) { el.classList.toggle('off', !fanShow[el.getAttribute('data-k')]); });
   }
   each('input[name="fanMode"]', function (r) { r.addEventListener('change', function () { if (r.checked) { fanMode = r.value; renderFan(); } }); });
   $('zin').addEventListener('click', function () { fanZoom = Math.min(5, fanZoom + 1); renderFan(); });
   $('zout').addEventListener('click', function () { fanZoom = Math.max(-4, fanZoom - 1); renderFan(); });
+  var fanPop = $('fan-pop'), fanInfo = $('fan-info');
+  function closeFanPop(back) { if (!fanPop || fanPop.hidden) return; fanPop.hidden = true; fanInfo.setAttribute('aria-expanded', 'false'); if (back) fanInfo.focus(); }
+  function openFanPop() {
+    fanPop.innerHTML = '<div class="fp-top"><h3 id="fan-pop-h">' + t1('fan.infoH') + '</h3><button type="button" class="fp-x" id="fan-pop-x" aria-label="' + esc(t1('b.close')) + '">✕</button></div>' +
+      '<dl><div><dt>' + t1('fan.nominal') + '</dt><dd>' + t1('fan.infoNom', { p: pct(state.inflatie / 100, 1) }) + '</dd></div><div><dt>' + t1('fan.real') + '</dt><dd>' + t1('fan.infoReal') + '</dd></div></dl>';
+    fanPop.hidden = false; fanInfo.setAttribute('aria-expanded', 'true');
+    $('fan-pop-x').addEventListener('click', function () { closeFanPop(true); });
+    $('fan-pop-x').focus();
+  }
+  if (fanInfo && fanPop) {
+    fanInfo.addEventListener('click', function (e) { e.stopPropagation(); if (fanPop.hidden) openFanPop(); else closeFanPop(false); });
+    document.addEventListener('click', function (e) { if (!fanPop.hidden && !fanPop.contains(e.target)) closeFanPop(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeFanPop(true); });
+  }
   each('#fan-legend .lg', function (el) { el.addEventListener('click', function () { var k = el.getAttribute('data-k'); fanShow[k] = !fanShow[k]; renderFan(); }); });
 
   /* knopen en meter */
-  var KNOP = ["<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#8DB8E8\" stroke=\"#5E8FC6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#5E8FC6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#5E8FC6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#5E8FC6\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F2A97E\" stroke=\"#D47F50\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D47F50\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D47F50\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D47F50\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#9ED3B4\" stroke=\"#6FAF8C\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#6FAF8C\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#6FAF8C\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#6FAF8C\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#C9B8EE\" stroke=\"#9C86D2\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#9C86D2\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#9C86D2\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#9C86D2\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F5D98B\" stroke=\"#D1B25E\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D1B25E\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D1B25E\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D1B25E\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#F6B8C8\" stroke=\"#D98AA0\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#D98AA0\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D98AA0\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#D98AA0\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#FFFFFF\" stroke=\"#B9C7D6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#B9C7D6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#B9C7D6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#B9C7D6\"/></svg>", "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.6\" fill=\"#A9D6E8\" stroke=\"#74AFC6\" stroke-width=\"1.4\"/><circle r=\"6\" fill=\"none\" stroke=\"#74AFC6\" stroke-width=\".9\" opacity=\".7\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#74AFC6\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"#74AFC6\"/></svg>"], KNOP0 = "<svg viewBox=\"-10 -10 20 20\"><circle r=\"8.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/><circle cx=\"-2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"2.2\" cy=\"-2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"-2.2\" cy=\"2.2\" r=\"1.1\" fill=\"currentColor\"/><circle cx=\"2.2\" cy=\"2.2\" r=\"1.1\" fill=\"currentColor\"/></svg>";
   function renderGauge() {
     var g = $('gauge'), card = $('status-card'); if (!g) return;
     var empty = state.budget <= 0, v = empty ? 0 : curSucc;
     var cls = empty ? '' : (v >= 0.9 ? 'good' : (v >= 0.75 ? 'warn' : 'bad'));
     card.className = 'card status ' + cls;
-    function pt(f, r) { var a = Math.PI * (1 - f); return [100 + r * Math.cos(a), 104 - r * Math.sin(a)]; }
     var arc = 'M16 104 A84 84 0 0 1 184 104';
     var s = '<svg viewBox="0 0 200 124" role="img" aria-label="' + esc(t1('w.success') + ': ' + (empty ? '–' : pct(v, 0))) + '"><path d="' + arc + '" class="g-bg"/>';
     if (!empty && v > 0.004) s += '<path d="' + arc + '" class="g-val ' + cls + '" pathLength="100" stroke-dasharray="' + (v * 100).toFixed(1) + ' 100"/>';
-    [0.75, 0.9].forEach(function (f) { var a = pt(f, 74), b = pt(f, 94); s += '<line class="g-tick" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"/>'; });
     s += '<text x="100" y="96" class="g-num">' + (empty ? '–' : pct(v, 0)) + '</text><text x="100" y="120" class="g-lbl">' + esc(t1('g.lbl')) + '</text></svg>';
     g.innerHTML = s;
-    var n = empty ? 0 : Math.round(v * 20), kr = '';
-    for (var i = 0; i < 20; i++) kr += i < n ? KNOP[i % KNOP.length] : KNOP0;
-    $('knoprij').innerHTML = kr;
-    $('knoprij-t').textContent = empty ? t1('g.empty') : t1('g.text', { n: n, r: refTxt() });
   }
   var route = 'overview';
   function updMini() { $('mini').classList.toggle('show', route !== 'overview' && state.budget > 0); }
   function renderMini(m) {
     var cls = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : 'bad');
-    $('mini').innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> ' + t1('mini.succ') + '</span><span>' + t1('mini.need') + ' <b>' + short(m.req0) + '</b></span><span>' + t1('mini.max') + ' <b>' + eur(m.maxBudget) + '</b></span>';
+    $('mini').innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> ' + t1('mini.succ') + '</span><span>' + t1(adv ? 'mini.need90' : 'mini.need') + ' <b>' + (adv ? eur(adv.c90) : short(m.req0)) + '</b></span><span>' + t1('mini.max') + ' <b>' + eur(m.maxBudget) + '</b></span>';
     updMini();
   }
   /* waar het maandbudget vandaan komt */
