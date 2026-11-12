@@ -602,6 +602,10 @@ body::before { background: var(--surface); }
 .tabs a[aria-current="page"] svg { stroke: var(--accent); }
 .hashtag { background: var(--copper); color: #FFFFFF; box-shadow: 0 4px 14px rgba(152, 90, 50, 0.25); }
 .hashtag:focus-visible { outline-color: var(--accent); }
+.hashtag { display: inline-flex; align-items: center; gap: 6px; border: 0; cursor: pointer; font-family: inherit; }
+.hashtag[hidden] { display: none; }
+.hashtag svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+
 .mini { background: rgba(255, 255, 255, 0.92); }
 .btn.primary { background: var(--accent); color: #FFFFFF; box-shadow: 0 4px 14px rgba(47, 109, 174, 0.22); }
 .btn.ghost { color: var(--ink); border-color: var(--line); background: var(--surface); }
@@ -1037,8 +1041,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
     </nav>
     <div class="tb-right">
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label"></select></label>
-      <button class="install" id="btn-install" type="button" hidden data-t-aria="inst.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span data-t="inst.btn"></span></button>
-      <a class="hashtag" href="https://www.instagram.com/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a>
+      <button class="hashtag" id="btn-install" type="button" hidden data-t-aria="inst.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span>App</span></button>
     </div>
   </div>
   <div class="mini" id="mini" aria-live="off"></div>
