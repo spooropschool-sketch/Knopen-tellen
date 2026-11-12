@@ -887,6 +887,35 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .goal:hover { border-color: var(--copper); }
 .goal:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .goal[data-goal="unsure"] { background: none; border-style: dashed; }
+.intro-about-h { font-family: var(--f-display); font-size: 22px; line-height: 1.2; margin: 0 0 8px; }
+.intro-about { color: var(--ink2); line-height: 1.55; margin-bottom: 18px; font-size: 15px; }
+.slot { --slot-h: 156px; display: grid; gap: 10px; margin: 8px 0 4px; }
+.slot-machine { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px; border: 2px solid var(--copper); border-radius: 18px; background: var(--surface2); box-shadow: 0 6px 18px rgba(152, 90, 50, 0.16), inset 0 0 0 4px var(--surface); }
+.slot-window { position: relative; height: var(--slot-h); overflow: hidden; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: inset 0 8px 10px -8px rgba(0, 0, 0, 0.22), inset 0 -8px 10px -8px rgba(0, 0, 0, 0.22); }
+.slot-reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
+.slot-reel.run { transition: transform 1.5s cubic-bezier(0.12, 0.7, 0.18, 1); }
+.slot-item { height: var(--slot-h); box-sizing: border-box; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden; }
+.slot-item b { font-family: var(--f-display); font-size: 17px; font-weight: 600; line-height: 1.25; }
+.slot-item span { font-size: 14px; color: var(--ink2); line-height: 1.4; }
+.slot-knob { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 76px; padding: 8px 4px 6px; border: 0; border-radius: 16px; background: none; color: var(--copper); font: 700 13px var(--f-body, inherit); cursor: pointer; }
+.slot-knob svg { width: 52px; height: 52px; transition: transform 1.5s cubic-bezier(0.12, 0.7, 0.18, 1); }
+.slot-knob .k-out { fill: var(--copper); stroke: #7A4426; stroke-width: 2; }
+.slot-knob .k-in { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.6; }
+.slot-knob .k-hole { fill: #5A321C; }
+.slot-knob:hover svg { filter: brightness(1.08); }
+.slot-knob:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.slot-knob.spin svg { transform: rotate(900deg); }
+.slot-knob:disabled, .slot-ok:disabled { opacity: 0.6; cursor: default; }
+.slot-hint { margin: 0; text-align: center; color: var(--ink2); font-size: 14px; }
+.slot-dots { display: flex; justify-content: center; gap: 4px; }
+.slot-dot { width: 32px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.slot-dot::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: background 0.2s, transform 0.2s; }
+.slot-dot[aria-current="true"]::before { background: var(--copper); transform: scale(1.3); }
+.slot-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-radius: 8px; }
+.slot-ok { width: 100%; }
+@media (max-width: 380px) { .slot { --slot-h: 180px; } .slot-knob { width: 62px; } .slot-knob svg { width: 44px; height: 44px; } .slot-item { padding: 10px 12px; } .slot-item b { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .slot-reel.run, .slot-knob svg { transition: none; } }
+
 #intro-s1 h2 { font-family: var(--f-display); font-size: 26px; line-height: 1.15; margin: 0; }
 .goal-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; border-left: 4px solid var(--copper); }
 .goal-bar .gb-text { flex: 1 1 280px; min-width: 0; }
@@ -1227,7 +1256,6 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
       <span data-t="about.disclaimer"></span>
       <span id="visits" hidden></span>
       <span id="support-ab" hidden></span>
-      <span class="tag"><a href="https://www.instagram.com/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a></span>
     </footer>
   </section>
 
@@ -1251,19 +1279,21 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
       </div>
     </div>
     <div class="modal-body" id="intro-s1" hidden>
+      <h2 class="intro-about-h" data-t="pay.h"></h2>
+      <div class="about-body intro-about" data-t="about.body"></div>
       <h2 id="intro-h" data-t="intro.ask"></h2>
       <p class="sub" data-t="intro.promise"></p>
-      <div class="goals" id="goals">
-        <button class="goal" type="button" data-goal="enough"><b data-t="goal.1.t"></b><span data-t="goal.1.s"></span></button>
-        <button class="goal" type="button" data-goal="spend"><b data-t="goal.2.t"></b><span data-t="goal.2.s"></span></button>
-        <button class="goal" type="button" data-goal="earlier"><b data-t="goal.3.t"></b><span data-t="goal.3.s"></span></button>
-        <button class="goal" type="button" data-goal="abroad"><b data-t="goal.4.t"></b><span data-t="goal.4.s"></span></button>
-        <button class="goal" type="button" data-goal="unsure"><b data-t="goal.5.t"></b><span data-t="goal.5.s"></span></button>
+      <div class="slot" id="slot">
+        <div class="slot-machine">
+          <div class="slot-window" id="slot-window" role="group" aria-live="polite">
+            <div class="slot-reel" id="slot-reel"></div>
+          </div>
+          <button class="slot-knob" type="button" id="slot-spin" aria-label="Spin"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" class="k-out"/><circle r="11.5" class="k-in"/><circle cx="-4.2" cy="-4.2" r="1.9" class="k-hole"/><circle cx="4.2" cy="-4.2" r="1.9" class="k-hole"/><circle cx="-4.2" cy="4.2" r="1.9" class="k-hole"/><circle cx="4.2" cy="4.2" r="1.9" class="k-hole"/></svg><span data-t="slot.spin"></span></button>
+        </div>
+        <p class="slot-hint" data-t="slot.hint"></p>
+        <div class="slot-dots" id="slot-dots" role="group" data-t-aria="slot.pick"></div>
+        <button class="btn primary slot-ok" type="button" id="slot-ok" data-t="slot.ok"></button>
       </div>
-      <details class="readmore">
-        <summary data-t="intro.more"></summary>
-        <div class="readmore-body" data-t="about.body"></div>
-      </details>
       <div class="modal-actions">
         <button class="btn link" type="button" id="intro-skip" data-t="b.skip"></button>
       </div>
@@ -3071,7 +3101,11 @@ Object.assign(I18N.en, {
  "vis.n": "{n} visits",
  "priv.body": "<p><strong>Your data stays with you.</strong> What you enter (ages, amounts, choices) is stored only in your own browser on this device. It is not sent to Buttons and nobody else can see it. If you clear your browser data, it is gone.</p><p><strong>No tracking.</strong> No advertising cookies are used and you are not followed. Visits are counted anonymously (only the number of visits, pages and country) with GoatCounter, without cookies and without personal data. The storage in your browser only makes the site work and remembers your input.</p><p><strong>What does run through others.</strong> The site is hosted on GitHub Pages, so GitHub sees technical data such as your IP address when the page loads. The fonts come from Google Fonts, so Google also sees your IP address. The form behind “Share a tip” is a Google Form: what you write there reaches the maker and possibly Google. Don’t enter anything there that you want to keep private. Links to sources lead to other websites with their own rules.</p><p><strong>Contact.</strong> Buttons is a personal, non-commercial project. What you send through “Share a tip” is used only to improve the site and is not kept longer than needed. Want something deleted, or have a question about this text? Send a message through “Share a tip”.</p>",
  "disc.h": "Disclaimer",
- "disc.body": "<p>Buttons is a general calculation tool for information only. It is <strong>not</strong> financial, investment, tax, pension or legal advice, and no advice is given about your personal situation.</p><p>Results are estimates based on simplified rules and assumptions about returns, inflation and life expectancy. The future can differ from what is shown, and the rules per country may be incomplete or out of date. No rights can be derived from the results.</p><p>Use of this site is at your own risk. To the extent permitted by law, the maker accepts no liability for decisions made or damage suffered based on this site. Check official sources and consult an independent, licensed adviser before making important financial decisions.</p>"
+ "disc.body": "<p>Buttons is a general calculation tool for information only. It is <strong>not</strong> financial, investment, tax, pension or legal advice, and no advice is given about your personal situation.</p><p>Results are estimates based on simplified rules and assumptions about returns, inflation and life expectancy. The future can differ from what is shown, and the rules per country may be incomplete or out of date. No rights can be derived from the results.</p><p>Use of this site is at your own risk. To the extent permitted by law, the maker accepts no liability for decisions made or damage suffered based on this site. Check official sources and consult an independent, licensed adviser before making important financial decisions.</p>",
+ "slot.spin": "Spin",
+ "slot.ok": "This is my question",
+ "slot.hint": "Spin until your question appears, then confirm.",
+ "slot.pick": "Choose a question"
 });
 
 Object.assign(I18N.nl, {
@@ -3122,7 +3156,11 @@ Object.assign(I18N.nl, {
  "vis.n": "{n} bezoeken",
  "priv.body": "<p><strong>Je gegevens blijven bij jou.</strong> Wat je invult (leeftijden, bedragen, keuzes) wordt alleen in je eigen browser op dit apparaat bewaard. Het wordt niet naar Knopen tellen gestuurd en niemand anders kan het inzien. Wis je de gegevens van je browser, dan zijn ze weg.</p><p><strong>Geen tracking.</strong> Er worden geen reclamecookies gebruikt en je wordt niet gevolgd. Bezoeken worden anoniem geteld (alleen aantal bezoeken, pagina’s en land) met GoatCounter, zonder cookies en zonder persoonsgegevens. De opslag in je browser is er alleen om de site te laten werken en je invoer te onthouden.</p><p><strong>Wat wel via anderen loopt.</strong> De site staat op GitHub Pages, dus GitHub ziet technische gegevens zoals je IP-adres als de pagina laadt. De lettertypen komen van Google Fonts, dus ook Google ziet je IP-adres. Het formulier achter “Geef een tip” is een Google Formulier: wat je daar schrijft komt bij de maker en mogelijk bij Google terecht. Vul daar niets in wat privé moet blijven. Links naar bronnen leiden naar andere websites met eigen regels.</p><p><strong>Contact.</strong> Knopen tellen is een persoonlijk project zonder winstoogmerk. Wat je via “Geef een tip” instuurt, gebruiken we alleen om de site te verbeteren en bewaren we niet langer dan nodig. Wil je iets laten verwijderen, of heb je een vraag over deze tekst? Stuur een bericht via “Geef een tip”.</p>",
  "disc.h": "Disclaimer",
- "disc.body": "<p>Knopen tellen is een algemeen rekenhulpmiddel, alleen bedoeld als informatie. Het is <strong>geen</strong> financieel, beleggings-, belasting-, pensioen- of juridisch advies, en er wordt geen advies gegeven over jouw persoonlijke situatie.</p><p>De uitkomsten zijn schattingen op basis van vereenvoudigde regels en aannames over rendement, inflatie en levensduur. De toekomst kan afwijken van wat er staat, en de regels per land kunnen onvolledig of verouderd zijn. Aan de uitkomsten kunnen geen rechten worden ontleend.</p><p>Gebruik van deze site is voor eigen risico. Voor zover de wet dat toestaat, aanvaardt de maker geen aansprakelijkheid voor beslissingen of schade die voortvloeien uit het gebruik van deze site. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>"
+ "disc.body": "<p>Knopen tellen is een algemeen rekenhulpmiddel, alleen bedoeld als informatie. Het is <strong>geen</strong> financieel, beleggings-, belasting-, pensioen- of juridisch advies, en er wordt geen advies gegeven over jouw persoonlijke situatie.</p><p>De uitkomsten zijn schattingen op basis van vereenvoudigde regels en aannames over rendement, inflatie en levensduur. De toekomst kan afwijken van wat er staat, en de regels per land kunnen onvolledig of verouderd zijn. Aan de uitkomsten kunnen geen rechten worden ontleend.</p><p>Gebruik van deze site is voor eigen risico. Voor zover de wet dat toestaat, aanvaardt de maker geen aansprakelijkheid voor beslissingen of schade die voortvloeien uit het gebruik van deze site. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>",
+ "slot.spin": "Draai",
+ "slot.ok": "Dit is mijn vraag",
+ "slot.hint": "Draai tot je vraag verschijnt en bevestig dan.",
+ "slot.pick": "Kies een vraag"
 });
 
 Object.assign(I18N.de, {
@@ -3168,7 +3206,11 @@ Object.assign(I18N.de, {
  "vis.n": "{n} Besuche",
  "priv.body": "<p><strong>Ihre Daten bleiben bei Ihnen.</strong> Was Sie eingeben (Alter, Beträge, Auswahl), wird nur in Ihrem eigenen Browser auf diesem Gerät gespeichert. Es wird nicht an Buttons gesendet und niemand sonst kann es einsehen. Löschen Sie die Browserdaten, sind sie weg.</p><p><strong>Kein Tracking.</strong> Es werden keine Werbe-Cookies verwendet und Sie werden nicht verfolgt. Besuche werden anonym gezählt (nur Anzahl der Besuche, Seiten und Land) mit GoatCounter, ohne Cookies und ohne personenbezogene Daten. Der Speicher im Browser dient nur dazu, dass die Seite funktioniert und Ihre Eingaben gemerkt werden.</p><p><strong>Was über Dritte läuft.</strong> Die Seite wird über GitHub Pages bereitgestellt, daher sieht GitHub technische Daten wie Ihre IP-Adresse, wenn die Seite lädt. Die Schriftarten kommen von Google Fonts, daher sieht auch Google Ihre IP-Adresse. Das Formular hinter „Tipp geben“ ist ein Google-Formular: Was Sie dort schreiben, erreicht den Betreiber und möglicherweise Google. Geben Sie dort nichts ein, was privat bleiben soll. Links zu Quellen führen zu anderen Websites mit eigenen Regeln.</p><p><strong>Kontakt.</strong> Buttons ist ein privates, nicht kommerzielles Projekt. Was Sie über „Tipp geben“ senden, wird nur zur Verbesserung der Seite verwendet und nicht länger als nötig aufbewahrt. Möchten Sie etwas löschen lassen oder haben Sie eine Frage zu diesem Text? Senden Sie eine Nachricht über „Tipp geben“.</p>",
  "disc.h": "Haftungsausschluss",
- "disc.body": "<p>Buttons ist ein allgemeines Rechenwerkzeug und dient nur der Information. Es ist <strong>keine</strong> Finanz-, Anlage-, Steuer-, Renten- oder Rechtsberatung, und es erfolgt keine Beratung zu Ihrer persönlichen Situation.</p><p>Die Ergebnisse sind Schätzungen auf Grundlage vereinfachter Regeln und Annahmen zu Rendite, Inflation und Lebensdauer. Die Zukunft kann abweichen, und die Regeln je Land können unvollständig oder veraltet sein. Aus den Ergebnissen können keine Rechte abgeleitet werden.</p><p>Die Nutzung dieser Seite erfolgt auf eigenes Risiko. Soweit gesetzlich zulässig, übernimmt der Betreiber keine Haftung für Entscheidungen oder Schäden, die sich aus der Nutzung dieser Seite ergeben. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>"
+ "disc.body": "<p>Buttons ist ein allgemeines Rechenwerkzeug und dient nur der Information. Es ist <strong>keine</strong> Finanz-, Anlage-, Steuer-, Renten- oder Rechtsberatung, und es erfolgt keine Beratung zu Ihrer persönlichen Situation.</p><p>Die Ergebnisse sind Schätzungen auf Grundlage vereinfachter Regeln und Annahmen zu Rendite, Inflation und Lebensdauer. Die Zukunft kann abweichen, und die Regeln je Land können unvollständig oder veraltet sein. Aus den Ergebnissen können keine Rechte abgeleitet werden.</p><p>Die Nutzung dieser Seite erfolgt auf eigenes Risiko. Soweit gesetzlich zulässig, übernimmt der Betreiber keine Haftung für Entscheidungen oder Schäden, die sich aus der Nutzung dieser Seite ergeben. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>",
+ "slot.spin": "Drehen",
+ "slot.ok": "Das ist meine Frage",
+ "slot.hint": "Drehen Sie, bis Ihre Frage erscheint, und bestätigen Sie dann.",
+ "slot.pick": "Frage wählen"
 });
 
 Object.assign(I18N.fr, {
@@ -3214,7 +3256,11 @@ Object.assign(I18N.fr, {
  "vis.n": "{n} visites",
  "priv.body": "<p><strong>Vos données restent chez vous.</strong> Ce que vous saisissez (âges, montants, choix) est enregistré uniquement dans votre navigateur, sur cet appareil. Rien n’est envoyé à Buttons et personne d’autre ne peut le voir. Si vous effacez les données du navigateur, elles disparaissent.</p><p><strong>Pas de suivi.</strong> Aucun cookie publicitaire n’est utilisé et vous n’êtes pas suivi. Les visites sont comptées de façon anonyme (nombre de visites, pages et pays) avec GoatCounter, sans cookies et sans données personnelles. Le stockage dans votre navigateur sert uniquement à faire fonctionner le site et à retenir votre saisie.</p><p><strong>Ce qui passe par des tiers.</strong> Le site est hébergé sur GitHub Pages ; GitHub voit donc des données techniques comme votre adresse IP au chargement de la page. Les polices viennent de Google Fonts ; Google voit donc aussi votre adresse IP. Le formulaire derrière « Donner une astuce » est un Google Form : ce que vous y écrivez parvient à l’auteur et éventuellement à Google. N’y saisissez rien qui doive rester privé. Les liens vers les sources mènent à d’autres sites avec leurs propres règles.</p><p><strong>Contact.</strong> Buttons est un projet personnel sans but lucratif. Ce que vous envoyez via « Donner une astuce » sert uniquement à améliorer le site et n’est pas conservé plus longtemps que nécessaire. Vous voulez faire supprimer quelque chose, ou vous avez une question sur ce texte ? Envoyez un message via « Donner une astuce ».</p>",
  "disc.h": "Avertissement",
- "disc.body": "<p>Buttons est un outil de calcul général, à titre d’information uniquement. Ce n’est <strong>pas</strong> un conseil financier, en placement, fiscal, de retraite ou juridique, et aucun conseil n’est donné sur votre situation personnelle.</p><p>Les résultats sont des estimations fondées sur des règles simplifiées et des hypothèses de rendement, d’inflation et d’espérance de vie. L’avenir peut différer, et les règles par pays peuvent être incomplètes ou dépassées. Aucun droit ne peut être tiré des résultats.</p><p>L’utilisation de ce site se fait à vos propres risques. Dans la mesure permise par la loi, l’auteur décline toute responsabilité pour les décisions prises ou les dommages subis en raison de ce site. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>"
+ "disc.body": "<p>Buttons est un outil de calcul général, à titre d’information uniquement. Ce n’est <strong>pas</strong> un conseil financier, en placement, fiscal, de retraite ou juridique, et aucun conseil n’est donné sur votre situation personnelle.</p><p>Les résultats sont des estimations fondées sur des règles simplifiées et des hypothèses de rendement, d’inflation et d’espérance de vie. L’avenir peut différer, et les règles par pays peuvent être incomplètes ou dépassées. Aucun droit ne peut être tiré des résultats.</p><p>L’utilisation de ce site se fait à vos propres risques. Dans la mesure permise par la loi, l’auteur décline toute responsabilité pour les décisions prises ou les dommages subis en raison de ce site. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>",
+ "slot.spin": "Tourner",
+ "slot.ok": "C’est ma question",
+ "slot.hint": "Tournez jusqu’à ce que votre question apparaisse, puis confirmez.",
+ "slot.pick": "Choisir une question"
 });
 
 Object.assign(I18N.es, {
@@ -3265,7 +3311,11 @@ Object.assign(I18N.es, {
  "vis.n": "{n} visitas",
  "priv.body": "<p><strong>Tus datos se quedan contigo.</strong> Lo que introduces (edades, importes, opciones) se guarda solo en tu propio navegador, en este dispositivo. No se envía a Buttons y nadie más puede verlo. Si borras los datos del navegador, desaparecen.</p><p><strong>Sin seguimiento.</strong> No se usan cookies de publicidad y no se te sigue. Las visitas se cuentan de forma anónima (solo número de visitas, páginas y país) con GoatCounter, sin cookies y sin datos personales. El almacenamiento en tu navegador solo sirve para que el sitio funcione y recuerde lo que introduces.</p><p><strong>Lo que pasa por terceros.</strong> El sitio está alojado en GitHub Pages, así que GitHub ve datos técnicos como tu dirección IP al cargar la página. Las fuentes vienen de Google Fonts, así que Google también ve tu dirección IP. El formulario de «Enviar un consejo» es un Google Form: lo que escribes llega al autor y posiblemente a Google. No escribas nada que deba seguir siendo privado. Los enlaces a fuentes llevan a otros sitios con sus propias reglas.</p><p><strong>Contacto.</strong> Buttons es un proyecto personal sin ánimo de lucro. Lo que envíes mediante «Enviar un consejo» solo se usa para mejorar el sitio y no se conserva más de lo necesario. ¿Quieres que se borre algo o tienes una pregunta sobre este texto? Envía un mensaje mediante «Enviar un consejo».</p>",
  "disc.h": "Aviso legal",
- "disc.body": "<p>Buttons es una herramienta de cálculo general, solo con fines informativos. <strong>No</strong> es asesoramiento financiero, de inversión, fiscal, de pensiones ni jurídico, y no se ofrece asesoramiento sobre tu situación personal.</p><p>Los resultados son estimaciones basadas en reglas simplificadas y supuestos sobre rentabilidad, inflación y esperanza de vida. El futuro puede diferir y las reglas de cada país pueden estar incompletas o desactualizadas. De los resultados no se puede derivar ningún derecho.</p><p>El uso de este sitio es bajo tu propia responsabilidad. En la medida permitida por la ley, el autor no asume responsabilidad por decisiones tomadas ni daños sufridos a raíz de este sitio. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>"
+ "disc.body": "<p>Buttons es una herramienta de cálculo general, solo con fines informativos. <strong>No</strong> es asesoramiento financiero, de inversión, fiscal, de pensiones ni jurídico, y no se ofrece asesoramiento sobre tu situación personal.</p><p>Los resultados son estimaciones basadas en reglas simplificadas y supuestos sobre rentabilidad, inflación y esperanza de vida. El futuro puede diferir y las reglas de cada país pueden estar incompletas o desactualizadas. De los resultados no se puede derivar ningún derecho.</p><p>El uso de este sitio es bajo tu propia responsabilidad. En la medida permitida por la ley, el autor no asume responsabilidad por decisiones tomadas ni daños sufridos a raíz de este sitio. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>",
+ "slot.spin": "Girar",
+ "slot.ok": "Esta es mi pregunta",
+ "slot.hint": "Gira hasta que aparezca tu pregunta y confirma.",
+ "slot.pick": "Elegir una pregunta"
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -3612,6 +3662,7 @@ Object.assign(I18N.es, {
     each('[data-ph-n]', function (e) { e.setAttribute('placeholder', e.getAttribute('data-ph-n') === '1' ? t1('p.you') : t1('p.partner')); });
     each('#stepper button', function (b) { var i = parseInt(b.getAttribute('data-go'), 10); b.setAttribute('aria-label', t1('stepOf', { n: i, m: STEPS.length }) + ': ' + t1(STEPS[i - 1].t)); });
     document.title = t1('brand');
+    if ($('slot-reel') && typeof slotBuild === 'function' && !slotBusy) slotBuild();
     var root = document.documentElement;
     root.classList.toggle('is-nl', isNL());
     root.classList.toggle('sp-flat', spFlat());
@@ -4385,7 +4436,7 @@ Object.assign(I18N.es, {
     if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = I18N.en.brand; }
     else { ib.removeAttribute('data-t-en'); ib.setAttribute('data-t', 'brand'); ib.textContent = t1('brand'); }
     $('intro-card').setAttribute('aria-labelledby', n === 0 ? 'intro-h0' : 'intro-h');
-    setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'intro-go'); if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
+    setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'slot-spin'); if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
   }
   function openIntro(step) {
     lastFocus = document.activeElement;
@@ -4419,7 +4470,52 @@ Object.assign(I18N.es, {
     showStep(1, false);
     if (location.hash !== '#input') location.hash = '#input'; else go();
   }
-  each('.goal', function (b) { b.addEventListener('click', function () { pickGoal(b.getAttribute('data-goal')); }); });
+  /* fruitautomaat: draai tot je vraag verschijnt, bevestig dan */
+  var SLOTG = ['enough', 'spend', 'earlier', 'abroad', 'unsure'], slotIdx = 0, slotBusy = false;
+  function slotBuild() {
+    var reel = $('slot-reel'), h = '', i, c;
+    if (!reel) return;
+    for (c = 0; c < 4; c++) for (i = 0; i < 5; i++) h += '<div class="slot-item"' + (c ? ' aria-hidden="true"' : '') + '><b>' + t1('goal.' + (i + 1) + '.t') + '</b><span>' + t1('goal.' + (i + 1) + '.s') + '</span></div>';
+    reel.innerHTML = h;
+    var dots = '';
+    for (i = 0; i < 5; i++) dots += '<button type="button" class="slot-dot" data-i="' + i + '" aria-label="' + t1('goal.' + (i + 1) + '.t').replace(/"/g, '&quot;') + '"></button>';
+    $('slot-dots').innerHTML = dots;
+    each('.slot-dot', function (d) { d.addEventListener('click', function () { if (!slotBusy) slotShow(parseInt(d.getAttribute('data-i'), 10)); }); });
+    slotShow(slotIdx);
+  }
+  function slotPos(pos, anim) {
+    var reel = $('slot-reel');
+    reel.classList.toggle('run', !!anim);
+    var SLOTH = $('slot-window').clientHeight || 156;
+    reel.style.transform = 'translateY(' + (-pos * SLOTH) + 'px)';
+  }
+  function slotShow(i) {
+    slotIdx = i; slotPos(i + 5, false);
+    each('.slot-dot', function (d) { d.setAttribute('aria-current', parseInt(d.getAttribute('data-i'), 10) === i ? 'true' : 'false'); });
+    var nm = $('slot-window'); if (nm) nm.setAttribute('aria-label', t1('goal.' + (i + 1) + '.t'));
+  }
+  function slotSpin() {
+    if (slotBusy) return;
+    var tgt, k, reduce = false;
+    try { reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    do { tgt = Math.floor(Math.random() * 5); } while (tgt === slotIdx);
+    if (reduce) { slotShow(tgt); return; }
+    k = ((tgt - slotIdx + 5) % 5) + 5;
+    slotBusy = true; $('slot-spin').disabled = true; $('slot-ok').disabled = true;
+    $('slot-spin').classList.add('spin');
+    var reel = $('slot-reel'), done = false;
+    function fin() { if (done) return; done = true; reel.removeEventListener('transitionend', fin); $('slot-spin').classList.remove('spin'); slotShow(tgt); slotBusy = false; $('slot-spin').disabled = false; $('slot-ok').disabled = false; }
+    reel.addEventListener('transitionend', fin);
+    setTimeout(fin, 1800);
+    void reel.offsetWidth;
+    slotPos(slotIdx + 5 + k, true);
+  }
+  if ($('slot-spin')) {
+    $('slot-spin').addEventListener('click', slotSpin);
+    $('slot-ok').addEventListener('click', function () { if (!slotBusy) pickGoal(SLOTG[slotIdx]); });
+  }
+  slotBuild();
+
   $('gb-go').addEventListener('click', function () {
     var tg = goalTarget(ui.goal); if (!tg) return;
     if (tg.step) showStep(tg.step, false);
