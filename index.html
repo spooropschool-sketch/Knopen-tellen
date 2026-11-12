@@ -1018,6 +1018,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .panel-head.has-nb .sub { grid-column: 1 / -1; }
 
 </style>
+<script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
@@ -4445,7 +4446,6 @@ Object.assign(I18N.es, {
   });
   $('inst-close').addEventListener('click', closeInst);
   $('inst').addEventListener('click', function (ev) { if (ev.target === $('inst')) closeInst(); });
-  if (/^(www\.)?countingbuttons\.com$/.test(location.hostname)) { try { var gc = document.createElement('script'); gc.async = true; gc.src = 'https://gc.zgo.at/count.js'; gc.setAttribute('data-goatcounter', 'https://countingbuttons.goatcounter.com/count'); document.head.appendChild(gc); } catch (e) {} }
   if (/^(www\.)?countingbuttons\.com$/.test(location.hostname)) { try { fetch('https://countingbuttons.goatcounter.com/counter/TOTAL.json').then(function (x) { return x.ok ? x.json() : null; }).then(function (j) { var el = $('visits'); if (j && j.count && el) { el.textContent = t1('vis.n', { n: j.count }); el.hidden = false; } }).catch(function () {}); } catch (e) {} }
   if (canHost && 'serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js').catch(function () {}); } catch (e) {} }
   function trap(container, ev) {
