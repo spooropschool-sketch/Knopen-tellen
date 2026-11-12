@@ -3042,7 +3042,8 @@ Object.assign(I18N.en, {
  "pf.max": "Max. monthly budget, average path",
  "v.shortOne": "With average returns your money runs out around age {a}. For a 90% chance you’d need {g} more to start with, or a monthly budget of {mb} at most.",
  "v.shortTwo": "With average returns your money runs out around the time {n} turns {a}. For a 90% chance you’d need {g} more to start with, or a monthly budget of {mb} at most.",
- "mini.succWith": "chance of success with {c}"
+ "mini.succWith": "chance of success with {c}",
+ "adv.p": "With {c} you can spend {b} a month {r}. In 9 out of 10 cases the money lasts that long. The investment mix that suits this best is {pf}."
 });
 
 Object.assign(I18N.nl, {
@@ -3086,7 +3087,9 @@ Object.assign(I18N.nl, {
  "pf.max": "Maximaal maandbudget, gemiddeld verloop",
  "v.shortOne": "Bij gemiddeld rendement is je geld op rond je {a}e. Voor 90% kans heb je {g} meer nodig om mee te beginnen, of een maandbudget van maximaal {mb}.",
  "v.shortTwo": "Bij gemiddeld rendement is het geld op rond de tijd dat {n} {a} wordt. Voor 90% kans hebben jullie {g} meer nodig om mee te beginnen, of een maandbudget van maximaal {mb}.",
- "mini.succWith": "kans op slagen met {c}"
+ "mini.succWith": "kans op slagen met {c}",
+ "adv.p": "Met {c} kun je {b} per maand besteden {r}. In 9 van de 10 gevallen houdt het geld het zo lang vol. De beleggingsmix die hier het best bij past is {pf}.",
+ "adv.p_2": "Met {c} kunnen jullie {b} per maand besteden {r}. In 9 van de 10 gevallen houdt het geld het zo lang vol. De beleggingsmix die hier het best bij past is {pf}."
 });
 
 Object.assign(I18N.de, {
@@ -3126,7 +3129,8 @@ Object.assign(I18N.de, {
  "pf.max": "Maximales Monatsbudget, durchschnittlicher Verlauf",
  "v.shortOne": "Bei durchschnittlicher Rendite ist Ihr Geld etwa mit {a} aufgebraucht. Für 90 % Erfolgschance bräuchten Sie {g} mehr zum Start oder höchstens {mb} Monatsbudget.",
  "v.shortTwo": "Bei durchschnittlicher Rendite ist Ihr Geld etwa aufgebraucht, wenn {n} {a} wird. Für 90 % Erfolgschance bräuchten Sie {g} mehr zum Start oder höchstens {mb} Monatsbudget.",
- "mini.succWith": "Erfolgschance mit {c}"
+ "mini.succWith": "Erfolgschance mit {c}",
+ "adv.p": "Mit {c} können Sie {b} pro Monat ausgeben, {r}. In 9 von 10 Fällen hält das Geld so lange. Am besten passt dazu der Anlagemix {pf}."
 });
 
 Object.assign(I18N.fr, {
@@ -3166,7 +3170,8 @@ Object.assign(I18N.fr, {
  "pf.max": "Budget mensuel max., parcours moyen",
  "v.shortOne": "Avec un rendement moyen, votre argent est épuisé vers {a} ans. Pour 90 % de chances, il vous faudrait {g} de plus au départ, ou un budget mensuel de {mb} au maximum.",
  "v.shortTwo": "Avec un rendement moyen, votre argent est épuisé vers les {a} ans de {n}. Pour 90 % de chances, il vous faudrait {g} de plus au départ, ou un budget mensuel de {mb} au maximum.",
- "mini.succWith": "de chances de réussite avec {c}"
+ "mini.succWith": "de chances de réussite avec {c}",
+ "adv.p": "Avec {c}, vous pouvez dépenser {b} par mois {r}. Dans 9 cas sur 10, l’argent tient jusque-là. La répartition qui convient le mieux est {pf}."
 });
 
 Object.assign(I18N.es, {
@@ -3210,7 +3215,9 @@ Object.assign(I18N.es, {
  "pf.max": "Presupuesto mensual máx., trayectoria media",
  "v.shortOne": "Con rentabilidad media, tu dinero se agota hacia los {a} años. Para un 90 % de probabilidad necesitarías {g} más para empezar, o un presupuesto mensual de {mb} como máximo.",
  "v.shortTwo": "Con rentabilidad media, vuestro dinero se agota cuando {n} cumpla unos {a} años. Para un 90 % de probabilidad necesitaríais {g} más para empezar, o un presupuesto mensual de {mb} como máximo.",
- "mini.succWith": "de probabilidad de éxito con {c}"
+ "mini.succWith": "de probabilidad de éxito con {c}",
+ "adv.p": "Con {c} puedes gastar {b} al mes {r}. En 9 de cada 10 casos el dinero llega hasta entonces. La mezcla de inversión que mejor encaja es {pf}.",
+ "adv.p_2": "Con {c} podéis gastar {b} al mes {r}. En 9 de cada 10 casos el dinero llega hasta entonces. La mezcla de inversión que mejor encaja es {pf}."
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -3830,7 +3837,7 @@ Object.assign(I18N.es, {
     var spMissing = !spFlat() && ((state.aowAanP !== 0 && !(state.spP > 0)) || (tw && state.aowAanD !== 0 && !(state.spD > 0)));
     var html = '<div class="adv-top"><div><span class="eyebrow" data-x="1">' + t1('adv.eyebrow') + '</span><h2>' + t('adv.h') + '</h2></div>' +
       '<div class="adv-big"><b>' + eur(need) + '</b><span>' + t1('adv.bigS') + '</span></div></div>' +
-      '<p class="adv-p">' + t('adv.p', { b: eur(state.budget), r: esc(refTxt()), min: eur(adv.req0), pf: portStat(adv.pf).n.toLowerCase() }) + '</p>' +
+      '<p class="adv-p">' + t('adv.p', { c: eur(need), b: eur(state.budget), r: esc(refTxt()), pf: portStat(adv.pf).n.toLowerCase() }) + '</p>' +
       (spMissing ? '<p class="adv-warn">' + t('adv.spMissing', { sp: spName(), site: CTRY[prefs.country].url ? '<a href="' + CTRY[prefs.country].url + '" target="_blank" rel="noopener">' + CTRY[prefs.country].site + '</a>' : t1('adv.yourStatement') }) + '</p>' : '') +
       '<ul class="adv-list">' + items.map(function (x) { return '<li>' + x.charAt(0).toUpperCase() + x.slice(1) + '</li>'; }).join('') + '</ul>';
     if (have > 0) {
