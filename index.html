@@ -3038,7 +3038,12 @@ Object.assign(I18N.en, {
  "fan.infoReal": "Prices stay the same. Amounts are in today’s money, so you see what they can buy and can compare the years fairly.",
  "k.needOf": "of your {t}, at {b} a month",
  "k.bufSum": "{t} minus {n} needed: {p} above the minimum",
- "k.shortSum": "{t} minus {n} needed: {p} below the minimum"
+ "k.shortSum": "{t} minus {n} needed: {p} below the minimum",
+ "mini.max90": "Max. per month for 90% chance",
+ "k.max90": "Max. monthly budget (90% chance)",
+ "pf.max": "Max. monthly budget, average path",
+ "v.shortOne": "With average returns your money runs out around age {a}. For a 90% chance you’d need {g} more to start with, or a monthly budget of {mb} at most.",
+ "v.shortTwo": "With average returns your money runs out around the time {n} turns {a}. For a 90% chance you’d need {g} more to start with, or a monthly budget of {mb} at most."
 });
 
 Object.assign(I18N.nl, {
@@ -3076,7 +3081,12 @@ Object.assign(I18N.nl, {
  "k.needOf": "van je {t}, bij {b} per maand",
  "k.needOf_2": "van jullie {t}, bij {b} per maand",
  "k.bufSum": "{t} min {n} benodigd: {p} boven het minimum",
- "k.shortSum": "{t} min {n} benodigd: {p} onder het minimum"
+ "k.shortSum": "{t} min {n} benodigd: {p} onder het minimum",
+ "mini.max90": "Max. per maand voor 90% kans",
+ "k.max90": "Maximaal maandbudget (90% kans)",
+ "pf.max": "Maximaal maandbudget, gemiddeld verloop",
+ "v.shortOne": "Bij gemiddeld rendement is je geld op rond je {a}e. Voor 90% kans heb je {g} meer nodig om mee te beginnen, of een maandbudget van maximaal {mb}.",
+ "v.shortTwo": "Bij gemiddeld rendement is het geld op rond de tijd dat {n} {a} wordt. Voor 90% kans hebben jullie {g} meer nodig om mee te beginnen, of een maandbudget van maximaal {mb}."
 });
 
 Object.assign(I18N.de, {
@@ -3110,7 +3120,12 @@ Object.assign(I18N.de, {
  "fan.infoReal": "Die Preise bleiben gleich. Die Beträge sind in heutigem Geld, sodass Sie sehen, was Sie dafür kaufen können, und die Jahre gut vergleichen können.",
  "k.needOf": "von Ihren {t}, bei {b} pro Monat",
  "k.bufSum": "{t} minus {n} benötigt: {p} über dem Minimum",
- "k.shortSum": "{t} minus {n} benötigt: {p} unter dem Minimum"
+ "k.shortSum": "{t} minus {n} benötigt: {p} unter dem Minimum",
+ "mini.max90": "Max. pro Monat für 90 % Erfolgschance",
+ "k.max90": "Maximales Monatsbudget (90 % Chance)",
+ "pf.max": "Maximales Monatsbudget, durchschnittlicher Verlauf",
+ "v.shortOne": "Bei durchschnittlicher Rendite ist Ihr Geld etwa mit {a} aufgebraucht. Für 90 % Erfolgschance bräuchten Sie {g} mehr zum Start oder höchstens {mb} Monatsbudget.",
+ "v.shortTwo": "Bei durchschnittlicher Rendite ist Ihr Geld etwa aufgebraucht, wenn {n} {a} wird. Für 90 % Erfolgschance bräuchten Sie {g} mehr zum Start oder höchstens {mb} Monatsbudget."
 });
 
 Object.assign(I18N.fr, {
@@ -3144,7 +3159,12 @@ Object.assign(I18N.fr, {
  "fan.infoReal": "Les prix restent les mêmes. Les montants sont en argent d’aujourd’hui : vous voyez ce qu’ils permettent d’acheter et comparez bien les années.",
  "k.needOf": "sur vos {t}, pour {b} par mois",
  "k.bufSum": "{t} moins {n} nécessaires : {p} au-dessus du minimum",
- "k.shortSum": "{t} moins {n} nécessaires : {p} sous le minimum"
+ "k.shortSum": "{t} moins {n} nécessaires : {p} sous le minimum",
+ "mini.max90": "Max. par mois pour 90 % de chances",
+ "k.max90": "Budget mensuel max. (90 % de chances)",
+ "pf.max": "Budget mensuel max., parcours moyen",
+ "v.shortOne": "Avec un rendement moyen, votre argent est épuisé vers {a} ans. Pour 90 % de chances, il vous faudrait {g} de plus au départ, ou un budget mensuel de {mb} au maximum.",
+ "v.shortTwo": "Avec un rendement moyen, votre argent est épuisé vers les {a} ans de {n}. Pour 90 % de chances, il vous faudrait {g} de plus au départ, ou un budget mensuel de {mb} au maximum."
 });
 
 Object.assign(I18N.es, {
@@ -3182,7 +3202,12 @@ Object.assign(I18N.es, {
  "k.needOf": "de tus {t}, para {b} al mes",
  "k.needOf_2": "de vuestros {t}, para {b} al mes",
  "k.bufSum": "{t} menos {n} necesarios: {p} por encima del mínimo",
- "k.shortSum": "{t} menos {n} necesarios: {p} por debajo del mínimo"
+ "k.shortSum": "{t} menos {n} necesarios: {p} por debajo del mínimo",
+ "mini.max90": "Máx. al mes para 90 % de probabilidad",
+ "k.max90": "Presupuesto mensual máx. (90 % de prob.)",
+ "pf.max": "Presupuesto mensual máx., trayectoria media",
+ "v.shortOne": "Con rentabilidad media, tu dinero se agota hacia los {a} años. Para un 90 % de probabilidad necesitarías {g} más para empezar, o un presupuesto mensual de {mb} como máximo.",
+ "v.shortTwo": "Con rentabilidad media, vuestro dinero se agota cuando {n} cumpla unos {a} años. Para un 90 % de probabilidad necesitaríais {g} más para empezar, o un presupuesto mensual de {mb} como máximo."
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -3397,7 +3422,7 @@ Object.assign(I18N.es, {
     }
     return { n: t1(pf.k), w: w, mu: mu, sd: Math.sqrt(v) };
   }
-  var autoIdx = 2, autoInfo = null, curSucc = 0, simText = '';
+  var autoIdx = 2, autoInfo = null, curSucc = 0, max90 = 0, simText = '';
   function effIdx() { return state.portfolio || autoIdx; }
 
   function taxLabel() {
@@ -3663,6 +3688,20 @@ Object.assign(I18N.es, {
     for (var i = 0; i < 13; i++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) hi = mid; else lo = mid; }
     return hi;
   }
+  /* hoogste maandbudget waarbij de kans op slagen met het beste van de drie beleggingsmixen nog 90% is (zelfde maat als het advies) */
+  function max90For(m0) {
+    var best = 0;
+    [1, 2, 3].forEach(function (i) {
+      var pf = portStat(i);
+      function q(b) { var p = params({ budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }); return simQuick(runModel(p), pf, p).succ; }
+      if (best > 0 && q(best + 1) < 0.9) return;
+      var lo = best > 0 ? best + 1 : 0, hi = Math.max(m0.maxBudget, lo * 1.5, 100), g = 0;
+      while (q(hi) >= 0.9 && g++ < 6) { lo = hi; hi *= 1.5; }
+      for (var k = 0; k < 12; k++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) lo = mid; else hi = mid; }
+      best = Math.max(best, Math.floor(lo));
+    });
+    return best;
+  }
   function computeAdvice(extra, only) {
     var best = null;
     (only ? [only] : [1, 2, 3]).forEach(function (i) {
@@ -3816,13 +3855,14 @@ Object.assign(I18N.es, {
       if (fail > 0) text += ' ' + t1('v.risk', { f: fail });
     } else {
       var age = m.youngest + (m.emptyAt === null ? m.N : m.emptyAt);
-      text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(-m.marge), mb: eur(m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(-m.marge), mb: eur(m.maxBudget) });
+      var gap = adv ? Math.max(0, adv.c90 - capEff()) : -m.marge;
+      text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
     el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (state.werk > 0 ? '<span class="scope">' + t1('v.work', { w: eur(state.werk) }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
   }
   function renderKpis(m) {
-    var room = m.maxBudget - state.budget, empty = state.budget <= 0;
+    var maxB = adv ? max90 : m.maxBudget, room = maxB - state.budget, empty = state.budget <= 0;
     var haveR = Math.round(capEff()), needR = Math.round(m.req0), bufR = haveR - needR;
     var link = !empty && state.startkapitaal > 0 && haveR > 0 && needR > 0;
     function split(hl) {
@@ -3836,7 +3876,7 @@ Object.assign(I18N.es, {
         s: link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(m.buffer, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-m.marge / m.req0, 0) }))
           : (bufR >= 0 ? t1('k.bufS', { p: pct(m.buffer, 0) }) : t1('k.shortS', { p: pct(-m.marge / m.req0, 0) })),
         c: bufR >= 0 ? 'pos' : 'neg', bar: link ? split('buf') : '' },
-      { l: t1('k.max'), v: eur(m.maxBudget), s: t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
+      { l: t1(adv ? 'k.max90' : 'k.max'), v: eur(maxB), s: t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
       { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1('k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
       { l: t1('k.tax'), v: eur(m.belastingJaar1), s: taxLabel(), c: '' }
     ];
@@ -3919,7 +3959,7 @@ Object.assign(I18N.es, {
       var rows = [
         [t1('pf.mix'), Math.round(pf.w[0] * 100) + ' / ' + Math.round(pf.w[1] * 100) + ' / ' + Math.round(pf.w[2] * 100)],
         [t1('pf.ret'), pct(pf.mu, 1)], [t1('pf.sd'), pct(pf.sd, 1)],
-        [t1('pf.need'), eur(m.req0)], [t1('k.max'), eur(m.maxBudget)],
+        [t1('pf.need'), eur(m.req0)], [t1('pf.max'), eur(m.maxBudget)],
         [t1('pf.endMid'), short(sim.q(sim.last, 0.5))], [t1('pf.endBad'), short(sim.q(sim.last, 0.05))]
       ];
       SHOCK.forEach(function (sh) {
@@ -4066,7 +4106,7 @@ Object.assign(I18N.es, {
   function updMini() { $('mini').classList.toggle('show', route !== 'overview' && state.budget > 0); }
   function renderMini(m) {
     var cls = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : 'bad');
-    $('mini').innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> ' + t1('mini.succ') + '</span><span>' + t1(adv ? 'mini.need90' : 'mini.need') + ' <b>' + (adv ? eur(adv.c90) : short(m.req0)) + '</b></span><span>' + t1('mini.max') + ' <b>' + eur(m.maxBudget) + '</b></span>';
+    $('mini').innerHTML = '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> ' + t1('mini.succ') + '</span><span>' + t1(adv ? 'mini.need90' : 'mini.need') + ' <b>' + (adv ? eur(adv.c90) : short(m.req0)) + '</b></span><span>' + t1(adv ? 'mini.max90' : 'mini.max') + ' <b>' + eur(adv ? max90 : m.maxBudget) + '</b></span>';
     updMini();
   }
   /* waar het maandbudget vandaan komt */
@@ -4201,6 +4241,7 @@ Object.assign(I18N.es, {
     var m = runModel(params());
     last = m;
     curSucc = simQuick(m, portStat(effIdx()), params()).succ;
+    max90 = state.budget > 0 ? max90For(m) : 0;
     simText = t1('v.sim', { pf: portStat(effIdx()).n.toLowerCase(), p: pct(curSucc, 0) });
     renderHead(); renderGauge(); renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
     renderTable(m); renderLadder(m); renderAbout();
