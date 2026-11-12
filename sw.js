@@ -1,5 +1,5 @@
 /* Buttons: offline support. Network first, so updates arrive; cache as fallback. */
-var V = 'buttons-v4-2';
+var V = 'buttons-v4-3';
 var CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'img/buidel.jpg', 'img/boekje.jpg', 'img/schaaltjes.jpg', 'img/stapels.jpg', 'img/over.jpg'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
