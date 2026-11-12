@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Buttons">
 <title>Buttons</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Buttons: see how far your savings go. In five languages, for eleven countries.">
@@ -873,6 +879,19 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .goal-bar .gb-actions { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
 @media (max-height: 760px) { #intro .modal-hero img { max-height: 120px; object-fit: cover; width: 100%; } #intro-s1 h2 { font-size: 22px; } }
 
+/* installeren */
+.install { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 36px; min-width: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--copper); font: 600 13px var(--f-body, inherit); cursor: pointer; white-space: nowrap; }
+.install[hidden] { display: none; }
+.install svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.install:hover { background: var(--surface2); }
+.install:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 760px) { .install { padding: 0; width: 36px; } .install span { display: none; } }
+@media (max-width: 400px) { .install { width: 32px; min-width: 32px; min-height: 32px; } .install svg { width: 16px; height: 16px; } }
+.inst-dlg h2 { font-family: var(--f-display); font-size: 22px; margin: 0; }
+.inst-steps { margin: 6px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; }
+.inst-steps li.plain { list-style: none; margin-left: -22px; }
+@media (max-width: 340px) { .topbar .wordmark { font-size: 13.5px; } .topbar .brand svg, .topbar .bmark { width: 26px; height: 26px; } .topbar .hashtag { font-size: 10.5px; padding: 5px 7px; } .install { width: 30px; min-width: 30px; min-height: 30px; } .lang-pick { min-height: 30px; } .lang-pick select { font-size: 12px; } .tb-right { gap: 4px; } .topbar-in { gap: 4px; } }
+
 </style>
 </head>
 <body>
@@ -892,6 +911,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
     </nav>
     <div class="tb-right">
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label"></select></label>
+      <button class="install" id="btn-install" type="button" hidden data-t-aria="inst.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span data-t="inst.btn"></span></button>
       <a class="hashtag" href="https://www.instagram.com/explore/tags/eindjetuffen/" target="_blank" rel="noopener">#eindjetuffen</a>
     </div>
   </div>
@@ -1091,7 +1111,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h0" id="intro-card">
     <div class="modal-hero">
       <img src="img/pad.jpg" alt="" data-t-alt="alt.path">
-      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark" data-t="brand">Buttons</span><span class="v2">V4</span></span>
+      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark" id="intro-brand" data-t-en="brand">Buttons</span><span class="v2">V4</span></span>
     </div>
     <div class="modal-body intro-s0" id="intro-s0">
       <span class="welcome" data-t-en="intro.welcome"></span>
@@ -1121,6 +1141,17 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
       <div class="modal-actions">
         <button class="btn link" type="button" id="intro-skip" data-t="b.skip"></button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="inst" hidden>
+  <div class="modal-card inst-dlg" role="dialog" aria-modal="true" aria-labelledby="inst-h">
+    <div class="modal-body">
+      <h2 id="inst-h" data-t="inst.h"></h2>
+      <p class="sub" data-t="inst.sub"></p>
+      <ol class="inst-steps" id="inst-steps"></ol>
+      <div class="modal-actions"><button class="btn primary" type="button" id="inst-close" data-t="b.close"></button></div>
     </div>
   </div>
 </div>
@@ -2831,6 +2862,46 @@ Object.assign(I18N.es, {
  "intro.promise": "¿Es suficiente? Lo calculamos, sin discurso comercial y con la fuente de cada cifra."
 });
 
+Object.assign(I18N.en, {
+ "inst.btn": "Install app",
+ "inst.h": "Put Buttons on your phone",
+ "inst.sub": "It opens full screen, works without internet and stays on your phone.",
+ "inst.ios": "<li>Tap the share button in Safari.</li><li>Choose <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>. Done.</li>",
+ "inst.other": "Open your browser menu and choose <b>Install app</b> or <b>Add to home screen</b>."
+});
+
+Object.assign(I18N.nl, {
+ "inst.btn": "App installeren",
+ "inst.h": "Zet Knopen tellen op je telefoon",
+ "inst.sub": "De app opent schermvullend, werkt zonder internet en blijft op je telefoon.",
+ "inst.ios": "<li>Tik in Safari op de deelknop.</li><li>Kies <b>Zet op beginscherm</b>.</li><li>Tik op <b>Voeg toe</b>. Klaar.</li>",
+ "inst.other": "Open het menu van je browser en kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>."
+});
+
+Object.assign(I18N.de, {
+ "inst.btn": "App installieren",
+ "inst.h": "Buttons auf Ihr Handy holen",
+ "inst.sub": "Die App öffnet im Vollbild, funktioniert ohne Internet und bleibt auf Ihrem Handy.",
+ "inst.ios": "<li>Tippen Sie in Safari auf die Teilen-Taste.</li><li>Wählen Sie <b>Zum Home-Bildschirm</b>.</li><li>Tippen Sie auf <b>Hinzufügen</b>. Fertig.</li>",
+ "inst.other": "Öffnen Sie das Browsermenü und wählen Sie <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b>."
+});
+
+Object.assign(I18N.fr, {
+ "inst.btn": "Installer l’app",
+ "inst.h": "Mettre Buttons sur votre téléphone",
+ "inst.sub": "L’app s’ouvre en plein écran, fonctionne sans internet et reste sur votre téléphone.",
+ "inst.ios": "<li>Touchez le bouton de partage dans Safari.</li><li>Choisissez <b>Sur l’écran d’accueil</b>.</li><li>Touchez <b>Ajouter</b>. C’est fait.</li>",
+ "inst.other": "Ouvrez le menu du navigateur et choisissez <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>."
+});
+
+Object.assign(I18N.es, {
+ "inst.btn": "Instalar la app",
+ "inst.h": "Pon Buttons en tu móvil",
+ "inst.sub": "La app se abre a pantalla completa, funciona sin internet y se queda en tu móvil.",
+ "inst.ios": "<li>Toca el botón de compartir en Safari.</li><li>Elige <b>Añadir a pantalla de inicio</b>.</li><li>Toca <b>Añadir</b>. Listo.</li>",
+ "inst.other": "Abre el menú del navegador y elige <b>Instalar app</b> o <b>Añadir a pantalla de inicio</b>."
+});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -3889,6 +3960,9 @@ Object.assign(I18N.es, {
   var lastFocus = null, langTouched = false;
   function introStep(n) {
     $('intro-s0').hidden = n !== 0; $('intro-s1').hidden = n !== 1;
+    var ib = $('intro-brand');
+    if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = I18N.en.brand; }
+    else { ib.removeAttribute('data-t-en'); ib.setAttribute('data-t', 'brand'); ib.textContent = t1('brand'); }
     $('intro-card').setAttribute('aria-labelledby', n === 0 ? 'intro-h0' : 'intro-h');
     setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'intro-go'); if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
   }
@@ -3935,6 +4009,29 @@ Object.assign(I18N.es, {
   showGoal();
   $('btn-intro').addEventListener('click', function () { openIntro(1); });
   $('btn-tour').addEventListener('click', function () { startTour(); });
+
+  /* ================= installeren als app ================= */
+  var instEv = null;
+  function isStandalone() { try { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; } catch (e) { return false; } }
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var canHost = /^https?:$/.test(location.protocol) && window.top === window;
+  function showInstall(on) { var b = $('btn-install'); if (b) { b.hidden = !(on && canHost && !isStandalone()); b.title = b.getAttribute('aria-label') || ''; } }
+  window.addEventListener('beforeinstallprompt', function (ev) { ev.preventDefault(); instEv = ev; showInstall(true); });
+  window.addEventListener('appinstalled', function () { instEv = null; showInstall(false); });
+  if (isIOS) showInstall(true);
+  function openInst(kind) {
+    $('inst-steps').innerHTML = t1(kind === 'ios' ? 'inst.ios' : 'inst.other');
+    if (kind !== 'ios') $('inst-steps').innerHTML = '<li class="plain">' + t1('inst.other') + '</li>';
+    $('inst').hidden = false; lastFocus = document.activeElement; setTimeout(function () { $('inst-close').focus(); }, 30);
+  }
+  function closeInst() { $('inst').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  $('btn-install').addEventListener('click', function () {
+    if (instEv) { var ev = instEv; instEv = null; ev.prompt(); if (ev.userChoice) ev.userChoice.then(function (c) { if (c && c.outcome !== 'accepted') instEv = ev; showInstall(c && c.outcome !== 'accepted'); }); }
+    else openInst(isIOS ? 'ios' : 'other');
+  });
+  $('inst-close').addEventListener('click', closeInst);
+  $('inst').addEventListener('click', function (ev) { if (ev.target === $('inst')) closeInst(); });
+  if (canHost && 'serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js').catch(function () {}); } catch (e) {} }
   function trap(container, ev) {
     var f = Array.prototype.filter.call(container.querySelectorAll('button, summary, a[href], input, select, textarea'), function (e) { return e.offsetParent !== null; });
     if (!f.length) return;
@@ -4066,6 +4163,7 @@ Object.assign(I18N.es, {
   window.addEventListener('scroll', function () { if (tourI >= 0) placeTour(false); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
     if (!$('fb').hidden) { if (ev.key === 'Escape') closeFb(); else if (ev.key === 'Tab') trap($('fb'), ev); return; }
+    if (!$('inst').hidden) { if (ev.key === 'Escape') closeInst(); return; }
     if (!$('intro').hidden) { if (ev.key === 'Escape') closeIntro(false); else if (ev.key === 'Tab') trap($('intro'), ev); return; }
     if (tourI >= 0) {
       if (ev.key === 'Escape') endTour(false);
