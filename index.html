@@ -2991,7 +2991,7 @@ Object.assign(I18N.en, {
  "inst.h": "Put Buttons on your phone",
  "inst.sub": "It opens full screen, works without internet and stays on your phone.",
  "inst.ios": "<li>Tap the share button in Safari.</li><li>Choose <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>. Done.</li>",
- "inst.other": "Open your browser menu and choose <b>Install app</b> or <b>Add to home screen</b>."
+ "inst.other": "Open your browser menu and choose <b>Install app</b> or <b>Add to home screen</b>. Do you see a bar with a cross at the top? Then first tap the three dots there and choose <b>Open in Chrome</b>, and install from there."
 });
 
 Object.assign(I18N.nl, {
@@ -2999,7 +2999,7 @@ Object.assign(I18N.nl, {
  "inst.h": "Zet Knopen tellen op je telefoon",
  "inst.sub": "De app opent schermvullend, werkt zonder internet en blijft op je telefoon.",
  "inst.ios": "<li>Tik in Safari op de deelknop.</li><li>Kies <b>Zet op beginscherm</b>.</li><li>Tik op <b>Voeg toe</b>. Klaar.</li>",
- "inst.other": "Open het menu van je browser en kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>."
+ "inst.other": "Open het menu van je browser en kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>. Zie je bovenin een balk met een kruisje? Tik dan eerst op de drie puntjes daar en kies <b>Openen in Chrome</b>, en installeer vanaf daar."
 });
 
 Object.assign(I18N.de, {
@@ -3007,7 +3007,7 @@ Object.assign(I18N.de, {
  "inst.h": "Buttons auf Ihr Handy holen",
  "inst.sub": "Die App öffnet im Vollbild, funktioniert ohne Internet und bleibt auf Ihrem Handy.",
  "inst.ios": "<li>Tippen Sie in Safari auf die Teilen-Taste.</li><li>Wählen Sie <b>Zum Home-Bildschirm</b>.</li><li>Tippen Sie auf <b>Hinzufügen</b>. Fertig.</li>",
- "inst.other": "Öffnen Sie das Browsermenü und wählen Sie <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b>."
+ "inst.other": "Öffnen Sie das Browsermenü und wählen Sie <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b>. Sehen Sie oben eine Leiste mit einem Kreuz? Tippen Sie dort zuerst auf die drei Punkte, wählen Sie <b>In Chrome öffnen</b> und installieren Sie von dort."
 });
 
 Object.assign(I18N.fr, {
@@ -3015,7 +3015,7 @@ Object.assign(I18N.fr, {
  "inst.h": "Mettre Buttons sur votre téléphone",
  "inst.sub": "L’app s’ouvre en plein écran, fonctionne sans internet et reste sur votre téléphone.",
  "inst.ios": "<li>Touchez le bouton de partage dans Safari.</li><li>Choisissez <b>Sur l’écran d’accueil</b>.</li><li>Touchez <b>Ajouter</b>. C’est fait.</li>",
- "inst.other": "Ouvrez le menu du navigateur et choisissez <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>."
+ "inst.other": "Ouvrez le menu du navigateur et choisissez <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>. Une barre avec une croix s’affiche en haut ? Touchez d’abord les trois points, choisissez <b>Ouvrir dans Chrome</b>, puis installez depuis là."
 });
 
 Object.assign(I18N.es, {
@@ -3023,7 +3023,7 @@ Object.assign(I18N.es, {
  "inst.h": "Pon Buttons en tu móvil",
  "inst.sub": "La app se abre a pantalla completa, funciona sin internet y se queda en tu móvil.",
  "inst.ios": "<li>Toca el botón de compartir en Safari.</li><li>Elige <b>Añadir a pantalla de inicio</b>.</li><li>Toca <b>Añadir</b>. Listo.</li>",
- "inst.other": "Abre el menú del navegador y elige <b>Instalar app</b> o <b>Añadir a pantalla de inicio</b>."
+ "inst.other": "Abre el menú del navegador y elige <b>Instalar app</b> o <b>Añadir a pantalla de inicio</b>. ¿Ves arriba una barra con una cruz? Toca primero los tres puntos, elige <b>Abrir en Chrome</b> e instala desde allí."
 });
 
 Object.assign(I18N.en, {
@@ -4426,7 +4426,7 @@ Object.assign(I18N.es, {
   function showInstall(on) { var b = $('btn-install'); if (b) { b.hidden = !(on && canHost && !isStandalone()); b.title = b.getAttribute('aria-label') || ''; } }
   window.addEventListener('beforeinstallprompt', function (ev) { ev.preventDefault(); instEv = ev; showInstall(true); });
   window.addEventListener('appinstalled', function () { instEv = null; showInstall(false); });
-  if (isIOS) showInstall(true);
+  showInstall(true);
   function openInst(kind) {
     $('inst-steps').innerHTML = t1(kind === 'ios' ? 'inst.ios' : 'inst.other');
     if (kind !== 'ios') $('inst-steps').innerHTML = '<li class="plain">' + t1('inst.other') + '</li>';
