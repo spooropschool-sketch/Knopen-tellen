@@ -708,6 +708,12 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
 .ov-hero { background: linear-gradient(120deg, #FFFFFF 0%, #F4F7FB 55%, #F8F1E8 100%); }
 .ov-hero h1 span { color: var(--accent); }
 .ov-hero .steps { margin: 6px 0 0; color: var(--ink2); }
+/* Over-pagina: titel, uitleg en knoppen in één kaart, alles links uitgelijnd onder de titel */
+.ab-hero .ov-text { padding: 28px 12px 28px 28px; gap: 6px; }
+.ab-hero .about-body { margin-top: 10px; max-width: none; gap: 12px; color: var(--ink2); line-height: 1.55; }
+.ab-hero .btn-row { margin-top: 14px; gap: 8px; }
+.ab-hero .btn-row .btn { padding-left: 16px; padding-right: 16px; }
+@media (max-width: 760px) { .ab-hero .ov-text { padding: 16px 18px 22px; } }
 .modal-hero { padding-top: 0 !important; height: auto; }
 .modal-hero img { display: block; width: 100%; height: 190px; object-fit: cover; object-position: 50% 60%; }
 .modal-brand { background: rgba(255, 255, 255, 0.86); padding: 6px 12px 6px 8px; border-radius: 99px; box-shadow: 0 4px 14px rgba(29, 43, 58, 0.10); }
@@ -1173,25 +1179,17 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
   </section>
 
   <section class="page" id="page-about" aria-labelledby="ab-h" hidden>
-    <section class="card ov-hero" aria-label="Buttons">
+    <section class="card ov-hero ab-hero" aria-label="Buttons">
       <div class="ov-text">
         <span class="eyebrow" data-t="tab.about"></span>
         <h1 id="ab-h" data-t="pay.h"></h1>
-        <p class="steps" data-t="pay.steps"></p>
+        <div class="about-body" data-t="about.body"></div>
+        <div class="btn-row">
+          <button class="btn ghost" type="button" id="btn-intro" data-t="about.intro"></button>
+          <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour"></button>
+        </div>
       </div>
       <div class="ov-art photo"><img src="img/pad.jpg" alt="" data-t-alt="alt.path"></div>
-    </section>
-    <section class="intro" aria-labelledby="ab-q">
-      <h2 id="ab-q" data-t="intro.q"></h2>
-      <ul class="route" data-t="intro.list"></ul>
-    </section>
-    <section class="card panel" aria-labelledby="ab-g">
-      <h2 id="ab-g" data-t="about.h"></h2>
-      <div class="about-body" data-t="about.body"></div>
-      <div class="btn-row">
-        <button class="btn ghost" type="button" id="btn-intro" data-t="about.intro"></button>
-        <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour"></button>
-      </div>
     </section>
     <section class="card panel fb-card" aria-labelledby="ab-fb">
       <h2 id="ab-fb" data-t="fb.aboutH"></h2>
