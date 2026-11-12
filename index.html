@@ -1200,7 +1200,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
           <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour"></button>
         </div>
       </div>
-      <div class="ov-art photo"><img src="img/pad.jpg" alt="" data-t-alt="alt.path"></div>
+      <div class="ov-art photo"><img src="img/over.jpg" alt="" data-t-alt="alt.notebook"></div>
     </section>
     <section class="card panel fb-card" aria-labelledby="ab-fb">
       <h2 id="ab-fb" data-t="fb.aboutH"></h2>
@@ -1233,7 +1233,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 <div class="modal" id="intro" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h0" id="intro-card">
     <div class="modal-hero">
-      <img src="img/pad.jpg" alt="" data-t-alt="alt.path">
+      <img src="img/over.jpg" alt="" data-t-alt="alt.notebook">
       <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark" id="intro-brand" data-t-en="brand">Buttons</span><span class="v2">V4</span></span>
     </div>
     <div class="modal-body intro-s0" id="intro-s0">
@@ -3490,7 +3490,7 @@ Object.assign(I18N.es, {
   var F = {
     startkapitaal: { u: 'u.cur', min: 0, max: 2000000, step: 5000, tag: 'zelf', r: [100000, 2000000] },
     budget: { u: 'u.netMonth', min: 0, max: 10000, step: 25, tag: 'zelf', r: [1000, 6000] },
-    werk: { u: 'u.workMonth', min: 0, max: 5000, step: 50, tag: 'zelf', r: [0, 3000] },
+    werk: { u: 'u.workMonth', min: 0, max: 20000, step: 50, tag: 'zelf', r: [0, 10000] },
     leeftijdPaul: { u: 'u.years', min: 18, max: 100, step: 1, tag: 'zelf' },
     leeftijdDiana: { u: 'u.years', min: 18, max: 100, step: 1, tag: 'zelf' },
     aowPaul: { u: 'u.years', min: 55, max: 75, step: 'any', tag: 'bron', lab: 'f.spAge', hint: 'h.spAge' },
@@ -3632,11 +3632,16 @@ Object.assign(I18N.es, {
   var SEGK = ['box3', 'eindDiana', 'portfolio', 'personen'];
   var CHK = ['aowAanP', 'aowAanD', 'pensAanP', 'pensAanD'];
   function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = val; }); }
+  var updTimer = 0;
+  function updateSoon() { clearTimeout(updTimer); updTimer = setTimeout(function () { updTimer = 0; update(); }, 450); }
+  function updateNow() { if (updTimer) { clearTimeout(updTimer); updTimer = 0; update(); } }
   function bind(k) {
     var n = $('n-' + k);
-    if (n) n.addEventListener('input', function () { var v = parseFloat(String(n.value).replace(',', '.')); if (!isFinite(v)) return; manual(k); setNum(k, v); update(); });
+    if (n) n.addEventListener('input', function () { var v = parseFloat(String(n.value).replace(',', '.')); if (!isFinite(v)) return; manual(k); setNum(k, v); updateSoon(); });
     var r = $('r-' + k);
-    if (r) r.addEventListener('input', function () { manual(k); setNum(k, parseFloat(r.value)); update(); });
+    if (r) r.addEventListener('input', function () { manual(k); setNum(k, parseFloat(r.value)); updateSoon(); });
+    if (n) n.addEventListener('change', updateNow);
+    if (r) r.addEventListener('change', updateNow);
   }
   function manual(k) {
     if (k === 'aowPaul' || k === 'aowDiana') state.autoAow = 0;
@@ -3650,8 +3655,9 @@ Object.assign(I18N.es, {
       var v = parseFloat(String(e.value).replace(',', '.'));
       if (e.value === '' && k !== 'leeftijdPaul' && k !== 'leeftijdDiana') v = 0;
       if (!isFinite(v)) return;
-      manual(k); setNum(k, v); update();
+      manual(k); setNum(k, v); updateSoon();
     });
+    e.addEventListener('change', updateNow);
   });
   document.addEventListener('change', function (ev) {
     var r = ev.target;
