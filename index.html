@@ -891,19 +891,34 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .inst-steps { margin: 6px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; }
 .inst-steps li.plain { list-style: none; margin-left: -22px; }
 @media (max-width: 340px) { .topbar .wordmark { font-size: 13.5px; } .topbar .brand svg, .topbar .bmark { width: 26px; height: 26px; } .topbar .hashtag { font-size: 10.5px; padding: 5px 7px; } .install { width: 30px; min-width: 30px; min-height: 30px; } .lang-pick { min-height: 30px; } .lang-pick select { font-size: 12px; } .tb-right { gap: 4px; } .topbar-in { gap: 4px; } }
-.dash > .goal-bar { grid-column: 1 / -1; flex-direction: row; padding-block: 12px; gap: 8px 16px; }
+#page-input .goal-bar { grid-column: 1 / -1; flex-direction: row; padding-block: 12px; gap: 8px 16px; }
 .goal-bar .gb-text { flex: 1 1 240px; }
 .goal-bar .eyebrow { margin-bottom: 2px; }
 .goal-bar h2 { font-size: 18px; margin-bottom: 2px; }
 .goal-bar .sub { font-size: 14px; }
 .goal-bar .gb-actions .btn { min-height: 40px; padding-block: 8px; font-size: 14px; }
 @media (max-width: 560px) { .goal-bar h2 { font-size: 17px; } .goal-bar .gb-actions { width: 100%; } }
-.dash > .goal-bar h2#gb-q { font-size: 17px; line-height: 1.3; }
-.dash > .goal-bar p.sub { font-size: 14px; line-height: 1.45; }
-.dash > .goal-bar .gb-actions .btn { min-height: 38px; padding: 6px 16px; font-size: 14px; }
-.dash > .goal-bar .gb-actions .btn.link { padding-inline: 4px; }
-@media (max-width: 560px) { .dash > .goal-bar { padding: 12px 14px; } .dash > .goal-bar .gb-actions { flex-wrap: nowrap; } }
-@media (max-width: 560px) { .dash > .goal-bar p.sub { display: none; } .dash > .goal-bar .gb-actions { flex-wrap: wrap; } .dash > .goal-bar h2#gb-q { text-wrap: pretty; } }
+#page-input .goal-bar h2#gb-q { font-size: 17px; line-height: 1.3; }
+#page-input .goal-bar p.sub { font-size: 14px; line-height: 1.45; }
+#page-input .goal-bar .gb-actions .btn { min-height: 38px; padding: 6px 16px; font-size: 14px; }
+#page-input .goal-bar .gb-actions .btn.link { padding-inline: 4px; }
+@media (max-width: 560px) { #page-input .goal-bar { padding: 12px 14px; } #page-input .goal-bar .gb-actions { flex-wrap: nowrap; } }
+@media (max-width: 560px) { #page-input .goal-bar p.sub { display: none; } #page-input .goal-bar .gb-actions { flex-wrap: wrap; } #page-input .goal-bar h2#gb-q { text-wrap: pretty; } }
+
+/* samengevoegde overzichtkaart en snel rekenen in stap 1 */
+.ov-main { gap: 12px; }
+.ovm-head { display: flex; flex-direction: column; gap: 6px; }
+.ovm-head .eyebrow { margin-bottom: 0; }
+.ovm-head h1 { font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; margin: 0; }
+.ovm-head .sub { margin: 0; color: var(--ink2); max-width: 70ch; }
+.ov-start { align-self: flex-start; }
+.adv-in { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
+.adv-in[hidden] { display: none; }
+@media (max-width: 560px) { .ovm-head h1 { font-size: 25px; } }
+#step1-slot .snel { padding: 16px; }
+#step1-slot .snel .ec-img, #step1-slot .snel .snel-body > .eyebrow, #step1-slot .snel .snel-body > h2, #step1-slot .snel .snel-body > .sub { display: none; }
+#step1-slot .snel .snel-grid { margin-top: 0; }
+@media (min-width: 761px) { .dash > .status, .dash > .kpis { grid-column: 1 / -1; } .dash > .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 </style>
 </head>
@@ -934,40 +949,12 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 <main class="wrap">
 
   <section class="page" id="page-overview" aria-labelledby="ov-h">
-    <div class="card ov-hero">
-      <div class="ov-text">
-        <span class="eyebrow" data-t="tab.overview"></span>
-        <h1 id="ov-h" data-t="ov.h"></h1>
-        <p class="sub" id="ov-sub"></p>
-      </div>
-      <div class="ov-art photo"><img src="img/buidel.jpg" alt="" data-t-alt="alt.pouch"></div>
-    </div>
     <div class="dash">
-      <section class="card goal-bar" id="goal-bar" aria-live="polite" hidden>
-        <div class="gb-text"><span class="eyebrow" data-t="goal.bar"></span><h2 id="gb-q"></h2><p class="sub" data-t="goal.sub"></p></div>
-        <div class="gb-actions"><button class="btn primary" type="button" id="gb-go" data-t="goal.go"></button><button class="btn link" type="button" id="gb-change" data-t="goal.change"></button></div>
+      <section class="card advies ov-main" id="ov-main" aria-labelledby="ov-h">
+        <div class="ovm-head"><span class="eyebrow" data-t="tab.overview"></span><h1 id="ov-h" data-t="ov.h"></h1><p class="sub" id="ov-sub"></p></div>
+        <a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden></a>
+        <div class="adv-in" id="advies" aria-live="polite" hidden></div>
       </section>
-      <section class="card snel" id="snel" aria-labelledby="snel-h">
-        <div class="ec-img"><img src="img/boekje.jpg" alt="" data-t-alt="alt.notebook"></div>
-        <div class="snel-body">
-          <span class="eyebrow" data-t="q.eyebrow"></span>
-          <h2 id="snel-h" data-t="q.h"></h2>
-          <p class="sub" data-t="q.sub"></p>
-          <div class="snel-grid">
-            <div class="field"><label for="q-country" data-t="f.country"></label><select id="q-country" class="ctry-sel"></select></div>
-            <div class="field"><span class="flabel" data-t="f.persons"></span>
-              <div class="seg" role="radiogroup" data-t-aria="f.persons"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one"></span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two"></span></label></div></div>
-            <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years"></span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m"></span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f"></span></label></div></div>
-            <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years"></span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m"></span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f"></span></label></div></div>
-            <div class="field"><label for="q-budget" data-t="f.budget"></label><div class="inrow"><input id="q-budget" type="number" inputmode="decimal" min="0" step="25" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth"></span></div></div>
-            <div class="field"><label for="q-startkapitaal"><span data-t="q.capital"></span> <span class="opt" data-t="q.optional"></span></label><div class="inrow"><input id="q-startkapitaal" type="number" inputmode="decimal" min="0" step="1000" placeholder="0"><span class="unit" data-t="u.cur"></span></div></div>
-            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth"></span></div></div>
-            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth"></span></div></div>
-          </div>
-          <p class="hint sp-q" id="q-sp-hint"></p>
-        </div>
-      </section>
-      <section class="card advies" id="advies" aria-live="polite" hidden></section>
       <div class="card status" id="status-card" aria-live="polite">
         <div class="gauge" id="gauge"></div>
         <p class="g-key" data-t="g.key"></p>
@@ -976,7 +963,6 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
         <div class="verdict" id="verdict"></div>
         <p class="srcline" data-src="le,mkt"></p>
       </div>
-      <div class="kpis" id="kpis"></div>
       <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h"></h2><p class="sub" id="fan-sub"></p></div>
         <div class="fan-head">
@@ -1004,6 +990,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
           <div class="tbl" id="tbl"></div>
         </details>
       </section>
+      <div class="kpis" id="kpis"></div>
       <section class="card panel" id="panel-flow" aria-labelledby="flow-h">
         <div class="panel-head"><h2 id="flow-h" data-t="flow.h"></h2><p class="sub" data-t="flow.sub"></p></div>
         <div class="chart" id="flow"></div>
@@ -1037,6 +1024,32 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
         <p class="sub" data-t="in.sub"></p>
       </div>
       <div class="ov-art photo"><img src="img/schaaltjes.jpg" alt="" data-t-alt="alt.bowls"></div>
+    </div>
+    <section class="card goal-bar" id="goal-bar" aria-live="polite" hidden>
+        <div class="gb-text"><span class="eyebrow" data-t="goal.bar"></span><h2 id="gb-q"></h2><p class="sub" data-t="goal.sub"></p></div>
+        <div class="gb-actions"><button class="btn primary" type="button" id="gb-go" data-t="goal.go"></button><button class="btn link" type="button" id="gb-change" data-t="goal.change"></button></div>
+      </section>
+    <div class="snel-home" hidden>
+      <section class="card snel" id="snel" aria-labelledby="snel-h">
+        <div class="ec-img"><img src="img/boekje.jpg" alt="" data-t-alt="alt.notebook"></div>
+        <div class="snel-body">
+          <span class="eyebrow" data-t="q.eyebrow"></span>
+          <h2 id="snel-h" data-t="q.h"></h2>
+          <p class="sub" data-t="q.sub"></p>
+          <div class="snel-grid">
+            <div class="field"><label for="q-country" data-t="f.country"></label><select id="q-country" class="ctry-sel"></select></div>
+            <div class="field"><span class="flabel" data-t="f.persons"></span>
+              <div class="seg" role="radiogroup" data-t-aria="f.persons"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one"></span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two"></span></label></div></div>
+            <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years"></span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m"></span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f"></span></label></div></div>
+            <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years"></span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m"></span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f"></span></label></div></div>
+            <div class="field"><label for="q-budget" data-t="f.budget"></label><div class="inrow"><input id="q-budget" type="number" inputmode="decimal" min="0" step="25" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth"></span></div></div>
+            <div class="field"><label for="q-startkapitaal"><span data-t="q.capital"></span> <span class="opt" data-t="q.optional"></span></label><div class="inrow"><input id="q-startkapitaal" type="number" inputmode="decimal" min="0" step="1000" placeholder="0"><span class="unit" data-t="u.cur"></span></div></div>
+            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth"></span></div></div>
+            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth"></span></div></div>
+          </div>
+          <p class="hint sp-q" id="q-sp-hint"></p>
+        </div>
+      </section>
     </div>
     <div class="progress" aria-hidden="true"><span id="prog"></span></div>
     <ol class="stepper" id="stepper" data-t-aria="in.steps"></ol>
@@ -2915,6 +2928,75 @@ Object.assign(I18N.es, {
  "inst.other": "Abre el menú del navegador y elige <b>Instalar app</b> o <b>Añadir a pantalla de inicio</b>."
 });
 
+Object.assign(I18N.en, {
+ "ov.start": "Start filling in",
+ "ov.subEmpty": "Once you have entered your age and monthly budget, you will see here where you stand.",
+ "g.empty": "Each button is a possible future. Once you have filled in the basics, you will see how many turn out well.",
+ "tour.1.h": "Where you stand",
+ "tour.1.p": "This shows at a glance where you stand. Once you have filled something in, the advice appears here too.",
+ "st1.t": "Basics",
+ "st2.t": "About you",
+ "st2.h": "A little more about you",
+ "st2.s": "Names make the charts and texts more personal. Side income counts until 67. Both are optional.",
+ "goal.sub": "Fill in the steps below. Your answer updates as you go."
+});
+
+Object.assign(I18N.nl, {
+ "ov.start": "Begin met invullen",
+ "ov.subEmpty": "Zodra je je leeftijd en maandbudget hebt ingevuld, zie je hier hoe je ervoor staat.",
+ "ov.subEmpty_2": "Zodra jullie leeftijden en maandbudget zijn ingevuld, zien jullie hier hoe jullie ervoor staan.",
+ "g.empty": "Elke knoop is een mogelijke toekomst. Na het invullen zie je hoeveel er goed aflopen.",
+ "tour.1.h": "Hoe je ervoor staat",
+ "tour.1.p": "Hier zie je in één oogopslag hoe je ervoor staat. Zodra je iets hebt ingevuld komt hier ook het advies.",
+ "st1.t": "Basis",
+ "st2.t": "Over jou",
+ "st2.h": "Nog wat meer over jou",
+ "st2.h_2": "Nog wat meer over jullie",
+ "st2.s": "Namen maken grafieken en teksten persoonlijker. Bijverdiensten tellen mee tot 67. Beide zijn optioneel.",
+ "goal.sub": "Vul de stappen hieronder in. Je antwoord rekent meteen mee."
+});
+
+Object.assign(I18N.de, {
+ "ov.start": "Jetzt ausfüllen",
+ "ov.subEmpty": "Sobald Sie Alter und Monatsbudget eingegeben haben, sehen Sie hier, wo Sie stehen.",
+ "g.empty": "Jeder Knopf ist eine mögliche Zukunft. Nach dem Ausfüllen sehen Sie, wie viele gut ausgehen.",
+ "tour.1.h": "Wo Sie stehen",
+ "tour.1.p": "Hier sehen Sie auf einen Blick, wo Sie stehen. Sobald Sie etwas eingegeben haben, erscheint hier auch die Empfehlung.",
+ "st1.t": "Grundlagen",
+ "st2.t": "Zu Ihnen",
+ "st2.h": "Noch etwas mehr zu Ihnen",
+ "st2.s": "Namen machen Grafiken und Texte persönlicher. Ein Nebenverdienst zählt bis 67. Beides ist optional.",
+ "goal.sub": "Füllen Sie die Schritte unten aus. Ihre Antwort rechnet sofort mit."
+});
+
+Object.assign(I18N.fr, {
+ "ov.start": "Commencer",
+ "ov.subEmpty": "Dès que vous avez saisi votre âge et votre budget mensuel, vous voyez ici où vous en êtes.",
+ "g.empty": "Chaque bouton est un avenir possible. Une fois les bases remplies, vous voyez combien se passent bien.",
+ "tour.1.h": "Où vous en êtes",
+ "tour.1.p": "Vous voyez ici d’un coup d’œil où vous en êtes. Dès que vous avez rempli quelque chose, le conseil apparaît aussi ici.",
+ "st1.t": "L’essentiel",
+ "st2.t": "Vous",
+ "st2.h": "Encore un peu sur vous",
+ "st2.s": "Les prénoms rendent les graphiques et les textes plus personnels. Les revenus d’appoint comptent jusqu’à 67 ans. Les deux sont facultatifs.",
+ "goal.sub": "Remplissez les étapes ci-dessous. Votre réponse se met à jour au fur et à mesure."
+});
+
+Object.assign(I18N.es, {
+ "ov.start": "Empezar",
+ "ov.subEmpty": "En cuanto indiques tu edad y tu presupuesto mensual, verás aquí cómo estás.",
+ "ov.subEmpty_2": "En cuanto indiquéis vuestras edades y vuestro presupuesto mensual, veréis aquí cómo estáis.",
+ "g.empty": "Cada botón es un futuro posible. Al rellenar lo básico verás cuántos salen bien.",
+ "tour.1.h": "Cómo estás",
+ "tour.1.p": "Aquí ves de un vistazo cómo estás. En cuanto rellenes algo, el consejo aparece también aquí.",
+ "st1.t": "Lo básico",
+ "st2.t": "Sobre ti",
+ "st2.h": "Un poco más sobre ti",
+ "st2.h_2": "Un poco más sobre vosotros",
+ "st2.s": "Los nombres hacen más personales los gráficos y los textos. Los ingresos extra cuentan hasta los 67. Ambos son opcionales.",
+ "goal.sub": "Rellena los pasos de abajo. Tu respuesta se actualiza al momento."
+});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -3184,18 +3266,13 @@ Object.assign(I18N.es, {
       segK(name, key, opts, title) + '<p class="hint"' + (hintId ? ' id="' + hintId + '"' : '') + (hintKey2 ? ' data-t="' + hintKey2 + '"' : '') + '></p></div>';
   }
   var STEPS = [
-    { t: 'st1.t', h: 'st1.h', s: 'st1.s', html: function () {
-      return '<div class="card knobs">' +
-        '<div class="knob wide" style="border-top:0;padding-top:0"><div class="knob-top"><label class="t" for="s-country" style="font-weight:600;font-size:14px" data-t="f.country"></label>' + tagHtml('zelf') + '</div><select id="s-country" class="ctry-sel"></select><p class="hint" data-t="h.country"></p></div>' +
-        segBlock('f.persons', 'zelf', 's-personen', 'personen', [{ v: '1', l: 'p.one' }, { v: '2', l: 'p.two' }], '', 'h.persons') + '</div>' +
-        '<div class="cols2">' + [1, 2].map(function (n) {
+    { t: 'st1.t', h: 'q.h', s: 'q.sub', html: function () { return '<div id="step1-slot"></div>'; } },
+    { t: 'st2.t', h: 'st2.h', s: 'st2.s', html: function () {
+      return '<div class="cols2">' + [1, 2].map(function (n) {
           return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
-            '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"></div>' +
-            fieldHtml(n === 1 ? 'leeftijdPaul' : 'leeftijdDiana') +
-            '<div class="field"><span class="flabel" data-t="f.sex"></span>' + segK('s-gesl' + n, n === 1 ? 'geslP' : 'geslD', [{ v: '0', l: 'sex.m' }, { v: '1', l: 'sex.f' }], 'f.sex') + '<p class="hint" data-t="h.sex"></p></div></div>';
-        }).join('') + '</div>';
+            '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"></div></div>';
+        }).join('') + '</div><div class="card knobs">' + knobHtml('werk') + '</div>';
     } },
-    { t: 'st2.t', h: 'st2.h', s: 'st2.s', html: function () { return '<div class="card knobs">' + knobHtml('startkapitaal') + knobHtml('budget') + knobHtml('werk') + '</div>'; } },
     { t: 'st3.t', h: 'st3.h', s: 'st3.s', html: function () {
       return '<div class="cols2">' + [1, 2].map(function (n) {
         var s = n === 1 ? 'P' : 'D', ka = n === 1 ? 'aowPaul' : 'aowDiana', ks = 'sp' + s, kp = n === 1 ? ['pensioenPaul', 'pensioenLeeftijd'] : ['pensioenDiana', 'pensioenLeeftijdDiana'];
@@ -3228,6 +3305,7 @@ Object.assign(I18N.es, {
   $('steps').innerHTML = STEPS.map(function (st, i) {
     return '<div class="step" id="step-' + (i + 1) + '"' + (i ? ' hidden' : '') + '><div class="step-head"><span class="step-k" data-stepk="' + (i + 1) + '"></span><h2 data-t="' + st.h + '"></h2><p class="sub" data-t="' + st.s + '"></p></div>' + st.html() + '</div>';
   }).join('');
+  (function () { var sn = $('snel'), slot = $('step1-slot'); if (sn && slot) slot.appendChild(sn); })();
   $('stepper').innerHTML = STEPS.map(function (st, i) {
     return '<li><button type="button" data-go="' + (i + 1) + '"><span class="num">' + (i + 1) + '</span><span class="lbl" data-t="' + st.t + '"></span></button></li>';
   }).join('');
@@ -3480,6 +3558,7 @@ Object.assign(I18N.es, {
 
   function renderHead() {
     var el = $('ov-sub'); if (!el) return;
+    var st = $('ov-start'); if (st) st.hidden = state.budget > 0;
     if (state.budget <= 0) { el.textContent = t('ov.subEmpty'); return; }
     el.innerHTML = (state.startkapitaal > 0 ? t('ov.subCap', { c: eur(capEff()) }) : t('ov.subNoCap', { c: eur(capEff()) })) + ' ' +
       t('ov.subRest', { b: eur(state.budget), r: esc(refTxt()), country: cName(prefs.country) });
@@ -3994,7 +4073,7 @@ Object.assign(I18N.es, {
   var GOALS = ['enough', 'spend', 'earlier', 'abroad'];
   function goalTarget(g) {
     if (g === 'enough') return { hash: '#overview', id: 'status-card' };
-    if (g === 'spend') return { hash: '#overview', id: !$('advies').hidden ? 'advies' : 'kpis' };
+    if (g === 'spend') return { hash: '#overview', id: 'ov-main' };
     if (g === 'earlier') return { hash: '#input', step: 2 };
     if (g === 'abroad') return { hash: '#insight', id: $('sec-koop') && !$('sec-koop').hidden ? 'sec-koop' : 'sec-pf' };
     return null;
@@ -4008,8 +4087,8 @@ Object.assign(I18N.es, {
     ui.goal = GOALS.indexOf(g) >= 0 ? g : ''; saveUi(); showGoal();
     closeIntro(false);
     if (!ui.goal) { startTour(); return; }
-    if (location.hash !== '#overview') location.hash = '#overview'; else go();
-    setTimeout(function () { var s = $('snel'); if (s) { s.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70); } }, 60);
+    showStep(1, false);
+    if (location.hash !== '#input') location.hash = '#input'; else go();
   }
   each('.goal', function (b) { b.addEventListener('click', function () { pickGoal(b.getAttribute('data-goal')); }); });
   $('gb-go').addEventListener('click', function () {
@@ -4135,7 +4214,7 @@ Object.assign(I18N.es, {
   });
 
   /* ================= rondleiding ================= */
-  var TOUR = ['snel', 'status-card', 'kpis', 'fan', 'flow', 'tab-insight', 'tab-about', 'tab-input'];
+  var TOUR = ['ov-main', 'status-card', 'kpis', 'fan', 'flow', 'tab-insight', 'tab-about', 'tab-input'];
   function startTour() {
     if (route !== 'overview') location.hash = '#overview';
     $('tour').hidden = false; tourI = 0;
@@ -4143,7 +4222,7 @@ Object.assign(I18N.es, {
   }
   function endTour(toStart) {
     $('tour').hidden = true; tourI = -1;
-    if (toStart) { location.hash = '#overview'; setTimeout(function () { var s = $('snel'); if (s) s.scrollIntoView({ block: 'center' }); var a = $('q-leeftijdPaul'); if (a) a.focus({ preventScroll: true }); }, 120); }
+    if (toStart) { showStep(1, false); location.hash = '#input'; setTimeout(function () { var a = $('q-leeftijdPaul'); if (a) { a.scrollIntoView({ block: 'center' }); a.focus({ preventScroll: true }); } }, 120); }
   }
   function placeTour(scroll) {
     if (tourI < 0) return;
