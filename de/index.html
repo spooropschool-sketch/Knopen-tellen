@@ -1527,6 +1527,17 @@ footer { color: var(--muted); }
 .cmp-card.sel, .cmp-card.auto, .cmp-card[aria-current="true"] { border-color: var(--accent); }
 .intro-s0 .welcome { color: var(--copper); }
 .intro-prefs { background: var(--surface2); border-color: var(--line); }
+/* koffieregel: onder het advies, in het deelvenster en na het bewaren van een plan */
+.support-card { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 10px 18px; flex-wrap: wrap; padding: 14px 20px; background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface)); }
+.support-card[hidden] { display: none; }
+.support-card .sup-t { flex: 1 1 240px; min-width: 0; color: var(--ink2); font-size: 15px; line-height: 1.45; }
+.support-card a.kofi, .sup-sh a.kofi, .sup-pl a.kofi { margin-left: 0; }
+.sup-sh, .sup-pl { display: flex; flex-direction: column; align-items: center; gap: 10px; line-height: 1.45; text-align: center; }
+.sup-sh { margin: 6px 0 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.sup-sh[hidden] { display: none; }
+#plans .sup-pl { margin: 20px 0 0; }
+@media (min-width: 640px) { .sup-pl { flex-direction: row; justify-content: center; gap: 4px 12px; flex-wrap: wrap; } }
+@media print { .support-card, .sup-sh, .sup-pl { display: none !important; } }
 </style>
 <link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1585,6 +1596,7 @@ footer { color: var(--muted); }
         <div class="srcline" data-src="le,mkt"></div>
       </div>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
+        <section class="card support-card needs-data" id="support-ov" hidden></section>
         <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">Verlauf Ihres Vermögens</h2><p class="sub" id="fan-sub"></p></div>
         <div class="fan-head">
@@ -1635,7 +1647,6 @@ footer { color: var(--muted); }
         </div>
       </section>
         <p class="fb-line"><span data-t="fb.line">Haben Sie einen Tipp oder eine Ergänzung? Wir freuen uns darauf.</span> <button class="btn ghost fb-open" type="button" data-cat="idea"><span aria-hidden="true">✎</span> <span data-t="fb.btn">Tipp geben</span></button></p>
-        <p class="support-line" id="support-ov" hidden></p>
       </div>
     </div>
   </section>
@@ -1862,6 +1873,7 @@ footer { color: var(--muted); }
         <button type="button" class="share-opt" id="sh-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11.5" height="11.5" rx="2"/><path d="M16 8V6.5a2 2 0 0 0-2-2H6.5a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2H8"/></svg><span><b data-t="sh.copy">Zusammenfassung kopieren</b><span data-t="sh.copyS">Ein kurzer Text für eine Nachricht oder E-Mail.</span></span></button>
       </div>
       <textarea id="share-out" rows="7" readonly hidden></textarea>
+      <p class="support-line sup-sh" id="support-sh" hidden></p>
     </div>
   </div>
 </div>
@@ -2961,7 +2973,8 @@ Object.assign(I18N.en, {
   'about.body': '<p>Buttons is your personal financial cockpit. We show you what you have, how much room that gives you now and later and how your savings could develop.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but about what you can do with it.</p>',
   'fact.intro': 'This is what we assume {inCountry}. You can change every number under Fine-tune.',
   'about.disclaimer': 'Buttons gives you insight, not tax or investment advice. We’ve simplified the rules per country, so do check the official sources.',
-  'sup.text': 'Does Buttons help you?'
+  'sup.text': 'Does Buttons help you?',
+  'sup.after': 'Did this help? It stays free. A coffee is welcome but never expected.'
 });
 
 Object.assign(I18N.nl, {
@@ -3046,7 +3059,8 @@ Object.assign(I18N.nl, {
   'about.body': '<p>Knopen tellen is je persoonlijke financiële cockpit. We laten je zien wat je hebt, hoeveel ruimte dat geeft nu en later en hoe je vermogen zich kan ontwikkelen.</p><p>Je verkent scenario’s, rekent keuzes door en ziet wat ze betekenen voor je toekomst. Alles in geld van vandaag en alles blijft in je eigen browser.</p><p>Want het gaat niet alleen om wat je hebt opgebouwd, maar vooral om wat je daarmee kunt.</p>',
   'fact.intro': 'Dit nemen we aan {inCountry}. Elk getal kun je aanpassen bij Invullen.',
   'about.disclaimer': 'Knopen tellen geeft je inzicht, geen belasting- of beleggingsadvies. De regels per land hebben we vereenvoudigd, dus kijk ook even bij de officiële bronnen.',
-  'sup.text': 'Heb je iets aan Knopen tellen?'
+  'sup.text': 'Heb je iets aan Knopen tellen?',
+  'sup.after': 'Hielp dit je verder? Het blijft gratis. Een koffie is nooit verplicht.'
 });
 
 Object.assign(I18N.de, {
@@ -3121,7 +3135,8 @@ Object.assign(I18N.de, {
   'about.body': '<p>Buttons ist Ihr persönliches Finanzcockpit. Wir zeigen Ihnen, was Sie haben, wie viel Spielraum das heute und später gibt und wie sich Ihr Vermögen entwickeln kann.</p><p>Sie erkunden Szenarien, rechnen Entscheidungen durch und sehen, was sie für Ihre Zukunft bedeuten. Alles in heutigem Geld und alles bleibt in Ihrem eigenen Browser.</p><p>Denn es geht nicht nur darum, was Sie aufgebaut haben, sondern vor allem darum, was Sie damit erreichen können.</p>',
   'fact.intro': 'Das nehmen wir {inCountry} an. Jede Zahl können Sie unter Eingeben ändern.',
   'about.disclaimer': 'Buttons gibt Ihnen Einblick, keine Steuer- oder Anlageberatung. Die Regeln je Land haben wir vereinfacht; schauen Sie also auch in die offiziellen Quellen.',
-  'sup.text': 'Hilft Ihnen Buttons?'
+  'sup.text': 'Hilft Ihnen Buttons?',
+  'sup.after': 'Hat Ihnen das weitergeholfen? Es bleibt kostenlos. Ein Kaffee ist willkommen, aber nie nötig.'
 });
 
 Object.assign(I18N.fr, {
@@ -3196,7 +3211,8 @@ Object.assign(I18N.fr, {
   'about.body': '<p>Buttons est votre tableau de bord financier personnel. Nous vous montrons ce que vous avez, la marge que cela vous donne aujourd’hui et demain et comment votre patrimoine peut évoluer.</p><p>Vous explorez des scénarios, testez des choix et voyez ce qu’ils signifient pour votre avenir. Tout est en argent d’aujourd’hui et reste dans votre propre navigateur.</p><p>Car l’important n’est pas seulement ce que vous avez construit, mais ce que vous pouvez en faire.</p>',
   'fact.intro': 'Voici ce que nous retenons {inCountry}. Vous pouvez modifier chaque chiffre dans Saisir.',
   'about.disclaimer': 'Buttons vous donne un éclairage, pas un conseil fiscal ou en placement. Nous avons simplifié les règles par pays : consultez aussi les sources officielles.',
-  'sup.text': 'Buttons vous est utile ?'
+  'sup.text': 'Buttons vous est utile ?',
+  'sup.after': 'Cela vous a aidé ? Cela reste gratuit. Un café fait plaisir mais n’est jamais obligatoire.'
 });
 
 Object.assign(I18N.es, {
@@ -3280,7 +3296,8 @@ Object.assign(I18N.es, {
   'about.body': '<p>Buttons es tu panel financiero personal. Te mostramos lo que tienes, cuánto margen te da ahora y más adelante y cómo puede evolucionar tu patrimonio.</p><p>Exploras escenarios, pruebas decisiones y ves lo que significan para tu futuro. Todo en dinero de hoy y todo se queda en tu propio navegador.</p><p>Porque no se trata solo de lo que has construido, sino de lo que puedes hacer con ello.</p>',
   'fact.intro': 'Esto es lo que suponemos {inCountry}. Puedes cambiar cada cifra en Rellenar.',
   'about.disclaimer': 'Buttons te da una visión, no asesoramiento fiscal ni de inversión. Hemos simplificado las reglas de cada país, así que consulta también las fuentes oficiales.',
-  'sup.text': '¿Te ayuda Buttons?'
+  'sup.text': '¿Te ayuda Buttons?',
+  'sup.after': '¿Te ha servido? Sigue siendo gratis. Un café se agradece, pero nunca es obligatorio.'
 });
 
 Object.assign(I18N.en, {
@@ -4127,6 +4144,7 @@ Object.assign(I18N.es, {
   var LOCALE = { en: 'en-GB', nl: 'nl-NL', de: 'de-DE', fr: 'fr-FR', es: 'es-ES' };
   var CURS = ['EUR', 'GBP', 'USD', 'CHF'];
   var KOFI = 'CountingButtons';
+  function kofiLink() { return KOFI ? '<a class="kofi" href="https://ko-fi.com/' + encodeURIComponent(KOFI) + '" target="_blank" rel="noopener"><span aria-hidden="true">☕</span> ' + t1('sup.btn') + '</a>' : ''; }
   /* Landinstellingen. sp: staatspensioen (flat = vast bedrag per persoon, netto per maand). tax: belasting op beleggingen.
      e0: levensverwachting bij geboorte man/vrouw (Eurostat 2023; GB ONS 2021-23; US CDC 2023), om de NL-levenstafel te schalen. */
   var CTRY = {
@@ -5175,8 +5193,9 @@ Object.assign(I18N.es, {
       L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk')
     ].join(' · ') + '.';
     if (KOFI) {
-      var k = '<a class="kofi" href="https://ko-fi.com/' + encodeURIComponent(KOFI) + '" target="_blank" rel="noopener"><span aria-hidden="true">☕</span> ' + t1('sup.btn') + '</a>';
-      $('support-ov').innerHTML = t1('sup.text') + ' ' + k; $('support-ov').hidden = false;
+      var k = kofiLink();
+      $('support-ov').innerHTML = '<span class="sup-t">' + t1('sup.after') + '</span>' + k; $('support-ov').hidden = false;
+      $('support-sh').innerHTML = t1('sup.after') + ' ' + k; $('support-sh').hidden = false;
       $('support-ab').innerHTML = t1('sup.text') + ' ' + k; $('support-ab').hidden = false;
     }
   }
@@ -5372,7 +5391,7 @@ Object.assign(I18N.es, {
     });
     h += '</div></div><div class="btn-row pl-save">';
     ['A', 'B'].forEach(function (k) { h += '<button type="button" class="btn ' + (k === 'A' ? 'primary' : 'ghost') + '" data-pl="save" data-k="' + k + '"' + (state.budget > 0 ? '' : ' disabled') + '>' + t1('pl.save', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') }) + '</button>'; });
-    el.innerHTML = h + '</div>';
+    el.innerHTML = h + '</div>' + ((plans.A || plans.B) && KOFI ? '<p class="support-line sup-pl">' + t1('sup.after') + ' ' + kofiLink() + '</p>' : '');
   }
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pl]') : null; if (!b) return;
