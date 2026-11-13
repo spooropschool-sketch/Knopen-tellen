@@ -1,0 +1,48 @@
+# Buttons (Counting Buttons / Knopen tellen)
+
+> Free retirement calculator. Enter your age, savings and monthly budget and see the chance your money lasts, based on 4,000 simulations. For 11 countries, no account.
+
+Buttons is a free, single-page retirement calculator at https://countingbuttons.com. It runs entirely in the browser, needs no account and stores what you enter only on your own device. It is a general calculation tool and does not give financial advice.
+
+## Pages
+
+- [Retirement calculator: how long will your savings last? | Buttons (English)](https://countingbuttons.com/): Free retirement calculator. Enter your age, savings and monthly budget and see the chance your money lasts, based on 4,000 simulations. For 11 countries, no account.
+- [Hoe lang gaat je spaargeld mee? Gratis rekentool | Knopen tellen (Nederlands)](https://countingbuttons.com/nl/): Gratis rekentool voor eerder stoppen met werken. Vul je leeftijd, spaargeld en maandbudget in en zie de kans dat je geld genoeg is, op basis van 4.000 simulaties.
+- [Wie lange reicht Ihr Erspartes? Kostenloser Rentenrechner | Buttons (Deutsch)](https://countingbuttons.com/de/): Kostenloser Ruhestandsrechner. Alter, Erspartes und Monatsbudget eingeben und sehen, mit welcher Wahrscheinlichkeit Ihr Geld reicht. Auf Basis von 4.000 Simulationen.
+- [Combien de temps durera votre épargne ? Simulateur retraite gratuit | Buttons (Français)](https://countingbuttons.com/fr/): Simulateur de retraite gratuit. Indiquez votre âge, votre épargne et votre budget mensuel et voyez la probabilité que votre argent suffise, sur la base de 4 000 simulations.
+- [¿Cuánto durarán tus ahorros? Calculadora de jubilación gratis | Buttons (Español)](https://countingbuttons.com/es/): Calculadora de jubilación gratuita. Introduce tu edad, tus ahorros y tu presupuesto mensual y mira la probabilidad de que tu dinero alcance, con 4.000 simulaciones.
+
+## Questions and answers
+
+### What is Buttons?
+
+Buttons is a free retirement calculator that shows how long your savings will last. You enter your age, your savings and what you want to spend each month. Buttons then shows the chance that your money lasts until your end age, based on 4,000 simulations of good and bad market years.
+
+### How much savings do I need to stop working?
+
+That depends on your monthly budget, your age and the pension you will receive. Buttons calculates the amount you need for a 90% chance that your money is enough. As a rough rule of thumb, people often need 25 to 30 times the yearly spending that their pensions do not cover.
+
+### How is the chance of success calculated?
+
+Buttons runs 4,000 simulations in which returns go up and down each year. It does this for three portfolios (defensive, balanced and aggressive), after costs, tax and inflation, so every amount is in today’s money. The chance of success is the share of simulations in which your money lasts until your end age. Two crash scenarios, one like 2008 and one like 2022, are shown separately.
+
+### Which countries does Buttons support?
+
+Buttons has its own rules for the Netherlands, Belgium, Germany, France, Spain, Italy, Portugal, Ireland, the United Kingdom and the United States, plus a general setting for other countries. Each country has its own state pension, pension age and tax on investments. Buttons also compares what your budget is worth in 31 European countries, based on Eurostat price levels.
+
+### Is Buttons free, and what happens to my data?
+
+Buttons is free, has no advertising and needs no account. What you enter stays in your own browser on your own device and is not sent to Buttons. Visits are counted anonymously, without cookies.
+
+### Is this financial advice?
+
+No. Buttons is a general calculation tool that gives estimates based on simplified rules and assumptions. It does not give advice about your personal situation. Check official sources and consult an independent, licensed adviser before you make important financial decisions.
+
+## Facts
+
+- Method: Monte Carlo simulation, 4,000 runs, three portfolios (defensive, balanced, aggressive), after costs, tax and inflation; all amounts in today's money.
+- Headline result: the chance that savings last until the end age, and the capital needed for a 90% chance.
+- Countries with their own rules: Netherlands, Belgium, Germany, France, Spain, Italy, Portugal, Ireland, United Kingdom, United States; plus a general setting.
+- Purchasing power comparison: 31 European countries, Eurostat price levels.
+- Languages: English, Dutch, German, French, Spanish.
+- Price: free. No advertising. No account.

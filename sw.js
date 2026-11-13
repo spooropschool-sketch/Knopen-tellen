@@ -1,6 +1,6 @@
 /* Buttons: offline support. Network first, so updates arrive; cache as fallback. */
-var V = 'buttons-v4-5';
-var CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'img/buidel.jpg', 'img/boekje.jpg', 'img/schaaltjes.jpg', 'img/weegschaal.jpg', 'img/over.jpg'];
+var V = 'buttons-v5-1';
+var CORE = ['/', '/nl/', '/de/', '/fr/', '/es/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/img/buidel.jpg', '/img/schaaltjes.jpg', '/img/weegschaal.jpg', '/img/over.jpg'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k !== V; }).map(function (k) { return caches.delete(k); })); }).then(function () { return self.clients.claim(); }));
@@ -14,5 +14,5 @@ self.addEventListener('fetch', function (e) {
   e.respondWith(fetch(r).then(function (res) {
     if (res && (res.ok || res.type === 'opaque')) { var cp = res.clone(); caches.open(V).then(function (c) { c.put(r, cp); }); }
     return res;
-  }).catch(function () { return caches.match(r).then(function (m) { return m || (r.mode === 'navigate' ? caches.match('index.html') : Response.error()); }); }));
+  }).catch(function () { return caches.match(r, { ignoreSearch: true }).then(function (m) { return m || (r.mode === 'navigate' ? caches.match('/') : Response.error()); }); }));
 });
