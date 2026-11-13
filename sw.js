@@ -1,6 +1,6 @@
 /* Buttons: offline support. Network first, so updates arrive; cache as fallback. */
-var V = 'buttons-v5-1';
-var CORE = ['/', '/nl/', '/de/', '/fr/', '/es/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/img/buidel.jpg', '/img/schaaltjes.jpg', '/img/weegschaal.jpg', '/img/over.jpg'];
+var V = 'buttons-v6-1';
+var CORE = ['/fonts/fraunces-600.woff2', '/fonts/inter-400.woff', '/fonts/inter-500.woff', '/fonts/inter-600.woff', '/fonts/inter-700.woff', '/', '/nl/', '/de/', '/fr/', '/es/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/img/buidel.jpg', '/img/schaaltjes.jpg', '/img/weegschaal.jpg', '/img/over.jpg'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k !== V; }).map(function (k) { return caches.delete(k); })); }).then(function () { return self.clients.claim(); }));

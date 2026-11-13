@@ -6,7 +6,8 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#F6F2EB">
+<meta name="color-scheme" content="light dark">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Buttons">
@@ -35,9 +36,9 @@
 <meta name="twitter:image" content="https://countingbuttons.com/og.jpg">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://countingbuttons.com/#site", "url": "https://countingbuttons.com/", "name": "Buttons", "alternateName": ["Knopen tellen", "Counting Buttons"], "inLanguage": ["en", "nl", "de", "fr", "es"]}, {"@type": "WebApplication", "@id": "https://countingbuttons.com/fr/#app", "name": "Buttons", "url": "https://countingbuttons.com/fr/", "description": "Simulateur de retraite gratuit. Indiquez votre âge, votre épargne et votre budget mensuel et voyez la probabilité que votre argent suffise, sur la base de 4 000 simulations.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web browser)", "browserRequirements": "Requires JavaScript", "inLanguage": "fr", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "image": "https://countingbuttons.com/og.jpg", "isPartOf": {"@id": "https://countingbuttons.com/#site"}, "featureList": ["Retirement calculator", "Monte Carlo simulation with 4,000 runs", "Chance that savings last until the end age", "Capital needed for a 90% chance", "State pension and investment tax rules for 10 countries", "Purchasing power comparison for 31 European countries", "Five languages", "No account, data stays in the browser"]}, {"@type": "FAQPage", "@id": "https://countingbuttons.com/fr/#faq", "inLanguage": "fr", "mainEntity": [{"@type": "Question", "name": "Qu’est-ce que Buttons ?", "acceptedAnswer": {"@type": "Answer", "text": "Buttons est un simulateur de retraite gratuit qui montre combien de temps votre épargne durera. Vous indiquez votre âge, votre épargne et le budget mensuel souhaité. Buttons affiche alors la probabilité que votre argent suffise jusqu’à votre âge de fin, sur la base de 4 000 simulations de bonnes et de mauvaises années boursières."}}, {"@type": "Question", "name": "De combien d’épargne ai-je besoin pour arrêter de travailler ?", "acceptedAnswer": {"@type": "Answer", "text": "Cela dépend de votre budget mensuel, de votre âge et de la pension que vous recevrez. Buttons calcule le montant nécessaire pour avoir 90 % de chances que votre argent suffise. En règle générale, il faut souvent 25 à 30 fois les dépenses annuelles que vos pensions ne couvrent pas."}}, {"@type": "Question", "name": "Comment la probabilité de réussite est-elle calculée ?", "acceptedAnswer": {"@type": "Answer", "text": "Buttons exécute 4 000 simulations dans lesquelles le rendement varie chaque année. Le calcul est fait pour trois portefeuilles (défensif, équilibré et offensif), après frais, impôts et inflation ; tous les montants sont donc en argent d’aujourd’hui. La probabilité de réussite est la part des simulations dans lesquelles votre argent dure jusqu’à votre âge de fin. Deux scénarios de krach, l’un comme 2008 et l’autre comme 2022, sont présentés à part."}}, {"@type": "Question", "name": "Pour quels pays Buttons fonctionne-t-il ?", "acceptedAnswer": {"@type": "Answer", "text": "Buttons a ses propres règles pour les Pays-Bas, la Belgique, l’Allemagne, la France, l’Espagne, l’Italie, le Portugal, l’Irlande, le Royaume-Uni et les États-Unis, ainsi qu’un réglage général pour les autres pays. Chaque pays a sa propre pension d’État, son âge de la retraite et sa fiscalité des placements. Buttons compare aussi ce que vaut votre budget dans 31 pays européens, d’après les niveaux de prix d’Eurostat."}}, {"@type": "Question", "name": "Buttons est-il gratuit, et que deviennent mes données ?", "acceptedAnswer": {"@type": "Answer", "text": "Buttons est gratuit, sans publicité et sans compte. Ce que vous saisissez reste dans votre propre navigateur, sur votre appareil, et n’est pas envoyé à Buttons. Les visites sont comptées de façon anonyme, sans cookies."}}, {"@type": "Question", "name": "S’agit-il d’un conseil financier ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Buttons est un outil de calcul général qui donne des estimations fondées sur des règles simplifiées et des hypothèses. Il ne donne aucun conseil sur votre situation personnelle. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante."}}]}]}</script>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400..700&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
+<link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
 /* Layout: smalle kolom met bedieningsstrook bovenaan, uitkomst direct eronder, daarna fiscale vergelijking, grafiek, ladder en aannames. */
@@ -1171,6 +1172,361 @@ input::placeholder { font-weight: 400; }
   .srcs[open] .srcs-body, .faq-i[open] .faq-a { animation: v5in 0.25s var(--ease) both; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* =====================================================================
+   V6 "Atelier": linnen, inkt en naaigaren. Eigen letters (Fraunces voor
+   koppen, Inter voor tekst en cijfers), licht en donker, een werkblad
+   met invoer naast de uitkomst.
+   ===================================================================== */
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/fraunces-600.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/inter-400.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/inter-500.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/inter-600.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 700; font-display: swap; src: url("/fonts/inter-700.woff") format("woff"); }
+
+:root {
+  color-scheme: light;
+  --bg: #F6F2EB; --surface: #FFFEFB; --surface2: #F0EADF; --ink: #1C2421; --ink2: #414C47; --muted: #616B65;
+  --line: #E2DACD; --grid: #EAE3D6;
+  --accent: #1E5A49; --accent-soft: #DDEAE3; --on-accent: #FFFFFF; --copper: #A9502A;
+  --good: #1D7046; --good-bg: #E1F0E5; --warn: #8A5A00; --warn-bg: #F7EBCF; --bad: #AB3526; --bad-bg: #F8E2DC;
+  --pblue: #8FB4D9; --peach: #E8A07A; --sage: #9CC7AC; --sky: #C2B3E0; --butter: #EBCF86; --tipmuted: #B9C2BC;
+  --tint-pf: #E9F0F6; --tint-ld: #E6F1E9; --tint-kp: #F8EBE1;
+  --glass: rgba(246, 242, 235, 0.82); --scrim: rgba(28, 36, 33, 0.45);
+  --shadow: 0 1px 0 rgba(28, 36, 33, 0.03), 0 12px 28px -20px rgba(28, 36, 33, 0.28);
+  --shadow-up: 0 2px 0 rgba(28, 36, 33, 0.03), 0 22px 40px -22px rgba(28, 36, 33, 0.38);
+  --ring: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+  --f-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-card: 20px; --r-ctl: 12px;
+}
+@media (prefers-color-scheme: dark) {
+:root:not([data-theme="light"]) {
+  --bg: #131715; --surface: #1B211E; --surface2: #242C28; --ink: #F2EEE6; --ink2: #CFD5CF; --muted: #9BA69F;
+  --line: #333E38; --grid: #2A332E;
+  --accent: #86D3B4; --accent-soft: #1F342C; --on-accent: #0F1D17; --copper: #E6A077;
+  --good: #84D7A5; --good-bg: #17301F; --warn: #ECC06B; --warn-bg: #382C10; --bad: #F39683; --bad-bg: #3A1F1A;
+  --pblue: #7FA6CF; --peach: #D9906A; --sage: #7FB796; --sky: #A999D0; --butter: #D7BB6F; --tipmuted: #6F7B74;
+  --tint-pf: #1F2930; --tint-ld: #1E2B24; --tint-kp: #2E2620;
+  --glass: rgba(19, 23, 21, 0.8); --scrim: rgba(0, 0, 0, 0.62);
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 14px 30px -20px rgba(0, 0, 0, 0.8);
+  --shadow-up: 0 2px 0 rgba(0, 0, 0, 0.25), 0 24px 44px -22px rgba(0, 0, 0, 0.9);
+  color-scheme: dark;
+}
+:root:not([data-theme="light"]) #btn-theme .i-sun { display: block; } :root:not([data-theme="light"]) #btn-theme .i-moon { display: none; }
+:root:not([data-theme="light"]) .hero-art img, :root:not([data-theme="light"]) .pt-art img, :root:not([data-theme="light"]) .modal-hero img { filter: brightness(0.86) saturate(0.95); }
+}
+:root[data-theme="dark"] {
+  --bg: #131715; --surface: #1B211E; --surface2: #242C28; --ink: #F2EEE6; --ink2: #CFD5CF; --muted: #9BA69F;
+  --line: #333E38; --grid: #2A332E;
+  --accent: #86D3B4; --accent-soft: #1F342C; --on-accent: #0F1D17; --copper: #E6A077;
+  --good: #84D7A5; --good-bg: #17301F; --warn: #ECC06B; --warn-bg: #382C10; --bad: #F39683; --bad-bg: #3A1F1A;
+  --pblue: #7FA6CF; --peach: #D9906A; --sage: #7FB796; --sky: #A999D0; --butter: #D7BB6F; --tipmuted: #6F7B74;
+  --tint-pf: #1F2930; --tint-ld: #1E2B24; --tint-kp: #2E2620;
+  --glass: rgba(19, 23, 21, 0.8); --scrim: rgba(0, 0, 0, 0.62);
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 14px 30px -20px rgba(0, 0, 0, 0.8);
+  --shadow-up: 0 2px 0 rgba(0, 0, 0, 0.25), 0 24px 44px -22px rgba(0, 0, 0, 0.9);
+  color-scheme: dark;
+}
+:root[data-theme="dark"] #btn-theme .i-sun { display: block; } :root[data-theme="dark"] #btn-theme .i-moon { display: none; }
+:root[data-theme="dark"] .hero-art img, :root[data-theme="dark"] .pt-art img, :root[data-theme="dark"] .modal-hero img { filter: brightness(0.86) saturate(0.95); }
+
+
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; font-feature-settings: "tnum" 1, "calt" 1, "case" 1; }
+.app-bg { background: radial-gradient(60rem 28rem at 50% -14rem, color-mix(in srgb, var(--accent-soft) 70%, transparent), transparent 70%), var(--bg); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+a { color: var(--accent); }
+.sub { color: var(--ink2); }
+.eyebrow, .step-k { color: var(--copper); font-family: var(--f-body); font-weight: 700; letter-spacing: 0.09em; }
+
+/* ---------- kop ---------- */
+.topbar { background: transparent; border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+.topbar::before { background: var(--glass); }
+.topbar-in { max-width: 1200px; gap: 16px; padding-block: 10px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.bmark { width: 30px; height: 30px; flex: 0 0 auto; }
+.bm-o { fill: var(--accent); } .bm-r { fill: none; stroke: var(--on-accent); stroke-width: 1.4; opacity: 0.55; } .bm-h { fill: var(--bg); } .bm-t { stroke: var(--copper); stroke-width: 1.5; stroke-linecap: round; fill: none; }
+.topbar .wordmark, .wordmark { font-family: var(--f-display); font-weight: 600; font-size: 21px; letter-spacing: -0.015em; color: var(--ink); white-space: nowrap; }
+.tabs { margin: 0 auto; gap: 2px; padding: 4px; background: var(--surface2); border-radius: 14px; }
+.tabs a { padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 14px; color: var(--ink2); gap: 8px; }
+.tabs a svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tabs a:hover { background: color-mix(in srgb, var(--surface) 60%, transparent); color: var(--ink); }
+.tabs a[aria-current="page"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 1px color-mix(in srgb, var(--line) 80%, transparent); }
+.tabs a[aria-current="page"] svg { stroke: var(--accent); }
+.tb-right { display: flex; align-items: center; gap: 8px; margin-left: 0; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: 40px; height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink2); font: 600 14px var(--f-body); cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s; }
+.icon-btn[hidden] { display: none; }
+.icon-btn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.icon-btn:hover { color: var(--ink); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.icon-btn:active { transform: scale(0.96); }
+.icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.icon-btn.install { background: var(--accent); border-color: var(--accent); color: var(--on-accent); padding: 0 14px; }
+#btn-theme .i-sun { display: none; }
+.lang-pick { border-radius: 12px; min-height: 40px; background: var(--surface); border-color: var(--line); color: var(--ink2); }
+.lang-pick select { color: var(--ink); font: 600 13px var(--f-body); background: transparent; }
+.mini { background: transparent; border-top-color: color-mix(in srgb, var(--line) 70%, transparent); color: var(--ink2); }
+.mini b { font-weight: 700; }
+
+/* ---------- pagina ---------- */
+.wrap { max-width: 1200px; padding-top: 28px; padding-bottom: 72px; }
+.page { gap: 20px; }
+.card, .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow); }
+.card { padding: 24px; }
+.panel-head h2, .card > h2, .side-h { font-size: 22px; line-height: 1.2; margin: 0; }
+.panel-head .sub { margin-top: 6px; max-width: 64ch; }
+
+/* ---------- held ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 40px; align-items: center; padding: 18px 12px 10px 4px; background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible; }
+.hero-text { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.kicker { display: inline-flex; align-items: center; gap: 9px; margin: 0; font: 700 12.5px var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); }
+.kdot { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 35% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), var(--copper); }
+.hero h1 { margin: 0; font-size: clamp(34px, 5.2vw, 58px); line-height: 1.04; letter-spacing: -0.025em; max-width: 14ch; }
+.hero-sub { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink2); max-width: 46ch; }
+.hero-sub[hidden] { display: none; }
+.hero .ov-start { display: none; }
+.hero-art { position: relative; aspect-ratio: 4 / 3; border-radius: 26px; overflow: visible; }
+.hero-art img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 26px; }
+.hero-art::after { content: ""; position: absolute; inset: -9px; border: 2px dashed color-mix(in srgb, var(--copper) 55%, transparent); border-radius: 33px; pointer-events: none; }
+.hero .ov-tiles { margin: 6px 0 0; padding: 0; }
+.ovt-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.ovt { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.ovt.auto { border-style: dashed; border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.ovt-l { font-size: 11px; letter-spacing: 0.08em; color: var(--muted); }
+.ovt-v { font-family: var(--f-num); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
+.ovt-chance .ovt-v { font-family: var(--f-display); font-weight: 600; font-size: 30px; }
+.ovt-note { color: var(--muted); }
+
+/* ---------- werkblad: invoer naast uitkomst ---------- */
+.home-grid { display: grid; grid-template-columns: 348px minmax(0, 1fr); gap: 24px; align-items: start; }
+.home-side { position: sticky; top: 84px; min-width: 0; }
+.home-main { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.side-card { display: flex; flex-direction: column; gap: 14px; padding: 20px; border-top: 3px solid var(--accent); }
+.side-more { justify-content: center; }
+#ov-quick .snel, #step1-slot .snel { background: none; border: 0; box-shadow: none; padding: 0; border-radius: 0; display: block; }
+#ov-quick .snel .ec-img, #ov-quick .snel .snel-body > .eyebrow, #ov-quick .snel .snel-body > h2, #ov-quick .snel .snel-body > .sub { display: none; }
+#ov-quick .snel .snel-body { padding: 0; }
+#ov-quick .snel .snel-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 0; }
+#ov-quick .qp { display: flex; flex-direction: column; gap: 8px; }
+.adv-card:has(#advies[hidden]) { display: none; }
+.adv-card { background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--accent-soft) 55%, var(--surface))); border-color: color-mix(in srgb, var(--accent) 22%, var(--line)); }
+.adv-in { padding: 0; margin: 0; border: 0; }
+.adv-big, .adv-top b { font-family: var(--f-display); font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
+.hb-track { background: var(--surface2); } .hb-fill { background: linear-gradient(90deg, var(--sage), var(--good)); }
+
+/* ---------- uitkomst ---------- */
+.status { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 8px 28px; align-items: center; padding: 24px 28px; }
+.status .gauge { max-width: 230px; grid-row: span 2; }
+.status .srcline { text-align: left; }
+.status.good { border-color: color-mix(in srgb, var(--good) 45%, var(--line)); } .status.warn { border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); } .status.bad { border-color: color-mix(in srgb, var(--bad) 45%, var(--line)); }
+.gauge .g-bg { stroke: var(--surface2); }
+.gauge .g-num { font-family: var(--f-display); font-weight: 600; font-size: 40px; fill: var(--ink); }
+.gauge .g-lbl { fill: var(--muted); font-family: var(--f-body); }
+.verdict { background: none !important; border: 0 !important; padding: 0; }
+.verdict .pill { font-family: var(--f-display); font-weight: 600; font-size: 22px; }
+.verdict-text { color: var(--ink2); }
+.chip, .verdict .chip { background: var(--surface2); border: 1px solid var(--line); color: var(--ink2); border-radius: 99px; }
+.kpis { gap: 12px; }
+.kpi { padding: 16px 18px; border-radius: 16px; box-shadow: none; }
+.k-label { color: var(--muted); font-weight: 600; }
+.k-val { font-family: var(--f-num); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.k-sub { color: var(--muted); }
+.fan-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.fan-box b { font-family: var(--f-num); font-weight: 700; letter-spacing: -0.02em; }
+.fan-ctl button, .info-btn { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; }
+.fan-pop, .tip { background: var(--surface); border: 1px solid var(--line); color: var(--ink); box-shadow: var(--shadow-up); }
+.ph { background: repeating-linear-gradient(135deg, transparent 0 12px, color-mix(in srgb, var(--accent) 5%, transparent) 12px 24px); border-color: var(--line); color: var(--muted); }
+.legend { color: var(--ink2); }
+.table-view summary, .readmore summary { color: var(--accent); }
+.more { font-family: var(--f-body); font-weight: 700; font-size: 12.5px; letter-spacing: 0.1em; color: var(--muted); }
+.nlink { box-shadow: none; }
+.nlink:nth-child(1) { background: linear-gradient(135deg, var(--surface), var(--tint-pf)); }
+.nlink:nth-child(2) { background: linear-gradient(135deg, var(--surface), var(--tint-ld)); }
+.nlink:nth-child(3) { background: linear-gradient(135deg, var(--surface), var(--tint-kp)); }
+.nlink b { font-family: var(--f-display); font-weight: 600; color: var(--ink); }
+#sec-pf { background: linear-gradient(135deg, var(--surface), var(--tint-pf)); }
+#sec-ladder { background: linear-gradient(135deg, var(--surface), var(--tint-ld)); }
+#sec-koop { background: linear-gradient(135deg, var(--surface), var(--tint-kp)); }
+.is-calc .status .gauge, .is-calc .ovt-chance, .is-calc .kpis, .is-calc .mini { opacity: 0.55; transition: opacity 0.2s 0.25s; }
+
+/* ---------- knoppen en velden ---------- */
+.btn { border-radius: 12px; font-family: var(--f-body); font-weight: 600; min-height: 46px; padding: 10px 20px; }
+.btn.sm { min-height: 36px; padding: 6px 12px; font-size: 14px; }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--accent) 80%, transparent); }
+.btn.primary:hover { box-shadow: 0 12px 22px -10px color-mix(in srgb, var(--accent) 85%, transparent); filter: none; }
+.btn.primary:disabled { opacity: 0.45; cursor: default; box-shadow: none; transform: none; }
+.btn.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); background: var(--surface); }
+.btn.link { color: var(--accent); background: none; }
+input[type="number"], input[type="text"], select, textarea, #fb-msg { background: var(--surface); color: var(--ink); border: 1px solid color-mix(in srgb, var(--ink) 22%, var(--line)); border-radius: var(--r-ctl); font-family: var(--f-body); }
+input[type="number"], input[type="text"] { font-weight: 600; min-height: 46px; }
+select { min-height: 46px; }
+input::placeholder { color: var(--muted); font-weight: 400; }
+.unit, .opt, .hint { color: var(--muted); }
+label, .flabel { color: var(--ink); }
+.seg { background: var(--surface2); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 2px; }
+.seg-opt span { border-radius: 9px; color: var(--ink2); }
+.seg-opt input:checked + span { background: var(--accent); color: var(--on-accent); }
+input[type="range"] { accent-color: var(--accent); }
+.tag { border-radius: 99px; font-weight: 600; }
+.tag.zelf { background: color-mix(in srgb, var(--sky) 30%, var(--surface)); color: var(--ink); }
+.tag.bron { background: var(--accent-soft); color: var(--accent); }
+.tag.aanname { background: var(--warn-bg); color: var(--warn); }
+.reset { color: var(--accent); }
+
+/* ---------- pagina-kop (Invullen, Inzicht, Over) ---------- */
+.page-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: center; padding: 6px 4px 2px; }
+.page-top.has-art { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); }
+.pt-text { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pg-h { margin: 0; font-size: clamp(30px, 4.2vw, 46px); line-height: 1.06; letter-spacing: -0.022em; }
+.pg-h span { color: var(--accent); }
+.page-top .sub { margin: 0; font-size: 17px; max-width: 56ch; }
+.pt-art { position: relative; aspect-ratio: 3 / 2; }
+.pt-art img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; display: block; }
+.pt-art::after { content: ""; position: absolute; inset: -8px; border: 2px dashed color-mix(in srgb, var(--copper) 50%, transparent); border-radius: 31px; pointer-events: none; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-btn { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 99px; padding: 8px 14px; min-height: 38px; font: 600 14px var(--f-body); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.chip-btn:hover { border-color: var(--accent); }
+.chip-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.about-body { color: var(--ink2); }
+.about-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 20px; align-items: start; }
+.about-grid > .faq { grid-row: span 2; }
+.about-grid > #privacy, .about-grid > #disclaimer { grid-column: 1 / -1; }
+.about-grid > #privacy .about-body, .about-grid > #disclaimer .about-body { max-width: none; columns: 2 320px; column-gap: 32px; display: block; }
+.about-grid .about-body p { margin: 0 0 10px; break-inside: avoid; }
+footer { color: var(--muted); }
+.site-langs a { color: var(--muted); } .site-langs a[aria-current="true"] { color: var(--ink); }
+.goal-bar { border-left: 4px solid var(--copper); }
+.empty-note { border-style: dashed; color: var(--ink2); box-shadow: none; }
+
+/* ---------- stappen ---------- */
+.progress { background: var(--surface2); } .progress span { background: var(--accent); }
+.stepper button { color: var(--ink2); }
+.stepper button .num { background: var(--surface); border: 1px solid var(--line); color: var(--ink2); box-shadow: none; }
+.stepper button[aria-current="step"] .num { background: var(--accent); background-image: none; border-color: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.stepper button.done .num { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.step-head h2 { font-size: 28px; line-height: 1.12; }
+.knob, .cmp-card, .pcard { background: var(--surface); border-color: var(--line); }
+
+/* ---------- bronnen, vragen ---------- */
+.srcs > summary { background: var(--surface); border-color: var(--line); color: var(--ink2); }
+.srcs > summary:hover { background: var(--surface2); }
+.srcs > summary i { background: var(--accent-soft); color: var(--accent); }
+.srcline a { color: var(--accent); }
+.fb-spot { color: var(--copper); }
+.faq-i { border-top-color: var(--line); }
+.faq-i > summary { font-family: var(--f-body); font-weight: 600; font-size: 16px; }
+.faq-i > summary::after { border-color: var(--accent); }
+
+/* ---------- plannen vergelijken ---------- */
+.pl-grid { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--surface); }
+.pl-row { display: grid; grid-template-columns: minmax(120px, 1.25fr) repeat(3, minmax(0, 1fr)); align-items: center; border-top: 1px solid var(--line); }
+.pl-row:first-child { border-top: 0; }
+.pl-row > span { padding: 11px 14px; min-width: 0; overflow-wrap: anywhere; }
+.pl-head > span { font: 700 12px var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--surface2); }
+.pl-l { color: var(--ink2); font-size: 14px; }
+.pl-v { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.pl-head .pl-col { text-align: right; }
+.pl-row .now { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+.pl-head .pl-col.now { color: var(--accent); background: var(--accent-soft); }
+.pl-succ { font-family: var(--f-display); font-size: 22px; font-weight: 600; }
+.pl-succ.good { color: var(--good); } .pl-succ.warn { color: var(--warn); } .pl-succ.bad { color: var(--bad); }
+.pl-none { color: var(--muted); font-weight: 400; font-size: 13px; }
+.pl-btns { display: flex; flex-wrap: wrap; gap: 4px 8px; justify-content: flex-end; align-items: center; }
+.pl-save { margin-top: 14px; }
+
+/* ---------- vensters ---------- */
+.modal { background: var(--scrim); }
+.modal-card { background: var(--surface); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.55); border-radius: 24px; }
+.modal-hero { background: var(--surface2); }
+.modal-brand { background: var(--glass); box-shadow: none; border: 1px solid var(--line); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.modal-actions { background: linear-gradient(180deg, transparent, var(--surface) 30%); }
+#intro-s1 h2, .intro-about-h { font-family: var(--f-display); }
+.fb-x { background: var(--surface2); color: var(--ink); border: 0; border-radius: 10px; }
+.fb-cats label span { border-color: var(--line); background: var(--surface); color: var(--ink); }
+.fb-cats input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.slot-machine { background: var(--surface2); border-color: var(--copper); box-shadow: inset 0 0 0 4px var(--surface); }
+.slot-window { background: var(--surface); border-color: var(--line); }
+.slot-item b { font-family: var(--f-display); }
+.share-list { display: grid; gap: 10px; margin-top: 6px; }
+.share-opt { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 14px 16px; min-height: 64px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; transition: border-color 0.15s, transform 0.15s, background 0.15s; }
+.share-opt[hidden] { display: none; }
+.share-opt:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 40%, var(--surface)); }
+.share-opt:active { transform: scale(0.99); }
+.share-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.share-opt svg { width: 24px; height: 24px; flex: 0 0 auto; fill: none; stroke: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.share-opt > span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.share-opt b { font-weight: 600; } .share-opt > span > span { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+#share-out { width: 100%; box-sizing: border-box; margin-top: 12px; padding: 12px; font: 13px/1.5 var(--f-body); resize: vertical; }
+.toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 12px); z-index: 200; max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 14px; background: #1C2421; color: #FFFEFB; font: 600 14.5px var(--f-body); box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.6); opacity: 0; transition: opacity 0.2s, transform 0.2s; text-align: center; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.tour-spot { box-shadow: 0 0 0 9999px rgba(15, 20, 18, 0.6); }
+.tour-tip { background: #1C2421; color: #FFFEFB; }
+.tour-tip h3, .tour-tip p { color: #FFFEFB; }
+.tour-tip .btn.primary { background: #FFFEFB; color: #1C2421; border-color: #FFFEFB; box-shadow: none; }
+.tour-tip .btn.ghost { background: none; color: #FFFEFB; border-color: rgba(255, 255, 255, 0.35); }
+.tour-tip .btn.link { color: #D7E6DF; }
+
+/* ---------- smal scherm ---------- */
+@media (max-width: 1020px) {
+  .home-grid { grid-template-columns: 300px minmax(0, 1fr); gap: 18px; }
+  .status { grid-template-columns: minmax(0, 1fr); } .status .gauge { grid-row: auto; justify-self: center; } .status .srcline { text-align: center; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); } .about-grid > .faq { grid-row: auto; }
+}
+@media (max-width: 760px) {
+  .wrap { padding-top: 18px; padding-bottom: 120px; }
+  .card { padding: 18px; }
+  .tabs { left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); margin: 0; padding: 5px; border: 1px solid var(--line); border-radius: 20px; background: var(--glass); -webkit-backdrop-filter: saturate(1.5) blur(18px); backdrop-filter: saturate(1.5) blur(18px); box-shadow: 0 16px 36px -14px rgba(0, 0, 0, 0.35); }
+  .tabs a { border-radius: 15px; padding: 7px 4px; font-size: 11.5px; gap: 3px; }
+  .tabs a[aria-current="page"] { background: var(--accent); color: var(--on-accent); box-shadow: none; }
+  .tabs a[aria-current="page"] svg { stroke: var(--on-accent); }
+  .icon-btn .ib-l { display: none; } .icon-btn, .icon-btn.install { padding: 0; width: 36px; min-width: 36px; height: 36px; border-radius: 10px; }
+  .lang-pick { min-height: 36px; padding-left: 6px; border-radius: 10px; } .lang-pick svg { display: none; } .lang-pick select { padding: 4px 2px; min-height: 32px; }
+  .topbar-in { gap: 8px; }
+  .topbar .wordmark { font-size: 19px; } .bmark { width: 27px; height: 27px; }
+  .tb-right { gap: 5px; margin-left: auto; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 4px; }
+  .hero h1 { font-size: clamp(32px, 9.4vw, 44px); }
+  .hero-sub { font-size: 16.5px; }
+  .hero-art { aspect-ratio: 16 / 9; margin: 4px 8px 6px; }
+  html:not(.is-empty) .hero-art { display: none; }
+  .hero .ov-tiles { display: none; }
+  .home-grid { display: flex; flex-direction: column; gap: 16px; }
+  .home-side { position: static; } .home-main { display: contents; }
+  html:not(.is-empty) #status-card { order: -1; }
+  .page-top.has-art { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .pt-art { aspect-ratio: 16 / 9; margin: 0 8px 4px; order: -1; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 2px 16px; scrollbar-width: none; } .chips::-webkit-scrollbar { display: none; } .chip-btn { white-space: nowrap; flex: 0 0 auto; }
+  .about-grid > #privacy .about-body, .about-grid > #disclaimer .about-body { columns: auto; }
+  .pl-row { grid-template-columns: minmax(84px, 1fr) repeat(3, minmax(0, 1fr)); }
+  .pl-row > span { padding: 10px 8px; font-size: 13.5px; } .pl-l { font-size: 12.5px; } .pl-succ { font-size: 19px; }
+  .pl-btns { flex-direction: column; align-items: flex-end; }
+  .step-head h2 { font-size: 24px; }
+}
+@media (max-width: 380px) { .topbar .wordmark { font-size: 17px; } .tb-right { gap: 4px; } #btn-theme { display: none; } }
+
+/* ---------- afdrukken ---------- */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface2: #f3f3f3; --line: #cfcfcf; --shadow: none; color-scheme: light; }
+  html, body, .app-bg { background: #fff !important; }
+  .topbar, .tabs, .home-side, .next, .fb-line, .support-line, .hero-art, .fan-ctl, .info-btn, .seg, .srcline, .table-view, .toast, .modal, .tour, footer, .hero .ov-start { display: none !important; }
+  .page[hidden] { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .home-grid { display: block; } .home-main { display: block; }
+  .card, .kpi { box-shadow: none; break-inside: avoid; margin-bottom: 12px; }
+  .hero { display: block; padding: 0 0 8px; } .hero h1 { font-size: 30px; max-width: none; }
+  .hero .ov-tiles { display: block !important; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- bijwerken na eerste beoordeling ---------- */
+.page-top { padding: 14px 4px 6px; }
+#page-input .page-top { padding-bottom: 0; }
+.step-head .sub, .step .sub { max-width: 64ch; }
+.cmp-card.sel, .cmp-card.auto, .cmp-card[aria-current="true"] { border-color: var(--accent); }
+.intro-s0 .welcome { color: var(--copper); }
+.intro-prefs { background: var(--surface2); border-color: var(--line); }
 </style>
 <link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1182,18 +1538,20 @@ input::placeholder { font-weight: 400; }
 <header class="topbar" id="topbar">
   <div class="topbar-in">
     <a class="brand" href="#overview" data-t-aria="brand.aria" aria-label="Buttons, vers l’aperçu">
-      <svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg>
-      <span class="wordmark" data-t="brand">Buttons</span><span class="v2">V5</span>
+      <svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="18" class="bm-o"/><circle r="12.5" class="bm-r"/><circle cx="-4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="-4.4" cy="4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="4.4" r="2.3" class="bm-h"/><path d="M-4.4 -4.4L4.4 4.4M4.4 -4.4L-4.4 4.4" class="bm-t"/></svg>
+      <span class="wordmark" data-t="brand">Buttons</span>
     </a>
     <nav class="tabs" data-t-aria="nav.aria" aria-label="Pages">
-      <a href="#overview" id="tab-overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/></svg><span data-t="tab.overview">Aperçu</span></a>
-      <a href="#input" id="tab-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4l10-10-4-4L5 15zM13 7l4 4"/></svg><span data-t="tab.input">Saisir</span></a>
-      <a href="#insight" id="tab-insight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19c4-1 5-8 8-8s4 4 8 2M4 5v14h16"/></svg><span data-t="tab.insight">Analyse</span></a>
-      <a href="#about" id="tab-about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span data-t="tab.about">À propos</span></a>
+      <a href="#overview" id="tab-overview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5V20h-5.5v-5h-5v5H4z"/></svg><span data-t="tab.overview">Aperçu</span></a>
+      <a href="#input" id="tab-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M4 12h7M4 17h5M15.5 18.5l-1 .5.5-1 5.2-5.2 1 1z"/><circle cx="17" cy="7" r="2.2"/></svg><span data-t="tab.input">Saisir</span></a>
+      <a href="#insight" id="tab-insight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M5 8h14M5 8l-2.5 6h5zM19 8l-2.5 6h5zM8 20h8"/></svg><span data-t="tab.insight">Analyse</span></a>
+      <a href="#about" id="tab-about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg><span data-t="tab.about">À propos</span></a>
     </nav>
     <div class="tb-right">
+      <button class="icon-btn share-open" type="button" data-t-aria="sh.btn" aria-label="Partager"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span class="ib-l" data-t="sh.btn">Partager</span></button>
+      <button class="icon-btn" id="btn-theme" type="button" data-t-aria="th.btn" aria-label="Clair ou sombre"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg></button>
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label" aria-label="Langue"></select></label>
-      <button class="hashtag" id="btn-install" type="button" hidden data-t-aria="inst.btn" aria-label="Installer l’app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span>App</span></button>
+      <button class="icon-btn install" id="btn-install" type="button" hidden data-t-aria="inst.btn" aria-label="Installer l’app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span class="ib-l">App</span></button>
     </div>
   </div>
   <div class="mini" id="mini" aria-live="off"></div>
@@ -1202,21 +1560,32 @@ input::placeholder { font-weight: 400; }
 <main class="wrap">
 
   <section class="page" id="page-overview" aria-labelledby="ov-h">
-    <div class="dash">
-      <section class="card advies ov-main" id="ov-main" aria-labelledby="ov-h">
-        <div class="ovm-top">
-          <div class="ovm-head"><h1 id="ov-h" data-t="ov.h">Où en êtes-vous ?</h1><p class="sub" id="ov-sub"></p><a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden>Commencer</a></div>
-          <div class="ovm-art"><img fetchpriority="high" decoding="async" src="/img/buidel.jpg" alt="Une bourse en cuir d’où des boutons roulent sur une table en bois" data-t-alt="alt.pouch"></div>
-        </div>
+    <header class="hero" id="ov-main">
+      <div class="hero-text">
+        <p class="kicker"><span class="kdot" aria-hidden="true"></span><span data-t="home.kick">Simulateur de retraite gratuit</span></p>
+        <h1 id="ov-h" data-t="home.h1">Combien de temps durera votre épargne ?</h1>
+        <p class="hero-sub" id="ov-sub"></p>
+        <a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden>Commencer</a>
         <div class="ov-tiles" id="ov-tiles" hidden></div>
-        <div class="adv-in" id="advies" aria-live="polite" hidden></div>
-      </section>
-      <div class="card status" id="status-card" aria-live="polite">
+      </div>
+      <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/buidel.jpg" alt="Une bourse en cuir d’où des boutons roulent sur une table en bois" data-t-alt="alt.pouch"></div>
+    </header>
+    <div class="home-grid">
+      <aside class="home-side" aria-labelledby="quick-h">
+        <div class="card side-card">
+          <h2 class="side-h" id="quick-h" data-t="home.quick">Vos chiffres</h2>
+          <div id="ov-quick"></div>
+          <a class="btn ghost side-more" href="#input"><span data-t="home.more">Tout affiner</span><span aria-hidden="true"> →</span></a>
+        </div>
+      </aside>
+      <div class="home-main">
+        <div class="card status" id="status-card" aria-live="polite">
         <div class="gauge" id="gauge"></div>
         <div class="verdict" id="verdict"></div>
         <div class="srcline" data-src="le,mkt"></div>
       </div>
-      <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
+        <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
+        <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">Évolution de votre patrimoine</h2><p class="sub" id="fan-sub"></p></div>
         <div class="fan-head">
           <div class="seg" role="radiogroup" data-t-aria="fan.view" aria-label="Affichage">
@@ -1244,8 +1613,8 @@ input::placeholder { font-weight: 400; }
           <div class="tbl" id="tbl"></div>
         </details>
       </section>
-      <div class="kpis" id="kpis"></div>
-      <section class="card panel" id="panel-flow" aria-labelledby="flow-h">
+        <div class="kpis" id="kpis"></div>
+        <section class="card panel" id="panel-flow" aria-labelledby="flow-h">
         <div class="panel-head"><h2 id="flow-h" data-t="flow.h">Ce que vous voulez dépenser par mois et d’où cela vient</h2><p class="sub" data-t="flow.sub">Par an, en argent d’aujourd’hui : ce qui vient de la retraite de base, de la retraite complémentaire et du travail et ce que nous prenons sur votre patrimoine. Touchez ou survolez une barre pour les chiffres.</p></div>
         <div class="chart" id="flow"></div>
         <div class="legend">
@@ -1257,7 +1626,7 @@ input::placeholder { font-weight: 400; }
         </div>
         <div class="srcline" data-src="sp,pen"></div>
       </section>
-      <section class="next" aria-labelledby="next-h">
+        <section class="next" aria-labelledby="next-h">
         <h2 class="more" id="next-h" data-t="next.h">Pour aller plus loin</h2>
         <div class="next-grid">
           <a class="card nlink" href="#insight" data-scroll="sec-pf"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><b data-t="next.pf">Comparer les portefeuilles</b><span data-t="next.pfS">Prudent, équilibré et dynamique côte à côte</span></a>
@@ -1265,19 +1634,19 @@ input::placeholder { font-weight: 400; }
           <a class="card nlink" href="#insight" data-scroll="sec-koop"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><b data-t="next.kp">Pouvoir d’achat par pays</b><span data-t="next.kpS">Ce que vaut votre budget ailleurs</span></a>
         </div>
       </section>
-      <p class="fb-line"><span data-t="fb.line">Une astuce ou un ajout ? Nous serions ravis de vous lire.</span> <button class="btn ghost fb-open" type="button" data-cat="idea"><span aria-hidden="true">✎</span> <span data-t="fb.btn">Donner une astuce</span></button></p>
-      <p class="support-line" id="support-ov" hidden></p>
+        <p class="fb-line"><span data-t="fb.line">Une astuce ou un ajout ? Nous serions ravis de vous lire.</span> <button class="btn ghost fb-open" type="button" data-cat="idea"><span aria-hidden="true">✎</span> <span data-t="fb.btn">Donner une astuce</span></button></p>
+        <p class="support-line" id="support-ov" hidden></p>
+      </div>
     </div>
   </section>
 
   <section class="page" id="page-input" aria-labelledby="in-h" hidden>
-    <div class="card ov-hero">
-      <div class="ov-text">
-        <h1 id="in-h" data-t="in.h">Cinq petits boutons</h1>
+    <header class="page-top">
+      <div class="pt-text">
+        <h2 class="pg-h" id="in-h" data-t="in.h">Cinq petits boutons</h2>
         <p class="sub" data-t="in.sub">Tout se recalcule pendant que vous tapez et rien ne quitte ce navigateur.</p>
       </div>
-      <div class="ov-art photo"><img loading="lazy" decoding="async" src="/img/schaaltjes.jpg" alt="Des boutons triés par couleur dans de petits bols" data-t-alt="alt.bowls" style="object-position: 50% 55%"></div>
-    </div>
+    </header>
     <section class="card goal-bar" id="goal-bar" aria-live="polite" hidden>
         <div class="gb-text"><span class="eyebrow" data-t="goal.bar">Votre question</span><h2 id="gb-q"></h2><p class="sub" data-t="goal.sub">Remplissez les étapes ci-dessous. Votre réponse se met à jour au fur et à mesure.</p></div>
         <div class="gb-actions"><button class="btn primary" type="button" id="gb-go" data-t="goal.go">Voir ma réponse</button><button class="btn link" type="button" id="gb-change" data-t="goal.change">Poser une autre question</button></div>
@@ -1295,10 +1664,10 @@ input::placeholder { font-weight: 400; }
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Vous prévoyez pour une ou pour deux personnes ?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 personne</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 personnes</span></label></div></div>
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">ans</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexe"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Homme</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Femme</span></label></div></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">ans</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexe"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Homme</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Femme</span></label></div></div>
-            <div class="field"><label for="q-budget" data-t="f.budget">Combien aimeriez-vous dépenser par mois ?</label><div class="inrow"><input id="q-budget" type="number" inputmode="decimal" min="0" step="25" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
-            <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Combien avez-vous épargné ou investi jusqu’ici ?</span> <span class="opt" data-t="q.optional">(facultatif)</span></label><div class="inrow"><input id="q-startkapitaal" type="number" inputmode="decimal" min="0" step="1000" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
-            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
-            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="number" inputmode="decimal" min="0" step="10" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
+            <div class="field"><label for="q-budget" data-t="f.budget">Combien aimeriez-vous dépenser par mois ?</label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
+            <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Combien avez-vous épargné ou investi jusqu’ici ?</span> <span class="opt" data-t="q.optional">(facultatif)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
+            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
+            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
           </div>
           <p class="hint sp-q" id="q-sp-hint"></p>
         </div>
@@ -1314,13 +1683,23 @@ input::placeholder { font-weight: 400; }
   </section>
 
   <section class="page" id="page-insight" aria-labelledby="iz-h" hidden>
-    <div class="card ov-hero">
-      <div class="ov-text">
-        <h1 id="iz-h" data-t="iz.h">Ce que d’autres choix changent</h1>
+    <header class="page-top has-art">
+      <div class="pt-text">
+        <h2 class="pg-h" id="iz-h" data-t="iz.h">Ce que d’autres choix changent</h2>
         <p class="sub" data-t="iz.sub">Envie de voir un peu plus loin ? Ici, vous voyez ce que d’autres choix changeraient.</p>
+        <div class="chips">
+          <button type="button" class="chip-btn" data-jump="sec-plans" data-t="pl.h">Comparer deux plans</button>
+          <button type="button" class="chip-btn" data-jump="sec-pf" data-t="next.pf">Comparer les portefeuilles</button>
+          <button type="button" class="chip-btn" data-jump="sec-ladder" data-t="next.ld">Un autre budget mensuel</button>
+          <button type="button" class="chip-btn" data-jump="sec-koop" data-t="next.kp">Pouvoir d’achat par pays</button>
+        </div>
       </div>
-      <div class="ov-art photo" style="min-height: 270px"><img loading="lazy" decoding="async" src="/img/weegschaal.jpg" alt="Boutons dans une balance en laiton, un choix pesé contre un autre" data-t-alt="alt.stacks" style="object-position: 50% 15%"></div>
-    </div>
+      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/weegschaal.jpg" alt="Boutons dans une balance en laiton, un choix pesé contre un autre" data-t-alt="alt.stacks"></div>
+    </header>
+    <section class="card panel" id="sec-plans" aria-labelledby="pl-h">
+      <div class="panel-head"><h2 id="pl-h" data-t="pl.h">Comparer deux plans</h2><p class="sub" data-t="pl.sub">Enregistrez vos données comme plan A ou B, modifiez quelque chose et voyez la différence côte à côte.</p></div>
+      <div id="plans"></div>
+    </section>
     <div class="card empty-note"><p data-t="iz.empty">Saisissez d’abord dans <a href="#overview">Aperçu</a> ce que vous aimeriez dépenser chaque mois ; les comparaisons s’afficheront ici.</p></div>
     <section class="card panel needs-data" id="sec-pf" aria-labelledby="pf-h">
       <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><h2 id="pf-h" data-t="pf.h">Comment se comportent les portefeuilles</h2><p class="sub" id="pf-sub"></p></div>
@@ -1346,27 +1725,19 @@ input::placeholder { font-weight: 400; }
   </section>
 
   <section class="page" id="page-about" aria-labelledby="ab-h" hidden>
-    <section class="card ov-hero ab-hero" aria-label="Buttons">
-      <div class="ov-text">
-        <h1 id="ab-h" data-t="pay.h">L’heure de faire le point.<br><span>L’heure d’avancer.</span></h1>
+    <header class="page-top has-art">
+      <div class="pt-text">
+        <h2 class="pg-h" id="ab-h" data-t="pay.h">L’heure de faire le point.<br><span>L’heure d’avancer.</span></h2>
         <div class="about-body" data-t="about.body"><p>Buttons est votre tableau de bord financier personnel. Nous vous montrons ce que vous avez, la marge que cela vous donne aujourd’hui et demain et comment votre patrimoine peut évoluer.</p><p>Vous explorez des scénarios, testez des choix et voyez ce qu’ils signifient pour votre avenir. Tout est en argent d’aujourd’hui et reste dans votre propre navigateur.</p><p>Car l’important n’est pas seulement ce que vous avez construit, mais ce que vous pouvez en faire.</p></div>
         <div class="btn-row">
           <button class="btn ghost" type="button" id="btn-intro" data-t="about.intro">Revoir l’introduction</button>
           <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour">Lancer la visite</button>
         </div>
       </div>
-      <div class="ov-art photo"><img loading="lazy" decoding="async" src="/img/over.jpg" alt="Un carnet ouvert avec des boutons alignés" data-t-alt="alt.notebook"></div>
-    </section>
-    <section class="card panel fb-card" aria-labelledby="ab-fb">
-      <h2 id="ab-fb" data-t="fb.aboutH">Aidez-nous à améliorer Buttons</h2>
-      <p data-t="fb.aboutP">Il manque une règle pour votre pays, vous avez repéré une erreur ou vous avez une idée ? Dites-le-nous. Chaque astuce nous aide à garder Buttons juste pour tous.</p>
-      <div class="btn-row"><button class="btn primary fb-open" type="button" data-cat="idea" data-t="fb.btn">Donner une astuce</button></div>
-    </section>
-    <section class="card panel" aria-labelledby="ab-c">
-      <h2 id="ab-c" data-t="about.ctryH">Votre pays dans Buttons</h2>
-      <div id="ctry-facts"></div>
-    </section>
-    <section class="card panel faq" id="faq" aria-labelledby="ab-faq">
+      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/over.jpg" alt="Un carnet ouvert avec des boutons alignés" data-t-alt="alt.notebook"></div>
+    </header>
+    <div class="about-grid">
+      <section class="card panel faq" id="faq" aria-labelledby="ab-faq">
       <h2 id="ab-faq" data-t="faq.h">Questions fréquentes</h2>
       <details class="faq-i"><summary data-t="faq.q1">Qu’est-ce que Buttons ?</summary><div class="faq-a" data-t="faq.a1"><p>Buttons est un simulateur de retraite gratuit qui montre combien de temps votre épargne durera. Vous indiquez votre âge, votre épargne et le budget mensuel souhaité. Buttons affiche alors la probabilité que votre argent suffise jusqu’à votre âge de fin, sur la base de 4 000 simulations de bonnes et de mauvaises années boursières.</p></div></details>
       <details class="faq-i"><summary data-t="faq.q2">De combien d’épargne ai-je besoin pour arrêter de travailler ?</summary><div class="faq-a" data-t="faq.a2"><p>Cela dépend de votre budget mensuel, de votre âge et de la pension que vous recevrez. Buttons calcule le montant nécessaire pour avoir 90 % de chances que votre argent suffise. En règle générale, il faut souvent 25 à 30 fois les dépenses annuelles que vos pensions ne couvrent pas.</p></div></details>
@@ -1375,14 +1746,24 @@ input::placeholder { font-weight: 400; }
       <details class="faq-i"><summary data-t="faq.q5">Buttons est-il gratuit, et que deviennent mes données ?</summary><div class="faq-a" data-t="faq.a5"><p>Buttons est gratuit, sans publicité et sans compte. Ce que vous saisissez reste dans votre propre navigateur, sur votre appareil, et n’est pas envoyé à Buttons. Les visites sont comptées de façon anonyme, sans cookies.</p></div></details>
       <details class="faq-i"><summary data-t="faq.q6">S’agit-il d’un conseil financier ?</summary><div class="faq-a" data-t="faq.a6"><p>Non. Buttons est un outil de calcul général qui donne des estimations fondées sur des règles simplifiées et des hypothèses. Il ne donne aucun conseil sur votre situation personnelle. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p></div></details>
     </section>
-    <section class="card panel" id="privacy" aria-labelledby="ab-pv">
+      <section class="card panel" aria-labelledby="ab-c">
+      <h2 id="ab-c" data-t="about.ctryH">Votre pays dans Buttons</h2>
+      <div id="ctry-facts"></div>
+    </section>
+      <section class="card panel fb-card" aria-labelledby="ab-fb">
+      <h2 id="ab-fb" data-t="fb.aboutH">Aidez-nous à améliorer Buttons</h2>
+      <p data-t="fb.aboutP">Il manque une règle pour votre pays, vous avez repéré une erreur ou vous avez une idée ? Dites-le-nous. Chaque astuce nous aide à garder Buttons juste pour tous.</p>
+      <div class="btn-row"><button class="btn primary fb-open" type="button" data-cat="idea" data-t="fb.btn">Donner une astuce</button></div>
+    </section>
+      <section class="card panel" id="privacy" aria-labelledby="ab-pv">
       <h2 id="ab-pv" data-t="priv.h">Confidentialité</h2>
       <div class="about-body" data-t="priv.body"><p><strong>Vos données restent chez vous.</strong> Ce que vous saisissez (âges, montants, choix) est enregistré uniquement dans votre navigateur, sur cet appareil. Rien n’est envoyé à Buttons et personne d’autre ne peut le voir. Si vous effacez les données du navigateur, elles disparaissent.</p><p><strong>Pas de suivi.</strong> Aucun cookie publicitaire n’est utilisé et vous n’êtes pas suivi. Les visites sont comptées de façon anonyme (nombre de visites, pages et pays) avec GoatCounter, sans cookies et sans données personnelles. Le stockage dans votre navigateur sert uniquement à faire fonctionner le site et à retenir votre saisie.</p><p><strong>Ce qui passe par des tiers.</strong> Le site est hébergé sur GitHub Pages ; GitHub voit donc des données techniques comme votre adresse IP au chargement de la page. Les polices viennent de Google Fonts ; Google voit donc aussi votre adresse IP. Le formulaire derrière « Donner une astuce » est un Google Form : ce que vous y écrivez parvient à l’auteur et éventuellement à Google. N’y saisissez rien qui doive rester privé. Les liens vers les sources mènent à d’autres sites avec leurs propres règles.</p><p><strong>Contact.</strong> Buttons est un projet personnel sans but lucratif. Ce que vous envoyez via « Donner une astuce » sert uniquement à améliorer le site et n’est pas conservé plus longtemps que nécessaire. Vous voulez faire supprimer quelque chose, ou vous avez une question sur ce texte ? Envoyez un message via « Donner une astuce ».</p></div>
     </section>
-    <section class="card panel" id="disclaimer" aria-labelledby="ab-dc">
+      <section class="card panel" id="disclaimer" aria-labelledby="ab-dc">
       <h2 id="ab-dc" data-t="disc.h">Avertissement</h2>
       <div class="about-body" data-t="disc.body"><p>Buttons est un outil de calcul général, à titre d’information uniquement. Ce n’est <strong>pas</strong> un conseil financier, en placement, fiscal, de retraite ou juridique, et aucun conseil n’est donné sur votre situation personnelle.</p><p>Les résultats sont des estimations fondées sur des règles simplifiées et des hypothèses de rendement, d’inflation et d’espérance de vie. L’avenir peut différer, et les règles par pays peuvent être incomplètes ou dépassées. Aucun droit ne peut être tiré des résultats.</p><p>L’utilisation de ce site se fait à vos propres risques. Dans la mesure permise par la loi, l’auteur décline toute responsabilité pour les décisions prises ou les dommages subis en raison de ce site. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p></div>
     </section>
+    </div>
     <footer>
       <span id="sources"></span>
       <span data-t="about.disclaimer">Buttons vous donne un éclairage, pas un conseil fiscal ou en placement. Nous avons simplifié les règles par pays : consultez aussi les sources officielles.</span>
@@ -1398,7 +1779,7 @@ input::placeholder { font-weight: 400; }
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h0" id="intro-card">
     <div class="modal-hero">
       <img loading="lazy" decoding="async" src="/img/over.jpg" alt="Un carnet ouvert avec des boutons alignés" data-t-alt="alt.notebook">
-      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="2.4"/><circle r="11.5" fill="none" stroke="#5E8FC6" stroke-width="1.6" opacity=".7"/><circle cx="-4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="-4.2" r="2.2" fill="#2F5F94"/><circle cx="-4.2" cy="4.2" r="2.2" fill="#2F5F94"/><circle cx="4.2" cy="4.2" r="2.2" fill="#2F5F94"/><ellipse cx="-7" cy="-9" rx="5" ry="2.4" fill="#fff" opacity=".45"/></svg><span class="wordmark" id="intro-brand" data-t-en="brand">Buttons</span><span class="v2">V5</span></span>
+      <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="18" class="bm-o"/><circle r="12.5" class="bm-r"/><circle cx="-4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="-4.4" cy="4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="4.4" r="2.3" class="bm-h"/><path d="M-4.4 -4.4L4.4 4.4M4.4 -4.4L-4.4 4.4" class="bm-t"/></svg><span class="wordmark" id="intro-brand" data-t-en="brand">Buttons</span></span>
     </div>
     <div class="modal-body intro-s0" id="intro-s0">
       <span class="welcome" data-t-en="intro.welcome"></span>
@@ -1469,6 +1850,22 @@ input::placeholder { font-weight: 400; }
     </div>
   </div>
 </div>
+
+<div class="modal" id="share" hidden>
+  <div class="modal-card share-dlg" role="dialog" aria-modal="true" aria-labelledby="share-h">
+    <div class="modal-body">
+      <div class="fb-top"><h2 id="share-h" data-t="sh.h">Partager ou enregistrer votre résultat</h2><button class="fb-x" type="button" id="share-close" data-t-aria="b.close" aria-label="Fermer">✕</button></div>
+      <p class="sub" data-t="sh.sub">Pour votre partenaire, votre conseiller ou pour plus tard.</p>
+      <div class="share-list">
+        <button type="button" class="share-opt" id="sh-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span><b data-t="sh.link">Copier le lien</b><span data-t="sh.linkS">Le lien contient les chiffres saisis. Toute personne ayant le lien peut les voir.</span></span></button>
+        <button type="button" class="share-opt" id="sh-print"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H4.5v-8h15v8H17M7 14h10v6H7z"/></svg><span><b data-t="sh.print">Imprimer ou enregistrer en PDF</b><span data-t="sh.printS">Une page soignée avec votre résultat et le graphique.</span></span></button>
+        <button type="button" class="share-opt" id="sh-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11.5" height="11.5" rx="2"/><path d="M16 8V6.5a2 2 0 0 0-2-2H6.5a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2H8"/></svg><span><b data-t="sh.copy">Copier le résumé</b><span data-t="sh.copyS">Un court texte pour un message ou un e-mail.</span></span></button>
+      </div>
+      <textarea id="share-out" rows="7" readonly hidden></textarea>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <div class="tour" id="tour" hidden>
   <div class="tour-spot" id="tour-spot"></div>
@@ -3253,7 +3650,46 @@ Object.assign(I18N.en, {
  "faq.q5": "Is Buttons free, and what happens to my data?",
  "faq.a5": "<p>Buttons is free, has no advertising and needs no account. What you enter stays in your own browser on your own device and is not sent to Buttons. Visits are counted anonymously, without cookies.</p>",
  "faq.q6": "Is this financial advice?",
- "faq.a6": "<p>No. Buttons is a general calculation tool that gives estimates based on simplified rules and assumptions. It does not give advice about your personal situation. Check official sources and consult an independent, licensed adviser before you make important financial decisions.</p>"
+ "faq.a6": "<p>No. Buttons is a general calculation tool that gives estimates based on simplified rules and assumptions. It does not give advice about your personal situation. Check official sources and consult an independent, licensed adviser before you make important financial decisions.</p>",
+ "home.h1": "How long will your savings last?",
+ "home.kick": "Free retirement calculator",
+ "home.quick": "Your figures",
+ "home.more": "Fine-tune everything",
+ "pl.h": "Compare two plans",
+ "pl.sub": "Save what you have filled in as plan A or B, change something and see the difference side by side.",
+ "pl.now": "Now",
+ "pl.a": "Plan A",
+ "pl.b": "Plan B",
+ "pl.save": "Save as {n}",
+ "pl.load": "Load",
+ "pl.clear": "Clear",
+ "pl.empty": "Not saved yet",
+ "pl.saved": "Saved as {n}",
+ "pl.loaded": "{n} loaded",
+ "pl.r.bud": "Monthly budget",
+ "pl.r.cap": "Savings",
+ "pl.r.end": "End age",
+ "pl.r.succ": "Chance of success",
+ "pl.r.c90": "Needed for 90% chance",
+ "pl.r.max": "Max. monthly budget (90%)",
+ "pl.r.ctry": "Country",
+ "sh.btn": "Share",
+ "sh.h": "Share or save your result",
+ "sh.sub": "For your partner, your adviser or yourself later.",
+ "sh.link": "Copy link",
+ "sh.linkS": "The link contains the figures you entered. Anyone with the link can see them.",
+ "sh.print": "Print or save as PDF",
+ "sh.printS": "A tidy page with your result and the chart.",
+ "sh.copy": "Copy summary",
+ "sh.copyS": "A short text for a message or e-mail.",
+ "sh.done": "Copied",
+ "sh.fail": "Copying didn’t work. Select the text and copy it yourself.",
+ "sh.empty": "Fill in your monthly budget first; then there is something to share.",
+ "sh.loaded": "Plan loaded from the link.",
+ "th.btn": "Light or dark",
+ "calc": "Calculating…",
+ "nav.plan": "Plan",
+ "nav.compare": "Compare"
 });
 
 Object.assign(I18N.nl, {
@@ -3323,7 +3759,46 @@ Object.assign(I18N.nl, {
  "faq.q5": "Is Knopen tellen gratis, en wat gebeurt er met mijn gegevens?",
  "faq.a5": "<p>Knopen tellen is gratis, heeft geen reclame en je hebt geen account nodig. Wat je invult blijft in je eigen browser op je eigen apparaat en wordt niet naar Knopen tellen gestuurd. Bezoeken worden anoniem geteld, zonder cookies.</p>",
  "faq.q6": "Is dit financieel advies?",
- "faq.a6": "<p>Nee. Knopen tellen is een algemeen rekenhulpmiddel dat schattingen geeft op basis van vereenvoudigde regels en aannames. Het geeft geen advies over jouw persoonlijke situatie. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>"
+ "faq.a6": "<p>Nee. Knopen tellen is een algemeen rekenhulpmiddel dat schattingen geeft op basis van vereenvoudigde regels en aannames. Het geeft geen advies over jouw persoonlijke situatie. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>",
+ "home.h1": "Hoe lang gaat je spaargeld mee?",
+ "home.kick": "Gratis rekentool",
+ "home.quick": "Jouw cijfers",
+ "home.more": "Alles verfijnen",
+ "pl.h": "Vergelijk twee plannen",
+ "pl.sub": "Bewaar wat je hebt ingevuld als plan A of B, verander iets en zie het verschil naast elkaar.",
+ "pl.now": "Nu",
+ "pl.a": "Plan A",
+ "pl.b": "Plan B",
+ "pl.save": "Bewaar als {n}",
+ "pl.load": "Laad",
+ "pl.clear": "Wis",
+ "pl.empty": "Nog niet bewaard",
+ "pl.saved": "Bewaard als {n}",
+ "pl.loaded": "{n} geladen",
+ "pl.r.bud": "Maandbudget",
+ "pl.r.cap": "Vermogen",
+ "pl.r.end": "Eindleeftijd",
+ "pl.r.succ": "Kans op slagen",
+ "pl.r.c90": "Nodig voor 90% kans",
+ "pl.r.max": "Max. maandbudget (90%)",
+ "pl.r.ctry": "Land",
+ "sh.btn": "Deel",
+ "sh.h": "Deel of bewaar je uitkomst",
+ "sh.sub": "Voor je partner, je adviseur of jezelf later.",
+ "sh.link": "Kopieer link",
+ "sh.linkS": "De link bevat je ingevulde cijfers. Iedereen met de link kan ze zien.",
+ "sh.print": "Print of bewaar als pdf",
+ "sh.printS": "Een nette pagina met je uitkomst en de grafiek.",
+ "sh.copy": "Kopieer samenvatting",
+ "sh.copyS": "Een korte tekst voor een bericht of e-mail.",
+ "sh.done": "Gekopieerd",
+ "sh.fail": "Kopiëren lukte niet. Selecteer de tekst en kopieer hem zelf.",
+ "sh.empty": "Vul eerst je maandbudget in; dan valt er iets te delen.",
+ "sh.loaded": "Plan geladen uit de link.",
+ "th.btn": "Licht of donker",
+ "calc": "Bezig met rekenen…",
+ "nav.plan": "Plan",
+ "nav.compare": "Vergelijk"
 });
 
 Object.assign(I18N.de, {
@@ -3388,7 +3863,46 @@ Object.assign(I18N.de, {
  "faq.q5": "Ist Buttons kostenlos, und was passiert mit meinen Daten?",
  "faq.a5": "<p>Buttons ist kostenlos, werbefrei und benötigt kein Konto. Ihre Eingaben bleiben in Ihrem eigenen Browser auf Ihrem eigenen Gerät und werden nicht an Buttons gesendet. Besuche werden anonym gezählt, ohne Cookies.</p>",
  "faq.q6": "Ist das eine Finanzberatung?",
- "faq.a6": "<p>Nein. Buttons ist ein allgemeines Rechenwerkzeug, das Schätzungen auf Grundlage vereinfachter Regeln und Annahmen liefert. Es berät nicht zu Ihrer persönlichen Situation. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>"
+ "faq.a6": "<p>Nein. Buttons ist ein allgemeines Rechenwerkzeug, das Schätzungen auf Grundlage vereinfachter Regeln und Annahmen liefert. Es berät nicht zu Ihrer persönlichen Situation. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>",
+ "home.h1": "Wie lange reicht Ihr Erspartes?",
+ "home.kick": "Kostenloser Ruhestandsrechner",
+ "home.quick": "Ihre Zahlen",
+ "home.more": "Alles verfeinern",
+ "pl.h": "Zwei Pläne vergleichen",
+ "pl.sub": "Speichern Sie Ihre Eingaben als Plan A oder B, ändern Sie etwas und sehen Sie den Unterschied nebeneinander.",
+ "pl.now": "Jetzt",
+ "pl.a": "Plan A",
+ "pl.b": "Plan B",
+ "pl.save": "Als {n} speichern",
+ "pl.load": "Laden",
+ "pl.clear": "Löschen",
+ "pl.empty": "Noch nicht gespeichert",
+ "pl.saved": "Als {n} gespeichert",
+ "pl.loaded": "{n} geladen",
+ "pl.r.bud": "Monatsbudget",
+ "pl.r.cap": "Erspartes",
+ "pl.r.end": "Endalter",
+ "pl.r.succ": "Erfolgschance",
+ "pl.r.c90": "Nötig für 90 % Chance",
+ "pl.r.max": "Max. Monatsbudget (90 %)",
+ "pl.r.ctry": "Land",
+ "sh.btn": "Teilen",
+ "sh.h": "Ergebnis teilen oder speichern",
+ "sh.sub": "Für Ihren Partner, Ihre Beratung oder für später.",
+ "sh.link": "Link kopieren",
+ "sh.linkS": "Der Link enthält Ihre eingegebenen Zahlen. Jeder mit dem Link kann sie sehen.",
+ "sh.print": "Drucken oder als PDF speichern",
+ "sh.printS": "Eine saubere Seite mit Ihrem Ergebnis und dem Diagramm.",
+ "sh.copy": "Zusammenfassung kopieren",
+ "sh.copyS": "Ein kurzer Text für eine Nachricht oder E-Mail.",
+ "sh.done": "Kopiert",
+ "sh.fail": "Kopieren hat nicht geklappt. Markieren Sie den Text und kopieren Sie ihn selbst.",
+ "sh.empty": "Geben Sie zuerst Ihr Monatsbudget ein; dann gibt es etwas zu teilen.",
+ "sh.loaded": "Plan aus dem Link geladen.",
+ "th.btn": "Hell oder dunkel",
+ "calc": "Wird berechnet…",
+ "nav.plan": "Plan",
+ "nav.compare": "Vergleich"
 });
 
 Object.assign(I18N.fr, {
@@ -3453,7 +3967,46 @@ Object.assign(I18N.fr, {
  "faq.q5": "Buttons est-il gratuit, et que deviennent mes données ?",
  "faq.a5": "<p>Buttons est gratuit, sans publicité et sans compte. Ce que vous saisissez reste dans votre propre navigateur, sur votre appareil, et n’est pas envoyé à Buttons. Les visites sont comptées de façon anonyme, sans cookies.</p>",
  "faq.q6": "S’agit-il d’un conseil financier ?",
- "faq.a6": "<p>Non. Buttons est un outil de calcul général qui donne des estimations fondées sur des règles simplifiées et des hypothèses. Il ne donne aucun conseil sur votre situation personnelle. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>"
+ "faq.a6": "<p>Non. Buttons est un outil de calcul général qui donne des estimations fondées sur des règles simplifiées et des hypothèses. Il ne donne aucun conseil sur votre situation personnelle. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>",
+ "home.h1": "Combien de temps durera votre épargne ?",
+ "home.kick": "Simulateur de retraite gratuit",
+ "home.quick": "Vos chiffres",
+ "home.more": "Tout affiner",
+ "pl.h": "Comparer deux plans",
+ "pl.sub": "Enregistrez vos données comme plan A ou B, modifiez quelque chose et voyez la différence côte à côte.",
+ "pl.now": "Actuel",
+ "pl.a": "Plan A",
+ "pl.b": "Plan B",
+ "pl.save": "Enregistrer comme {n}",
+ "pl.load": "Charger",
+ "pl.clear": "Effacer",
+ "pl.empty": "Pas encore enregistré",
+ "pl.saved": "Enregistré comme {n}",
+ "pl.loaded": "{n} chargé",
+ "pl.r.bud": "Budget mensuel",
+ "pl.r.cap": "Épargne",
+ "pl.r.end": "Âge de fin",
+ "pl.r.succ": "Probabilité de réussite",
+ "pl.r.c90": "Nécessaire pour 90 % de chances",
+ "pl.r.max": "Budget mensuel max. (90 %)",
+ "pl.r.ctry": "Pays",
+ "sh.btn": "Partager",
+ "sh.h": "Partager ou enregistrer votre résultat",
+ "sh.sub": "Pour votre partenaire, votre conseiller ou pour plus tard.",
+ "sh.link": "Copier le lien",
+ "sh.linkS": "Le lien contient les chiffres saisis. Toute personne ayant le lien peut les voir.",
+ "sh.print": "Imprimer ou enregistrer en PDF",
+ "sh.printS": "Une page soignée avec votre résultat et le graphique.",
+ "sh.copy": "Copier le résumé",
+ "sh.copyS": "Un court texte pour un message ou un e-mail.",
+ "sh.done": "Copié",
+ "sh.fail": "La copie a échoué. Sélectionnez le texte et copiez-le vous-même.",
+ "sh.empty": "Indiquez d’abord votre budget mensuel ; il y aura alors quelque chose à partager.",
+ "sh.loaded": "Plan chargé depuis le lien.",
+ "th.btn": "Clair ou sombre",
+ "calc": "Calcul en cours…",
+ "nav.plan": "Plan",
+ "nav.compare": "Comparer"
 });
 
 Object.assign(I18N.es, {
@@ -3523,7 +4076,46 @@ Object.assign(I18N.es, {
  "faq.q5": "¿Buttons es gratis y qué pasa con mis datos?",
  "faq.a5": "<p>Buttons es gratis, no tiene publicidad y no necesita cuenta. Lo que introduces se queda en tu propio navegador, en tu dispositivo, y no se envía a Buttons. Las visitas se cuentan de forma anónima, sin cookies.</p>",
  "faq.q6": "¿Es esto asesoramiento financiero?",
- "faq.a6": "<p>No. Buttons es una herramienta de cálculo general que ofrece estimaciones basadas en reglas simplificadas y supuestos. No asesora sobre tu situación personal. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>"
+ "faq.a6": "<p>No. Buttons es una herramienta de cálculo general que ofrece estimaciones basadas en reglas simplificadas y supuestos. No asesora sobre tu situación personal. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>",
+ "home.h1": "¿Cuánto durarán tus ahorros?",
+ "home.kick": "Calculadora de jubilación gratuita",
+ "home.quick": "Tus cifras",
+ "home.more": "Afinar todo",
+ "pl.h": "Compara dos planes",
+ "pl.sub": "Guarda lo que has introducido como plan A o B, cambia algo y mira la diferencia lado a lado.",
+ "pl.now": "Ahora",
+ "pl.a": "Plan A",
+ "pl.b": "Plan B",
+ "pl.save": "Guardar como {n}",
+ "pl.load": "Cargar",
+ "pl.clear": "Borrar",
+ "pl.empty": "Aún no guardado",
+ "pl.saved": "Guardado como {n}",
+ "pl.loaded": "{n} cargado",
+ "pl.r.bud": "Presupuesto mensual",
+ "pl.r.cap": "Ahorros",
+ "pl.r.end": "Edad final",
+ "pl.r.succ": "Probabilidad de éxito",
+ "pl.r.c90": "Necesario para un 90 %",
+ "pl.r.max": "Presupuesto máx. mensual (90 %)",
+ "pl.r.ctry": "País",
+ "sh.btn": "Compartir",
+ "sh.h": "Comparte o guarda tu resultado",
+ "sh.sub": "Para tu pareja, tu asesor o para más adelante.",
+ "sh.link": "Copiar enlace",
+ "sh.linkS": "El enlace contiene las cifras que has introducido. Cualquiera con el enlace puede verlas.",
+ "sh.print": "Imprimir o guardar como PDF",
+ "sh.printS": "Una página limpia con tu resultado y el gráfico.",
+ "sh.copy": "Copiar resumen",
+ "sh.copyS": "Un texto breve para un mensaje o correo.",
+ "sh.done": "Copiado",
+ "sh.fail": "No se pudo copiar. Selecciona el texto y cópialo tú.",
+ "sh.empty": "Introduce primero tu presupuesto mensual; así habrá algo que compartir.",
+ "sh.loaded": "Plan cargado desde el enlace.",
+ "th.btn": "Claro u oscuro",
+ "calc": "Calculando…",
+ "nav.plan": "Plan",
+ "nav.compare": "Comparar"
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -3776,17 +4368,22 @@ Object.assign(I18N.es, {
   function lab(k) { return F[k].lab || ('f.' + k); }
   function hintKey(k) { return F[k].hint || ('h.' + k); }
   function tagHtml(tg) { return '<span class="tag ' + (tg === 'sp' ? 'bron' : tg) + '" data-tag="' + tg + '"></span>'; }
+  function numAttr(k) {
+    var f = F[k];
+    if (/cur|Month|perPersonYear/.test(f.u)) return 'type="text" inputmode="numeric" autocomplete="off" data-money="1"';
+    return 'type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"';
+  }
   function knobHtml(k) {
     var f = F[k], r = f.r || [f.min, f.max];
     return '<div class="knob"><div class="knob-top"><label class="t" for="n-' + k + '" data-t="' + lab(k) + '"></label>' + tagHtml(f.tag) + '</div>' +
-      '<div class="knob-top"><span class="unit" data-t="' + f.u + '"></span><input id="n-' + k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"></div>' +
+      '<div class="knob-top"><span class="unit" data-t="' + f.u + '"></span><input id="n-' + k + '" ' + numAttr(k) + '></div>' +
       '<input id="r-' + k + '" type="range" min="' + r[0] + '" max="' + r[1] + '" step="' + f.step + '" data-t-aria="' + lab(k) + '">' +
       '<p class="hint" data-t="' + hintKey(k) + '"></p></div>';
   }
   function fieldHtml(k) {
     var f = F[k];
     return '<div class="field"><div class="ftop"><label for="n-' + k + '" data-t="' + lab(k) + '"></label>' + tagHtml(f.tag) + '</div>' +
-      '<div class="inrow"><input id="n-' + k + '" type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"><span class="unit" data-t="' + f.u + '"></span></div>' +
+      '<div class="inrow"><input id="n-' + k + '" ' + numAttr(k) + '><span class="unit" data-t="' + f.u + '"></span></div>' +
       '<p class="hint" data-t="' + hintKey(k) + '"' + (k === 'aowPaul' || k === 'aowDiana' || k === 'pensioenPaul' || k === 'pensioenDiana' ? ' data-hfor="' + k + '"' : '') + '></p></div>';
   }
   function segK(name, key, opts, aria) {
@@ -3899,13 +4496,31 @@ Object.assign(I18N.es, {
   /* ================= invoer koppelen ================= */
   var SEGK = ['box3', 'eindDiana', 'portfolio', 'personen'];
   var CHK = ['aowAanP', 'aowAanD', 'pensAanP', 'pensAanD'];
-  function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = val; }); }
+  /* geldvelden: tekstveld met scheidingstekens tijdens het typen */
+  function isMoney(e) { return !!e && e.getAttribute('data-money') === '1'; }
+  function grp(v) { return nfmt('g', { maximumFractionDigits: 0 }).format(Math.round(v)); }
+  function numOf(e) {
+    if (isMoney(e)) { var d = String(e.value).replace(/[^\d]/g, ''); return d === '' ? NaN : parseInt(d, 10); }
+    return parseFloat(String(e.value).replace(',', '.'));
+  }
+  function fmtIn(e, v) { return isMoney(e) ? (isFinite(v) ? grp(v) : '') : v; }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target; if (!isMoney(e)) return;
+    var pos = e.selectionStart || 0, before = String(e.value).slice(0, pos).replace(/[^\d]/g, '').length;
+    var d = String(e.value).replace(/[^\d]/g, '').replace(/^0+(?=\d)/, '').slice(0, 9);
+    var f = d === '' ? '' : grp(parseInt(d, 10));
+    if (f === e.value) return;
+    e.value = f;
+    var i = 0, c = 0; while (i < f.length && c < before) { if (/\d/.test(f.charAt(i))) c++; i++; }
+    try { e.setSelectionRange(i, i); } catch (x) {}
+  }, true);
+  function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = fmtIn(e, val); }); }
   var updTimer = 0;
   function updateSoon() { clearTimeout(updTimer); updTimer = setTimeout(function () { updTimer = 0; update(); }, 450); }
   function updateNow() { if (updTimer) { clearTimeout(updTimer); updTimer = 0; update(); } }
   function bind(k) {
     var n = $('n-' + k);
-    if (n) n.addEventListener('input', function () { var v = parseFloat(String(n.value).replace(',', '.')); if (!isFinite(v)) return; manual(k); setNum(k, v); updateSoon(); });
+    if (n) n.addEventListener('input', function () { var v = numOf(n); if (isMoney(n) && n.value === '') v = 0; if (!isFinite(v)) return; manual(k); setNum(k, v); updateSoon(); });
     var r = $('r-' + k);
     if (r) r.addEventListener('input', function () { manual(k); setNum(k, parseFloat(r.value)); updateSoon(); });
     if (n) n.addEventListener('change', updateNow);
@@ -3920,7 +4535,7 @@ Object.assign(I18N.es, {
   ['leeftijdPaul', 'leeftijdDiana', 'budget', 'startkapitaal', 'spP', 'spD'].forEach(function (k) {
     var e = $('q-' + k); if (!e) return;
     e.addEventListener('input', function () {
-      var v = parseFloat(String(e.value).replace(',', '.'));
+      var v = numOf(e);
       if (e.value === '' && k !== 'leeftijdPaul' && k !== 'leeftijdDiana') v = 0;
       if (!isFinite(v)) return;
       manual(k); setNum(k, v); updateSoon();
@@ -3951,7 +4566,7 @@ Object.assign(I18N.es, {
     CHK.forEach(function (k) { var c = $('c-' + k); if (c) c.checked = state[k] !== 0; });
     Object.keys(DEF).forEach(function (k) {
       if (SEGK.indexOf(k) >= 0) return;
-      ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = Math.round(state[k] * 1000) / 1000; });
+      ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = fmtIn(e, Math.round(state[k] * 1000) / 1000); });
     });
   }
   function taxPreset() { var c = CTRY[prefs.country].tax; state.taxRate = c.rate || 0; state.taxAllow = c.allow || 0; }
@@ -4566,28 +5181,272 @@ Object.assign(I18N.es, {
     }
   }
 
+  /* Zwaar rekenwerk (advies, automatische portefeuille, kans, maximaal budget). Eén functie die zowel op de
+     hoofddraad draait (eerste keer en als terugval) als in een worker, zodat typen nooit hapert. */
+  function hvRun(X) {
+    var adv = null, autoIdx = X.autoIdx, autoInfo = null;
+    function eff() { return X.pfUser || autoIdx; }
+    function prm(over) {
+      var p = {}, k;
+      for (k in X.st) p[k] = X.st[k];
+      p.startkapitaal = X.cap > 0 ? X.cap : (adv ? adv.c90 : 0);
+      p.taxMode = X.nl ? 'nlbox3' : 'returns';
+      var ps = X.ports[eff()];
+      p.bruto = ps.mu * 100; p.spaarDeel = ps.w[2] * 100;
+      if (over) for (k in over) p[k] = over[k];
+      return p;
+    }
+    function advice(extra, only) {
+      var best = null;
+      (only ? [only] : [1, 2, 3]).forEach(function (i) {
+        var pf = X.ports[i], ov = { startkapitaal: 0, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true, eindleeftijd: X.st.eindleeftijd + (extra || 0) };
+        var m = runModel(prm(ov)), c = c90For(m, pf, prm(ov));
+        if (!best || c < best.c90) best = { c90: Math.ceil(c / 1000) * 1000, req0: m.req0, pf: i, eind: X.st.eindleeftijd + (extra || 0) };
+      });
+      return best;
+    }
+    function maxBud(m0) {
+      var best = 0;
+      [1, 2, 3].forEach(function (i) {
+        var pf = X.ports[i];
+        function q(b) { var p = prm({ budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }); return simQuick(runModel(p), pf, p).succ; }
+        if (best > 0 && q(best + 1) < 0.9) return;
+        var lo = best > 0 ? best + 1 : 0, hi = Math.max(m0.maxBudget, lo * 1.5, 100), g = 0;
+        while (q(hi) >= 0.9 && g++ < 6) { lo = hi; hi *= 1.5; }
+        for (var k = 0; k < 12; k++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) lo = mid; else hi = mid; }
+        best = Math.max(best, Math.floor(lo));
+      });
+      return best;
+    }
+    function pick() {
+      var p = prm(), res = [];
+      [1, 2, 3].forEach(function (i) {
+        var pf = X.ports[i], m = runModel(prm({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true }));
+        var q = simQuick(m, pf, p); res.push({ i: i, succ: q.succ, med: q.med });
+      });
+      var b = res.reduce(function (a, c) { return c.succ > a.succ ? c : a; });
+      var near = res.filter(function (x) { return x.succ >= b.succ - 0.01; });
+      var pk = near.reduce(function (a, c) { return c.med > a.med ? c : a; });
+      return { idx: pk.i, succ: pk.succ };
+    }
+    if (X.st.budget > 0) { adv = advice(0); adv.long = advice(5, adv.pf); }
+    if (!X.pfUser) { autoInfo = pick(); autoIdx = autoInfo.idx; }
+    var m = runModel(prm());
+    var succ = simQuick(m, X.ports[eff()], prm()).succ;
+    return { adv: adv, autoInfo: autoInfo, autoIdx: autoIdx, curSucc: succ, max90: X.st.budget > 0 ? maxBud(m) : 0 };
+  }
+  function hvCtx() {
+    var st = {}, ports = {};
+    Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
+    [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
+    return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports };
+  }
+  var hvW = null, hvSeq = 0, hvCb = null, hvPend = null, hvFirst = true;
+  function hvWorker() {
+    if (hvW !== null) return hvW;
+    try {
+      var src = 'var RHO=' + RHO + ',SIMN=' + SIMN + ',ASSET=' + JSON.stringify(ASSET) + ',zc={};\n' +
+        [runModel, normalsFor, simCore, simQuick, c90For, hvRun].map(function (f) { return f.toString(); }).join('\n') +
+        '\nonmessage=function(e){var r=null;try{r=hvRun(e.data.X);}catch(x){}postMessage({id:e.data.id,r:r});};';
+      hvW = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+      var fall = function () { hvW = false; if (hvCb) { var cb = hvCb; hvCb = null; cb(hvRun(hvPend)); } };
+      hvW.onmessage = function (e) {
+        if (e.data.id !== hvSeq || !hvCb) return;
+        if (!e.data.r) { fall(); return; }
+        var cb = hvCb; hvCb = null; cb(e.data.r);
+      };
+      hvW.onerror = fall;
+    } catch (e) { hvW = false; }
+    return hvW;
+  }
+  function heavy(X, cb) {
+    hvSeq++;
+    if (hvFirst) { hvFirst = false; cb(hvRun(X)); return; }
+    var w = hvWorker();
+    if (!w) { cb(hvRun(X)); return; }
+    hvPend = X; hvCb = cb;
+    document.documentElement.classList.add('is-calc');
+    w.postMessage({ id: hvSeq, X: X });
+  }
   function update() {
     applyAuto();
     applyText();
     applyNames();
     syncInputs();
-    if (state.budget > 0) { adv = computeAdvice(0); adv.long = computeAdvice(5, adv.pf); } else adv = null;
+    heavy(hvCtx(), function (res) {
+      adv = res.adv; autoInfo = res.autoInfo; autoIdx = res.autoIdx; curSucc = res.curSucc; max90 = res.max90;
+      finishUpdate();
+    });
+  }
+  function finishUpdate() {
+    document.documentElement.classList.remove('is-calc');
     renderAdvies();
     document.documentElement.classList.toggle('is-empty', state.budget <= 0);
-    if (state.portfolio === 0) { autoInfo = pickAuto(); autoIdx = autoInfo.idx; } else autoInfo = null;
     renderHints();
     var m = runModel(params());
     last = m;
-    curSucc = simQuick(m, portStat(effIdx()), params()).succ;
-    max90 = state.budget > 0 ? max90For(m) : 0;
     simText = t1('v.sim', { pf: portStat(effIdx()).n.toLowerCase(), p: pct(curSucc, 0) });
     renderHead(); renderGauge(); renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
-    renderTable(m); renderLadder(m); renderAbout();
+    renderTable(m); renderLadder(m); renderAbout(); renderPlans();
     if (route === 'overview') renderFlow(m);
     showStep(curStep, false);
     scheduleSim(false);
     persist();
   }
+
+  /* ================= melding ================= */
+  var toastT = 0;
+  function toast(msg) {
+    var el = $('toast'); if (!el) return;
+    el.textContent = msg; el.hidden = false; el.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(function () { el.classList.remove('show'); setTimeout(function () { el.hidden = true; }, 250); }, 2600);
+  }
+
+  /* ================= thema ================= */
+  function themeNow() {
+    var a = document.documentElement.getAttribute('data-theme');
+    if (a === 'dark' || a === 'light') return a;
+    try { return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { return 'light'; }
+  }
+  function applyTheme() {
+    var th = prefs.theme;
+    if (th === 'dark' || th === 'light') document.documentElement.setAttribute('data-theme', th); else document.documentElement.removeAttribute('data-theme');
+    var mt = document.querySelector('meta[name="theme-color"]'); if (mt) mt.setAttribute('content', themeNow() === 'dark' ? '#141816' : '#F6F2EB');
+  }
+  try { var spT = JSON.parse(localStorage.getItem(KEY + '-prefs') || 'null'); if (spT && (spT.theme === 'dark' || spT.theme === 'light')) prefs.theme = spT.theme; } catch (e) {}
+  applyTheme();
+  if ($('btn-theme')) $('btn-theme').addEventListener('click', function () {
+    prefs.theme = themeNow() === 'dark' ? 'light' : 'dark'; savePrefs(); applyTheme();
+    if (last) { lastW = 0; renderFan(); renderFlow(last); }
+  });
+
+  /* ================= plannen bewaren en vergelijken ================= */
+  var plans = { A: null, B: null };
+  try { var sp0 = JSON.parse(localStorage.getItem(KEY + '-plans') || 'null'); if (sp0) { plans.A = sp0.A || null; plans.B = sp0.B || null; } } catch (e) {}
+  function savePlans() { try { localStorage.setItem(KEY + '-plans', JSON.stringify(plans)); } catch (e) {} }
+  function planSum() {
+    return { bud: state.budget, cap: capEff(), end: state.eindleeftijd, succ: curSucc, c90: adv ? adv.c90 : 0, max: max90, country: prefs.country, cur: prefs.cur };
+  }
+  function planSnap() {
+    var st = {}; Object.keys(DEF).forEach(function (k) { st[k] = state[k]; });
+    return { state: st, names: { n1: names.n1, n2: names.n2 }, country: prefs.country, cur: prefs.cur, sum: planSum() };
+  }
+  function planLoad(pl) {
+    if (!pl || !pl.state) return;
+    Object.keys(DEF).forEach(function (k) { var v = pl.state[k]; if (typeof v === 'number' && isFinite(v)) state[k] = v; });
+    if (pl.names) { names.n1 = String(pl.names.n1 || '').slice(0, 20); names.n2 = String(pl.names.n2 || '').slice(0, 20); ['1', '2'].forEach(function (n) { var el = $('nm-' + n); if (el) el.value = names['n' + n]; }); }
+    if (CTRY[pl.country]) prefs.country = pl.country;
+    if (CURS.indexOf(pl.cur) >= 0) prefs.cur = pl.cur;
+    savePrefs(); refreshAll();
+  }
+  function moneyIn(v, cur) {
+    try { return new Intl.NumberFormat(loc(), { style: 'currency', currency: cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 }).format(Math.round(v) || 0); } catch (e) { return eur(v); }
+  }
+  function renderPlans() {
+    var el = $('plans'); if (!el) return;
+    var now = planSum(), cols = [{ k: 'now', n: t1('pl.now'), s: state.budget > 0 ? now : null }, { k: 'A', n: t1('pl.a'), s: plans.A ? plans.A.sum : null }, { k: 'B', n: t1('pl.b'), s: plans.B ? plans.B.sum : null }];
+    function cell(sm, f) { return sm ? f(sm) : '<span class="pl-none">–</span>'; }
+    var rows = [
+      ['pl.r.succ', function (x) { var c = x.succ >= 0.9 ? 'good' : (x.succ >= 0.75 ? 'warn' : 'bad'); return '<b class="pl-succ ' + c + '">' + pct(x.succ, 0) + '</b>'; }],
+      ['pl.r.bud', function (x) { return moneyIn(x.bud, x.cur); }],
+      ['pl.r.cap', function (x) { return moneyIn(x.cap, x.cur); }],
+      ['pl.r.end', function (x) { return fmtAge(x.end); }],
+      ['pl.r.c90', function (x) { return moneyIn(x.c90, x.cur); }],
+      ['pl.r.max', function (x) { return moneyIn(x.max, x.cur); }],
+      ['pl.r.ctry', function (x) { return esc(cName(x.country)); }]
+    ];
+    var h = '<div class="pl-grid" role="table"><div class="pl-row pl-head" role="row"><span role="columnheader"></span>';
+    cols.forEach(function (c) { h += '<span role="columnheader" class="pl-col' + (c.k === 'now' ? ' now' : '') + '">' + c.n + '</span>'; });
+    h += '</div>';
+    rows.forEach(function (rw) {
+      h += '<div class="pl-row" role="row"><span role="rowheader" class="pl-l">' + t1(rw[0]) + '</span>';
+      cols.forEach(function (c) { h += '<span role="cell" class="pl-v' + (c.k === 'now' ? ' now' : '') + '">' + cell(c.s, rw[1]) + '</span>'; });
+      h += '</div>';
+    });
+    h += '<div class="pl-row pl-act" role="row"><span></span><span class="now"></span>';
+    ['A', 'B'].forEach(function (k) {
+      var nm = t1(k === 'A' ? 'pl.a' : 'pl.b');
+      h += '<span class="pl-btns">' + (plans[k]
+        ? '<button type="button" class="btn ghost sm" data-pl="load" data-k="' + k + '">' + t1('pl.load') + '</button><button type="button" class="btn link sm" data-pl="clear" data-k="' + k + '">' + t1('pl.clear') + '</button>'
+        : '<span class="pl-none">' + t1('pl.empty') + '</span>') + '</span>';
+    });
+    h += '</div></div><div class="btn-row pl-save">';
+    ['A', 'B'].forEach(function (k) { h += '<button type="button" class="btn ' + (k === 'A' ? 'primary' : 'ghost') + '" data-pl="save" data-k="' + k + '"' + (state.budget > 0 ? '' : ' disabled') + '>' + t1('pl.save', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') }) + '</button>'; });
+    el.innerHTML = h + '</div>';
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('[data-pl]') : null; if (!b) return;
+    var k = b.getAttribute('data-k'), a = b.getAttribute('data-pl');
+    if (a === 'save') { plans[k] = planSnap(); savePlans(); renderPlans(); toast(t1('pl.saved', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') })); }
+    else if (a === 'clear') { plans[k] = null; savePlans(); renderPlans(); }
+    else if (a === 'load') { planLoad(plans[k]); toast(t1('pl.loaded', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') })); }
+  });
+
+  /* ================= delen en bewaren ================= */
+  function b64u(str) { return btoa(unescape(encodeURIComponent(str))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+  function b64d(str) { str = str.replace(/-/g, '+').replace(/_/g, '/'); while (str.length % 4) str += '='; return decodeURIComponent(escape(atob(str))); }
+  function shareUrl() {
+    var d = {}; Object.keys(DEF).forEach(function (k) { if (state[k] !== DEF[k]) d[k] = state[k]; });
+    var base = location.origin + location.pathname;
+    return base + '?plan=' + b64u(JSON.stringify({ s: d, c: prefs.country, u: prefs.cur })) + '#overview';
+  }
+  function shareText() {
+    var L = [t1('brand') + ': ' + t1('home.h1'), ''];
+    L.push(t1('pl.r.succ') + ': ' + pct(curSucc, 0));
+    L.push(t1('pl.r.bud') + ': ' + eur(state.budget));
+    L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
+    L.push(t1('pl.r.end') + ': ' + fmtAge(state.eindleeftijd));
+    if (adv) L.push(t1('pl.r.c90') + ': ' + eur(adv.c90));
+    L.push(t1('pl.r.max') + ': ' + eur(max90));
+    L.push(t1('pl.r.ctry') + ': ' + cName(prefs.country));
+    L.push('', t1('about.disclaimer').replace(/<[^>]+>/g, ''));
+    if (canShareLink()) L.push(location.origin + location.pathname);
+    return L.join('\n');
+  }
+  function canShareLink() { return /^https?:$/.test(location.protocol) && window.top === window; }
+  function copyText(txt, okMsg) {
+    var out = $('share-out');
+    function fail() { if (out) { out.hidden = false; out.value = txt; out.focus(); out.select(); } toast(t1('sh.fail')); }
+    try { navigator.clipboard.writeText(txt).then(function () { toast(okMsg); }, fail); } catch (e) { fail(); }
+  }
+  var shFocus = null;
+  function openShare() {
+    if (!(state.budget > 0)) { toast(t1('sh.empty')); return; }
+    shFocus = document.activeElement;
+    var ok = canShareLink();
+    $('sh-link').hidden = !ok; $('sh-print').hidden = !ok;
+    $('share-out').hidden = true; $('share-out').value = '';
+    $('share').hidden = false;
+    setTimeout(function () { var f = ok ? $('sh-link') : $('sh-copy'); if (f) f.focus(); }, 30);
+  }
+  function closeShare() { $('share').hidden = true; if (shFocus && shFocus.focus) shFocus.focus(); }
+  if ($('share')) {
+    each('.share-open', function (b) { b.addEventListener('click', openShare); });
+    $('share-close').addEventListener('click', closeShare);
+    $('share').addEventListener('click', function (ev) { if (ev.target === $('share')) closeShare(); });
+    document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !$('share').hidden) closeShare(); });
+    $('sh-link').addEventListener('click', function () { copyText(shareUrl(), t1('sh.done')); });
+    $('sh-copy').addEventListener('click', function () { copyText(shareText(), t1('sh.done')); });
+    $('sh-print').addEventListener('click', function () {
+      closeShare();
+      if (location.hash !== '#overview' && location.hash !== '') location.hash = '#overview';
+      setTimeout(function () { each('details.table-view', function (d) { d.open = false; }); try { window.print(); } catch (e) {} }, 250);
+    });
+  }
+  /* een gedeelde link (?plan=...) laadt de cijfers en haalt ze daarna uit de adresbalk */
+  var planFromLink = false;
+  (function () {
+    try {
+      var m = /[?&]plan=([A-Za-z0-9_-]+)/.exec(location.search || ''); if (!m) return;
+      var o = JSON.parse(b64d(m[1]));
+      Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
+      if (o && o.s) Object.keys(DEF).forEach(function (k) { var v = o.s[k]; if (typeof v === 'number' && isFinite(v)) state[k] = v; });
+      if (o && CTRY[o.c]) prefs.country = o.c;
+      if (o && CURS.indexOf(o.u) >= 0) prefs.cur = o.u;
+      planFromLink = true;
+      history.replaceState(null, '', location.pathname + '#overview');
+    } catch (e) {}
+  })();
 
   /* ================= stappen ================= */
   var ui = { introSeen: false, step: 1, goal: '' };
@@ -4622,12 +5481,14 @@ Object.assign(I18N.es, {
       var tb = $('tab-' + r);
       if (r === route) tb.setAttribute('aria-current', 'page'); else tb.removeAttribute('aria-current');
     });
+    var sn = $('snel'), slot = $(route === 'overview' ? 'ov-quick' : 'step1-slot'); if (sn && slot && sn.parentNode !== slot) slot.appendChild(sn);
     updMini();
     if (route === 'overview' && last) { lastW = 0; renderFan(); renderFlow(last); }
     window.scrollTo(0, 0);
     if (pendingScroll && $(pendingScroll)) { var id = pendingScroll; pendingScroll = null; setTimeout(function () { $(id).scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); }, 30); }
   }
   document.addEventListener('click', function (ev) { var c = ev.target.closest ? ev.target.closest('.ovt-chance') : null; if (c && $('status-card')) { try { $('status-card').scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { $('status-card').scrollIntoView(); } } });
+  each('[data-jump]', function (b) { b.addEventListener('click', function () { var el = $(b.getAttribute('data-jump')); if (el) { el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -90); } }); });
   each('[data-scroll]', function (a) { a.addEventListener('click', function () { pendingScroll = a.getAttribute('data-scroll'); }); });
   window.addEventListener('hashchange', go);
 
@@ -4636,6 +5497,7 @@ Object.assign(I18N.es, {
   syncInputs();
   go();
   update();
+  if (planFromLink) { ui.introSeen = true; saveUi(); setTimeout(function () { toast(t1('sh.loaded')); }, 400); }
   scheduleSim(true);
   var rt;
   function onResize() {

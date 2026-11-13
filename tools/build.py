@@ -158,6 +158,8 @@ def build_page(src, lang, d):
     head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1">' % (lang, '' if lang == 'en' else lang))
     head = head.replace('href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
     head = head.replace('href="icon-192.png"', 'href="/icon-192.png"').replace('href="apple-touch-icon.png"', 'href="/apple-touch-icon.png"')
+    head = head.replace('url("fonts/', 'url("/fonts/')
+    head = head.replace('<style>', '<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>\n<style>', 1)
     head = head.replace('</style>', '</style>\n<link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">', 1)
     body = fill_body(body, d)
     body = body.replace('src="img/', 'src="/img/')
