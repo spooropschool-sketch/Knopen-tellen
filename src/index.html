@@ -1532,20 +1532,26 @@ footer { color: var(--muted); }
 /* ===== v7: gesplitste knop tip | koffie ===== */
 .support-card { flex-direction: column; justify-content: center; text-align: center; gap: 12px; padding: 18px 20px; }
 .duo-t { margin: 0; color: var(--ink2); font-size: 15px; line-height: 1.45; }
-.duo { display: inline-flex; align-items: stretch; max-width: 100%; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); overflow: hidden; box-shadow: 0 1px 2px rgba(20, 40, 30, 0.06); }
-.duo > button, .duo > a { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 22px; margin: 0; border: 0; background: none; font: inherit; text-align: left; text-decoration: none; cursor: pointer; flex: 0 1 auto; min-width: 0; }
+.duo { display: flex; align-items: stretch; width: min(100%, 520px); border: 1px solid var(--line); border-radius: 999px; background: var(--surface); overflow: hidden; box-shadow: 0 1px 2px rgba(20, 40, 30, 0.06); }
+.duo > button, .duo > a { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 10px 18px; margin: 0; border: 0; background: none; font: inherit; text-align: left; text-decoration: none; cursor: pointer; flex: 1 1 0; min-width: 0; }
 .duo > button:hover, .duo > a:hover { background: var(--surface2); }
 .duo > button:focus-visible, .duo > a:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 .duo-l { color: var(--accent); }
 .duo-r { color: var(--copper); border-left: 1px solid var(--line) !important; }
-.duo-i { font-size: 19px; line-height: 1; }
+.duo-i { flex: 0 0 auto; font-size: 20px; line-height: 1; }
 .duo-x { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
-.duo-x b { font-weight: 650; font-size: 15px; white-space: nowrap; }
-.duo-x small { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.duo-x b { font-weight: 650; font-size: 15px; text-wrap: balance; overflow-wrap: break-word; }
+.duo-x small { font-size: 12.5px; color: var(--muted); text-wrap: balance; overflow-wrap: break-word; }
 .sup-sh, .sup-pl, .sup-ab { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .sup-sh { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
 footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
-@media (max-width: 440px) { .duo > button, .duo > a { padding: 8px 12px; gap: 8px; } .duo-x b { font-size: 14px; } .duo-x small { white-space: normal; } }
+@media (max-width: 480px) {
+  .duo { border-radius: 26px; }
+  .duo > button, .duo > a { flex-direction: column; gap: 4px; padding: 12px 10px; text-align: center; }
+  .duo-x { align-items: center; text-align: center; }
+  .duo-i { font-size: 22px; }
+  .duo-x b { font-size: 14px; }
+}
 @media print { .sup-ab { display: none !important; } }
 
 /* ===== v7: werk per partner, perioden en potten ===== */
@@ -3065,7 +3071,7 @@ Object.assign(I18N.en, {
   'fact.intro': 'This is what we assume {inCountry}. You can change every number under Fine-tune.',
   'about.disclaimer': 'Button Counter gives you insight, not tax or investment advice. We’ve simplified the rules per country, so do check the official sources.',
   'sup.text': 'Does Button Counter help you?',
-  'sup.after': 'Did this help? It stays free. A coffee is welcome but never expected.'
+  'sup.after': 'Did this help? A tip or a coffee is always welcome.'
 });
 
 Object.assign(I18N.nl, {
@@ -3151,7 +3157,7 @@ Object.assign(I18N.nl, {
   'fact.intro': 'Dit nemen we aan {inCountry}. Elk getal kun je aanpassen bij Invullen.',
   'about.disclaimer': 'Knopenteller geeft je inzicht, geen belasting- of beleggingsadvies. De regels per land hebben we vereenvoudigd, dus kijk ook even bij de officiële bronnen.',
   'sup.text': 'Heb je iets aan Knopenteller?',
-  'sup.after': 'Hielp dit je verder? Het blijft gratis. Een koffie is nooit verplicht.'
+  'sup.after': 'Hielp dit je verder? Een tip of een koffie is altijd welkom.'
 });
 
 Object.assign(I18N.de, {
@@ -3227,7 +3233,7 @@ Object.assign(I18N.de, {
   'fact.intro': 'Das nehmen wir {inCountry} an. Jede Zahl können Sie unter Eingeben ändern.',
   'about.disclaimer': 'Button Counter gibt Ihnen Einblick, keine Steuer- oder Anlageberatung. Die Regeln je Land haben wir vereinfacht; schauen Sie also auch in die offiziellen Quellen.',
   'sup.text': 'Hilft Ihnen Button Counter?',
-  'sup.after': 'Hat Ihnen das weitergeholfen? Es bleibt kostenlos. Ein Kaffee ist willkommen, aber nie nötig.'
+  'sup.after': 'Hat Ihnen das weitergeholfen? Ein Tipp oder ein Kaffee ist immer willkommen.'
 });
 
 Object.assign(I18N.fr, {
@@ -3303,7 +3309,7 @@ Object.assign(I18N.fr, {
   'fact.intro': 'Voici ce que nous retenons {inCountry}. Vous pouvez modifier chaque chiffre dans Saisir.',
   'about.disclaimer': 'Button Counter vous donne un éclairage, pas un conseil fiscal ou en placement. Nous avons simplifié les règles par pays : consultez aussi les sources officielles.',
   'sup.text': 'Button Counter vous est utile ?',
-  'sup.after': 'Cela vous a aidé ? Cela reste gratuit. Un café fait plaisir mais n’est jamais obligatoire.'
+  'sup.after': 'Cela vous a aidé ? Un conseil ou un café est toujours le bienvenu.'
 });
 
 Object.assign(I18N.es, {
@@ -3388,7 +3394,7 @@ Object.assign(I18N.es, {
   'fact.intro': 'Esto es lo que suponemos {inCountry}. Puedes cambiar cada cifra en Rellenar.',
   'about.disclaimer': 'Button Counter te da una visión, no asesoramiento fiscal ni de inversión. Hemos simplificado las reglas de cada país, así que consulta también las fuentes oficiales.',
   'sup.text': '¿Te ayuda Button Counter?',
-  'sup.after': '¿Te ha servido? Sigue siendo gratis. Un café se agradece, pero nunca es obligatorio.'
+  'sup.after': '¿Te ha servido? Un consejo o un café siempre es bienvenido.'
 });
 
 Object.assign(I18N.en, {
@@ -4250,7 +4256,7 @@ Object.assign(I18N.en, {
  'ins.wk': 'Income from work', 'ins.pots': 'Extra pots', 'ins.pf': 'Investment mix', 'ins.tax': 'Tax', 'ins.end': 'Plan until', 'ins.rest': 'Capital left', 'ins.infl': 'Inflation and costs',
  'ins.periods': 'by period ({n})', 'ins.until': 'until {a}', 'ins.from': 'from {a}',
  'duo.aria': 'Feedback or thanks', 'duo.tip': 'Leave a tip', 'duo.tipS': 'Idea, mistake or question', 'duo.cof': 'Buy a coffee', 'duo.cofS': 'As a thank you',
- 'sup.after': 'Did this help? It stays free. A tip or a coffee is always welcome.'
+ 'sup.after': 'Did this help? A tip or a coffee is always welcome.'
 });
 Object.assign(I18N.nl, {
  'k.bufNone': 'Voor dit budget is geen startkapitaal nodig.', 'k.wrSave': 'Geen opname: er blijft {m} per maand over voor je vermogen.', 'fan.wrSave': 'Per maand over in jaar 1, gaat naar je vermogen',
@@ -4275,7 +4281,7 @@ Object.assign(I18N.nl, {
  'ins.wk': 'Inkomen uit werk', 'ins.pots': 'Extra potten', 'ins.pf': 'Beleggingsmix', 'ins.tax': 'Belasting', 'ins.end': 'Rekenen tot', 'ins.rest': 'Restkapitaal', 'ins.infl': 'Inflatie en kosten',
  'ins.periods': 'per periode ({n})', 'ins.until': 'tot {a}', 'ins.from': 'vanaf {a}',
  'duo.aria': 'Feedback of waardering', 'duo.tip': 'Geef een tip', 'duo.tipS': 'Idee, fout of vraag', 'duo.cof': 'Trakteer op koffie', 'duo.cofS': 'Als waardering',
- 'sup.after': 'Hielp dit je verder? Het blijft gratis. Een tip of een koffie is altijd welkom.'
+ 'sup.after': 'Hielp dit je verder? Een tip of een koffie is altijd welkom.'
 });
 Object.assign(I18N.de, {
  'k.bufNone': 'Für dieses Budget ist kein Startkapital nötig.', 'k.wrSave': 'Keine Entnahme: {m} pro Monat bleiben übrig und fließen ins Vermögen.', 'fan.wrSave': 'Pro Monat übrig im Jahr 1, fließt ins Vermögen',
@@ -4300,7 +4306,7 @@ Object.assign(I18N.de, {
  'ins.wk': 'Einkommen aus Arbeit', 'ins.pots': 'Zusätzliche Töpfe', 'ins.pf': 'Anlagemix', 'ins.tax': 'Steuer', 'ins.end': 'Rechnen bis', 'ins.rest': 'Restvermögen', 'ins.infl': 'Inflation und Kosten',
  'ins.periods': 'nach Zeiträumen ({n})', 'ins.until': 'bis {a}', 'ins.from': 'ab {a}',
  'duo.aria': 'Feedback oder Dank', 'duo.tip': 'Tipp geben', 'duo.tipS': 'Idee, Fehler oder Frage', 'duo.cof': 'Kaffee spendieren', 'duo.cofS': 'Als Dankeschön',
- 'sup.after': 'Hat Ihnen das weitergeholfen? Es bleibt kostenlos. Ein Tipp oder ein Kaffee ist immer willkommen.'
+ 'sup.after': 'Hat Ihnen das weitergeholfen? Ein Tipp oder ein Kaffee ist immer willkommen.'
 });
 Object.assign(I18N.fr, {
  'k.bufNone': 'Aucun capital de départ n’est nécessaire pour ce budget.', 'k.wrSave': 'Aucun retrait : il reste {m} par mois, ajoutés à votre patrimoine.', 'fan.wrSave': 'Reste par mois en année 1, ajouté au patrimoine',
@@ -4325,7 +4331,7 @@ Object.assign(I18N.fr, {
  'ins.wk': 'Revenus du travail', 'ins.pots': 'Cagnottes supplémentaires', 'ins.pf': 'Répartition', 'ins.tax': 'Impôt', 'ins.end': 'Calcul jusqu’à', 'ins.rest': 'Capital restant', 'ins.infl': 'Inflation et frais',
  'ins.periods': 'par période ({n})', 'ins.until': 'jusqu’à {a}', 'ins.from': 'dès {a}',
  'duo.aria': 'Avis ou remerciement', 'duo.tip': 'Donner un conseil', 'duo.tipS': 'Idée, erreur ou question', 'duo.cof': 'Offrir un café', 'duo.cofS': 'Pour remercier',
- 'sup.after': 'Cela vous a aidé ? Cela reste gratuit. Un conseil ou un café est toujours le bienvenu.'
+ 'sup.after': 'Cela vous a aidé ? Un conseil ou un café est toujours le bienvenu.'
 });
 Object.assign(I18N.es, {
  'k.bufNone': 'Para este presupuesto no hace falta capital inicial.', 'k.wrSave': 'Sin retirada: sobran {m} al mes que se suman a tu patrimonio.', 'fan.wrSave': 'Sobra al mes el año 1, se suma al patrimonio',
@@ -4350,7 +4356,7 @@ Object.assign(I18N.es, {
  'ins.wk': 'Ingresos del trabajo', 'ins.pots': 'Fondos extra', 'ins.pf': 'Mezcla de inversión', 'ins.tax': 'Impuestos', 'ins.end': 'Calcular hasta', 'ins.rest': 'Capital restante', 'ins.infl': 'Inflación y costes',
  'ins.periods': 'por periodos ({n})', 'ins.until': 'hasta {a}', 'ins.from': 'desde {a}',
  'duo.aria': 'Opinión o agradecimiento', 'duo.tip': 'Da un consejo', 'duo.tipS': 'Idea, error o pregunta', 'duo.cof': 'Invita a un café', 'duo.cofS': 'Como agradecimiento',
- 'sup.after': '¿Te ha servido? Sigue siendo gratis. Un consejo o un café siempre es bienvenido.'
+ 'sup.after': '¿Te ha servido? Un consejo o un café siempre es bienvenido.'
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
