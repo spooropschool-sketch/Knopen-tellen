@@ -282,6 +282,7 @@ footer .tag a:hover { text-decoration: underline; }
 .hero-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 14px; max-width: 34rem; }
 .hero h1 { font-size: 38px; line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
 .hero h1 span { color: var(--accent); }
+.kn { margin-right: 0.075em; color: inherit !important; } .kn.j { margin-right: 0.035em; }
 .steps { margin: 0; display: flex; flex-wrap: wrap; gap: 2px 14px; color: var(--ink2); font-size: 15px; }
 .horizon { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; }
 .intro { display: flex; flex-direction: column; gap: 12px; }
@@ -1105,7 +1106,7 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body { font-variant-numeric: tabular-nums lining-nums; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 ::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
-h1, h2, h3 { text-wrap: balance; letter-spacing: -0.012em; }
+h1, h2, h3, .wordmark { text-wrap: balance; letter-spacing: -0.012em; font-variant-ligatures: no-common-ligatures no-discretionary-ligatures; font-feature-settings: "liga" 0, "clig" 0, "calt" 1; font-kerning: normal; }
 p { text-wrap: pretty; }
 
 /* kaarten */
@@ -1314,7 +1315,7 @@ a { color: var(--accent); }
 .hero-text { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .kicker { display: inline-flex; align-items: center; gap: 9px; margin: 0; font: 700 12.5px var(--f-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); }
 .kdot { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 35% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), var(--copper); }
-.hero h1 { margin: 0; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.04; letter-spacing: -0.025em; max-width: 19ch; text-wrap: balance; }
+.hero h1 { margin: 0; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.06; letter-spacing: -0.008em; word-spacing: 0.02em; max-width: 19ch; text-wrap: balance; }
 .hero-sub { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink2); max-width: 46ch; }
 .hero-sub[hidden] { display: none; }
 .hero .ov-start { display: none; }
@@ -5033,6 +5034,8 @@ Object.assign(I18N.es, {
     G = gvars();
     document.documentElement.lang = prefs.lang;
     each('[data-t]', function (e) { e.innerHTML = t(e.getAttribute('data-t')); });
+    /* Fraunces: de haak van de f dekt de punt van de i af en de staart van de J raakt de volgende letter; geef die twee paren een haartje lucht */
+    each('h1', function (e) { if (e.children.length === 0 && !/kn">/.test(e.innerHTML)) e.innerHTML = e.innerHTML.replace(/f(?=i)/g, '<span class="kn">f</span>').replace(/\bJ(?=[a-zà-ÿ])/g, '<span class="kn j">J</span>'); });
     each('[data-t-en]', function (e) { e.innerHTML = fill(I18N.en[e.getAttribute('data-t-en')] || ''); });
     each('[data-t-aria]', function (e) { e.setAttribute('aria-label', t(e.getAttribute('data-t-aria')).replace(/<[^>]+>/g, '')); });
     each('[data-t-ph]', function (e) { e.setAttribute('placeholder', t(e.getAttribute('data-t-ph'))); });
