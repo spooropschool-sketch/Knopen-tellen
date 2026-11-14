@@ -902,32 +902,25 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .goal[data-goal="unsure"] { background: none; border-style: dashed; }
 .intro-about-h { font-family: var(--f-display); font-size: 22px; line-height: 1.2; margin: 0 0 8px; }
 .intro-about { color: var(--ink2); line-height: 1.55; margin-bottom: 18px; font-size: 15px; }
-.slot { --slot-h: 156px; display: grid; gap: 10px; margin: 8px 0 4px; }
-.slot-machine { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px; border: 2px solid var(--copper); border-radius: 18px; background: var(--surface2); box-shadow: 0 6px 18px rgba(152, 90, 50, 0.16), inset 0 0 0 4px var(--surface); }
-.slot-window { position: relative; height: var(--slot-h); overflow: hidden; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: inset 0 8px 10px -8px rgba(0, 0, 0, 0.22), inset 0 -8px 10px -8px rgba(0, 0, 0, 0.22); }
-.slot-reel { position: absolute; left: 0; right: 0; top: 0; will-change: transform; }
-.slot-reel.run { transition: transform 1.5s cubic-bezier(0.12, 0.7, 0.18, 1); }
-.slot-item { height: var(--slot-h); box-sizing: border-box; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden; }
-.slot-item b { font-family: var(--f-display); font-size: 17px; font-weight: 600; line-height: 1.25; }
-.slot-item span { font-size: 14px; color: var(--ink2); line-height: 1.4; }
-.slot-knob { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 76px; padding: 8px 4px 6px; border: 0; border-radius: 16px; background: none; color: var(--copper); font: 700 13px var(--f-body, inherit); cursor: pointer; }
-.slot-knob svg { width: 52px; height: 52px; transition: transform 1.5s cubic-bezier(0.12, 0.7, 0.18, 1); }
-.slot-knob .k-out { fill: var(--copper); stroke: #7A4426; stroke-width: 2; }
-.slot-knob .k-in { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 1.6; }
-.slot-knob .k-hole { fill: #5A321C; }
-.slot-knob:hover svg { filter: brightness(1.08); }
-.slot-knob:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.slot-knob.spin svg { transform: rotate(900deg); }
-.slot-knob:disabled, .slot-ok:disabled { opacity: 0.6; cursor: default; }
-.slot-hint { margin: 0; text-align: center; color: var(--ink2); font-size: 14px; }
-.slot-dots { display: flex; justify-content: center; gap: 4px; }
-.slot-dot { width: 32px; height: 32px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
-.slot-dot::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--line); transition: background 0.2s, transform 0.2s; }
-.slot-dot[aria-current="true"]::before { background: var(--copper); transform: scale(1.3); }
-.slot-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-radius: 8px; }
+.slot { --fh: 52px; --wh: 250px; display: grid; gap: 10px; margin: 8px 0 4px; }
+.slot-machine { padding: 8px; border: 2px solid var(--copper); border-radius: 18px; background: linear-gradient(180deg, #4a3a30, #2a211b); box-shadow: 0 6px 18px rgba(152, 90, 50, 0.18); }
+.slot-window { position: relative; height: var(--wh); overflow: hidden; border-radius: 12px; background: #f4efe7; perspective: 600px; perspective-origin: 50% 50%; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+.slot-window:active { cursor: grabbing; }
+.slot-window:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.slot-window::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(30, 20, 12, 0.62) 0%, rgba(30, 20, 12, 0.22) 22%, rgba(30, 20, 12, 0) 40%, rgba(30, 20, 12, 0) 60%, rgba(30, 20, 12, 0.22) 78%, rgba(30, 20, 12, 0.62) 100%), linear-gradient(90deg, rgba(30, 20, 12, 0.18), rgba(30, 20, 12, 0) 7%, rgba(30, 20, 12, 0) 93%, rgba(30, 20, 12, 0.18)); }
+.slot-window::after { content: ""; position: absolute; left: -2px; right: -2px; top: 50%; height: calc(var(--fh) + 4px); transform: translateY(-50%); z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(196, 112, 62, 0.20), rgba(196, 112, 62, 0.10) 50%, rgba(196, 112, 62, 0.20)); border-top: 1px solid rgba(160, 82, 45, 0.75); border-bottom: 1px solid rgba(160, 82, 45, 0.75); box-shadow: 0 2px 6px rgba(30, 20, 12, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+.slot-cyl-wrap { position: absolute; inset: 0; transform-style: preserve-3d; }
+.slot-cyl { position: absolute; left: 0; right: 0; top: 50%; height: var(--fh); margin-top: calc(var(--fh) / -2); transform-style: preserve-3d; will-change: transform; }
+.slot-cyl.run { transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.25, 1); }
+.slot-face { position: absolute; inset: 0; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; justify-content: center; text-align: center; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #fbf8f3; color: #1d1a17; }
+.slot-face b { font-family: var(--f-display); font-size: 17px; font-weight: 600; line-height: 1.15; text-wrap: balance; }
+.slot-sub { margin: 0; min-height: 1.4em; text-align: center; color: var(--ink2); font-size: 15px; }
+.slot-hint { margin: 0; text-align: center; color: var(--ink2); font-size: 13.5px; }
 .slot-ok { width: 100%; }
-@media (max-width: 380px) { .slot { --slot-h: 180px; } .slot-knob { width: 62px; } .slot-knob svg { width: 44px; height: 44px; } .slot-item { padding: 10px 12px; } .slot-item b { font-size: 16px; } }
-@media (prefers-reduced-motion: reduce) { .slot-reel.run, .slot-knob svg { transition: none; } }
+@keyframes slotNudge { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-16px); } 70% { transform: translateY(5px); } }
+.slot-window.nudge .slot-cyl-wrap { animation: slotNudge 0.9s ease-in-out 0.5s 1 both; }
+@media (max-width: 420px) { .slot { --fh: 54px; --wh: 260px; } .slot-face { padding: 0 12px; } .slot-face b { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .slot-cyl.run { transition: none; } .slot-window.nudge .slot-cyl-wrap { animation: none; } }
 
 #intro-s1 h2 { font-family: var(--f-display); font-size: 26px; line-height: 1.15; margin: 0; }
 .goal-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; border-left: 4px solid var(--copper); }
@@ -1498,8 +1491,6 @@ footer { color: var(--muted); }
 .fb-cats label span { border-color: var(--line); background: var(--surface); color: var(--ink); }
 .fb-cats input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .slot-machine { background: var(--surface2); border-color: var(--copper); box-shadow: inset 0 0 0 4px var(--surface); }
-.slot-window { background: var(--surface); border-color: var(--line); }
-.slot-item b { font-family: var(--f-display); }
 .share-list { display: grid; gap: 10px; margin-top: 6px; }
 .share-opt { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 14px 16px; min-height: 64px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; transition: border-color 0.15s, transform 0.15s, background 0.15s; }
 .share-opt[hidden] { display: none; }
@@ -1962,13 +1953,12 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       <p class="sub" data-t="intro.promise">¿Es suficiente? Lo calculamos, sin discurso comercial y con la fuente de cada cifra.</p>
       <div class="slot" id="slot">
         <div class="slot-machine">
-          <div class="slot-window" id="slot-window" role="group" aria-live="polite">
-            <div class="slot-reel" id="slot-reel"></div>
+          <div class="slot-window" id="slot-window" tabindex="0" role="spinbutton" data-t-aria="slot.pick" aria-valuemin="1" aria-valuemax="5" aria-label="Elegir una pregunta">
+            <div class="slot-cyl-wrap"><div class="slot-cyl" id="slot-cyl"></div></div>
           </div>
-          <button class="slot-knob" type="button" id="slot-spin" aria-label="Spin"><svg viewBox="-20 -20 40 40" aria-hidden="true"><circle r="17" class="k-out"/><circle r="11.5" class="k-in"/><circle cx="-4.2" cy="-4.2" r="1.9" class="k-hole"/><circle cx="4.2" cy="-4.2" r="1.9" class="k-hole"/><circle cx="-4.2" cy="4.2" r="1.9" class="k-hole"/><circle cx="4.2" cy="4.2" r="1.9" class="k-hole"/></svg><span data-t="slot.spin">Girar</span></button>
         </div>
-        <p class="slot-hint" data-t="slot.hint">Gira hasta que aparezca tu pregunta y confirma.</p>
-        <div class="slot-dots" id="slot-dots" role="group" data-t-aria="slot.pick" aria-label="Elegir una pregunta"></div>
+        <p class="slot-sub" id="slot-sub" aria-hidden="true"></p>
+        <p class="slot-hint" data-t="slot.hint">Gira la rueda con el dedo hasta que tu pregunta quede en el centro y confirma.</p>
         <button class="btn primary slot-ok" type="button" id="slot-ok" data-t="slot.ok">Esta es mi pregunta</button>
       </div>
       <div class="modal-actions">
@@ -3853,7 +3843,7 @@ Object.assign(I18N.en, {
  "disc.body": "<p>Button Counter is a general calculation tool for information only. It is <strong>not</strong> financial, investment, tax, pension or legal advice, and no advice is given about your personal situation.</p><p>Results are estimates based on simplified rules and assumptions about returns, inflation and life expectancy. The future can differ from what is shown, and the rules per country may be incomplete or out of date. No rights can be derived from the results.</p><p>Use of this site is at your own risk. To the extent permitted by law, the maker accepts no liability for decisions made or damage suffered based on this site. Check official sources and consult an independent, licensed adviser before making important financial decisions.</p>",
  "slot.spin": "Spin",
  "slot.ok": "This is my question",
- "slot.hint": "Spin until your question appears, then confirm.",
+ "slot.hint": "Turn the wheel with your finger until your question is in the middle, then confirm.",
  "slot.pick": "Choose a question",
  "seo.title": "How long will your savings last? See your financial future | Button Counter",
  "seo.desc": "A tool for your financial future. Enter your age, savings and monthly budget and see the chance your money lasts, based on 4,000 simulations. For 11 countries, no account.",
@@ -3962,7 +3952,7 @@ Object.assign(I18N.nl, {
  "disc.body": "<p>Knopenteller is een algemeen rekenhulpmiddel, alleen bedoeld als informatie. Het is <strong>geen</strong> financieel, beleggings-, belasting-, pensioen- of juridisch advies, en er wordt geen advies gegeven over jouw persoonlijke situatie.</p><p>De uitkomsten zijn schattingen op basis van vereenvoudigde regels en aannames over rendement, inflatie en levensduur. De toekomst kan afwijken van wat er staat, en de regels per land kunnen onvolledig of verouderd zijn. Aan de uitkomsten kunnen geen rechten worden ontleend.</p><p>Gebruik van deze site is voor eigen risico. Voor zover de wet dat toestaat, aanvaardt de maker geen aansprakelijkheid voor beslissingen of schade die voortvloeien uit het gebruik van deze site. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>",
  "slot.spin": "Draai",
  "slot.ok": "Dit is mijn vraag",
- "slot.hint": "Draai tot je vraag verschijnt en bevestig dan.",
+ "slot.hint": "Draai het wiel met je vinger tot je vraag in het midden staat en bevestig dan.",
  "slot.pick": "Kies een vraag",
  "seo.title": "Hoe lang gaat je spaargeld mee? Zie je financiële toekomst | Knopenteller",
  "seo.desc": "Rekentool voor je financiële toekomst en eerder stoppen met werken. Vul je leeftijd, spaargeld en maandbudget in en zie de kans dat je geld genoeg is, op basis van 4.000 simulaties.",
@@ -4066,7 +4056,7 @@ Object.assign(I18N.de, {
  "disc.body": "<p>Button Counter ist ein allgemeines Rechenwerkzeug und dient nur der Information. Es ist <strong>keine</strong> Finanz-, Anlage-, Steuer-, Renten- oder Rechtsberatung, und es erfolgt keine Beratung zu Ihrer persönlichen Situation.</p><p>Die Ergebnisse sind Schätzungen auf Grundlage vereinfachter Regeln und Annahmen zu Rendite, Inflation und Lebensdauer. Die Zukunft kann abweichen, und die Regeln je Land können unvollständig oder veraltet sein. Aus den Ergebnissen können keine Rechte abgeleitet werden.</p><p>Die Nutzung dieser Seite erfolgt auf eigenes Risiko. Soweit gesetzlich zulässig, übernimmt der Betreiber keine Haftung für Entscheidungen oder Schäden, die sich aus der Nutzung dieser Seite ergeben. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>",
  "slot.spin": "Drehen",
  "slot.ok": "Das ist meine Frage",
- "slot.hint": "Drehen Sie, bis Ihre Frage erscheint, und bestätigen Sie dann.",
+ "slot.hint": "Drehen Sie das Rad mit dem Finger, bis Ihre Frage in der Mitte steht, und bestätigen Sie dann.",
  "slot.pick": "Frage wählen",
  "seo.title": "Wie lange reicht Ihr Erspartes? Ihre finanzielle Zukunft im Blick | Button Counter",
  "seo.desc": "Rechner für Ihre finanzielle Zukunft. Alter, Erspartes und Monatsbudget eingeben und sehen, mit welcher Wahrscheinlichkeit Ihr Geld reicht. Auf Basis von 4.000 Simulationen.",
@@ -4170,7 +4160,7 @@ Object.assign(I18N.fr, {
  "disc.body": "<p>Button Counter est un outil de calcul général, à titre d’information uniquement. Ce n’est <strong>pas</strong> un conseil financier, en placement, fiscal, de retraite ou juridique, et aucun conseil n’est donné sur votre situation personnelle.</p><p>Les résultats sont des estimations fondées sur des règles simplifiées et des hypothèses de rendement, d’inflation et d’espérance de vie. L’avenir peut différer, et les règles par pays peuvent être incomplètes ou dépassées. Aucun droit ne peut être tiré des résultats.</p><p>L’utilisation de ce site se fait à vos propres risques. Dans la mesure permise par la loi, l’auteur décline toute responsabilité pour les décisions prises ou les dommages subis en raison de ce site. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>",
  "slot.spin": "Tourner",
  "slot.ok": "C’est ma question",
- "slot.hint": "Tournez jusqu’à ce que votre question apparaisse, puis confirmez.",
+ "slot.hint": "Tournez la roue du doigt jusqu’à ce que votre question soit au milieu, puis confirmez.",
  "slot.pick": "Choisir une question",
  "seo.title": "Combien de temps durera votre épargne ? Votre avenir financier en vue | Button Counter",
  "seo.desc": "Simulateur pour votre avenir financier. Indiquez votre âge, votre épargne et votre budget mensuel et voyez la probabilité que votre argent suffise, sur la base de 4 000 simulations.",
@@ -4279,7 +4269,7 @@ Object.assign(I18N.es, {
  "disc.body": "<p>Button Counter es una herramienta de cálculo general, solo con fines informativos. <strong>No</strong> es asesoramiento financiero, de inversión, fiscal, de pensiones ni jurídico, y no se ofrece asesoramiento sobre tu situación personal.</p><p>Los resultados son estimaciones basadas en reglas simplificadas y supuestos sobre rentabilidad, inflación y esperanza de vida. El futuro puede diferir y las reglas de cada país pueden estar incompletas o desactualizadas. De los resultados no se puede derivar ningún derecho.</p><p>El uso de este sitio es bajo tu propia responsabilidad. En la medida permitida por la ley, el autor no asume responsabilidad por decisiones tomadas ni daños sufridos a raíz de este sitio. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>",
  "slot.spin": "Girar",
  "slot.ok": "Esta es mi pregunta",
- "slot.hint": "Gira hasta que aparezca tu pregunta y confirma.",
+ "slot.hint": "Gira la rueda con el dedo hasta que tu pregunta quede en el centro y confirma.",
  "slot.pick": "Elegir una pregunta",
  "seo.title": "¿Cuánto durarán tus ahorros? Mira tu futuro financiero | Button Counter",
  "seo.desc": "Calculadora para tu futuro financiero. Introduce tu edad, tus ahorros y tu presupuesto mensual y mira la probabilidad de que tu dinero alcance, con 4.000 simulaciones.",
@@ -5014,7 +5004,7 @@ Object.assign(I18N.es, {
     document.title = SITE ? t1(sk + 'title') : t1('brand');
     document.documentElement.setAttribute('data-seo-title', t1(sk + 'title'));
     var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', t1(sk + 'desc'));
-    if ($('slot-reel') && typeof slotBuild === 'function' && !slotBusy) slotBuild();
+    if ($('slot-cyl') && typeof SLN === 'number') slotBuild();
     var root = document.documentElement;
     root.classList.toggle('is-nl', isNL());
     root.classList.toggle('sp-flat', spFlat());
@@ -6482,7 +6472,7 @@ var TRK = {
     if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = I18N.en.brand; }
     else { ib.removeAttribute('data-t-en'); ib.setAttribute('data-t', 'brand'); ib.textContent = t1('brand'); }
     $('intro-card').setAttribute('aria-labelledby', n === 0 ? 'intro-h0' : 'intro-h');
-    setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'slot-spin'); if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
+    setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'slot-window'); if (n !== 0 && $('slot-window')) { $('slot-window').classList.remove('nudge'); void $('slot-window').offsetWidth; $('slot-window').classList.add('nudge'); if (typeof slotBuild === 'function') slotBuild(); } if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
   }
   function openIntro(step) {
     lastFocus = document.activeElement;
@@ -6517,49 +6507,80 @@ var TRK = {
     if (location.hash !== '#input') location.hash = '#input'; else go();
   }
   /* fruitautomaat: draai tot je vraag verschijnt, bevestig dan */
+  /* draaiwiel: sleep omhoog of omlaag (of pijltjes, scrollwiel, tikken op de vraag erboven of eronder) */
   var SLOTG = ['enough', 'spend', 'earlier', 'abroad', 'unsure'], slotIdx = 0, slotBusy = false;
+  var SLN = 15, SLA = 360 / SLN, slAng = 0, slR = 0;
+  function slotFh() { var w = $('slot-window'); return w ? (parseFloat(getComputedStyle(w).getPropertyValue('--fh')) || 128) : 128; }
   function slotBuild() {
-    var reel = $('slot-reel'), h = '', i, c;
-    if (!reel) return;
-    for (c = 0; c < 4; c++) for (i = 0; i < 5; i++) h += '<div class="slot-item"' + (c ? ' aria-hidden="true"' : '') + '><b>' + t1('goal.' + (i + 1) + '.t') + '</b><span>' + t1('goal.' + (i + 1) + '.s') + '</span></div>';
-    reel.innerHTML = h;
-    var dots = '';
-    for (i = 0; i < 5; i++) dots += '<button type="button" class="slot-dot" data-i="' + i + '" aria-label="' + t1('goal.' + (i + 1) + '.t').replace(/"/g, '&quot;') + '"></button>';
-    $('slot-dots').innerHTML = dots;
-    each('.slot-dot', function (d) { d.addEventListener('click', function () { if (!slotBusy) slotShow(parseInt(d.getAttribute('data-i'), 10)); }); });
-    slotShow(slotIdx);
+    var cyl = $('slot-cyl'), h = '', f, i;
+    if (!cyl) return;
+    slR = slotFh() / 2 / Math.tan(Math.PI / SLN);
+    for (f = 0; f < SLN; f++) {
+      i = f % 5;
+      h += '<div class="slot-face" data-i="' + i + '" aria-hidden="true" style="transform: rotateX(' + (-f * SLA) + 'deg) translateZ(' + slR.toFixed(1) + 'px)"><b>' + t1('goal.' + (i + 1) + '.t') + '</b></div>';
+    }
+    cyl.innerHTML = h;
+    slotPos(slotIdx * SLA, false);
   }
-  function slotPos(pos, anim) {
-    var reel = $('slot-reel');
-    reel.classList.toggle('run', !!anim);
-    var SLOTH = $('slot-window').clientHeight || 156;
-    reel.style.transform = 'translateY(' + (-pos * SLOTH) + 'px)';
+  function slotPos(a, anim) {
+    var cyl = $('slot-cyl'); if (!cyl) return;
+    slAng = a;
+    cyl.classList.toggle('run', !!anim);
+    cyl.style.transform = 'translateZ(' + (-slR).toFixed(1) + 'px) rotateX(' + a.toFixed(2) + 'deg)';
+    var k = ((Math.round(a / SLA) % SLN) + SLN) % SLN;
+    slotIdx = k % 5;
+    var w = $('slot-window');
+    var sb = $('slot-sub'); if (sb) sb.textContent = t1('goal.' + (slotIdx + 1) + '.s');
+    if (w) { w.setAttribute('aria-valuenow', slotIdx + 1); w.setAttribute('aria-valuetext', t1('goal.' + (slotIdx + 1) + '.t')); }
   }
-  function slotShow(i) {
-    slotIdx = i; slotPos(i + 5, false);
-    each('.slot-dot', function (d) { d.setAttribute('aria-current', parseInt(d.getAttribute('data-i'), 10) === i ? 'true' : 'false'); });
-    var nm = $('slot-window'); if (nm) nm.setAttribute('aria-label', t1('goal.' + (i + 1) + '.t'));
-  }
-  function slotSpin() {
-    if (slotBusy) return;
-    var tgt, k, reduce = false;
-    try { reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-    do { tgt = Math.floor(Math.random() * 5); } while (tgt === slotIdx);
-    if (reduce) { slotShow(tgt); return; }
-    k = ((tgt - slotIdx + 5) % 5) + 5;
-    slotBusy = true; $('slot-spin').disabled = true; $('slot-ok').disabled = true;
-    $('slot-spin').classList.add('spin');
-    var reel = $('slot-reel'), done = false;
-    function fin() { if (done) return; done = true; reel.removeEventListener('transitionend', fin); $('slot-spin').classList.remove('spin'); slotShow(tgt); slotBusy = false; $('slot-spin').disabled = false; $('slot-ok').disabled = false; }
-    reel.addEventListener('transitionend', fin);
-    setTimeout(fin, 1800);
-    void reel.offsetWidth;
-    slotPos(slotIdx + 5 + k, true);
-  }
-  if ($('slot-spin')) {
-    $('slot-spin').addEventListener('click', slotSpin);
-    $('slot-ok').addEventListener('click', function () { if (!slotBusy) pickGoal(SLOTG[slotIdx]); });
-  }
+  function slotShow(i) { slotPos(i * SLA, false); }
+  function slotSnap(a) { slotPos(Math.round(a / SLA) * SLA, true); }
+  function slotStep(d) { slotSnap(Math.round(slAng / SLA) * SLA + d * SLA); }
+  (function () {
+    var w = $('slot-window'); if (!w) return;
+    var drag = null, wheelT = 0;
+    w.addEventListener('pointerdown', function (ev) {
+      if (ev.button > 0) return;
+      w.classList.remove('nudge');
+      drag = { y: ev.clientY, a: slAng, t: performance.now(), v: 0, ly: ev.clientY, lt: performance.now(), moved: false, id: ev.pointerId };
+      try { w.setPointerCapture(ev.pointerId); } catch (e) {}
+      slotPos(slAng, false);
+    });
+    w.addEventListener('pointermove', function (ev) {
+      if (!drag) return;
+      var dy = ev.clientY - drag.y, now = performance.now();
+      if (Math.abs(dy) > 4) drag.moved = true;
+      var a = drag.a - dy / slR * 180 / Math.PI;
+      if (now > drag.lt) drag.v = 0.7 * drag.v + 0.3 * (-(ev.clientY - drag.ly) / slR * 180 / Math.PI) / (now - drag.lt);
+      drag.ly = ev.clientY; drag.lt = now;
+      slotPos(a, false);
+    });
+    function end(ev) {
+      if (!drag) return;
+      var d = drag; drag = null;
+      if (!d.moved) {
+        var r = w.getBoundingClientRect(), off = ev.clientY - (r.top + r.height / 2), fh = slotFh();
+        if (off < -fh / 2) slotStep(-1); else if (off > fh / 2) slotStep(1); else slotSnap(slAng);
+        return;
+      }
+      var v = Math.max(-1.2, Math.min(1.2, d.v));
+      slotSnap(slAng + v * 260);
+    }
+    w.addEventListener('pointerup', end);
+    w.addEventListener('pointercancel', end);
+    w.addEventListener('wheel', function (ev) {
+      ev.preventDefault();
+      var now = Date.now(); if (now - wheelT < 260) return; wheelT = now;
+      w.classList.remove('nudge');
+      slotStep(ev.deltaY > 0 ? 1 : -1);
+    }, { passive: false });
+    w.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); slotStep(1); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); slotStep(-1); }
+      else if (ev.key === 'Enter') { ev.preventDefault(); pickGoal(SLOTG[slotIdx]); }
+    });
+  })();
+  $('slot-ok').addEventListener('click', function () { pickGoal(SLOTG[slotIdx]); });
   slotBuild();
 
   $('gb-go').addEventListener('click', function () {
