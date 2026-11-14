@@ -1,4 +1,4 @@
-# Buttons / Knopen tellen
+# Button Counter / Knopenteller
 
 Free retirement calculator at https://countingbuttons.com. One page, runs in the browser.
 

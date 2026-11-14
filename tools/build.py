@@ -86,7 +86,7 @@ def fill_body(body, d):
 
 def head_block(lang, d):
     e = lambda s: html.escape(s, quote=True)
-    brand = 'Knopen tellen' if lang == 'nl' else 'Buttons'
+    brand = 'Knopenteller' if lang == 'nl' else 'Button Counter'
     lines = [
         '<title>%s</title>' % e(d['title']),
         '<meta name="description" content="%s">' % e(d['desc']),
@@ -112,8 +112,8 @@ def head_block(lang, d):
         '<meta name="twitter:image" content="%s/og.jpg">' % SITE,
     ]
     graph = [
-        {'@type': 'WebSite', '@id': SITE + '/#site', 'url': SITE + '/', 'name': 'Buttons',
-         'alternateName': ['Knopen tellen', 'Counting Buttons'], 'inLanguage': LANGS},
+        {'@type': 'WebSite', '@id': SITE + '/#site', 'url': SITE + '/', 'name': 'Button Counter',
+         'alternateName': ['Knopenteller', 'Knopen tellen', 'Buttons', 'Counting Buttons'], 'inLanguage': LANGS},
         {'@type': 'WebApplication', '@id': url(lang) + '#app', 'name': brand, 'url': url(lang),
          'description': d['desc'], 'applicationCategory': 'FinanceApplication',
          'operatingSystem': 'Any (web browser)', 'browserRequirements': 'Requires JavaScript',
@@ -156,6 +156,8 @@ def build_page(src, lang, d):
     head = re.sub(r'<title>[^<]*</title>', lambda m: head_block(lang, d), head, count=1)
     # the root page follows the visitor's own language (and sends them on to /nl/ etc.); language pages are fixed
     head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1">' % (lang, '' if lang == 'en' else lang))
+    if lang == 'nl':
+        head = head.replace('name="apple-mobile-web-app-title" content="Button Counter"', 'name="apple-mobile-web-app-title" content="Knopenteller"')
     head = head.replace('href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
     head = head.replace('href="icon-192.png"', 'href="/icon-192.png"').replace('href="apple-touch-icon.png"', 'href="/apple-touch-icon.png"')
     head = head.replace('url("fonts/', 'url("/fonts/')
@@ -220,8 +222,8 @@ def main():
     write('robots.txt', rb)
 
     en = data['en']
-    ll = '# Buttons (Counting Buttons / Knopen tellen)\n\n> %s\n\n' % en['desc']
-    ll += ('Buttons is a free, single-page retirement calculator at %s. It runs entirely in the browser, '
+    ll = '# Button Counter (Knopenteller; previously Buttons / Knopen tellen; also Counting Buttons)\n\n> %s\n\n' % en['desc']
+    ll += ('Button Counter is a free, single-page retirement calculator at %s. It runs entirely in the browser, '
            'needs no account and stores what you enter only on your own device. It is a general calculation '
            'tool and does not give financial advice.\n\n' % SITE)
     ll += '## Pages\n\n' + ''.join('- [%s (%s)](%s): %s\n' % (data[l]['title'], NAMES[l], url(l), data[l]['desc']) for l in LANGS)
@@ -236,10 +238,10 @@ def main():
     write('llms.txt', ll)
 
     nf = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-          '<title>Page not found | Buttons</title>\n<meta name="robots" content="noindex">\n'
+          '<title>Page not found | Button Counter</title>\n<meta name="robots" content="noindex">\n'
           '<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#F3F7FB;color:#1D2B3A;font:17px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}'
           'main{max-width:520px;padding:24px}h1{font-size:28px;margin:0 0 8px}a{color:#2F6DAE;font-weight:600}ul{padding-left:20px}</style>\n</head>\n<body>\n<main>\n'
-          '<h1>This page does not exist</h1>\n<p>Buttons is a single page. Pick your language to continue:</p>\n<ul>\n'
+          '<h1>This page does not exist</h1>\n<p>Button Counter is a single page. Pick your language to continue:</p>\n<ul>\n'
           + ''.join('<li><a href="%s" hreflang="%s" lang="%s">%s</a></li>\n' % ('/' if l == 'en' else '/%s/' % l, l, l, NAMES[l]) for l in LANGS)
           + '</ul>\n</main>\n</body>\n</html>\n')
     write('404.html', nf)

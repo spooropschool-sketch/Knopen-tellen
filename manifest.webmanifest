@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Buttons: how long will your savings last?",
-  "short_name": "Buttons",
+  "name": "Button Counter: how long will your savings last?",
+  "short_name": "Button Counter",
   "description": "Free retirement calculator. See the chance that your savings last, based on 4,000 simulations.",
   "categories": ["finance", "productivity"],
   "start_url": "/",
