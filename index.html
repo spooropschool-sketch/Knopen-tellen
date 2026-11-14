@@ -1348,7 +1348,7 @@ a { color: var(--accent); }
 #sec-pf { background: linear-gradient(135deg, var(--surface), var(--tint-pf)); }
 #sec-ladder { background: linear-gradient(135deg, var(--surface), var(--tint-ld)); }
 #sec-koop { background: linear-gradient(135deg, var(--surface), var(--tint-kp)); }
-.is-calc .status .gauge, .is-calc .ovt-chance, .is-calc .kpis, .is-calc .mini { opacity: 0.55; transition: opacity 0.2s 0.25s; }
+.is-calc .status .gauge, .is-calc .ovt-chance, .is-calc .kpis, .is-calc .mini, .is-calc #plans .pl-v.now, .is-calc #fb-form { opacity: 0.55; transition: opacity 0.15s; }
 
 /* ---------- knoppen en velden ---------- */
 .btn { border-radius: 12px; font-family: var(--f-body); font-weight: 600; min-height: 46px; padding: 10px 20px; }
@@ -1540,6 +1540,82 @@ footer { color: var(--muted); }
 #plans .sup-pl { margin: 20px 0 0; }
 @media (min-width: 640px) { .sup-pl { flex-direction: row; justify-content: center; gap: 4px 12px; flex-wrap: wrap; } }
 @media print { .support-card, .sup-sh, .sup-pl { display: none !important; } }
+
+/* ===== v7: gesplitste knop tip | koffie ===== */
+.support-card { flex-direction: column; justify-content: center; text-align: center; gap: 12px; padding: 18px 20px; }
+.duo-t { margin: 0; color: var(--ink2); font-size: 15px; line-height: 1.45; }
+.duo { display: inline-flex; align-items: stretch; max-width: 100%; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); overflow: hidden; box-shadow: 0 1px 2px rgba(20, 40, 30, 0.06); }
+.duo > button, .duo > a { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 22px; margin: 0; border: 0; background: none; font: inherit; text-align: left; text-decoration: none; cursor: pointer; flex: 0 1 auto; min-width: 0; }
+.duo > button:hover, .duo > a:hover { background: var(--surface2); }
+.duo > button:focus-visible, .duo > a:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.duo-l { color: var(--accent); }
+.duo-r { color: var(--copper); border-left: 1px solid var(--line) !important; }
+.duo-i { font-size: 19px; line-height: 1; }
+.duo-x { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.duo-x b { font-weight: 650; font-size: 15px; white-space: nowrap; }
+.duo-x small { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.sup-sh, .sup-pl, .sup-ab { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.sup-sh { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
+@media (max-width: 440px) { .duo > button, .duo > a { padding: 8px 12px; gap: 8px; } .duo-x b { font-size: 14px; } .duo-x small { white-space: normal; } }
+@media print { .sup-ab { display: none !important; } }
+
+/* ===== v7: werk per partner, perioden en potten ===== */
+.wk { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.wk-h { margin: 0; font-size: 15px; font-weight: 650; color: var(--ink); }
+.wk-one { display: flex; flex-direction: column; gap: 14px; }
+.wk-tog { align-self: flex-start; }
+.wk-per { display: flex; flex-direction: column; gap: 8px; }
+.per-row { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.8fr) minmax(0, 1.5fr) 36px; gap: 8px; align-items: center; }
+.per-row input { width: 100%; min-width: 0; }
+.per-head span { font-size: 12.5px; font-weight: 600; color: var(--ink2); }
+.per-x { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink2); cursor: pointer; font-size: 14px; }
+.per-x:hover { border-color: var(--copper); color: var(--copper); }
+.per-add { align-self: flex-start; }
+.pots { margin-top: 16px; padding: 0; }
+.pots > summary { display: flex; flex-direction: column; gap: 3px; padding: 16px 20px; cursor: pointer; list-style: none; }
+.pots > summary::-webkit-details-marker { display: none; }
+.pots-h { display: flex; align-items: center; gap: 10px; font-size: 16px; }
+.pots-h::before { content: '+'; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.pots[open] .pots-h::before { content: '−'; }
+.pots-n { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 99px; background: var(--accent); color: var(--bg); font-size: 12.5px; font-weight: 700; }
+.pots-s { color: var(--ink2); font-size: 14px; padding-left: 34px; }
+.pots-in { display: flex; flex-direction: column; gap: 14px; padding: 0 20px 20px; }
+.pots-in > .hint { margin: 0; }
+#pots-list { display: flex; flex-direction: column; gap: 14px; }
+#pots-list:empty { display: none; }
+.pot { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+.pot-top { display: flex; gap: 8px; align-items: center; }
+.pot-name { flex: 1 1 auto; min-width: 0; font-weight: 600; }
+.pot-segs { display: flex; flex-wrap: wrap; gap: 8px; }
+.pot-f { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.pot-f input { min-width: 0; width: 100%; }
+.pot-taxh { margin: 0; }
+.pot-sum { margin: 0; font-weight: 600; color: var(--accent); }
+.pot-sum.muted { color: var(--muted); font-weight: 500; }
+.chart .f-pot, .sw.f-pot { fill: var(--butter, #EBCF86); background: var(--butter, #EBCF86); }
+.chart .f-lump { fill: var(--accent); }
+.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 3px var(--accent); } 100% { box-shadow: 0 0 0 3px transparent; } }
+
+/* ===== v7: fine-tunen als overzicht ===== */
+.in-mode { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; margin: 0 0 14px; }
+.in-mode .hint { margin: 0; }
+.in-sum { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+.in-sum[hidden] { display: none; }
+.ins-head h2 { margin: 0 0 4px; }
+.ins-head .sub { margin: 0; }
+.ins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px 26px; }
+.ins-g { display: flex; flex-direction: column; min-width: 0; }
+.ins-g h3 { margin: 0 0 4px; font-size: 12.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--copper); font-weight: 700; }
+.ins-i { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 6px; border: 0; border-bottom: 1px dashed var(--line); background: none; font: inherit; color: var(--ink2); text-align: left; cursor: pointer; border-radius: 6px; }
+.ins-i:hover { background: var(--surface2); }
+.ins-i span { flex: 0 0 auto; font-size: 14px; }
+.ins-i b { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 14px; font-weight: 600; color: var(--ink); text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.in-all .progress, .in-all .step-k, .in-all #step-prev { display: none; }
+.in-all .step + .step { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
+.in-all .stepper button.done, .in-all .stepper button[aria-current] { background: var(--surface); }
+@media print { .in-mode, .in-sum { display: none !important; } }
 </style>
 <link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1634,7 +1710,8 @@ footer { color: var(--muted); }
         <div class="legend">
           <span><span class="sw box f-aow"></span><span data-t="w.sp">State Pension</span></span>
           <span><span class="sw box f-pen"></span><span data-t="w.pension">Workplace pension</span></span>
-          <span><span class="sw box f-wk"></span><span data-t="w.work">Side income</span></span>
+          <span><span class="sw box f-wk"></span><span data-t="w.work">Income from work</span></span>
+          <span id="lg-pot" hidden><span class="sw box f-pot"></span><span data-t="w.pots">Extra pots</span></span>
           <span><span class="sw box f-cap"></span><span data-t="w.fromCap">From savings</span></span>
           <span><i class="dash"></i><span data-t="w.spendLine">Monthly budget</span></span>
         </div>
@@ -1686,6 +1763,14 @@ footer { color: var(--muted); }
         </div>
       </section>
     </div>
+    <div class="in-mode" id="in-mode">
+      <div class="seg" role="radiogroup" data-t-aria="in.modeAria" aria-label="How do you want to fill it in?">
+        <label class="seg-opt"><input type="radio" name="in-mode" value="all"><span data-t="in.all">Everything on one page</span></label>
+        <label class="seg-opt"><input type="radio" name="in-mode" value="steps"><span data-t="in.stepsMode">Step by step</span></label>
+      </div>
+      <p class="hint" id="in-mode-h"></p>
+    </div>
+    <section class="card in-sum" id="in-sum" aria-labelledby="in-sum-h" hidden></section>
     <div class="progress" aria-hidden="true"><span id="prog"></span></div>
     <ol class="stepper" id="stepper" data-t-aria="in.steps" aria-label="Steps"></ol>
     <div id="steps"></div>
@@ -1781,7 +1866,7 @@ footer { color: var(--muted); }
       <span id="sources"></span>
       <span data-t="about.disclaimer">Button Counter gives you insight, not tax or investment advice. We’ve simplified the rules per country, so do check the official sources.</span>
       <span id="visits" hidden></span>
-      <span id="support-ab" hidden></span>
+      <div class="sup-ab" id="support-ab" hidden></div>
       <nav class="site-langs" aria-label="Language"><a href="/" hreflang="en" lang="en" aria-current="true">English</a><a href="/nl/" hreflang="nl" lang="nl">Nederlands</a><a href="/de/" hreflang="de" lang="de">Deutsch</a><a href="/fr/" hreflang="fr" lang="fr">Français</a><a href="/es/" hreflang="es" lang="es">Español</a></nav>
     </footer>
   </section>
@@ -1875,7 +1960,7 @@ footer { color: var(--muted); }
         <button type="button" class="share-opt" id="sh-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11.5" height="11.5" rx="2"/><path d="M16 8V6.5a2 2 0 0 0-2-2H6.5a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2H8"/></svg><span><b data-t="sh.copy">Copy summary</b><span data-t="sh.copyS">A short text for a message or e-mail.</span></span></button>
       </div>
       <textarea id="share-out" rows="7" readonly hidden></textarea>
-      <p class="support-line sup-sh" id="support-sh" hidden></p>
+      <div class="sup-sh" id="support-sh" hidden></div>
     </div>
   </div>
 </div>
@@ -1914,20 +1999,37 @@ function runModel(p) {
   var N = Math.max(1, Math.round(p.eindleeftijd - youngest));
   var grow = (1 + b - c) / (1 + i);
   var tRate = (p.taxRate || 0) / 100, tAllow = (p.taxAllow || 0) * (two ? 2 : 1);
-  var werkTot = p.werkTot || 67;
 
   function clamp01(x) { return Math.max(0, Math.min(1, x)); }
-
-  var inc = [];
-  for (var t = 0; t < N; t++) {
-    var x = 0;
-    if (aowOnP) x += 12 * spP * clamp01(ageP + t + 1 - p.aowPaul);
-    if (aowOnD) x += 12 * spD * clamp01(ageD + t + 1 - p.aowDiana);
-    if (penOnP) x += 12 * p.pensioenPaul * clamp01(ageP + t + 1 - p.pensioenLeeftijd);
-    if (penOnD) x += 12 * p.pensioenDiana * clamp01(ageD + t + 1 - (p.pensioenLeeftijdDiana !== undefined ? p.pensioenLeeftijdDiana : p.pensioenLeeftijd));
-    if (p.werk > 0 && (ageP + t < werkTot || (two && ageD + t < werkTot))) x += 12 * p.werk;
-    inc.push(x);
+  /* deel van het levensjaar [age, age+1) dat binnen [a, b) valt */
+  function ovl(age, a, b) { return Math.max(0, Math.min(age + 1, b) - Math.max(age, a)); }
+  /* inkomen uit werk per maand (netto) in het jaar dat iemand 'age' is: perioden als die er zijn, anders één bedrag tot de eindleeftijd */
+  function work(age, amt, tot, rows) {
+    var s = 0, j;
+    if (rows && rows.length) { for (j = 0; j < rows.length; j++) if (rows[j].m > 0) s += rows[j].m * ovl(age, rows[j].a, rows[j].b); return s; }
+    return amt > 0 ? amt * ovl(age, -1e9, tot) : 0;
   }
+
+  /* jaarbedragen per soort inkomen; 'lump' is eenmalig geld dat dat jaar bij het vermogen komt */
+  var inc = [], incSp = [], incPen = [], incWk = [], incPot = [], lump = [];
+  for (var t = 0; t < N; t++) {
+    var xs = 0, xp = 0, xw = 0;
+    if (aowOnP) xs += 12 * spP * clamp01(ageP + t + 1 - p.aowPaul);
+    if (aowOnD) xs += 12 * spD * clamp01(ageD + t + 1 - p.aowDiana);
+    if (penOnP) xp += 12 * p.pensioenPaul * clamp01(ageP + t + 1 - p.pensioenLeeftijd);
+    if (penOnD) xp += 12 * p.pensioenDiana * clamp01(ageD + t + 1 - (p.pensioenLeeftijdDiana !== undefined ? p.pensioenLeeftijdDiana : p.pensioenLeeftijd));
+    xw += 12 * work(ageP + t, p.werkP || 0, p.werkTotP || 67, p.perP);
+    if (two) xw += 12 * work(ageD + t, p.werkD || 0, p.werkTotD || 67, p.perD);
+    incSp.push(xs); incPen.push(xp); incWk.push(xw); incPot.push(0); lump.push(0);
+  }
+  (p.pots || []).forEach(function (q) {
+    if (!q || !(q.a > 0) || (q.w === 1 && !two)) return;
+    var own = q.w === 1 ? ageD : ageP, net = q.a * (1 - Math.max(0, Math.min(100, q.x || 0)) / 100);
+    if (q.k === 'l') { var tl = Math.max(0, Math.floor((q.f || 0) - own + 1e-9)); if (tl < N) lump[tl] += net; return; }
+    var end = q.u > 0 ? q.u : 1e9;
+    for (var t1 = 0; t1 < N; t1++) incPot[t1] += 12 * net * ovl(own + t1, q.f || 0, end);
+  });
+  for (var t0 = 0; t0 < N; t0++) inc.push(incSp[t0] + incPen[t0] + incWk[t0] + incPot[t0] + lump[t0]);
 
   function box3Of(K) {
     if (p.box3 === 0) return 0;
@@ -2004,7 +2106,7 @@ function runModel(p) {
 
   return {
     g: grow - 1, N: N, youngest: youngest,
-    req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes,
+    req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes, incSp: incSp, incPen: incPen, incWk: incWk, incPot: incPot, lump: lump,
     emptyAt: emptyAt, marge: p.startkapitaal - req0,
     buffer: req0 > 0 ? p.startkapitaal / req0 - 1 : Infinity,
     maxBudget: lo3, eersteJaarOpname: p.startkapitaal > 0 ? draws[0] / p.startkapitaal : 0,
@@ -4137,6 +4239,133 @@ Object.assign(I18N.es, {
  "nav.compare": "Comparar"
 });
 
+/* ===== v7: werk per partner, extra potten, overzicht en gesplitste knop ===== */
+Object.assign(I18N.en, {
+ 'k.bufNone': 'No starting capital is needed for this budget.', 'k.wrSave': 'No withdrawal: {m} a month is left over and added to your savings.', 'fan.wrSave': 'Left over per month in year 1, added to savings',
+ 'f.wkAmt': 'Income from work, net per month', 'h.wkAmt': 'Salary or profit after tax. Leave empty if you no longer work.',
+ 'f.wkEnd': 'Works until age', 'h.wkEnd': 'By default the age your {sp} starts. Stopping earlier or later? Change it here.',
+ 'wk.h': 'Work', 'wk.per': 'Fine-tune by period', 'wk.one': 'Back to one amount', 'wk.from': 'From age', 'wk.to': 'To age', 'wk.amt': '{cur} net per month',
+ 'wk.del': 'Remove period', 'wk.add': '+ Add period', 'wk.perHint': 'For example fewer hours from 60. From 55 to 60 covers the years you are 55 up to and including 59.',
+ 'st2.s': 'Names make the charts and texts more personal. Income from work counts until the age you choose. Everything is optional.',
+ 'tour.8.p': 'Want it more precise? Add pensions, income from work, extra pots and your own choices. The first time in five short steps, after that all on one page.',
+ 'w.work': 'Income from work', 'w.pots': 'Extra pots', 'w.lump': 'One-off to savings', 'v.wk': 'Including income from work', 'v.pots': 'Extra pots: {n}',
+ 'pot.h': 'Extra pension or pot', 'pot.s': 'For example from another country or a separate investment pot. Only if it applies to you.',
+ 'pot.intro': 'Add a pot for money that becomes available later: all at once or as a monthly payment. Don’t also count it in your savings above.',
+ 'pot.add': '+ Add a pot', 'pot.name': 'Name of the pot', 'pot.namePh': 'For example US pot', 'pot.nameN': 'Pot {n}', 'pot.del': 'Remove pot',
+ 'pot.kind': 'Type of payment', 'pot.whose': 'Whose', 'pot.monthly': 'Monthly', 'pot.lump': 'All at once',
+ 'pot.amtL': 'Amount before tax', 'pot.amtM': 'Per month before tax', 'pot.when': 'Paid out at age', 'pot.from': 'From age', 'pot.until': 'Until age', 'pot.life': 'for life',
+ 'pot.tax': 'Tax you pay on it', 'pot.taxHint': 'This depends on where you live and where the pot was built up. Please check it yourself, for example with the tax office or an adviser. We use the percentage you enter. Amounts in today’s money.',
+ 'pot.sumEmpty': 'Enter an amount to include this pot.', 'pot.sumL': '{v} net all at once at {a}. It goes to your savings.', 'pot.sumM': '{v} net per month from {a}, {u}.', 'pot.sumU': 'until {u}', 'pot.sumLife': 'for life',
+ 'u.grossMonth': '{cur} gross per month',
+ 'in.modeAria': 'How do you want to fill it in?', 'in.all': 'Everything on one page', 'in.stepsMode': 'Step by step',
+ 'in.allH': 'All your input on one page. Tap a line to go straight to it.', 'in.stepsH': 'Five short steps. Handy the first time.',
+ 'ins.h': 'What you have filled in', 'ins.sub': 'Tap a line to change it.', 'ins.ctry': 'Country', 'ins.age': 'Age', 'ins.bud': 'To spend per month', 'ins.cap': 'Savings',
+ 'ins.wk': 'Income from work', 'ins.pots': 'Extra pots', 'ins.pf': 'Investment mix', 'ins.tax': 'Tax', 'ins.end': 'Plan until', 'ins.rest': 'Capital left', 'ins.infl': 'Inflation and costs',
+ 'ins.periods': 'by period ({n})', 'ins.until': 'until {a}', 'ins.from': 'from {a}',
+ 'duo.aria': 'Feedback or thanks', 'duo.tip': 'Leave a tip', 'duo.tipS': 'Idea, mistake or question', 'duo.cof': 'Buy a coffee', 'duo.cofS': 'As a thank you',
+ 'sup.after': 'Did this help? It stays free. A tip or a coffee is always welcome.'
+});
+Object.assign(I18N.nl, {
+ 'k.bufNone': 'Voor dit budget is geen startkapitaal nodig.', 'k.wrSave': 'Geen opname: er blijft {m} per maand over voor je vermogen.', 'fan.wrSave': 'Per maand over in jaar 1, gaat naar je vermogen',
+ 'f.wkAmt': 'Inkomen uit werk, netto per maand', 'h.wkAmt': 'Salaris of winst na belasting. Laat leeg als je niet meer werkt.',
+ 'f.wkEnd': 'Werkt tot leeftijd', 'h.wkEnd': 'Standaard de leeftijd waarop je {sp} ingaat. Stop je eerder of later? Pas het dan hier aan.',
+ 'wk.h': 'Werk', 'wk.per': 'Per periode verfijnen', 'wk.one': 'Terug naar één bedrag', 'wk.from': 'Van leeftijd', 'wk.to': 'Tot leeftijd', 'wk.amt': '{cur} netto per maand',
+ 'wk.del': 'Periode verwijderen', 'wk.add': '+ Periode toevoegen', 'wk.perHint': 'Bijvoorbeeld minder uren vanaf 60. Van 55 tot 60 telt de jaren waarin je 55 tot en met 59 bent.',
+ 'st2.s': 'Namen maken grafieken en teksten persoonlijker. Inkomen uit werk telt mee tot de leeftijd die je kiest. Alles is optioneel.',
+ 'tour.8.p': 'Wil je het preciezer? Vul pensioen, inkomen uit werk, extra potten en je eigen keuzes in. De eerste keer in vijf korte stappen, daarna alles op één pagina.',
+ 'w.work': 'Inkomen uit werk', 'w.pots': 'Extra potten', 'w.lump': 'Eenmalig naar vermogen', 'v.wk': 'Met inkomen uit werk', 'v.pots': 'Extra potten: {n}',
+ 'pot.h': 'Extra pensioen of pot', 'pot.s': 'Bijvoorbeeld uit een ander land of een aparte beleggingspot. Alleen als het voor je geldt.',
+ 'pot.intro': 'Voeg een pot toe voor geld dat later vrijkomt: in één keer of als maandelijkse uitkering. Tel het niet ook mee bij je vermogen hierboven.',
+ 'pot.add': '+ Pot toevoegen', 'pot.name': 'Naam van de pot', 'pot.namePh': 'Bijvoorbeeld Pot Amerika', 'pot.nameN': 'Pot {n}', 'pot.del': 'Pot verwijderen',
+ 'pot.kind': 'Soort uitkering', 'pot.whose': 'Van wie', 'pot.monthly': 'Per maand', 'pot.lump': 'In één keer',
+ 'pot.amtL': 'Bedrag vóór belasting', 'pot.amtM': 'Per maand vóór belasting', 'pot.when': 'Komt vrij op leeftijd', 'pot.from': 'Vanaf leeftijd', 'pot.until': 'Tot leeftijd', 'pot.life': 'levenslang',
+ 'pot.tax': 'Belasting die je erover betaalt', 'pot.taxHint': 'Dit hangt af van waar je woont en waar de pot is opgebouwd. Zoek het zelf uit, bijvoorbeeld bij de belastingdienst of een adviseur. Wij rekenen met het percentage dat je invult. Bedragen in geld van vandaag.',
+ 'pot.sumEmpty': 'Vul een bedrag in om deze pot mee te tellen.', 'pot.sumL': 'Netto {v} in één keer op {a} jaar. Dat gaat naar je vermogen.', 'pot.sumM': 'Netto {v} per maand vanaf {a} jaar, {u}.', 'pot.sumU': 'tot {u} jaar', 'pot.sumLife': 'levenslang',
+ 'u.grossMonth': '{cur} bruto per maand',
+ 'in.modeAria': 'Hoe wil je invullen?', 'in.all': 'Alles in één overzicht', 'in.stepsMode': 'Stap voor stap',
+ 'in.allH': 'Al je invoer op één pagina. Tik op een regel om er direct heen te gaan.', 'in.stepsH': 'Vijf korte stappen. Handig de eerste keer.',
+ 'ins.h': 'Wat je hebt ingevuld', 'ins.sub': 'Tik op een regel om het aan te passen.', 'ins.ctry': 'Land', 'ins.age': 'Leeftijd', 'ins.bud': 'Te besteden per maand', 'ins.cap': 'Vermogen',
+ 'ins.wk': 'Inkomen uit werk', 'ins.pots': 'Extra potten', 'ins.pf': 'Beleggingsmix', 'ins.tax': 'Belasting', 'ins.end': 'Rekenen tot', 'ins.rest': 'Restkapitaal', 'ins.infl': 'Inflatie en kosten',
+ 'ins.periods': 'per periode ({n})', 'ins.until': 'tot {a}', 'ins.from': 'vanaf {a}',
+ 'duo.aria': 'Feedback of waardering', 'duo.tip': 'Geef een tip', 'duo.tipS': 'Idee, fout of vraag', 'duo.cof': 'Trakteer op koffie', 'duo.cofS': 'Als waardering',
+ 'sup.after': 'Hielp dit je verder? Het blijft gratis. Een tip of een koffie is altijd welkom.'
+});
+Object.assign(I18N.de, {
+ 'k.bufNone': 'Für dieses Budget ist kein Startkapital nötig.', 'k.wrSave': 'Keine Entnahme: {m} pro Monat bleiben übrig und fließen ins Vermögen.', 'fan.wrSave': 'Pro Monat übrig im Jahr 1, fließt ins Vermögen',
+ 'f.wkAmt': 'Einkommen aus Arbeit, netto pro Monat', 'h.wkAmt': 'Gehalt oder Gewinn nach Steuern. Leer lassen, wenn Sie nicht mehr arbeiten.',
+ 'f.wkEnd': 'Arbeitet bis zum Alter', 'h.wkEnd': 'Standardmäßig das Alter, ab dem Ihre {sp} beginnt. Hören Sie früher oder später auf? Dann hier ändern.',
+ 'wk.h': 'Arbeit', 'wk.per': 'Nach Zeiträumen verfeinern', 'wk.one': 'Zurück zu einem Betrag', 'wk.from': 'Ab Alter', 'wk.to': 'Bis Alter', 'wk.amt': '{cur} netto pro Monat',
+ 'wk.del': 'Zeitraum entfernen', 'wk.add': '+ Zeitraum hinzufügen', 'wk.perHint': 'Zum Beispiel weniger Stunden ab 60. Von 55 bis 60 umfasst die Jahre, in denen Sie 55 bis einschließlich 59 sind.',
+ 'st2.s': 'Namen machen Grafiken und Texte persönlicher. Einkommen aus Arbeit zählt bis zum gewählten Alter. Alles ist optional.',
+ 'tour.8.p': 'Möchten Sie es genauer? Ergänzen Sie Renten, Einkommen aus Arbeit, zusätzliche Töpfe und eigene Entscheidungen. Beim ersten Mal in fünf kurzen Schritten, danach alles auf einer Seite.',
+ 'w.work': 'Einkommen aus Arbeit', 'w.pots': 'Zusätzliche Töpfe', 'w.lump': 'Einmalig ins Vermögen', 'v.wk': 'Mit Einkommen aus Arbeit', 'v.pots': 'Zusätzliche Töpfe: {n}',
+ 'pot.h': 'Zusätzliche Rente oder Topf', 'pot.s': 'Zum Beispiel aus einem anderen Land oder ein separater Anlagetopf. Nur wenn es für Sie gilt.',
+ 'pot.intro': 'Fügen Sie einen Topf für Geld hinzu, das später frei wird: auf einmal oder als monatliche Zahlung. Zählen Sie es nicht zusätzlich zu Ihrem Vermögen oben.',
+ 'pot.add': '+ Topf hinzufügen', 'pot.name': 'Name des Topfes', 'pot.namePh': 'Zum Beispiel Topf USA', 'pot.nameN': 'Topf {n}', 'pot.del': 'Topf entfernen',
+ 'pot.kind': 'Art der Auszahlung', 'pot.whose': 'Von wem', 'pot.monthly': 'Monatlich', 'pot.lump': 'Auf einmal',
+ 'pot.amtL': 'Betrag vor Steuern', 'pot.amtM': 'Pro Monat vor Steuern', 'pot.when': 'Wird frei mit Alter', 'pot.from': 'Ab Alter', 'pot.until': 'Bis Alter', 'pot.life': 'lebenslang',
+ 'pot.tax': 'Steuer, die Sie darauf zahlen', 'pot.taxHint': 'Das hängt davon ab, wo Sie wohnen und wo der Topf aufgebaut wurde. Bitte selbst prüfen, etwa beim Finanzamt oder bei einer Beratung. Wir rechnen mit dem Prozentsatz, den Sie eingeben. Beträge in heutigem Geld.',
+ 'pot.sumEmpty': 'Geben Sie einen Betrag ein, damit dieser Topf zählt.', 'pot.sumL': 'Netto {v} auf einmal mit {a}. Das fließt in Ihr Vermögen.', 'pot.sumM': 'Netto {v} pro Monat ab {a}, {u}.', 'pot.sumU': 'bis {u}', 'pot.sumLife': 'lebenslang',
+ 'u.grossMonth': '{cur} brutto pro Monat',
+ 'in.modeAria': 'Wie möchten Sie ausfüllen?', 'in.all': 'Alles auf einer Seite', 'in.stepsMode': 'Schritt für Schritt',
+ 'in.allH': 'Alle Eingaben auf einer Seite. Tippen Sie auf eine Zeile, um direkt dorthin zu springen.', 'in.stepsH': 'Fünf kurze Schritte. Praktisch beim ersten Mal.',
+ 'ins.h': 'Was Sie eingegeben haben', 'ins.sub': 'Tippen Sie auf eine Zeile, um sie zu ändern.', 'ins.ctry': 'Land', 'ins.age': 'Alter', 'ins.bud': 'Monatsbudget', 'ins.cap': 'Vermögen',
+ 'ins.wk': 'Einkommen aus Arbeit', 'ins.pots': 'Zusätzliche Töpfe', 'ins.pf': 'Anlagemix', 'ins.tax': 'Steuer', 'ins.end': 'Rechnen bis', 'ins.rest': 'Restvermögen', 'ins.infl': 'Inflation und Kosten',
+ 'ins.periods': 'nach Zeiträumen ({n})', 'ins.until': 'bis {a}', 'ins.from': 'ab {a}',
+ 'duo.aria': 'Feedback oder Dank', 'duo.tip': 'Tipp geben', 'duo.tipS': 'Idee, Fehler oder Frage', 'duo.cof': 'Kaffee spendieren', 'duo.cofS': 'Als Dankeschön',
+ 'sup.after': 'Hat Ihnen das weitergeholfen? Es bleibt kostenlos. Ein Tipp oder ein Kaffee ist immer willkommen.'
+});
+Object.assign(I18N.fr, {
+ 'k.bufNone': 'Aucun capital de départ n’est nécessaire pour ce budget.', 'k.wrSave': 'Aucun retrait : il reste {m} par mois, ajoutés à votre patrimoine.', 'fan.wrSave': 'Reste par mois en année 1, ajouté au patrimoine',
+ 'f.wkAmt': 'Revenus du travail, nets par mois', 'h.wkAmt': 'Salaire ou bénéfice après impôt. Laissez vide si vous ne travaillez plus.',
+ 'f.wkEnd': 'Travaille jusqu’à l’âge de', 'h.wkEnd': 'Par défaut, l’âge de départ de votre {sp}. Vous arrêtez plus tôt ou plus tard ? Modifiez-le ici.',
+ 'wk.h': 'Travail', 'wk.per': 'Affiner par période', 'wk.one': 'Revenir à un seul montant', 'wk.from': 'De l’âge de', 'wk.to': 'Jusqu’à l’âge de', 'wk.amt': '{cur} net par mois',
+ 'wk.del': 'Supprimer la période', 'wk.add': '+ Ajouter une période', 'wk.perHint': 'Par exemple moins d’heures à partir de 60 ans. De 55 à 60 couvre les années où vous avez de 55 à 59 ans inclus.',
+ 'st2.s': 'Les prénoms rendent les graphiques et les textes plus personnels. Les revenus du travail comptent jusqu’à l’âge choisi. Tout est facultatif.',
+ 'tour.8.p': 'Envie de plus de précision ? Ajoutez retraites, revenus du travail, cagnottes supplémentaires et vos propres choix. La première fois en cinq étapes courtes, ensuite tout sur une seule page.',
+ 'w.work': 'Revenus du travail', 'w.pots': 'Cagnottes supplémentaires', 'w.lump': 'Ponctuel vers le patrimoine', 'v.wk': 'Avec revenus du travail', 'v.pots': 'Cagnottes supplémentaires : {n}',
+ 'pot.h': 'Retraite ou cagnotte supplémentaire', 'pot.s': 'Par exemple d’un autre pays ou un placement à part. Seulement si cela vous concerne.',
+ 'pot.intro': 'Ajoutez une cagnotte pour de l’argent disponible plus tard : en une fois ou en versement mensuel. Ne la comptez pas aussi dans votre patrimoine ci-dessus.',
+ 'pot.add': '+ Ajouter une cagnotte', 'pot.name': 'Nom de la cagnotte', 'pot.namePh': 'Par exemple cagnotte États-Unis', 'pot.nameN': 'Cagnotte {n}', 'pot.del': 'Supprimer la cagnotte',
+ 'pot.kind': 'Type de versement', 'pot.whose': 'À qui', 'pot.monthly': 'Par mois', 'pot.lump': 'En une fois',
+ 'pot.amtL': 'Montant avant impôt', 'pot.amtM': 'Par mois avant impôt', 'pot.when': 'Disponible à l’âge de', 'pot.from': 'À partir de l’âge de', 'pot.until': 'Jusqu’à l’âge de', 'pot.life': 'à vie',
+ 'pot.tax': 'Impôt que vous payez dessus', 'pot.taxHint': 'Cela dépend de votre lieu de résidence et du pays où la cagnotte a été constituée. Vérifiez-le vous-même, par exemple auprès de l’administration fiscale ou d’un conseiller. Nous utilisons le pourcentage que vous indiquez. Montants en argent d’aujourd’hui.',
+ 'pot.sumEmpty': 'Indiquez un montant pour inclure cette cagnotte.', 'pot.sumL': '{v} net en une fois à {a} ans. Cela rejoint votre patrimoine.', 'pot.sumM': '{v} net par mois à partir de {a} ans, {u}.', 'pot.sumU': 'jusqu’à {u} ans', 'pot.sumLife': 'à vie',
+ 'u.grossMonth': '{cur} brut par mois',
+ 'in.modeAria': 'Comment voulez-vous remplir ?', 'in.all': 'Tout sur une page', 'in.stepsMode': 'Étape par étape',
+ 'in.allH': 'Toutes vos données sur une seule page. Touchez une ligne pour y aller directement.', 'in.stepsH': 'Cinq étapes courtes. Pratique la première fois.',
+ 'ins.h': 'Ce que vous avez rempli', 'ins.sub': 'Touchez une ligne pour la modifier.', 'ins.ctry': 'Pays', 'ins.age': 'Âge', 'ins.bud': 'Budget mensuel', 'ins.cap': 'Patrimoine',
+ 'ins.wk': 'Revenus du travail', 'ins.pots': 'Cagnottes supplémentaires', 'ins.pf': 'Répartition', 'ins.tax': 'Impôt', 'ins.end': 'Calcul jusqu’à', 'ins.rest': 'Capital restant', 'ins.infl': 'Inflation et frais',
+ 'ins.periods': 'par période ({n})', 'ins.until': 'jusqu’à {a}', 'ins.from': 'dès {a}',
+ 'duo.aria': 'Avis ou remerciement', 'duo.tip': 'Donner un conseil', 'duo.tipS': 'Idée, erreur ou question', 'duo.cof': 'Offrir un café', 'duo.cofS': 'Pour remercier',
+ 'sup.after': 'Cela vous a aidé ? Cela reste gratuit. Un conseil ou un café est toujours le bienvenu.'
+});
+Object.assign(I18N.es, {
+ 'k.bufNone': 'Para este presupuesto no hace falta capital inicial.', 'k.wrSave': 'Sin retirada: sobran {m} al mes que se suman a tu patrimonio.', 'fan.wrSave': 'Sobra al mes el año 1, se suma al patrimonio',
+ 'f.wkAmt': 'Ingresos del trabajo, netos al mes', 'h.wkAmt': 'Sueldo o beneficio después de impuestos. Déjalo vacío si ya no trabajas.',
+ 'f.wkEnd': 'Trabaja hasta la edad de', 'h.wkEnd': 'Por defecto, la edad en que empieza tu {sp}. ¿Paras antes o después? Cámbialo aquí.',
+ 'wk.h': 'Trabajo', 'wk.per': 'Afinar por periodos', 'wk.one': 'Volver a un solo importe', 'wk.from': 'Desde la edad', 'wk.to': 'Hasta la edad', 'wk.amt': '{cur} netos al mes',
+ 'wk.del': 'Quitar periodo', 'wk.add': '+ Añadir periodo', 'wk.perHint': 'Por ejemplo, menos horas desde los 60. De 55 a 60 abarca los años en que tienes de 55 a 59 inclusive.',
+ 'st2.s': 'Los nombres hacen más personales los gráficos y los textos. Los ingresos del trabajo cuentan hasta la edad que elijas. Todo es opcional.',
+ 'tour.8.p': '¿Lo quieres más preciso? Añade pensiones, ingresos del trabajo, fondos extra y tus propias decisiones. La primera vez en cinco pasos cortos, después todo en una página.',
+ 'w.work': 'Ingresos del trabajo', 'w.pots': 'Fondos extra', 'w.lump': 'Pago único al patrimonio', 'v.wk': 'Con ingresos del trabajo', 'v.pots': 'Fondos extra: {n}',
+ 'pot.h': 'Pensión o fondo extra', 'pot.s': 'Por ejemplo de otro país o una inversión aparte. Solo si te afecta.',
+ 'pot.intro': 'Añade un fondo para dinero que estará disponible más adelante: de una vez o como pago mensual. No lo cuentes también en tus ahorros de arriba.',
+ 'pot.add': '+ Añadir fondo', 'pot.name': 'Nombre del fondo', 'pot.namePh': 'Por ejemplo fondo EE. UU.', 'pot.nameN': 'Fondo {n}', 'pot.del': 'Quitar fondo',
+ 'pot.kind': 'Tipo de pago', 'pot.whose': 'De quién', 'pot.monthly': 'Al mes', 'pot.lump': 'De una vez',
+ 'pot.amtL': 'Importe antes de impuestos', 'pot.amtM': 'Al mes antes de impuestos', 'pot.when': 'Disponible a la edad de', 'pot.from': 'Desde la edad', 'pot.until': 'Hasta la edad', 'pot.life': 'de por vida',
+ 'pot.tax': 'Impuesto que pagas', 'pot.taxHint': 'Depende de dónde vives y de dónde se formó el fondo. Compruébalo tú, por ejemplo con Hacienda o con un asesor. Calculamos con el porcentaje que indiques. Importes en dinero de hoy.',
+ 'pot.sumEmpty': 'Indica un importe para incluir este fondo.', 'pot.sumL': '{v} netos de una vez a los {a}. Pasa a tu patrimonio.', 'pot.sumM': '{v} netos al mes desde los {a}, {u}.', 'pot.sumU': 'hasta los {u}', 'pot.sumLife': 'de por vida',
+ 'u.grossMonth': '{cur} brutos al mes',
+ 'in.modeAria': '¿Cómo quieres rellenarlo?', 'in.all': 'Todo en una página', 'in.stepsMode': 'Paso a paso',
+ 'in.allH': 'Todos tus datos en una página. Toca una línea para ir directamente.', 'in.stepsH': 'Cinco pasos cortos. Útil la primera vez.',
+ 'ins.h': 'Lo que has rellenado', 'ins.sub': 'Toca una línea para cambiarla.', 'ins.ctry': 'País', 'ins.age': 'Edad', 'ins.bud': 'Presupuesto mensual', 'ins.cap': 'Ahorros',
+ 'ins.wk': 'Ingresos del trabajo', 'ins.pots': 'Fondos extra', 'ins.pf': 'Mezcla de inversión', 'ins.tax': 'Impuestos', 'ins.end': 'Calcular hasta', 'ins.rest': 'Capital restante', 'ins.infl': 'Inflación y costes',
+ 'ins.periods': 'por periodos ({n})', 'ins.until': 'hasta {a}', 'ins.from': 'desde {a}',
+ 'duo.aria': 'Opinión o agradecimiento', 'duo.tip': 'Da un consejo', 'duo.tipS': 'Idea, error o pregunta', 'duo.cof': 'Invita a un café', 'duo.cofS': 'Como agradecimiento',
+ 'sup.after': '¿Te ha servido? Sigue siendo gratis. Un consejo o un café siempre es bienvenido.'
+});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -4146,6 +4375,12 @@ Object.assign(I18N.es, {
   var LOCALE = { en: 'en-GB', nl: 'nl-NL', de: 'de-DE', fr: 'fr-FR', es: 'es-ES' };
   var CURS = ['EUR', 'GBP', 'USD', 'CHF'];
   var KOFI = 'CountingButtons';
+  /* gesplitste knop: links een tip of feedback geven, rechts koffie als waardering */
+  function duoHtml(lead) {
+    return (lead ? '<p class="duo-t">' + lead + '</p>' : '') + '<div class="duo" role="group" aria-label="' + esc(t1('duo.aria')) + '">' +
+      '<button type="button" class="duo-l fb-open" data-cat="idea"><span class="duo-i" aria-hidden="true">✎</span><span class="duo-x"><b>' + t1('duo.tip') + '</b><small>' + t1('duo.tipS') + '</small></span></button>' +
+      (KOFI ? '<a class="duo-r" href="https://ko-fi.com/' + encodeURIComponent(KOFI) + '" target="_blank" rel="noopener"><span class="duo-i" aria-hidden="true">☕</span><span class="duo-x"><b>' + t1('duo.cof') + '</b><small>' + t1('duo.cofS') + '</small></span></a>' : '') + '</div>';
+  }
   function kofiLink() { return KOFI ? '<a class="kofi" href="https://ko-fi.com/' + encodeURIComponent(KOFI) + '" target="_blank" rel="noopener"><span aria-hidden="true">☕</span> ' + t1('sup.btn') + '</a>' : ''; }
   /* Landinstellingen. sp: staatspensioen (flat = vast bedrag per persoon, netto per maand). tax: belasting op beleggingen.
      e0: levensverwachting bij geboorte man/vrouw (Eurostat 2023; GB ONS 2021-23; US CDC 2023), om de NL-levenstafel te schalen. */
@@ -4315,23 +4550,49 @@ Object.assign(I18N.es, {
 
   /* ================= toestand ================= */
   var DEF = {
-    startkapitaal: 0, budget: 0, werk: 0, box3: 1, eindDiana: 1,
+    startkapitaal: 0, budget: 0, box3: 1, eindDiana: 1,
+    werkP: 0, werkD: 0, werkTotP: 67, werkTotD: 67, autoWerk: 1,
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 67, aowDiana: 67, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
     spP: 0, spD: 0, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67,
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
+  var APPV = '7 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
+  /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
+  var lists = { perP: [], perD: [], pots: [] };
+  function fin(v, lo, hi, d) { v = parseFloat(v); return isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d; }
+  function cleanLists(o) {
+    var r = { perP: [], perD: [], pots: [] };
+    if (!o || typeof o !== 'object') return r;
+    ['perP', 'perD'].forEach(function (k) {
+      (Array.isArray(o[k]) ? o[k] : []).slice(0, 12).forEach(function (x) { if (x) r[k].push({ a: fin(x.a, 0, 110, 50), b: fin(x.b, 0, 110, 67), m: fin(x.m, 0, 1e6, 0) }); });
+    });
+    (Array.isArray(o.pots) ? o.pots : []).slice(0, 8).forEach(function (x) {
+      if (x) r.pots.push({ n: String(x.n || '').slice(0, 30), w: x.w === 1 ? 1 : 0, k: x.k === 'l' ? 'l' : 'm', a: fin(x.a, 0, 1e9, 0), f: fin(x.f, 0, 110, 67), u: fin(x.u, 0, 110, 0), x: fin(x.x, 0, 100, 0) });
+    });
+    return r;
+  }
+  /* zet getallen uit een bron (opslag, link of scenario) in st; oude invoer met één bedrag 'werk' wordt omgezet
+     naar inkomen van de eerste persoon tot het moment waarop de oude regel stopte, zodat de uitslag gelijk blijft */
+  function loadNums(st, src) {
+    Object.keys(DEF).forEach(function (k) { st[k] = DEF[k]; var v = src && src[k]; if (typeof v === 'number' && isFinite(v)) st[k] = v; });
+    if (src && typeof src.werk === 'number' && src.werk > 0 && typeof src.werkP !== 'number') {
+      st.werkP = src.werk; st.werkD = 0; st.autoWerk = 0;
+      st.werkTotP = st.personen !== 1 ? Math.max(67, st.leeftijdPaul + 67 - st.leeftijdDiana) : 67;
+    }
+    return st;
+  }
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (saved && saved.names) { if (typeof saved.names.n1 === 'string') names.n1 = saved.names.n1.slice(0, 20); if (typeof saved.names.n2 === 'string') names.n2 = saved.names.n2.slice(0, 20); }
-    if (saved && saved.state) Object.keys(DEF).forEach(function (k) { var v = saved.state[k]; if (typeof v === 'number' && isFinite(v)) state[k] = v; });
+    if (saved && saved.state) { loadNums(state, saved.state); lists = cleanLists(saved.lists); }
     if (!saved) { var c0 = CTRY[prefs.country].tax; state.taxRate = c0.rate || 0; state.taxAllow = c0.allow || 0; }
   } catch (e) {}
-  function persist() { try { localStorage.setItem(KEY, JSON.stringify({ state: state, names: names })); } catch (e) {} }
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify({ state: state, names: names, lists: lists })); } catch (e) {} }
   function two() { return state.personen !== 1; }
   function isNL() { return prefs.country === 'NL'; }
   function spFlat() { return !!CTRY[prefs.country].sp.flat; }
@@ -4367,7 +4628,10 @@ Object.assign(I18N.es, {
   var F = {
     startkapitaal: { u: 'u.cur', min: 0, max: 2000000, step: 5000, tag: 'zelf', r: [100000, 2000000] },
     budget: { u: 'u.netMonth', min: 0, max: 10000, step: 25, tag: 'zelf', r: [1000, 6000] },
-    werk: { u: 'u.workMonth', min: 0, max: 20000, step: 50, tag: 'zelf', r: [0, 10000] },
+    werkP: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
+    werkD: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
+    werkTotP: { u: 'u.years', min: 18, max: 100, step: 'any', tag: 'zelf', lab: 'f.wkEnd', hint: 'h.wkEnd' },
+    werkTotD: { u: 'u.years', min: 18, max: 100, step: 'any', tag: 'zelf', lab: 'f.wkEnd', hint: 'h.wkEnd' },
     leeftijdPaul: { u: 'u.years', min: 18, max: 100, step: 1, tag: 'zelf' },
     leeftijdDiana: { u: 'u.years', min: 18, max: 100, step: 1, tag: 'zelf' },
     aowPaul: { u: 'u.years', min: 55, max: 75, step: 'any', tag: 'bron', lab: 'f.spAge', hint: 'h.spAge' },
@@ -4420,8 +4684,9 @@ Object.assign(I18N.es, {
     { t: 'st2.t', h: 'st2.h', s: 'st2.s', html: function () {
       return '<div class="cols2">' + [1, 2].map(function (n) {
           return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
-            '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name' + n + '"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"></div></div>';
-        }).join('') + '</div><div class="card knobs">' + knobHtml('werk') + '</div>';
+            '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name' + n + '"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"></div>' +
+            wkHtml(n === 1 ? 'P' : 'D') + '</div>';
+        }).join('') + '</div>';
     } },
     { t: 'st3.t', h: 'st3.h', s: 'st3.s', html: function () {
       return '<div class="cols2">' + [1, 2].map(function (n) {
@@ -4431,7 +4696,9 @@ Object.assign(I18N.es, {
           '<div class="dep" data-dep="aowAan' + s + '">' + fieldHtml(ka) + fieldHtml(ks) + '</div>' +
           '<label class="check"><input type="checkbox" id="c-pensAan' + s + '"> <span data-t="f.penOn"></span></label>' +
           '<div class="dep" data-dep="pensAan' + s + '">' + kp.map(fieldHtml).join('') + '</div></div>';
-      }).join('') + '</div><button class="reset" id="sp-reset" type="button" data-t="b.spAuto"></button>';
+      }).join('') + '</div><button class="reset" id="sp-reset" type="button" data-t="b.spAuto"></button>' +
+        '<details class="card pots" id="pots-box"><summary><span class="pots-h"><b data-t="pot.h"></b><span class="pots-n" id="pots-n" hidden></span></span><span class="pots-s" data-t="pot.s"></span></summary>' +
+        '<div class="pots-in"><p class="hint" data-t="pot.intro"></p><div id="pots-list"></div><button type="button" class="btn ghost sm" id="pot-add" data-t="pot.add"></button></div></details>';
     } },
     { t: 'st4.t', h: 'st4.h', s: 'st4.s', html: function () {
       return '<div class="card knobs">' +
@@ -4536,7 +4803,7 @@ Object.assign(I18N.es, {
   }, true);
   function setNum(k, val) { state[k] = val; ['n-' + k, 'r-' + k, 'q-' + k].forEach(function (id) { var e = $(id); if (e && document.activeElement !== e) e.value = fmtIn(e, val); }); }
   var updTimer = 0;
-  function updateSoon() { clearTimeout(updTimer); updTimer = setTimeout(function () { updTimer = 0; update(); }, 450); }
+  function updateSoon() { clearTimeout(updTimer); document.documentElement.classList.add('is-calc'); updTimer = setTimeout(function () { updTimer = 0; update(); }, 450); }
   function updateNow() { if (updTimer) { clearTimeout(updTimer); updTimer = 0; update(); } }
   function bind(k) {
     var n = $('n-' + k);
@@ -4551,6 +4818,7 @@ Object.assign(I18N.es, {
     if (k === 'eindleeftijd') state.autoEind = 0;
     if (k === 'spP' || k === 'spD') state.autoSp = 0;
     if (k === 'pensioenLeeftijd' || k === 'pensioenLeeftijdDiana') state.autoPenAge = 0;
+    if (k === 'werkTotP' || k === 'werkTotD') state.autoWerk = 0;
   }
   ['leeftijdPaul', 'leeftijdDiana', 'budget', 'startkapitaal', 'spP', 'spD'].forEach(function (k) {
     var e = $('q-' + k); if (!e) return;
@@ -4570,6 +4838,7 @@ Object.assign(I18N.es, {
       state[k] = parseInt(r.value, 10);
       if (k === 'eindDiana') state.autoEind = 0;
       if (k === 'personen' && state.autoSp) applyAuto();
+      if (k === 'personen') renderPots();
       update();
     } else if (r.matches('.ctry-sel')) {
       if (r.id === 'country-intro' && !langTouched) { var l = langFor(r.value); if (l) prefs.lang = l; }
@@ -4608,11 +4877,117 @@ Object.assign(I18N.es, {
     if (SITE) { try { location.href = (l === 'en' ? '/' : '/' + l + '/') + location.hash; return; } catch (e) {} }
     refreshAll();
   }
-  function refreshAll() { NF = {}; fillSelects(); update(); if (tourI >= 0) placeTour(false); }
+  function refreshAll() { NF = {}; fillSelects(); renderLists(); update(); if (tourI >= 0) placeTour(false); }
   $('auto-reset').addEventListener('click', function () { state.autoAow = 1; state.autoEind = 1; update(); });
   $('sp-reset').addEventListener('click', function () { state.autoAow = 1; state.autoSp = 1; state.autoPenAge = 1; update(); });
   $('tax-reset').addEventListener('click', function () { taxPreset(); update(); });
-  $('reset').addEventListener('click', function () { Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; }); taxPreset(); syncInputs(); update(); });
+  $('reset').addEventListener('click', function () { Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; }); lists = cleanLists(null); taxPreset(); syncInputs(); renderLists(); update(); });
+
+  /* ================= inkomen per periode en extra potten ================= */
+  function wkHtml(s) {
+    return '<div class="wk" data-who="' + s + '"><h4 class="wk-h" data-t="wk.h"></h4><div class="wk-one" id="wk-one-' + s + '">' + fieldHtml('werk' + s) + fieldHtml('werkTot' + s) + '</div>' +
+      '<div class="wk-per" id="wk-per-' + s + '" hidden></div><button type="button" class="btn link sm wk-tog" data-per="' + s + '"></button></div>';
+  }
+  function numIn(id, attrs, val, money) {
+    var v = money ? (val > 0 ? grp(val) : '') : (val === '' || val === null || val === undefined ? '' : String(Math.round(val * 100) / 100));
+    return '<input id="' + id + '" ' + (money ? 'type="text" inputmode="numeric" autocomplete="off" data-money="1"' : 'type="number" inputmode="decimal" step="any"') + ' ' + attrs + ' value="' + v + '">';
+  }
+  function fldL(id, lab, input, unit) {
+    return '<div class="field"><div class="ftop"><label for="' + id + '">' + lab + '</label></div><div class="inrow">' + input + (unit ? '<span class="unit">' + unit + '</span>' : '') + '</div></div>';
+  }
+  function renderPer(s) {
+    var rows = lists['per' + s], one = $('wk-one-' + s), box = $('wk-per-' + s), tog = document.querySelector('.wk-tog[data-per="' + s + '"]');
+    if (!box || !one || !tog) return;
+    var on = rows.length > 0;
+    one.hidden = on; box.hidden = !on;
+    tog.textContent = t1(on ? 'wk.one' : 'wk.per');
+    if (!on) { box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="per-row per-head" aria-hidden="true"><span>' + t1('wk.from') + '</span><span>' + t1('wk.to') + '</span><span>' + t1('wk.amt', { cur: curSym() }) + '</span><span></span></div>' +
+      rows.map(function (r, i) {
+        var L = 'data-l="per' + s + '" data-i="' + i + '"', id = 'per' + s + '-' + i + '-';
+        return '<div class="per-row">' +
+          numIn(id + 'a', L + ' data-f="a" min="0" max="110" aria-label="' + esc(t1('wk.from')) + '"', r.a) +
+          numIn(id + 'b', L + ' data-f="b" min="0" max="110" aria-label="' + esc(t1('wk.to')) + '"', r.b) +
+          numIn(id + 'm', L + ' data-f="m" aria-label="' + esc(t1('wk.amt', { cur: curSym() })) + '"', r.m, true) +
+          '<button type="button" class="per-x" data-del="per' + s + '" data-i="' + i + '" aria-label="' + esc(t1('wk.del')) + '">✕</button></div>';
+      }).join('') +
+      '<button type="button" class="btn ghost sm per-add" data-addper="' + s + '">' + t1('wk.add') + '</button><p class="hint">' + t1('wk.perHint') + '</p>';
+  }
+  function potSum(i) {
+    var q = lists.pots[i], el = $('pot-sum-' + i); if (!q || !el) return;
+    if (!(q.a > 0)) { el.textContent = t1('pot.sumEmpty'); el.classList.add('muted'); return; }
+    el.classList.remove('muted');
+    var net = q.a * (1 - (q.x || 0) / 100), who = two() ? (q.w ? nm2() : nm1()) + ': ' : '';
+    el.textContent = who + (q.k === 'l' ? t1('pot.sumL', { v: eur(net), a: fmtAge(q.f) }) : t1('pot.sumM', { v: eur(net), a: fmtAge(q.f), u: q.u > 0 ? t1('pot.sumU', { u: fmtAge(q.u) }) : t1('pot.sumLife') }));
+  }
+  function renderPots() {
+    var host = $('pots-list'); if (!host) return;
+    var P = lists.pots;
+    $('pots-n').hidden = !P.length; $('pots-n').textContent = P.length;
+    if (P.length) $('pots-box').open = true;
+    function opt(i, f, v, lab, cur) { return '<label class="seg-opt"><input type="radio" name="pot-' + f + '-' + i + '" data-pk="' + f + '" data-i="' + i + '" value="' + v + '"' + (cur ? ' checked' : '') + '><span>' + lab + '</span></label>'; }
+    host.innerHTML = P.map(function (q, i) {
+      var L = 'data-l="pots" data-i="' + i + '"', lump = q.k === 'l', id = 'pot-' + i + '-';
+      return '<div class="pot">' +
+        '<div class="pot-top"><input type="text" class="pot-name" id="' + id + 'n" maxlength="30" ' + L + ' data-f="n" value="' + esc(q.n) + '" placeholder="' + esc(t1('pot.namePh')) + '" aria-label="' + esc(t1('pot.name')) + '">' +
+        '<button type="button" class="per-x" data-del="pots" data-i="' + i + '" aria-label="' + esc(t1('pot.del')) + '">✕</button></div>' +
+        '<div class="pot-segs"><div class="seg" role="radiogroup" aria-label="' + esc(t1('pot.kind')) + '">' + opt(i, 'k', 'm', t1('pot.monthly'), !lump) + opt(i, 'k', 'l', t1('pot.lump'), lump) + '</div>' +
+        (two() ? '<div class="seg" role="radiogroup" aria-label="' + esc(t1('pot.whose')) + '">' + opt(i, 'w', '0', esc(nm1()), q.w !== 1) + opt(i, 'w', '1', esc(nm2()), q.w === 1) + '</div>' : '') + '</div>' +
+        '<div class="fields pot-f">' +
+        fldL(id + 'a', t1(lump ? 'pot.amtL' : 'pot.amtM'), numIn(id + 'a', L + ' data-f="a"', q.a, true), lump ? curSym() : t1('u.grossMonth', { cur: curSym() })) +
+        fldL(id + 'f', t1(lump ? 'pot.when' : 'pot.from'), numIn(id + 'f', L + ' data-f="f" min="0" max="110"', q.f), t1('u.years')) +
+        (lump ? '' : fldL(id + 'u', t1('pot.until'), numIn(id + 'u', L + ' data-f="u" min="0" max="110" placeholder="' + esc(t1('pot.life')) + '"', q.u > 0 ? q.u : ''), t1('u.years'))) +
+        fldL(id + 'x', t1('pot.tax'), numIn(id + 'x', L + ' data-f="x" min="0" max="100"', q.x), '%') +
+        '</div><p class="hint pot-taxh">' + t1('pot.taxHint') + '</p><p class="pot-sum" id="pot-sum-' + i + '"></p></div>';
+    }).join('');
+    P.forEach(function (q, i) { potSum(i); });
+  }
+  function renderLists() { renderPer('P'); renderPer('D'); renderPots(); }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target, l = e.getAttribute && e.getAttribute('data-l'); if (!l || !lists[l]) return;
+    var i = parseInt(e.getAttribute('data-i'), 10), f = e.getAttribute('data-f'), it = lists[l][i]; if (!it) return;
+    if (f === 'n') it.n = String(e.value).slice(0, 30);
+    else {
+      var keep = l === 'pots' ? f === 'f' : (f === 'a' || f === 'b');
+      var v = e.value === '' ? (keep ? NaN : 0) : numOf(e);
+      if (!isFinite(v)) return;
+      if (f === 'x') v = Math.max(0, Math.min(100, v));
+      it[f] = v;
+    }
+    if (l === 'pots') potSum(i);
+    if (f !== 'n') updateSoon(); else persist();
+  });
+  document.addEventListener('change', function (ev) {
+    var e = ev.target, f = e.getAttribute && e.getAttribute('data-pk'); if (!f || !e.checked) return;
+    var it = lists.pots[parseInt(e.getAttribute('data-i'), 10)]; if (!it) return;
+    if (f === 'k') it.k = e.value === 'l' ? 'l' : 'm'; else it.w = e.value === '1' ? 1 : 0;
+    renderPots(); update();
+  });
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('.wk-tog, [data-addper], [data-del], #pot-add') : null; if (!b) return;
+    if (b.id === 'pot-add') {
+      lists.pots.push({ n: '', w: 0, k: 'm', a: 0, f: Math.round(state.aowPaul) || 67, u: 0, x: 0 });
+      renderPots(); update();
+      var nn = $('pot-' + (lists.pots.length - 1) + '-n'); if (nn) nn.focus();
+      return;
+    }
+    if (b.classList.contains('wk-tog')) {
+      var s = b.getAttribute('data-per'), rows = lists['per' + s], age = s === 'D' ? state.leeftijdDiana : state.leeftijdPaul;
+      if (rows.length) lists['per' + s] = [];
+      else lists['per' + s] = [{ a: age, b: Math.max(age + 1, Math.round(state['werkTot' + s])), m: state['werk' + s] }];
+      renderPer(s); update();
+      return;
+    }
+    if (b.hasAttribute('data-addper')) {
+      var s2 = b.getAttribute('data-addper'), R = lists['per' + s2], lastR = R[R.length - 1];
+      if (R.length < 12) R.push({ a: lastR.b, b: Math.min(100, lastR.b + 5), m: lastR.m });
+      renderPer(s2); update();
+      var na = $('per' + s2 + '-' + (R.length - 1) + '-m'); if (na) na.focus();
+      return;
+    }
+    var l = b.getAttribute('data-del'), di = parseInt(b.getAttribute('data-i'), 10);
+    if (lists[l]) { lists[l].splice(di, 1); renderLists(); update(); }
+  });
   ['1', '2'].forEach(function (n) {
     var el = $('nm-' + n); el.value = names['n' + n];
     el.addEventListener('input', function () { names['n' + n] = el.value.slice(0, 20); update(); });
@@ -4624,6 +4999,7 @@ Object.assign(I18N.es, {
   function applyAuto() {
     if (state.autoAow) { state.aowPaul = spAgeFor(state.leeftijdPaul); state.aowDiana = spAgeFor(state.leeftijdDiana); }
     if (state.autoPenAge) { state.pensioenLeeftijd = state.aowPaul; state.pensioenLeeftijdDiana = state.aowDiana; }
+    if (state.autoWerk) { state.werkTotP = state.aowPaul; state.werkTotD = state.aowDiana; }
     if (state.autoSp) {
       var sp = CTRY[prefs.country].sp;
       state.spP = state.spD = sp.flat ? (two() ? sp.two : sp.one) : 0;
@@ -4642,6 +5018,7 @@ Object.assign(I18N.es, {
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
     p.startkapitaal = capEff();
+    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots;
     p.taxMode = isNL() ? 'nlbox3' : 'returns';
     if (isNL()) p.box3 = state.box3;
     var ps = portStat(effIdx());
@@ -4829,7 +5206,7 @@ Object.assign(I18N.es, {
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (state.werk > 0 ? '<span class="scope">' + t1('v.work', { w: eur(state.werk) }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (lists.pots.some(function (q) { return q.a > 0; }) ? '<span class="scope">' + t1('v.pots', { n: lists.pots.filter(function (q) { return q.a > 0; }).length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
   }
   function renderKpis(m) {
     var maxB = adv ? max90 : m.maxBudget, room = maxB - state.budget, empty = state.budget <= 0;
@@ -4843,11 +5220,11 @@ Object.assign(I18N.es, {
       { l: t1('k.end'), v: eur(m.K[m.N]), s: t1('k.endS'), c: m.K[m.N] < 0 ? 'neg' : '' },
       { l: t1('k.need'), v: eur(needR), s: link ? t('k.needOf', { t: eur(haveR), b: eur(state.budget) }) : t1('k.needS', { b: eur(state.budget) }), c: '', bar: link ? split('need') : '' },
       { l: empty ? t1('k.bufOrShort') : (bufR >= 0 ? t1('k.buffer') : t1('k.short')), v: (bufR >= 0 ? '+' : '') + eur(bufR),
-        s: link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(m.buffer, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-m.marge / m.req0, 0) }))
+        s: needR <= 0 ? t1('k.bufNone') : link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(m.buffer, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-m.marge / m.req0, 0) }))
           : (bufR >= 0 ? t1('k.bufS', { p: pct(m.buffer, 0) }) : t1('k.shortS', { p: pct(-m.marge / m.req0, 0) })),
         c: bufR >= 0 ? 'pos' : 'neg', bar: link ? split('buf') : '' },
       { l: t1(adv ? 'k.max90' : 'k.max'), v: eur(maxB), s: t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
-      { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1('k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
+      m.draws[0] < 0 ? { l: t1('k.wr'), v: pct(0, 1), s: t1('k.wrSave', { m: eur(-m.draws[0] / 12) }), c: 'pos' } : { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1('k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
       { l: t1('k.tax'), v: eur(m.belastingJaar1), s: taxLabel(), c: '' }
     ];
     if (empty) items = items.map(function (i) { return { l: i.l, v: '–', s: '', c: '' }; });
@@ -5035,8 +5412,8 @@ Object.assign(I18N.es, {
     hit.addEventListener('pointermove', show); hit.addEventListener('pointerdown', show);
     hit.addEventListener('pointerleave', function () { hv.style.display = 'none'; tip.style.display = 'none'; });
     $('fan-succ').textContent = pct(curSucc, 0);
-    $('fan-wr').textContent = eur(m.draws[0] / 12);
-    $('fan-wr-s').textContent = t1('fan.wrS', { p: pct(m.eersteJaarOpname, 1) });
+    $('fan-wr').textContent = m.draws[0] < 0 ? '+' + eur(-m.draws[0] / 12) : eur(m.draws[0] / 12);
+    $('fan-wr-s').textContent = m.draws[0] < 0 ? t1('fan.wrSave') : t1('fan.wrS', { p: pct(m.eersteJaarOpname, 1) });
     $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.mix', { a: Math.round(pf.w[0] * 100), b: Math.round(pf.w[1] * 100), c: Math.round(pf.w[2] * 100) }) + '</li><li>' + t1('fan.costs', { p: pct(state.kosten / 100, 1) }) + '</li><li>' + taxLabel() + '</li></ul>';
     $('fan-sub').textContent = t1('fan.sub', { pf: pf.n.toLowerCase(), n: num(SIMN, 0) });
     each('#fan-legend .lg', function (el) { el.classList.toggle('off', !fanShow[el.getAttribute('data-k')]); });
@@ -5089,14 +5466,12 @@ Object.assign(I18N.es, {
     if (state.budget <= 0) { host.innerHTML = '<div class="ph">' + t('flow.empty') + '</div>'; return; }
     var N = m.N, rows = [], i2, mx = state.budget, tw = two();
     for (i2 = 0; i2 < N; i2++) {
-      var aP = state.leeftijdPaul + i2, aD = state.leeftijdDiana + i2;
-      var aow = (state.aowAanP !== 0 ? state.spP * cl01(aP + 1 - state.aowPaul) : 0) + (tw && state.aowAanD !== 0 ? state.spD * cl01(aD + 1 - state.aowDiana) : 0);
-      var pen = (state.pensAanP !== 0 ? state.pensioenPaul * cl01(aP + 1 - state.pensioenLeeftijd) : 0) + (tw && state.pensAanD !== 0 ? state.pensioenDiana * cl01(aD + 1 - state.pensioenLeeftijdDiana) : 0);
-      var wk = (state.werk > 0 && (aP < 67 || (tw && aD < 67))) ? state.werk : 0;
-      var inc = aow + pen + wk;
-      rows.push({ aow: aow, pen: pen, wk: wk, inc: inc, cap: Math.max(0, state.budget - inc) });
+      var aow = m.incSp[i2] / 12, pen = m.incPen[i2] / 12, wk = m.incWk[i2] / 12, pot = m.incPot[i2] / 12;
+      var inc = aow + pen + wk + pot;
+      rows.push({ aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, cap: Math.max(0, state.budget - inc) });
       mx = Math.max(mx, inc);
     }
+    var hasPot = rows.some(function (r) { return r.pot > 0.5 || r.lump > 0; }), lg = $('lg-pot'); if (lg) lg.hidden = !hasPot;
     var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 230 : 270;
     var tk = niceTicks(0, mx * 1.1, 4), ymax = Math.max(mx * 1.1, tk.ticks[tk.ticks.length - 1]);
     var ml = labW(tk.ticks), mr = 14, mt = 14, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
@@ -5107,11 +5482,12 @@ Object.assign(I18N.es, {
     s += '<rect id="flowhl" class="f-hl" x="0" y="' + mt + '" width="' + bw + '" height="' + ph + '" style="display:none"/>';
     rows.forEach(function (r, i) {
       var x0 = ml + i * bw + gap / 2, w = Math.max(1, bw - gap), base = 0;
-      [['aow', 'f-aow'], ['pen', 'f-pen'], ['wk', 'f-wk'], ['cap', 'f-cap']].forEach(function (p2) {
+      [['aow', 'f-aow'], ['pen', 'f-pen'], ['wk', 'f-wk'], ['pot', 'f-pot'], ['cap', 'f-cap']].forEach(function (p2) {
         var v = r[p2[0]]; if (v <= 0.5) return;
         s += '<rect class="' + p2[1] + '" x="' + x0.toFixed(1) + '" y="' + y(base + v).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + (y(base) - y(base + v)).toFixed(1) + '"/>';
         base += v;
       });
+      if (r.lump > 0) { var cx0 = x0 + w / 2, cy0 = mt + 6; s += '<path class="f-lump" d="M' + cx0.toFixed(1) + ' ' + (cy0 - 5) + 'l5 5l-5 5l-5-5z"/>'; }
     });
     s += '<line class="f-bud" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(state.budget) + '" y2="' + y(state.budget) + '"/>';
     s += '<line class="zero" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(0) + '" y2="' + y(0) + '"/>';
@@ -5127,7 +5503,7 @@ Object.assign(I18N.es, {
       hl.style.display = ''; hl.setAttribute('x', ml + i * bw);
       var line = function (l, v) { return '<div class="row"><span>' + l + '</span><span>' + eur(v) + '</span></div>'; };
       tip.style.display = '';
-      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + line(t1('w.fromCap'), r.cap) + (r.inc > state.budget ? line(t1('flow.over'), r.inc - state.budget) : '');
+      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + (r.pot > 0 ? line(t1('w.pots'), r.pot) : '') + line(t1('w.fromCap'), r.cap) + (r.lump > 0 ? line(t1('w.lump'), r.lump) : '') + (r.inc > state.budget ? line(t1('flow.over'), r.inc - state.budget) : '');
       var sc = rc.width / W, cx2 = (ml + (i + 0.5) * bw) * sc, left = cx2 + 12;
       if (left + 210 > rc.width) left = cx2 - 210 - 12;
       tip.style.left = Math.max(4, left) + 'px'; tip.style.top = '10px';
@@ -5195,10 +5571,9 @@ Object.assign(I18N.es, {
       L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk')
     ].join(' · ') + '.';
     if (KOFI) {
-      var k = kofiLink();
-      $('support-ov').innerHTML = '<span class="sup-t">' + t1('sup.after') + '</span>' + k; $('support-ov').hidden = false;
-      $('support-sh').innerHTML = t1('sup.after') + ' ' + k; $('support-sh').hidden = false;
-      $('support-ab').innerHTML = t1('sup.text') + ' ' + k; $('support-ab').hidden = false;
+      $('support-ov').innerHTML = duoHtml(t1('sup.after')); $('support-ov').hidden = false;
+      $('support-sh').innerHTML = duoHtml(t1('sup.after')); $('support-sh').hidden = false;
+      $('support-ab').innerHTML = duoHtml(t1('sup.text')); $('support-ab').hidden = false;
     }
   }
 
@@ -5259,10 +5634,17 @@ Object.assign(I18N.es, {
   function hvCtx() {
     var st = {}, ports = {};
     Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
+    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots;
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports };
   }
-  var hvW = null, hvSeq = 0, hvCb = null, hvPend = null, hvFirst = true;
+  /* Elke berekening krijgt een eigen nummer. De hoofduitslag gebruikt alleen het antwoord op de laatste vraag;
+     scenario's rekenen in dezelfde worker mee zonder de hoofduitslag te verstoren. */
+  var hvW = null, hvSeq = 0, hvLatest = 0, hvCbs = {}, hvPend = {}, hvFirst = true;
+  function hvFall() {
+    hvW = false;
+    Object.keys(hvCbs).forEach(function (id) { var cb = hvCbs[id], X = hvPend[id]; delete hvCbs[id]; delete hvPend[id]; var r = null; try { r = hvRun(X); } catch (x) {} cb(r); });
+  }
   function hvWorker() {
     if (hvW !== null) return hvW;
     try {
@@ -5270,25 +5652,33 @@ Object.assign(I18N.es, {
         [runModel, normalsFor, simCore, simQuick, c90For, hvRun].map(function (f) { return f.toString(); }).join('\n') +
         '\nonmessage=function(e){var r=null;try{r=hvRun(e.data.X);}catch(x){}postMessage({id:e.data.id,r:r});};';
       hvW = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
-      var fall = function () { hvW = false; if (hvCb) { var cb = hvCb; hvCb = null; cb(hvRun(hvPend)); } };
       hvW.onmessage = function (e) {
-        if (e.data.id !== hvSeq || !hvCb) return;
-        if (!e.data.r) { fall(); return; }
-        var cb = hvCb; hvCb = null; cb(e.data.r);
+        var cb = hvCbs[e.data.id], X = hvPend[e.data.id]; delete hvCbs[e.data.id]; delete hvPend[e.data.id];
+        if (!cb) return;
+        if (!e.data.r) { var r = null; try { r = hvRun(X); } catch (x) {} cb(r); return; }
+        cb(e.data.r);
       };
-      hvW.onerror = fall;
+      hvW.onerror = hvFall;
     } catch (e) { hvW = false; }
     return hvW;
   }
-  function heavy(X, cb) {
-    hvSeq++;
-    if (hvFirst) { hvFirst = false; cb(hvRun(X)); return; }
-    var w = hvWorker();
-    if (!w) { cb(hvRun(X)); return; }
-    hvPend = X; hvCb = cb;
-    document.documentElement.classList.add('is-calc');
-    w.postMessage({ id: hvSeq, X: X });
+  function calcX(X, cb) {
+    var id = ++hvSeq, w = hvWorker();
+    if (!w) { var r = null; try { r = hvRun(X); } catch (x) {} cb(r); return id; }
+    hvCbs[id] = cb; hvPend[id] = X;
+    w.postMessage({ id: id, X: X });
+    return id;
   }
+  function heavy(X, cb) {
+    document.documentElement.classList.add('is-calc');
+    if (hvFirst) { hvFirst = false; hvLatest = ++hvSeq; cb(hvRun(X)); return; }
+    var id = calcX(X, function (r) { if (id === hvLatest && r) cb(r); });
+    hvLatest = id;
+  }
+  /* bewaren, delen en feedback wachten tot de uitslag bij de invoer hoort */
+  var readyQ = [];
+  function busy() { return !!updTimer || document.documentElement.classList.contains('is-calc'); }
+  function whenReady(fn) { if (!busy()) { fn(); return; } readyQ.push(fn); updateNow(); }
   function update() {
     applyAuto();
     applyText();
@@ -5300,7 +5690,7 @@ Object.assign(I18N.es, {
     });
   }
   function finishUpdate() {
-    document.documentElement.classList.remove('is-calc');
+    if (!updTimer) document.documentElement.classList.remove('is-calc');
     renderAdvies();
     document.documentElement.classList.toggle('is-empty', state.budget <= 0);
     renderHints();
@@ -5309,10 +5699,13 @@ Object.assign(I18N.es, {
     simText = t1('v.sim', { pf: portStat(effIdx()).n.toLowerCase(), p: pct(curSucc, 0) });
     renderHead(); renderGauge(); renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
     renderTable(m); renderLadder(m); renderAbout(); renderPlans();
+    if (route === 'input' && inAll()) renderInSum();
     if (route === 'overview') renderFlow(m);
     showStep(curStep, false);
     scheduleSim(false);
     persist();
+    if (!$('fb').hidden) fbUpdate();
+    if (!busy() && readyQ.length) { var q = readyQ; readyQ = []; q.forEach(function (fn) { fn(); }); }
   }
 
   /* ================= melding ================= */
@@ -5348,13 +5741,34 @@ Object.assign(I18N.es, {
   function planSum() {
     return { bud: state.budget, cap: capEff(), end: state.eindleeftijd, succ: curSucc, c90: adv ? adv.c90 : 0, max: max90, country: prefs.country, cur: prefs.cur };
   }
+  /* Een scenario bewaart alleen de invoer. De uitslag rekenen we bij het tonen opnieuw uit met de huidige
+     rekenmotor, zodat een getal nooit kan achterlopen op de invoer of op een nieuwere versie van de app. */
   function planSnap() {
     var st = {}; Object.keys(DEF).forEach(function (k) { st[k] = state[k]; });
-    return { state: st, names: { n1: names.n1, n2: names.n2 }, country: prefs.country, cur: prefs.cur, sum: planSum() };
+    return { state: st, lists: JSON.parse(JSON.stringify(lists)), names: { n1: names.n1, n2: names.n2 }, country: prefs.country, cur: prefs.cur };
+  }
+  var planCache = {}, planBusy = {};
+  function planKey(pl) { return JSON.stringify([pl.state, pl.lists || null, pl.country, pl.cur]); }
+  function planCalc(pl) {
+    var key = planKey(pl);
+    if (planCache[key] || planBusy[key]) return planCache[key] || null;
+    var st = loadNums({}, pl.state), L = cleanLists(pl.lists), ports = {};
+    st.perP = L.perP; st.perD = L.perD; st.pots = L.pots;
+    [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
+    planBusy[key] = 1;
+    calcX({ st: st, cap: st.startkapitaal, nl: pl.country === 'NL', pfUser: st.portfolio, autoIdx: 2, ports: ports }, function (r) {
+      delete planBusy[key];
+      if (!r) return;
+      var c90 = r.adv ? r.adv.c90 : 0;
+      planCache[key] = { bud: st.budget, cap: st.startkapitaal > 0 ? st.startkapitaal : c90, end: st.eindleeftijd, succ: r.curSucc, c90: c90, max: r.max90, country: pl.country, cur: pl.cur };
+      renderPlans();
+    });
+    return null;
   }
   function planLoad(pl) {
     if (!pl || !pl.state) return;
-    Object.keys(DEF).forEach(function (k) { var v = pl.state[k]; if (typeof v === 'number' && isFinite(v)) state[k] = v; });
+    loadNums(state, pl.state);
+    lists = cleanLists(pl.lists);
     if (pl.names) { names.n1 = String(pl.names.n1 || '').slice(0, 20); names.n2 = String(pl.names.n2 || '').slice(0, 20); ['1', '2'].forEach(function (n) { var el = $('nm-' + n); if (el) el.value = names['n' + n]; }); }
     if (CTRY[pl.country]) prefs.country = pl.country;
     if (CURS.indexOf(pl.cur) >= 0) prefs.cur = pl.cur;
@@ -5365,8 +5779,9 @@ Object.assign(I18N.es, {
   }
   function renderPlans() {
     var el = $('plans'); if (!el) return;
-    var now = planSum(), cols = [{ k: 'now', n: t1('pl.now'), s: state.budget > 0 ? now : null }, { k: 'A', n: t1('pl.a'), s: plans.A ? plans.A.sum : null }, { k: 'B', n: t1('pl.b'), s: plans.B ? plans.B.sum : null }];
-    function cell(sm, f) { return sm ? f(sm) : '<span class="pl-none">–</span>'; }
+    var now = planSum(), cols = [{ k: 'now', n: t1('pl.now'), s: state.budget > 0 ? now : null }];
+    ['A', 'B'].forEach(function (k) { var pl = plans[k]; cols.push({ k: k, n: t1(k === 'A' ? 'pl.a' : 'pl.b'), s: pl ? (planCalc(pl) || 'calc') : null }); });
+    function cell(sm, f) { return sm === 'calc' ? '<span class="pl-none">…</span>' : (sm ? f(sm) : '<span class="pl-none">–</span>'); }
     var rows = [
       ['pl.r.succ', function (x) { var c = x.succ >= 0.9 ? 'good' : (x.succ >= 0.75 ? 'warn' : 'bad'); return '<b class="pl-succ ' + c + '">' + pct(x.succ, 0) + '</b>'; }],
       ['pl.r.bud', function (x) { return moneyIn(x.bud, x.cur); }],
@@ -5393,12 +5808,12 @@ Object.assign(I18N.es, {
     });
     h += '</div></div><div class="btn-row pl-save">';
     ['A', 'B'].forEach(function (k) { h += '<button type="button" class="btn ' + (k === 'A' ? 'primary' : 'ghost') + '" data-pl="save" data-k="' + k + '"' + (state.budget > 0 ? '' : ' disabled') + '>' + t1('pl.save', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') }) + '</button>'; });
-    el.innerHTML = h + '</div>' + ((plans.A || plans.B) && KOFI ? '<p class="support-line sup-pl">' + t1('sup.after') + ' ' + kofiLink() + '</p>' : '');
+    el.innerHTML = h + '</div>' + ((plans.A || plans.B) ? '<div class="sup-pl">' + duoHtml(t1('sup.after')) + '</div>' : '');
   }
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pl]') : null; if (!b) return;
     var k = b.getAttribute('data-k'), a = b.getAttribute('data-pl');
-    if (a === 'save') { plans[k] = planSnap(); savePlans(); renderPlans(); toast(t1('pl.saved', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') })); }
+    if (a === 'save') { plans[k] = planSnap(); savePlans(); whenReady(renderPlans); toast(t1('pl.saved', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') })); }
     else if (a === 'clear') { plans[k] = null; savePlans(); renderPlans(); }
     else if (a === 'load') { planLoad(plans[k]); toast(t1('pl.loaded', { n: t1(k === 'A' ? 'pl.a' : 'pl.b') })); }
   });
@@ -5408,8 +5823,9 @@ Object.assign(I18N.es, {
   function b64d(str) { str = str.replace(/-/g, '+').replace(/_/g, '/'); while (str.length % 4) str += '='; return decodeURIComponent(escape(atob(str))); }
   function shareUrl() {
     var d = {}; Object.keys(DEF).forEach(function (k) { if (state[k] !== DEF[k]) d[k] = state[k]; });
-    var base = location.origin + location.pathname;
-    return base + '?plan=' + b64u(JSON.stringify({ s: d, c: prefs.country, u: prefs.cur })) + '#overview';
+    var base = location.origin + location.pathname, o = { s: d, c: prefs.country, u: prefs.cur };
+    if (lists.perP.length || lists.perD.length || lists.pots.length) o.l = lists;
+    return base + '?plan=' + b64u(JSON.stringify(o)) + '#overview';
   }
   function shareText() {
     var L = [t1('brand') + ': ' + t1('home.h1'), ''];
@@ -5447,7 +5863,7 @@ Object.assign(I18N.es, {
     $('share').addEventListener('click', function (ev) { if (ev.target === $('share')) closeShare(); });
     document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !$('share').hidden) closeShare(); });
     $('sh-link').addEventListener('click', function () { copyText(shareUrl(), t1('sh.done')); });
-    $('sh-copy').addEventListener('click', function () { copyText(shareText(), t1('sh.done')); });
+    $('sh-copy').addEventListener('click', function () { whenReady(function () { copyText(shareText(), t1('sh.done')); }); });
     $('sh-print').addEventListener('click', function () {
       closeShare();
       if (location.hash !== '#overview' && location.hash !== '') location.hash = '#overview';
@@ -5460,8 +5876,8 @@ Object.assign(I18N.es, {
     try {
       var m = /[?&]plan=([A-Za-z0-9_-]+)/.exec(location.search || ''); if (!m) return;
       var o = JSON.parse(b64d(m[1]));
-      Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
-      if (o && o.s) Object.keys(DEF).forEach(function (k) { var v = o.s[k]; if (typeof v === 'number' && isFinite(v)) state[k] = v; });
+      loadNums(state, o && o.s);
+      lists = cleanLists(o && o.l);
       if (o && CTRY[o.c]) prefs.country = o.c;
       if (o && CURS.indexOf(o.u) >= 0) prefs.cur = o.u;
       planFromLink = true;
@@ -5470,13 +5886,22 @@ Object.assign(I18N.es, {
   })();
 
   /* ================= stappen ================= */
-  var ui = { introSeen: false, step: 1, goal: '' };
-  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; } } catch (e) {}
+  var ui = { introSeen: false, step: 1, goal: '', mode: '', stepsDone: false };
+  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; ui.mode = su.mode === 'all' || su.mode === 'steps' ? su.mode : ''; ui.stepsDone = !!su.stepsDone; } } catch (e) {}
+  /* De stappen zijn de rondleiding voor de eerste keer. Wie ze één keer doorlopen heeft, krijgt daarna standaard
+     alles in één overzicht; de keuze blijft altijd te wisselen. */
+  function inAll() { return ui.mode ? ui.mode === 'all' : ui.stepsDone; }
   function saveUi() { try { localStorage.setItem(KEY + '-ui', JSON.stringify(ui)); } catch (e) {} }
   var curStep = Math.max(1, Math.min(STEPS.length, ui.step));
   function showStep(n, scroll) {
     curStep = Math.max(1, Math.min(STEPS.length, n));
-    STEPS.forEach(function (st, i) { $('step-' + (i + 1)).hidden = i + 1 !== curStep; });
+    var all = inAll();
+    $('page-input').classList.toggle('in-all', all);
+    each('input[name="in-mode"]', function (r) { r.checked = r.value === (all ? 'all' : 'steps'); });
+    $('in-mode-h').textContent = t1(all ? 'in.allH' : 'in.stepsH');
+    $('in-sum').hidden = !all;
+    if (all) renderInSum();
+    STEPS.forEach(function (st, i) { $('step-' + (i + 1)).hidden = !all && i + 1 !== curStep; });
     each('#stepper button', function (b) {
       var k = parseInt(b.getAttribute('data-go'), 10);
       if (k === curStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
@@ -5484,13 +5909,71 @@ Object.assign(I18N.es, {
     });
     $('prog').style.width = (curStep / STEPS.length * 100) + '%';
     $('step-prev').style.visibility = curStep === 1 ? 'hidden' : '';
-    $('step-next').textContent = curStep === STEPS.length ? t1('b.toOverview') : t1('b.nextStep', { s: t1(STEPS[curStep].t).toLowerCase() });
+    $('step-next').textContent = all || curStep === STEPS.length ? t1('b.toOverview') : t1('b.nextStep', { s: t1(STEPS[curStep].t).toLowerCase() });
+    if (all) $('step-prev').style.visibility = 'hidden';
     ui.step = curStep; saveUi();
     if (scroll) window.scrollTo(0, 0);
   }
-  each('#stepper button', function (b) { b.addEventListener('click', function () { showStep(parseInt(b.getAttribute('data-go'), 10), true); }); });
+  function jumpTo(el) {
+    if (!el) return;
+    var box = el.closest ? (el.closest('.field, .knob, .wk, .pot, details, .card') || el) : el;
+    if (box.tagName === 'DETAILS') box.open = true;
+    box.scrollIntoView({ block: 'center' });
+    try { if (el.focus && el.offsetParent !== null) el.focus({ preventScroll: true }); } catch (e) {}
+    box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+  }
+  each('#stepper button', function (b) { b.addEventListener('click', function () {
+    var n = parseInt(b.getAttribute('data-go'), 10);
+    if (inAll()) { curStep = n; var st = $('step-' + n); if (st) { st.scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); } return; }
+    showStep(n, true);
+  }); });
   $('step-prev').addEventListener('click', function () { showStep(curStep - 1, true); });
-  $('step-next').addEventListener('click', function () { if (curStep < STEPS.length) showStep(curStep + 1, true); else location.hash = '#overview'; });
+  $('step-next').addEventListener('click', function () {
+    if (!inAll() && curStep < STEPS.length) { showStep(curStep + 1, true); return; }
+    if (!ui.stepsDone) { ui.stepsDone = true; saveUi(); }
+    location.hash = '#overview';
+  });
+  each('input[name="in-mode"]', function (r) { r.addEventListener('change', function () { if (!r.checked) return; ui.mode = r.value; if (r.value === 'all') ui.stepsDone = true; saveUi(); showStep(r.value === 'all' ? curStep : 1, true); }); });
+  /* overzicht van alles wat is ingevuld; elke regel springt naar het veld */
+  function renderInSum() {
+    var host = $('in-sum'); if (!host || host.hidden) return;
+    var tw = two(), dash = '–';
+    function it(lab, val, target) { return '<button type="button" class="ins-i" data-goto="' + target + '"><span>' + lab + '</span><b>' + val + '</b></button>'; }
+    function per(a, b) { return tw ? '<span>' + esc(nm1()) + ': ' + a + '</span><span>' + esc(nm2()) + ': ' + b + '</span>' : a; }
+    function wk(s) {
+      var rows = lists['per' + s];
+      if (rows.length) return t1('ins.periods', { n: rows.length });
+      return state['werk' + s] > 0 ? eur(state['werk' + s]) + ' ' + t1('ins.until', { a: fmtAge(state['werkTot' + s]) }) : dash;
+    }
+    function inc(on, amt, age) { return on && amt > 0 ? eur(amt) + ' ' + t1('ins.from', { a: fmtAge(age) }) : dash; }
+    var pots = lists.pots.filter(function (q) { return q.a > 0; });
+    var G2 = [
+      [STEPS[0].t, [
+        it(t1('ins.ctry'), esc(cName(prefs.country)), 'q-country'),
+        it(t1('ins.age'), tw ? esc(nm1()) + ' ' + state.leeftijdPaul + ' · ' + esc(nm2()) + ' ' + state.leeftijdDiana : state.leeftijdPaul, 'q-leeftijdPaul'),
+        it(t1('ins.bud'), state.budget > 0 ? eur(state.budget) : dash, 'q-budget'),
+        it(t1('ins.cap'), state.startkapitaal > 0 ? eur(state.startkapitaal) : dash, 'q-startkapitaal')]],
+      [STEPS[1].t, [it(t1('ins.wk'), per(wk('P'), wk('D')), lists.perP.length ? 'wk-per-P' : 'n-werkP')]],
+      [STEPS[2].t, [
+        it(esc(cap1(spName())), per(inc(state.aowAanP !== 0, state.spP, state.aowPaul), inc(state.aowAanD !== 0, state.spD, state.aowDiana)), 'n-spP'),
+        it(esc(cap1(penName())), per(inc(state.pensAanP !== 0, state.pensioenPaul, state.pensioenLeeftijd), inc(state.pensAanD !== 0, state.pensioenDiana, state.pensioenLeeftijdDiana)), 'n-pensioenPaul'),
+        it(t1('ins.pots'), pots.length ? esc(pots.map(function (q, i) { return q.n || t1('pot.nameN', { n: i + 1 }); }).join(', ')) : dash, 'pots-box')]],
+      [STEPS[3].t, [
+        it(t1('ins.pf'), esc(portStat(effIdx()).n) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')'), 's-portfolio'),
+        it(t1('ins.tax'), esc(taxLabel()), isNL() ? 's-box3' : 'n-taxRate'),
+        it(t1('ins.end'), fmtAge(state.eindleeftijd) + (tw ? ' (' + esc(state.eindDiana === 0 ? nm1() : nm2()) + ')' : ''), 'n-eindleeftijd'),
+        it(t1('ins.rest'), state.restkapitaal > 0 ? eur(state.restkapitaal) : dash, 'n-restkapitaal')]],
+      [STEPS[4].t, [
+        it(t1('ins.infl'), num(state.inflatie, 2) + '% · ' + num(state.kosten, 2) + '%', 'n-inflatie')]]
+    ];
+    host.innerHTML = '<div class="ins-head"><h2 id="in-sum-h">' + t1('ins.h') + '</h2><p class="sub">' + t1('ins.sub') + '</p></div><div class="ins-grid">' +
+      G2.map(function (g) { return '<div class="ins-g"><h3>' + t1(g[0]) + '</h3>' + g[1].join('') + '</div>'; }).join('') + '</div>';
+  }
+  $('in-sum').addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('[data-goto]') : null; if (!b) return;
+    var tg = b.getAttribute('data-goto'), el = $(tg) || document.querySelector('[name="' + tg + '"]');
+    jumpTo(el);
+  });
 
   /* ================= pagina's ================= */
   var ROUTES = ['overview', 'input', 'insight', 'about'], pendingScroll = null, lastW = 0;
@@ -5503,6 +5986,7 @@ Object.assign(I18N.es, {
       if (r === route) tb.setAttribute('aria-current', 'page'); else tb.removeAttribute('aria-current');
     });
     var sn = $('snel'), slot = $(route === 'overview' ? 'ov-quick' : 'step1-slot'); if (sn && slot && sn.parentNode !== slot) slot.appendChild(sn);
+    if (route === 'input') showStep(curStep, false);
     updMini();
     if (route === 'overview' && last) { lastW = 0; renderFan(); renderFlow(last); }
     window.scrollTo(0, 0);
@@ -5516,6 +6000,7 @@ Object.assign(I18N.es, {
   var tourI = -1;
   fillSelects();
   syncInputs();
+  renderLists();
   go();
   update();
   if (planFromLink) { ui.introSeen = true; saveUi(); setTimeout(function () { toast(t1('sh.loaded')); }, 400); }
@@ -5667,15 +6152,35 @@ Object.assign(I18N.es, {
   /* Google-formulier: antwoorden komen in het gekoppelde spreadsheet */
   var FB_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScOj9gCX_pPJd7RsF5-AVnuOVoq5LeAGzmqa0F34aGc0KbrUw/viewform';
   var FB_E = { topic: 'entry.862323177', msg: 'entry.1725021484', country: 'entry.1839444150', lang: 'entry.1235630570', section: 'entry.1924711593', details: 'entry.1617613850' };
-  function fbFormUrl() {
-    var cat = fbCat(), msg = ($('fb-msg').value || '').trim(), det = ['App: Button Counter V4', 'Currency: ' + prefs.cur];
-    if ($('fb-incl').checked) {
-      det.push('People: ' + state.personen, 'Age: ' + state.leeftijdPaul + (two() ? ' / ' + state.leeftijdDiana : ''),
-        'Monthly budget: ' + eur(state.budget), 'Savings: ' + eur(state.startkapitaal),
-        'State pension: ' + eur(state.spP) + (two() ? ' / ' + eur(state.spD) : '') + ' from ' + fmtAge(state.aowPaul),
-        'Pension: ' + eur(state.pensioenPaul) + (two() ? ' / ' + eur(state.pensioenDiana) : ''),
-        'Chance of success: ' + pct(curSucc, 0), 'Portfolio: ' + I18N.en[PORT[effIdx()].k]);
+  /* Alle invoer die de uitslag bepaalt, in het Engels, zodat een melding altijd na te rekenen is */
+  function fbDetails() {
+    var tw = two(), L = [];
+    function ag(a) { var y = Math.floor(a + 1e-6), mo = Math.round((a - y) * 12); if (mo === 12) { y++; mo = 0; } return y + (mo ? 'y' + mo + 'm' : ''); }
+    function money(v) { return prefs.cur + ' ' + Math.round(v || 0).toLocaleString('en-GB'); }
+    function both(fP, fD) { return fP + (tw ? ' / ' + fD : ''); }
+    function wk(s) {
+      var rows = lists['per' + s];
+      if (rows.length) return rows.map(function (r) { return ag(r.a) + '-' + ag(r.b) + ' ' + money(r.m); }).join(', ');
+      return state['werk' + s] > 0 ? money(state['werk' + s]) + '/m until ' + ag(state['werkTot' + s]) : 'none';
     }
+    L.push('People: ' + state.personen, 'Age: ' + both(state.leeftijdPaul, state.leeftijdDiana),
+      'Monthly budget: ' + money(state.budget), 'Savings: ' + money(state.startkapitaal) + (state.startkapitaal > 0 ? '' : ' (using 90% capital ' + money(capEff()) + ')'),
+      'State pension: ' + both(state.aowAanP !== 0 ? money(state.spP) + ' from ' + ag(state.aowPaul) : 'off', state.aowAanD !== 0 ? money(state.spD) + ' from ' + ag(state.aowDiana) : 'off'),
+      'Pension: ' + both(state.pensAanP !== 0 ? money(state.pensioenPaul) + ' from ' + ag(state.pensioenLeeftijd) : 'off', state.pensAanD !== 0 ? money(state.pensioenDiana) + ' from ' + ag(state.pensioenLeeftijdDiana) : 'off'),
+      'Work income (net): ' + both(wk('P'), wk('D')));
+    lists.pots.forEach(function (q, i) {
+      L.push('Extra pot ' + (i + 1) + ': ' + (q.k === 'l' ? 'lump sum ' + money(q.a) + ' at ' + ag(q.f) : money(q.a) + '/m from ' + ag(q.f) + (q.u > 0 ? ' until ' + ag(q.u) : ' for life')) + ', tax ' + (q.x || 0) + '%' + (tw ? ', ' + (q.w ? 'partner' : 'person 1') : ''));
+    });
+    L.push('Plan until: ' + ag(state.eindleeftijd) + (tw ? ' (of ' + (state.eindDiana === 0 ? 'person 1' : 'partner') + ')' : '') + ', capital left: ' + money(state.restkapitaal),
+      'Tax: ' + (isNL() ? 'box 3 option ' + state.box3 : state.taxRate + '% on returns above ' + money(state.taxAllow)),
+      'Inflation: ' + state.inflatie + '%, costs: ' + state.kosten + '%',
+      'Portfolio: ' + I18N.en[PORT[effIdx()].k] + (state.portfolio ? '' : ' (auto)'),
+      'Chance of success: ' + Math.round(curSucc * 100) + '%');
+    return L;
+  }
+  function fbFormUrl() {
+    var cat = fbCat(), msg = ($('fb-msg').value || '').trim(), det = ['App: Button Counter ' + APPV, 'Currency: ' + prefs.cur];
+    if ($('fb-incl').checked) det = det.concat(fbDetails());
     var q = [[FB_E.topic, I18N.en['fb.cat.' + cat]], [FB_E.msg, msg], [FB_E.country, cName(prefs.country, 'en') + ' (' + prefs.country + ')'],
       [FB_E.lang, LANGNAME[prefs.lang]], [FB_E.section, fbCtx], [FB_E.details, det.join('\n')]];
     return FB_FORM + '?usp=pp_url&' + q.filter(function (x) { return x[1]; }).map(function (x) { return x[0] + '=' + encodeURIComponent(x[1]); }).join('&');
@@ -5686,15 +6191,8 @@ Object.assign(I18N.es, {
     var subject = '[Button Counter] ' + I18N.en['fb.cat.' + cat] + ' · ' + prefs.country + ' · ' + prefs.lang.toUpperCase();
     lines.push(msg, '', '—', t1('fb.cat') + ': ' + t1('fb.cat.' + cat));
     if (fbCtx) lines.push(t1('fb.section') + ': ' + fbCtx);
-    lines.push(t1('fb.ctry') + ': ' + cName(prefs.country) + ' (' + prefs.country + ')', t1('lang.label') + ': ' + LANGNAME[prefs.lang], 'Button Counter V4');
-    if ($('fb-incl').checked) {
-      lines.push(t1('fb.persons') + ': ' + state.personen,
-        t1('tbl.age') + ': ' + state.leeftijdPaul + (two() ? ' / ' + state.leeftijdDiana : ''),
-        t1('w.spendLine') + ': ' + eur(state.budget), t1('f.startkapitaal') + ': ' + eur(state.startkapitaal),
-        cap1(spName()) + ': ' + eur(state.spP) + (two() ? ' / ' + eur(state.spD) : '') + ' · ' + fmtAge(state.aowPaul),
-        cap1(penName()) + ': ' + eur(state.pensioenPaul) + (two() ? ' / ' + eur(state.pensioenDiana) : ''),
-        t1('w.success') + ': ' + pct(curSucc, 0));
-    }
+    lines.push(t1('fb.ctry') + ': ' + cName(prefs.country) + ' (' + prefs.country + ')', t1('lang.label') + ': ' + LANGNAME[prefs.lang], 'Button Counter ' + APPV);
+    if ($('fb-incl').checked) lines = lines.concat(fbDetails());
     return { subject: subject, body: lines.join('\n'), msg: msg };
   }
   function fbUpdate() {
@@ -5707,7 +6205,7 @@ Object.assign(I18N.es, {
     fbFocus = document.activeElement; fbCtx = ctx || '';
     each('input[name="fb-cat"]', function (r) { r.checked = r.value === (cat || 'idea'); });
     $('fb-status').textContent = '';
-    $('fb').hidden = false; fbUpdate();
+    $('fb').hidden = false; updateNow(); fbUpdate();
     setTimeout(function () { $('fb-msg').focus({ preventScroll: true }); var c = document.querySelector('.fb-dlg'); if (c) c.scrollTop = 0; }, 30);
   }
   function closeFb() { $('fb').hidden = true; if (fbFocus && fbFocus.focus) fbFocus.focus({ preventScroll: true }); }
@@ -5721,6 +6219,7 @@ Object.assign(I18N.es, {
       else if (b2.closest('#advies')) ctx = t1('adv.eyebrow');
       else { var box = b2.closest('section, .card'); var h = box && box.querySelector('h2, h3'); ctx = h ? h.textContent.trim() : ''; }
     }
+    var om = b2.closest('.modal'); if (om && om.id !== 'fb') om.hidden = true;
     openFb(b2.getAttribute('data-cat'), ctx);
   });
   $('fb-close').addEventListener('click', closeFb);
@@ -5729,6 +6228,7 @@ Object.assign(I18N.es, {
   $('fb-incl').addEventListener('change', fbUpdate);
   each('input[name="fb-cat"]', function (r) { r.addEventListener('change', fbUpdate); });
   function fbGo(ev, key) {
+    if (busy()) { ev.preventDefault(); $('fb-status').textContent = t1('calc'); return; }
     if (!fbText().msg) { ev.preventDefault(); $('fb-status').textContent = t1('fb.empty'); $('fb-status').classList.add('warn'); $('fb-msg').focus(); return; }
     $('fb-status').classList.remove('warn'); $('fb-status').textContent = t1(key);
   }
