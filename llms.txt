@@ -32,7 +32,7 @@ Button Counter has its own rules for the Netherlands, Belgium, Germany, France, 
 
 ### Is Button Counter free, and what happens to my data?
 
-At the moment Button Counter is free to use, has no advertising and needs no account. What you enter stays in your own browser on your own device and is not sent to Button Counter. Visits are counted anonymously, without cookies.
+At the moment Button Counter is free to use, has no advertising and needs no account. What you enter stays in your own browser on your own device and is not sent to Button Counter. Visits and the use of features are counted anonymously, without cookies.
 
 ### Is this financial advice?
 
