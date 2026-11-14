@@ -958,6 +958,41 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .rel-vers { display: flex; flex-direction: column; gap: 10px; }
 .rel-ver { display: flex; flex-direction: column; gap: 8px; }
 .rel-ver + .rel-ver { border-top: 1px dashed var(--line); padding-top: 14px; }
+.pro-tag { display: inline-flex; align-items: center; gap: 3px; margin-left: 7px; padding: 2px 6px 2px 4px; border: 1px solid var(--copper); border-radius: 99px; color: var(--copper); font-family: var(--f-body); font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; line-height: 1.2; vertical-align: 0.15em; white-space: nowrap; cursor: help; opacity: 0.85; }
+.pro-tag svg, .pro-dot svg, .share-opt .pro-tag svg { width: 11px; min-width: 0; margin: 0; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; flex: none; }
+.panel-head.has-pro { position: relative; }
+.panel-head.has-pro > .pro-tag.corner { position: absolute; top: 2px; right: 0; margin: 0; }
+.panel-head.has-pro h2 { padding-right: 64px; }
+#btn-theme { position: relative; }
+.pro-dot { position: absolute; top: -5px; right: -5px; width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--copper); color: var(--copper); pointer-events: none; }
+.pro-dot svg { width: 10px; height: 10px; }
+.share-opt b { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0 2px; }
+.wk-tog .pro-tag { margin-left: 8px; }
+.nt-fab { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 75; width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: grid; place-items: center; box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.35); cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; transition: transform 0.15s; }
+.nt-fab:hover { transform: translateY(-1px); }
+.nt-fab.dragging { cursor: grabbing; transform: scale(1.06); transition: none; }
+.nt-fab[aria-expanded="true"] { background: var(--accent-soft); }
+.nt-fab svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.nt-fab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.nt-dot { position: absolute; top: 9px; right: 10px; width: 9px; height: 9px; border-radius: 50%; background: var(--copper); border: 2px solid var(--surface); pointer-events: none; }
+.nt-pop { position: fixed; z-index: 76; width: min(400px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 16px 18px 14px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.45); }
+.nt-pop[hidden] { display: none; }
+.nt-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.nt-top h2 { margin: 0; font-size: 20px; }
+.nt-sub { margin: -4px 0 0; color: var(--muted); font-size: 14px; }
+.nt-bar { display: flex; flex-wrap: wrap; gap: 6px; }
+#nt-text { width: 100%; min-height: 200px; resize: vertical; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.55; box-sizing: border-box; }
+#nt-text:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.nt-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nt-state { color: var(--muted); font-size: 13px; }
+.nt-sure { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.nt-sure p { margin: 0; }
+.nt-pop .hint { margin: 0; font-size: 12.5px; }
+@media (max-width: 560px) {
+  .nt-fab { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); width: 50px; height: 50px; }
+  .nt-pop.sheet { left: 8px !important; right: 8px; top: auto !important; bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; width: auto; max-height: calc(100vh - 110px); }
+}
+@media print { .nt-fab, .nt-pop { display: none !important; } }
 .rel-list.fix li::before { background: transparent; border: 2px solid var(--copper); box-sizing: border-box; }
 .inst-steps { margin: 6px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; }
 .inst-steps li.plain { list-style: none; margin-left: -22px; }
@@ -1663,7 +1698,7 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
     </nav>
     <div class="tb-right">
       <button class="icon-btn share-open" type="button" data-t-aria="sh.btn" aria-label="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span class="ib-l" data-t="sh.btn">Compartir</span></button>
-      <button class="icon-btn" id="btn-theme" type="button" data-t-aria="th.btn" aria-label="Claro u oscuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg></button>
+      <button class="icon-btn" id="btn-theme" type="button" data-t-aria="th.btn" aria-label="Claro u oscuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg><span class="pro-dot" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.8V8l2.2 1.4"/></svg></span></button>
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label" aria-label="Idioma"></select></label>
       <button class="icon-btn install" id="btn-install" type="button" hidden data-t-aria="inst.btn" aria-label="Instalar la app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span class="ib-l">App</span></button>
     </div>
@@ -1820,7 +1855,7 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       <div class="pt-art"><img loading="lazy" decoding="async" src="/img/weegschaal.jpg" alt="Botones en una balanza de latón, una decisión sopesada frente a otra" data-t-alt="alt.stacks"></div>
     </header>
     <section class="card panel" id="sec-plans" aria-labelledby="pl-h">
-      <div class="panel-head"><h2 id="pl-h" data-t="pl.h">Compara dos planes</h2><p class="sub" data-t="pl.sub">Guarda lo que has introducido como plan A o B, cambia algo y mira la diferencia lado a lado.</p></div>
+      <div class="panel-head has-pro"><span class="pro-tag corner"></span><h2 id="pl-h" data-t="pl.h">Compara dos planes</h2><p class="sub" data-t="pl.sub">Guarda lo que has introducido como plan A o B, cambia algo y mira la diferencia lado a lado.</p></div>
       <div id="plans"></div>
     </section>
     <div class="card empty-note"><p data-t="iz.empty">Indica primero en <a href="#overview">Resumen</a> cuánto te gustaría gastar al mes; después aparecerán aquí las comparaciones.</p></div>
@@ -1839,7 +1874,7 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       <div class="srcline" data-src="mkt,sp,tax"></div>
     </section>
     <section class="card panel needs-data" id="sec-koop" aria-labelledby="kp-h">
-      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><h2 id="kp-h" data-t="kp.h">Lo que vale tu presupuesto en cada país</h2><p class="sub" id="kp-sub"></p></div>
+      <div class="panel-head has-nb has-pro"><span class="pro-tag corner"></span><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><h2 id="kp-h" data-t="kp.h">Lo que vale tu presupuesto en cada país</h2><p class="sub" id="kp-sub"></p></div>
       <div class="rank" id="koop"></div>
       <p class="insight" id="koop-insight"></p>
       <p class="hint" id="koop-note"></p>
@@ -1949,6 +1984,28 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
   </div>
 </div>
 
+<button type="button" class="nt-fab" id="nt-fab" data-t-aria="nt.open" aria-expanded="false" aria-controls="nt-pop" aria-label="Abrir tus notas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h3.5"/></svg><span class="nt-dot" id="nt-dot" hidden></span></button>
+<div class="nt-pop" id="nt-pop" role="dialog" aria-labelledby="nt-h" hidden>
+  <div class="nt-top"><h2 id="nt-h" data-t="nt.h">Notas</h2><button class="fb-x" type="button" id="nt-close" data-t-aria="b.close" aria-label="Cerrar">✕</button></div>
+  <p class="nt-sub" data-t="nt.sub">Preguntas para ti, ideas y cosas que revisar. Útil junto a tu plan.</p>
+  <div class="nt-bar" role="group" data-t-aria="nt.add" aria-label="Añadir">
+    <button type="button" class="btn ghost sm" data-nt="q" data-t="nt.q">+ Pregunta</button>
+    <button type="button" class="btn ghost sm" data-nt="t" data-t="nt.t">+ Idea</button>
+    <button type="button" class="btn ghost sm" data-nt="d" data-t="nt.d">+ Pendiente</button>
+    <button type="button" class="btn ghost sm" data-nt="date" data-t="nt.date">+ Fecha</button>
+  </div>
+  <textarea id="nt-text" rows="9" spellcheck="true" data-t-ph="nt.ph" data-t-aria="nt.h" aria-label="Notas"></textarea>
+  <div class="nt-foot">
+    <span class="nt-state" id="nt-state" aria-live="polite"></span>
+    <button type="button" class="btn link sm" id="nt-clear" data-t="nt.clear">Vaciar notas</button>
+  </div>
+  <div class="nt-sure" id="nt-sure" hidden>
+    <p data-t="nt.sure">¿Borrar todas las notas? No se puede deshacer.</p>
+    <div class="btn-row"><button type="button" class="btn ghost sm" id="nt-no" data-t="nt.no">Cancelar</button><button type="button" class="btn primary sm" id="nt-yes" data-t="nt.yes">Sí, vaciar</button></div>
+  </div>
+  <p class="hint" data-t="nt.priv">Tus notas se quedan en este navegador, en este dispositivo. No se comparten ni se envían a ningún sitio.</p>
+</div>
+
 <div class="modal" id="rel" hidden>
   <div class="modal-card rel-dlg" role="dialog" aria-modal="true" aria-labelledby="rel-h">
     <div class="modal-body">
@@ -1992,8 +2049,8 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       <p class="sub" data-t="sh.sub">Para tu pareja, tu asesor o para más adelante.</p>
       <div class="share-list">
         <button type="button" class="share-opt" id="sh-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span><b data-t="sh.link">Copiar enlace</b><span data-t="sh.linkS">El enlace contiene las cifras que has introducido. Cualquiera con el enlace puede verlas.</span></span></button>
-        <button type="button" class="share-opt" id="sh-print"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H4.5v-8h15v8H17M7 14h10v6H7z"/></svg><span><b data-t="sh.print">Imprimir o guardar como PDF</b><span data-t="sh.printS">Una página limpia con tu resultado y el gráfico.</span></span></button>
-        <button type="button" class="share-opt" id="sh-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11.5" height="11.5" rx="2"/><path d="M16 8V6.5a2 2 0 0 0-2-2H6.5a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2H8"/></svg><span><b data-t="sh.copy">Copiar resumen</b><span data-t="sh.copyS">Un texto breve para un mensaje o correo.</span></span></button>
+        <button type="button" class="share-opt" id="sh-print"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H4.5v-8h15v8H17M7 14h10v6H7z"/></svg><span><b><span data-t="sh.print">Imprimir o guardar como PDF</span><span class="pro-tag"></span></b><span data-t="sh.printS">Una página limpia con tu resultado y el gráfico.</span></span></button>
+        <button type="button" class="share-opt" id="sh-copy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11.5" height="11.5" rx="2"/><path d="M16 8V6.5a2 2 0 0 0-2-2H6.5a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2H8"/></svg><span><b><span data-t="sh.copy">Copiar resumen</span><span class="pro-tag"></span></b><span data-t="sh.copyS">Un texto breve para un mensaje o correo.</span></span></button>
       </div>
       <textarea id="share-out" rows="7" readonly hidden></textarea>
       <div class="sup-sh" id="support-sh" hidden></div>
@@ -4433,6 +4490,9 @@ Object.assign(I18N.es, {
 });
 /* wat is er nieuw (per versie; nieuwste bovenaan) */
 Object.assign(I18N.en, {
+ 'nt.open': 'Open your notes', 'nt.h': 'Notes', 'nt.sub': 'Questions for yourself, thoughts and things to look into. Handy next to your plan.', 'nt.ph': 'For example: questions for your pension adviser, things to check, what strikes you about the outcome…', 'nt.q': '+ Question', 'nt.t': '+ Thought', 'nt.d': '+ To do', 'nt.date': '+ Date', 'nt.qP': 'Question: ', 'nt.tP': 'Thought: ', 'nt.dP': 'To do: ',
+ 'nt.saved': 'Saved in this browser', 'nt.typing': 'Saving…', 'nt.noSave': 'Could not save: your browser blocks storage', 'nt.clear': 'Clear notes', 'nt.sure': 'Clear all notes? This cannot be undone.', 'nt.yes': 'Yes, clear', 'nt.no': 'Cancel', 'nt.priv': 'Your notes stay in this browser on this device. They are not shared and not sent anywhere.', 'nt.add': 'Add',
+ 'pro.tag': 'Pro', 'pro.tip': 'Pro feature, temporarily available', 'pro.toast': 'This will become a Pro feature later. For now you can simply use it.', 'rel.9.v': 'Version 9 · November 2026', 'rel.9.n1': 'Notes in the bottom right corner: jot down questions, thoughts and things to look into, on every screen', 'rel.9.n2': 'Features with a clock will become Pro later. For now you can still use them.',
  'rel.8.v': 'Version 8 · November 2026', 'rel.8.n1': 'New headline: your financial future, one button at a time', 'rel.8.n2': 'Updates you missed now appear once, all together', 'rel.since': 'You missed {n} updates.',
  'rel.7.v': 'Version 7 · November 2026', 'rel.h': 'What’s new', 'rel.newH': 'New', 'rel.fixH': 'Fixed', 'rel.ok': 'Got it',
  'rel.7.n1': 'Income per person, for each period of your life', 'rel.7.n2': 'Extra pots: a lump sum or monthly payment, with your own tax rate', 'rel.7.n3': 'Fine-tune everything on one page',
@@ -4441,6 +4501,9 @@ Object.assign(I18N.en, {
  'rel.7.f4': 'Warning for overlapping periods; no more ∞ for extreme amounts', 'rel.7.f5': 'Fits small phone screens'
 });
 Object.assign(I18N.nl, {
+ 'nt.open': 'Open je kladblok', 'nt.h': 'Kladblok', 'nt.sub': 'Vragen voor jezelf, gedachten en dingen om uit te zoeken. Handig naast je plan.', 'nt.ph': 'Bijvoorbeeld: vragen voor je pensioenadviseur, dingen om na te kijken, wat je opvalt aan de uitkomst…', 'nt.q': '+ Vraag', 'nt.t': '+ Gedachte', 'nt.d': '+ Te doen', 'nt.date': '+ Datum', 'nt.qP': 'Vraag: ', 'nt.tP': 'Gedachte: ', 'nt.dP': 'Te doen: ',
+ 'nt.saved': 'Bewaard in deze browser', 'nt.typing': 'Bewaren…', 'nt.noSave': 'Bewaren lukt niet: je browser blokkeert opslag', 'nt.clear': 'Kladblok leegmaken', 'nt.sure': 'Alle notities wissen? Dit kun je niet ongedaan maken.', 'nt.yes': 'Ja, leegmaken', 'nt.no': 'Annuleren', 'nt.priv': 'Je notities blijven in deze browser op dit apparaat. Ze worden niet gedeeld en nergens heen gestuurd.', 'nt.add': 'Toevoegen',
+ 'pro.tag': 'Pro', 'pro.tip': 'Pro-functie, tijdelijk beschikbaar', 'pro.toast': 'Dit wordt later een Pro-functie. Nu kun je hem nog gewoon gebruiken.', 'rel.9.v': 'Versie 9 · november 2026', 'rel.9.n1': 'Kladblok rechtsonder: noteer vragen, gedachten en dingen om uit te zoeken, op elk scherm', 'rel.9.n2': 'Functies met een klokje worden later Pro. Nu kun je ze nog gewoon gebruiken.',
  'rel.8.v': 'Versie 8 · november 2026', 'rel.8.n1': 'Nieuwe kop: je financiële toekomst, knoop voor knoop', 'rel.8.n2': 'Updates die je gemist hebt zie je voortaan één keer, bij elkaar', 'rel.since': 'Je hebt {n} updates gemist.',
  'rel.7.v': 'Versie 7 · november 2026', 'rel.h': 'Wat is er nieuw?', 'rel.newH': 'Nieuw', 'rel.fixH': 'Opgelost', 'rel.ok': 'Top, verder',
  'rel.7.n1': 'Inkomen per persoon, per periode', 'rel.7.n2': 'Extra potten: bedrag ineens of per maand, met eigen belasting', 'rel.7.n3': 'Fine-tunen op één overzichtspagina',
@@ -4449,6 +4512,9 @@ Object.assign(I18N.nl, {
  'rel.7.f4': 'Waarschuwing bij overlappende periodes; geen ∞ meer bij extreme bedragen', 'rel.7.f5': 'Past op kleine telefoonschermen'
 });
 Object.assign(I18N.de, {
+ 'nt.open': 'Notizen öffnen', 'nt.h': 'Notizen', 'nt.sub': 'Fragen an sich selbst, Gedanken und offene Punkte. Praktisch neben Ihrem Plan.', 'nt.ph': 'Zum Beispiel: Fragen an Ihre Rentenberatung, Dinge zum Nachprüfen, was Ihnen am Ergebnis auffällt…', 'nt.q': '+ Frage', 'nt.t': '+ Gedanke', 'nt.d': '+ Zu erledigen', 'nt.date': '+ Datum', 'nt.qP': 'Frage: ', 'nt.tP': 'Gedanke: ', 'nt.dP': 'Zu erledigen: ',
+ 'nt.saved': 'In diesem Browser gespeichert', 'nt.typing': 'Speichern…', 'nt.noSave': 'Speichern nicht möglich: Ihr Browser blockiert den Speicher', 'nt.clear': 'Notizen leeren', 'nt.sure': 'Alle Notizen löschen? Das lässt sich nicht rückgängig machen.', 'nt.yes': 'Ja, leeren', 'nt.no': 'Abbrechen', 'nt.priv': 'Ihre Notizen bleiben in diesem Browser auf diesem Gerät. Sie werden nicht geteilt und nirgendwohin gesendet.', 'nt.add': 'Hinzufügen',
+ 'pro.tag': 'Pro', 'pro.tip': 'Pro-Funktion, vorübergehend verfügbar', 'pro.toast': 'Das wird später eine Pro-Funktion. Im Moment können Sie sie einfach nutzen.', 'rel.9.v': 'Version 9 · November 2026', 'rel.9.n1': 'Notizen unten rechts: Fragen, Gedanken und offene Punkte festhalten, auf jeder Seite', 'rel.9.n2': 'Funktionen mit einer Uhr werden später Pro. Im Moment können Sie sie noch nutzen.',
  'rel.8.v': 'Version 8 · November 2026', 'rel.8.n1': 'Neue Überschrift: Ihre finanzielle Zukunft, Knopf für Knopf', 'rel.8.n2': 'Verpasste Updates sehen Sie jetzt einmalig und gesammelt', 'rel.since': 'Sie haben {n} Updates verpasst.',
  'rel.7.v': 'Version 7 · November 2026', 'rel.h': 'Was ist neu?', 'rel.newH': 'Neu', 'rel.fixH': 'Behoben', 'rel.ok': 'Alles klar',
  'rel.7.n1': 'Einkommen pro Person, für jeden Zeitraum', 'rel.7.n2': 'Zusätzliche Töpfe: einmalig oder monatlich, mit eigenem Steuersatz', 'rel.7.n3': 'Feinabstimmung auf einer einzigen Seite',
@@ -4457,6 +4523,9 @@ Object.assign(I18N.de, {
  'rel.7.f4': 'Warnung bei überlappenden Zeiträumen; kein ∞ mehr bei extremen Beträgen', 'rel.7.f5': 'Passt auf kleine Smartphone-Displays'
 });
 Object.assign(I18N.fr, {
+ 'nt.open': 'Ouvrir vos notes', 'nt.h': 'Notes', 'nt.sub': 'Questions pour vous-même, idées et points à vérifier. Pratique à côté de votre plan.', 'nt.ph': 'Par exemple : questions pour votre conseiller retraite, points à vérifier, ce qui vous frappe dans le résultat…', 'nt.q': '+ Question', 'nt.t': '+ Idée', 'nt.d': '+ À faire', 'nt.date': '+ Date', 'nt.qP': 'Question : ', 'nt.tP': 'Idée : ', 'nt.dP': 'À faire : ',
+ 'nt.saved': 'Enregistré dans ce navigateur', 'nt.typing': 'Enregistrement…', 'nt.noSave': 'Impossible d’enregistrer : votre navigateur bloque le stockage', 'nt.clear': 'Vider les notes', 'nt.sure': 'Effacer toutes les notes ? Impossible d’annuler.', 'nt.yes': 'Oui, vider', 'nt.no': 'Annuler', 'nt.priv': 'Vos notes restent dans ce navigateur, sur cet appareil. Elles ne sont ni partagées ni envoyées.', 'nt.add': 'Ajouter',
+ 'pro.tag': 'Pro', 'pro.tip': 'Fonction Pro, disponible temporairement', 'pro.toast': 'Ce sera plus tard une fonction Pro. Pour l’instant, vous pouvez l’utiliser librement.', 'rel.9.v': 'Version 9 · novembre 2026', 'rel.9.n1': 'Notes en bas à droite : notez vos questions, vos idées et ce qu’il reste à vérifier, sur chaque écran', 'rel.9.n2': 'Les fonctions marquées d’une horloge deviendront Pro plus tard. Pour l’instant, vous pouvez encore les utiliser.',
  'rel.8.v': 'Version 8 · novembre 2026', 'rel.8.n1': 'Nouveau titre : votre avenir financier, bouton après bouton', 'rel.8.n2': 'Les mises à jour manquées s’affichent désormais une seule fois, toutes ensemble', 'rel.since': 'Vous avez manqué {n} mises à jour.',
  'rel.7.v': 'Version 7 · novembre 2026', 'rel.h': 'Quoi de neuf ?', 'rel.newH': 'Nouveau', 'rel.fixH': 'Corrigé', 'rel.ok': 'Compris',
  'rel.7.n1': 'Revenus par personne, période par période', 'rel.7.n2': 'Cagnottes supplémentaires : en une fois ou par mois, avec votre propre taux d’impôt', 'rel.7.n3': 'Réglages fins sur une seule page',
@@ -4465,6 +4534,9 @@ Object.assign(I18N.fr, {
  'rel.7.f4': 'Avertissement si des périodes se chevauchent ; plus de ∞ pour les montants extrêmes', 'rel.7.f5': 'S’adapte aux petits écrans de téléphone'
 });
 Object.assign(I18N.es, {
+ 'nt.open': 'Abrir tus notas', 'nt.h': 'Notas', 'nt.sub': 'Preguntas para ti, ideas y cosas que revisar. Útil junto a tu plan.', 'nt.ph': 'Por ejemplo: preguntas para tu asesor de pensiones, cosas que comprobar, lo que te llama la atención del resultado…', 'nt.q': '+ Pregunta', 'nt.t': '+ Idea', 'nt.d': '+ Pendiente', 'nt.date': '+ Fecha', 'nt.qP': 'Pregunta: ', 'nt.tP': 'Idea: ', 'nt.dP': 'Pendiente: ',
+ 'nt.saved': 'Guardado en este navegador', 'nt.typing': 'Guardando…', 'nt.noSave': 'No se puede guardar: tu navegador bloquea el almacenamiento', 'nt.clear': 'Vaciar notas', 'nt.sure': '¿Borrar todas las notas? No se puede deshacer.', 'nt.yes': 'Sí, vaciar', 'nt.no': 'Cancelar', 'nt.priv': 'Tus notas se quedan en este navegador, en este dispositivo. No se comparten ni se envían a ningún sitio.', 'nt.add': 'Añadir',
+ 'pro.tag': 'Pro', 'pro.tip': 'Función Pro, disponible temporalmente', 'pro.toast': 'Más adelante será una función Pro. De momento puedes usarla sin más.', 'rel.9.v': 'Versión 9 · noviembre de 2026', 'rel.9.n1': 'Notas abajo a la derecha: apunta preguntas, ideas y cosas que revisar, en cada pantalla', 'rel.9.n2': 'Las funciones con un reloj serán Pro más adelante. De momento puedes seguir usándolas.',
  'rel.8.v': 'Versión 8 · noviembre de 2026', 'rel.8.n1': 'Nuevo título: tu futuro financiero, botón a botón', 'rel.8.n2': 'Las novedades que te perdiste aparecen ahora una sola vez, todas juntas', 'rel.since': 'Te has perdido {n} actualizaciones.',
  'rel.7.v': 'Versión 7 · noviembre de 2026', 'rel.h': '¿Qué hay de nuevo?', 'rel.newH': 'Novedades', 'rel.fixH': 'Corregido', 'rel.ok': 'Entendido',
  'rel.7.n1': 'Ingresos por persona, periodo a periodo', 'rel.7.n2': 'Fondos extra: de una vez o al mes, con tu propio tipo de impuesto', 'rel.7.n3': 'Ajustes finos en una sola página',
@@ -4670,7 +4742,7 @@ Object.assign(I18N.es, {
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '8 · 2026-11';
+  var APPV = '9 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
@@ -4809,7 +4881,7 @@ Object.assign(I18N.es, {
           '<label class="check"><input type="checkbox" id="c-pensAan' + s + '"> <span data-t="f.penOn"></span></label>' +
           '<div class="dep" data-dep="pensAan' + s + '">' + kp.map(fieldHtml).join('') + '</div></div>';
       }).join('') + '</div><button class="reset" id="sp-reset" type="button" data-t="b.spAuto"></button>' +
-        '<details class="card pots" id="pots-box"><summary><span class="pots-h"><b data-t="pot.h"></b><span class="pots-n" id="pots-n" hidden></span></span><span class="pots-s" data-t="pot.s"></span></summary>' +
+        '<details class="card pots" id="pots-box"><summary><span class="pots-h"><b data-t="pot.h"></b><span class="pro-tag"></span><span class="pots-n" id="pots-n" hidden></span></span><span class="pots-s" data-t="pot.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="pot.intro"></p><div id="pots-list"></div><button type="button" class="btn ghost sm" id="pot-add" data-t="pot.add"></button></div></details>';
     } },
     { t: 'st4.t', h: 'st4.h', s: 'st4.s', html: function () {
@@ -4990,7 +5062,7 @@ Object.assign(I18N.es, {
     if (SITE) { try { location.href = (l === 'en' ? '/' : '/' + l + '/') + location.hash; return; } catch (e) {} }
     refreshAll();
   }
-  function refreshAll() { NF = {}; fillSelects(); renderLists(); update(); if (tourI >= 0) placeTour(false); }
+  function refreshAll() { NF = {}; fillSelects(); renderLists(); update(); fillPro(); ntState($('nt-text').value ? 'nt.saved' : ''); if (tourI >= 0) placeTour(false); }
   $('auto-reset').addEventListener('click', function () { state.autoAow = 1; state.autoEind = 1; update(); });
   $('sp-reset').addEventListener('click', function () { state.autoAow = 1; state.autoSp = 1; state.autoPenAge = 1; update(); });
   $('tax-reset').addEventListener('click', function () { taxPreset(); update(); });
@@ -5013,7 +5085,7 @@ Object.assign(I18N.es, {
     if (!box || !one || !tog) return;
     var on = rows.length > 0;
     one.hidden = on; box.hidden = !on;
-    tog.textContent = t1(on ? 'wk.one' : 'wk.per');
+    tog.innerHTML = esc(t1(on ? 'wk.one' : 'wk.per')) + (on ? '' : proTag());
     if (!on) { box.innerHTML = ''; return; }
     box.innerHTML = '<div class="per-row per-head" aria-hidden="true"><span>' + t1('wk.from') + '</span><span>' + t1('wk.to') + '</span><span>' + t1('wk.amt', { cur: curSym() }) + '</span><span></span></div>' +
       rows.map(function (r, i) {
@@ -5844,6 +5916,79 @@ Object.assign(I18N.es, {
     clearTimeout(toastT); toastT = setTimeout(function () { el.classList.remove('show'); setTimeout(function () { el.hidden = true; }, 250); }, 2600);
   }
 
+  /* ================= Pro-functies (nu tijdelijk beschikbaar) ================= */
+  var PRO_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.8V8l2.2 1.4"/></svg>';
+  function proTag() { return '<span class="pro-tag" title="' + esc(t1('pro.tip')) + '" aria-label="' + esc(t1('pro.tip')) + '" role="img">' + PRO_SVG + '<span>' + esc(t1('pro.tag')) + '</span></span>'; }
+  function fillPro() {
+    each('.pro-tag', function (e) { if (e.getAttribute('role') !== 'img') { e.setAttribute('role', 'img'); } e.title = t1('pro.tip'); e.setAttribute('aria-label', t1('pro.tip')); e.innerHTML = PRO_SVG + '<span>' + esc(t1('pro.tag')) + '</span>'; });
+    var tb = $('btn-theme'); if (tb) tb.title = t1('th.btn') + ' · ' + t1('pro.tip');
+  }
+  document.addEventListener('click', function (ev) {
+    var p = ev.target.closest ? ev.target.closest('.pro-tag') : null; if (!p) return;
+    ev.preventDefault(); ev.stopPropagation(); toast(t1('pro.toast'));
+  }, true);
+
+  /* ================= kladblok ================= */
+  var NKEY = KEY + '-notes', ntT = null;
+  function ntLoad() { var v = ''; try { v = localStorage.getItem(NKEY) || ''; } catch (e) {} $('nt-text').value = v; $('nt-dot').hidden = !v; ntState(v ? 'nt.saved' : ''); }
+  function ntSave() { var v = $('nt-text').value; $('nt-dot').hidden = !v; try { if (v) localStorage.setItem(NKEY, v); else localStorage.removeItem(NKEY); ntState(v ? 'nt.saved' : ''); } catch (e) { ntState('nt.noSave'); } }
+  function ntState(k) { $('nt-state').textContent = k ? t1(k) : ''; }
+  function ntInsert(txt) {
+    var ta = $('nt-text'), a = ta.selectionStart, b = ta.selectionEnd, v = ta.value;
+    if (typeof a !== 'number') { a = b = v.length; }
+    var pre = v.slice(0, a), lead = pre && !/\n$/.test(pre) ? '\n' : '';
+    ta.value = pre + lead + txt + v.slice(b);
+    var pos = (pre + lead + txt).length; ta.focus(); try { ta.setSelectionRange(pos, pos); } catch (e) {}
+    ntSave();
+  }
+  $('nt-text').addEventListener('input', function () { ntState('nt.typing'); clearTimeout(ntT); ntT = setTimeout(ntSave, 500); });
+  $('nt-text').addEventListener('blur', function () { clearTimeout(ntT); ntSave(); });
+  each('[data-nt]', function (b) { b.addEventListener('click', function () {
+    var k = b.getAttribute('data-nt');
+    if (k === 'date') { var d = new Date(); ntInsert(d.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + '\n'); }
+    else ntInsert(t1('nt.' + k + 'P'));
+  }); });
+  $('nt-clear').addEventListener('click', function () { $('nt-sure').hidden = false; $('nt-no').focus(); });
+  $('nt-no').addEventListener('click', function () { $('nt-sure').hidden = true; });
+  $('nt-yes').addEventListener('click', function () { $('nt-text').value = ''; ntSave(); $('nt-sure').hidden = true; $('nt-text').focus(); });
+  ntLoad();
+  var fab = $('nt-fab'), pop = $('nt-pop'), NPOS = KEY + '-ntpos', drag = null, wasDrag = false;
+  function fabClamp(x, y) {
+    var sz = fab.offsetWidth || 54, w = window.innerWidth, h = window.innerHeight;
+    x = Math.max(8, Math.min(w - sz - 8, x)); y = Math.max(8, Math.min(h - sz - 8, y));
+    fab.style.left = x + 'px'; fab.style.top = y + 'px'; fab.style.right = 'auto'; fab.style.bottom = 'auto';
+  }
+  function fabRestore() { try { var q = JSON.parse(localStorage.getItem(NPOS) || 'null'); if (q && isFinite(q.fx) && isFinite(q.fy)) fabClamp(q.fx * window.innerWidth, q.fy * window.innerHeight); } catch (e) {} }
+  function ntPlace() {
+    if (pop.hidden) return;
+    var small = window.innerWidth <= 560; pop.classList.toggle('sheet', small);
+    if (small) { pop.style.left = ''; pop.style.top = ''; pop.style.bottom = ''; return; }
+    var r = fab.getBoundingClientRect(), w = pop.offsetWidth, ph = pop.offsetHeight, W = window.innerWidth, H = window.innerHeight;
+    var left = (r.left + r.width / 2 > W / 2) ? r.right - w : r.left;
+    var top = (r.top + r.height / 2 > H / 2) ? r.top - ph - 10 : r.bottom + 10;
+    pop.style.left = Math.max(12, Math.min(W - w - 12, left)) + 'px'; pop.style.top = Math.max(12, Math.min(H - ph - 12, top)) + 'px'; pop.style.bottom = 'auto';
+  }
+  function ntShow(on) {
+    pop.hidden = !on; fab.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (on) { $('nt-sure').hidden = true; ntPlace(); setTimeout(function () { var ta = $('nt-text'); ta.focus({ preventScroll: true }); try { ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {} }, 30); }
+    else { clearTimeout(ntT); ntSave(); fab.focus({ preventScroll: true }); }
+  }
+  fab.addEventListener('pointerdown', function (ev) { if (ev.button > 0) return; var r = fab.getBoundingClientRect(); drag = { sx: ev.clientX, sy: ev.clientY, x: r.left, y: r.top, moved: false }; try { fab.setPointerCapture(ev.pointerId); } catch (e) {} });
+  fab.addEventListener('pointermove', function (ev) {
+    if (!drag) return; var dx = ev.clientX - drag.sx, dy = ev.clientY - drag.sy;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 7) return;
+    drag.moved = true; fab.classList.add('dragging'); fabClamp(drag.x + dx, drag.y + dy); ntPlace();
+  });
+  function dragEnd() {
+    if (!drag) return; var m = drag.moved; drag = null; fab.classList.remove('dragging');
+    if (m) { wasDrag = true; var r = fab.getBoundingClientRect(); try { localStorage.setItem(NPOS, JSON.stringify({ fx: r.left / window.innerWidth, fy: r.top / window.innerHeight })); } catch (e) {} setTimeout(function () { wasDrag = false; }, 0); }
+  }
+  fab.addEventListener('pointerup', dragEnd); fab.addEventListener('pointercancel', dragEnd);
+  fab.addEventListener('click', function () { if (wasDrag) { wasDrag = false; return; } ntShow(pop.hidden); });
+  $('nt-close').addEventListener('click', function () { ntShow(false); });
+  window.addEventListener('resize', function () { fabRestore(); ntPlace(); });
+  fabRestore();
+
   /* ================= thema ================= */
   function themeNow() {
     var a = document.documentElement.getAttribute('data-theme');
@@ -6126,6 +6271,7 @@ Object.assign(I18N.es, {
   window.addEventListener('hashchange', go);
 
   var tourI = -1;
+  fillPro();
   fillSelects();
   syncInputs();
   renderLists();
@@ -6264,7 +6410,7 @@ Object.assign(I18N.es, {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -6420,6 +6566,7 @@ Object.assign(I18N.es, {
   $('tour-skip').addEventListener('click', function () { endTour(false); });
   window.addEventListener('scroll', function () { if (tourI >= 0) placeTour(false); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
+    if (!pop.hidden && ev.key === 'Escape' && $('fb').hidden && $('rel').hidden && $('inst').hidden && $('intro').hidden && $('share').hidden) { ntShow(false); return; }
     if (!$('fb').hidden) { if (ev.key === 'Escape') closeFb(); else if (ev.key === 'Tab') trap($('fb'), ev); return; }
     if (!$('rel').hidden) { if (ev.key === 'Escape') closeRel(); else if (ev.key === 'Tab') trap($('rel'), ev); return; }
     if (!$('inst').hidden) { if (ev.key === 'Escape') closeInst(); return; }
