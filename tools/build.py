@@ -19,12 +19,12 @@ NAMES = {'en': 'English', 'nl': 'Nederlands', 'de': 'Deutsch', 'fr': 'Français'
 LOCALE = {'en': 'en_GB', 'nl': 'nl_NL', 'de': 'de_DE', 'fr': 'fr_FR', 'es': 'es_ES'}
 COUNTRY = {'en': 'GB', 'nl': 'NL', 'de': 'DE', 'fr': 'FR', 'es': 'ES'}
 TODAY = datetime.date.today().isoformat()
-# landingspagina per vraag (doel); eerst alleen nl en en
+# landingspagina per vraag (doel), in alle vijf talen
 LANDING = {
-    'enough': {'nl': 'is-mijn-geld-genoeg', 'en': 'will-my-money-last'},
-    'spend': {'nl': 'hoeveel-kan-ik-per-maand-uitgeven', 'en': 'how-much-can-i-spend-in-retirement'},
-    'earlier': {'nl': 'eerder-stoppen-met-werken', 'en': 'retire-early'},
-    'abroad': {'nl': 'met-pensioen-naar-het-buitenland', 'en': 'retire-abroad'},
+    'enough': {'nl': 'is-mijn-geld-genoeg', 'en': 'will-my-money-last', 'de': 'reicht-mein-geld', 'fr': 'mon-argent-suffira-t-il', 'es': 'me-llegara-el-dinero'},
+    'spend': {'nl': 'hoeveel-kan-ik-per-maand-uitgeven', 'en': 'how-much-can-i-spend-in-retirement', 'de': 'wie-viel-kann-ich-im-ruhestand-ausgeben', 'fr': 'combien-depenser-a-la-retraite', 'es': 'cuanto-puedo-gastar-al-jubilarme'},
+    'earlier': {'nl': 'eerder-stoppen-met-werken', 'en': 'retire-early', 'de': 'frueher-in-rente-gehen', 'fr': 'partir-plus-tot-a-la-retraite', 'es': 'jubilarse-antes'},
+    'abroad': {'nl': 'met-pensioen-naar-het-buitenland', 'en': 'retire-abroad', 'de': 'rente-im-ausland', 'fr': 'retraite-a-l-etranger', 'es': 'jubilarse-en-el-extranjero'},
 }
 
 
