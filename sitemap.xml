@@ -50,4 +50,60 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://countingbuttons.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/"/>
   </url>
+  <url>
+    <loc>https://countingbuttons.com/nl/is-mijn-geld-genoeg/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/is-mijn-geld-genoeg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/will-my-money-last/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/will-my-money-last/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/will-my-money-last/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/is-mijn-geld-genoeg/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/will-my-money-last/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/will-my-money-last/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/nl/hoeveel-kan-ik-per-maand-uitgeven/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/hoeveel-kan-ik-per-maand-uitgeven/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/how-much-can-i-spend-in-retirement/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/how-much-can-i-spend-in-retirement/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/how-much-can-i-spend-in-retirement/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/hoeveel-kan-ik-per-maand-uitgeven/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/how-much-can-i-spend-in-retirement/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/how-much-can-i-spend-in-retirement/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/nl/eerder-stoppen-met-werken/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/eerder-stoppen-met-werken/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/retire-early/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/retire-early/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/retire-early/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/eerder-stoppen-met-werken/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/retire-early/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/retire-early/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/nl/met-pensioen-naar-het-buitenland/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/met-pensioen-naar-het-buitenland/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/retire-abroad/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/retire-abroad/"/>
+  </url>
+  <url>
+    <loc>https://countingbuttons.com/retire-abroad/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://countingbuttons.com/nl/met-pensioen-naar-het-buitenland/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://countingbuttons.com/retire-abroad/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://countingbuttons.com/retire-abroad/"/>
+  </url>
 </urlset>

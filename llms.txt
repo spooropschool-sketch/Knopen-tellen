@@ -12,11 +12,26 @@ Button Counter is a free, single-page retirement calculator at https://countingb
 - [Combien de temps durera votre épargne ? Votre avenir financier en vue | Button Counter (Français)](https://countingbuttons.com/fr/): Simulateur pour votre avenir financier. Indiquez votre âge, votre épargne et votre budget mensuel et voyez la probabilité que votre argent suffise, sur la base de 4 000 simulations.
 - [¿Cuánto durarán tus ahorros? Mira tu futuro financiero | Button Counter (Español)](https://countingbuttons.com/es/): Calculadora para tu futuro financiero. Introduce tu edad, tus ahorros y tu presupuesto mensual y mira la probabilidad de que tu dinero alcance, con 4.000 simulaciones.
 
+## Question pages
+
+- [Is mijn geld genoeg als ik stop met werken?](https://countingbuttons.com/nl/is-mijn-geld-genoeg/): Bereken de kans dat je spaargeld genoeg is tot je eindleeftijd, met AOW, pensioen, box 3 en inflatie. Zonder account, je gegevens blijven op je eigen apparaat.
+- [Will my money last when I stop working?](https://countingbuttons.com/will-my-money-last/): Calculate the chance that your savings last until your end age, with state pension, pension, tax and inflation. No account; your data stays on your own device.
+- [Hoeveel kan ik per maand uitgeven als ik stop met werken?](https://countingbuttons.com/nl/hoeveel-kan-ik-per-maand-uitgeven/): Zie welk maandbudget je kunt aanhouden met je spaargeld, AOW en pensioen, en hoe groot de kans is dat het genoeg is. Zonder account.
+- [How much can I spend each month when I stop working?](https://countingbuttons.com/how-much-can-i-spend-in-retirement/): See which monthly budget your savings and pensions can support, and the chance that it is enough. No account needed.
+- [Kan ik eerder stoppen met werken?](https://countingbuttons.com/nl/eerder-stoppen-met-werken/): Reken uit wat eerder stoppen of minder werken doet met je spaargeld en pensioen. Met AOW, pensioen en box 3, zonder account.
+- [Can I stop working earlier?](https://countingbuttons.com/retire-early/): Calculate what stopping earlier or working less does to your savings and pensions, with the rules of your country. No account needed.
+- [Wat is mijn geld waard in een ander land?](https://countingbuttons.com/nl/met-pensioen-naar-het-buitenland/): Vergelijk de koopkracht van je maandbudget in 31 Europese landen en reken je plan door met de regels van tien landen. Zonder account.
+- [What is my money worth in another country?](https://countingbuttons.com/retire-abroad/): Compare the purchasing power of your monthly budget in 31 European countries and test your plan with the rules of ten countries. No account needed.
+
 ## Questions and answers
 
 ### What is Button Counter?
 
 Button Counter gives you a view of your financial future: how long your savings will last and what changes when you adjust something. You enter your age, your savings and what you want to spend each month. Button Counter then shows the chance that your money lasts until your end age, based on 4,000 simulations of good and bad market years.
+
+### Why Button Counter instead of a simple calculator?
+
+A simple calculator answers one sum, such as how long an amount lasts or how much tax you pay on savings. Button Counter puts everything in one plan: your savings, your pension and state pension, work per period, one or two people and the rules of your country. Instead of one number you see the chance that your money is enough, based on 4,000 simulations. Every number shows whether it comes from a source, is an assumption or was entered by you.
 
 ### How much savings do I need to stop working?
 

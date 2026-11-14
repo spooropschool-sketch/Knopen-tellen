@@ -19,6 +19,18 @@ NAMES = {'en': 'English', 'nl': 'Nederlands', 'de': 'Deutsch', 'fr': 'Français'
 LOCALE = {'en': 'en_GB', 'nl': 'nl_NL', 'de': 'de_DE', 'fr': 'fr_FR', 'es': 'es_ES'}
 COUNTRY = {'en': 'GB', 'nl': 'NL', 'de': 'DE', 'fr': 'FR', 'es': 'ES'}
 TODAY = datetime.date.today().isoformat()
+# landingspagina per vraag (doel); eerst alleen nl en en
+LANDING = {
+    'enough': {'nl': 'is-mijn-geld-genoeg', 'en': 'will-my-money-last'},
+    'spend': {'nl': 'hoeveel-kan-ik-per-maand-uitgeven', 'en': 'how-much-can-i-spend-in-retirement'},
+    'earlier': {'nl': 'eerder-stoppen-met-werken', 'en': 'retire-early'},
+    'abroad': {'nl': 'met-pensioen-naar-het-buitenland', 'en': 'retire-abroad'},
+}
+
+
+def lp_path(goal, lang):
+    slug = LANDING[goal][lang]
+    return '/%s/' % slug if lang == 'en' else '/%s/%s/' % (lang, slug)
 
 
 def url(lang):
@@ -53,7 +65,8 @@ def extract():
               document.querySelectorAll('[data-t-alt]').forEach(e => { alt[e.getAttribute('data-t-alt')] = e.getAttribute('alt') || ''; });
               document.querySelectorAll('[data-t-aria]').forEach(e => { aria[e.getAttribute('data-t-aria')] = e.getAttribute('aria-label') || ''; });
               const faq = [...document.querySelectorAll('.faq-i')].map(d => [d.querySelector('summary').textContent.trim(), d.querySelector('.faq-a').textContent.trim()]);
-              return { t, alt, aria, faq, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
+              const lp = {}; Object.keys(I18N[document.documentElement.lang] || {}).forEach(k => { if (k.startsWith('lp.')) lp[k] = I18N[document.documentElement.lang][k]; });
+              return { t, alt, aria, faq, lp, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
             }""")
             assert not errs, errs
             assert data['lang'] == lang, (lang, data['lang'])
@@ -84,21 +97,27 @@ def fill_body(body, d):
     return body
 
 
-def head_block(lang, d):
+def head_block(lang, d, goal=None):
     e = lambda s: html.escape(s, quote=True)
+    page = SITE + lp_path(goal, lang) if goal else url(lang)
     brand = 'Knopenteller' if lang == 'nl' else 'Button Counter'
     lines = [
         '<title>%s</title>' % e(d['title']),
         '<meta name="description" content="%s">' % e(d['desc']),
         '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">',
-        '<link rel="canonical" href="%s">' % url(lang),
+        '<link rel="canonical" href="%s">' % page,
     ]
-    for l in LANGS:
-        lines.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, url(l)))
-    lines.append('<link rel="alternate" hreflang="x-default" href="%s">' % url('en'))
+    if goal:
+        for l in LANDING[goal]:
+            lines.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, SITE + lp_path(goal, l)))
+        lines.append('<link rel="alternate" hreflang="x-default" href="%s">' % (SITE + lp_path(goal, 'en')))
+    else:
+        for l in LANGS:
+            lines.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, url(l)))
+        lines.append('<link rel="alternate" hreflang="x-default" href="%s">' % url('en'))
     lines += [
         '<meta property="og:type" content="website">',
-        '<meta property="og:url" content="%s">' % url(lang),
+        '<meta property="og:url" content="%s">' % page,
         '<meta property="og:site_name" content="%s">' % e(brand),
         '<meta property="og:locale" content="%s">' % LOCALE[lang],
         '<meta property="og:title" content="%s">' % e(d['title']),
@@ -114,7 +133,7 @@ def head_block(lang, d):
     graph = [
         {'@type': 'WebSite', '@id': SITE + '/#site', 'url': SITE + '/', 'name': 'Button Counter',
          'alternateName': ['Knopenteller', 'Knopen tellen', 'Buttons', 'Counting Buttons'], 'inLanguage': LANGS},
-        {'@type': 'WebApplication', '@id': url(lang) + '#app', 'name': brand, 'url': url(lang),
+        {'@type': 'WebApplication', '@id': page + '#app', 'name': brand, 'url': page,
          'description': d['desc'], 'applicationCategory': 'FinanceApplication',
          'operatingSystem': 'Any (web browser)', 'browserRequirements': 'Requires JavaScript',
          'inLanguage': lang, 'isAccessibleForFree': True,
@@ -125,7 +144,7 @@ def head_block(lang, d):
                          'State pension and investment tax rules for 10 countries',
                          'Purchasing power comparison for 31 European countries',
                          'Five languages', 'No account, data stays in the browser']},
-        {'@type': 'FAQPage', '@id': url(lang) + '#faq', 'inLanguage': lang,
+        {'@type': 'FAQPage', '@id': page + '#faq', 'inLanguage': lang,
          'mainEntity': [{'@type': 'Question', 'name': q,
                          'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in d['faq']]},
     ]
@@ -146,16 +165,24 @@ def split(src):
     return src[:i], src[i:j], src[j:]
 
 
-def build_page(src, lang, d):
+def build_page(src, lang, d, goal=None):
     head, body, script = split(src)
+    if goal:
+        d = dict(d, title=d['lp']['lp.%s.title' % goal], desc=d['lp']['lp.%s.desc' % goal], t=dict(d['t'], **d['lp']))
+        body = body.replace('data-t="home.h1"', 'data-t="lp.%s.h1"' % goal, 1)
+        body = body.replace('<p class="lp-intro" id="lp-intro" hidden></p>', '<p class="lp-intro" id="lp-intro" data-t="lp.%s.intro"></p>' % goal, 1)
     # head: replace the old social/meta lines with the generated block
     head = re.sub(r'<link rel="canonical"[^>]*>\n', '', head)
     head = re.sub(r'<meta (?:property="og:|name="twitter:)[^>]*>\n', '', head)
     head = re.sub(r'<meta name="description"[^>]*>\n', '', head)
     head = re.sub(r'<meta name="robots"[^>]*><!--TEMPLATE-ONLY-->\n', '', head)
-    head = re.sub(r'<title>[^<]*</title>', lambda m: head_block(lang, d), head, count=1)
+    head = re.sub(r'<title>[^<]*</title>', lambda m: head_block(lang, d, goal), head, count=1)
     # the root page follows the visitor's own language (and sends them on to /nl/ etc.); language pages are fixed
-    head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1">' % (lang, '' if lang == 'en' else lang))
+    if goal:
+        alt = ''.join(' data-lp-%s="%s"' % (l, lp_path(goal, l)) for l in LANDING[goal])
+        head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1" data-goal="%s"%s>' % (lang, lang, goal, alt))
+    else:
+        head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1">' % (lang, '' if lang == 'en' else lang))
     if lang == 'nl':
         head = head.replace('name="apple-mobile-web-app-title" content="Button Counter"', 'name="apple-mobile-web-app-title" content="Knopenteller"')
     head = head.replace('href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
@@ -205,12 +232,20 @@ def main():
     data = extract()
     for lang in LANGS:
         write('index.html' if lang == 'en' else '%s/index.html' % lang, build_page(src, lang, data[lang]))
+    for goal in LANDING:
+        for lang in LANDING[goal]:
+            write(lp_path(goal, lang).strip('/') + '/index.html', build_page(src, lang, data[lang], goal))
 
     alts = ''.join('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>\n' % (l, url(l)) for l in LANGS)
     alts += '    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>\n' % url('en')
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
     for l in LANGS:
         sm += '  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n%s  </url>\n' % (url(l), TODAY, alts)
+    for goal in LANDING:
+        lalts = ''.join('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>\n' % (l, SITE + lp_path(goal, l)) for l in LANDING[goal])
+        lalts += '    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>\n' % (SITE + lp_path(goal, 'en'))
+        for l in LANDING[goal]:
+            sm += '  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n%s  </url>\n' % (SITE + lp_path(goal, l), TODAY, lalts)
     sm += '</urlset>\n'
     write('sitemap.xml', sm)
 
@@ -227,6 +262,7 @@ def main():
            'needs no account and stores what you enter only on your own device. It is a general calculation '
            'tool and does not give financial advice.\n\n' % SITE)
     ll += '## Pages\n\n' + ''.join('- [%s (%s)](%s): %s\n' % (data[l]['title'], NAMES[l], url(l), data[l]['desc']) for l in LANGS)
+    ll += '\n## Question pages\n\n' + ''.join('- [%s](%s%s): %s\n' % (data[l]['lp']['lp.%s.h1' % g], SITE, lp_path(g, l), data[l]['lp']['lp.%s.desc' % g]) for g in LANDING for l in LANDING[g])
     ll += '\n## Questions and answers\n\n' + ''.join('### %s\n\n%s\n\n' % (q, a) for q, a in en['faq'])
     ll += ('## Facts\n\n- Method: Monte Carlo simulation, 4,000 runs, three portfolios (defensive, balanced, aggressive), '
            'after costs, tax and inflation; all amounts in today\'s money.\n'
