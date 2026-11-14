@@ -1,5 +1,5 @@
 /* Buttons: offline support. Network first, so updates arrive; cache as fallback. */
-var V = 'buttons-v8-1';
+var V = 'buttons-v8-2';
 var CORE = ['/fonts/fraunces-600.woff2', '/fonts/inter-400.woff', '/fonts/inter-500.woff', '/fonts/inter-600.woff', '/fonts/inter-700.woff', '/', '/nl/', '/de/', '/fr/', '/es/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/img/buidel.jpg', '/img/schaaltjes.jpg', '/img/weegschaal.jpg', '/img/over.jpg'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
