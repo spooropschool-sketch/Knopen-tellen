@@ -954,6 +954,10 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .rel-list li { position: relative; padding-left: 22px; min-width: 0; overflow-wrap: anywhere; }
 .rel-list li::before { content: ""; position: absolute; left: 3px; top: 0.5em; width: 9px; height: 9px; border-radius: 50%; background: var(--copper); }
 @media (max-width: 480px) { .rel-dlg .modal-body { gap: 8px; padding: 16px 18px 16px; } .rel-dlg h2 { font-size: 22px; } .rel-list { font-size: 14.5px; gap: 5px; line-height: 1.32; } }
+.rel-since { margin: -4px 0 0; color: var(--muted); font-size: 15px; }
+.rel-vers { display: flex; flex-direction: column; gap: 10px; }
+.rel-ver { display: flex; flex-direction: column; gap: 8px; }
+.rel-ver + .rel-ver { border-top: 1px dashed var(--line); padding-top: 14px; }
 .rel-list.fix li::before { background: transparent; border: 2px solid var(--copper); box-sizing: border-box; }
 .inst-steps { margin: 6px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; }
 .inst-steps li.plain { list-style: none; margin-left: -22px; }
@@ -1948,16 +1952,9 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
 <div class="modal" id="rel" hidden>
   <div class="modal-card rel-dlg" role="dialog" aria-modal="true" aria-labelledby="rel-h">
     <div class="modal-body">
-      <span class="rel-v" data-t="rel.v">Versión 7 · noviembre de 2026</span>
       <h2 id="rel-h" data-t="rel.h">¿Qué hay de nuevo?</h2>
-      <h3 data-t="rel.newH">Novedades</h3>
-      <ul class="rel-list">
-        <li data-t="rel.n1">Ingresos por persona, periodo a periodo</li><li data-t="rel.n2">Fondos extra: de una vez o al mes, con tu propio tipo de impuesto</li><li data-t="rel.n3">Ajustes finos en una sola página</li><li data-t="rel.n4">Un solo botón para un consejo o un café</li><li data-t="rel.n5">Los escenarios guardados siempre muestran resultados actualizados</li><li data-t="rel.n6">La opinión incluye un informe completo de tus datos</li>
-      </ul>
-      <h3 data-t="rel.fixH">Corregido</h3>
-      <ul class="rel-list fix">
-        <li data-t="rel.f1">La coma decimal funciona (2,5 sigue siendo 2,5)</li><li data-t="rel.f2">El consejo es correcto también si no necesitas capital</li><li data-t="rel.f3">El idioma no cambia al elegir un país</li><li data-t="rel.f4">Aviso si los periodos se solapan; ya no aparece ∞ con importes extremos</li><li data-t="rel.f5">Se adapta a pantallas de móvil pequeñas</li>
-      </ul>
+      <p class="rel-since" id="rel-since" hidden></p>
+      <div class="rel-vers" id="rel-vers"></div>
       <div class="modal-actions"><button class="btn primary" type="button" id="rel-ok" data-t="rel.ok">Entendido</button></div>
     </div>
   </div>
@@ -4434,41 +4431,46 @@ Object.assign(I18N.es, {
  'duo.aria': 'Opinión o agradecimiento', 'duo.tip': 'Da un consejo', 'duo.tipS': 'Idea, error o pregunta', 'duo.cof': 'Invita a un café', 'duo.cofS': 'Como agradecimiento',
  'sup.after': '¿Te ha servido? Un consejo o un café siempre es bienvenido.'
 });
-/* wat is er nieuw (versie 7) */
+/* wat is er nieuw (per versie; nieuwste bovenaan) */
 Object.assign(I18N.en, {
- 'rel.v': 'Version 7 · November 2026', 'rel.h': 'What’s new', 'rel.newH': 'New', 'rel.fixH': 'Fixed', 'rel.ok': 'Got it',
- 'rel.n1': 'Income per person, for each period of your life', 'rel.n2': 'Extra pots: a lump sum or monthly payment, with your own tax rate', 'rel.n3': 'Fine-tune everything on one page',
- 'rel.n4': 'One button for a tip or a coffee', 'rel.n5': 'Saved scenarios always show up-to-date results', 'rel.n6': 'Feedback now comes with a full report of your input',
- 'rel.f1': 'Decimal comma and point both work', 'rel.f2': 'The advice is right even when you need no capital', 'rel.f3': 'Your language stays put when you pick a country',
- 'rel.f4': 'Warning for overlapping periods; no more ∞ for extreme amounts', 'rel.f5': 'Fits small phone screens'
+ 'rel.8.v': 'Version 8 · November 2026', 'rel.8.n1': 'New headline: your financial future, one button at a time', 'rel.8.n2': 'Updates you missed now appear once, all together', 'rel.since': 'You missed {n} updates.',
+ 'rel.7.v': 'Version 7 · November 2026', 'rel.h': 'What’s new', 'rel.newH': 'New', 'rel.fixH': 'Fixed', 'rel.ok': 'Got it',
+ 'rel.7.n1': 'Income per person, for each period of your life', 'rel.7.n2': 'Extra pots: a lump sum or monthly payment, with your own tax rate', 'rel.7.n3': 'Fine-tune everything on one page',
+ 'rel.7.n4': 'One button for a tip or a coffee', 'rel.7.n5': 'Saved scenarios always show up-to-date results', 'rel.7.n6': 'Feedback now comes with a full report of your input',
+ 'rel.7.f1': 'Decimal comma and point both work', 'rel.7.f2': 'The advice is right even when you need no capital', 'rel.7.f3': 'Your language stays put when you pick a country',
+ 'rel.7.f4': 'Warning for overlapping periods; no more ∞ for extreme amounts', 'rel.7.f5': 'Fits small phone screens'
 });
 Object.assign(I18N.nl, {
- 'rel.v': 'Versie 7 · november 2026', 'rel.h': 'Wat is er nieuw?', 'rel.newH': 'Nieuw', 'rel.fixH': 'Opgelost', 'rel.ok': 'Top, verder',
- 'rel.n1': 'Inkomen per persoon, per periode', 'rel.n2': 'Extra potten: bedrag ineens of per maand, met eigen belasting', 'rel.n3': 'Fine-tunen op één overzichtspagina',
- 'rel.n4': 'Eén knop voor een tip of een koffie', 'rel.n5': 'Scenario’s tonen altijd een actuele uitkomst', 'rel.n6': 'Feedback met een volledig rapport van je invoer',
- 'rel.f1': 'Decimale komma werkt (2,5 blijft 2,5)', 'rel.f2': 'Advies klopt nu ook als je geen kapitaal nodig hebt', 'rel.f3': 'Taal blijft staan als je een land kiest',
- 'rel.f4': 'Waarschuwing bij overlappende periodes; geen ∞ meer bij extreme bedragen', 'rel.f5': 'Past op kleine telefoonschermen'
+ 'rel.8.v': 'Versie 8 · november 2026', 'rel.8.n1': 'Nieuwe kop: je financiële toekomst, knoop voor knoop', 'rel.8.n2': 'Updates die je gemist hebt zie je voortaan één keer, bij elkaar', 'rel.since': 'Je hebt {n} updates gemist.',
+ 'rel.7.v': 'Versie 7 · november 2026', 'rel.h': 'Wat is er nieuw?', 'rel.newH': 'Nieuw', 'rel.fixH': 'Opgelost', 'rel.ok': 'Top, verder',
+ 'rel.7.n1': 'Inkomen per persoon, per periode', 'rel.7.n2': 'Extra potten: bedrag ineens of per maand, met eigen belasting', 'rel.7.n3': 'Fine-tunen op één overzichtspagina',
+ 'rel.7.n4': 'Eén knop voor een tip of een koffie', 'rel.7.n5': 'Scenario’s tonen altijd een actuele uitkomst', 'rel.7.n6': 'Feedback met een volledig rapport van je invoer',
+ 'rel.7.f1': 'Decimale komma werkt (2,5 blijft 2,5)', 'rel.7.f2': 'Advies klopt nu ook als je geen kapitaal nodig hebt', 'rel.7.f3': 'Taal blijft staan als je een land kiest',
+ 'rel.7.f4': 'Waarschuwing bij overlappende periodes; geen ∞ meer bij extreme bedragen', 'rel.7.f5': 'Past op kleine telefoonschermen'
 });
 Object.assign(I18N.de, {
- 'rel.v': 'Version 7 · November 2026', 'rel.h': 'Was ist neu?', 'rel.newH': 'Neu', 'rel.fixH': 'Behoben', 'rel.ok': 'Alles klar',
- 'rel.n1': 'Einkommen pro Person, für jeden Zeitraum', 'rel.n2': 'Zusätzliche Töpfe: einmalig oder monatlich, mit eigenem Steuersatz', 'rel.n3': 'Feinabstimmung auf einer einzigen Seite',
- 'rel.n4': 'Ein Button für einen Tipp oder einen Kaffee', 'rel.n5': 'Gespeicherte Szenarien zeigen immer aktuelle Ergebnisse', 'rel.n6': 'Feedback mit vollständigem Bericht Ihrer Eingaben',
- 'rel.f1': 'Dezimalkomma funktioniert (2,5 bleibt 2,5)', 'rel.f2': 'Der Rat stimmt auch, wenn Sie kein Vermögen brauchen', 'rel.f3': 'Die Sprache bleibt, wenn Sie ein Land wählen',
- 'rel.f4': 'Warnung bei überlappenden Zeiträumen; kein ∞ mehr bei extremen Beträgen', 'rel.f5': 'Passt auf kleine Smartphone-Displays'
+ 'rel.8.v': 'Version 8 · November 2026', 'rel.8.n1': 'Neue Überschrift: Ihre finanzielle Zukunft, Knopf für Knopf', 'rel.8.n2': 'Verpasste Updates sehen Sie jetzt einmalig und gesammelt', 'rel.since': 'Sie haben {n} Updates verpasst.',
+ 'rel.7.v': 'Version 7 · November 2026', 'rel.h': 'Was ist neu?', 'rel.newH': 'Neu', 'rel.fixH': 'Behoben', 'rel.ok': 'Alles klar',
+ 'rel.7.n1': 'Einkommen pro Person, für jeden Zeitraum', 'rel.7.n2': 'Zusätzliche Töpfe: einmalig oder monatlich, mit eigenem Steuersatz', 'rel.7.n3': 'Feinabstimmung auf einer einzigen Seite',
+ 'rel.7.n4': 'Ein Button für einen Tipp oder einen Kaffee', 'rel.7.n5': 'Gespeicherte Szenarien zeigen immer aktuelle Ergebnisse', 'rel.7.n6': 'Feedback mit vollständigem Bericht Ihrer Eingaben',
+ 'rel.7.f1': 'Dezimalkomma funktioniert (2,5 bleibt 2,5)', 'rel.7.f2': 'Der Rat stimmt auch, wenn Sie kein Vermögen brauchen', 'rel.7.f3': 'Die Sprache bleibt, wenn Sie ein Land wählen',
+ 'rel.7.f4': 'Warnung bei überlappenden Zeiträumen; kein ∞ mehr bei extremen Beträgen', 'rel.7.f5': 'Passt auf kleine Smartphone-Displays'
 });
 Object.assign(I18N.fr, {
- 'rel.v': 'Version 7 · novembre 2026', 'rel.h': 'Quoi de neuf ?', 'rel.newH': 'Nouveau', 'rel.fixH': 'Corrigé', 'rel.ok': 'Compris',
- 'rel.n1': 'Revenus par personne, période par période', 'rel.n2': 'Cagnottes supplémentaires : en une fois ou par mois, avec votre propre taux d’impôt', 'rel.n3': 'Réglages fins sur une seule page',
- 'rel.n4': 'Un seul bouton pour un conseil ou un café', 'rel.n5': 'Les scénarios enregistrés affichent toujours un résultat à jour', 'rel.n6': 'L’avis inclut un rapport complet de vos données',
- 'rel.f1': 'La virgule décimale fonctionne (2,5 reste 2,5)', 'rel.f2': 'Le conseil est juste aussi sans besoin de capital', 'rel.f3': 'La langue ne change plus quand vous choisissez un pays',
- 'rel.f4': 'Avertissement si des périodes se chevauchent ; plus de ∞ pour les montants extrêmes', 'rel.f5': 'S’adapte aux petits écrans de téléphone'
+ 'rel.8.v': 'Version 8 · novembre 2026', 'rel.8.n1': 'Nouveau titre : votre avenir financier, bouton après bouton', 'rel.8.n2': 'Les mises à jour manquées s’affichent désormais une seule fois, toutes ensemble', 'rel.since': 'Vous avez manqué {n} mises à jour.',
+ 'rel.7.v': 'Version 7 · novembre 2026', 'rel.h': 'Quoi de neuf ?', 'rel.newH': 'Nouveau', 'rel.fixH': 'Corrigé', 'rel.ok': 'Compris',
+ 'rel.7.n1': 'Revenus par personne, période par période', 'rel.7.n2': 'Cagnottes supplémentaires : en une fois ou par mois, avec votre propre taux d’impôt', 'rel.7.n3': 'Réglages fins sur une seule page',
+ 'rel.7.n4': 'Un seul bouton pour un conseil ou un café', 'rel.7.n5': 'Les scénarios enregistrés affichent toujours un résultat à jour', 'rel.7.n6': 'L’avis inclut un rapport complet de vos données',
+ 'rel.7.f1': 'La virgule décimale fonctionne (2,5 reste 2,5)', 'rel.7.f2': 'Le conseil est juste aussi sans besoin de capital', 'rel.7.f3': 'La langue ne change plus quand vous choisissez un pays',
+ 'rel.7.f4': 'Avertissement si des périodes se chevauchent ; plus de ∞ pour les montants extrêmes', 'rel.7.f5': 'S’adapte aux petits écrans de téléphone'
 });
 Object.assign(I18N.es, {
- 'rel.v': 'Versión 7 · noviembre de 2026', 'rel.h': '¿Qué hay de nuevo?', 'rel.newH': 'Novedades', 'rel.fixH': 'Corregido', 'rel.ok': 'Entendido',
- 'rel.n1': 'Ingresos por persona, periodo a periodo', 'rel.n2': 'Fondos extra: de una vez o al mes, con tu propio tipo de impuesto', 'rel.n3': 'Ajustes finos en una sola página',
- 'rel.n4': 'Un solo botón para un consejo o un café', 'rel.n5': 'Los escenarios guardados siempre muestran resultados actualizados', 'rel.n6': 'La opinión incluye un informe completo de tus datos',
- 'rel.f1': 'La coma decimal funciona (2,5 sigue siendo 2,5)', 'rel.f2': 'El consejo es correcto también si no necesitas capital', 'rel.f3': 'El idioma no cambia al elegir un país',
- 'rel.f4': 'Aviso si los periodos se solapan; ya no aparece ∞ con importes extremos', 'rel.f5': 'Se adapta a pantallas de móvil pequeñas'
+ 'rel.8.v': 'Versión 8 · noviembre de 2026', 'rel.8.n1': 'Nuevo título: tu futuro financiero, botón a botón', 'rel.8.n2': 'Las novedades que te perdiste aparecen ahora una sola vez, todas juntas', 'rel.since': 'Te has perdido {n} actualizaciones.',
+ 'rel.7.v': 'Versión 7 · noviembre de 2026', 'rel.h': '¿Qué hay de nuevo?', 'rel.newH': 'Novedades', 'rel.fixH': 'Corregido', 'rel.ok': 'Entendido',
+ 'rel.7.n1': 'Ingresos por persona, periodo a periodo', 'rel.7.n2': 'Fondos extra: de una vez o al mes, con tu propio tipo de impuesto', 'rel.7.n3': 'Ajustes finos en una sola página',
+ 'rel.7.n4': 'Un solo botón para un consejo o un café', 'rel.7.n5': 'Los escenarios guardados siempre muestran resultados actualizados', 'rel.7.n6': 'La opinión incluye un informe completo de tus datos',
+ 'rel.7.f1': 'La coma decimal funciona (2,5 sigue siendo 2,5)', 'rel.7.f2': 'El consejo es correcto también si no necesitas capital', 'rel.7.f3': 'El idioma no cambia al elegir un país',
+ 'rel.7.f4': 'Aviso si los periodos se solapan; ya no aparece ∞ con importes extremos', 'rel.7.f5': 'Se adapta a pantallas de móvil pequeñas'
 });
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
@@ -4668,7 +4670,7 @@ Object.assign(I18N.es, {
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '7 · 2026-11';
+  var APPV = '8 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
@@ -6013,7 +6015,7 @@ Object.assign(I18N.es, {
 
   /* ================= stappen ================= */
   var ui = { introSeen: false, step: 1, goal: '', mode: '', stepsDone: false };
-  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; ui.mode = su.mode === 'all' || su.mode === 'steps' ? su.mode : ''; ui.stepsDone = !!su.stepsDone; } } catch (e) {}
+  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; ui.mode = su.mode === 'all' || su.mode === 'steps' ? su.mode : ''; ui.stepsDone = !!su.stepsDone; if (typeof su.relSeen === 'number') ui.relSeen = su.relSeen; } } catch (e) {}
   /* De stappen zijn de rondleiding voor de eerste keer. Wie ze één keer doorlopen heeft, krijgt daarna standaard
      alles in één overzicht; de keuze blijft altijd te wisselen. */
   function inAll() { return ui.mode ? ui.mode === 'all' : ui.stepsDone; }
@@ -6261,7 +6263,20 @@ Object.assign(I18N.es, {
     if (instEv) { var ev = instEv; instEv = null; ev.prompt(); if (ev.userChoice) ev.userChoice.then(function (c) { if (c && c.outcome !== 'accepted') instEv = ev; showInstall(c && c.outcome !== 'accepted'); }); }
     else openInst(isIOS ? 'ios' : 'other');
   });
-  function openRel() { lastFocus = document.activeElement; $('rel').hidden = false; setTimeout(function () { var b = $('rel-ok'); if (b) b.focus({ preventScroll: true }); }, 30); }
+  /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
+  var RELEASES = [{ v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
+  function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
+  function openRel() {
+    var list = relMissed(); if (!list.length) return;
+    $('rel-vers').innerHTML = list.map(function (r) {
+      return '<section class="rel-ver"><span class="rel-v">' + t1('rel.' + r.v + '.v') + '</span>' +
+        (r.n ? '<h3>' + t1('rel.newH') + '</h3><ul class="rel-list">' + relList(r, 'n', r.n) + '</ul>' : '') +
+        (r.f ? '<h3>' + t1('rel.fixH') + '</h3><ul class="rel-list fix">' + relList(r, 'f', r.f) + '</ul>' : '') + '</section>';
+    }).join('');
+    var sn = $('rel-since'); sn.hidden = list.length < 2; if (list.length > 1) sn.textContent = t1('rel.since', { n: list.length });
+    ui.relSeen = REL_LAST; saveUi();
+    lastFocus = document.activeElement; $('rel').hidden = false; setTimeout(function () { var b = $('rel-ok'); if (b) b.focus({ preventScroll: true }); }, 30); }
   function closeRel() { $('rel').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
   $('rel-ok').addEventListener('click', closeRel);
   $('rel').addEventListener('click', function (ev) { if (ev.target === $('rel')) closeRel(); });
@@ -6416,8 +6431,8 @@ Object.assign(I18N.es, {
       else if (ev.key === 'Tab') trap($('tour-tip'), ev);
     }
   });
-  /* elke keer bij het openen: wat is er nieuw (niet bij een eerste bezoek en niet bij een gedeelde link) */
-  if (!ui.introSeen) openIntro(0); else if (!planFromLink) openRel();
+  /* wat is er nieuw: eenmalig, met alle gemiste versies (niet bij een eerste bezoek of een gedeelde link) */
+  if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(0); } else openRel();
 })();
 
 </script>
