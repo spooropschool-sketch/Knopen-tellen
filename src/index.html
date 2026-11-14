@@ -86,7 +86,7 @@ input[type="number"], input[type="text"] {
   font-family: var(--f-num); font-size: 15px; color: var(--ink); background: var(--bg);
   border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; min-width: 0;
 }
-.knob input[type="number"] { width: 128px; text-align: right; }
+.knob input[type="number"], .knob input[data-dec] { width: 128px; text-align: right; }
 input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; margin: 0; }
 input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
@@ -264,7 +264,7 @@ footer .tag a:hover { text-decoration: underline; }
 @media (max-width: 420px) {
   h1 { font-size: 26px; }
   .lrow { grid-template-columns: 54px 1fr 96px; gap: 8px; }
-  .knob input[type="number"] { width: 116px; }
+  .knob input[type="number"], .knob input[data-dec] { width: 116px; }
 }
 
 
@@ -1128,6 +1128,7 @@ input::placeholder { font-weight: 400; }
 .srcs > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .srcs[open] > summary { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
 .srcs-body { margin-top: 8px; line-height: 1.7; color: var(--muted); text-align: left; }
+.srcs-body a { white-space: normal !important; overflow-wrap: anywhere; }
 .status .srcline { text-align: center; } .status .srcs-body { text-align: center; }
 .facts .srcs > summary { min-height: 28px; }
 
@@ -1528,6 +1529,11 @@ footer { color: var(--muted); }
 #plans .sup-pl { margin: 20px 0 0; }
 @media (min-width: 640px) { .sup-pl { flex-direction: row; justify-content: center; gap: 4px 12px; flex-wrap: wrap; } }
 @media print { .support-card, .sup-sh, .sup-pl { display: none !important; } }
+
+/* ===== v7: kaarten op smalle schermen niet breder dan het scherm ===== */
+.home-grid > *, .home-main > * { min-width: 0; max-width: 100%; }
+.per-warn { margin: 0; padding: 8px 10px; border-radius: 8px; background: color-mix(in srgb, var(--copper) 12%, transparent); color: var(--ink); font-size: 13.5px; line-height: 1.4; }
+.per-warn[hidden] { display: none; }
 
 /* ===== v7: gesplitste knop tip | koffie ===== */
 .support-card { flex-direction: column; justify-content: center; text-align: center; gap: 12px; padding: 18px 20px; }
@@ -4234,6 +4240,12 @@ Object.assign(I18N.es, {
 
 /* ===== v7: werk per partner, extra potten, overzicht en gesplitste knop ===== */
 Object.assign(I18N.en, {
+ 'adv.pZero': 'You need no savings to spend {b} a month {r}: your income covers it in 9 out of 10 cases. With savings, the {pf} mix suits best.',
+ 'adv.pZero_2': 'You need no savings to spend {b} a month {r}: your income covers it in 9 out of 10 cases. With savings, the {pf} mix suits best.',
+ 'adv.p': 'With {c} you can spend {b} a month {r}. In 9 out of 10 cases the money lasts that long. With that amount, the {pf} mix suits best.',
+ 'pot.sumOff': 'Doesn’t count: this pot belongs to your partner and you are now planning for one person.',
+ 'wk.warnRev': 'Period {n}: “to” is not after “from”, so it doesn’t count.', 'wk.warnOver': 'Note: periods {i} and {j} overlap from {a} to {b}; the amounts add up in those years.',
+ 'w.over': 'more than {v}',
  'k.bufNone': 'No starting capital is needed for this budget.', 'k.wrSave': 'No withdrawal: {m} a month is left over and added to your savings.', 'fan.wrSave': 'Left over per month in year 1, added to savings',
  'f.wkAmt': 'Income from work, net per month', 'h.wkAmt': 'Salary or profit after tax. Leave empty if you no longer work.',
  'f.wkEnd': 'Works until age', 'h.wkEnd': 'By default the age your {sp} starts. Stopping earlier or later? Change it here.',
@@ -4259,6 +4271,13 @@ Object.assign(I18N.en, {
  'sup.after': 'Did this help? A tip or a coffee is always welcome.'
 });
 Object.assign(I18N.nl, {
+ 'adv.pZero': 'Je hebt geen vermogen nodig om {b} per maand te besteden {r}: je inkomen dekt het in 9 van de 10 gevallen. Leg je wel geld opzij, dan past de beleggingsmix {pf} het best.',
+ 'adv.pZero_2': 'Jullie hebben geen vermogen nodig om {b} per maand te besteden {r}: jullie inkomen dekt het in 9 van de 10 gevallen. Leggen jullie wel geld opzij, dan past de beleggingsmix {pf} het best.',
+ 'adv.p': 'Met {c} kun je {b} per maand besteden {r}. In 9 van de 10 gevallen houdt het geld het zo lang vol. Bij dat bedrag past de beleggingsmix {pf} het best.',
+ 'adv.p_2': 'Met {c} kunnen jullie {b} per maand besteden {r}. In 9 van de 10 gevallen houdt het geld het zo lang vol. Bij dat bedrag past de beleggingsmix {pf} het best.',
+ 'pot.sumOff': 'Telt niet mee: deze pot is van je partner en je rekent nu voor één persoon.',
+ 'wk.warnRev': 'Periode {n}: “tot” ligt niet na “van”, dus deze telt niet mee.', 'wk.warnOver': 'Let op: perioden {i} en {j} overlappen van {a} tot {b}; in die jaren tellen de bedragen bij elkaar op.',
+ 'w.over': 'meer dan {v}',
  'k.bufNone': 'Voor dit budget is geen startkapitaal nodig.', 'k.wrSave': 'Geen opname: er blijft {m} per maand over voor je vermogen.', 'fan.wrSave': 'Per maand over in jaar 1, gaat naar je vermogen',
  'f.wkAmt': 'Inkomen uit werk, netto per maand', 'h.wkAmt': 'Salaris of winst na belasting. Laat leeg als je niet meer werkt.',
  'f.wkEnd': 'Werkt tot leeftijd', 'h.wkEnd': 'Standaard de leeftijd waarop je {sp} ingaat. Stop je eerder of later? Pas het dan hier aan.',
@@ -4284,6 +4303,11 @@ Object.assign(I18N.nl, {
  'sup.after': 'Hielp dit je verder? Een tip of een koffie is altijd welkom.'
 });
 Object.assign(I18N.de, {
+ 'adv.pZero': 'Sie brauchen kein Vermögen, um {b} pro Monat auszugeben, {r}: Ihr Einkommen deckt es in 9 von 10 Fällen. Legen Sie doch Geld an, passt der Anlagemix {pf} am besten.',
+ 'adv.p': 'Mit {c} können Sie {b} pro Monat ausgeben, {r}. In 9 von 10 Fällen hält das Geld so lange. Bei diesem Betrag passt der Anlagemix {pf} am besten.',
+ 'pot.sumOff': 'Zählt nicht: Dieser Topf gehört Ihrem Partner und Sie rechnen jetzt für eine Person.',
+ 'wk.warnRev': 'Zeitraum {n}: „bis“ liegt nicht nach „ab“, daher zählt er nicht.', 'wk.warnOver': 'Achtung: Die Zeiträume {i} und {j} überschneiden sich von {a} bis {b}; in diesen Jahren addieren sich die Beträge.',
+ 'w.over': 'mehr als {v}',
  'k.bufNone': 'Für dieses Budget ist kein Startkapital nötig.', 'k.wrSave': 'Keine Entnahme: {m} pro Monat bleiben übrig und fließen ins Vermögen.', 'fan.wrSave': 'Pro Monat übrig im Jahr 1, fließt ins Vermögen',
  'f.wkAmt': 'Einkommen aus Arbeit, netto pro Monat', 'h.wkAmt': 'Gehalt oder Gewinn nach Steuern. Leer lassen, wenn Sie nicht mehr arbeiten.',
  'f.wkEnd': 'Arbeitet bis zum Alter', 'h.wkEnd': 'Standardmäßig das Alter, ab dem Ihre {sp} beginnt. Hören Sie früher oder später auf? Dann hier ändern.',
@@ -4309,6 +4333,11 @@ Object.assign(I18N.de, {
  'sup.after': 'Hat Ihnen das weitergeholfen? Ein Tipp oder ein Kaffee ist immer willkommen.'
 });
 Object.assign(I18N.fr, {
+ 'adv.pZero': 'Vous n’avez besoin d’aucune épargne pour dépenser {b} par mois {r} : vos revenus suffisent dans 9 cas sur 10. Si vous placez de l’argent, la répartition {pf} convient le mieux.',
+ 'adv.p': 'Avec {c}, vous pouvez dépenser {b} par mois {r}. Dans 9 cas sur 10, l’argent tient jusque-là. Avec ce montant, la répartition {pf} convient le mieux.',
+ 'pot.sumOff': 'Ne compte pas : cette cagnotte appartient à votre partenaire et vous calculez maintenant pour une personne.',
+ 'wk.warnRev': 'Période {n} : « jusqu’à » n’est pas après « de », elle ne compte donc pas.', 'wk.warnOver': 'Attention : les périodes {i} et {j} se chevauchent de {a} à {b} ; les montants s’additionnent ces années-là.',
+ 'w.over': 'plus de {v}',
  'k.bufNone': 'Aucun capital de départ n’est nécessaire pour ce budget.', 'k.wrSave': 'Aucun retrait : il reste {m} par mois, ajoutés à votre patrimoine.', 'fan.wrSave': 'Reste par mois en année 1, ajouté au patrimoine',
  'f.wkAmt': 'Revenus du travail, nets par mois', 'h.wkAmt': 'Salaire ou bénéfice après impôt. Laissez vide si vous ne travaillez plus.',
  'f.wkEnd': 'Travaille jusqu’à l’âge de', 'h.wkEnd': 'Par défaut, l’âge de départ de votre {sp}. Vous arrêtez plus tôt ou plus tard ? Modifiez-le ici.',
@@ -4334,6 +4363,13 @@ Object.assign(I18N.fr, {
  'sup.after': 'Cela vous a aidé ? Un conseil ou un café est toujours le bienvenu.'
 });
 Object.assign(I18N.es, {
+ 'adv.pZero': 'No necesitas ahorros para gastar {b} al mes {r}: tus ingresos lo cubren en 9 de cada 10 casos. Si inviertes dinero, la mezcla {pf} es la que mejor encaja.',
+ 'adv.pZero_2': 'No necesitáis ahorros para gastar {b} al mes {r}: vuestros ingresos lo cubren en 9 de cada 10 casos. Si invertís dinero, la mezcla {pf} es la que mejor encaja.',
+ 'adv.p': 'Con {c} puedes gastar {b} al mes {r}. En 9 de cada 10 casos el dinero llega hasta entonces. Con ese importe, la mezcla {pf} es la que mejor encaja.',
+ 'adv.p_2': 'Con {c} podéis gastar {b} al mes {r}. En 9 de cada 10 casos el dinero llega hasta entonces. Con ese importe, la mezcla {pf} es la que mejor encaja.',
+ 'pot.sumOff': 'No cuenta: este fondo es de tu pareja y ahora calculas para una persona.',
+ 'wk.warnRev': 'Periodo {n}: «hasta» no es posterior a «desde», así que no cuenta.', 'wk.warnOver': 'Atención: los periodos {i} y {j} se solapan de {a} a {b}; en esos años los importes se suman.',
+ 'w.over': 'más de {v}',
  'k.bufNone': 'Para este presupuesto no hace falta capital inicial.', 'k.wrSave': 'Sin retirada: sobran {m} al mes que se suman a tu patrimonio.', 'fan.wrSave': 'Sobra al mes el año 1, se suma al patrimonio',
  'f.wkAmt': 'Ingresos del trabajo, netos al mes', 'h.wkAmt': 'Sueldo o beneficio después de impuestos. Déjalo vacío si ya no trabajas.',
  'f.wkEnd': 'Trabaja hasta la edad de', 'h.wkEnd': 'Por defecto, la edad en que empieza tu {sp}. ¿Paras antes o después? Cámbialo aquí.',
@@ -4491,7 +4527,7 @@ Object.assign(I18N.es, {
   function savePrefs() { try { localStorage.setItem(KEY + '-prefs', JSON.stringify(prefs)); } catch (e) {} }
   function dict() { return I18N[prefs.lang] || I18N.en; }
   function gvars() {
-    var k = 'in.' + prefs.country, ic = has(k) ? look(k, false) : fill(look('in.default', false), { country: cName(prefs.country) });
+    var k = 'in.' + prefs.country, ic = dict()[k] !== undefined ? dict()[k] : fill(look('in.default', false), { country: cName(prefs.country) });
     return { cur: curSym(), sp: spName(), Sp: cap1(spName()), pen: penName(), Pen: cap1(penName()), country: cName(prefs.country), site: CTRY[prefs.country].site || '', inCountry: ic, InCountry: ic.charAt(0).toUpperCase() + ic.slice(1) };
   }
   function fill(s, v) {
@@ -4521,12 +4557,17 @@ Object.assign(I18N.es, {
   function loc() { return prefs.lang === 'en' && prefs.country === 'US' ? 'en-US' : LOCALE[prefs.lang]; }
   var NF = {};
   function nfmt(key, opts) { var k = loc() + prefs.cur + key; if (!NF[k]) NF[k] = new Intl.NumberFormat(loc(), opts); return NF[k]; }
-  function eur(n) { return nfmt('m', { style: 'currency', currency: prefs.cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(Math.round(n) || 0); }
+  function eur(n) {
+    if (n === Infinity || n > 1e12) return t1('w.over', { v: eur(1e8) });
+    if (n === -Infinity || n < -1e12) return t1('w.over', { v: eur(1e8) });
+    return eurF(n);
+  }
+  function eurF(n) { return nfmt('m', { style: 'currency', currency: prefs.cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0, minimumFractionDigits: 0 }).format(Math.round(n) || 0); }
   function short(n) {
     try { return nfmt('s', { style: 'currency', currency: prefs.cur, currencyDisplay: 'narrowSymbol', notation: 'compact', maximumFractionDigits: Math.abs(n) >= 1e6 ? 1 : 0 }).format(n); }
     catch (e) { return eur(n); }
   }
-  function pct(x, d) { d = d === undefined ? 1 : d; return nfmt('p' + d, { style: 'percent', minimumFractionDigits: d, maximumFractionDigits: d }).format(x); }
+  function pct(x, d) { d = d === undefined ? 1 : d; if (!isFinite(x)) return '–'; return nfmt('p' + d, { style: 'percent', minimumFractionDigits: d, maximumFractionDigits: d }).format(x); }
   function num(x, d) { return nfmt('n' + d, { maximumFractionDigits: d }).format(x); }
   function curSym() {
     try { var p = nfmt('m', { style: 'currency', currency: prefs.cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0, minimumFractionDigits: 0 }).formatToParts(1); for (var i = 0; i < p.length; i++) if (p[i].type === 'currency') return p[i].value; } catch (e) {}
@@ -4648,7 +4689,7 @@ Object.assign(I18N.es, {
   function numAttr(k) {
     var f = F[k];
     if (/cur|Month|perPersonYear/.test(f.u)) return 'type="text" inputmode="numeric" autocomplete="off" data-money="1"';
-    return 'type="number" inputmode="decimal" min="' + f.min + '" max="' + f.max + '" step="' + f.step + '"';
+    return 'type="text" inputmode="decimal" autocomplete="off" data-dec="1"';
   }
   function knobHtml(k) {
     var f = F[k], r = f.r || [f.min, f.max];
@@ -4783,7 +4824,9 @@ Object.assign(I18N.es, {
     if (isMoney(e)) { var d = String(e.value).replace(/[^\d]/g, ''); return d === '' ? NaN : parseInt(d, 10); }
     return parseFloat(String(e.value).replace(',', '.'));
   }
-  function fmtIn(e, v) { return isMoney(e) ? (isFinite(v) ? grp(v) : '') : v; }
+  function decSep() { try { return (1.5).toLocaleString(loc()).charAt(1); } catch (x) { return '.'; } }
+  function decTxt(v) { return isFinite(v) ? String(v).replace('.', decSep()) : ''; }
+  function fmtIn(e, v) { return isMoney(e) ? (isFinite(v) ? grp(v) : '') : (e.getAttribute && e.getAttribute('data-dec') === '1' ? decTxt(v) : v); }
   document.addEventListener('input', function (ev) {
     var e = ev.target; if (!isMoney(e)) return;
     var pos = e.selectionStart || 0, before = String(e.value).slice(0, pos).replace(/[^\d]/g, '').length;
@@ -4834,7 +4877,6 @@ Object.assign(I18N.es, {
       if (k === 'personen') renderPots();
       update();
     } else if (r.matches('.ctry-sel')) {
-      if (r.id === 'country-intro' && !langTouched) { var l = langFor(r.value); if (l) prefs.lang = l; }
       setCountry(r.value);
     }
     else if (r.matches('.lang-sel')) { if (r.id === 'lang-intro') langTouched = true; setLang(r.value); }
@@ -4882,8 +4924,8 @@ Object.assign(I18N.es, {
       '<div class="wk-per" id="wk-per-' + s + '" hidden></div><button type="button" class="btn link sm wk-tog" data-per="' + s + '"></button></div>';
   }
   function numIn(id, attrs, val, money) {
-    var v = money ? (val > 0 ? grp(val) : '') : (val === '' || val === null || val === undefined ? '' : String(Math.round(val * 100) / 100));
-    return '<input id="' + id + '" ' + (money ? 'type="text" inputmode="numeric" autocomplete="off" data-money="1"' : 'type="number" inputmode="decimal" step="any"') + ' ' + attrs + ' value="' + v + '">';
+    var v = money ? (val > 0 ? grp(val) : '') : (val === '' || val === null || val === undefined ? '' : decTxt(Math.round(val * 100) / 100));
+    return '<input id="' + id + '" ' + (money ? 'type="text" inputmode="numeric" autocomplete="off" data-money="1"' : 'type="text" inputmode="decimal" autocomplete="off" data-dec="1"') + ' ' + attrs + ' value="' + v + '">';
   }
   function fldL(id, lab, input, unit) {
     return '<div class="field"><div class="ftop"><label for="' + id + '">' + lab + '</label></div><div class="inrow">' + input + (unit ? '<span class="unit">' + unit + '</span>' : '') + '</div></div>';
@@ -4904,11 +4946,24 @@ Object.assign(I18N.es, {
           numIn(id + 'm', L + ' data-f="m" aria-label="' + esc(t1('wk.amt', { cur: curSym() })) + '"', r.m, true) +
           '<button type="button" class="per-x" data-del="per' + s + '" data-i="' + i + '" aria-label="' + esc(t1('wk.del')) + '">✕</button></div>';
       }).join('') +
+      '<p class="per-warn" id="per-warn-' + s + '" hidden></p>' +
       '<button type="button" class="btn ghost sm per-add" data-addper="' + s + '">' + t1('wk.add') + '</button><p class="hint">' + t1('wk.perHint') + '</p>';
+    perWarn(s);
+  }
+  function perWarn(s) {
+    var el = $('per-warn-' + s); if (!el) return;
+    var rows = lists['per' + s], msg = [];
+    rows.forEach(function (r, i) { if (!(r.b > r.a)) msg.push(t1('wk.warnRev', { n: i + 1 })); });
+    for (var i = 0; i < rows.length; i++) for (var j = i + 1; j < rows.length; j++) {
+      var a = Math.max(rows[i].a, rows[j].a), b = Math.min(rows[i].b, rows[j].b);
+      if (b > a && rows[i].b > rows[i].a && rows[j].b > rows[j].a) msg.push(t1('wk.warnOver', { i: i + 1, j: j + 1, a: decTxt(a), b: decTxt(b) }));
+    }
+    el.hidden = !msg.length; el.textContent = msg.join(' ');
   }
   function potSum(i) {
     var q = lists.pots[i], el = $('pot-sum-' + i); if (!q || !el) return;
     if (!(q.a > 0)) { el.textContent = t1('pot.sumEmpty'); el.classList.add('muted'); return; }
+    if (q.w === 1 && !two()) { el.textContent = t1('pot.sumOff'); el.classList.add('muted'); return; }
     el.classList.remove('muted');
     var net = q.a * (1 - (q.x || 0) / 100), who = two() ? (q.w ? nm2() : nm1()) + ': ' : '';
     el.textContent = who + (q.k === 'l' ? t1('pot.sumL', { v: eur(net), a: fmtAge(q.f) }) : t1('pot.sumM', { v: eur(net), a: fmtAge(q.f), u: q.u > 0 ? t1('pot.sumU', { u: fmtAge(q.u) }) : t1('pot.sumLife') }));
@@ -4936,6 +4991,7 @@ Object.assign(I18N.es, {
     P.forEach(function (q, i) { potSum(i); });
   }
   function renderLists() { renderPer('P'); renderPer('D'); renderPots(); }
+  function potsOn() { return lists.pots.filter(function (q) { return q.a > 0 && (q.w !== 1 || two()); }); }
   document.addEventListener('input', function (ev) {
     var e = ev.target, l = e.getAttribute && e.getAttribute('data-l'); if (!l || !lists[l]) return;
     var i = parseInt(e.getAttribute('data-i'), 10), f = e.getAttribute('data-f'), it = lists[l][i]; if (!it) return;
@@ -4947,7 +5003,7 @@ Object.assign(I18N.es, {
       if (f === 'x') v = Math.max(0, Math.min(100, v));
       it[f] = v;
     }
-    if (l === 'pots') potSum(i);
+    if (l === 'pots') potSum(i); else perWarn(l.slice(3));
     if (f !== 'n') updateSoon(); else persist();
   });
   document.addEventListener('change', function (ev) {
@@ -5021,6 +5077,7 @@ Object.assign(I18N.es, {
   }
   function c90For(m, pf, p) {
     function q(c) { p.startkapitaal = c; return simQuick(m, pf, p).succ; }
+    if (q(0) >= 0.9) return 0;
     var lo = 0, hi = Math.max(m.req0 * 2, 50000), g = 0;
     while (q(hi) < 0.9 && g++ < 8) { lo = hi; hi *= 2; }
     for (var i = 0; i < 13; i++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) hi = mid; else lo = mid; }
@@ -5167,14 +5224,14 @@ Object.assign(I18N.es, {
     var spMissing = !spFlat() && ((state.aowAanP !== 0 && !(state.spP > 0)) || (tw && state.aowAanD !== 0 && !(state.spD > 0)));
     var html = '<div class="adv-top"><div><span class="eyebrow" data-x="1">' + t1('adv.eyebrow') + '</span><h2>' + t('adv.h') + '</h2></div>' +
       '<div class="adv-big"><b>' + eur(need) + '</b><span>' + t1('adv.bigS') + '</span></div></div>' +
-      '<p class="adv-p">' + t('adv.p', { c: eur(need), b: eur(state.budget), r: esc(refTxt()), pf: portStat(adv.pf).n.toLowerCase() }) + '</p>' +
+      '<p class="adv-p">' + t(need > 0 ? 'adv.p' : 'adv.pZero', { c: eur(need), b: eur(state.budget), r: esc(refTxt()), pf: portStat(adv.pf).n.toLowerCase() }) + '</p>' +
       (spMissing ? '<p class="adv-warn">' + t('adv.spMissing', { sp: spName(), site: CTRY[prefs.country].url ? '<a href="' + CTRY[prefs.country].url + '" target="_blank" rel="noopener">' + CTRY[prefs.country].site + '</a>' : t1('adv.yourStatement') }) + '</p>' : '') +
       '<ul class="adv-list">' + items.map(function (x) { return '<li>' + x.charAt(0).toUpperCase() + x.slice(1) + '</li>'; }).join('') + '</ul>';
     if (have > 0) {
       var f = Math.min(1, have / need), gap = need - have;
       html += '<div class="havebar"><div class="hb-track"><div class="hb-fill" style="width:' + (f * 100).toFixed(1) + '%"></div></div><p>' +
         (gap > 0 ? t('adv.short', { h: eur(have), p: pct(have / need, 0), g: eur(gap) }) : t('adv.enough', { h: eur(have), g: eur(-gap) })) + '</p></div>';
-    } else html += '<p class="hint">' + t('adv.noCap', { c: eur(need) }) + '</p>';
+    } else if (need > 0) html += '<p class="hint">' + t('adv.noCap', { c: eur(need) }) + '</p>';
     html += '<div class="srcline">' + srcLine('le,sp,pen,tax,mkt') + '</div>';
     el.innerHTML = html;
   }
@@ -5199,7 +5256,7 @@ Object.assign(I18N.es, {
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (lists.pots.some(function (q) { return q.a > 0; }) ? '<span class="scope">' + t1('v.pots', { n: lists.pots.filter(function (q) { return q.a > 0; }).length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
   }
   function renderKpis(m) {
     var maxB = adv ? max90 : m.maxBudget, room = maxB - state.budget, empty = state.budget <= 0;
@@ -5939,7 +5996,7 @@ Object.assign(I18N.es, {
       return state['werk' + s] > 0 ? eur(state['werk' + s]) + ' ' + t1('ins.until', { a: fmtAge(state['werkTot' + s]) }) : dash;
     }
     function inc(on, amt, age) { return on && amt > 0 ? eur(amt) + ' ' + t1('ins.from', { a: fmtAge(age) }) : dash; }
-    var pots = lists.pots.filter(function (q) { return q.a > 0; });
+    var pots = potsOn();
     var G2 = [
       [STEPS[0].t, [
         it(t1('ins.ctry'), esc(cName(prefs.country)), 'q-country'),
