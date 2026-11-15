@@ -915,6 +915,33 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .slot-cyl.run { transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.25, 1); }
 .slot-face { position: absolute; inset: 0; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; justify-content: center; text-align: center; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #fbf8f3; color: #1d1a17; }
 .slot-face b { font-family: var(--f-display); font-size: 17px; font-weight: 600; line-height: 1.15; text-wrap: balance; }
+.agebox { display: flex; flex-direction: column; gap: 6px; margin: 4px 0 12px; }
+.age-q { font-weight: 600; font-size: 15px; color: var(--ink2); text-align: center; }
+.age-read { text-align: center; font-family: var(--f-num); font-size: 15px; color: var(--ink2); }
+.age-read b { font-size: 34px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+#age-r { -webkit-appearance: none; appearance: none; width: 100%; height: 40px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+#age-r::-webkit-slider-runnable-track { height: 22px; border-radius: 6px; border: 1px solid var(--line); background:
+  repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px calc(100% / 45)) bottom / 100% 8px no-repeat,
+  linear-gradient(90deg, var(--accent-soft) 0 33.33%, var(--surface2) 33.33% 66.66%, var(--bg) 66.66%); }
+#age-r::-moz-range-track { height: 22px; border-radius: 6px; border: 1px solid var(--line); background:
+  repeating-linear-gradient(90deg, var(--muted) 0 1px, transparent 1px calc(100% / 45)) bottom / 100% 8px no-repeat,
+  linear-gradient(90deg, var(--accent-soft) 0 33.33%, var(--surface2) 33.33% 66.66%, var(--bg) 66.66%); }
+#age-r::-webkit-slider-thumb { -webkit-appearance: none; width: 8px; height: 38px; margin-top: -9px; border-radius: 4px; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+#age-r::-moz-range-thumb { width: 6px; height: 36px; border-radius: 4px; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+#age-r:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.age-zones { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 13px; color: var(--muted); }
+.age-zones span { padding: 2px 0; border-radius: 6px; }
+.age-zones span.on { color: var(--accent); font-weight: 700; background: var(--accent-soft); }
+html:not(.is-opb) .opb-q { display: none !important; }
+html.is-opb .not-opb { display: none !important; }
+html.is-opb.no-bud #status-card { display: none; }
+.opb-card { margin: 0 0 14px; display: flex; flex-direction: column; gap: 6px; border-color: var(--accent); }
+.opb-k { margin: 0; font-size: 12.5px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.opb-big { margin: 0; font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: clamp(32px, 7vw, 46px); font-weight: 500; line-height: 1.1; color: var(--ink); overflow-wrap: anywhere; }
+.opb-range, .opb-split { margin: 0; font-size: 15px; color: var(--ink2); }
+.opb-note, .opb-empty { margin: 0; font-size: 13px; color: var(--muted); }
+.opb-empty { font-size: 15px; color: var(--ink2); }
+.opb-act { margin-top: 6px; display: flex; gap: 10px; flex-wrap: wrap; }
 .slot-sub { margin: 0; min-height: 1.4em; text-align: center; color: var(--ink2); font-size: 15px; }
 .slot-hint { margin: 0; text-align: center; color: var(--ink2); font-size: 13.5px; }
 .slot-ok { width: 100%; }
@@ -1715,6 +1742,7 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       </div>
       <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/buidel.jpg" alt="Ein Lederbeutel, aus dem Knöpfe über einen Holztisch rollen" data-t-alt="alt.pouch"></div>
     </header>
+    <section class="card opb-card" id="opb-card" aria-live="polite" hidden></section>
     <div class="home-grid">
       <aside class="home-side" aria-labelledby="quick-h">
         <div class="card side-card">
@@ -1810,8 +1838,9 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Planen Sie für eine oder für zwei Personen?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 Person</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 Personen</span></label></div></div>
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Frau</span></label></div></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Frau</span></label></div></div>
-            <div class="field"><label for="q-budget" data-t="f.budget">Was möchten Sie pro Monat ausgeben?</label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
+            <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Was möchten Sie pro Monat ausgeben?</span><span class="opb-q" data-t="f.budgetOpb">Wie viel möchten Sie später pro Monat ausgeben?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Wie viel haben Sie bisher gespart oder angelegt?</span> <span class="opt" data-t="q.optional">(optional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
+            <div class="field opb-q"><label for="q-inleg" data-t="q.inleg">Wie viel legen Sie pro Monat zurück?</label><div class="inrow"><input id="q-inleg" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
           </div>
@@ -1952,6 +1981,9 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
       <div class="about-body intro-about" data-t="about.body"><p>Button Counter ist Ihr persönliches Finanzcockpit. Wir zeigen Ihnen, was Sie haben, wie viel Spielraum das heute und später gibt und wie sich Ihr Vermögen entwickeln kann.</p><p>Sie erkunden Szenarien, rechnen Entscheidungen durch und sehen, was sie für Ihre Zukunft bedeuten. Alles in heutigem Geld und alles bleibt in Ihrem eigenen Browser.</p><p>Denn es geht nicht nur darum, was Sie aufgebaut haben, sondern vor allem darum, was Sie damit erreichen können.</p></div>
       <h2 id="intro-h" data-t="intro.ask">Was möchten Sie wissen?</h2>
       <p class="sub" data-t="intro.promise">Reicht es? Das rechnen wir aus, ohne Verkaufsgespräch und mit Quelle zu jeder Zahl.</p>
+      <div class="agebox" id="agebox"><label class="age-q" for="age-r" data-t="age.q">Wie alt sind Sie?</label><div class="age-read"><b id="age-v">50</b> <span data-t="u.years">Jahre</span></div>
+        <input type="range" id="age-r" min="20" max="65" step="1" value="50" data-t-aria="age.aria" aria-label="Ihr Alter">
+        <div class="age-zones" aria-hidden="true"><span data-z="0">20–35</span><span data-z="1">35–50</span><span data-z="2">50–65+</span></div></div>
       <div class="slot" id="slot">
         <div class="slot-machine">
           <div class="slot-window" id="slot-window" tabindex="0" role="spinbutton" data-t-aria="slot.pick" aria-valuemin="1" aria-valuemax="5" aria-label="Frage wählen">
@@ -2138,7 +2170,13 @@ function runModel(p) {
     var tx = taxAt(K, B, b);
     return { B: B, next: B * grow - tx, tax: tx };
   }
-  function drawAt(t, budget) { return 12 * budget - inc[t]; }
+  /* opbouw: tot de pensioenleeftijd gaat de maandelijkse inleg in het vermogen (geld van vandaag); daarna geldt het gewone budget */
+  var stopAge = p.opbouw ? (p.pensioenLeeftijd || 67) : 0, saveM = p.opbouw ? Math.max(0, p.inleg || 0) : 0;
+  function drawAt(t, budget) {
+    if (!p.opbouw) return 12 * budget - inc[t];
+    var f = ovl(ageP + t, -1e9, stopAge);
+    return f * (-12 * saveM) + (1 - f) * (12 * budget - inc[t]);
+  }
 
   function feasible(K0, budget) {
     var K = K0;
@@ -2194,7 +2232,7 @@ function runModel(p) {
   }
 
   return {
-    g: grow - 1, N: N, youngest: youngest,
+    g: grow - 1, N: N, youngest: youngest, tStop: p.opbouw ? Math.max(0, Math.min(N, Math.round(stopAge - ageP))) : 0,
     req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes, incSp: incSp, incPen: incPen, incWk: incWk, incPot: incPot, lump: lump,
     emptyAt: emptyAt, marge: p.startkapitaal - req0,
     buffer: req0 > 0 ? p.startkapitaal / req0 - 1 : Infinity,
@@ -4658,6 +4696,121 @@ Object.assign(I18N.es, {
 "lp.abroad.title": "Jubilarse en el extranjero: ¿cuánto vale allí tu dinero? | Button Counter",
 "lp.abroad.desc": "Compara el poder adquisitivo de tu presupuesto mensual en 31 países europeos y prueba tu plan con las normas de diez países. Sin cuenta."
 });
+Object.assign(I18N.nl, {
+ "age.q": "Hoe oud ben je?",
+ "age.aria": "Je leeftijd",
+ "goalY.1.t": "Wat wordt mijn inleg over 30 jaar?",
+ "goalY.1.s": "Zie wat je maandelijkse inleg oplevert, in geld van vandaag.",
+ "goalY.2.t": "Haal ik mijn pensioen zo?",
+ "goalY.2.s": "Zet je inleg naast je pensioen en zie of het genoeg wordt.",
+ "goalY.3.t": "Wat scheelt een beetje meer inleg?",
+ "goalY.3.s": "Pas je inleg aan en zie meteen wat het straks verschilt.",
+ "goalY.4.t": "Sparen of beleggen: wat scheelt het?",
+ "goalY.4.s": "Vergelijk drie manieren van beleggen over een lange tijd.",
+ "q.inleg": "Wat leg je per maand opzij?",
+ "f.budgetOpb": "Wat wil je later per maand te besteden hebben?",
+ "opb.k": "Rond je pensioen, op {a}",
+ "opb.empty": "Vul in wat je per maand opzij legt, dan zie je wat het wordt.",
+ "opb.fill": "Inleg invullen",
+ "opb.late": "Je pensioenleeftijd is al bereikt of vlakbij. Kijk in de rest van het overzicht of je vermogen genoeg is.",
+ "opb.range": "In 8 van de 10 gevallen tussen {lo} en {hi}.",
+ "opb.split": "Daarvan komt {put} uit je eigen zak: {inl} per maand, {y} jaar lang, plus wat je nu al hebt. De rest is rendement.",
+ "opb.note": "Het midden van {n} rekenvoorbeelden, in geld van vandaag, na kosten en belasting. Een rekenvoorbeeld, geen belofte.",
+ "opb.mix": "Gerekend met de mix {pf}. Andere mixen zie je onder Inzicht.",
+ "opb.edit": "Inleg aanpassen"
+});
+Object.assign(I18N.en, {
+ "age.q": "How old are you?",
+ "age.aria": "Your age",
+ "goalY.1.t": "What does my monthly saving become in 30 years?",
+ "goalY.1.s": "See what your monthly saving builds up to, in today’s money.",
+ "goalY.2.t": "Will this get me to my pension?",
+ "goalY.2.s": "Put your saving next to your retirement and see if it will be enough.",
+ "goalY.3.t": "What does saving a bit more change?",
+ "goalY.3.s": "Adjust your monthly saving and see the difference straight away.",
+ "goalY.4.t": "Saving or investing: what’s the difference?",
+ "goalY.4.s": "Compare three ways of investing over a long time.",
+ "q.inleg": "What do you put aside each month?",
+ "f.budgetOpb": "What do you want to spend per month later?",
+ "opb.k": "Around retirement, at {a}",
+ "opb.empty": "Enter what you put aside each month and see what it becomes.",
+ "opb.fill": "Enter monthly saving",
+ "opb.late": "Your pension age is here or close. See the rest of the overview for whether your capital is enough.",
+ "opb.range": "In 8 out of 10 cases between {lo} and {hi}.",
+ "opb.split": "Of that, {put} is your own money: {inl} a month for {y} years, plus what you start with. The rest is return.",
+ "opb.note": "The middle of {n} simulated paths, in today’s money, after costs and tax. An illustration, not a promise.",
+ "opb.mix": "Calculated with the {pf} mix. You can see the other mixes under Insights.",
+ "opb.edit": "Adjust saving"
+});
+Object.assign(I18N.de, {
+ "age.q": "Wie alt sind Sie?",
+ "age.aria": "Ihr Alter",
+ "goalY.1.t": "Was wird aus meiner Sparrate in 30 Jahren?",
+ "goalY.1.s": "Sehen Sie, was Ihre monatliche Sparrate bringt, in heutigem Geld.",
+ "goalY.2.t": "Komme ich so bis zur Rente?",
+ "goalY.2.s": "Stellen Sie Ihre Sparrate neben Ihre Rente und sehen Sie, ob es reicht.",
+ "goalY.3.t": "Was bringt etwas mehr Sparrate?",
+ "goalY.3.s": "Ändern Sie Ihre Sparrate und sehen Sie sofort den Unterschied.",
+ "goalY.4.t": "Sparen oder anlegen: was ist der Unterschied?",
+ "goalY.4.s": "Vergleichen Sie drei Arten der Geldanlage über lange Zeit.",
+ "q.inleg": "Wie viel legen Sie pro Monat zurück?",
+ "f.budgetOpb": "Wie viel möchten Sie später pro Monat ausgeben?",
+ "opb.k": "Rund um die Rente, mit {a}",
+ "opb.empty": "Tragen Sie ein, was Sie pro Monat zurücklegen, dann sehen Sie, was daraus wird.",
+ "opb.fill": "Sparrate eintragen",
+ "opb.late": "Ihr Rentenalter ist erreicht oder nah. Im restlichen Überblick sehen Sie, ob Ihr Vermögen reicht.",
+ "opb.range": "In 8 von 10 Fällen zwischen {lo} und {hi}.",
+ "opb.split": "Davon stammen {put} aus Ihrer eigenen Tasche: {inl} pro Monat, {y} Jahre lang, plus Ihr heutiges Vermögen. Der Rest ist Rendite.",
+ "opb.note": "Die Mitte von {n} Rechenbeispielen, in heutigem Geld, nach Kosten und Steuern. Ein Rechenbeispiel, kein Versprechen.",
+ "opb.mix": "Gerechnet mit der Mischung {pf}. Die anderen Mischungen sehen Sie unter Einblick.",
+ "opb.edit": "Sparrate ändern"
+});
+Object.assign(I18N.fr, {
+ "age.q": "Quel âge avez-vous ?",
+ "age.aria": "Votre âge",
+ "goalY.1.t": "Que deviendra mon épargne mensuelle dans 30 ans ?",
+ "goalY.1.s": "Voyez ce que rapporte votre épargne mensuelle, en argent d’aujourd’hui.",
+ "goalY.2.t": "Aurai-je assez pour ma retraite ?",
+ "goalY.2.s": "Mettez votre épargne à côté de votre retraite et voyez si cela suffira.",
+ "goalY.3.t": "Que change un peu plus d’épargne ?",
+ "goalY.3.s": "Modifiez votre épargne et voyez tout de suite la différence.",
+ "goalY.4.t": "Épargner ou investir : quelle différence ?",
+ "goalY.4.s": "Comparez trois façons d’investir sur une longue durée.",
+ "q.inleg": "Combien mettez-vous de côté par mois ?",
+ "f.budgetOpb": "Combien voulez-vous dépenser par mois plus tard ?",
+ "opb.k": "Autour de la retraite, à {a}",
+ "opb.empty": "Indiquez ce que vous mettez de côté chaque mois pour voir ce que cela devient.",
+ "opb.fill": "Saisir l’épargne",
+ "opb.late": "Votre âge de retraite est atteint ou proche. Voyez dans le reste de l’aperçu si votre patrimoine suffit.",
+ "opb.range": "Dans 8 cas sur 10, entre {lo} et {hi}.",
+ "opb.split": "Sur ce total, {put} viennent de votre poche : {inl} par mois pendant {y} ans, plus ce que vous avez déjà. Le reste est du rendement.",
+ "opb.note": "Le milieu de {n} scénarios simulés, en argent d’aujourd’hui, après frais et impôts. Une illustration, pas une promesse.",
+ "opb.mix": "Calculé avec le mix {pf}. Vous voyez les autres mix sous Analyse.",
+ "opb.edit": "Modifier l’épargne"
+});
+Object.assign(I18N.es, {
+ "age.q": "¿Cuántos años tienes?",
+ "age.aria": "Tu edad",
+ "goalY.1.t": "¿En qué se convertirá mi ahorro mensual en 30 años?",
+ "goalY.1.s": "Mira a cuánto llega tu ahorro mensual, en dinero de hoy.",
+ "goalY.2.t": "¿Me alcanzará para la jubilación?",
+ "goalY.2.s": "Pon tu ahorro junto a tu jubilación y mira si será suficiente.",
+ "goalY.3.t": "¿Qué cambia ahorrar un poco más?",
+ "goalY.3.s": "Ajusta tu ahorro y mira la diferencia al instante.",
+ "goalY.4.t": "¿Ahorrar o invertir: qué diferencia hay?",
+ "goalY.4.s": "Compara tres formas de invertir a largo plazo.",
+ "q.inleg": "¿Cuánto apartas cada mes?",
+ "f.budgetOpb": "¿Cuánto quieres gastar al mes más adelante?",
+ "opb.k": "Hacia la jubilación, a los {a}",
+ "opb.empty": "Indica cuánto apartas cada mes y verás en qué se convierte.",
+ "opb.fill": "Indicar ahorro",
+ "opb.late": "Tu edad de jubilación ya ha llegado o está cerca. Mira en el resto del resumen si tu patrimonio basta.",
+ "opb.range": "En 8 de cada 10 casos, entre {lo} y {hi}.",
+ "opb.split": "De eso, {put} salen de tu bolsillo: {inl} al mes durante {y} años, más lo que ya tienes. El resto es rentabilidad.",
+ "opb.note": "El punto medio de {n} simulaciones, en dinero de hoy, después de costes e impuestos. Una ilustración, no una promesa.",
+ "opb.mix": "Calculado con la mezcla {pf}. Las otras mezclas están en Análisis.",
+ "opb.edit": "Ajustar ahorro"
+});
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -4848,7 +5001,7 @@ Object.assign(I18N.es, {
 
   /* ================= toestand ================= */
   var DEF = {
-    startkapitaal: 0, budget: 0, box3: 1, eindDiana: 1,
+    startkapitaal: 0, budget: 0, opbouw: 0, inleg: 0, box3: 1, eindDiana: 1,
     werkP: 0, werkD: 0, werkTotP: 67, werkTotD: 67, autoWerk: 1,
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 67, aowDiana: 67, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
@@ -4926,6 +5079,7 @@ Object.assign(I18N.es, {
   var F = {
     startkapitaal: { u: 'u.cur', min: 0, max: 2000000, step: 5000, tag: 'zelf', r: [100000, 2000000] },
     budget: { u: 'u.netMonth', min: 0, max: 10000, step: 25, tag: 'zelf', r: [1000, 6000] },
+    inleg: { u: 'u.netMonth', min: 0, max: 5000, step: 25, tag: 'zelf', r: [0, 1500] },
     werkP: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
     werkD: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
     werkTotP: { u: 'u.years', min: 18, max: 100, step: 'any', tag: 'zelf', lab: 'f.wkEnd', hint: 'h.wkEnd' },
@@ -5123,7 +5277,7 @@ Object.assign(I18N.es, {
     if (k === 'pensioenLeeftijd' || k === 'pensioenLeeftijdDiana') state.autoPenAge = 0;
     if (k === 'werkTotP' || k === 'werkTotD') state.autoWerk = 0;
   }
-  ['leeftijdPaul', 'leeftijdDiana', 'budget', 'startkapitaal', 'spP', 'spD'].forEach(function (k) {
+  ['leeftijdPaul', 'leeftijdDiana', 'budget', 'startkapitaal', 'inleg', 'spP', 'spD'].forEach(function (k) {
     var e = $('q-' + k); if (!e) return;
     e.addEventListener('input', function () {
       var v = numOf(e);
@@ -5152,7 +5306,7 @@ Object.assign(I18N.es, {
   Object.keys(DEF).forEach(function (k) { if (SEGK.indexOf(k) < 0) bind(k); });
   CHK.forEach(function (k) { var c = $('c-' + k); if (c) c.addEventListener('change', function () { state[k] = c.checked ? 1 : 0; update(); }); });
   function syncInputs() {
-    setTimeout(function () { ['budget', 'startkapitaal', 'spP', 'spD'].forEach(function (k) { var e = $('q-' + k); if (e && document.activeElement !== e && !(state[k] > 0)) e.value = ''; }); }, 0);
+    setTimeout(function () { ['budget', 'startkapitaal', 'inleg', 'spP', 'spD'].forEach(function (k) { var e = $('q-' + k); if (e && document.activeElement !== e && !(state[k] > 0)) e.value = ''; }); }, 0);
     each('input[data-k]', function (r) { r.checked = parseInt(r.value, 10) === state[r.getAttribute('data-k')]; });
     CHK.forEach(function (k) { var c = $('c-' + k); if (c) c.checked = state[k] !== 0; });
     Object.keys(DEF).forEach(function (k) {
@@ -5311,7 +5465,7 @@ Object.assign(I18N.es, {
 
   /* ================= automatisch invullen en advies ================= */
   var adv = null, last = null;
-  function capEff() { return state.startkapitaal > 0 ? state.startkapitaal : (adv ? adv.c90 : 0); }
+  function capEff() { return state.startkapitaal > 0 || state.opbouw ? state.startkapitaal : (adv ? adv.c90 : 0); }
   function applyAuto() {
     if (state.autoAow) { state.aowPaul = spAgeFor(state.leeftijdPaul); state.aowDiana = spAgeFor(state.leeftijdDiana); }
     if (state.autoPenAge) { state.pensioenLeeftijd = state.aowPaul; state.pensioenLeeftijdDiana = state.aowDiana; }
@@ -5469,7 +5623,7 @@ Object.assign(I18N.es, {
   }
   function renderAdvies() {
     var el = $('advies'); if (!el) return;
-    if (!adv) { el.hidden = true; el.innerHTML = ''; return; }
+    if (!adv || state.opbouw) { el.hidden = true; el.innerHTML = ''; return; }
     el.hidden = false;
     var tw = two(), have = state.startkapitaal, need = adv.c90;
     var gl = function (g) { return t1(g === 0 ? 'sex.man' : (g === 1 ? 'sex.woman' : 'sex.person')); };
@@ -5612,7 +5766,33 @@ Object.assign(I18N.es, {
 
   var simTimer = null, fanSrc = null;
   function scheduleSim(now) { clearTimeout(simTimer); if (now) { renderPortfolios(); return; } simTimer = setTimeout(renderPortfolios, 450); }
+  function renderOpb() {
+    var el = $('opb-card'); if (!el) return;
+    var root = document.documentElement;
+    root.classList.toggle('is-opb', !!state.opbouw);
+    root.classList.toggle('no-bud', !(state.budget > 0));
+    if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false;
+    var stop = state.pensioenLeeftijd, now = state.leeftijdPaul;
+    var a = fmtAge(stop); if (/^\d+$/.test(a)) a += ' ' + t1('u.years');
+    var head = '<p class="opb-k">' + t1('opb.k', { a: a }) + '</p>';
+    if (!(state.inleg > 0)) {
+      el.innerHTML = head + '<p class="opb-empty">' + t1('opb.empty') + '</p><div class="opb-act"><a class="btn primary" href="#input" id="opb-fill">' + t1('opb.fill') + '</a></div>';
+      return;
+    }
+    if (stop - now < 1) { el.innerHTML = head + '<p class="opb-empty">' + t1('opb.late') + '</p>'; return; }
+    var pf = portStat(effIdx()), p = params();
+    var m = runModel(params({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true }));
+    var sim = simulate(m, pf, p), k = Math.min(m.tStop, sim.last);
+    var put = state.startkapitaal + 12 * state.inleg * (stop - now);
+    el.innerHTML = head + '<p class="opb-big">' + eur(sim.q(k, 0.5)) + '</p>' +
+      '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p>' +
+      '<p class="opb-split">' + t1('opb.split', { put: eur(put), inl: eur(state.inleg), y: num(Math.round(stop - now), 0) }) + '</p>' +
+      '<p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + ' ' + t1('opb.mix', { pf: pf.n.toLowerCase() }) + '</p>' +
+      '<div class="opb-act"><a class="btn ghost" href="#input">' + t1('opb.edit') + '</a></div>';
+  }
   function renderPortfolios() {
+    renderOpb();
     var p = params(), html = '', chosen = null, ref = youngestName();
     [1, 2, 3].forEach(function (i) {
       var pf = portStat(i), cur = i === effIdx();
@@ -6022,7 +6202,7 @@ Object.assign(I18N.es, {
   function finishUpdate() {
     if (!updTimer) document.documentElement.classList.remove('is-calc');
     renderAdvies();
-    document.documentElement.classList.toggle('is-empty', state.budget <= 0);
+    document.documentElement.classList.toggle('is-empty', state.budget <= 0 && !(state.opbouw && state.inleg > 0));
     renderHints();
     var m = runModel(params());
     last = m;
@@ -6050,6 +6230,7 @@ Object.assign(I18N.es, {
   /*TRK-START*/
 var TRK = {
  'core-budget': ['basis', 'Maandbudget ingevuld'],
+ 'extra-inleg': ['extra', 'Maandelijkse inleg ingevuld'],
  'core-capital': ['basis', 'Vermogen ingevuld'],
  'core-two-persons': ['basis', 'Gekozen voor twee personen'],
  'core-country': ['basis', 'Land gekozen of gewijzigd'],
@@ -6069,6 +6250,12 @@ var TRK = {
  'reach-goal-earlier': ['bereik', 'Welkom: kies doel Eerder stoppen'],
  'reach-goal-abroad': ['bereik', 'Welkom: kies doel Naar het buitenland'],
  'reach-goal-unsure': ['bereik', 'Welkom: weet het nog niet'],
+ 'reach-goal-grow': ['bereik', 'Welkom: kies doel Wat wordt mijn inleg'],
+ 'reach-goal-retire': ['bereik', 'Welkom: kies doel Haal ik mijn pensioen'],
+ 'reach-goal-more': ['bereik', 'Welkom: kies doel Meer inleg'],
+ 'reach-goal-invest': ['bereik', 'Welkom: kies doel Sparen of beleggen'],
+ 'reach-young': ['bereik', 'Welkom: leeftijd onder 35'],
+ 'reach-midlife': ['bereik', 'Welkom: leeftijd 35 tot 50'],
  'reach-landing-enough': ['bereik', 'Binnengekomen via vraagpagina Is mijn geld genoeg'],
  'reach-landing-spend': ['bereik', 'Binnengekomen via vraagpagina Hoeveel kan ik uitgeven'],
  'reach-landing-earlier': ['bereik', 'Binnengekomen via vraagpagina Eerder stoppen'],
@@ -6122,7 +6309,7 @@ var TRK = {
   var TRK_CLICK = [['.share-open', 'reach-share-open'], ['#sh-link', 'reach-share-link'], ['#sh-print', 'pro-share-print'], ['#sh-copy', 'pro-share-summary'], ['.fb-open', 'reach-tip-open'], ['.duo-r', 'reach-coffee-click'],
     ['#btn-install', 'reach-install-click'], ['#btn-theme', 'extra-theme'], ['#btn-tour', 'extra-tour'], ['[data-addper]', 'pro-period-add'], ['#pot-add', 'pro-pot-add'], ['#pots-box > summary', 'pro-pots-open'],
     ['[data-pl="save"]', 'pro-plan-save'], ['#nt-fab', 'extra-notes-open']];
-  var TRK_CHANGE = { 'q-budget': 'core-budget', 'q-startkapitaal': 'core-capital', 'q-country': 'core-country', 'country-intro': 'core-country', 'lang-top': 'reach-language', 'lang-intro': 'reach-language',
+  var TRK_CHANGE = { 'q-budget': 'core-budget', 'q-startkapitaal': 'core-capital', 'q-inleg': 'extra-inleg', 'q-country': 'core-country', 'country-intro': 'core-country', 'lang-top': 'reach-language', 'lang-intro': 'reach-language',
     'n-werkP': 'extra-income-work', 'n-werkD': 'extra-income-work', 'n-werkTotP': 'extra-income-work', 'n-werkTotD': 'extra-income-work', 'n-pensioenPaul': 'extra-pension', 'n-pensioenDiana': 'extra-pension', 'n-pensioenLeeftijd': 'extra-pension', 'n-pensioenLeeftijdDiana': 'extra-pension', 'n-spP': 'extra-statepension', 'n-spD': 'extra-statepension', 'n-aowPaul': 'extra-statepension', 'n-aowDiana': 'extra-statepension',
     'n-taxRate': 'extra-tax', 'n-taxAllow': 'extra-tax', 'n-eindleeftijd': 'extra-endage', 'n-restkapitaal': 'extra-endage', 'n-inflatie': 'extra-inflation', 'n-kosten': 'extra-inflation', 'nm-1': 'extra-names', 'nm-2': 'extra-names' };
   document.addEventListener('click', function (ev) {
@@ -6533,6 +6720,8 @@ var TRK = {
   }
   function openIntro(step) {
     lastFocus = document.activeElement;
+    ageTouched = false; ageSet(Math.max(20, Math.min(65, state.leeftijdPaul || 50)));
+    if ($('slot-cyl') && typeof SLN === 'number') slotBuild();
     $('intro').hidden = false;
     introStep(step === 0 ? 0 : 1);
   }
@@ -6544,7 +6733,16 @@ var TRK = {
   }
   $('intro-skip').addEventListener('click', function () { closeIntro(false); });
   var GOALS = ['enough', 'spend', 'earlier', 'abroad'];
+  var SETS = [['grow', 'retire', 'more', 'invest'], ['retire', 'more', 'earlier', 'enough'], ['enough', 'spend', 'earlier', 'abroad']];
+  var GTXT = { grow: 'goalY.1', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
+  var introBand = 2, ageTouched = false;
+  function bandOf(a) { return a < 35 ? 0 : (a < 50 ? 1 : 2); }
+  function gtx(g, suf) { return t1((GTXT[g] || 'goal.5') + suf); }
   function goalTarget(g) {
+    if (g === 'grow') return { hash: '#overview', id: 'opb-card' };
+    if (g === 'retire') return { hash: '#overview', id: 'status-card' };
+    if (g === 'more') return { hash: '#input', step: 1 };
+    if (g === 'invest') return { hash: '#insight', id: 'sec-pf' };
     if (g === 'enough') return { hash: '#overview', id: 'status-card' };
     if (g === 'spend') return { hash: '#overview', id: 'ov-main' };
     if (g === 'earlier') return { hash: '#input', step: 2 };
@@ -6552,12 +6750,16 @@ var TRK = {
     return null;
   }
   function showGoal() {
-    var i = GOALS.indexOf(ui.goal), bar = $('goal-bar');
-    bar.hidden = i < 0;
-    if (i >= 0) $('gb-q').textContent = t1('goal.' + (i + 1) + '.t');
+    var bar = $('goal-bar');
+    bar.hidden = !GTXT[ui.goal];
+    if (GTXT[ui.goal]) $('gb-q').textContent = gtx(ui.goal, '.t');
   }
   function pickGoal(g) {
-    ui.goal = GOALS.indexOf(g) >= 0 ? g : ''; saveUi(); showGoal(); track('reach-goal-' + (ui.goal || 'unsure'));
+    var young = introBand < 2, list = SETS[introBand];
+    ui.goal = list.indexOf(g) >= 0 ? g : ''; state.opbouw = young ? 1 : 0;
+    if (ageTouched) { var av = parseInt($('age-r').value, 10); state.leeftijdPaul = av; if (two() && state.leeftijdDiana === DEF.leeftijdDiana) state.leeftijdDiana = av; }
+    saveUi(); showGoal(); track('reach-goal-' + (ui.goal || 'unsure')); if (introBand === 0) track('reach-young'); else if (introBand === 1) track('reach-midlife');
+    update();
     closeIntro(false);
     if (!ui.goal) { startTour(); return; }
     showStep(1, false);
@@ -6565,7 +6767,8 @@ var TRK = {
   }
   /* fruitautomaat: draai tot je vraag verschijnt, bevestig dan */
   /* draaiwiel: sleep omhoog of omlaag (of pijltjes, scrollwiel, tikken op de vraag erboven of eronder) */
-  var SLOTG = ['enough', 'spend', 'earlier', 'abroad', 'unsure'], slotIdx = 0, slotBusy = false;
+  function slotG() { return SETS[introBand].concat('unsure'); }
+  var slotIdx = 0, slotBusy = false;
   var SLN = 15, SLA = 360 / SLN, slAng = 0, slR = 0;
   function slotFh() { var w = $('slot-window'); return w ? (parseFloat(getComputedStyle(w).getPropertyValue('--fh')) || 128) : 128; }
   function slotBuild() {
@@ -6574,7 +6777,7 @@ var TRK = {
     slR = slotFh() / 2 / Math.tan(Math.PI / SLN);
     for (f = 0; f < SLN; f++) {
       i = f % 5;
-      h += '<div class="slot-face" data-i="' + i + '" aria-hidden="true" style="transform: rotateX(' + (-f * SLA) + 'deg) translateZ(' + slR.toFixed(1) + 'px)"><b>' + t1('goal.' + (i + 1) + '.t') + '</b></div>';
+      h += '<div class="slot-face" data-i="' + i + '" aria-hidden="true" style="transform: rotateX(' + (-f * SLA) + 'deg) translateZ(' + slR.toFixed(1) + 'px)"><b>' + gtx(slotG()[i], '.t') + '</b></div>';
     }
     cyl.innerHTML = h;
     slotPos(slotIdx * SLA, false);
@@ -6587,8 +6790,8 @@ var TRK = {
     var k = ((Math.round(a / SLA) % SLN) + SLN) % SLN;
     slotIdx = k % 5;
     var w = $('slot-window');
-    var sb = $('slot-sub'); if (sb) sb.textContent = t1('goal.' + (slotIdx + 1) + '.s');
-    if (w) { w.setAttribute('aria-valuenow', slotIdx + 1); w.setAttribute('aria-valuetext', t1('goal.' + (slotIdx + 1) + '.t')); }
+    var sb = $('slot-sub'); if (sb) sb.textContent = gtx(slotG()[slotIdx], '.s');
+    if (w) { w.setAttribute('aria-valuenow', slotIdx + 1); w.setAttribute('aria-valuetext', gtx(slotG()[slotIdx], '.t')); }
   }
   function slotShow(i) { slotPos(i * SLA, false); }
   function slotSnap(a) { slotPos(Math.round(a / SLA) * SLA, true); }
@@ -6634,10 +6837,17 @@ var TRK = {
     w.addEventListener('keydown', function (ev) {
       if (ev.key === 'ArrowDown') { ev.preventDefault(); slotStep(1); }
       else if (ev.key === 'ArrowUp') { ev.preventDefault(); slotStep(-1); }
-      else if (ev.key === 'Enter') { ev.preventDefault(); pickGoal(SLOTG[slotIdx]); }
+      else if (ev.key === 'Enter') { ev.preventDefault(); pickGoal(slotG()[slotIdx]); }
     });
   })();
-  $('slot-ok').addEventListener('click', function () { pickGoal(SLOTG[slotIdx]); });
+  $('slot-ok').addEventListener('click', function () { pickGoal(slotG()[slotIdx]); });
+  function ageSet(a) {
+    var r = $('age-r'); if (!r) return;
+    r.value = a; $('age-v').textContent = a + (a >= 65 ? '+' : '');
+    var b = bandOf(a); each('.age-zones span', function (z) { z.classList.toggle('on', parseInt(z.getAttribute('data-z'), 10) === b); });
+    if (b !== introBand) { introBand = b; if ($('slot-cyl') && typeof SLN === 'number') slotBuild(); }
+  }
+  if ($('age-r')) $('age-r').addEventListener('input', function () { ageTouched = true; ageSet(parseInt(this.value, 10)); });
   slotBuild();
 
   $('gb-go').addEventListener('click', function () {
@@ -6841,7 +7051,7 @@ var TRK = {
   });
   /* wat is er nieuw: eenmalig, met alle gemiste versies (niet bij een eerste bezoek of een gedeelde link) */
   if (LPG && GOALS.indexOf(LPG) >= 0 && !planFromLink) {
-    var lpFirst = !ui.introSeen; ui.goal = LPG; ui.introSeen = true; if (typeof ui.relSeen !== 'number') ui.relSeen = REL_LAST; saveUi(); showGoal(); track('reach-landing-' + LPG);
+    var lpFirst = !ui.introSeen; if (state.opbouw) { state.opbouw = 0; update(); } ui.goal = LPG; ui.introSeen = true; if (typeof ui.relSeen !== 'number') ui.relSeen = REL_LAST; saveUi(); showGoal(); track('reach-landing-' + LPG);
     if (!lpFirst) openRel();
   } else if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(0); } else openRel();
 })();
