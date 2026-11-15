@@ -941,6 +941,10 @@ html.is-opb.no-bud #status-card { display: none; }
 .opb-range, .opb-split { margin: 0; font-size: 15px; color: var(--ink2); }
 .opb-note, .opb-empty { margin: 0; font-size: 13px; color: var(--muted); }
 .opb-empty { font-size: 15px; color: var(--ink2); }
+.opb-h { margin: 10px 0 0; font-size: 12.5px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.opb-mix { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 15px; color: var(--ink2); }
+.opb-mix li { padding: 6px 10px; border-radius: 8px; background: var(--surface2); overflow-wrap: anywhere; }
+.opb-mix li.cur { background: var(--accent-soft); }
 .opb-act { margin-top: 6px; display: flex; gap: 10px; flex-wrap: wrap; }
 .slot-sub { margin: 0; min-height: 1.4em; text-align: center; color: var(--ink2); font-size: 15px; }
 .slot-hint { margin: 0; text-align: center; color: var(--ink2); font-size: 13.5px; }
@@ -4699,117 +4703,177 @@ Object.assign(I18N.es, {
 Object.assign(I18N.nl, {
  "age.q": "Hoe oud ben je?",
  "age.aria": "Je leeftijd",
- "goalY.1.t": "Wat wordt mijn inleg over 30 jaar?",
- "goalY.1.s": "Zie wat je maandelijkse inleg oplevert, in geld van vandaag.",
  "goalY.2.t": "Haal ik mijn pensioen zo?",
  "goalY.2.s": "Zet je inleg naast je pensioen en zie of het genoeg wordt.",
- "goalY.3.t": "Wat scheelt een beetje meer inleg?",
- "goalY.3.s": "Pas je inleg aan en zie meteen wat het straks verschilt.",
+ "goalY.3.t": "Wat scheelt een beetje meer sparen?",
+ "goalY.3.s": "Pas aan hoeveel je opzij legt en zie meteen wat het scheelt.",
  "goalY.4.t": "Sparen of beleggen: wat scheelt het?",
  "goalY.4.s": "Vergelijk drie manieren van beleggen over een lange tijd.",
  "q.inleg": "Wat leg je per maand opzij?",
  "f.budgetOpb": "Wat wil je later per maand te besteden hebben?",
  "opb.k": "Rond je pensioen, op {a}",
  "opb.empty": "Vul in wat je per maand opzij legt, dan zie je wat het wordt.",
- "opb.fill": "Inleg invullen",
+ "opb.fill": "Bedrag invullen",
  "opb.late": "Je pensioenleeftijd is al bereikt of vlakbij. Kijk in de rest van het overzicht of je vermogen genoeg is.",
  "opb.range": "In 8 van de 10 gevallen tussen {lo} en {hi}.",
  "opb.split": "Daarvan komt {put} uit je eigen zak: {inl} per maand, {y} jaar lang, plus wat je nu al hebt. De rest is rendement.",
  "opb.note": "Het midden van {n} rekenvoorbeelden, in geld van vandaag, na kosten en belasting. Een rekenvoorbeeld, geen belofte.",
- "opb.mix": "Gerekend met de mix {pf}. Andere mixen zie je onder Inzicht.",
- "opb.edit": "Inleg aanpassen"
+ "opb.edit": "Bedrag aanpassen",
+ "goalY.5.t": "Hoe rijk word ik van sparen en beleggen?",
+ "goalY.5.s": "Zonder hype: wat een vast bedrag per maand echt oplevert, ook als het tegenzit.",
+ "goalY.6.t": "Wanneer ben ik financieel vrij (FIRE)?",
+ "goalY.6.s": "Zie vanaf welke leeftijd je vermogen genoeg is om van te leven.",
+ "opb.mixh": "Hetzelfde bedrag, drie manieren van beleggen",
+ "opb.mixrow": "{n}: {mid} (tussen {lo} en {hi})",
+ "opb.fireH": "Financieel vrij (FIRE)",
+ "opb.fire": "Met {b} per maand heb je ongeveer {t} nodig (25 keer je jaarbudget, een vuistregel). Je haalt dat:",
+ "opb.fireNo": "Met {b} per maand heb je ongeveer {t} nodig (25 keer je jaarbudget, een vuistregel). Dat haal je met dit bedrag niet voor je pensioen, ook niet als het meezit. Meer sparen of een lager budget helpt.",
+ "opb.fireAsk": "Vul in wat je later per maand wilt uitgeven, dan zie je wanneer je financieel vrij kunt zijn.",
+ "opb.at": "op {n} jaar",
+ "opb.never": "niet voor je pensioen",
+ "opb.fireL": "Als het meezit",
+ "opb.fireM": "In het midden",
+ "opb.fireB": "Als het tegenzit"
 });
 Object.assign(I18N.en, {
  "age.q": "How old are you?",
  "age.aria": "Your age",
- "goalY.1.t": "What does my monthly saving become in 30 years?",
- "goalY.1.s": "See what your monthly saving builds up to, in today’s money.",
  "goalY.2.t": "Will this get me to my pension?",
  "goalY.2.s": "Put your saving next to your retirement and see if it will be enough.",
  "goalY.3.t": "What does saving a bit more change?",
- "goalY.3.s": "Adjust your monthly saving and see the difference straight away.",
+ "goalY.3.s": "Adjust how much you put aside and see the difference straight away.",
  "goalY.4.t": "Saving or investing: what’s the difference?",
  "goalY.4.s": "Compare three ways of investing over a long time.",
  "q.inleg": "What do you put aside each month?",
  "f.budgetOpb": "What do you want to spend per month later?",
  "opb.k": "Around retirement, at {a}",
  "opb.empty": "Enter what you put aside each month and see what it becomes.",
- "opb.fill": "Enter monthly saving",
+ "opb.fill": "Enter amount",
  "opb.late": "Your pension age is here or close. See the rest of the overview for whether your capital is enough.",
  "opb.range": "In 8 out of 10 cases between {lo} and {hi}.",
  "opb.split": "Of that, {put} is your own money: {inl} a month for {y} years, plus what you start with. The rest is return.",
  "opb.note": "The middle of {n} simulated paths, in today’s money, after costs and tax. An illustration, not a promise.",
- "opb.mix": "Calculated with the {pf} mix. You can see the other mixes under Insights.",
- "opb.edit": "Adjust saving"
+ "opb.edit": "Adjust amount",
+ "goalY.5.t": "Will saving and investing actually make me rich?",
+ "goalY.5.s": "No hype: what a fixed amount each month really builds, even if markets disappoint.",
+ "goalY.6.t": "When can I be financially free (FIRE)?",
+ "goalY.6.s": "See from which age your wealth is enough to live on.",
+ "opb.mixh": "The same amount, three ways of investing",
+ "opb.mixrow": "{n}: {mid} (between {lo} and {hi})",
+ "opb.fireH": "Financially free (FIRE)",
+ "opb.fire": "With {b} a month you need about {t} (25 times your yearly spending, a rule of thumb). You get there:",
+ "opb.fireNo": "With {b} a month you need about {t} (25 times your yearly spending, a rule of thumb). You don’t get there before your pension at this amount, even if things go well. Saving more or a lower budget helps.",
+ "opb.fireAsk": "Enter what you want to spend per month later and you’ll see when you could be financially free.",
+ "opb.at": "at {n}",
+ "opb.never": "not before your pension",
+ "opb.fireL": "If things go well",
+ "opb.fireM": "In the middle case",
+ "opb.fireB": "If things go badly"
 });
 Object.assign(I18N.de, {
  "age.q": "Wie alt sind Sie?",
  "age.aria": "Ihr Alter",
- "goalY.1.t": "Was wird aus meiner Sparrate in 30 Jahren?",
- "goalY.1.s": "Sehen Sie, was Ihre monatliche Sparrate bringt, in heutigem Geld.",
  "goalY.2.t": "Komme ich so bis zur Rente?",
  "goalY.2.s": "Stellen Sie Ihre Sparrate neben Ihre Rente und sehen Sie, ob es reicht.",
- "goalY.3.t": "Was bringt etwas mehr Sparrate?",
- "goalY.3.s": "Ändern Sie Ihre Sparrate und sehen Sie sofort den Unterschied.",
+ "goalY.3.t": "Was bringt etwas mehr Sparen?",
+ "goalY.3.s": "Ändern Sie, wie viel Sie zurücklegen, und sehen Sie sofort den Unterschied.",
  "goalY.4.t": "Sparen oder anlegen: was ist der Unterschied?",
  "goalY.4.s": "Vergleichen Sie drei Arten der Geldanlage über lange Zeit.",
  "q.inleg": "Wie viel legen Sie pro Monat zurück?",
  "f.budgetOpb": "Wie viel möchten Sie später pro Monat ausgeben?",
  "opb.k": "Rund um die Rente, mit {a}",
  "opb.empty": "Tragen Sie ein, was Sie pro Monat zurücklegen, dann sehen Sie, was daraus wird.",
- "opb.fill": "Sparrate eintragen",
+ "opb.fill": "Betrag eintragen",
  "opb.late": "Ihr Rentenalter ist erreicht oder nah. Im restlichen Überblick sehen Sie, ob Ihr Vermögen reicht.",
  "opb.range": "In 8 von 10 Fällen zwischen {lo} und {hi}.",
  "opb.split": "Davon stammen {put} aus Ihrer eigenen Tasche: {inl} pro Monat, {y} Jahre lang, plus Ihr heutiges Vermögen. Der Rest ist Rendite.",
  "opb.note": "Die Mitte von {n} Rechenbeispielen, in heutigem Geld, nach Kosten und Steuern. Ein Rechenbeispiel, kein Versprechen.",
- "opb.mix": "Gerechnet mit der Mischung {pf}. Die anderen Mischungen sehen Sie unter Einblick.",
- "opb.edit": "Sparrate ändern"
+ "opb.edit": "Betrag ändern",
+ "goalY.5.t": "Werde ich vom Sparen und Anlegen wirklich reich?",
+ "goalY.5.s": "Ohne Hype: was ein fester Betrag pro Monat wirklich bringt, auch wenn es schlecht läuft.",
+ "goalY.6.t": "Wann bin ich finanziell frei (FIRE)?",
+ "goalY.6.s": "Sehen Sie, ab welchem Alter Ihr Vermögen zum Leben reicht.",
+ "opb.mixh": "Derselbe Betrag, drei Arten der Geldanlage",
+ "opb.mixrow": "{n}: {mid} (zwischen {lo} und {hi})",
+ "opb.fireH": "Finanziell frei (FIRE)",
+ "opb.fire": "Mit {b} pro Monat brauchen Sie etwa {t} (das 25-Fache Ihrer Jahresausgaben, eine Faustregel). Sie erreichen das:",
+ "opb.fireNo": "Mit {b} pro Monat brauchen Sie etwa {t} (das 25-Fache Ihrer Jahresausgaben, eine Faustregel). Das erreichen Sie mit diesem Betrag nicht vor der Rente, auch nicht, wenn es gut läuft. Mehr sparen oder ein niedrigeres Budget hilft.",
+ "opb.fireAsk": "Tragen Sie ein, was Sie später pro Monat ausgeben möchten, dann sehen Sie, wann Sie finanziell frei sein könnten.",
+ "opb.at": "mit {n}",
+ "opb.never": "nicht vor Ihrer Rente",
+ "opb.fireL": "Wenn es gut läuft",
+ "opb.fireM": "Im mittleren Fall",
+ "opb.fireB": "Wenn es schlecht läuft"
 });
 Object.assign(I18N.fr, {
  "age.q": "Quel âge avez-vous ?",
  "age.aria": "Votre âge",
- "goalY.1.t": "Que deviendra mon épargne mensuelle dans 30 ans ?",
- "goalY.1.s": "Voyez ce que rapporte votre épargne mensuelle, en argent d’aujourd’hui.",
  "goalY.2.t": "Aurai-je assez pour ma retraite ?",
  "goalY.2.s": "Mettez votre épargne à côté de votre retraite et voyez si cela suffira.",
  "goalY.3.t": "Que change un peu plus d’épargne ?",
- "goalY.3.s": "Modifiez votre épargne et voyez tout de suite la différence.",
+ "goalY.3.s": "Modifiez ce que vous mettez de côté et voyez tout de suite la différence.",
  "goalY.4.t": "Épargner ou investir : quelle différence ?",
  "goalY.4.s": "Comparez trois façons d’investir sur une longue durée.",
  "q.inleg": "Combien mettez-vous de côté par mois ?",
  "f.budgetOpb": "Combien voulez-vous dépenser par mois plus tard ?",
  "opb.k": "Autour de la retraite, à {a}",
  "opb.empty": "Indiquez ce que vous mettez de côté chaque mois pour voir ce que cela devient.",
- "opb.fill": "Saisir l’épargne",
+ "opb.fill": "Saisir le montant",
  "opb.late": "Votre âge de retraite est atteint ou proche. Voyez dans le reste de l’aperçu si votre patrimoine suffit.",
  "opb.range": "Dans 8 cas sur 10, entre {lo} et {hi}.",
  "opb.split": "Sur ce total, {put} viennent de votre poche : {inl} par mois pendant {y} ans, plus ce que vous avez déjà. Le reste est du rendement.",
  "opb.note": "Le milieu de {n} scénarios simulés, en argent d’aujourd’hui, après frais et impôts. Une illustration, pas une promesse.",
- "opb.mix": "Calculé avec le mix {pf}. Vous voyez les autres mix sous Analyse.",
- "opb.edit": "Modifier l’épargne"
+ "opb.edit": "Modifier le montant",
+ "goalY.5.t": "Vais-je vraiment m’enrichir en épargnant et en investissant ?",
+ "goalY.5.s": "Sans battage : ce qu’un montant fixe par mois rapporte vraiment, même si cela tourne mal.",
+ "goalY.6.t": "Quand serai-je financièrement libre (FIRE) ?",
+ "goalY.6.s": "Voyez à partir de quel âge votre patrimoine suffit pour vivre.",
+ "opb.mixh": "Le même montant, trois façons d’investir",
+ "opb.mixrow": "{n} : {mid} (entre {lo} et {hi})",
+ "opb.fireH": "Financièrement libre (FIRE)",
+ "opb.fire": "Avec {b} par mois, il vous faut environ {t} (25 fois vos dépenses annuelles, une règle empirique). Vous y arrivez :",
+ "opb.fireNo": "Avec {b} par mois, il vous faut environ {t} (25 fois vos dépenses annuelles, une règle empirique). Avec ce montant, vous n’y arrivez pas avant la retraite, même si tout va bien. Épargner plus ou viser un budget plus bas aide.",
+ "opb.fireAsk": "Indiquez ce que vous voulez dépenser par mois plus tard pour voir quand vous pourriez être financièrement libre.",
+ "opb.at": "à {n} ans",
+ "opb.never": "pas avant votre retraite",
+ "opb.fireL": "Si tout va bien",
+ "opb.fireM": "Dans le cas moyen",
+ "opb.fireB": "Si cela tourne mal"
 });
 Object.assign(I18N.es, {
  "age.q": "¿Cuántos años tienes?",
  "age.aria": "Tu edad",
- "goalY.1.t": "¿En qué se convertirá mi ahorro mensual en 30 años?",
- "goalY.1.s": "Mira a cuánto llega tu ahorro mensual, en dinero de hoy.",
  "goalY.2.t": "¿Me alcanzará para la jubilación?",
  "goalY.2.s": "Pon tu ahorro junto a tu jubilación y mira si será suficiente.",
  "goalY.3.t": "¿Qué cambia ahorrar un poco más?",
- "goalY.3.s": "Ajusta tu ahorro y mira la diferencia al instante.",
+ "goalY.3.s": "Ajusta cuánto apartas y mira la diferencia al instante.",
  "goalY.4.t": "¿Ahorrar o invertir: qué diferencia hay?",
  "goalY.4.s": "Compara tres formas de invertir a largo plazo.",
  "q.inleg": "¿Cuánto apartas cada mes?",
  "f.budgetOpb": "¿Cuánto quieres gastar al mes más adelante?",
  "opb.k": "Hacia la jubilación, a los {a}",
  "opb.empty": "Indica cuánto apartas cada mes y verás en qué se convierte.",
- "opb.fill": "Indicar ahorro",
+ "opb.fill": "Indicar importe",
  "opb.late": "Tu edad de jubilación ya ha llegado o está cerca. Mira en el resto del resumen si tu patrimonio basta.",
  "opb.range": "En 8 de cada 10 casos, entre {lo} y {hi}.",
  "opb.split": "De eso, {put} salen de tu bolsillo: {inl} al mes durante {y} años, más lo que ya tienes. El resto es rentabilidad.",
  "opb.note": "El punto medio de {n} simulaciones, en dinero de hoy, después de costes e impuestos. Una ilustración, no una promesa.",
- "opb.mix": "Calculado con la mezcla {pf}. Las otras mezclas están en Análisis.",
- "opb.edit": "Ajustar ahorro"
+ "opb.edit": "Ajustar importe",
+ "goalY.5.t": "¿Ahorrar e invertir me hará rico de verdad?",
+ "goalY.5.s": "Sin humo: lo que un importe fijo al mes da de verdad, incluso si sale mal.",
+ "goalY.6.t": "¿Cuándo seré financieramente libre (FIRE)?",
+ "goalY.6.s": "Mira desde qué edad tu patrimonio basta para vivir.",
+ "opb.mixh": "El mismo importe, tres formas de invertir",
+ "opb.mixrow": "{n}: {mid} (entre {lo} y {hi})",
+ "opb.fireH": "Financieramente libre (FIRE)",
+ "opb.fire": "Con {b} al mes necesitas unos {t} (25 veces tu gasto anual, una regla práctica). Lo alcanzas:",
+ "opb.fireNo": "Con {b} al mes necesitas unos {t} (25 veces tu gasto anual, una regla práctica). Con este importe no llegas antes de la jubilación, ni siquiera si va bien. Ahorrar más o un presupuesto menor ayuda.",
+ "opb.fireAsk": "Indica cuánto quieres gastar al mes más adelante y verás cuándo podrías ser financieramente libre.",
+ "opb.at": "a los {n}",
+ "opb.never": "no antes de tu jubilación",
+ "opb.fireL": "Si va bien",
+ "opb.fireM": "En el caso medio",
+ "opb.fireB": "Si va mal"
 });
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
@@ -5781,14 +5845,33 @@ Object.assign(I18N.es, {
       return;
     }
     if (stop - now < 1) { el.innerHTML = head + '<p class="opb-empty">' + t1('opb.late') + '</p>'; return; }
-    var pf = portStat(effIdx()), p = params();
-    var m = runModel(params({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true }));
-    var sim = simulate(m, pf, p), k = Math.min(m.tStop, sim.last);
+    var p = params(), rows = [1, 2, 3].map(function (i) {
+      var pf = portStat(i), m = runModel(params({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true })), sim = simulate(m, pf, p);
+      return { pf: pf, m: m, sim: sim, k: Math.min(m.tStop, sim.last) };
+    });
+    var cur = rows[effIdx() - 1] || rows[1], sim = cur.sim, k = cur.k;
     var put = state.startkapitaal + 12 * state.inleg * (stop - now);
+    var mixHtml = rows.map(function (r) {
+      return '<li' + (r === cur ? ' class="cur"' : '') + '>' + t1('opb.mixrow', { n: '<b>' + esc(r.pf.n) + '</b>', mid: eur(r.sim.q(r.k, 0.5)), lo: eur(r.sim.q(r.k, 0.1)), hi: eur(r.sim.q(r.k, 0.9)) }) + '</li>';
+    }).join('');
+    /* financieel vrij: eerste jaar waarin het vermogen 25 keer het jaarbudget haalt (vuistregel) */
+    var fire = '';
+    if (state.budget > 0) {
+      var tgt = 25 * 12 * state.budget;
+      var at = function (f) {
+        for (var j = 0; j <= k; j++) if (sim.q(j, f) >= tgt) return t1('opb.at', { n: Math.round(now + j) });
+        return t1('opb.never');
+      };
+      var f1 = at(0.5), f2 = at(0.9), f3 = at(0.1), nv = t1('opb.never');
+      var fl = function (k, v) { return '<li>' + t1(k) + (prefs.lang === 'fr' ? '\u202f: ' : ': ') + v + '</li>'; };
+      fire = '<h3 class="opb-h">' + t1('opb.fireH') + '</h3><p class="opb-split">' + t1(f2 === nv ? 'opb.fireNo' : 'opb.fire', { b: eur(state.budget), t: eur(tgt) }) + '</p>' +
+        (f2 === nv ? '' : '<ul class="opb-mix">' + fl('opb.fireL', f2) + fl('opb.fireM', f1) + fl('opb.fireB', f3) + '</ul>');
+    } else fire = '<h3 class="opb-h">' + t1('opb.fireH') + '</h3><p class="opb-note">' + t1('opb.fireAsk') + '</p>';
     el.innerHTML = head + '<p class="opb-big">' + eur(sim.q(k, 0.5)) + '</p>' +
       '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p>' +
       '<p class="opb-split">' + t1('opb.split', { put: eur(put), inl: eur(state.inleg), y: num(Math.round(stop - now), 0) }) + '</p>' +
-      '<p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + ' ' + t1('opb.mix', { pf: pf.n.toLowerCase() }) + '</p>' +
+      '<h3 class="opb-h">' + t1('opb.mixh') + '</h3><ul class="opb-mix">' + mixHtml + '</ul>' + fire +
+      '<p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p>' +
       '<div class="opb-act"><a class="btn ghost" href="#input">' + t1('opb.edit') + '</a></div>';
   }
   function renderPortfolios() {
@@ -6250,7 +6333,8 @@ var TRK = {
  'reach-goal-earlier': ['bereik', 'Welkom: kies doel Eerder stoppen'],
  'reach-goal-abroad': ['bereik', 'Welkom: kies doel Naar het buitenland'],
  'reach-goal-unsure': ['bereik', 'Welkom: weet het nog niet'],
- 'reach-goal-grow': ['bereik', 'Welkom: kies doel Wat wordt mijn inleg'],
+ 'reach-goal-rich': ['bereik', 'Welkom: kies doel Hoe rijk word ik'],
+ 'reach-goal-free': ['bereik', 'Welkom: kies doel Financieel vrij FIRE'],
  'reach-goal-retire': ['bereik', 'Welkom: kies doel Haal ik mijn pensioen'],
  'reach-goal-more': ['bereik', 'Welkom: kies doel Meer inleg'],
  'reach-goal-invest': ['bereik', 'Welkom: kies doel Sparen of beleggen'],
@@ -6733,13 +6817,13 @@ var TRK = {
   }
   $('intro-skip').addEventListener('click', function () { closeIntro(false); });
   var GOALS = ['enough', 'spend', 'earlier', 'abroad'];
-  var SETS = [['grow', 'retire', 'more', 'invest'], ['retire', 'more', 'earlier', 'enough'], ['enough', 'spend', 'earlier', 'abroad']];
-  var GTXT = { grow: 'goalY.1', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
+  var SETS = [['rich', 'free', 'more', 'invest'], ['retire', 'more', 'earlier', 'enough'], ['enough', 'spend', 'earlier', 'abroad']];
+  var GTXT = { rich: 'goalY.5', free: 'goalY.6', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
   var introBand = 2, ageTouched = false;
   function bandOf(a) { return a < 35 ? 0 : (a < 50 ? 1 : 2); }
   function gtx(g, suf) { return t1((GTXT[g] || 'goal.5') + suf); }
   function goalTarget(g) {
-    if (g === 'grow') return { hash: '#overview', id: 'opb-card' };
+    if (g === 'rich' || g === 'free') return { hash: '#overview', id: 'opb-card' };
     if (g === 'retire') return { hash: '#overview', id: 'status-card' };
     if (g === 'more') return { hash: '#input', step: 1 };
     if (g === 'invest') return { hash: '#insight', id: 'sec-pf' };
