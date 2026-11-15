@@ -1362,18 +1362,12 @@ a { color: var(--accent); }
 .adv-card { background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--accent-soft) 55%, var(--surface))); border-color: color-mix(in srgb, var(--accent) 22%, var(--line)); }
 .adv-in { padding: 0; margin: 0; border: 0; }
 .adv-big, .adv-top b { font-family: var(--f-display); font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
-.zeker-card[hidden] { display: none; }
-#zeker { display: flex; flex-direction: column; gap: 10px; }
-.zk-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.zk-col { background: var(--surface2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.zk-col.on { border: 2px solid var(--accent); padding: 11px 13px; }
-.zk-l { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink2); }
-.zk-col.on .zk-l { color: var(--accent); }
-.zk-v { font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 500; overflow-wrap: anywhere; }
-.zk-s { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
-.zk-d { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 500; line-height: 1.4; }
-.zk-note { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
-@media (max-width: 380px) { .zk-v { font-size: 19px; } .zk-col { padding: 10px 11px; } .zk-col.on { padding: 9px 10px; } }
+.curve-cap { display: block; margin-top: 2px; font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.curve-cap:empty { display: none; }
+.seg.seg3 .seg-opt span { text-align: center; }
+.zk-cap { margin: 6px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+.zk-d { margin: 6px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 500; line-height: 1.4; }
+.zk-cap[hidden], .zk-d[hidden] { display: none; }
 .hb-track { background: var(--surface2); } .hb-fill { background: linear-gradient(90deg, var(--sage), var(--good)); }
 
 /* ---------- uitkomst ---------- */
@@ -1746,10 +1740,6 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
         <div class="srcline" data-src="le,mkt"></div>
       </div>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
-        <section class="card panel zeker-card" id="sec-zeker" aria-labelledby="zk-h" hidden>
-          <div class="panel-head has-pro"><span class="pro-tag corner" data-pro="spend-compare"></span><h2 id="zk-h" data-t="zk.h">¿Cuánto cuesta la tranquilidad?</h2><p class="sub" data-t="zk.sub">Patrimonio necesario desde hoy, con un 90 % de probabilidad de que baste</p></div>
-          <div id="zeker" aria-live="polite"></div>
-        </section>
         <section class="card support-card needs-data" id="support-ov" hidden></section>
         <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">Evolución de tu patrimonio</h2><p class="sub" id="fan-sub"></p></div>
@@ -1832,7 +1822,8 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">años</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexo"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Hombre</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Mujer</span></label></div></div>
             <div class="field"><label for="q-budget" data-t="f.budget">¿Cuánto te gustaría gastar al mes?</label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netos al mes</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">¿Cómo evolucionan los gastos más adelante?</span><span class="pro-tag" data-pro="spend-curve"></span></div>
-              <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="¿Cómo evolucionan los gastos más adelante?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span data-t="curve.o0">Constante</span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span data-t="curve.o1">Típico</span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span data-t="curve.o2">Bajando más</span></label></div>
+              <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="¿Cómo evolucionan los gastos más adelante?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><span data-t="curve.o0">Constante</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><span data-t="curve.o1">Típico</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><span data-t="curve.o2">Bajando más</span><small class="curve-cap" data-cap="2"></small></span></label></div>
+              <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">¿Cuánto has ahorrado o invertido hasta ahora?</span> <span class="opt" data-t="q.optional">(opcional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
             <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netos al mes</span></div></div>
@@ -4773,76 +4764,46 @@ Object.assign(I18N.es, {
  'rel.11.v': 'Versión 11 · noviembre de 2026',
  'rel.11.n1': 'Evolución del gasto: elige si tu gasto se mantiene o baja a partir de los 65 años'
 });
-/* zekerheid naast elkaar (versie 12) */
+/* uitgavenverloop met prijskaartje (versie 12) */
 Object.assign(I18N.en, {
- 'zk.h': 'What does certainty cost?',
- 'zk.sub': 'Savings needed from now, with a 90% chance it’s enough',
- 'zk.chosen': 'chosen',
- 'zk.s0': 'Spending stays the same',
- 'zk.s1': '1% less each year',
- 'zk.s2': '2% less each year',
- 'zk.dChosen': '{o} lowers the savings you need by {d}.',
+ 'zk.cap': 'Under each option: the savings you need, with a 90% chance it’s enough.',
+ 'zk.dChosen': '{o} lowers the savings you need by {d} compared with {f}.',
  'zk.dAlt': 'Choose “{o}” and you need {d} less.',
  'zk.same': 'With these numbers the spending path makes almost no difference.',
- 'zk.note': 'Flat stays the most cautious choice. These are averages from research, not a forecast for an individual household.',
  'rel.12.v': 'Version 12 · November 2026',
- 'rel.12.n1': 'Certainty side by side: see how much you need with flat and with falling spending'
+ 'rel.12.n1': 'Spending path with a price tag: see under each option how much you need'
 });
 Object.assign(I18N.nl, {
- 'zk.h': 'Wat kost de zekerheid?',
- 'zk.sub': 'Benodigd vermogen vanaf nu, met 90% kans genoeg',
- 'zk.chosen': 'gekozen',
- 'zk.s0': 'Uitgaven blijven gelijk',
- 'zk.s1': '1% minder per jaar',
- 'zk.s2': '2% minder per jaar',
- 'zk.dChosen': '{o} scheelt {d} aan benodigd vermogen.',
+ 'zk.cap': 'Onder elke keuze: het vermogen dat je nodig hebt, met 90% kans genoeg.',
+ 'zk.dChosen': '{o} scheelt {d} aan benodigd vermogen ten opzichte van {f}.',
  'zk.dAlt': 'Kies je “{o}”, dan heb je {d} minder nodig.',
  'zk.same': 'Bij deze cijfers maakt het uitgavenverloop vrijwel niets uit.',
- 'zk.note': 'Vlak blijft de voorzichtigste keuze. Dit zijn gemiddelden uit onderzoek, geen voorspelling voor een individueel huishouden.',
  'rel.12.v': 'Versie 12 · november 2026',
- 'rel.12.n1': 'Zekerheid naast elkaar: zie hoeveel vermogen je nodig hebt bij gelijke en bij dalende uitgaven'
+ 'rel.12.n1': 'Uitgavenverloop met prijskaartje: zie onder elke keuze hoeveel vermogen je nodig hebt'
 });
 Object.assign(I18N.de, {
- 'zk.h': 'Was kostet die Sicherheit?',
- 'zk.sub': 'Nötiges Vermögen ab heute, mit 90 % Wahrscheinlichkeit genug',
- 'zk.chosen': 'gewählt',
- 'zk.s0': 'Ausgaben bleiben gleich',
- 'zk.s1': '1 % weniger pro Jahr',
- 'zk.s2': '2 % weniger pro Jahr',
- 'zk.dChosen': '{o} senkt das nötige Vermögen um {d}.',
+ 'zk.cap': 'Unter jeder Wahl: das nötige Vermögen, mit 90 % Wahrscheinlichkeit genug.',
+ 'zk.dChosen': '{o} senkt das nötige Vermögen um {d} gegenüber „{f}“.',
  'zk.dAlt': 'Wählen Sie „{o}“, brauchen Sie {d} weniger.',
  'zk.same': 'Bei diesen Zahlen macht der Ausgabenverlauf kaum einen Unterschied.',
- 'zk.note': 'Gleichbleibend bleibt die vorsichtigste Wahl. Das sind Durchschnittswerte aus Studien, keine Prognose für einen einzelnen Haushalt.',
  'rel.12.v': 'Version 12 · November 2026',
- 'rel.12.n1': 'Sicherheit im Vergleich: Sehen Sie nebeneinander, wie viel Vermögen Sie bei gleichbleibenden und sinkenden Ausgaben brauchen'
+ 'rel.12.n1': 'Ausgabenverlauf mit Preisschild: Sehen Sie unter jeder Wahl, wie viel Vermögen Sie brauchen'
 });
 Object.assign(I18N.fr, {
- 'zk.h': 'Que coûte la sécurité ?',
- 'zk.sub': 'Patrimoine nécessaire dès maintenant, avec 90 % de chances que ce soit assez',
- 'zk.chosen': 'choisi',
- 'zk.s0': 'Dépenses constantes',
- 'zk.s1': '1 % de moins par an',
- 'zk.s2': '2 % de moins par an',
- 'zk.dChosen': '{o} réduit de {d} le patrimoine nécessaire.',
+ 'zk.cap': 'Sous chaque choix : le patrimoine nécessaire, avec 90 % de chances que ce soit assez.',
+ 'zk.dChosen': '{o} réduit de {d} le patrimoine nécessaire par rapport à « {f} ».',
  'zk.dAlt': 'Si vous choisissez « {o} », il vous faut {d} de moins.',
  'zk.same': 'Avec ces chiffres, la trajectoire des dépenses ne change presque rien.',
- 'zk.note': 'Constantes reste le choix le plus prudent. Ce sont des moyennes issues d’études, pas une prévision pour un ménage précis.',
  'rel.12.v': 'Version 12 · novembre 2026',
- 'rel.12.n1': 'La sécurité côte à côte : voyez le patrimoine nécessaire avec des dépenses constantes ou en baisse'
+ 'rel.12.n1': 'Trajectoire des dépenses avec son prix : voyez sous chaque choix le patrimoine nécessaire'
 });
 Object.assign(I18N.es, {
- 'zk.h': '¿Cuánto cuesta la tranquilidad?',
- 'zk.sub': 'Patrimonio necesario desde hoy, con un 90 % de probabilidad de que baste',
- 'zk.chosen': 'elegido',
- 'zk.s0': 'El gasto se mantiene',
- 'zk.s1': '1 % menos cada año',
- 'zk.s2': '2 % menos cada año',
- 'zk.dChosen': '{o} reduce en {d} el patrimonio necesario.',
+ 'zk.cap': 'Bajo cada opción: el patrimonio necesario, con un 90 % de probabilidad de que baste.',
+ 'zk.dChosen': '{o} reduce en {d} el patrimonio necesario frente a «{f}».',
  'zk.dAlt': 'Si eliges «{o}», necesitas {d} menos.',
  'zk.same': 'Con estas cifras, la evolución del gasto casi no cambia nada.',
- 'zk.note': 'Constante sigue siendo la opción más prudente. Son promedios de estudios, no una previsión para un hogar concreto.',
  'rel.12.v': 'Versión 12 · noviembre de 2026',
- 'rel.12.n1': 'La tranquilidad, lado a lado: compara cuánto patrimonio necesitas con gasto constante y con gasto a la baja'
+ 'rel.12.n1': 'Evolución del gasto con su precio: mira bajo cada opción cuánto patrimonio necesitas'
 });
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
@@ -5690,19 +5651,17 @@ Object.assign(I18N.es, {
     html += '<div class="srcline">' + srcLine('le,sp,pen,tax,mkt') + '</div>';
     el.innerHTML = html;
   }
-  /* Vlak naast de gekozen stand (of naast Typisch als je zelf Vlak hebt gekozen): wat kost de zekerheid van gelijke uitgaven */
+  /* Onder elke keuze van het uitgavenverloop staat het vermogen dat je daarbij nodig hebt (90% kans), plus het verschil met Vlak */
   function renderZeker() {
-    var card = $('sec-zeker'), el = $('zeker'); if (!card || !el) return;
-    var ok = !!adv && state.budget > 0 && typeof altC90 === 'number' && Math.max(adv.c90, altC90) > 0;
-    card.hidden = !ok;
-    if (!ok) { el.innerHTML = ''; return; }
-    var cd = state.uitgaveDaling === 1 || state.uitgaveDaling === 2 ? state.uitgaveDaling : 0;
-    var flatV = cd > 0 ? altC90 : adv.c90, otherK = cd > 0 ? cd : 1, otherV = cd > 0 ? adv.c90 : altC90, d = flatV - otherV;
-    function col(k, v, on) {
-      return '<div class="zk-col' + (on ? ' on' : '') + '"><span class="zk-l">' + t1('curve.o' + k) + (on ? ' · ' + t1('zk.chosen') : '') + '</span><b class="zk-v">' + eur(v) + '</b><span class="zk-s">' + t1('zk.s' + k) + '</span></div>';
-    }
-    var msg = d >= 1000 ? (cd > 0 ? t1('zk.dChosen', { o: t1('curve.o' + cd), d: eur(d) }) : t1('zk.dAlt', { o: t1('curve.o1'), d: eur(d) })) : t1('zk.same');
-    el.innerHTML = '<div class="zk-grid">' + col(0, flatV, cd === 0) + col(otherK, otherV, cd > 0) + '</div><p class="zk-d">' + msg + '</p><p class="zk-note">' + t1('zk.note') + '</p>';
+    var cap = $('curve-cap'), dl = $('curve-delta'); if (!cap || !dl) return;
+    var cd = state.uitgaveDaling === 1 || state.uitgaveDaling === 2 ? state.uitgaveDaling : 0, all = {}, ok = !!adv && state.budget > 0 && !!altC90;
+    if (ok) { [0, 1, 2].forEach(function (k) { all[k] = k === cd ? adv.c90 : altC90[k]; }); ok = [0, 1, 2].every(function (k) { return typeof all[k] === 'number'; }) && Math.max(all[0], all[1], all[2]) > 0; }
+    each('.curve-cap', function (e) { e.textContent = ok ? eur(all[+e.getAttribute('data-cap')]) : ''; });
+    cap.hidden = dl.hidden = !ok;
+    if (!ok) return;
+    var d = all[0] - all[cd > 0 ? cd : 1];
+    cap.textContent = t1('zk.cap');
+    dl.textContent = d >= 1000 ? (cd > 0 ? t1('zk.dChosen', { o: t1('curve.o' + cd), f: t1('curve.o0'), d: eur(d) }) : t1('zk.dAlt', { o: t1('curve.o1'), d: eur(d) })) : t1('zk.same');
   }
   function renderVerdict(m) {
     var el = $('verdict');
@@ -6169,7 +6128,7 @@ Object.assign(I18N.es, {
     }
     if (X.st.budget > 0) { adv = advice(0); adv.long = advice(5, adv.pf); }
     var altC90 = null;
-    if (X.st.budget > 0 && typeof X.alt === 'number') altC90 = advice(0, null, X.alt).c90;
+    if (X.st.budget > 0 && X.alts && X.alts.length) { altC90 = {}; X.alts.forEach(function (k) { altC90[k] = advice(0, null, k).c90; }); }
     if (!X.pfUser) { autoInfo = pick(); autoIdx = autoInfo.idx; }
     var m = runModel(prm());
     var succ = simQuick(m, X.ports[eff()], prm()).succ;
@@ -6180,7 +6139,7 @@ Object.assign(I18N.es, {
     Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
     st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots;
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
-    return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports, alt: state.uitgaveDaling === 0 ? 1 : 0 };
+    return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports, alts: [0, 1, 2].filter(function (k) { return k !== state.uitgaveDaling; }) };
   }
   /* Elke berekening krijgt een eigen nummer. De hoofduitslag gebruikt alleen het antwoord op de laatste vraag;
      scenario's rekenen in dezelfde worker mee zonder de hoofduitslag te verstoren. */
@@ -6307,7 +6266,6 @@ var TRK = {
  'extra-view-ladder': ['extra', 'Maandbudget-ladder bekeken'],
  'pro-view-plans': ['pro', 'Twee plannen vergelijken bekeken'],
  'pro-spend-curve': ['pro', 'Uitgavenverloop gekozen'],
- 'pro-view-spend-compare': ['pro', 'Zekerheidsvergelijking bekeken'],
  'pro-plan-save': ['pro', 'Plan A of B bewaard'],
  'pro-view-purchasing-power': ['pro', 'Koopkracht per land bekeken'],
  'pro-period-open': ['pro', 'Per periode verfijnen geopend'],
@@ -6318,7 +6276,6 @@ var TRK = {
  'pro-share-summary': ['pro', 'Samenvatting gekopieerd'],
  'pro-label-plans': ['pro', 'Klik op Pro-label: plannen vergelijken'],
  'pro-label-spend-curve': ['pro', 'Klik op Pro-label: uitgavenverloop'],
- 'pro-label-spend-compare': ['pro', 'Klik op Pro-label: zekerheidsvergelijking'],
  'pro-label-purchasing-power': ['pro', 'Klik op Pro-label: koopkracht per land'],
  'pro-label-period': ['pro', 'Klik op Pro-label: per periode'],
  'pro-label-pots': ['pro', 'Klik op Pro-label: extra pot'],
@@ -6360,7 +6317,7 @@ var TRK = {
   window.addEventListener('appinstalled', function () { track('reach-app-installed'); });
   (function () {
     if (!('IntersectionObserver' in window)) return;
-    var V = { 'sec-pf': 'extra-view-portfolios', 'sec-ladder': 'extra-view-ladder', 'sec-koop': 'pro-view-purchasing-power', 'sec-plans': 'pro-view-plans', 'sec-zeker': 'pro-view-spend-compare' };
+    var V = { 'sec-pf': 'extra-view-portfolios', 'sec-ladder': 'extra-view-ladder', 'sec-koop': 'pro-view-purchasing-power', 'sec-plans': 'pro-view-plans' };
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { track(V[e.target.id]); io.unobserve(e.target); } }); }, { threshold: 0.4 });
     Object.keys(V).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
   })();
