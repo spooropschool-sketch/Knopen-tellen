@@ -1754,7 +1754,7 @@ html.pro-locked .curve-f .seg-opt:not(:first-child) > span::after { content: "";
 html.pro-locked .curve-f .seg-opt { position: relative; }
 
 /* losse knoppen: extra pot, per periode, print en samenvatting */
-html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-locked #sh-print, html.pro-locked #sh-copy { opacity: .8; }
+html.pro-locked #pots-box > summary, html.pro-locked #debts-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-locked #sh-print, html.pro-locked #sh-copy { opacity: .8; }
 
 :root { --pl-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='7' width='10' height='7.5' rx='1.6'/%3E%3Cpath d='M5.3 7V5.2a2.7 2.7 0 0 1 5.4 0V7' fill='none' stroke='%23000' stroke-width='1.8'/%3E%3C/svg%3E"); }
 
@@ -5267,7 +5267,7 @@ Object.assign(I18N.en, {
  'debt.m': '{m} months', 'debt.shareLine': '{n}: {m} a month, {t} to go', 'debt.shareBal': ', plus {v} in one go at the end', 'debt.shareOnly': '{n}: {v} in one go in {t}',
  'ins.debt': 'Debt',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Debt: enter your monthly payment, the remaining term and any interest-only amount'
+ 'rel.15.n1': 'Debt: count your mortgage or loan, with monthly payment, term and any interest-only part. A Pro feature: tap the lock and say whether you want it.'
 });
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
@@ -5287,7 +5287,7 @@ Object.assign(I18N.nl, {
  'debt.m': '{m} maanden', 'debt.shareLine': '{n}: {m} per maand, nog {t}', 'debt.shareBal': ', plus {v} in één keer aan het einde', 'debt.shareOnly': '{n}: {v} in één keer over {t}',
  'ins.debt': 'Schuld',
  'rel.15.v': 'Versie 15 · november 2026',
- 'rel.15.n1': 'Schuld: vul je maandlast, de resterende looptijd en een eventueel aflossingsvrij bedrag in'
+ 'rel.15.n1': 'Schuld: tel je hypotheek of lening mee, met maandlast, looptijd en een eventueel aflossingsvrij deel. Een Pro-functie: tik op het slotje en laat weten of je dit wilt.'
 });
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
@@ -5307,7 +5307,7 @@ Object.assign(I18N.de, {
  'debt.m': '{m} Monate', 'debt.shareLine': '{n}: {m} pro Monat, noch {t}', 'debt.shareBal': ', dazu am Ende {v} auf einmal', 'debt.shareOnly': '{n}: {v} auf einmal, Restlaufzeit {t}',
  'ins.debt': 'Schulden',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Schulden: Rate, Restlaufzeit und einen etwaigen tilgungsfreien Betrag eintragen'
+ 'rel.15.n1': 'Schulden: Hypothek oder Kredit mitrechnen, mit Rate, Laufzeit und einem etwaigen tilgungsfreien Teil. Eine Pro-Funktion: Tippen Sie auf das Schloss und sagen Sie, ob Sie sie wollen.'
 });
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
@@ -5327,7 +5327,7 @@ Object.assign(I18N.fr, {
  'debt.m': '{m} mois', 'debt.shareLine': '{n} : {m} par mois, encore {t}', 'debt.shareBal': ', plus {v} en une fois à la fin', 'debt.shareOnly': '{n} : {v} en une fois dans {t}',
  'ins.debt': 'Dette',
  'rel.15.v': 'Version 15 · novembre 2026',
- 'rel.15.n1': 'Dette : indiquez la mensualité, la durée restante et un éventuel montant in fine'
+ 'rel.15.n1': 'Dette : comptez votre prêt immobilier ou crédit, avec mensualité, durée et une éventuelle partie in fine. Une fonction Pro : touchez le cadenas et dites si vous la voulez.'
 });
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
@@ -5347,7 +5347,7 @@ Object.assign(I18N.es, {
  'debt.m': '{m} meses', 'debt.shareLine': '{n}: {m} al mes, {t} más', 'debt.shareBal': ', más {v} de una vez al final', 'debt.shareOnly': '{n}: {v} de una vez dentro de {t}',
  'ins.debt': 'Deudas',
  'rel.15.v': 'Versión 15 · noviembre de 2026',
- 'rel.15.n1': 'Deuda: introduce la cuota, el plazo restante y, si lo hay, un importe sin amortizar'
+ 'rel.15.n1': 'Deuda: cuenta tu hipoteca o préstamo, con cuota, plazo y una posible parte sin amortizar. Una función Pro: toca el candado y di si la quieres.'
 });
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
@@ -5713,7 +5713,7 @@ Object.assign(I18N.es, {
             '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name' + n + '"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"><p class="hint" data-t="h.names' + n + '"></p></div>' +
             wkHtml(n === 1 ? 'P' : 'D') + '</div>';
         }).join('') + '</div>' +
-        '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
+        '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pro-tag" data-pro="debts"></span><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="debt.intro"></p><p class="hint debts-opb" id="debts-opb" data-t="debt.opb" hidden></p><div id="debts-list"></div><button type="button" class="btn ghost sm" id="debt-add" data-t="debt.add"></button></div></details>';
     } },
     { t: 'st3.t', h: 'st3.h', s: 'st3.s', html: function () {
@@ -6983,7 +6983,8 @@ var TRK = {
  'extra-notes-written': ['extra', 'Iets in het kladblok getypt'],
  'extra-view-portfolios': ['extra', 'Portefeuilles vergelijken bekeken'],
  'extra-view-ladder': ['extra', 'Maandbudget-ladder bekeken'],
- 'extra-debt': ['extra', 'Schuld toegevoegd'],
+ 'pro-debts-open': ['pro', 'Schuld geopend'],
+ 'pro-debt-add': ['pro', 'Schuld toegevoegd'],
  'pro-view-plans': ['pro', 'Twee plannen vergelijken bekeken'],
  'pro-spend-curve': ['pro', 'Uitgavenverloop gekozen'],
  'pro-plan-save': ['pro', 'Plan A of B bewaard'],
@@ -7016,7 +7017,7 @@ var TRK = {
     })();
   }
   var TRK_CLICK = [['.share-open', 'reach-share-open'], ['#sh-link', 'reach-share-link'], ['#sh-print', 'pro-share-print'], ['#sh-copy', 'pro-share-summary'], ['.fb-open', 'reach-tip-open'], ['.duo-r', 'reach-coffee-click'],
-    ['#btn-install', 'reach-install-click'], ['#btn-theme', 'extra-theme'], ['#btn-tour', 'extra-tour'], ['[data-addper]', 'pro-period-add'], ['#pot-add', 'pro-pot-add'], ['#pots-box > summary', 'pro-pots-open'], ['#debt-add', 'extra-debt'],
+    ['#btn-install', 'reach-install-click'], ['#btn-theme', 'extra-theme'], ['#btn-tour', 'extra-tour'], ['[data-addper]', 'pro-period-add'], ['#pot-add', 'pro-pot-add'], ['#pots-box > summary', 'pro-pots-open'], ['#debts-box > summary', 'pro-debts-open'], ['#debt-add', 'pro-debt-add'],
     ['[data-pl="save"]', 'pro-plan-save'], ['#nt-fab', 'extra-notes-open']];
   var TRK_CHANGE = { 'q-budget': 'core-budget', 'q-startkapitaal': 'core-capital', 'q-inleg': 'extra-inleg', 'q-country': 'core-country', 'country-intro': 'core-country', 'lang-top': 'reach-language', 'lang-intro': 'reach-language',
     'n-werkP': 'extra-income-work', 'n-werkD': 'extra-income-work', 'n-werkTotP': 'extra-income-work', 'n-werkTotD': 'extra-income-work', 'n-pensioenPaul': 'extra-pension', 'n-pensioenDiana': 'extra-pension', 'n-pensioenLeeftijd': 'extra-pension', 'n-pensioenLeeftijdDiana': 'extra-pension', 'n-spP': 'extra-statepension', 'n-spD': 'extra-statepension', 'n-aowPaul': 'extra-statepension', 'n-aowDiana': 'extra-statepension',
@@ -7795,7 +7796,7 @@ var TRK = {
      pro-3-wil-<f>   "Dit wil ik"       pro-4-prijs-<0|3|5|10>  genoemd bedrag */
   var PL_LOCK = '<svg class="pl-lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/><path d="M5.3 7V5.2a2.7 2.7 0 0 1 5.4 0V7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
   PRO_SVG = PRO_SVG.replace('<svg ', '<svg class="pl-clock" ') + PL_LOCK;
-  var PL_ORDER = ['plans', 'spend-curve', 'purchasing-power', 'period', 'pots', 'print', 'summary'];
+  var PL_ORDER = ['plans', 'spend-curve', 'purchasing-power', 'period', 'pots', 'debts', 'print', 'summary'];
   var PLT = {
     en: {
       title: 'Pro is coming', tap: 'Tap to find out more',
@@ -7810,6 +7811,7 @@ var TRK = {
         'purchasing-power': ['Purchasing power by country', 'See where your monthly budget is worth the most.'],
         'period': ['Refine by period', 'Enter a different income per age: for example fewer hours from 60.'],
         'pots': ['Extra pension or pot', 'Count an extra pension, inheritance or the sale of your home.'],
+        'debts': ['Count a debt', 'Count a mortgage or loan: the monthly payment, the remaining term and any interest-only part.'],
         'print': ['Print or PDF', 'Keep your result as a neat PDF, for yourself or your adviser.'],
         'summary': ['Copy summary', 'Copy a short summary to share with your partner.']
       }
@@ -7827,6 +7829,7 @@ var TRK = {
         'purchasing-power': ['Koopkracht per land', 'Zie in welk land je maandbudget het meest waard is.'],
         'period': ['Per periode verfijnen', 'Geef per leeftijd een ander inkomen op, bijvoorbeeld minder uren vanaf 60.'],
         'pots': ['Extra pensioen of pot', 'Tel een extra pensioen, erfenis of de verkoop van je huis mee.'],
+        'debts': ['Schuld meetellen', 'Tel een hypotheek of lening mee: de maandlast, de looptijd en een eventueel aflossingsvrij deel.'],
         'print': ['Print of pdf', 'Bewaar je uitkomst als nette pdf, voor jezelf of je adviseur.'],
         'summary': ['Samenvatting kopiëren', 'Kopieer een korte samenvatting om met je partner te delen.']
       }
@@ -7844,6 +7847,7 @@ var TRK = {
         'purchasing-power': ['Kaufkraft nach Land', 'Sehen Sie, in welchem Land Ihr Monatsbudget am meisten wert ist.'],
         'period': ['Nach Zeiträumen verfeinern', 'Geben Sie je Alter ein anderes Einkommen an, zum Beispiel weniger Stunden ab 60.'],
         'pots': ['Zusätzliche Rente oder Topf', 'Rechnen Sie eine zusätzliche Rente, ein Erbe oder den Verkauf Ihres Hauses mit ein.'],
+        'debts': ['Schulden mitrechnen', 'Rechnen Sie eine Hypothek oder einen Kredit mit ein: die monatliche Rate, die Restlaufzeit und einen etwaigen tilgungsfreien Teil.'],
         'print': ['Drucken oder PDF', 'Bewahren Sie Ihr Ergebnis als ordentliches PDF auf, für sich oder Ihre Beratung.'],
         'summary': ['Zusammenfassung kopieren', 'Kopieren Sie eine kurze Zusammenfassung für Ihren Partner.']
       }
@@ -7861,6 +7865,7 @@ var TRK = {
         'purchasing-power': ['Pouvoir d’achat par pays', 'Voyez dans quel pays votre budget mensuel vaut le plus.'],
         'period': ['Affiner par période', 'Indiquez un revenu différent selon l’âge, par exemple moins d’heures à partir de 60 ans.'],
         'pots': ['Pension ou capital en plus', 'Comptez une pension en plus, un héritage ou la vente de votre maison.'],
+        'debts': ['Compter une dette', 'Comptez un prêt immobilier ou un crédit : la mensualité, la durée restante et une éventuelle partie in fine.'],
         'print': ['Imprimer ou PDF', 'Gardez votre résultat en PDF soigné, pour vous ou votre conseiller.'],
         'summary': ['Copier le résumé', 'Copiez un court résumé à partager avec votre partenaire.']
       }
@@ -7878,6 +7883,7 @@ var TRK = {
         'purchasing-power': ['Poder adquisitivo por país', 'Mira en qué país tu presupuesto mensual vale más.'],
         'period': ['Afinar por periodos', 'Indica un ingreso distinto según la edad, por ejemplo menos horas a partir de los 60.'],
         'pots': ['Pensión o fondo extra', 'Cuenta una pensión extra, una herencia o la venta de tu casa.'],
+        'debts': ['Contar una deuda', 'Cuenta una hipoteca o un préstamo: la cuota mensual, el plazo restante y una posible parte sin amortizar.'],
         'print': ['Imprimir o PDF', 'Guarda tu resultado como un PDF ordenado, para ti o tu asesor.'],
         'summary': ['Copiar resumen', 'Copia un resumen corto para compartir con tu pareja.']
       }
@@ -7963,6 +7969,7 @@ var TRK = {
     if (pt) w = pt.getAttribute('data-pro');
     else if (g) w = g.getAttribute('data-pl');
     else if (t.closest('#pots-box > summary')) w = 'pots';
+    else if (t.closest('#debts-box > summary')) w = 'debts';
     else if (t.closest('#sh-print')) w = 'print';
     else if (t.closest('#sh-copy')) w = 'summary';
     else { var wk = t.closest('.wk-tog'); if (wk && wk.querySelector('.pro-tag')) w = 'period'; }
