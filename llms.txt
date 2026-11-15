@@ -63,7 +63,7 @@ Button Counter has its own rules for the Netherlands, Belgium, Germany, France, 
 
 ### Is Button Counter free, and what happens to my data?
 
-At the moment Button Counter is free to use, has no advertising and needs no account. What you enter stays in your own browser on your own device and is not sent to Button Counter. Visits and the use of features are counted anonymously, without cookies.
+Button Counter has no advertising and needs no account. Most of it is free and stays free; a few extended features are closed off on purpose as Pro. What you enter stays in your own browser on your own device and is not sent to Button Counter. Visits and the use of features are counted anonymously, without cookies.
 
 ### Is this financial advice?
 
@@ -76,4 +76,4 @@ No. Button Counter is a general calculation tool that gives estimates based on s
 - Countries with their own rules: Netherlands, Belgium, Germany, France, Spain, Italy, Portugal, Ireland, United Kingdom, United States; plus a general setting.
 - Purchasing power comparison: 31 European countries, Eurostat price levels.
 - Languages: English, Dutch, German, French, Spanish.
-- Price: free. No advertising. No account.
+- Price: most of it is free and stays free; a few extended features are Pro. No advertising. No account.

@@ -270,7 +270,7 @@ def main():
            '- Countries with their own rules: Netherlands, Belgium, Germany, France, Spain, Italy, Portugal, Ireland, '
            'United Kingdom, United States; plus a general setting.\n'
            '- Purchasing power comparison: 31 European countries, Eurostat price levels.\n'
-           '- Languages: English, Dutch, German, French, Spanish.\n- Price: free. No advertising. No account.\n')
+           '- Languages: English, Dutch, German, French, Spanish.\n- Price: most of it is free and stays free; a few extended features are Pro. No advertising. No account.\n')
     write('llms.txt', ll)
 
     nf = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
