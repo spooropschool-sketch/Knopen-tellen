@@ -1686,8 +1686,10 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
 .pots-s { color: var(--ink2); font-size: 14px; padding-left: 34px; }
 .pots-in { display: flex; flex-direction: column; gap: 14px; padding: 0 20px 20px; }
 .pots-in > .hint { margin: 0; }
-#pots-list { display: flex; flex-direction: column; gap: 14px; }
-#pots-list:empty { display: none; }
+#pots-list, #debts-list { display: flex; flex-direction: column; gap: 14px; }
+#pots-list:empty, #debts-list:empty { display: none; }
+.debts-opb { margin: 0; }
+.debt-q { flex: 1 1 100%; font-size: 14px; font-weight: 600; }
 .pot { display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
 .pot-top { display: flex; gap: 8px; align-items: center; }
 .pot-name { flex: 1 1 auto; min-width: 0; font-weight: 600; }
@@ -1763,7 +1765,7 @@ html.pro-locked .curve-f .seg-opt:not(:first-child) > span::after { content: "";
 html.pro-locked .curve-f .seg-opt { position: relative; }
 
 /* losse knoppen: extra pot, per periode, print en samenvatting */
-html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-locked #sh-print, html.pro-locked #sh-copy { opacity: .8; }
+html.pro-locked #pots-box > summary, html.pro-locked #debts-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-locked #sh-print, html.pro-locked #sh-copy { opacity: .8; }
 
 :root { --pl-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='7' width='10' height='7.5' rx='1.6'/%3E%3Cpath d='M5.3 7V5.2a2.7 2.7 0 0 1 5.4 0V7' fill='none' stroke='%23000' stroke-width='1.8'/%3E%3C/svg%3E"); }
 
@@ -2019,7 +2021,7 @@ html.is-empty .share-plan { display: none; }
     <header class="page-top has-art">
       <div class="pt-text">
         <h2 class="pg-h" id="ab-h" data-t="pay.h">Time to take stock.<br><span>Time to move forward.</span></h2>
-        <div class="about-body" data-t="about.body"><p>Button Counter is your personal financial cockpit. We show you what you have, how much room that gives you now and later and how your savings could develop.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but about what you can do with it.</p></div>
+        <div class="about-body" data-t="about.body"><p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p><p>It started with my own research into the financial situation of my partner and me. Being able to tweak variables showed me which strategy suits us best for defining and reaching a desired financial situation. I want to give you that same insight.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but above all about what you can do with it.</p></div>
         <div class="btn-row">
           <button class="btn ghost" type="button" id="btn-intro" data-t="about.intro">Show the introduction again</button>
           <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour">Start the tour</button>
@@ -2087,7 +2089,7 @@ html.is-empty .share-plan { display: none; }
     </div>
     <div class="modal-body" id="intro-s1" hidden>
       <h2 class="intro-about-h" data-t="pay.h">Time to take stock.<br><span>Time to move forward.</span></h2>
-      <div class="about-body intro-about" data-t="about.body"><p>Button Counter is your personal financial cockpit. We show you what you have, how much room that gives you now and later and how your savings could develop.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but about what you can do with it.</p></div>
+      <div class="about-body intro-about" data-t="about.body"><p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p><p>It started with my own research into the financial situation of my partner and me. Being able to tweak variables showed me which strategy suits us best for defining and reaching a desired financial situation. I want to give you that same insight.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but above all about what you can do with it.</p></div>
       <h2 id="intro-h" data-t="intro.ask">What are you curious about?</h2>
       <p class="sub" data-t="intro.promise">Is it enough? That’s what we work out, with no sales pitch and a source for every figure.</p>
       <div class="agebox" id="agebox"><label class="age-q" for="age-r" data-t="age.q">How old are you?</label><div class="age-read"><b id="age-v">50</b> <span data-t="u.years">years</span></div>
@@ -2213,6 +2215,15 @@ html.is-empty .share-plan { display: none; }
 </div>
 
 <script>
+/* Schuld (hypotheek, lening): wat je per maand kwijt bent (m), de resterende looptijd in jaren (y) en eventueel een
+   aflossingsvrij bedrag (v): die schuld blijft aan het einde van de looptijd staan en telt als één betaling. Geen rente
+   nodig: de leningdelen van een hypotheek zitten samen in de maandlast. n = aantal maanden. */
+function debtCalc(d) {
+  var pm = d && d.m > 0 ? d.m : 0, n = Math.round((d && d.y > 0 ? d.y : 0) * 12), v = d && d.v > 0 ? d.v : 0;
+  if (!((pm > 0 || v > 0) && n >= 1)) return { ok: false, pm: 0, n: 0, v: 0, total: 0 };
+  return { ok: true, pm: pm, n: n, v: v, total: pm * n };
+}
+
 /* Take Stock rekenmodel (V4, internationaal). Alles in geld van vandaag (reeel).
    Belasting: 'nlbox3' (Nederland, forfaitair over vermogen) of 'returns' (percentage over rendement boven een vrijstelling). */
 function runModel(p) {
@@ -2233,8 +2244,23 @@ function runModel(p) {
      (het ingevulde budget is wat je nu uitgeeft); bij twee personen telt de oudste. 0 = vlak (zoals voor versie 11).
      'fac' is de factor op het maandbudget per jaar, 'spend' het maandbudget per jaar. */
   var uRaw = parseFloat(p.uitgaveDaling), uDec = (isFinite(uRaw) ? Math.max(0, Math.min(5, uRaw)) : 0) / 100, uRef = two ? Math.max(ageP, ageD) : ageP, uStart = Math.max(p.uitgaveVan || 65, uRef);
+  /* schulden: een vaste maandlast in euro's tot het einde van de looptijd, plus eventueel een aflossingsvrij bedrag dat aan het
+     einde in één keer uit het vermogen gaat. In geld van vandaag wordt de maandlast elk jaar iets lichter.
+     'debtM' = kosten per jaar; 'debtL' = eenmalig bedrag per jaar (aflossingsvrij); 'debtIn' = het deel van de maandlasten
+     dat al in het ingevulde maandbudget zit, dat deel valt na de looptijd weg. Het maandbudget zonder die lasten daalt
+     volgens het uitgavenverloop. */
+  var debtM = [], debtL = [], debtIn = 0, dtI;
+  for (dtI = 0; dtI < N; dtI++) { debtM.push(0); debtL.push(0); }
+  (p.debts || []).forEach(function (dd) {
+    var dc = debtCalc(dd); if (!dc.ok) return;
+    if (dd.b !== 0) debtIn += dc.pm;
+    for (var dtT = 0; dtT < N; dtT++) { var act = Math.max(0, Math.min(12, dc.n - 12 * dtT)); if (act > 0) debtM[dtT] += act * dc.pm / Math.pow(1 + i, dtT); }
+    var tb = Math.round(dc.n / 12);
+    if (dc.v > 0 && tb < N) debtL[tb] += dc.v / Math.pow(1 + i, dc.n / 12);
+  });
+  function baseOf(bud) { return Math.max(0, bud - debtIn); }
   var fac = [], spend = [];
-  for (var uy = 0; uy < N; uy++) { fac.push(Math.pow(1 - uDec, Math.max(0, uRef + uy - uStart))); spend.push(p.budget * fac[uy]); }
+  for (var uy = 0; uy < N; uy++) { fac.push(Math.pow(1 - uDec, Math.max(0, uRef + uy - uStart))); spend.push(baseOf(p.budget) * fac[uy] + debtM[uy] / 12); }
 
   function clamp01(x) { return Math.max(0, Math.min(1, x)); }
   /* deel van het levensjaar [age, age+1) dat binnen [a, b) valt */
@@ -2287,10 +2313,11 @@ function runModel(p) {
   }
   /* opbouw: tot de pensioenleeftijd gaat de maandelijkse inleg in het vermogen (geld van vandaag); daarna geldt het gewone budget */
   var stopAge = p.opbouw ? (p.pensioenLeeftijd || 67) : 0, saveM = p.opbouw ? Math.max(0, p.inleg || 0) : 0;
+  /* tijdens het sparen (opbouw) betaal je de maandlast uit je inkomen; die telt pas mee vanaf de pensioenleeftijd */
   function drawAt(t, budget) {
-    if (!p.opbouw) return 12 * budget * fac[t] - inc[t];
+    if (!p.opbouw) return 12 * baseOf(budget) * fac[t] + debtM[t] + debtL[t] - inc[t];
     var f = ovl(ageP + t, -1e9, stopAge);
-    return f * (-12 * saveM) + (1 - f) * (12 * budget * fac[t] - inc[t]);
+    return f * (-12 * saveM) + (1 - f) * (12 * baseOf(budget) * fac[t] + debtM[t] - inc[t]) + debtL[t];
   }
 
   function feasible(K0, budget) {
@@ -2347,7 +2374,7 @@ function runModel(p) {
   }
 
   return {
-    g: grow - 1, N: N, youngest: youngest, tStop: p.opbouw ? Math.max(0, Math.min(N, Math.round(stopAge - ageP))) : 0, fac: fac, spend: spend,
+    g: grow - 1, N: N, youngest: youngest, tStop: p.opbouw ? Math.max(0, Math.min(N, Math.round(stopAge - ageP))) : 0, fac: fac, spend: spend, debtM: debtM, debtL: debtL,
     req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes, incSp: incSp, incPen: incPen, incWk: incWk, incPot: incPot, lump: lump,
     emptyAt: emptyAt, marge: p.startkapitaal - req0,
     buffer: req0 > 0 ? p.startkapitaal / req0 - 1 : Infinity,
@@ -3316,7 +3343,7 @@ Object.assign(I18N.en, {
   'tour.6.p': 'Want to dig deeper? Under Insights you can compare portfolios, try a different monthly budget and see what your money is worth abroad.',
   'tour.7.p': 'Here you’ll find the idea behind Button Counter, the rules for your country and all our sources. You can restart this tour from here too.',
   'tour.8.p': 'Want it more precise? In five short steps you can add pensions, side income and your own choices. Then just play with the sliders.',
-  'about.body': '<p>Button Counter is your personal financial cockpit. We show you what you have, how much room that gives you now and later and how your savings could develop.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but about what you can do with it.</p>',
+  'about.body': '<p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p><p>It started with my own research into the financial situation of my partner and me. Being able to tweak variables showed me which strategy suits us best for defining and reaching a desired financial situation. I want to give you that same insight.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but above all about what you can do with it.</p>',
   'fact.intro': 'This is what we assume {inCountry}. You can change every number under Fine-tune.',
   'about.disclaimer': 'Button Counter gives you insight, not tax or investment advice. We’ve simplified the rules per country, so do check the official sources.',
   'sup.text': 'Does Button Counter help you?',
@@ -3402,7 +3429,7 @@ Object.assign(I18N.nl, {
   'tour.6.p': 'Wil je verder kijken? Bij Inzicht vergelijk je portefeuilles, probeer je een ander maandbudget en zie je wat je geld in het buitenland waard is.',
   'tour.7.p': 'Hier vind je de gedachte achter Knopenteller, de regels voor jouw land en al onze bronnen. Je kunt deze rondleiding hier ook opnieuw starten.',
   'tour.8.p': 'Wil je het preciezer? In vijf korte stappen voeg je pensioen, bijverdienen en je eigen keuzes toe. Daarna kun je lekker schuiven met de knoppen.',
-  'about.body': '<p>Knopenteller is je persoonlijke financiële cockpit. We laten je zien wat je hebt, hoeveel ruimte dat geeft nu en later en hoe je vermogen zich kan ontwikkelen.</p><p>Je verkent scenario’s, rekent keuzes door en ziet wat ze betekenen voor je toekomst. Alles in geld van vandaag en alles blijft in je eigen browser.</p><p>Want het gaat niet alleen om wat je hebt opgebouwd, maar vooral om wat je daarmee kunt.</p>',
+  'about.body': '<p>Knopenteller is je persoonlijke financiële cockpit. Het laat je zien wat je hebt, hoeveel ruimte dat geeft nu en later en hoe je vermogen zich kan ontwikkelen.</p><p>Het is ontstaan uit mijn eigen onderzoek naar de financiële situatie van mij en mijn partner. Door variabelen te kunnen tweaken kreeg ik inzicht in welke strategie het beste bij ons past om een gewenste financiële situatie te bepalen én te bereiken. Datzelfde inzicht wil ik jou ook geven.</p><p>Je verkent scenario’s, rekent keuzes door en ziet wat ze betekenen voor je toekomst. Alles in geld van vandaag en alles blijft in je eigen browser.</p><p>Want het gaat niet alleen om wat je hebt opgebouwd, maar vooral om wat je daarmee kunt.</p>',
   'fact.intro': 'Dit nemen we aan {inCountry}. Elk getal kun je aanpassen bij Invullen.',
   'about.disclaimer': 'Knopenteller geeft je inzicht, geen belasting- of beleggingsadvies. De regels per land hebben we vereenvoudigd, dus kijk ook even bij de officiële bronnen.',
   'sup.text': 'Heb je iets aan Knopenteller?',
@@ -3478,7 +3505,7 @@ Object.assign(I18N.de, {
   'tour.6.p': 'Möchten Sie tiefer einsteigen? Unter Einblick vergleichen Sie Portfolios, probieren ein anderes Monatsbudget und sehen, was Ihr Geld im Ausland wert ist.',
   'tour.7.p': 'Hier finden Sie die Idee hinter Button Counter, die Regeln für Ihr Land und alle unsere Quellen. Auch diesen Rundgang starten Sie hier neu.',
   'tour.8.p': 'Möchten Sie es genauer? In fünf kurzen Schritten ergänzen Sie Renten, Nebenverdienst und eigene Entscheidungen. Danach drehen Sie einfach an den Reglern.',
-  'about.body': '<p>Button Counter ist Ihr persönliches Finanzcockpit. Wir zeigen Ihnen, was Sie haben, wie viel Spielraum das heute und später gibt und wie sich Ihr Vermögen entwickeln kann.</p><p>Sie erkunden Szenarien, rechnen Entscheidungen durch und sehen, was sie für Ihre Zukunft bedeuten. Alles in heutigem Geld und alles bleibt in Ihrem eigenen Browser.</p><p>Denn es geht nicht nur darum, was Sie aufgebaut haben, sondern vor allem darum, was Sie damit erreichen können.</p>',
+  'about.body': '<p>Button Counter ist Ihr persönliches Finanzcockpit. Es zeigt Ihnen, was Sie haben, wie viel Spielraum das heute und später gibt und wie sich Ihr Vermögen entwickeln kann.</p><p>Es ist aus meiner eigenen Untersuchung der finanziellen Situation von uns beiden entstanden. Weil ich Variablen anpassen konnte, sah ich, welche Strategie am besten zu uns passt, um eine gewünschte finanzielle Situation zu bestimmen und zu erreichen. Diese Einsicht möchte ich auch Ihnen geben.</p><p>Sie erkunden Szenarien, rechnen Entscheidungen durch und sehen, was sie für Ihre Zukunft bedeuten. Alles in heutigem Geld und alles bleibt in Ihrem eigenen Browser.</p><p>Denn es geht nicht nur darum, was Sie aufgebaut haben, sondern vor allem darum, was Sie damit erreichen können.</p>',
   'fact.intro': 'Das nehmen wir {inCountry} an. Jede Zahl können Sie unter Eingeben ändern.',
   'about.disclaimer': 'Button Counter gibt Ihnen Einblick, keine Steuer- oder Anlageberatung. Die Regeln je Land haben wir vereinfacht; schauen Sie also auch in die offiziellen Quellen.',
   'sup.text': 'Hilft Ihnen Button Counter?',
@@ -3554,7 +3581,7 @@ Object.assign(I18N.fr, {
   'tour.6.p': 'Envie d’approfondir ? Dans Analyse, comparez les portefeuilles, essayez un autre budget mensuel et voyez ce que vaut votre argent à l’étranger.',
   'tour.7.p': 'Vous trouverez ici l’idée derrière Button Counter, les règles de votre pays et toutes nos sources. Vous pouvez aussi relancer cette visite d’ici.',
   'tour.8.p': 'Envie de plus de précision ? En cinq étapes courtes, ajoutez retraites, revenus d’appoint et vos propres choix. Ensuite, jouez simplement avec les curseurs.',
-  'about.body': '<p>Button Counter est votre tableau de bord financier personnel. Nous vous montrons ce que vous avez, la marge que cela vous donne aujourd’hui et demain et comment votre patrimoine peut évoluer.</p><p>Vous explorez des scénarios, testez des choix et voyez ce qu’ils signifient pour votre avenir. Tout est en argent d’aujourd’hui et reste dans votre propre navigateur.</p><p>Car l’important n’est pas seulement ce que vous avez construit, mais ce que vous pouvez en faire.</p>',
+  'about.body': '<p>Button Counter est votre tableau de bord financier personnel. Il vous montre ce que vous avez, la marge que cela vous donne aujourd’hui et demain et comment votre patrimoine peut évoluer.</p><p>Il est né de mes propres recherches sur notre situation financière à tous les deux. En pouvant ajuster les variables, j’ai vu quelle stratégie nous convient le mieux pour définir et atteindre une situation financière souhaitée. Cette compréhension, je souhaite aussi vous l’offrir.</p><p>Vous explorez des scénarios, testez des choix et voyez ce qu’ils signifient pour votre avenir. Tout est en argent d’aujourd’hui et reste dans votre propre navigateur.</p><p>Car l’important n’est pas seulement ce que vous avez construit, mais surtout ce que vous pouvez en faire.</p>',
   'fact.intro': 'Voici ce que nous retenons {inCountry}. Vous pouvez modifier chaque chiffre dans Saisir.',
   'about.disclaimer': 'Button Counter vous donne un éclairage, pas un conseil fiscal ou en placement. Nous avons simplifié les règles par pays : consultez aussi les sources officielles.',
   'sup.text': 'Button Counter vous est utile ?',
@@ -3639,7 +3666,7 @@ Object.assign(I18N.es, {
   'tour.6.p': '¿Quieres profundizar? En Análisis comparas carteras, pruebas otro presupuesto mensual y ves lo que vale tu dinero en el extranjero.',
   'tour.7.p': 'Aquí encontrarás la idea detrás de Button Counter, las reglas de tu país y todas nuestras fuentes. También puedes reiniciar esta visita desde aquí.',
   'tour.8.p': '¿Lo quieres más preciso? En cinco pasos cortos añades pensiones, ingresos extra y tus propias decisiones. Después, juega con los controles.',
-  'about.body': '<p>Button Counter es tu panel financiero personal. Te mostramos lo que tienes, cuánto margen te da ahora y más adelante y cómo puede evolucionar tu patrimonio.</p><p>Exploras escenarios, pruebas decisiones y ves lo que significan para tu futuro. Todo en dinero de hoy y todo se queda en tu propio navegador.</p><p>Porque no se trata solo de lo que has construido, sino de lo que puedes hacer con ello.</p>',
+  'about.body': '<p>Button Counter es tu panel financiero personal. Te muestra lo que tienes, cuánto margen te da ahora y más adelante y cómo puede evolucionar tu patrimonio.</p><p>Nació de mi propia investigación sobre la situación financiera de mi pareja y la mía. Al poder ajustar las variables, vi qué estrategia nos encaja mejor para definir y alcanzar una situación financiera deseada. Esa misma visión quiero dártela también a ti.</p><p>Exploras escenarios, pruebas decisiones y ves lo que significan para tu futuro. Todo en dinero de hoy y todo se queda en tu propio navegador.</p><p>Porque no se trata solo de lo que has construido, sino sobre todo de lo que puedes hacer con ello.</p>',
   'fact.intro': 'Esto es lo que suponemos {inCountry}. Puedes cambiar cada cifra en Rellenar.',
   'about.disclaimer': 'Button Counter te da una visión, no asesoramiento fiscal ni de inversión. Hemos simplificado las reglas de cada país, así que consulta también las fuentes oficiales.',
   'sup.text': '¿Te ayuda Button Counter?',
@@ -5233,6 +5260,107 @@ Object.assign(I18N.es, {
  'rel.14.v': 'Versión 14 · noviembre de 2026',
  'rel.14.n1': 'Las funciones Pro ahora tienen un candado. La versión básica sigue siendo gratis. Toca un candado y ayuda a decidir qué incluirá Pro.'
 });
+/* schuld: hypotheek of lening met maandlast en aflooptijd (versie 15) */
+Object.assign(I18N.en, {
+ 'debt.h': 'Debt',
+ 'debt.s': 'Mortgage or loan: monthly cost, term and any interest-only part',
+ 'debt.intro': 'Still paying off a mortgage or a loan? Enter what you pay each month, how long it still runs and whether part of it is interest-only. You do not need the interest rate: it is already in your monthly payment. The payment stays the same in euros, so in today’s money it gets a little lighter every year.',
+ 'debt.opb': 'While you are saving, you pay this from your income. The calculation counts it from your retirement age.',
+ 'debt.add': 'Add a debt', 'debt.del': 'Remove this debt', 'debt.name': 'Name of the debt', 'debt.namePh': 'Name, for example Mortgage', 'debt.nameN': 'Debt {n}',
+ 'debt.pm': 'Monthly payment', 'debt.yrs': 'Remaining term', 'debt.bal': 'Interest-only amount (optional)', 'debt.unitM': '{cur} per month',
+ 'debt.balHint': 'Interest-only means this part is not repaid during the term, so the debt is still there at the end. The calculation counts this amount at the end of the term as one payment from your capital. Will you pay it from selling your home? Then leave it empty.',
+ 'debt.in': 'Is this payment already in your monthly budget?', 'debt.inY': 'Yes', 'debt.inN': 'No, on top',
+ 'debt.inHint': 'If yes, your budget drops by this payment once the debt is paid off. If no, the payment is added to your budget until then.',
+ 'debt.sumEmpty': 'Fill in the monthly payment and the remaining term to see the result.',
+ 'debt.sum': 'You pay {m} a month for another {t} (until {yr}).',
+ 'debt.sumBal': 'At the end you also pay {v} in one go.',
+ 'debt.sumOnlyBal': 'In {t} (in {yr}) you pay {v} in one go.',
+ 'debt.sumAge': 'You will be {a} then.', 'debt.sumFree': 'After that you need {m} a month less.',
+ 'debt.m': '{m} months', 'debt.shareLine': '{n}: {m} a month, {t} to go', 'debt.shareBal': ', plus {v} in one go at the end', 'debt.shareOnly': '{n}: {v} in one go in {t}',
+ 'ins.debt': 'Debt',
+ 'rel.15.v': 'Version 15 · November 2026',
+ 'rel.15.n1': 'Debt: count your mortgage or loan, with monthly payment, term and any interest-only part. A Pro feature: tap the lock and say whether you want it.'
+});
+Object.assign(I18N.nl, {
+ 'debt.h': 'Schuld',
+ 'debt.s': 'Hypotheek of lening: maandlast, looptijd en aflossingsvrij deel',
+ 'debt.intro': 'Betaal je nog een hypotheek of lening af? Vul in wat je per maand kwijt bent, hoe lang dat nog duurt en of er een aflossingsvrij deel in zit. Rente hoef je niet in te vullen: die zit al in je maandlast. De maandlast blijft in euro’s gelijk, dus in geld van vandaag wordt hij elk jaar iets lichter.',
+ 'debt.opb': 'Zolang je spaart, betaal je dit uit je inkomen. De berekening telt het mee vanaf je pensioenleeftijd.',
+ 'debt.add': 'Schuld toevoegen', 'debt.del': 'Deze schuld verwijderen', 'debt.name': 'Naam van de schuld', 'debt.namePh': 'Naam, bijvoorbeeld Hypotheek', 'debt.nameN': 'Schuld {n}',
+ 'debt.pm': 'Maandlast', 'debt.yrs': 'Resterende looptijd', 'debt.bal': 'Aflossingsvrij bedrag (optioneel)', 'debt.unitM': '{cur} per maand',
+ 'debt.balHint': 'Aflossingsvrij betekent dat dit deel tijdens de looptijd niet wordt afgelost: de schuld blijft aan het einde van de looptijd staan. De berekening telt dit bedrag dan als één betaling uit je vermogen. Betaal je het straks uit de verkoop van je huis? Laat het dan leeg.',
+ 'debt.in': 'Zit deze maandlast al in je maandbudget?', 'debt.inY': 'Ja', 'debt.inN': 'Nee, komt erbij',
+ 'debt.inHint': 'Bij ja daalt je budget met deze maandlast zodra de schuld is afbetaald. Bij nee komt de maandlast tot dan bovenop je budget.',
+ 'debt.sumEmpty': 'Vul de maandlast en de resterende looptijd in, dan zie je de uitkomst.',
+ 'debt.sum': 'Je betaalt {m} per maand, nog {t} (tot {yr}).',
+ 'debt.sumBal': 'Aan het einde betaal je daarnaast {v} in één keer.',
+ 'debt.sumOnlyBal': 'Over {t} (in {yr}) betaal je {v} in één keer.',
+ 'debt.sumAge': 'Je bent dan {a} jaar.', 'debt.sumFree': 'Daarna heb je {m} per maand minder nodig.',
+ 'debt.m': '{m} maanden', 'debt.shareLine': '{n}: {m} per maand, nog {t}', 'debt.shareBal': ', plus {v} in één keer aan het einde', 'debt.shareOnly': '{n}: {v} in één keer over {t}',
+ 'ins.debt': 'Schuld',
+ 'rel.15.v': 'Versie 15 · november 2026',
+ 'rel.15.n1': 'Schuld: tel je hypotheek of lening mee, met maandlast, looptijd en een eventueel aflossingsvrij deel. Een Pro-functie: tik op het slotje en laat weten of je dit wilt.'
+});
+Object.assign(I18N.de, {
+ 'debt.h': 'Schulden',
+ 'debt.s': 'Hypothek oder Kredit: Rate, Laufzeit und tilgungsfreier Teil',
+ 'debt.intro': 'Zahlen Sie noch eine Hypothek oder einen Kredit ab? Tragen Sie ein, was Sie pro Monat zahlen, wie lange das noch läuft und ob ein tilgungsfreier Teil dabei ist. Den Zins brauchen Sie nicht einzutragen: er steckt schon in Ihrer Rate. Die Rate bleibt in Euro gleich, in heutigem Geld wird sie also jedes Jahr etwas leichter.',
+ 'debt.opb': 'Solange Sie sparen, zahlen Sie das aus Ihrem Einkommen. Die Berechnung zählt es ab Ihrem Rentenalter mit.',
+ 'debt.add': 'Schuld hinzufügen', 'debt.del': 'Diese Schuld entfernen', 'debt.name': 'Name der Schuld', 'debt.namePh': 'Name, zum Beispiel Hypothek', 'debt.nameN': 'Schuld {n}',
+ 'debt.pm': 'Monatliche Rate', 'debt.yrs': 'Restlaufzeit', 'debt.bal': 'Tilgungsfreier Betrag (optional)', 'debt.unitM': '{cur} pro Monat',
+ 'debt.balHint': 'Tilgungsfrei heißt: Dieser Teil wird während der Laufzeit nicht abgezahlt, die Schuld bleibt also am Ende der Laufzeit bestehen. Die Berechnung zählt den Betrag dann als eine Zahlung aus Ihrem Vermögen. Zahlen Sie ihn später aus dem Verkauf Ihres Hauses? Dann lassen Sie das Feld leer.',
+ 'debt.in': 'Ist die Rate schon in Ihrem Monatsbudget enthalten?', 'debt.inY': 'Ja', 'debt.inN': 'Nein, kommt dazu',
+ 'debt.inHint': 'Bei Ja sinkt Ihr Budget um diese Rate, sobald die Schuld getilgt ist. Bei Nein kommt die Rate bis dahin zu Ihrem Budget hinzu.',
+ 'debt.sumEmpty': 'Tragen Sie die Rate und die Restlaufzeit ein, dann sehen Sie das Ergebnis.',
+ 'debt.sum': 'Sie zahlen {m} pro Monat, noch {t} (bis {yr}).',
+ 'debt.sumBal': 'Am Ende zahlen Sie zusätzlich {v} auf einmal.',
+ 'debt.sumOnlyBal': 'Im Jahr {yr} (Restlaufzeit {t}) zahlen Sie {v} auf einmal.',
+ 'debt.sumAge': 'Sie sind dann {a} Jahre alt.', 'debt.sumFree': 'Danach brauchen Sie {m} pro Monat weniger.',
+ 'debt.m': '{m} Monate', 'debt.shareLine': '{n}: {m} pro Monat, noch {t}', 'debt.shareBal': ', dazu am Ende {v} auf einmal', 'debt.shareOnly': '{n}: {v} auf einmal, Restlaufzeit {t}',
+ 'ins.debt': 'Schulden',
+ 'rel.15.v': 'Version 15 · November 2026',
+ 'rel.15.n1': 'Schulden: Hypothek oder Kredit mitrechnen, mit Rate, Laufzeit und einem etwaigen tilgungsfreien Teil. Eine Pro-Funktion: Tippen Sie auf das Schloss und sagen Sie, ob Sie sie wollen.'
+});
+Object.assign(I18N.fr, {
+ 'debt.h': 'Dette',
+ 'debt.s': 'Prêt immobilier ou crédit : mensualité, durée et partie in fine',
+ 'debt.intro': 'Vous remboursez encore un prêt immobilier ou un crédit ? Indiquez ce que vous payez par mois, combien de temps cela dure encore et s’il y a une partie in fine (sans remboursement du capital pendant la durée). Pas besoin du taux : il est déjà dans votre mensualité. La mensualité reste la même en euros, donc en argent d’aujourd’hui elle pèse un peu moins chaque année.',
+ 'debt.opb': 'Tant que vous épargnez, vous la payez avec vos revenus. Le calcul la compte à partir de l’âge de la retraite.',
+ 'debt.add': 'Ajouter une dette', 'debt.del': 'Supprimer cette dette', 'debt.name': 'Nom de la dette', 'debt.namePh': 'Nom, par exemple Prêt immobilier', 'debt.nameN': 'Dette {n}',
+ 'debt.pm': 'Mensualité', 'debt.yrs': 'Durée restante', 'debt.bal': 'Montant in fine (facultatif)', 'debt.unitM': '{cur} par mois',
+ 'debt.balHint': 'In fine signifie que cette partie n’est pas remboursée pendant la durée du prêt : la dette reste donc due à la fin. Le calcul compte ce montant comme un seul paiement prélevé sur votre patrimoine. Vous le paierez avec la vente de votre logement ? Laissez alors le champ vide.',
+ 'debt.in': 'Cette mensualité est-elle déjà dans votre budget mensuel ?', 'debt.inY': 'Oui', 'debt.inN': 'Non, en plus',
+ 'debt.inHint': 'Si oui, votre budget baisse de cette mensualité dès que la dette est remboursée. Si non, la mensualité s’ajoute à votre budget jusque-là.',
+ 'debt.sumEmpty': 'Indiquez la mensualité et la durée restante pour voir le résultat.',
+ 'debt.sum': 'Vous payez {m} par mois, encore {t} (jusqu’en {yr}).',
+ 'debt.sumBal': 'À la fin, vous payez en plus {v} en une fois.',
+ 'debt.sumOnlyBal': 'Dans {t} (en {yr}), vous payez {v} en une fois.',
+ 'debt.sumAge': 'Vous aurez alors {a} ans.', 'debt.sumFree': 'Ensuite, il vous faut {m} de moins par mois.',
+ 'debt.m': '{m} mois', 'debt.shareLine': '{n} : {m} par mois, encore {t}', 'debt.shareBal': ', plus {v} en une fois à la fin', 'debt.shareOnly': '{n} : {v} en une fois dans {t}',
+ 'ins.debt': 'Dette',
+ 'rel.15.v': 'Version 15 · novembre 2026',
+ 'rel.15.n1': 'Dette : comptez votre prêt immobilier ou crédit, avec mensualité, durée et une éventuelle partie in fine. Une fonction Pro : touchez le cadenas et dites si vous la voulez.'
+});
+Object.assign(I18N.es, {
+ 'debt.h': 'Deuda',
+ 'debt.s': 'Hipoteca o préstamo: cuota, plazo y parte sin amortizar',
+ 'debt.intro': '¿Todavía pagas una hipoteca o un préstamo? Indica lo que pagas al mes, cuánto tiempo falta y si una parte no se amortiza durante el plazo. No hace falta el interés: ya está en tu cuota. La cuota se mantiene igual en euros, así que en dinero de hoy pesa un poco menos cada año.',
+ 'debt.opb': 'Mientras ahorras, la pagas con tus ingresos. El cálculo la cuenta a partir de la edad de jubilación.',
+ 'debt.add': 'Añadir una deuda', 'debt.del': 'Quitar esta deuda', 'debt.name': 'Nombre de la deuda', 'debt.namePh': 'Nombre, por ejemplo Hipoteca', 'debt.nameN': 'Deuda {n}',
+ 'debt.pm': 'Cuota mensual', 'debt.yrs': 'Plazo restante', 'debt.bal': 'Importe sin amortizar (opcional)', 'debt.unitM': '{cur} al mes',
+ 'debt.balHint': 'Sin amortizar significa que esta parte no se devuelve durante el plazo, así que la deuda sigue ahí al final. El cálculo cuenta ese importe como un único pago de tu patrimonio. ¿Lo pagarás con la venta de tu vivienda? Entonces déjalo vacío.',
+ 'debt.in': '¿Esta cuota ya está en tu presupuesto mensual?', 'debt.inY': 'Sí', 'debt.inN': 'No, se suma',
+ 'debt.inHint': 'Si es que sí, tu presupuesto baja en esta cuota cuando la deuda esté pagada. Si no, la cuota se suma a tu presupuesto hasta entonces.',
+ 'debt.sumEmpty': 'Indica la cuota y el plazo restante para ver el resultado.',
+ 'debt.sum': 'Pagas {m} al mes, {t} más (hasta {yr}).',
+ 'debt.sumBal': 'Al final pagas además {v} de una vez.',
+ 'debt.sumOnlyBal': 'Dentro de {t} (en {yr}) pagas {v} de una vez.',
+ 'debt.sumAge': 'Tendrás entonces {a} años.', 'debt.sumFree': 'Después necesitas {m} menos al mes.',
+ 'debt.m': '{m} meses', 'debt.shareLine': '{n}: {m} al mes, {t} más', 'debt.shareBal': ', más {v} de una vez al final', 'debt.shareOnly': '{n}: {v} de una vez dentro de {t}',
+ 'ins.debt': 'Deudas',
+ 'rel.15.v': 'Versión 15 · noviembre de 2026',
+ 'rel.15.n1': 'Deuda: cuenta tu hipoteca o préstamo, con cuota, plazo y una posible parte sin amortizar. Una función Pro: toca el candado y di si la quieres.'
+});
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
  'faq.q8': 'Does my spending stay the same in the calculation, or does it fall?',
@@ -5467,11 +5595,14 @@ Object.assign(I18N.es, {
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
   /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
-  var lists = { perP: [], perD: [], pots: [] };
+  var lists = { perP: [], perD: [], pots: [], debts: [] };
   function fin(v, lo, hi, d) { v = parseFloat(v); return isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d; }
   function cleanLists(o) {
-    var r = { perP: [], perD: [], pots: [] };
+    var r = { perP: [], perD: [], pots: [], debts: [] };
     if (!o || typeof o !== 'object') return r;
+    (Array.isArray(o.debts) ? o.debts : []).slice(0, 6).forEach(function (x) {
+      if (x) r.debts.push({ n: String(x.n || '').slice(0, 30), m: fin(x.m, 0, 1e6, 0), y: fin(x.y, 0, 60, 0), v: fin(x.v, 0, 1e8, 0), b: x.b === 0 ? 0 : 1 });
+    });
     ['perP', 'perD'].forEach(function (k) {
       (Array.isArray(o[k]) ? o[k] : []).slice(0, 12).forEach(function (x) { if (x) r[k].push({ a: fin(x.a, 0, 110, 50), b: fin(x.b, 0, 110, 67), m: fin(x.m, 0, 1e6, 0) }); });
     });
@@ -5593,7 +5724,9 @@ Object.assign(I18N.es, {
           return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
             '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name' + n + '"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"><p class="hint" data-t="h.names' + n + '"></p></div>' +
             wkHtml(n === 1 ? 'P' : 'D') + '</div>';
-        }).join('') + '</div>';
+        }).join('') + '</div>' +
+        '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pro-tag" data-pro="debts"></span><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
+        '<div class="pots-in"><p class="hint" data-t="debt.intro"></p><p class="hint debts-opb" id="debts-opb" data-t="debt.opb" hidden></p><div id="debts-list"></div><button type="button" class="btn ghost sm" id="debt-add" data-t="debt.add"></button></div></details>';
     } },
     { t: 'st3.t', h: 'st3.h', s: 'st3.s', html: function () {
       return '<div class="cols2">' + [1, 2].map(function (n) {
@@ -5875,20 +6008,70 @@ Object.assign(I18N.es, {
     }).join('');
     P.forEach(function (q, i) { potSum(i); });
   }
-  function renderLists() { renderPer('P'); renderPer('D'); renderPots(); }
+  /* schulden: maandlast, resterende looptijd en eventueel een aflossingsvrij bedrag; de uitkomst staat onder elke regel */
+  function durTxt(n) {
+    var y = Math.floor(n / 12 + 1e-9), m = Math.round(n - 12 * y);
+    if (m === 12) { y++; m = 0; }
+    if (!y) return t1('debt.m', { m: m });
+    return m ? t1('ageYM', { y: y, m: m }) : y + ' ' + t1('u.years');
+  }
+  function debtName(q, i) { return q.n || t1('debt.nameN', { n: i + 1 }); }
+  function debtSum(i) {
+    var q = lists.debts[i], el = $('debt-sum-' + i); if (!q || !el) return;
+    var c = debtCalc(q);
+    el.classList.toggle('muted', !c.ok);
+    if (!c.ok) { el.textContent = t1('debt.sumEmpty'); return; }
+    var dt = new Date(); dt.setMonth(dt.getMonth() + c.n);
+    var yr = dt.getFullYear(), s = [];
+    if (c.pm > 0) { s.push(t1('debt.sum', { m: eur(c.pm), t: durTxt(c.n), yr: yr })); if (c.v > 0) s.push(t1('debt.sumBal', { v: eur(c.v) })); }
+    else s.push(t1('debt.sumOnlyBal', { v: eur(c.v), t: durTxt(c.n), yr: yr }));
+    if (!two()) s.push(t1('debt.sumAge', { a: Math.round(state.leeftijdPaul + c.n / 12) }));
+    if (q.b !== 0 && c.pm > 0) s.push(t1('debt.sumFree', { m: eur(c.pm) }));
+    el.textContent = s.join(' ');
+  }
+  function renderDebts() {
+    var host = $('debts-list'); if (!host) return;
+    var D = lists.debts;
+    var lk = plLocked();
+    $('debts-n').hidden = !D.length || lk; $('debts-n').textContent = D.length;
+    $('debt-add').hidden = D.length >= 6;
+    $('debts-opb').hidden = !(state.opbouw && D.length) || lk;
+    if (D.length && !lk) $('debts-box').open = true;
+    else if (lk) $('debts-box').open = false;
+    function opt(i, f, v, lab, cur) { return '<label class="seg-opt"><input type="radio" name="debt-' + f + '-' + i + '" data-dk="' + f + '" data-i="' + i + '" value="' + v + '"' + (cur ? ' checked' : '') + '><span>' + lab + '</span></label>'; }
+    host.innerHTML = D.map(function (q, i) {
+      var L = 'data-l="debts" data-i="' + i + '"', id = 'debt-' + i + '-';
+      return '<div class="pot">' +
+        '<div class="pot-top"><input type="text" class="pot-name" id="' + id + 'n" maxlength="30" ' + L + ' data-f="n" value="' + esc(q.n) + '" placeholder="' + esc(t1('debt.namePh')) + '" aria-label="' + esc(t1('debt.name')) + '">' +
+        '<button type="button" class="per-x" data-del="debts" data-i="' + i + '" aria-label="' + esc(t1('debt.del')) + '">✕</button></div>' +
+        '<div class="fields pot-f">' +
+        fldL(id + 'm', t1('debt.pm'), numIn(id + 'm', L + ' data-f="m"', q.m, true), t1('debt.unitM', { cur: curSym() })) +
+        fldL(id + 'y', t1('debt.yrs'), numIn(id + 'y', L + ' data-f="y" min="0" max="60"', q.y > 0 ? q.y : ''), t1('u.years')) +
+        fldL(id + 'v', t1('debt.bal'), numIn(id + 'v', L + ' data-f="v"', q.v, true), curSym()) +
+        '</div>' + (i === 0 ? '<p class="hint pot-taxh">' + t1('debt.balHint') + '</p>' : '') +
+        '<div class="pot-segs"><span class="debt-q">' + t1('debt.in') + '</span><div class="seg" role="radiogroup" aria-label="' + esc(t1('debt.in')) + '">' + opt(i, 'b', '1', t1('debt.inY'), q.b !== 0) + opt(i, 'b', '0', t1('debt.inN'), q.b === 0) + '</div></div>' +
+        (i === 0 ? '<p class="hint pot-taxh">' + t1('debt.inHint') + '</p>' : '') + '<p class="pot-sum" id="debt-sum-' + i + '"></p></div>';
+    }).join('');
+    D.forEach(function (q, i) { debtSum(i); });
+  }
+  function renderLists() { renderPer('P'); renderPer('D'); renderPots(); renderDebts(); }
   function potsOn() { return lists.pots.filter(function (q) { return q.a > 0 && (q.w !== 1 || two()); }); }
+  /* zolang Pro op slot zit, telt een schuld nooit mee (ook niet als die ooit is opgeslagen): de kaart is dicht en de uitkomst blijft zoals zonder schuld */
+  function debtsList() { return plLocked() ? [] : lists.debts; }
+  function debtsOn() { return debtsList().filter(function (q) { return debtCalc(q).ok; }); }
   document.addEventListener('input', function (ev) {
     var e = ev.target, l = e.getAttribute && e.getAttribute('data-l'); if (!l || !lists[l]) return;
     var i = parseInt(e.getAttribute('data-i'), 10), f = e.getAttribute('data-f'), it = lists[l][i]; if (!it) return;
     if (f === 'n') it.n = String(e.value).slice(0, 30);
     else {
-      var keep = l === 'pots' ? f === 'f' : (f === 'a' || f === 'b');
+      var keep = l === 'pots' ? f === 'f' : l === 'debts' ? false : (f === 'a' || f === 'b');
       var v = e.value === '' ? (keep ? NaN : 0) : numOf(e);
       if (!isFinite(v)) return;
       if (f === 'x') v = Math.max(0, Math.min(100, v));
+      if (l === 'debts' && f === 'y') v = Math.max(0, Math.min(60, v));
       it[f] = v;
     }
-    if (l === 'pots') potSum(i); else perWarn(l.slice(3));
+    if (l === 'pots') potSum(i); else if (l === 'debts') debtSum(i); else perWarn(l.slice(3));
     if (f !== 'n') updateSoon(); else persist();
   });
   document.addEventListener('change', function (ev) {
@@ -5897,12 +6080,25 @@ Object.assign(I18N.es, {
     if (f === 'k') it.k = e.value === 'l' ? 'l' : 'm'; else it.w = e.value === '1' ? 1 : 0;
     renderPots(); update();
   });
+  document.addEventListener('change', function (ev) {
+    var e = ev.target, f = e.getAttribute && e.getAttribute('data-dk'); if (!f || !e.checked) return;
+    var it = lists.debts[parseInt(e.getAttribute('data-i'), 10)]; if (!it) return;
+    if (f === 'b') it.b = e.value === '0' ? 0 : 1;
+    renderDebts(); update();
+  });
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest ? ev.target.closest('.wk-tog, [data-addper], [data-del], #pot-add') : null; if (!b) return;
+    var b = ev.target.closest ? ev.target.closest('.wk-tog, [data-addper], [data-del], #pot-add, #debt-add') : null; if (!b) return;
     if (b.id === 'pot-add') {
       lists.pots.push({ n: '', w: 0, k: 'm', a: 0, f: Math.round(state.aowPaul) || 67, u: 0, x: 0 });
       renderPots(); update();
       var nn = $('pot-' + (lists.pots.length - 1) + '-n'); if (nn) nn.focus();
+      return;
+    }
+    if (b.id === 'debt-add') {
+      if (lists.debts.length >= 6) return;
+      lists.debts.push({ n: '', m: 0, y: 0, v: 0, b: 1 });
+      renderDebts(); update();
+      var dn = $('debt-' + (lists.debts.length - 1) + '-m'); if (dn) dn.focus();
       return;
     }
     if (b.classList.contains('wk-tog')) {
@@ -5957,7 +6153,7 @@ Object.assign(I18N.es, {
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
     p.startkapitaal = capEff();
-    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots;
+    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots; p.debts = debtsList();
     p.taxMode = isNL() ? 'nlbox3' : 'returns';
     if (isNL()) p.box3 = state.box3;
     var ps = portStat(effIdx());
@@ -6667,7 +6863,7 @@ Object.assign(I18N.es, {
   function hvCtx() {
     var st = {}, ports = {};
     Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
-    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots;
+    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots; st.debts = debtsList();
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports, alts: [0, 1, 2].filter(function (k) { return k !== state.uitgaveDaling; }) };
   }
@@ -6682,7 +6878,7 @@ Object.assign(I18N.es, {
     if (hvW !== null) return hvW;
     try {
       var src = 'var RHO=' + RHO + ',SIMN=' + SIMN + ',ASSET=' + JSON.stringify(ASSET) + ',zc={};\n' +
-        [runModel, normalsFor, simCore, simQuick, c90For, hvRun].map(function (f) { return f.toString(); }).join('\n') +
+        [debtCalc, runModel, normalsFor, simCore, simQuick, c90For, hvRun].map(function (f) { return f.toString(); }).join('\n') +
         '\nonmessage=function(e){var r=null;try{r=hvRun(e.data.X);}catch(x){}postMessage({id:e.data.id,r:r});};';
       hvW = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
       hvW.onmessage = function (e) {
@@ -6724,6 +6920,7 @@ Object.assign(I18N.es, {
   }
   function finishUpdate() {
     if (!updTimer) document.documentElement.classList.remove('is-calc');
+    var dob = $('debts-opb'); if (dob) dob.hidden = !(state.opbouw && debtsList().length);
     renderAdvies();
     renderZeker();
     document.documentElement.classList.toggle('is-empty', state.budget <= 0 && !(state.opbouw && state.inleg > 0));
@@ -6803,6 +7000,8 @@ var TRK = {
  'extra-notes-written': ['extra', 'Iets in het kladblok getypt'],
  'extra-view-portfolios': ['extra', 'Portefeuilles vergelijken bekeken'],
  'extra-view-ladder': ['extra', 'Maandbudget-ladder bekeken'],
+ 'pro-debts-open': ['pro', 'Schuld geopend'],
+ 'pro-debt-add': ['pro', 'Schuld toegevoegd'],
  'pro-view-plans': ['pro', 'Twee plannen vergelijken bekeken'],
  'pro-spend-curve': ['pro', 'Uitgavenverloop gekozen'],
  'pro-plan-save': ['pro', 'Plan A of B bewaard'],
@@ -6835,7 +7034,7 @@ var TRK = {
     })();
   }
   var TRK_CLICK = [['.share-open', 'reach-share-open'], ['#sh-link', 'reach-share-link'], ['#sh-print', 'pro-share-print'], ['#sh-copy', 'pro-share-summary'], ['.fb-open', 'reach-tip-open'], ['.duo-r', 'reach-coffee-click'],
-    ['#btn-install', 'reach-install-click'], ['#btn-theme', 'extra-theme'], ['#btn-tour', 'extra-tour'], ['[data-addper]', 'pro-period-add'], ['#pot-add', 'pro-pot-add'], ['#pots-box > summary', 'pro-pots-open'],
+    ['#btn-install', 'reach-install-click'], ['#btn-theme', 'extra-theme'], ['#btn-tour', 'extra-tour'], ['[data-addper]', 'pro-period-add'], ['#pot-add', 'pro-pot-add'], ['#pots-box > summary', 'pro-pots-open'], ['#debts-box > summary', 'pro-debts-open'], ['#debt-add', 'pro-debt-add'],
     ['[data-pl="save"]', 'pro-plan-save'], ['#nt-fab', 'extra-notes-open']];
   var TRK_CHANGE = { 'q-budget': 'core-budget', 'q-startkapitaal': 'core-capital', 'q-inleg': 'extra-inleg', 'q-country': 'core-country', 'country-intro': 'core-country', 'lang-top': 'reach-language', 'lang-intro': 'reach-language',
     'n-werkP': 'extra-income-work', 'n-werkD': 'extra-income-work', 'n-werkTotP': 'extra-income-work', 'n-werkTotD': 'extra-income-work', 'n-pensioenPaul': 'extra-pension', 'n-pensioenDiana': 'extra-pension', 'n-pensioenLeeftijd': 'extra-pension', 'n-pensioenLeeftijdDiana': 'extra-pension', 'n-spP': 'extra-statepension', 'n-spD': 'extra-statepension', 'n-aowPaul': 'extra-statepension', 'n-aowDiana': 'extra-statepension',
@@ -6981,7 +7180,7 @@ var TRK = {
     var key = planKey(pl);
     if (planCache[key] || planBusy[key]) return planCache[key] || null;
     var st = loadNums({}, pl.state), L = cleanLists(pl.lists), ports = {};
-    st.perP = L.perP; st.perD = L.perD; st.pots = L.pots;
+    st.perP = L.perP; st.perD = L.perD; st.pots = L.pots; st.debts = plLocked() ? [] : L.debts;
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     planBusy[key] = 1;
     calcX({ st: st, cap: st.startkapitaal, nl: pl.country === 'NL', pfUser: st.portfolio, autoIdx: 2, ports: ports }, function (r) {
@@ -7052,7 +7251,7 @@ var TRK = {
   function shareUrl() {
     var d = {}; Object.keys(DEF).forEach(function (k) { if (state[k] !== DEF[k]) d[k] = state[k]; });
     var base = location.origin + location.pathname, o = { s: d, c: prefs.country, u: prefs.cur };
-    if (lists.perP.length || lists.perD.length || lists.pots.length) o.l = lists;
+    if (lists.perP.length || lists.perD.length || lists.pots.length || debtsList().length) o.l = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList() };
     return base + '?plan=' + b64u(JSON.stringify(o)) + '#overview';
   }
   function shareText() {
@@ -7061,6 +7260,11 @@ var TRK = {
     L.push(t1('pl.r.bud') + ': ' + eur(state.budget));
     L.push(t1('curve.lbl') + ': ' + t1('curve.o' + (state.uitgaveDaling || 0)));
     L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
+    debtsList().forEach(function (q, i) {
+      var c = debtCalc(q); if (!c.ok) return;
+      L.push(c.pm > 0 ? t1('debt.shareLine', { n: debtName(q, i), m: eur(c.pm), t: durTxt(c.n) }) + (c.v > 0 ? t1('debt.shareBal', { v: eur(c.v) }) : '')
+        : t1('debt.shareOnly', { n: debtName(q, i), v: eur(c.v), t: durTxt(c.n) }));
+    });
     L.push(t1('pl.r.end') + ': ' + fmtAge(state.eindleeftijd));
     if (adv) L.push(t1('pl.r.c90') + ': ' + eur(adv.c90));
     L.push(t1('pl.r.max') + ': ' + eur(max90));
@@ -7175,7 +7379,7 @@ var TRK = {
       return state['werk' + s] > 0 ? eur(state['werk' + s]) + ' ' + t1('ins.until', { a: fmtAge(state['werkTot' + s]) }) : dash;
     }
     function inc(on, amt, age) { return on && amt > 0 ? eur(amt) + ' ' + t1('ins.from', { a: fmtAge(age) }) : dash; }
-    var pots = potsOn();
+    var pots = potsOn(), debts = debtsOn();
     var G2 = [
       [STEPS[0].t, [
         it(t1('ins.ctry'), esc(cName(prefs.country)), 'q-country'),
@@ -7183,7 +7387,8 @@ var TRK = {
         it(t1('ins.bud'), state.budget > 0 ? eur(state.budget) : dash, 'q-budget'),
         it(t1('curve.lbl'), t1('curve.o' + (state.uitgaveDaling || 0)), 'q-uitgaveDaling'),
         it(t1('ins.cap'), state.startkapitaal > 0 ? eur(state.startkapitaal) : dash, 'q-startkapitaal')]],
-      [STEPS[1].t, [it(t1('ins.wk'), per(wk('P'), wk('D')), lists.perP.length ? 'wk-per-P' : 'n-werkP')]],
+      [STEPS[1].t, [it(t1('ins.wk'), per(wk('P'), wk('D')), lists.perP.length ? 'wk-per-P' : 'n-werkP'),
+        it(t1('ins.debt'), debts.length ? esc(debts.map(function (q) { return debtName(q, lists.debts.indexOf(q)); }).join(', ')) : dash, 'debts-box')]],
       [STEPS[2].t, [
         it(esc(cap1(spName())), per(inc(state.aowAanP !== 0, state.spP, state.aowPaul), inc(state.aowAanD !== 0, state.spD, state.aowDiana)), 'n-spP'),
         it(esc(cap1(penName())), per(inc(state.pensAanP !== 0, state.pensioenPaul, state.pensioenLeeftijd), inc(state.pensAanD !== 0, state.pensioenDiana, state.pensioenLeeftijdDiana)), 'n-pensioenPaul'),
@@ -7433,7 +7638,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 14, n: 2, f: 0 }, { v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -7482,6 +7687,10 @@ var TRK = {
       'State pension: ' + both(state.aowAanP !== 0 ? money(state.spP) + ' from ' + ag(state.aowPaul) : 'off', state.aowAanD !== 0 ? money(state.spD) + ' from ' + ag(state.aowDiana) : 'off'),
       'Pension: ' + both(state.pensAanP !== 0 ? money(state.pensioenPaul) + ' from ' + ag(state.pensioenLeeftijd) : 'off', state.pensAanD !== 0 ? money(state.pensioenDiana) + ' from ' + ag(state.pensioenLeeftijdDiana) : 'off'),
       'Work income (net): ' + both(wk('P'), wk('D')));
+    debtsList().forEach(function (q, i) {
+      var c = debtCalc(q); if (!c.ok) return;
+      L.push('Debt ' + (i + 1) + ': payment ' + money(c.pm) + '/m for ' + Math.round(c.n) + ' months' + (c.v > 0 ? ', interest-only amount ' + money(c.v) + ' at the end' : '') + ', ' + (q.b !== 0 ? 'inside the monthly budget' : 'on top of the monthly budget'));
+    });
     lists.pots.forEach(function (q, i) {
       L.push('Extra pot ' + (i + 1) + ': ' + (q.k === 'l' ? 'lump sum ' + money(q.a) + ' at ' + ag(q.f) : money(q.a) + '/m from ' + ag(q.f) + (q.u > 0 ? ' until ' + ag(q.u) : ' for life')) + ', tax ' + (q.x || 0) + '%' + (tw ? ', ' + (q.w ? 'partner' : 'person 1') : ''));
     });
@@ -7615,7 +7824,7 @@ var TRK = {
      pro-3-wil-<f>   "Dit wil ik"       pro-4-prijs-<0|3|5|10>  genoemd bedrag */
   var PL_LOCK = '<svg class="pl-lock" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/><path d="M5.3 7V5.2a2.7 2.7 0 0 1 5.4 0V7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
   PRO_SVG = PRO_SVG.replace('<svg ', '<svg class="pl-clock" ') + PL_LOCK;
-  var PL_ORDER = ['plans', 'spend-curve', 'purchasing-power', 'period', 'pots', 'print', 'summary'];
+  var PL_ORDER = ['plans', 'spend-curve', 'purchasing-power', 'period', 'pots', 'debts', 'print', 'summary'];
   var PLT = {
     en: {
       title: 'Pro is coming', tap: 'Tap to find out more',
@@ -7630,6 +7839,7 @@ var TRK = {
         'purchasing-power': ['Purchasing power by country', 'See where your monthly budget is worth the most.'],
         'period': ['Refine by period', 'Enter a different income per age: for example fewer hours from 60.'],
         'pots': ['Extra pension or pot', 'Count an extra pension, inheritance or the sale of your home.'],
+        'debts': ['Count a debt', 'Count a mortgage or loan: the monthly payment, the remaining term and any interest-only part.'],
         'print': ['Print or PDF', 'Keep your result as a neat PDF, for yourself or your adviser.'],
         'summary': ['Copy summary', 'Copy a short summary to share with your partner.']
       }
@@ -7647,6 +7857,7 @@ var TRK = {
         'purchasing-power': ['Koopkracht per land', 'Zie in welk land je maandbudget het meest waard is.'],
         'period': ['Per periode verfijnen', 'Geef per leeftijd een ander inkomen op, bijvoorbeeld minder uren vanaf 60.'],
         'pots': ['Extra pensioen of pot', 'Tel een extra pensioen, erfenis of de verkoop van je huis mee.'],
+        'debts': ['Schuld meetellen', 'Tel een hypotheek of lening mee: de maandlast, de looptijd en een eventueel aflossingsvrij deel.'],
         'print': ['Print of pdf', 'Bewaar je uitkomst als nette pdf, voor jezelf of je adviseur.'],
         'summary': ['Samenvatting kopiëren', 'Kopieer een korte samenvatting om met je partner te delen.']
       }
@@ -7664,6 +7875,7 @@ var TRK = {
         'purchasing-power': ['Kaufkraft nach Land', 'Sehen Sie, in welchem Land Ihr Monatsbudget am meisten wert ist.'],
         'period': ['Nach Zeiträumen verfeinern', 'Geben Sie je Alter ein anderes Einkommen an, zum Beispiel weniger Stunden ab 60.'],
         'pots': ['Zusätzliche Rente oder Topf', 'Rechnen Sie eine zusätzliche Rente, ein Erbe oder den Verkauf Ihres Hauses mit ein.'],
+        'debts': ['Schulden mitrechnen', 'Rechnen Sie eine Hypothek oder einen Kredit mit ein: die monatliche Rate, die Restlaufzeit und einen etwaigen tilgungsfreien Teil.'],
         'print': ['Drucken oder PDF', 'Bewahren Sie Ihr Ergebnis als ordentliches PDF auf, für sich oder Ihre Beratung.'],
         'summary': ['Zusammenfassung kopieren', 'Kopieren Sie eine kurze Zusammenfassung für Ihren Partner.']
       }
@@ -7681,6 +7893,7 @@ var TRK = {
         'purchasing-power': ['Pouvoir d’achat par pays', 'Voyez dans quel pays votre budget mensuel vaut le plus.'],
         'period': ['Affiner par période', 'Indiquez un revenu différent selon l’âge, par exemple moins d’heures à partir de 60 ans.'],
         'pots': ['Pension ou capital en plus', 'Comptez une pension en plus, un héritage ou la vente de votre maison.'],
+        'debts': ['Compter une dette', 'Comptez un prêt immobilier ou un crédit : la mensualité, la durée restante et une éventuelle partie in fine.'],
         'print': ['Imprimer ou PDF', 'Gardez votre résultat en PDF soigné, pour vous ou votre conseiller.'],
         'summary': ['Copier le résumé', 'Copiez un court résumé à partager avec votre partenaire.']
       }
@@ -7698,6 +7911,7 @@ var TRK = {
         'purchasing-power': ['Poder adquisitivo por país', 'Mira en qué país tu presupuesto mensual vale más.'],
         'period': ['Afinar por periodos', 'Indica un ingreso distinto según la edad, por ejemplo menos horas a partir de los 60.'],
         'pots': ['Pensión o fondo extra', 'Cuenta una pensión extra, una herencia o la venta de tu casa.'],
+        'debts': ['Contar una deuda', 'Cuenta una hipoteca o un préstamo: la cuota mensual, el plazo restante y una posible parte sin amortizar.'],
         'print': ['Imprimir o PDF', 'Guarda tu resultado como un PDF ordenado, para ti o tu asesor.'],
         'summary': ['Copiar resumen', 'Copia un resumen corto para compartir con tu pareja.']
       }
@@ -7783,6 +7997,7 @@ var TRK = {
     if (pt) w = pt.getAttribute('data-pro');
     else if (g) w = g.getAttribute('data-pl');
     else if (t.closest('#pots-box > summary')) w = 'pots';
+    else if (t.closest('#debts-box > summary')) w = 'debts';
     else if (t.closest('#sh-print')) w = 'print';
     else if (t.closest('#sh-copy')) w = 'summary';
     else { var wk = t.closest('.wk-tog'); if (wk && wk.querySelector('.pro-tag')) w = 'period'; }
