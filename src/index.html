@@ -1291,7 +1291,6 @@ input::placeholder { font-weight: 400; }
   --shadow-up: 0 2px 0 rgba(0, 0, 0, 0.25), 0 24px 44px -22px rgba(0, 0, 0, 0.9);
   color-scheme: dark;
 }
-:root:not([data-theme="light"]) #btn-theme .i-sun { display: block; } :root:not([data-theme="light"]) #btn-theme .i-moon { display: none; }
 :root:not([data-theme="light"]) .hero-art img, :root:not([data-theme="light"]) .pt-art img, :root:not([data-theme="light"]) .modal-hero img { filter: brightness(0.86) saturate(0.95); }
 }
 :root[data-theme="dark"] {
@@ -1306,7 +1305,6 @@ input::placeholder { font-weight: 400; }
   --shadow-up: 0 2px 0 rgba(0, 0, 0, 0.25), 0 24px 44px -22px rgba(0, 0, 0, 0.9);
   color-scheme: dark;
 }
-:root[data-theme="dark"] #btn-theme .i-sun { display: block; } :root[data-theme="dark"] #btn-theme .i-moon { display: none; }
 :root[data-theme="dark"] .hero-art img, :root[data-theme="dark"] .pt-art img, :root[data-theme="dark"] .modal-hero img { filter: brightness(0.86) saturate(0.95); }
 
 
@@ -1340,7 +1338,8 @@ a { color: var(--accent); }
 .icon-btn:active { transform: scale(0.96); }
 .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .icon-btn.install { background: var(--accent); border-color: var(--accent); color: var(--on-accent); padding: 0 14px; }
-#btn-theme .i-sun { display: none; }
+#btn-theme .i-sun, #btn-theme .i-moon, #btn-theme .i-auto { display: none; }
+#btn-theme[data-mode="light"] .i-sun, #btn-theme[data-mode="dark"] .i-moon, #btn-theme[data-mode="auto"] .i-auto { display: block; }
 .lang-pick { border-radius: 12px; min-height: 40px; background: var(--surface); border-color: var(--line); color: var(--ink2); }
 .lang-pick select { color: var(--ink); font: 600 13px var(--f-body); background: transparent; }
 .mini { background: transparent; border-top-color: color-mix(in srgb, var(--line) 70%, transparent); color: var(--ink2); }
@@ -1810,7 +1809,7 @@ html.is-empty .share-plan { display: none; }
     <div class="tb-right">
       <button class="icon-btn share-app" type="button" data-t-aria="tip.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="17.5" cy="5.5" r="2.6"/><circle cx="6.5" cy="12" r="2.6"/><circle cx="17.5" cy="18.5" r="2.6"/><path d="M8.8 10.7l6.4-3.9M8.8 13.3l6.4 3.9"/></svg><span class="ib-l" data-t="tip.btn"></span></button>
       <button class="icon-btn share-open" type="button" data-t-aria="sh.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span class="ib-l" data-t="sh.btn"></span></button>
-      <button class="icon-btn" id="btn-theme" type="button" data-t-aria="th.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg></button>
+      <button class="icon-btn" id="btn-theme" type="button" data-mode="auto"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="i-auto"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor"/></g><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg></button>
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label"></select></label>
       <button class="icon-btn install" id="btn-install" type="button" hidden data-t-aria="inst.btn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span class="ib-l">App</span></button>
     </div>
@@ -4037,7 +4036,7 @@ Object.assign(I18N.en, {
  "sh.fail": "Copying didn’t work. Select the text and copy it yourself.",
  "sh.empty": "Fill in your monthly budget first; then there is something to share.",
  "sh.loaded": "Plan loaded from the link.",
- "th.btn": "Light or dark",
+ "th.btn": "Theme", "th.auto": "Automatic", "th.light": "Light", "th.dark": "Dark",
  "calc": "Calculating…",
  "nav.plan": "Plan",
  "nav.compare": "Compare"
@@ -4146,7 +4145,7 @@ Object.assign(I18N.nl, {
  "sh.fail": "Kopiëren lukte niet. Selecteer de tekst en kopieer hem zelf.",
  "sh.empty": "Vul eerst je maandbudget in; dan valt er iets te delen.",
  "sh.loaded": "Plan geladen uit de link.",
- "th.btn": "Licht of donker",
+ "th.btn": "Thema", "th.auto": "Automatisch", "th.light": "Licht", "th.dark": "Donker",
  "calc": "Bezig met rekenen…",
  "nav.plan": "Plan",
  "nav.compare": "Vergelijk"
@@ -4250,7 +4249,7 @@ Object.assign(I18N.de, {
  "sh.fail": "Kopieren hat nicht geklappt. Markieren Sie den Text und kopieren Sie ihn selbst.",
  "sh.empty": "Geben Sie zuerst Ihr Monatsbudget ein; dann gibt es etwas zu teilen.",
  "sh.loaded": "Plan aus dem Link geladen.",
- "th.btn": "Hell oder dunkel",
+ "th.btn": "Design", "th.auto": "Automatisch", "th.light": "Hell", "th.dark": "Dunkel",
  "calc": "Wird berechnet…",
  "nav.plan": "Plan",
  "nav.compare": "Vergleich"
@@ -4354,7 +4353,7 @@ Object.assign(I18N.fr, {
  "sh.fail": "La copie a échoué. Sélectionnez le texte et copiez-le vous-même.",
  "sh.empty": "Indiquez d’abord votre budget mensuel ; il y aura alors quelque chose à partager.",
  "sh.loaded": "Plan chargé depuis le lien.",
- "th.btn": "Clair ou sombre",
+ "th.btn": "Thème", "th.auto": "Automatique", "th.light": "Clair", "th.dark": "Sombre",
  "calc": "Calcul en cours…",
  "nav.plan": "Plan",
  "nav.compare": "Comparer"
@@ -4463,7 +4462,7 @@ Object.assign(I18N.es, {
  "sh.fail": "No se pudo copiar. Selecciona el texto y cópialo tú.",
  "sh.empty": "Introduce primero tu presupuesto mensual; así habrá algo que compartir.",
  "sh.loaded": "Plan cargado desde el enlace.",
- "th.btn": "Claro u oscuro",
+ "th.btn": "Tema", "th.auto": "Automático", "th.light": "Claro", "th.dark": "Oscuro",
  "calc": "Calculando…",
  "nav.plan": "Plan",
  "nav.compare": "Comparar"
@@ -5643,6 +5642,7 @@ Object.assign(I18N.es, {
   function applyText() {
     G = gvars();
     document.documentElement.lang = prefs.lang;
+    if (typeof applyTheme === 'function' && $('btn-theme')) { try { applyTheme(); } catch (e) {} }
     each('[data-t]', function (e) { e.innerHTML = t(e.getAttribute('data-t')); });
     /* Fraunces: de haak van de f dekt de punt van de i af en de staart van de J raakt de volgende letter; geef die twee paren een haartje lucht */
     each('h1', function (e) { if (e.children.length === 0 && !/kn">/.test(e.innerHTML)) e.innerHTML = e.innerHTML.replace(/f(?=i)/g, '<span class="kn">f</span>').replace(/\bJ(?=[a-zà-ÿ])/g, '<span class="kn j">J</span>'); });
@@ -6785,7 +6785,7 @@ var TRK = {
  'extra-mode-all': ['extra', 'Fine-tunen: alles in een overzicht'],
  'extra-mode-steps': ['extra', 'Fine-tunen: stap voor stap'],
  'extra-tour': ['extra', 'Rondleiding gestart'],
- 'extra-theme': ['extra', 'Donker of licht gewisseld'],
+ 'extra-theme': ['extra', 'Thema gewisseld (automatisch/licht/donker)'],
  'extra-notes-open': ['extra', 'Kladblok geopend'],
  'extra-notes-written': ['extra', 'Iets in het kladblok getypt'],
  'extra-view-portfolios': ['extra', 'Portefeuilles vergelijken bekeken'],
@@ -6926,17 +6926,28 @@ var TRK = {
     if (a === 'dark' || a === 'light') return a;
     try { return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { return 'light'; }
   }
+  function themeMode() { return prefs.theme === 'dark' || prefs.theme === 'light' ? prefs.theme : 'auto'; }
   function applyTheme() {
-    var th = prefs.theme;
-    if (th === 'dark' || th === 'light') document.documentElement.setAttribute('data-theme', th); else document.documentElement.removeAttribute('data-theme');
+    var th = themeMode();
+    if (th !== 'auto') document.documentElement.setAttribute('data-theme', th); else document.documentElement.removeAttribute('data-theme');
     var mt = document.querySelector('meta[name="theme-color"]'); if (mt) mt.setAttribute('content', themeNow() === 'dark' ? '#141816' : '#F6F2EB');
+    var b = $('btn-theme');
+    if (b) { var lbl = t1('th.btn') + ': ' + t1('th.' + th); b.setAttribute('data-mode', th); b.setAttribute('aria-label', lbl); b.setAttribute('title', lbl); }
   }
   try { var spT = JSON.parse(localStorage.getItem(KEY + '-prefs') || 'null'); if (spT && (spT.theme === 'dark' || spT.theme === 'light')) prefs.theme = spT.theme; } catch (e) {}
   applyTheme();
   if ($('btn-theme')) $('btn-theme').addEventListener('click', function () {
-    prefs.theme = themeNow() === 'dark' ? 'light' : 'dark'; savePrefs(); applyTheme();
+    var nx = { auto: 'light', light: 'dark', dark: 'auto' }[themeMode()];
+    if (nx === 'auto') delete prefs.theme; else prefs.theme = nx;
+    savePrefs(); applyTheme();
     if (last) { lastW = 0; renderFan(); renderFlow(last); }
   });
+  /* Bij 'automatisch' beweegt de site mee als de telefoon van licht naar donker wisselt (bijvoorbeeld 's avonds) */
+  try {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onMq = function () { if (themeMode() !== 'auto') return; applyTheme(); if (last) { lastW = 0; renderFan(); renderFlow(last); } };
+    if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
+  } catch (e) {}
 
   /* ================= plannen bewaren en vergelijken ================= */
   var plans = { A: null, B: null };
