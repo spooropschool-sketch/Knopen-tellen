@@ -55,7 +55,7 @@ Button Counter runs 4,000 simulations in which returns go up and down each year.
 
 ### Does my spending stay the same in the calculation, or does it fall?
 
-You choose this under “How does your spending change later?”. With Flat, your spending stays the same every year, in today’s money. That is the most cautious choice. With Typical you spend about 1% less each year from age 65, and with Falling faster about 2% less. This matches what research in the Netherlands, the UK and the US, among others, shows on average: older people tend to spend less, for example because leisure and transport costs fall. The figures are in today’s money, so amounts still rise with inflation. Under each option you see how much savings you need, so you can see what the choice makes. These are averages, and your own spending may follow a different path, for instance because of care costs. A new plan starts on Typical.
+You choose this under “How does your spending change later?”. With Flat, your spending stays the same every year, in today’s money. That is the most cautious choice. With Typical you spend about 1% less each year from age 65, and with Falling faster about 2% less. This matches what research in the Netherlands, the UK and the US, among others, shows on average: older people tend to spend less, for example because leisure and transport costs fall. The figures are in today’s money, so amounts still rise with inflation. Under each option you see how much savings you need, so you can see what the choice makes. These are averages, and your own spending may follow a different path, for instance because of care costs. Flat is free; Typical and Falling faster will be part of Pro.
 
 ### Which countries does Button Counter support?
 
