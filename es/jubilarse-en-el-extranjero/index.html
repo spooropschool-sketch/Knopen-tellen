@@ -1778,6 +1778,9 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
 .pl-prices button:hover, .pl-prices button:focus-visible { background: var(--accent-soft); }
 .wk-tip { margin: -6px 0 0; font-size: 12.5px; }
 .curve-intro { margin: 2px 0 10px; }
+.share-plan { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: -4px 0 14px; }
+.share-plan svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+html.is-empty .share-plan { display: none; }
 </style>
 <link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1799,7 +1802,7 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
       <a href="#about" id="tab-about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg><span data-t="tab.about">Acerca de</span></a>
     </nav>
     <div class="tb-right">
-      <button class="icon-btn share-open" type="button" data-t-aria="sh.btn" aria-label="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span class="ib-l" data-t="sh.btn">Compartir</span></button>
+      <button class="icon-btn share-app" type="button" data-t-aria="tip.btn" aria-label="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span class="ib-l" data-t="sh.btn">Compartir</span></button>
       <button class="icon-btn" id="btn-theme" type="button" data-t-aria="th.btn" aria-label="Claro u oscuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-moon" d="M19.5 14.2A8 8 0 0 1 9.8 4.5a8 8 0 1 0 9.7 9.7z"/><g class="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/></g></svg></button>
       <label class="lang-pick"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><select id="lang-top" class="lang-sel" data-t-aria="lang.label" aria-label="Idioma"></select></label>
       <button class="icon-btn install" id="btn-install" type="button" hidden data-t-aria="inst.btn" aria-label="Instalar la app"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 7v7M9 11.5l3 3 3-3M11 18.5h2"/></svg><span class="ib-l">App</span></button>
@@ -1839,6 +1842,7 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
         <div class="srcline" data-src="le,mkt"></div>
       </div>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
+        <button type="button" class="btn ghost share-open share-plan needs-data"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 7.5 12 4l4 3.5M6 11H5v9h14v-9h-1"/></svg><span data-t="sh.h">Comparte o guarda tu resultado</span></button>
         <section class="card support-card needs-data" id="support-ov" hidden></section>
         <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">Evolución de tu patrimonio</h2><p class="sub" id="fan-sub"></p></div>
@@ -1921,7 +1925,7 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">años</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexo"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Hombre</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Mujer</span></label></div></div>
             <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">¿Cómo quieres vivir más adelante?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="¿Cómo quieres vivir más adelante?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Importes orientativos por persona en dinero de hoy, basados en el mínimo neerlandés del Nibud (2025) y el gasto del CBS por ingresos, convertidos a 2025. Para dos personas usamos 1,4 veces, porque compartís los gastos de vivienda. Para otros países del euro escalamos con los niveles de precios. Medias, no un consejo. Puedes cambiar el importe abajo. Fuera de los Países Bajos es una indicación: los importes son neerlandeses y se convierten con los niveles de precios, no se basan en los patrones de gasto de tu país.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">¿Cuánto te gustaría gastar al mes?</span><span class="opb-q" data-t="f.budgetOpb">¿Cuánto quieres gastar al mes más adelante?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netos al mes</span></div></div>
-            <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">¿Cómo evolucionan los gastos más adelante?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Los estudios muestran que, a partir de los 65 años aproximadamente, se gasta de media un poco menos cada año, por ejemplo en ocio y transporte. Por eso eliges aquí cómo evolucionan tus gastos más adelante.</p>
+            <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">¿Cómo evolucionan los gastos más adelante?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Los estudios muestran que la gente gasta de forma distinta en cada etapa de la vida. Por eso eliges aquí cómo evolucionan tus gastos más adelante.</p>
               <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="¿Cómo evolucionan los gastos más adelante?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><span data-t="curve.o0">Constante</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><span data-t="curve.o1">Típico</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><span data-t="curve.o2">Bajando más</span><small class="curve-cap" data-cap="2"></small></span></label></div>
               <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
@@ -5152,35 +5156,60 @@ Object.assign(I18N.es, {
  'rel.12.n1': 'Evolución del gasto con su precio: mira bajo cada opción cuánto patrimonio necesitas'
 });
 Object.assign(I18N.en, {
- 'curve.intro': "Research shows that people spend a little less each year on average after about 65, for example on leisure and transport. That is why you choose here how your spending develops later.",
+ 'tip.btn': "Share",
+ 'tip.msg': "Hi! I found this handy app: Button Counter. In a few minutes it gives you insight into your financial future: how much you need and what you can do about it yourself. Free, no account, and your figures stay on your own phone. Maybe it’s useful for you too:",
+ 'tip.copied': "Message with link copied. Paste it into WhatsApp or an e-mail.",
+ 'tip.url': "https://countingbuttons.com/",
+ 'rel.14.n2': "Share button at the top: recommend the app to someone with a short message",
+ 'curve.intro': "Research shows that people spend differently in different stages of life. That is why you choose here how your spending develops later.",
  'wk.perTip': 'Won’t you earn the same right up to the end? Enter a different amount per age, for example fewer hours from 60.',
  'pro.tip': 'Pro feature, coming soon',
  'rel.14.v': 'Version 14 · November 2026',
  'rel.14.n1': 'Pro features now have a lock. The basics stay free. Tap a lock to help decide what goes into Pro.'
 });
 Object.assign(I18N.nl, {
- 'curve.intro': "Onderzoek laat zien dat mensen na hun 65e gemiddeld elk jaar iets minder uitgeven, bijvoorbeeld aan vrije tijd en vervoer. Daarom kies je hier hoe je uitgaven later verlopen.",
+ 'tip.btn': "Deel",
+ 'tip.msg': "Hé! Ik vond deze handige app: Knopenteller. In een paar minuten krijg je inzicht in je financiële toekomst: hoeveel je nodig hebt en wat je er zelf aan kunt doen. Gratis, zonder account, en je cijfers blijven op je eigen telefoon. Misschien heb je er ook wat aan:",
+ 'tip.copied': "Bericht met link gekopieerd. Plak het in WhatsApp of een e-mail.",
+ 'tip.url': "https://countingbuttons.com/nl/",
+ 'rel.14.n2': "Deelknop bovenaan: tip de app aan iemand, met een kort bericht erbij",
+ 'curve.intro': "Onderzoek laat zien dat mensen in verschillende fasen van hun leven anders uitgeven. Daarom kies je hier hoe je uitgaven later verlopen.",
  'wk.perTip': 'Verdien je niet tot het einde hetzelfde? Geef per leeftijd een ander bedrag op, bijvoorbeeld minder uren vanaf 60.',
  'pro.tip': 'Pro-functie, komt eraan',
  'rel.14.v': 'Versie 14 · november 2026',
  'rel.14.n1': 'Pro-functies hebben nu een slotje. De basis blijft gratis. Tik op een slotje en bepaal mee wat er in Pro komt.'
 });
 Object.assign(I18N.de, {
- 'curve.intro': "Studien zeigen, dass Menschen ab etwa 65 im Schnitt jedes Jahr etwas weniger ausgeben, zum Beispiel für Freizeit und Verkehr. Deshalb wählen Sie hier, wie sich Ihre Ausgaben später entwickeln.",
+ 'tip.btn': "Teilen",
+ 'tip.msg': "Hallo! Ich habe diese praktische App gefunden: Button Counter. In wenigen Minuten bekommst du einen Einblick in deine finanzielle Zukunft: wie viel du brauchst und was du selbst tun kannst. Kostenlos, ohne Konto, und deine Zahlen bleiben auf deinem eigenen Handy. Vielleicht hilft sie dir auch:",
+ 'tip.copied': "Nachricht mit Link kopiert. Füge sie in WhatsApp oder eine E-Mail ein.",
+ 'tip.url': "https://countingbuttons.com/de/",
+ 'rel.14.n2': "Teilen-Knopf oben: Empfehlen Sie die App mit einer kurzen Nachricht weiter",
+ 'curve.intro': "Studien zeigen, dass Menschen in verschiedenen Lebensphasen unterschiedlich ausgeben. Deshalb wählen Sie hier, wie sich Ihre Ausgaben später entwickeln.",
  'wk.perTip': 'Verdienen Sie nicht bis zum Schluss gleich viel? Geben Sie je Alter einen anderen Betrag an, zum Beispiel weniger Stunden ab 60.',
  'pro.tip': 'Pro-Funktion, kommt bald',
  'rel.14.v': 'Version 14 · November 2026',
  'rel.14.n1': 'Pro-Funktionen haben jetzt ein Schloss. Die Grundversion bleibt kostenlos. Tippen Sie auf ein Schloss und bestimmen Sie mit, was in Pro kommt.'
 });
 Object.assign(I18N.fr, {
- 'curve.intro': "Les études montrent qu’après 65 ans environ, on dépense en moyenne un peu moins chaque année, par exemple pour les loisirs et les transports. C’est pourquoi vous choisissez ici comment vos dépenses évoluent plus tard.",
+ 'tip.btn': "Partager",
+ 'tip.msg': "Salut ! J’ai trouvé cette appli pratique : Button Counter. En quelques minutes, tu vois plus clair dans ton avenir financier : combien il te faut et ce que tu peux faire toi-même. Gratuit, sans compte, et tes chiffres restent sur ton téléphone. Ça peut peut-être t’aider aussi :",
+ 'tip.copied': "Message avec lien copié. Collez-le dans WhatsApp ou un e-mail.",
+ 'tip.url': "https://countingbuttons.com/fr/",
+ 'rel.14.n2': "Bouton Partager en haut : recommandez l’appli avec un court message",
+ 'curve.intro': "Les études montrent qu’on dépense différemment selon les étapes de la vie. C’est pourquoi vous choisissez ici comment vos dépenses évoluent plus tard.",
  'wk.perTip': 'Vos revenus ne resteront pas les mêmes jusqu’à la fin ? Indiquez un montant différent selon l’âge, par exemple moins d’heures à partir de 60 ans.',
  'pro.tip': 'Fonction Pro, bientôt disponible',
  'rel.14.v': 'Version 14 · novembre 2026',
  'rel.14.n1': 'Les fonctions Pro ont maintenant un cadenas. La version de base reste gratuite. Touchez un cadenas pour aider à choisir ce qui entrera dans Pro.'
 });
 Object.assign(I18N.es, {
- 'curve.intro': "Los estudios muestran que, a partir de los 65 años aproximadamente, se gasta de media un poco menos cada año, por ejemplo en ocio y transporte. Por eso eliges aquí cómo evolucionan tus gastos más adelante.",
+ 'tip.btn': "Compartir",
+ 'tip.msg': "¡Hola! He encontrado esta app muy útil: Button Counter. En unos minutos te da una idea clara de tu futuro financiero: cuánto necesitas y qué puedes hacer tú. Gratis, sin cuenta, y tus cifras se quedan en tu propio móvil. Quizá a ti también te sirva:",
+ 'tip.copied': "Mensaje con enlace copiado. Pégalo en WhatsApp o en un correo.",
+ 'tip.url': "https://countingbuttons.com/es/",
+ 'rel.14.n2': "Botón Compartir arriba: recomienda la app con un mensaje corto",
+ 'curve.intro': "Los estudios muestran que la gente gasta de forma distinta en cada etapa de la vida. Por eso eliges aquí cómo evolucionan tus gastos más adelante.",
  'wk.perTip': '¿No ganarás lo mismo hasta el final? Indica un importe distinto según la edad, por ejemplo menos horas a partir de los 60.',
  'pro.tip': 'Función Pro, llega pronto',
  'rel.14.v': 'Versión 14 · noviembre de 2026',
@@ -7363,7 +7392,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 14, n: 1, f: 0 }, { v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 14, n: 2, f: 0 }, { v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -7724,6 +7753,19 @@ var TRK = {
   function plRefresh() { fillPro(); plGates(); }
   plRefresh(); plFlat();
   var plFillPro = fillPro; fillPro = function () { plFillPro(); plGates(); };
+
+
+  /* ================= app tippen: deelknop bovenaan ================= */
+  TRK['reach-tip-app'] = ['bereik', 'Deelknop bovenaan: app tippen geopend'];
+  TRK['reach-tip-sent'] = ['bereik', 'App-tip echt gedeeld'];
+  TRK['reach-tip-copy'] = ['bereik', 'App-tip gekopieerd (geen deelscherm)'];
+  each('.share-app', function (b) { b.addEventListener('click', function () {
+    track('reach-tip-app');
+    var url = t1('tip.url') + '?utm_campaign=tip', msg = t1('tip.msg') + '\n' + url;
+    if (navigator.share) {
+      navigator.share({ title: document.title, text: msg }).then(function () { track('reach-tip-sent'); }).catch(function (e) { if (e && e.name !== 'AbortError') { track('reach-tip-copy'); copyText(msg, t1('tip.copied')); } });
+    } else { track('reach-tip-copy'); copyText(msg, t1('tip.copied')); }
+  }); });
 
 })();
 
