@@ -1777,6 +1777,7 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
 .pl-prices button { padding: 12px 8px; border: 1px solid var(--copper); border-radius: 12px; background: transparent; color: var(--ink); font: 700 15px/1 var(--f-body); cursor: pointer; }
 .pl-prices button:hover, .pl-prices button:focus-visible { background: var(--accent-soft); }
 .wk-tip { margin: -6px 0 0; font-size: 12.5px; }
+.curve-intro { margin: 2px 0 10px; }
 </style>
 <link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -1920,7 +1921,7 @@ html.pro-locked #pots-box > summary, html.pro-locked .wk-tog.pl-has, html.pro-lo
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">jaar</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Man</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Vrouw</span></label></div></div>
             <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Hoe wil je later leven?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Hoe wil je later leven?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Richtbedragen per persoon in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Wat wil je per maand te besteden hebben?</span><span class="opb-q" data-t="f.budgetOpb">Wat wil je later per maand te besteden hebben?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto per maand</span></div></div>
-            <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Hoe verlopen de uitgaven later?</span><span class="pro-tag" data-pro="spend-curve"></span></div>
+            <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Hoe verlopen de uitgaven later?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Onderzoek laat zien dat mensen na hun 65e gemiddeld elk jaar iets minder uitgeven, bijvoorbeeld aan vrije tijd en vervoer. Daarom kies je hier hoe je uitgaven later verlopen.</p>
               <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="Hoe verlopen de uitgaven later?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><span data-t="curve.o0">Vlak</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><span data-t="curve.o1">Typisch</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><span data-t="curve.o2">Sterk dalend</span><small class="curve-cap" data-cap="2"></small></span></label></div>
               <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
@@ -5151,30 +5152,35 @@ Object.assign(I18N.es, {
  'rel.12.n1': 'Evolución del gasto con su precio: mira bajo cada opción cuánto patrimonio necesitas'
 });
 Object.assign(I18N.en, {
+ 'curve.intro': "Research shows that people spend a little less each year on average after about 65, for example on leisure and transport. That is why you choose here how your spending develops later.",
  'wk.perTip': 'Won’t you earn the same right up to the end? Enter a different amount per age, for example fewer hours from 60.',
  'pro.tip': 'Pro feature, coming soon',
  'rel.14.v': 'Version 14 · November 2026',
  'rel.14.n1': 'Pro features now have a lock. The basics stay free. Tap a lock to help decide what goes into Pro.'
 });
 Object.assign(I18N.nl, {
+ 'curve.intro': "Onderzoek laat zien dat mensen na hun 65e gemiddeld elk jaar iets minder uitgeven, bijvoorbeeld aan vrije tijd en vervoer. Daarom kies je hier hoe je uitgaven later verlopen.",
  'wk.perTip': 'Verdien je niet tot het einde hetzelfde? Geef per leeftijd een ander bedrag op, bijvoorbeeld minder uren vanaf 60.',
  'pro.tip': 'Pro-functie, komt eraan',
  'rel.14.v': 'Versie 14 · november 2026',
  'rel.14.n1': 'Pro-functies hebben nu een slotje. De basis blijft gratis. Tik op een slotje en bepaal mee wat er in Pro komt.'
 });
 Object.assign(I18N.de, {
+ 'curve.intro': "Studien zeigen, dass Menschen ab etwa 65 im Schnitt jedes Jahr etwas weniger ausgeben, zum Beispiel für Freizeit und Verkehr. Deshalb wählen Sie hier, wie sich Ihre Ausgaben später entwickeln.",
  'wk.perTip': 'Verdienen Sie nicht bis zum Schluss gleich viel? Geben Sie je Alter einen anderen Betrag an, zum Beispiel weniger Stunden ab 60.',
  'pro.tip': 'Pro-Funktion, kommt bald',
  'rel.14.v': 'Version 14 · November 2026',
  'rel.14.n1': 'Pro-Funktionen haben jetzt ein Schloss. Die Grundversion bleibt kostenlos. Tippen Sie auf ein Schloss und bestimmen Sie mit, was in Pro kommt.'
 });
 Object.assign(I18N.fr, {
+ 'curve.intro': "Les études montrent qu’après 65 ans environ, on dépense en moyenne un peu moins chaque année, par exemple pour les loisirs et les transports. C’est pourquoi vous choisissez ici comment vos dépenses évoluent plus tard.",
  'wk.perTip': 'Vos revenus ne resteront pas les mêmes jusqu’à la fin ? Indiquez un montant différent selon l’âge, par exemple moins d’heures à partir de 60 ans.',
  'pro.tip': 'Fonction Pro, bientôt disponible',
  'rel.14.v': 'Version 14 · novembre 2026',
  'rel.14.n1': 'Les fonctions Pro ont maintenant un cadenas. La version de base reste gratuite. Touchez un cadenas pour aider à choisir ce qui entrera dans Pro.'
 });
 Object.assign(I18N.es, {
+ 'curve.intro': "Los estudios muestran que, a partir de los 65 años aproximadamente, se gasta de media un poco menos cada año, por ejemplo en ocio y transporte. Por eso eliges aquí cómo evolucionan tus gastos más adelante.",
  'wk.perTip': '¿No ganarás lo mismo hasta el final? Indica un importe distinto según la edad, por ejemplo menos horas a partir de los 60.',
  'pro.tip': 'Función Pro, llega pronto',
  'rel.14.v': 'Versión 14 · noviembre de 2026',
@@ -6075,7 +6081,7 @@ Object.assign(I18N.es, {
   function renderZeker() {
     var cap = $('curve-cap'), dl = $('curve-delta'); if (!cap || !dl) return;
     var cd = state.uitgaveDaling === 1 || state.uitgaveDaling === 2 ? state.uitgaveDaling : 0, all = {}, ok = !!adv && state.budget > 0 && !!altC90;
-    if (ok) { [0, 1, 2].forEach(function (k) { all[k] = k === cd ? adv.c90 : altC90[k]; }); ok = [0, 1, 2].every(function (k) { return typeof all[k] === 'number'; }) && Math.max(all[0], all[1], all[2]) > 0; }
+    if (ok) { [0, 1, 2].forEach(function (k) { all[k] = k === cd ? adv.c90 : altC90[k]; }); ok = [0, 1, 2].every(function (k) { return typeof all[k] === 'number'; }) && Math.min(all[0], all[1], all[2]) > 0; }
     each('.curve-cap', function (e) { e.textContent = ok ? eur(all[+e.getAttribute('data-cap')]) : ''; });
     cap.hidden = dl.hidden = !ok;
     if (!ok) return;
