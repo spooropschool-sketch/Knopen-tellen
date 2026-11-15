@@ -333,6 +333,8 @@ h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transf
   input[type="number"], input[type="text"] { font-size: 16px; min-height: 44px; padding: 8px 10px; }
   .partners input[type="text"] { font-size: 16px; }
   .seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-self: stretch; }
+  .seg.seg3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .seg.seg3 .seg-opt span { padding: 12px 4px; }
   .seg-opt span { padding: 12px 10px; text-align: center; font-size: 14px; }
   input[type="range"] { height: 40px; }
   .fold > summary { padding: 12px 14px; }
@@ -767,6 +769,8 @@ footer a, .keyline a, .empty-note a { color: var(--accent); }
 .snel .ec-img { flex: 0 0 240px; }
 .snel-body { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .snel-body h2 { font-size: 22px; }
+.snel-grid .curve-f { grid-column: 1 / -1; }
+.curve-f .hint a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .snel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px 20px; margin-top: 6px; }
 .qp { display: flex; flex-direction: column; gap: 8px; }
 .flabel { font-weight: 600; font-size: 14px; }
@@ -1811,6 +1815,9 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Frau</span></label></div></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Frau</span></label></div></div>
             <div class="field"><label for="q-budget" data-t="f.budget">Was möchten Sie pro Monat ausgeben?</label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
+            <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Wie entwickeln sich die Ausgaben später?</span><span class="pro-tag" data-pro="spend-curve"></span></div>
+              <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="Wie entwickeln sich die Ausgaben später?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span data-t="curve.o0">Gleichbleibend</span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span data-t="curve.o1">Typisch</span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span data-t="curve.o2">Stärker sinkend</span></label></div>
+              <p class="hint" id="curve-hint"></p></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Wie viel haben Sie bisher gespart oder angelegt?</span> <span class="opt" data-t="q.optional">(optional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
             <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
@@ -2088,6 +2095,12 @@ function runModel(p) {
   var N = Math.max(1, Math.round(p.eindleeftijd - youngest));
   var grow = (1 + b - c) / (1 + i);
   var tRate = (p.taxRate || 0) / 100, tAllow = (p.taxAllow || 0) * (two ? 2 : 1);
+  /* uitgavenverloop: reële daling van de uitgaven per jaar (in %) vanaf 65 jaar, of vanaf nu als iemand al ouder is
+     (het ingevulde budget is wat je nu uitgeeft); bij twee personen telt de oudste. 0 = vlak (zoals voor versie 11).
+     'fac' is de factor op het maandbudget per jaar, 'spend' het maandbudget per jaar. */
+  var uRaw = parseFloat(p.uitgaveDaling), uDec = (isFinite(uRaw) ? Math.max(0, Math.min(5, uRaw)) : 0) / 100, uRef = two ? Math.max(ageP, ageD) : ageP, uStart = Math.max(p.uitgaveVan || 65, uRef);
+  var fac = [], spend = [];
+  for (var uy = 0; uy < N; uy++) { fac.push(Math.pow(1 - uDec, Math.max(0, uRef + uy - uStart))); spend.push(p.budget * fac[uy]); }
 
   function clamp01(x) { return Math.max(0, Math.min(1, x)); }
   /* deel van het levensjaar [age, age+1) dat binnen [a, b) valt */
@@ -2138,7 +2151,7 @@ function runModel(p) {
     var tx = taxAt(K, B, b);
     return { B: B, next: B * grow - tx, tax: tx };
   }
-  function drawAt(t, budget) { return 12 * budget - inc[t]; }
+  function drawAt(t, budget) { return 12 * budget * fac[t] - inc[t]; }
 
   function feasible(K0, budget) {
     var K = K0;
@@ -2194,7 +2207,7 @@ function runModel(p) {
   }
 
   return {
-    g: grow - 1, N: N, youngest: youngest,
+    g: grow - 1, N: N, youngest: youngest, fac: fac, spend: spend,
     req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes, incSp: incSp, incPen: incPen, incWk: incWk, incPot: incPot, lump: lump,
     emptyAt: emptyAt, marge: p.startkapitaal - req0,
     buffer: req0 > 0 ? p.startkapitaal / req0 - 1 : Infinity,
@@ -4658,6 +4671,92 @@ Object.assign(I18N.es, {
 "lp.abroad.title": "Jubilarse en el extranjero: ¿cuánto vale allí tu dinero? | Button Counter",
 "lp.abroad.desc": "Compara el poder adquisitivo de tu presupuesto mensual en 31 países europeos y prueba tu plan con las normas de diez países. Sin cuenta."
 });
+/* uitgavenverloop (versie 11) */
+Object.assign(I18N.en, {
+ 'f.curve': 'How does your spending change later?',
+ 'curve.lbl': 'Spending path',
+ 'curve.o0': 'Flat',
+ 'curve.o1': 'Typical',
+ 'curve.o2': 'Falling faster',
+ 'curve.h0': 'Flat: spending stays the same every year, in today’s money. This is the most cautious choice.',
+ 'curve.h1': 'Typical: from age {a} you spend about 1% less each year. By {b} that is about {x} less than at {a}.',
+ 'curve.h2': 'Falling faster: from age {a} you spend about 2% less each year. By {b} that is about {x} less than at {a}.',
+ 'curve.two': 'With two people, the age of the oldest counts.',
+ 'curve.note': 'This is in today’s money, so amounts still rise with inflation. These are averages from research in the Netherlands, the UK and the US among others. It is not a forecast for your household and not advice. Flat stays the most cautious choice. Sources: <a href="https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf" target="_blank" rel="noopener">Nibud/PwC</a>, <a href="https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx" target="_blank" rel="noopener">Blanchett</a>, <a href="https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf" target="_blank" rel="noopener">IFS</a>.',
+ 'src.nibud': 'Nibud/PwC, spending of older people',
+ 'src.blanchett': 'Blanchett, spending in retirement',
+ 'src.ifs': 'IFS, spending through retirement',
+ 'rel.11.v': 'Version 11 · November 2026',
+ 'rel.11.n1': 'Spending path: choose whether your spending stays flat or falls after age 65'
+});
+Object.assign(I18N.nl, {
+ 'f.curve': 'Hoe verlopen de uitgaven later?',
+ 'curve.lbl': 'Uitgavenverloop',
+ 'curve.o0': 'Vlak',
+ 'curve.o1': 'Typisch',
+ 'curve.o2': 'Sterk dalend',
+ 'curve.h0': 'Vlak: de uitgaven blijven elk jaar gelijk, in geld van vandaag. Dit is de voorzichtigste keuze.',
+ 'curve.h1': 'Typisch: vanaf je {a}e geef je elk jaar ongeveer 1% minder uit. Rond je {b}e is dat ongeveer {x} minder dan op je {a}e.',
+ 'curve.h2': 'Sterk dalend: vanaf je {a}e geef je elk jaar ongeveer 2% minder uit. Rond je {b}e is dat ongeveer {x} minder dan op je {a}e.',
+ 'curve.two': 'Bij twee personen telt de leeftijd van de oudste.',
+ 'curve.note': 'Het gaat om geld van vandaag: de bedragen stijgen dus nog wel mee met de inflatie. Dit zijn gemiddelden uit onderzoek in onder meer Nederland, het Verenigd Koninkrijk en de Verenigde Staten. Het is geen voorspelling voor jouw huishouden en geen advies. Vlak blijft de voorzichtigste keuze. Bronnen: <a href="https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf" target="_blank" rel="noopener">Nibud/PwC</a>, <a href="https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx" target="_blank" rel="noopener">Blanchett</a>, <a href="https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf" target="_blank" rel="noopener">IFS</a>.',
+ 'src.nibud': 'Nibud/PwC, bestedingen van ouderen',
+ 'src.blanchett': 'Blanchett, uitgaven in pensioen',
+ 'src.ifs': 'IFS, uitgaven tijdens pensioen',
+ 'rel.11.v': 'Versie 11 · november 2026',
+ 'rel.11.n1': 'Uitgavenverloop: kies of je uitgaven na je 65e gelijk blijven of dalen'
+});
+Object.assign(I18N.de, {
+ 'f.curve': 'Wie entwickeln sich die Ausgaben später?',
+ 'curve.lbl': 'Ausgabenverlauf',
+ 'curve.o0': 'Gleichbleibend',
+ 'curve.o1': 'Typisch',
+ 'curve.o2': 'Stärker sinkend',
+ 'curve.h0': 'Gleichbleibend: Die Ausgaben bleiben jedes Jahr gleich, in heutigem Geld. Das ist die vorsichtigste Wahl.',
+ 'curve.h1': 'Typisch: Ab {a} Jahren geben Sie jedes Jahr etwa 1 % weniger aus. Mit {b} sind das etwa {x} weniger als mit {a}.',
+ 'curve.h2': 'Stärker sinkend: Ab {a} Jahren geben Sie jedes Jahr etwa 2 % weniger aus. Mit {b} sind das etwa {x} weniger als mit {a}.',
+ 'curve.two': 'Bei zwei Personen zählt das Alter der älteren Person.',
+ 'curve.note': 'Es geht um heutiges Geld: Die Beträge steigen also weiterhin mit der Inflation. Das sind Durchschnittswerte aus Studien unter anderem in den Niederlanden, in Großbritannien und in den USA. Es ist keine Prognose für Ihren Haushalt und keine Beratung. Gleichbleibend bleibt die vorsichtigste Wahl. Quellen: <a href="https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf" target="_blank" rel="noopener">Nibud/PwC</a>, <a href="https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx" target="_blank" rel="noopener">Blanchett</a>, <a href="https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf" target="_blank" rel="noopener">IFS</a>.',
+ 'src.nibud': 'Nibud/PwC, Ausgaben älterer Menschen',
+ 'src.blanchett': 'Blanchett, Ausgaben im Ruhestand',
+ 'src.ifs': 'IFS, Ausgaben im Ruhestand',
+ 'rel.11.v': 'Version 11 · November 2026',
+ 'rel.11.n1': 'Ausgabenverlauf: Wählen Sie, ob Ihre Ausgaben nach 65 gleich bleiben oder sinken'
+});
+Object.assign(I18N.fr, {
+ 'f.curve': 'Comment évoluent les dépenses plus tard ?',
+ 'curve.lbl': 'Trajectoire des dépenses',
+ 'curve.o0': 'Constantes',
+ 'curve.o1': 'Typique',
+ 'curve.o2': 'En forte baisse',
+ 'curve.h0': 'Constantes : les dépenses restent les mêmes chaque année, en argent d’aujourd’hui. C’est le choix le plus prudent.',
+ 'curve.h1': 'Typique : dès {a} ans, vous dépensez environ 1 % de moins chaque année. À {b} ans, cela fait environ {x} de moins qu’à {a} ans.',
+ 'curve.h2': 'En forte baisse : dès {a} ans, vous dépensez environ 2 % de moins chaque année. À {b} ans, cela fait environ {x} de moins qu’à {a} ans.',
+ 'curve.two': 'À deux, c’est l’âge de la personne la plus âgée qui compte.',
+ 'curve.note': 'Il s’agit d’argent d’aujourd’hui : les montants suivent donc encore l’inflation. Ce sont des moyennes issues d’études, notamment aux Pays-Bas, au Royaume-Uni et aux États-Unis. Ce n’est ni une prévision pour votre foyer ni un conseil. Garder des dépenses constantes reste le choix le plus prudent. Sources : <a href="https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf" target="_blank" rel="noopener">Nibud/PwC</a>, <a href="https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx" target="_blank" rel="noopener">Blanchett</a>, <a href="https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf" target="_blank" rel="noopener">IFS</a>.',
+ 'src.nibud': 'Nibud/PwC, dépenses des seniors',
+ 'src.blanchett': 'Blanchett, dépenses à la retraite',
+ 'src.ifs': 'IFS, dépenses pendant la retraite',
+ 'rel.11.v': 'Version 11 · novembre 2026',
+ 'rel.11.n1': 'Trajectoire des dépenses : choisissez si vos dépenses restent constantes ou baissent après 65 ans'
+});
+Object.assign(I18N.es, {
+ 'f.curve': '¿Cómo evolucionan los gastos más adelante?',
+ 'curve.lbl': 'Evolución del gasto',
+ 'curve.o0': 'Constante',
+ 'curve.o1': 'Típico',
+ 'curve.o2': 'Bajando más',
+ 'curve.h0': 'Constante: los gastos se mantienen igual cada año, en dinero de hoy. Es la opción más prudente.',
+ 'curve.h1': 'Típico: desde los {a} años gastas cada año un 1 % menos. A los {b} años gastas aproximadamente {x} menos que a los {a}.',
+ 'curve.h2': 'Bajando más: desde los {a} años gastas cada año un 2 % menos. A los {b} años gastas aproximadamente {x} menos que a los {a}.',
+ 'curve.two': 'Con dos personas cuenta la edad de la mayor.',
+ 'curve.note': 'Se trata de dinero de hoy: los importes siguen subiendo con la inflación. Son promedios de estudios realizados, entre otros, en los Países Bajos, el Reino Unido y Estados Unidos. No es una previsión para tu hogar ni un consejo. Mantener los gastos constantes sigue siendo la opción más prudente. Fuentes: <a href="https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf" target="_blank" rel="noopener">Nibud/PwC</a>, <a href="https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx" target="_blank" rel="noopener">Blanchett</a>, <a href="https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf" target="_blank" rel="noopener">IFS</a>.',
+ 'src.nibud': 'Nibud/PwC, gastos de las personas mayores',
+ 'src.blanchett': 'Blanchett, gasto en la jubilación',
+ 'src.ifs': 'IFS, gasto durante la jubilación',
+ 'rel.11.v': 'Versión 11 · noviembre de 2026',
+ 'rel.11.n1': 'Evolución del gasto: elige si tu gasto se mantiene o baja a partir de los 65 años'
+});
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -4848,7 +4947,7 @@ Object.assign(I18N.es, {
 
   /* ================= toestand ================= */
   var DEF = {
-    startkapitaal: 0, budget: 0, box3: 1, eindDiana: 1,
+    startkapitaal: 0, budget: 0, uitgaveDaling: 0, box3: 1, eindDiana: 1,
     werkP: 0, werkD: 0, werkTotP: 67, werkTotD: 67, autoWerk: 1,
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 67, aowDiana: 67, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
@@ -4856,7 +4955,7 @@ Object.assign(I18N.es, {
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '9 · 2026-11';
+  var APPV = '11 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
@@ -4878,6 +4977,7 @@ Object.assign(I18N.es, {
      naar inkomen van de eerste persoon tot het moment waarop de oude regel stopte, zodat de uitslag gelijk blijft */
   function loadNums(st, src) {
     Object.keys(DEF).forEach(function (k) { st[k] = DEF[k]; var v = src && src[k]; if (typeof v === 'number' && isFinite(v)) st[k] = v; });
+    if (st.uitgaveDaling !== 1 && st.uitgaveDaling !== 2) st.uitgaveDaling = 0;
     if (src && typeof src.werk === 'number' && src.werk > 0 && typeof src.werkP !== 'number') {
       st.werkP = src.werk; st.werkD = 0; st.autoWerk = 0;
       st.werkTotP = st.personen !== 1 ? Math.max(67, st.leeftijdPaul + 67 - st.leeftijdDiana) : 67;
@@ -4887,7 +4987,8 @@ Object.assign(I18N.es, {
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (saved && saved.names) { if (typeof saved.names.n1 === 'string') names.n1 = saved.names.n1.slice(0, 20); if (typeof saved.names.n2 === 'string') names.n2 = saved.names.n2.slice(0, 20); }
-    if (saved && saved.state) { loadNums(state, saved.state); lists = cleanLists(saved.lists); }
+    if (saved && saved.state) { loadNums(state, saved.state); lists = cleanLists(saved.lists); if (typeof saved.state.uitgaveDaling !== 'number' && !(saved.state.budget > 0)) state.uitgaveDaling = 1; }
+    if (!saved || !saved.state) state.uitgaveDaling = 1;
     if (!saved) { var c0 = CTRY[prefs.country].tax; state.taxRate = c0.rate || 0; state.taxAllow = c0.allow || 0; }
   } catch (e) {}
   function persist() { try { localStorage.setItem(KEY, JSON.stringify({ state: state, names: names, lists: lists })); } catch (e) {} }
@@ -5082,7 +5183,7 @@ Object.assign(I18N.es, {
   }
 
   /* ================= invoer koppelen ================= */
-  var SEGK = ['box3', 'eindDiana', 'portfolio', 'personen'];
+  var SEGK = ['box3', 'eindDiana', 'portfolio', 'personen', 'uitgaveDaling'];
   var CHK = ['aowAanP', 'aowAanD', 'pensAanP', 'pensAanD'];
   /* geldvelden: tekstveld met scheidingstekens tijdens het typen */
   function isMoney(e) { return !!e && e.getAttribute('data-money') === '1'; }
@@ -5183,7 +5284,7 @@ Object.assign(I18N.es, {
   $('auto-reset').addEventListener('click', function () { state.autoAow = 1; state.autoEind = 1; update(); });
   $('sp-reset').addEventListener('click', function () { state.autoAow = 1; state.autoSp = 1; state.autoPenAge = 1; update(); });
   $('tax-reset').addEventListener('click', function () { taxPreset(); update(); });
-  $('reset').addEventListener('click', function () { Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; }); lists = cleanLists(null); taxPreset(); syncInputs(); renderLists(); update(); });
+  $('reset').addEventListener('click', function () { Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; }); state.uitgaveDaling = 1; lists = cleanLists(null); taxPreset(); syncInputs(); renderLists(); update(); });
 
   /* ================= inkomen per periode en extra potten ================= */
   function wkHtml(s) {
@@ -5785,7 +5886,7 @@ Object.assign(I18N.es, {
     for (i2 = 0; i2 < N; i2++) {
       var aow = m.incSp[i2] / 12, pen = m.incPen[i2] / 12, wk = m.incWk[i2] / 12, pot = m.incPot[i2] / 12;
       var inc = aow + pen + wk + pot;
-      rows.push({ aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, cap: Math.max(0, state.budget - inc) });
+      rows.push({ aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, bud: m.spend[i2], cap: Math.max(0, m.spend[i2] - inc) });
       mx = Math.max(mx, inc);
     }
     var hasPot = rows.some(function (r) { return r.pot > 0.5 || r.lump > 0; }), lg = $('lg-pot'); if (lg) lg.hidden = !hasPot;
@@ -5806,7 +5907,8 @@ Object.assign(I18N.es, {
       });
       if (r.lump > 0) { var cx0 = x0 + w / 2, cy0 = mt + 6; s += '<path class="f-lump" d="M' + cx0.toFixed(1) + ' ' + (cy0 - 5) + 'l5 5l-5 5l-5-5z"/>'; }
     });
-    s += '<line class="f-bud" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(state.budget) + '" y2="' + y(state.budget) + '"/>';
+    var bp = ''; rows.forEach(function (r, i) { var xa = ml + i * bw, xb = xa + bw, yb = y(r.bud).toFixed(1); bp += (i ? 'L' : 'M') + xa.toFixed(1) + ' ' + yb + 'L' + xb.toFixed(1) + ' ' + yb; });
+    s += '<path class="f-bud" d="' + bp + '"/>';
     s += '<line class="zero" x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y(0) + '" y2="' + y(0) + '"/>';
     for (var a = Math.ceil(m.youngest / 5) * 5; a < m.youngest + N; a += 5) { var tt = a - m.youngest, cx = ml + (tt + 0.5) * bw; if (cx - ml < 22) continue; s += '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + a + '</text>'; }
     s += '<text x="' + ml + '" y="' + (H - 10) + '" text-anchor="start" class="lbl">' + m.youngest + '</text>';
@@ -5820,7 +5922,7 @@ Object.assign(I18N.es, {
       hl.style.display = ''; hl.setAttribute('x', ml + i * bw);
       var line = function (l, v) { return '<div class="row"><span>' + l + '</span><span>' + eur(v) + '</span></div>'; };
       tip.style.display = '';
-      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + (r.pot > 0 ? line(t1('w.pots'), r.pot) : '') + line(t1('w.fromCap'), r.cap) + (r.lump > 0 ? line(t1('w.lump'), r.lump) : '') + (r.inc > state.budget ? line(t1('flow.over'), r.inc - state.budget) : '');
+      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + (r.pot > 0 ? line(t1('w.pots'), r.pot) : '') + line(t1('w.fromCap'), r.cap) + (r.lump > 0 ? line(t1('w.lump'), r.lump) : '') + (r.inc > r.bud ? line(t1('flow.over'), r.inc - r.bud) : '');
       var sc = rc.width / W, cx2 = (ml + (i + 0.5) * bw) * sc, left = cx2 + 12;
       if (left + 210 > rc.width) left = cx2 - 210 - 12;
       tip.style.left = Math.max(4, left) + 'px'; tip.style.top = '10px';
@@ -5829,6 +5931,11 @@ Object.assign(I18N.es, {
     hit.addEventListener('pointerleave', function () { hl.style.display = 'none'; tip.style.display = 'none'; });
   }
   function renderHints() {
+    var ch = $('curve-hint');
+    if (ch) {
+      var cd = state.uitgaveDaling || 0;
+      ch.innerHTML = t1('curve.h' + cd, { a: 65, b: 85, x: pct(1 - Math.pow(1 - cd / 100, 20), 0) }) + (cd > 0 ? (two() ? ' ' + t1('curve.two') : '') + ' ' + t1('curve.note') : '');
+    }
     var pst = portStat(effIdx()), pfh = $('pf-hint');
     if (pfh) pfh.textContent = (autoInfo ? t1('pf.autoHint', { pf: pst.n, p: pct(autoInfo.succ, 0) }) + ' ' : pst.n + ': ') + t1('pf.mixHint', { a: Math.round(pst.w[0] * 100), b: Math.round(pst.w[1] * 100), c: Math.round(pst.w[2] * 100), r: pct(pst.mu, 1), s: pct(pst.sd, 0) });
     var bh = $('b3-hint');
@@ -5885,7 +5992,10 @@ Object.assign(I18N.es, {
       L('https://www.sra.nl/nieuws/259001/2026/01/box-3-percentages-vrijstellingen-en-bedragen-2026', 'src.box3'),
       L('https://www.svp.ie/wp-content/uploads/2025/10/Department-of-Social-Protection-Budget-2026-Factsheet.pdf', 'src.ie'),
       L('https://www.lafinancepourtous.com/2026/08/31/retraite-decalage-de-lage-legal-et-lage-de-depart-pour-carriere-longue-au-1er-septembre-2026/', 'src.fr'),
-      L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk')
+      L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk'),
+      L('https://www.pwc.nl/nl/assets/documents/bestedingen-van-ouderen-nibud-pwc.pdf', 'src.nibud'),
+      L('https://www.financialplanningassociation.org/journal/Pages/MAY14-Exploring-the-Retirement-Consumption-Puzzle-.aspx', 'src.blanchett'),
+      L('https://ifs.org.uk/sites/default/files/2022-09/IFS-Report-R209-How-does-spending-change-through-retirement.pdf', 'src.ifs')
     ].join(' · ') + '.';
     renderTrust();
     if (KOFI) {
@@ -6091,6 +6201,7 @@ var TRK = {
  'extra-view-portfolios': ['extra', 'Portefeuilles vergelijken bekeken'],
  'extra-view-ladder': ['extra', 'Maandbudget-ladder bekeken'],
  'pro-view-plans': ['pro', 'Twee plannen vergelijken bekeken'],
+ 'pro-spend-curve': ['pro', 'Uitgavenverloop gekozen'],
  'pro-plan-save': ['pro', 'Plan A of B bewaard'],
  'pro-view-purchasing-power': ['pro', 'Koopkracht per land bekeken'],
  'pro-period-open': ['pro', 'Per periode verfijnen geopend'],
@@ -6100,6 +6211,7 @@ var TRK = {
  'pro-share-print': ['pro', 'Print of pdf gekozen'],
  'pro-share-summary': ['pro', 'Samenvatting gekopieerd'],
  'pro-label-plans': ['pro', 'Klik op Pro-label: plannen vergelijken'],
+ 'pro-label-spend-curve': ['pro', 'Klik op Pro-label: uitgavenverloop'],
  'pro-label-purchasing-power': ['pro', 'Klik op Pro-label: koopkracht per land'],
  'pro-label-period': ['pro', 'Klik op Pro-label: per periode'],
  'pro-label-pots': ['pro', 'Klik op Pro-label: extra pot'],
@@ -6134,7 +6246,7 @@ var TRK = {
     var t = ev.target; if (!t) return;
     var tid = t.id ? t.id.replace(/^r-/, 'n-') : '';
     if (tid && TRK_CHANGE[tid]) { track(TRK_CHANGE[tid]); return; }
-    if (t.name === 's-portfolio') track('extra-portfolio'); else if (t.name === 's-box3') track('extra-box3');
+    if (t.name === 's-portfolio') track('extra-portfolio'); else if (t.name === 's-box3') track('extra-box3'); else if (t.name === 'q-uitgaveDaling') track('pro-spend-curve');
     else if (t.name === 'in-mode' && t.checked) track('extra-mode-' + t.value);
     else if (t.name === 'q-personen' && t.checked && t.value === '2') track('core-two-persons');
   }, true);
@@ -6333,6 +6445,7 @@ var TRK = {
     var L = [t1('brand') + ': ' + t1('home.h1'), ''];
     L.push(t1('pl.r.succ') + ': ' + pct(curSucc, 0));
     L.push(t1('pl.r.bud') + ': ' + eur(state.budget));
+    L.push(t1('curve.lbl') + ': ' + t1('curve.o' + (state.uitgaveDaling || 0)));
     L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
     L.push(t1('pl.r.end') + ': ' + fmtAge(state.eindleeftijd));
     if (adv) L.push(t1('pl.r.c90') + ': ' + eur(adv.c90));
@@ -6454,6 +6567,7 @@ var TRK = {
         it(t1('ins.ctry'), esc(cName(prefs.country)), 'q-country'),
         it(t1('ins.age'), tw ? esc(nm1()) + ' ' + state.leeftijdPaul + ' · ' + esc(nm2()) + ' ' + state.leeftijdDiana : state.leeftijdPaul, 'q-leeftijdPaul'),
         it(t1('ins.bud'), state.budget > 0 ? eur(state.budget) : dash, 'q-budget'),
+        it(t1('curve.lbl'), t1('curve.o' + (state.uitgaveDaling || 0)), 'q-uitgaveDaling'),
         it(t1('ins.cap'), state.startkapitaal > 0 ? eur(state.startkapitaal) : dash, 'q-startkapitaal')]],
       [STEPS[1].t, [it(t1('ins.wk'), per(wk('P'), wk('D')), lists.perP.length ? 'wk-per-P' : 'n-werkP')]],
       [STEPS[2].t, [
@@ -6671,7 +6785,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -6716,7 +6830,7 @@ var TRK = {
       return state['werk' + s] > 0 ? money(state['werk' + s]) + '/m until ' + ag(state['werkTot' + s]) : 'none';
     }
     L.push('People: ' + state.personen, 'Age: ' + both(state.leeftijdPaul, state.leeftijdDiana),
-      'Monthly budget: ' + money(state.budget), 'Savings: ' + money(state.startkapitaal) + (state.startkapitaal > 0 ? '' : ' (using 90% capital ' + money(capEff()) + ')'),
+      'Monthly budget: ' + money(state.budget), 'Spending path: ' + ['flat', 'typical (-1% a year from 65)', 'falling faster (-2% a year from 65)'][state.uitgaveDaling || 0], 'Savings: ' + money(state.startkapitaal) + (state.startkapitaal > 0 ? '' : ' (using 90% capital ' + money(capEff()) + ')'),
       'State pension: ' + both(state.aowAanP !== 0 ? money(state.spP) + ' from ' + ag(state.aowPaul) : 'off', state.aowAanD !== 0 ? money(state.spD) + ' from ' + ag(state.aowDiana) : 'off'),
       'Pension: ' + both(state.pensAanP !== 0 ? money(state.pensioenPaul) + ' from ' + ag(state.pensioenLeeftijd) : 'off', state.pensAanD !== 0 ? money(state.pensioenDiana) + ' from ' + ag(state.pensioenLeeftijdDiana) : 'off'),
       'Work income (net): ' + both(wk('P'), wk('D')));
