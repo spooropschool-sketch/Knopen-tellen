@@ -1732,9 +1732,9 @@ html.pro-locked .pro-tag .pl-clock { display: none; }
 /* hele blokken: kop blijft leesbaar, inhoud vervaagt achter een slot */
 html.pro-locked .pl-gated { position: relative; }
 html.pro-locked .pl-gated > :not(.panel-head):not(.pl-gate) { filter: blur(5px) saturate(.7); opacity: .55; pointer-events: none; user-select: none; }
-html.pro-locked .pl-gated { min-height: 230px; }
+html.pro-locked .pl-gated { min-height: 320px; }
 .pl-gate { display: none; }
-html.pro-locked .pl-gate { display: flex; position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%); z-index: 3; width: min(88%, 340px); flex-direction: column; align-items: center; gap: 8px; padding: 16px 18px; text-align: center; background: var(--surface); border: 1px solid var(--copper); border-radius: 16px; box-shadow: 0 12px 34px rgba(0,0,0,.35); }
+html.pro-locked .pl-gate { display: flex; position: absolute; left: 50%; top: 124px; transform: translateX(-50%); z-index: 3; width: min(88%, 340px); flex-direction: column; align-items: center; gap: 8px; padding: 16px 18px; text-align: center; background: var(--surface); border: 1px solid var(--copper); border-radius: 16px; box-shadow: 0 12px 34px rgba(0,0,0,.35); }
 .pl-ic { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--copper); color: #1A120B; }
 .pl-ic svg { width: 17px; height: 17px; }
 .pl-gate p { margin: 0; color: var(--ink); font: 600 14.5px/1.4 var(--f-body); }
@@ -7192,7 +7192,18 @@ var TRK = {
     updMini();
     if (route === 'overview' && last) { lastW = 0; renderFan(); renderFlow(last); }
     window.scrollTo(0, 0);
-    if (pendingScroll && $(pendingScroll)) { var id = pendingScroll; pendingScroll = null; setTimeout(function () { $(id).scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); }, 30); }
+    if (pendingScroll && $(pendingScroll)) {
+      var id = pendingScroll; pendingScroll = null;
+      /* de inhoud erboven en erin kan nog van hoogte veranderen terwijl de berekening klaar komt: daarom een paar keer opnieuw uitlijnen, tenzij de bezoeker zelf al scrolt */
+      var touched = false, mark = function () { touched = true; };
+      ['wheel', 'touchmove', 'keydown', 'mousedown'].forEach(function (n) { window.addEventListener(n, mark, { once: true, passive: true }); });
+      var align = function () {
+        if (touched || !$(id)) return;
+        var tb = $('topbar'), off = (tb ? tb.getBoundingClientRect().bottom : 70) + 10;
+        window.scrollBy({ top: $(id).getBoundingClientRect().top - off, behavior: 'instant' });
+      };
+      [30, 400, 1000, 2000].forEach(function (ms) { setTimeout(align, ms); });
+    }
   }
   document.addEventListener('click', function (ev) { var c = ev.target.closest ? ev.target.closest('.ovt-chance') : null; if (c && $('status-card')) { try { $('status-card').scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { $('status-card').scrollIntoView(); } } });
   each('[data-jump]', function (b) { b.addEventListener('click', function () { var el = $(b.getAttribute('data-jump')); if (el) { el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -90); } }); });
@@ -7672,6 +7683,23 @@ var TRK = {
   });
   ['0', '3', '5', '10'].forEach(function (p) { TRK['pro-4-prijs-' + p] = ['pro', 'Pro eenmalig waard: ' + p]; });
   document.documentElement.classList.add('pro-locked');
+  /* het slot-kaartje blijft in beeld zolang je in het geblurde blok bent */
+  (function () {
+    var tick = false;
+    function place() {
+      tick = false;
+      var tb = $('topbar'), hb = (tb ? tb.getBoundingClientRect().bottom : 70) + 12;
+      each('.pl-gated', function (pn) {
+        var g = pn.querySelector('.pl-gate'); if (!g || pn.hidden || !pn.offsetParent) return;
+        var r = pn.getBoundingClientRect(), gh = g.offsetHeight || 150;
+        var top = Math.max(124, Math.min(hb - r.top, r.height - gh - 90));
+        g.style.top = Math.round(top) + 'px';
+      });
+    }
+    function sched() { if (!tick) { tick = true; requestAnimationFrame(place); } }
+    window.addEventListener('scroll', sched, { passive: true }); window.addEventListener('resize', sched); window.addEventListener('hashchange', function () { setTimeout(sched, 50); });
+    setInterval(sched, 1000); sched();
+  })();
 
   /* het venster */
   var plM = document.createElement('div'); plM.className = 'pl-modal'; plM.hidden = true;
