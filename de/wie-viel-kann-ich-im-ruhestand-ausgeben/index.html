@@ -941,6 +941,15 @@ html.is-opb.no-bud #status-card { display: none; }
 .opb-range, .opb-split { margin: 0; font-size: 15px; color: var(--ink2); }
 .opb-note, .opb-empty { margin: 0; font-size: 13px; color: var(--muted); }
 .opb-empty { font-size: 15px; color: var(--ink2); }
+.lvl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.lvl-b { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink2); font: inherit; cursor: pointer; min-width: 0; }
+.lvl-b b { font-size: 15px; color: var(--ink); }
+.lvl-b .lvl-a { font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 600; color: var(--accent); }
+.lvl-b .lvl-e { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+.lvl-b.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.lvl-b:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+html.no-lvl #lvl-box { display: none !important; }
+@media (max-width: 560px) { .lvl { grid-template-columns: minmax(0, 1fr); } }
 .opb-h { margin: 10px 0 0; font-size: 12.5px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
 .opb-mix { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 15px; color: var(--ink2); }
 .opb-mix li { padding: 6px 10px; border-radius: 8px; background: var(--surface2); overflow-wrap: anywhere; }
@@ -1842,6 +1851,7 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Planen Sie für eine oder für zwei Personen?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 Person</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 Personen</span></label></div></div>
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Frau</span></label></div></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Frau</span></label></div></div>
+            <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Wie möchten Sie später leben?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Wie möchten Sie später leben?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Richtwerte pro Person in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Was möchten Sie pro Monat ausgeben?</span><span class="opb-q" data-t="f.budgetOpb">Wie viel möchten Sie später pro Monat ausgeben?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Wie viel haben Sie bisher gespart oder angelegt?</span> <span class="opt" data-t="q.optional">(optional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
             <div class="field opb-q"><label for="q-inleg" data-t="q.inleg">Wie viel legen Sie pro Monat zurück?</label><div class="inrow"><input id="q-inleg" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
@@ -4733,7 +4743,18 @@ Object.assign(I18N.nl, {
  "opb.never": "niet voor je pensioen",
  "opb.fireL": "Als het meezit",
  "opb.fireM": "In het midden",
- "opb.fireB": "Als het tegenzit"
+ "opb.fireB": "Als het tegenzit",
+ "lvl.q": "Hoe wil je later leven?",
+ "lvl.pm": "{a} per maand",
+ "lvl.1.n": "Sober",
+ "lvl.2.n": "Gemiddeld",
+ "lvl.3.n": "Ruim",
+ "lvl.1.e": "Kleine huurwoning, zelf koken, fiets en ov, af en toe uit.",
+ "lvl.2.e": "Gewone woning, regelmatig uit eten, een auto of goed ov, een vakantie per jaar.",
+ "lvl.3.e": "Ruime woning, vaak uit, auto, meerdere reizen per jaar.",
+ "lvl.hint": "Richtbedragen per persoon in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.",
+ "src.nibud": "Nibud, minimumvoorbeeldbegrotingen juli 2025",
+ "src.cbsb": "CBS, bestedingen huishoudens"
 });
 Object.assign(I18N.en, {
  "age.q": "How old are you?",
@@ -4768,7 +4789,18 @@ Object.assign(I18N.en, {
  "opb.never": "not before your pension",
  "opb.fireL": "If things go well",
  "opb.fireM": "In the middle case",
- "opb.fireB": "If things go badly"
+ "opb.fireB": "If things go badly",
+ "lvl.q": "How do you want to live later?",
+ "lvl.pm": "{a} a month",
+ "lvl.1.n": "Frugal",
+ "lvl.2.n": "Average",
+ "lvl.3.n": "Comfortable",
+ "lvl.1.e": "Small rented flat, cooking at home, bike and public transport, the occasional night out.",
+ "lvl.2.e": "An ordinary home, eating out regularly, a car or good public transport, one holiday a year.",
+ "lvl.3.e": "A spacious home, going out often, a car, several trips a year.",
+ "lvl.hint": "Guide amounts per person in today’s money, based on the Dutch Nibud minimum (2025) and CBS spending by income, converted to 2025. For two people we use 1.4 times, because you share housing costs. For other euro countries we scale by price levels. Averages, not advice. You can change the amount below.",
+ "src.nibud": "Nibud, minimum budgets July 2025",
+ "src.cbsb": "CBS, household spending"
 });
 Object.assign(I18N.de, {
  "age.q": "Wie alt sind Sie?",
@@ -4803,7 +4835,18 @@ Object.assign(I18N.de, {
  "opb.never": "nicht vor Ihrer Rente",
  "opb.fireL": "Wenn es gut läuft",
  "opb.fireM": "Im mittleren Fall",
- "opb.fireB": "Wenn es schlecht läuft"
+ "opb.fireB": "Wenn es schlecht läuft",
+ "lvl.q": "Wie möchten Sie später leben?",
+ "lvl.pm": "{a} pro Monat",
+ "lvl.1.n": "Sparsam",
+ "lvl.2.n": "Durchschnittlich",
+ "lvl.3.n": "Komfortabel",
+ "lvl.1.e": "Kleine Mietwohnung, selbst kochen, Fahrrad und ÖPNV, ab und zu ausgehen.",
+ "lvl.2.e": "Normale Wohnung, regelmäßig essen gehen, Auto oder guter ÖPNV, ein Urlaub im Jahr.",
+ "lvl.3.e": "Große Wohnung, oft ausgehen, Auto, mehrere Reisen im Jahr.",
+ "lvl.hint": "Richtwerte pro Person in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern.",
+ "src.nibud": "Nibud, Mindestbudgets Juli 2025",
+ "src.cbsb": "CBS, Haushaltsausgaben"
 });
 Object.assign(I18N.fr, {
  "age.q": "Quel âge avez-vous ?",
@@ -4838,7 +4881,18 @@ Object.assign(I18N.fr, {
  "opb.never": "pas avant votre retraite",
  "opb.fireL": "Si tout va bien",
  "opb.fireM": "Dans le cas moyen",
- "opb.fireB": "Si cela tourne mal"
+ "opb.fireB": "Si cela tourne mal",
+ "lvl.q": "Comment voulez-vous vivre plus tard ?",
+ "lvl.pm": "{a} par mois",
+ "lvl.1.n": "Sobre",
+ "lvl.2.n": "Moyen",
+ "lvl.3.n": "Confortable",
+ "lvl.1.e": "Petit logement loué, cuisine maison, vélo et transports en commun, quelques sorties.",
+ "lvl.2.e": "Logement ordinaire, restaurant régulièrement, voiture ou bons transports, des vacances par an.",
+ "lvl.3.e": "Grand logement, sorties fréquentes, voiture, plusieurs voyages par an.",
+ "lvl.hint": "Montants indicatifs par personne en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous.",
+ "src.nibud": "Nibud, budgets minimaux juillet 2025",
+ "src.cbsb": "CBS, dépenses des ménages"
 });
 Object.assign(I18N.es, {
  "age.q": "¿Cuántos años tienes?",
@@ -4873,7 +4927,18 @@ Object.assign(I18N.es, {
  "opb.never": "no antes de tu jubilación",
  "opb.fireL": "Si va bien",
  "opb.fireM": "En el caso medio",
- "opb.fireB": "Si va mal"
+ "opb.fireB": "Si va mal",
+ "lvl.q": "¿Cómo quieres vivir más adelante?",
+ "lvl.pm": "{a} al mes",
+ "lvl.1.n": "Austero",
+ "lvl.2.n": "Medio",
+ "lvl.3.n": "Cómodo",
+ "lvl.1.e": "Piso pequeño de alquiler, cocinar en casa, bici y transporte público, alguna salida.",
+ "lvl.2.e": "Vivienda normal, comer fuera con regularidad, coche o buen transporte público, unas vacaciones al año.",
+ "lvl.3.e": "Vivienda amplia, salir a menudo, coche, varios viajes al año.",
+ "lvl.hint": "Importes orientativos por persona en dinero de hoy, basados en el mínimo neerlandés del Nibud (2025) y el gasto del CBS por ingresos, convertidos a 2025. Para dos personas usamos 1,4 veces, porque compartís los gastos de vivienda. Para otros países del euro escalamos con los niveles de precios. Medias, no un consejo. Puedes cambiar el importe abajo.",
+ "src.nibud": "Nibud, presupuestos mínimos julio 2025",
+ "src.cbsb": "CBS, gasto de los hogares"
 });
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
@@ -5065,7 +5130,7 @@ Object.assign(I18N.es, {
 
   /* ================= toestand ================= */
   var DEF = {
-    startkapitaal: 0, budget: 0, opbouw: 0, inleg: 0, box3: 1, eindDiana: 1,
+    startkapitaal: 0, budget: 0, opbouw: 0, inleg: 0, levend: 0, box3: 1, eindDiana: 1,
     werkP: 0, werkD: 0, werkTotP: 67, werkTotD: 67, autoWerk: 1,
     leeftijdPaul: 50, leeftijdDiana: 50, aowPaul: 67, aowDiana: 67, eindleeftijd: 90, restkapitaal: 0,
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
@@ -5334,7 +5399,12 @@ Object.assign(I18N.es, {
     if (n) n.addEventListener('change', updateNow);
     if (r) r.addEventListener('change', updateNow);
   }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('.lvl-b') : null; if (!b) return;
+    state.levend = parseInt(b.getAttribute('data-l'), 10); state.budget = lvlAmt(state.levend); track('extra-level'); update();
+  });
   function manual(k) {
+    if (k === 'budget') state.levend = 0;
     if (k === 'aowPaul' || k === 'aowDiana') state.autoAow = 0;
     if (k === 'eindleeftijd') state.autoEind = 0;
     if (k === 'spP' || k === 'spD') state.autoSp = 0;
@@ -5529,11 +5599,16 @@ Object.assign(I18N.es, {
 
   /* ================= automatisch invullen en advies ================= */
   var adv = null, last = null;
+  /* levensstijlniveaus: richtbedrag per persoon per maand in geld van vandaag (NL 2025): Nibud-minimum alleenstaande, CBS-gemiddelde en bovenste inkomensgroepen omgerekend naar een alleenstaande */
+  var LVL = [1750, 2450, 3900];
+  function lvlOk() { return !!(CTRY[prefs.country] && CTRY[prefs.country].cur === 'EUR' && PLI[prefs.country]); }
+  function lvlAmt(n) { return Math.round(LVL[n - 1] * (PLI[prefs.country][0] / PLI.NL[0]) * (two() ? 1.42 : 1) / 25) * 25; }
   function capEff() { return state.startkapitaal > 0 || state.opbouw ? state.startkapitaal : (adv ? adv.c90 : 0); }
   function applyAuto() {
     if (state.autoAow) { state.aowPaul = spAgeFor(state.leeftijdPaul); state.aowDiana = spAgeFor(state.leeftijdDiana); }
     if (state.autoPenAge) { state.pensioenLeeftijd = state.aowPaul; state.pensioenLeeftijdDiana = state.aowDiana; }
     if (state.autoWerk) { state.werkTotP = state.aowPaul; state.werkTotD = state.aowDiana; }
+    if (state.opbouw && state.levend && lvlOk()) state.budget = lvlAmt(state.levend);
     if (state.autoSp) {
       var sp = CTRY[prefs.country].sp;
       state.spP = state.spD = sp.flat ? (two() ? sp.two : sp.one) : 0;
@@ -5830,11 +5905,19 @@ Object.assign(I18N.es, {
 
   var simTimer = null, fanSrc = null;
   function scheduleSim(now) { clearTimeout(simTimer); if (now) { renderPortfolios(); return; } simTimer = setTimeout(renderPortfolios, 450); }
+  function renderLvl() {
+    var el = $('lvl'); if (!el || !lvlOk()) return;
+    el.innerHTML = [1, 2, 3].map(function (n) {
+      return '<button type="button" class="lvl-b' + (state.levend === n ? ' on' : '') + '" role="radio" aria-checked="' + (state.levend === n) + '" data-l="' + n + '"><b>' + t1('lvl.' + n + '.n') + '</b><span class="lvl-a">' + t1('lvl.pm', { a: eur(lvlAmt(n)) }) + '</span><span class="lvl-e">' + t1('lvl.' + n + '.e') + '</span></button>';
+    }).join('');
+  }
   function renderOpb() {
     var el = $('opb-card'); if (!el) return;
     var root = document.documentElement;
     root.classList.toggle('is-opb', !!state.opbouw);
     root.classList.toggle('no-bud', !(state.budget > 0));
+    root.classList.toggle('no-lvl', !lvlOk());
+    renderLvl();
     if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; return; }
     el.hidden = false;
     var stop = state.pensioenLeeftijd, now = state.leeftijdPaul;
@@ -6148,7 +6231,9 @@ Object.assign(I18N.es, {
       L('https://www.sra.nl/nieuws/259001/2026/01/box-3-percentages-vrijstellingen-en-bedragen-2026', 'src.box3'),
       L('https://www.svp.ie/wp-content/uploads/2025/10/Department-of-Social-Protection-Budget-2026-Factsheet.pdf', 'src.ie'),
       L('https://www.lafinancepourtous.com/2026/08/31/retraite-decalage-de-lage-legal-et-lage-de-depart-pour-carriere-longue-au-1er-septembre-2026/', 'src.fr'),
-      L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk')
+      L('https://www.gov.uk/new-state-pension/what-youll-get', 'src.uk'),
+      L('https://www.nvvk.nl/l/library/download/urn:uuid:a0154979-3659-4407-8462-4009aab6144c/nibud+minimumvoorbeeldbegrotingen+juli+2025%5B13%5D.pdf', 'src.nibud'),
+      L('https://www.cbs.nl/nl-nl/cijfers/detail/85419NED', 'src.cbsb')
     ].join(' · ') + '.';
     renderTrust();
     if (KOFI) {
@@ -6314,6 +6399,7 @@ Object.assign(I18N.es, {
 var TRK = {
  'core-budget': ['basis', 'Maandbudget ingevuld'],
  'extra-inleg': ['extra', 'Maandelijkse inleg ingevuld'],
+ 'extra-level': ['extra', 'Levensstijlniveau gekozen'],
  'core-capital': ['basis', 'Vermogen ingevuld'],
  'core-two-persons': ['basis', 'Gekozen voor twee personen'],
  'core-country': ['basis', 'Land gekozen of gewijzigd'],
