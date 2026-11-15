@@ -2204,8 +2204,8 @@ html.is-empty .share-plan { display: none; }
 
 <script>
 /* Schuld (hypotheek, lening): wat je per maand kwijt bent (m), de resterende looptijd in jaren (y) en eventueel een
-   aflossingsvrij bedrag (v) dat aan het einde van de looptijd in één keer betaald moet worden. Geen rente nodig: veel
-   hypotheken bestaan uit meerdere leningdelen met een eigen rente, dus per deel invullen. n = aantal maanden. */
+   aflossingsvrij bedrag (v): die schuld blijft aan het einde van de looptijd staan en telt als één betaling. Geen rente
+   nodig: de leningdelen van een hypotheek zitten samen in de maandlast. n = aantal maanden. */
 function debtCalc(d) {
   var pm = d && d.m > 0 ? d.m : 0, n = Math.round((d && d.y > 0 ? d.y : 0) * 12), v = d && d.v > 0 ? d.v : 0;
   if (!((pm > 0 || v > 0) && n >= 1)) return { ok: false, pm: 0, n: 0, v: 0, total: 0 };
@@ -5252,11 +5252,11 @@ Object.assign(I18N.es, {
 Object.assign(I18N.en, {
  'debt.h': 'Debt',
  'debt.s': 'Mortgage or loan: monthly cost, term and any interest-only part',
- 'debt.intro': 'Still paying off a mortgage or a loan? Enter what you pay each month, how long it still runs and whether part of it is interest-only. You do not need the interest rate: it is already in your monthly payment. A mortgage with several loan parts? Add each part separately. The payment stays the same in euros, so in today’s money it gets a little lighter every year.',
+ 'debt.intro': 'Still paying off a mortgage or a loan? Enter what you pay each month, how long it still runs and whether part of it is interest-only. You do not need the interest rate: it is already in your monthly payment. The payment stays the same in euros, so in today’s money it gets a little lighter every year.',
  'debt.opb': 'While you are saving, you pay this from your income. The calculation counts it from your retirement age.',
  'debt.add': 'Add a debt', 'debt.del': 'Remove this debt', 'debt.name': 'Name of the debt', 'debt.namePh': 'Name, for example Mortgage', 'debt.nameN': 'Debt {n}',
  'debt.pm': 'Monthly payment', 'debt.yrs': 'Remaining term', 'debt.bal': 'Interest-only amount (optional)', 'debt.unitM': '{cur} per month',
- 'debt.balHint': 'Interest-only means you do not repay this part during the term. The calculation counts this amount at the end of the term as one payment from your capital. Will you pay it from selling your home? Then leave it empty.',
+ 'debt.balHint': 'Interest-only means this part is not repaid during the term, so the debt is still there at the end. The calculation counts this amount at the end of the term as one payment from your capital. Will you pay it from selling your home? Then leave it empty.',
  'debt.in': 'Is this payment already in your monthly budget?', 'debt.inY': 'Yes', 'debt.inN': 'No, on top',
  'debt.inHint': 'If yes, your budget drops by this payment once the debt is paid off. If no, the payment is added to your budget until then.',
  'debt.sumEmpty': 'Fill in the monthly payment and the remaining term to see the result.',
@@ -5272,11 +5272,11 @@ Object.assign(I18N.en, {
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
  'debt.s': 'Hypotheek of lening: maandlast, looptijd en aflossingsvrij deel',
- 'debt.intro': 'Betaal je nog een hypotheek of lening af? Vul in wat je per maand kwijt bent, hoe lang dat nog duurt en of er een aflossingsvrij deel in zit. Rente hoef je niet in te vullen: die zit al in je maandlast. Heb je een hypotheek met meerdere leningdelen? Voeg dan elk deel apart toe. De maandlast blijft in euro’s gelijk, dus in geld van vandaag wordt hij elk jaar iets lichter.',
+ 'debt.intro': 'Betaal je nog een hypotheek of lening af? Vul in wat je per maand kwijt bent, hoe lang dat nog duurt en of er een aflossingsvrij deel in zit. Rente hoef je niet in te vullen: die zit al in je maandlast. De maandlast blijft in euro’s gelijk, dus in geld van vandaag wordt hij elk jaar iets lichter.',
  'debt.opb': 'Zolang je spaart, betaal je dit uit je inkomen. De berekening telt het mee vanaf je pensioenleeftijd.',
  'debt.add': 'Schuld toevoegen', 'debt.del': 'Deze schuld verwijderen', 'debt.name': 'Naam van de schuld', 'debt.namePh': 'Naam, bijvoorbeeld Hypotheek', 'debt.nameN': 'Schuld {n}',
  'debt.pm': 'Maandlast', 'debt.yrs': 'Resterende looptijd', 'debt.bal': 'Aflossingsvrij bedrag (optioneel)', 'debt.unitM': '{cur} per maand',
- 'debt.balHint': 'Aflossingsvrij betekent dat je dit deel tijdens de looptijd niet aflost. De berekening telt dit bedrag aan het einde van de looptijd als één betaling uit je vermogen. Betaal je het straks uit de verkoop van je huis? Laat het dan leeg.',
+ 'debt.balHint': 'Aflossingsvrij betekent dat dit deel tijdens de looptijd niet wordt afgelost: de schuld blijft aan het einde van de looptijd staan. De berekening telt dit bedrag dan als één betaling uit je vermogen. Betaal je het straks uit de verkoop van je huis? Laat het dan leeg.',
  'debt.in': 'Zit deze maandlast al in je maandbudget?', 'debt.inY': 'Ja', 'debt.inN': 'Nee, komt erbij',
  'debt.inHint': 'Bij ja daalt je budget met deze maandlast zodra de schuld is afbetaald. Bij nee komt de maandlast tot dan bovenop je budget.',
  'debt.sumEmpty': 'Vul de maandlast en de resterende looptijd in, dan zie je de uitkomst.',
@@ -5292,11 +5292,11 @@ Object.assign(I18N.nl, {
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
  'debt.s': 'Hypothek oder Kredit: Rate, Laufzeit und tilgungsfreier Teil',
- 'debt.intro': 'Zahlen Sie noch eine Hypothek oder einen Kredit ab? Tragen Sie ein, was Sie pro Monat zahlen, wie lange das noch läuft und ob ein tilgungsfreier Teil dabei ist. Den Zins brauchen Sie nicht einzutragen: er steckt schon in Ihrer Rate. Eine Hypothek mit mehreren Darlehensteilen? Fügen Sie dann jeden Teil einzeln hinzu. Die Rate bleibt in Euro gleich, in heutigem Geld wird sie also jedes Jahr etwas leichter.',
+ 'debt.intro': 'Zahlen Sie noch eine Hypothek oder einen Kredit ab? Tragen Sie ein, was Sie pro Monat zahlen, wie lange das noch läuft und ob ein tilgungsfreier Teil dabei ist. Den Zins brauchen Sie nicht einzutragen: er steckt schon in Ihrer Rate. Die Rate bleibt in Euro gleich, in heutigem Geld wird sie also jedes Jahr etwas leichter.',
  'debt.opb': 'Solange Sie sparen, zahlen Sie das aus Ihrem Einkommen. Die Berechnung zählt es ab Ihrem Rentenalter mit.',
  'debt.add': 'Schuld hinzufügen', 'debt.del': 'Diese Schuld entfernen', 'debt.name': 'Name der Schuld', 'debt.namePh': 'Name, zum Beispiel Hypothek', 'debt.nameN': 'Schuld {n}',
  'debt.pm': 'Monatliche Rate', 'debt.yrs': 'Restlaufzeit', 'debt.bal': 'Tilgungsfreier Betrag (optional)', 'debt.unitM': '{cur} pro Monat',
- 'debt.balHint': 'Tilgungsfrei heißt: Diesen Teil zahlen Sie während der Laufzeit nicht ab. Die Berechnung zählt den Betrag am Ende der Laufzeit als eine Zahlung aus Ihrem Vermögen. Zahlen Sie ihn später aus dem Verkauf Ihres Hauses? Dann lassen Sie das Feld leer.',
+ 'debt.balHint': 'Tilgungsfrei heißt: Dieser Teil wird während der Laufzeit nicht abgezahlt, die Schuld bleibt also am Ende der Laufzeit bestehen. Die Berechnung zählt den Betrag dann als eine Zahlung aus Ihrem Vermögen. Zahlen Sie ihn später aus dem Verkauf Ihres Hauses? Dann lassen Sie das Feld leer.',
  'debt.in': 'Ist die Rate schon in Ihrem Monatsbudget enthalten?', 'debt.inY': 'Ja', 'debt.inN': 'Nein, kommt dazu',
  'debt.inHint': 'Bei Ja sinkt Ihr Budget um diese Rate, sobald die Schuld getilgt ist. Bei Nein kommt die Rate bis dahin zu Ihrem Budget hinzu.',
  'debt.sumEmpty': 'Tragen Sie die Rate und die Restlaufzeit ein, dann sehen Sie das Ergebnis.',
@@ -5312,11 +5312,11 @@ Object.assign(I18N.de, {
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
  'debt.s': 'Prêt immobilier ou crédit : mensualité, durée et partie in fine',
- 'debt.intro': 'Vous remboursez encore un prêt immobilier ou un crédit ? Indiquez ce que vous payez par mois, combien de temps cela dure encore et s’il y a une partie in fine (sans remboursement du capital pendant la durée). Pas besoin du taux : il est déjà dans votre mensualité. Un prêt immobilier en plusieurs parties ? Ajoutez chaque partie séparément. La mensualité reste la même en euros, donc en argent d’aujourd’hui elle pèse un peu moins chaque année.',
+ 'debt.intro': 'Vous remboursez encore un prêt immobilier ou un crédit ? Indiquez ce que vous payez par mois, combien de temps cela dure encore et s’il y a une partie in fine (sans remboursement du capital pendant la durée). Pas besoin du taux : il est déjà dans votre mensualité. La mensualité reste la même en euros, donc en argent d’aujourd’hui elle pèse un peu moins chaque année.',
  'debt.opb': 'Tant que vous épargnez, vous la payez avec vos revenus. Le calcul la compte à partir de l’âge de la retraite.',
  'debt.add': 'Ajouter une dette', 'debt.del': 'Supprimer cette dette', 'debt.name': 'Nom de la dette', 'debt.namePh': 'Nom, par exemple Prêt immobilier', 'debt.nameN': 'Dette {n}',
  'debt.pm': 'Mensualité', 'debt.yrs': 'Durée restante', 'debt.bal': 'Montant in fine (facultatif)', 'debt.unitM': '{cur} par mois',
- 'debt.balHint': 'In fine signifie que vous ne remboursez pas cette partie pendant la durée du prêt. Le calcul compte ce montant à la fin comme un seul paiement prélevé sur votre patrimoine. Vous le paierez avec la vente de votre logement ? Laissez alors le champ vide.',
+ 'debt.balHint': 'In fine signifie que cette partie n’est pas remboursée pendant la durée du prêt : la dette reste donc due à la fin. Le calcul compte ce montant comme un seul paiement prélevé sur votre patrimoine. Vous le paierez avec la vente de votre logement ? Laissez alors le champ vide.',
  'debt.in': 'Cette mensualité est-elle déjà dans votre budget mensuel ?', 'debt.inY': 'Oui', 'debt.inN': 'Non, en plus',
  'debt.inHint': 'Si oui, votre budget baisse de cette mensualité dès que la dette est remboursée. Si non, la mensualité s’ajoute à votre budget jusque-là.',
  'debt.sumEmpty': 'Indiquez la mensualité et la durée restante pour voir le résultat.',
@@ -5332,11 +5332,11 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
  'debt.s': 'Hipoteca o préstamo: cuota, plazo y parte sin amortizar',
- 'debt.intro': '¿Todavía pagas una hipoteca o un préstamo? Indica lo que pagas al mes, cuánto tiempo falta y si una parte no se amortiza durante el plazo. No hace falta el interés: ya está en tu cuota. ¿Una hipoteca con varios tramos? Añade cada tramo por separado. La cuota se mantiene igual en euros, así que en dinero de hoy pesa un poco menos cada año.',
+ 'debt.intro': '¿Todavía pagas una hipoteca o un préstamo? Indica lo que pagas al mes, cuánto tiempo falta y si una parte no se amortiza durante el plazo. No hace falta el interés: ya está en tu cuota. La cuota se mantiene igual en euros, así que en dinero de hoy pesa un poco menos cada año.',
  'debt.opb': 'Mientras ahorras, la pagas con tus ingresos. El cálculo la cuenta a partir de la edad de jubilación.',
  'debt.add': 'Añadir una deuda', 'debt.del': 'Quitar esta deuda', 'debt.name': 'Nombre de la deuda', 'debt.namePh': 'Nombre, por ejemplo Hipoteca', 'debt.nameN': 'Deuda {n}',
  'debt.pm': 'Cuota mensual', 'debt.yrs': 'Plazo restante', 'debt.bal': 'Importe sin amortizar (opcional)', 'debt.unitM': '{cur} al mes',
- 'debt.balHint': 'Sin amortizar significa que no devuelves esa parte durante el plazo. El cálculo cuenta ese importe al final como un único pago de tu patrimonio. ¿Lo pagarás con la venta de tu vivienda? Entonces déjalo vacío.',
+ 'debt.balHint': 'Sin amortizar significa que esta parte no se devuelve durante el plazo, así que la deuda sigue ahí al final. El cálculo cuenta ese importe como un único pago de tu patrimonio. ¿Lo pagarás con la venta de tu vivienda? Entonces déjalo vacío.',
  'debt.in': '¿Esta cuota ya está en tu presupuesto mensual?', 'debt.inY': 'Sí', 'debt.inN': 'No, se suma',
  'debt.inHint': 'Si es que sí, tu presupuesto baja en esta cuota cuando la deuda esté pagada. Si no, la cuota se suma a tu presupuesto hasta entonces.',
  'debt.sumEmpty': 'Indica la cuota y el plazo restante para ver el resultado.',
