@@ -53,6 +53,10 @@ That depends on your monthly budget, your age and the pension you will receive. 
 
 Button Counter runs 4,000 simulations in which returns go up and down each year. It does this for three portfolios (defensive, balanced and aggressive), after costs, tax and inflation, so every amount is in today’s money. The chance of success is the share of simulations in which your money lasts until your end age. Two crash scenarios, one like 2008 and one like 2022, are shown separately.
 
+### Does my spending stay the same in the calculation, or does it fall?
+
+You choose this under “How does your spending change later?”. With Flat, your spending stays the same every year, in today’s money. That is the most cautious choice. With Typical you spend about 1% less each year from age 65, and with Falling faster about 2% less. This matches what research in the Netherlands, the UK and the US, among others, shows on average: older people tend to spend less, for example because leisure and transport costs fall. The figures are in today’s money, so amounts still rise with inflation. Under each option you see how much savings you need, so you can see what the choice makes. These are averages, and your own spending may follow a different path, for instance because of care costs. A new plan starts on Typical.
+
 ### Which countries does Button Counter support?
 
 Button Counter has its own rules for the Netherlands, Belgium, Germany, France, Spain, Italy, Portugal, Ireland, the United Kingdom and the United States, plus a general setting for other countries. Each country has its own state pension, pension age and tax on investments. Button Counter also compares what your budget is worth in 31 European countries, based on Eurostat price levels.
