@@ -1709,6 +1709,24 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
 .in-all .step + .step { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line); }
 .in-all .stepper button.done, .in-all .stepper button[aria-current] { background: var(--surface); }
 @media print { .in-mode, .in-sum { display: none !important; } }
+/* opgeruimd invulblok (v16): alles op één lijn, geen dubbele voortgang */
+.page-top { padding-inline: 0; }
+#page-input { gap: 14px; }
+#page-input .goal-bar { border-left: 1px solid var(--line); background: var(--surface); }
+#page-input .goal-bar h2#gb-q { text-wrap: balance; }
+#page-input .goal-bar .gb-actions { gap: 4px 14px; }
+.in-mode { gap: 8px 14px; margin: 0; }
+.in-mode .hint { margin: 0; }
+@media (max-width: 560px) {
+  .in-mode { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .in-mode .seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-self: stretch; width: 100%; }
+  .in-mode .seg-opt span { text-align: center; padding: 11px 10px; }
+}
+#page-input .progress { display: none; }
+#steps .snel-body { padding-inline: 0; }
+#steps .step-head { margin-top: 4px; }
+#stepper { margin-top: 2px; }
+
 
 /* ===== Pro op slot (meetfase) ===== */
 
