@@ -1865,8 +1865,8 @@ footer .sup-ab { flex-basis: 100%; margin: 6px 0; }
     </div>
     <div class="in-mode" id="in-mode">
       <div class="seg" role="radiogroup" data-t-aria="in.modeAria">
-        <label class="seg-opt"><input type="radio" name="in-mode" value="all"><span data-t="in.all"></span></label>
         <label class="seg-opt"><input type="radio" name="in-mode" value="steps"><span data-t="in.stepsMode"></span></label>
+        <label class="seg-opt"><input type="radio" name="in-mode" value="all"><span data-t="in.all"></span></label>
       </div>
       <p class="hint" id="in-mode-h"></p>
     </div>
@@ -5574,7 +5574,10 @@ Object.assign(I18N.es, {
   }
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('.lvl-b') : null; if (!b) return;
-    state.levend = parseInt(b.getAttribute('data-l'), 10); state.budget = lvlAmt(state.levend); track('extra-level'); update();
+    state.levend = parseInt(b.getAttribute('data-l'), 10); state.budget = lvlAmt(state.levend); track('extra-level');
+    each('.lvl-b', function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-checked', on ? 'true' : 'false'); });
+    var bi = $('q-budget'); if (bi) bi.value = fmtIn(bi, state.budget);
+    update();
   });
   function manual(k) {
     if (k === 'budget') state.levend = 0;
