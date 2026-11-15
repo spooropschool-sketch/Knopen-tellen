@@ -6019,10 +6019,12 @@ Object.assign(I18N.es, {
   function renderDebts() {
     var host = $('debts-list'); if (!host) return;
     var D = lists.debts;
-    $('debts-n').hidden = !D.length; $('debts-n').textContent = D.length;
+    var lk = plLocked();
+    $('debts-n').hidden = !D.length || lk; $('debts-n').textContent = D.length;
     $('debt-add').hidden = D.length >= 6;
-    $('debts-opb').hidden = !(state.opbouw && D.length);
-    if (D.length) $('debts-box').open = true;
+    $('debts-opb').hidden = !(state.opbouw && D.length) || lk;
+    if (D.length && !lk) $('debts-box').open = true;
+    else if (lk) $('debts-box').open = false;
     function opt(i, f, v, lab, cur) { return '<label class="seg-opt"><input type="radio" name="debt-' + f + '-' + i + '" data-dk="' + f + '" data-i="' + i + '" value="' + v + '"' + (cur ? ' checked' : '') + '><span>' + lab + '</span></label>'; }
     host.innerHTML = D.map(function (q, i) {
       var L = 'data-l="debts" data-i="' + i + '"', id = 'debt-' + i + '-';
@@ -6041,7 +6043,9 @@ Object.assign(I18N.es, {
   }
   function renderLists() { renderPer('P'); renderPer('D'); renderPots(); renderDebts(); }
   function potsOn() { return lists.pots.filter(function (q) { return q.a > 0 && (q.w !== 1 || two()); }); }
-  function debtsOn() { return lists.debts.filter(function (q) { return debtCalc(q).ok; }); }
+  /* zolang Pro op slot zit, telt een schuld nooit mee (ook niet als die ooit is opgeslagen): de kaart is dicht en de uitkomst blijft zoals zonder schuld */
+  function debtsList() { return plLocked() ? [] : lists.debts; }
+  function debtsOn() { return debtsList().filter(function (q) { return debtCalc(q).ok; }); }
   document.addEventListener('input', function (ev) {
     var e = ev.target, l = e.getAttribute && e.getAttribute('data-l'); if (!l || !lists[l]) return;
     var i = parseInt(e.getAttribute('data-i'), 10), f = e.getAttribute('data-f'), it = lists[l][i]; if (!it) return;
@@ -6136,7 +6140,7 @@ Object.assign(I18N.es, {
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
     p.startkapitaal = capEff();
-    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots; p.debts = lists.debts;
+    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots; p.debts = debtsList();
     p.taxMode = isNL() ? 'nlbox3' : 'returns';
     if (isNL()) p.box3 = state.box3;
     var ps = portStat(effIdx());
@@ -6846,7 +6850,7 @@ Object.assign(I18N.es, {
   function hvCtx() {
     var st = {}, ports = {};
     Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
-    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots; st.debts = lists.debts;
+    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots; st.debts = debtsList();
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports, alts: [0, 1, 2].filter(function (k) { return k !== state.uitgaveDaling; }) };
   }
@@ -6903,7 +6907,7 @@ Object.assign(I18N.es, {
   }
   function finishUpdate() {
     if (!updTimer) document.documentElement.classList.remove('is-calc');
-    var dob = $('debts-opb'); if (dob) dob.hidden = !(state.opbouw && lists.debts.length);
+    var dob = $('debts-opb'); if (dob) dob.hidden = !(state.opbouw && debtsList().length);
     renderAdvies();
     renderZeker();
     document.documentElement.classList.toggle('is-empty', state.budget <= 0 && !(state.opbouw && state.inleg > 0));
@@ -7152,7 +7156,7 @@ var TRK = {
     var key = planKey(pl);
     if (planCache[key] || planBusy[key]) return planCache[key] || null;
     var st = loadNums({}, pl.state), L = cleanLists(pl.lists), ports = {};
-    st.perP = L.perP; st.perD = L.perD; st.pots = L.pots; st.debts = L.debts;
+    st.perP = L.perP; st.perD = L.perD; st.pots = L.pots; st.debts = plLocked() ? [] : L.debts;
     [1, 2, 3].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     planBusy[key] = 1;
     calcX({ st: st, cap: st.startkapitaal, nl: pl.country === 'NL', pfUser: st.portfolio, autoIdx: 2, ports: ports }, function (r) {
@@ -7223,7 +7227,7 @@ var TRK = {
   function shareUrl() {
     var d = {}; Object.keys(DEF).forEach(function (k) { if (state[k] !== DEF[k]) d[k] = state[k]; });
     var base = location.origin + location.pathname, o = { s: d, c: prefs.country, u: prefs.cur };
-    if (lists.perP.length || lists.perD.length || lists.pots.length || lists.debts.length) o.l = lists;
+    if (lists.perP.length || lists.perD.length || lists.pots.length || debtsList().length) o.l = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList() };
     return base + '?plan=' + b64u(JSON.stringify(o)) + '#overview';
   }
   function shareText() {
@@ -7232,7 +7236,7 @@ var TRK = {
     L.push(t1('pl.r.bud') + ': ' + eur(state.budget));
     L.push(t1('curve.lbl') + ': ' + t1('curve.o' + (state.uitgaveDaling || 0)));
     L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
-    lists.debts.forEach(function (q, i) {
+    debtsList().forEach(function (q, i) {
       var c = debtCalc(q); if (!c.ok) return;
       L.push(c.pm > 0 ? t1('debt.shareLine', { n: debtName(q, i), m: eur(c.pm), t: durTxt(c.n) }) + (c.v > 0 ? t1('debt.shareBal', { v: eur(c.v) }) : '')
         : t1('debt.shareOnly', { n: debtName(q, i), v: eur(c.v), t: durTxt(c.n) }));
@@ -7659,7 +7663,7 @@ var TRK = {
       'State pension: ' + both(state.aowAanP !== 0 ? money(state.spP) + ' from ' + ag(state.aowPaul) : 'off', state.aowAanD !== 0 ? money(state.spD) + ' from ' + ag(state.aowDiana) : 'off'),
       'Pension: ' + both(state.pensAanP !== 0 ? money(state.pensioenPaul) + ' from ' + ag(state.pensioenLeeftijd) : 'off', state.pensAanD !== 0 ? money(state.pensioenDiana) + ' from ' + ag(state.pensioenLeeftijdDiana) : 'off'),
       'Work income (net): ' + both(wk('P'), wk('D')));
-    lists.debts.forEach(function (q, i) {
+    debtsList().forEach(function (q, i) {
       var c = debtCalc(q); if (!c.ok) return;
       L.push('Debt ' + (i + 1) + ': payment ' + money(c.pm) + '/m for ' + Math.round(c.n) + ' months' + (c.v > 0 ? ', interest-only amount ' + money(c.v) + ' at the end' : '') + ', ' + (q.b !== 0 ? 'inside the monthly budget' : 'on top of the monthly budget'));
     });
