@@ -4754,7 +4754,8 @@ Object.assign(I18N.nl, {
  "lvl.3.e": "Ruime woning, vaak uit, auto, meerdere reizen per jaar.",
  "lvl.hint": "Richtbedragen per persoon in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.",
  "src.nibud": "Nibud, minimumvoorbeeldbegrotingen juli 2025",
- "src.cbsb": "CBS, bestedingen huishoudens"
+ "src.cbsb": "CBS, bestedingen huishoudens",
+ "lvl.hintX": "Buiten Nederland is dit een indicatie: de bedragen zijn Nederlands en omgerekend met prijsniveaus, niet gebaseerd op de uitgavenpatronen van jouw land."
 });
 Object.assign(I18N.en, {
  "age.q": "How old are you?",
@@ -4800,7 +4801,8 @@ Object.assign(I18N.en, {
  "lvl.3.e": "A spacious home, going out often, a car, several trips a year.",
  "lvl.hint": "Guide amounts per person in today’s money, based on the Dutch Nibud minimum (2025) and CBS spending by income, converted to 2025. For two people we use 1.4 times, because you share housing costs. For other euro countries we scale by price levels. Averages, not advice. You can change the amount below.",
  "src.nibud": "Nibud, minimum budgets July 2025",
- "src.cbsb": "CBS, household spending"
+ "src.cbsb": "CBS, household spending",
+ "lvl.hintX": "Outside the Netherlands this is an indication: the amounts are Dutch and converted with price levels, not based on spending patterns in your own country."
 });
 Object.assign(I18N.de, {
  "age.q": "Wie alt sind Sie?",
@@ -4846,7 +4848,8 @@ Object.assign(I18N.de, {
  "lvl.3.e": "Große Wohnung, oft ausgehen, Auto, mehrere Reisen im Jahr.",
  "lvl.hint": "Richtwerte pro Person in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern.",
  "src.nibud": "Nibud, Mindestbudgets Juli 2025",
- "src.cbsb": "CBS, Haushaltsausgaben"
+ "src.cbsb": "CBS, Haushaltsausgaben",
+ "lvl.hintX": "Außerhalb der Niederlande ist das eine Orientierung: Die Beträge sind niederländisch und mit Preisniveaus umgerechnet, nicht auf Ausgabenmustern Ihres Landes beruhend."
 });
 Object.assign(I18N.fr, {
  "age.q": "Quel âge avez-vous ?",
@@ -4892,7 +4895,8 @@ Object.assign(I18N.fr, {
  "lvl.3.e": "Grand logement, sorties fréquentes, voiture, plusieurs voyages par an.",
  "lvl.hint": "Montants indicatifs par personne en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous.",
  "src.nibud": "Nibud, budgets minimaux juillet 2025",
- "src.cbsb": "CBS, dépenses des ménages"
+ "src.cbsb": "CBS, dépenses des ménages",
+ "lvl.hintX": "En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays."
 });
 Object.assign(I18N.es, {
  "age.q": "¿Cuántos años tienes?",
@@ -4938,7 +4942,8 @@ Object.assign(I18N.es, {
  "lvl.3.e": "Vivienda amplia, salir a menudo, coche, varios viajes al año.",
  "lvl.hint": "Importes orientativos por persona en dinero de hoy, basados en el mínimo neerlandés del Nibud (2025) y el gasto del CBS por ingresos, convertidos a 2025. Para dos personas usamos 1,4 veces, porque compartís los gastos de vivienda. Para otros países del euro escalamos con los niveles de precios. Medias, no un consejo. Puedes cambiar el importe abajo.",
  "src.nibud": "Nibud, presupuestos mínimos julio 2025",
- "src.cbsb": "CBS, gasto de los hogares"
+ "src.cbsb": "CBS, gasto de los hogares",
+ "lvl.hintX": "Fuera de los Países Bajos es una indicación: los importes son neerlandeses y se convierten con los niveles de precios, no se basan en los patrones de gasto de tu país."
 });
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
@@ -5907,6 +5912,7 @@ Object.assign(I18N.es, {
   function scheduleSim(now) { clearTimeout(simTimer); if (now) { renderPortfolios(); return; } simTimer = setTimeout(renderPortfolios, 450); }
   function renderLvl() {
     var el = $('lvl'); if (!el || !lvlOk()) return;
+    var hh = $('lvl-hint'); if (hh) hh.textContent = t1('lvl.hint') + (prefs.country === 'NL' ? '' : ' ' + t1('lvl.hintX'));
     el.innerHTML = [1, 2, 3].map(function (n) {
       return '<button type="button" class="lvl-b' + (state.levend === n ? ' on' : '') + '" role="radio" aria-checked="' + (state.levend === n) + '" data-l="' + n + '"><b>' + t1('lvl.' + n + '.n') + '</b><span class="lvl-a">' + t1('lvl.pm', { a: eur(lvlAmt(n)) }) + '</span><span class="lvl-e">' + t1('lvl.' + n + '.e') + '</span></button>';
     }).join('');
