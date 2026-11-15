@@ -2216,23 +2216,13 @@ html.is-empty .share-plan { display: none; }
 </div>
 
 <script>
-/* Schuld (hypotheek, lening): uit de restschuld a, de rente r (% per jaar) en de maandlast m óf de looptijd y (jaren)
-   volgt de rest. k = 'm': maandlast bekend, k = 't': looptijd bekend. Vaste maandlast (annuïteit), per maand gerekend.
-   n = aantal maanden tot afbetaald; 'never' = de maandlast dekt de rente niet, dus de schuld loopt door. */
+/* Schuld (hypotheek, lening): wat je per maand kwijt bent (m), de resterende looptijd in jaren (y) en eventueel een
+   aflossingsvrij bedrag (v) dat aan het einde van de looptijd in één keer betaald moet worden. Geen rente nodig: veel
+   hypotheken bestaan uit meerdere leningdelen met een eigen rente, dus per deel invullen. n = aantal maanden. */
 function debtCalc(d) {
-  var a = d && d.a > 0 ? d.a : 0, im = (d && d.r > 0 ? d.r : 0) / 1200, pm = 0, n = 0;
-  if (!(a > 0)) return { ok: false, pm: 0, n: 0, interest: 0, never: false };
-  if (d.k === 't') {
-    n = Math.round((d.y > 0 ? d.y : 0) * 12);
-    if (n < 1) return { ok: false, pm: 0, n: 0, interest: 0, never: false };
-    pm = im > 0 ? a * im / (1 - Math.pow(1 + im, -n)) : a / n;
-  } else {
-    pm = d.m > 0 ? d.m : 0;
-    if (!(pm > 0)) return { ok: false, pm: 0, n: 0, interest: 0, never: false };
-    if (pm <= a * im + 1e-9) return { ok: true, pm: pm, n: Infinity, interest: Infinity, never: true };
-    n = im > 0 ? -Math.log(1 - a * im / pm) / Math.log(1 + im) : a / pm;
-  }
-  return { ok: true, pm: pm, n: n, interest: Math.max(0, pm * n - a), never: false };
+  var pm = d && d.m > 0 ? d.m : 0, n = Math.round((d && d.y > 0 ? d.y : 0) * 12), v = d && d.v > 0 ? d.v : 0;
+  if (!((pm > 0 || v > 0) && n >= 1)) return { ok: false, pm: 0, n: 0, v: 0, total: 0 };
+  return { ok: true, pm: pm, n: n, v: v, total: pm * n };
 }
 
 /* Take Stock rekenmodel (V4, internationaal). Alles in geld van vandaag (reeel).
@@ -2255,15 +2245,19 @@ function runModel(p) {
      (het ingevulde budget is wat je nu uitgeeft); bij twee personen telt de oudste. 0 = vlak (zoals voor versie 11).
      'fac' is de factor op het maandbudget per jaar, 'spend' het maandbudget per jaar. */
   var uRaw = parseFloat(p.uitgaveDaling), uDec = (isFinite(uRaw) ? Math.max(0, Math.min(5, uRaw)) : 0) / 100, uRef = two ? Math.max(ageP, ageD) : ageP, uStart = Math.max(p.uitgaveVan || 65, uRef);
-  /* schulden: een vaste maandlast in euro's tot de schuld is afgelost. In geld van vandaag wordt die elk jaar iets lichter.
-     'debtM' = kosten per jaar; 'debtIn' = het deel van de maandlasten (bij de start) dat al in het ingevulde maandbudget zit,
-     dat deel valt na de aflossing dus weg. Het maandbudget zonder die lasten daalt volgens het uitgavenverloop. */
-  var debtM = [], debtIn = 0, dtI;
-  for (dtI = 0; dtI < N; dtI++) debtM.push(0);
+  /* schulden: een vaste maandlast in euro's tot het einde van de looptijd, plus eventueel een aflossingsvrij bedrag dat aan het
+     einde in één keer uit het vermogen gaat. In geld van vandaag wordt de maandlast elk jaar iets lichter.
+     'debtM' = kosten per jaar; 'debtL' = eenmalig bedrag per jaar (aflossingsvrij); 'debtIn' = het deel van de maandlasten
+     dat al in het ingevulde maandbudget zit, dat deel valt na de looptijd weg. Het maandbudget zonder die lasten daalt
+     volgens het uitgavenverloop. */
+  var debtM = [], debtL = [], debtIn = 0, dtI;
+  for (dtI = 0; dtI < N; dtI++) { debtM.push(0); debtL.push(0); }
   (p.debts || []).forEach(function (dd) {
     var dc = debtCalc(dd); if (!dc.ok) return;
     if (dd.b !== 0) debtIn += dc.pm;
     for (var dtT = 0; dtT < N; dtT++) { var act = Math.max(0, Math.min(12, dc.n - 12 * dtT)); if (act > 0) debtM[dtT] += act * dc.pm / Math.pow(1 + i, dtT); }
+    var tb = Math.round(dc.n / 12);
+    if (dc.v > 0 && tb < N) debtL[tb] += dc.v / Math.pow(1 + i, dc.n / 12);
   });
   function baseOf(bud) { return Math.max(0, bud - debtIn); }
   var fac = [], spend = [];
@@ -2322,9 +2316,9 @@ function runModel(p) {
   var stopAge = p.opbouw ? (p.pensioenLeeftijd || 67) : 0, saveM = p.opbouw ? Math.max(0, p.inleg || 0) : 0;
   /* tijdens het sparen (opbouw) betaal je de maandlast uit je inkomen; die telt pas mee vanaf de pensioenleeftijd */
   function drawAt(t, budget) {
-    if (!p.opbouw) return 12 * baseOf(budget) * fac[t] + debtM[t] - inc[t];
+    if (!p.opbouw) return 12 * baseOf(budget) * fac[t] + debtM[t] + debtL[t] - inc[t];
     var f = ovl(ageP + t, -1e9, stopAge);
-    return f * (-12 * saveM) + (1 - f) * (12 * baseOf(budget) * fac[t] + debtM[t] - inc[t]);
+    return f * (-12 * saveM) + (1 - f) * (12 * baseOf(budget) * fac[t] + debtM[t] - inc[t]) + debtL[t];
   }
 
   function feasible(K0, budget) {
@@ -2381,7 +2375,7 @@ function runModel(p) {
   }
 
   return {
-    g: grow - 1, N: N, youngest: youngest, tStop: p.opbouw ? Math.max(0, Math.min(N, Math.round(stopAge - ageP))) : 0, fac: fac, spend: spend, debtM: debtM,
+    g: grow - 1, N: N, youngest: youngest, tStop: p.opbouw ? Math.max(0, Math.min(N, Math.round(stopAge - ageP))) : 0, fac: fac, spend: spend, debtM: debtM, debtL: debtL,
     req0: req0, R: R, K: K, draws: draws, incomes: inc, taxes: taxes, incSp: incSp, incPen: incPen, incWk: incWk, incPot: incPot, lump: lump,
     emptyAt: emptyAt, marge: p.startkapitaal - req0,
     buffer: req0 > 0 ? p.startkapitaal / req0 - 1 : Infinity,
@@ -5270,98 +5264,103 @@ Object.assign(I18N.es, {
 /* schuld: hypotheek of lening met maandlast en aflooptijd (versie 15) */
 Object.assign(I18N.en, {
  'debt.h': 'Debt',
- 'debt.s': 'Mortgage or loan: monthly cost and when it is paid off',
- 'debt.intro': 'Still paying off a mortgage or a loan? Enter what you still owe, the interest and the monthly payment or the remaining term. The calculation counts the payment until the debt is paid off. The payment stays the same in euros, so in today’s money it gets a little lighter every year.',
+ 'debt.s': 'Mortgage or loan: monthly cost, term and any interest-only part',
+ 'debt.intro': 'Still paying off a mortgage or a loan? Enter what you pay each month, how long it still runs and whether part of it is interest-only. You do not need the interest rate: it is already in your monthly payment. A mortgage with several loan parts? Add each part separately. The payment stays the same in euros, so in today’s money it gets a little lighter every year.',
  'debt.opb': 'While you are saving, you pay this from your income. The calculation counts it from your retirement age.',
  'debt.add': 'Add a debt', 'debt.del': 'Remove this debt', 'debt.name': 'Name of the debt', 'debt.namePh': 'Name, for example Mortgage', 'debt.nameN': 'Debt {n}',
- 'debt.kind': 'What do you know?', 'debt.kM': 'I know the payment', 'debt.kT': 'I know the term',
- 'debt.owed': 'Still owed', 'debt.rate': 'Interest per year', 'debt.pm': 'Monthly payment', 'debt.yrs': 'Remaining term', 'debt.unitM': '{cur} per month',
+ 'debt.pm': 'Monthly payment', 'debt.yrs': 'Remaining term', 'debt.bal': 'Interest-only amount (optional)', 'debt.unitM': '{cur} per month',
+ 'debt.balHint': 'Interest-only means you do not repay this part during the term. The calculation counts this amount at the end of the term as one payment from your capital. Will you pay it from selling your home? Then leave it empty.',
  'debt.in': 'Is this payment already in your monthly budget?', 'debt.inY': 'Yes', 'debt.inN': 'No, on top',
  'debt.inHint': 'If yes, your budget drops by this payment once the debt is paid off. If no, the payment is added to your budget until then.',
- 'debt.sumEmpty': 'Fill in what you owe and the payment or the term to see the result.',
- 'debt.sum': 'Payment {m} a month, paid off in {t} (in {yr}). Total interest: {i}.',
+ 'debt.sumEmpty': 'Fill in the monthly payment and the remaining term to see the result.',
+ 'debt.sum': 'You pay {m} a month for another {t} (until {yr}).',
+ 'debt.sumBal': 'At the end you also pay {v} in one go.',
+ 'debt.sumOnlyBal': 'In {t} (in {yr}) you pay {v} in one go.',
  'debt.sumAge': 'You will be {a} then.', 'debt.sumFree': 'After that you need {m} a month less.',
- 'debt.sumNever': 'At {m} a month the debt does not get smaller. The calculation counts the payment until the end.',
- 'debt.m': '{m} months', 'debt.shareLine': '{n}: {m} a month, paid off in {t}', 'debt.shareNever': '{n}: {m} a month, not paid off',
+ 'debt.m': '{m} months', 'debt.shareLine': '{n}: {m} a month, {t} to go', 'debt.shareBal': ', plus {v} in one go at the end', 'debt.shareOnly': '{n}: {v} in one go in {t}',
  'ins.debt': 'Debt',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Debt: enter a mortgage or loan and see the monthly cost and when it is paid off'
+ 'rel.15.n1': 'Debt: enter your monthly payment, the remaining term and any interest-only amount'
 });
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
- 'debt.s': 'Hypotheek of lening: kosten per maand en wanneer het is afbetaald',
- 'debt.intro': 'Betaal je nog een hypotheek of lening af? Vul in wat je nog schuldig bent, de rente en de maandlast of de looptijd. De berekening telt de maandlast mee tot de schuld is afbetaald. De maandlast blijft in euro’s gelijk, dus in geld van vandaag wordt hij elk jaar iets lichter.',
+ 'debt.s': 'Hypotheek of lening: maandlast, looptijd en aflossingsvrij deel',
+ 'debt.intro': 'Betaal je nog een hypotheek of lening af? Vul in wat je per maand kwijt bent, hoe lang dat nog duurt en of er een aflossingsvrij deel in zit. Rente hoef je niet in te vullen: die zit al in je maandlast. Heb je een hypotheek met meerdere leningdelen? Voeg dan elk deel apart toe. De maandlast blijft in euro’s gelijk, dus in geld van vandaag wordt hij elk jaar iets lichter.',
  'debt.opb': 'Zolang je spaart, betaal je dit uit je inkomen. De berekening telt het mee vanaf je pensioenleeftijd.',
  'debt.add': 'Schuld toevoegen', 'debt.del': 'Deze schuld verwijderen', 'debt.name': 'Naam van de schuld', 'debt.namePh': 'Naam, bijvoorbeeld Hypotheek', 'debt.nameN': 'Schuld {n}',
- 'debt.kind': 'Wat weet je?', 'debt.kM': 'Ik weet de maandlast', 'debt.kT': 'Ik weet de looptijd',
- 'debt.owed': 'Nog schuldig', 'debt.rate': 'Rente per jaar', 'debt.pm': 'Maandlast', 'debt.yrs': 'Resterende looptijd', 'debt.unitM': '{cur} per maand',
+ 'debt.pm': 'Maandlast', 'debt.yrs': 'Resterende looptijd', 'debt.bal': 'Aflossingsvrij bedrag (optioneel)', 'debt.unitM': '{cur} per maand',
+ 'debt.balHint': 'Aflossingsvrij betekent dat je dit deel tijdens de looptijd niet aflost. De berekening telt dit bedrag aan het einde van de looptijd als één betaling uit je vermogen. Betaal je het straks uit de verkoop van je huis? Laat het dan leeg.',
  'debt.in': 'Zit deze maandlast al in je maandbudget?', 'debt.inY': 'Ja', 'debt.inN': 'Nee, komt erbij',
  'debt.inHint': 'Bij ja daalt je budget met deze maandlast zodra de schuld is afbetaald. Bij nee komt de maandlast tot dan bovenop je budget.',
- 'debt.sumEmpty': 'Vul in wat je schuldig bent en de maandlast of de looptijd, dan zie je de uitkomst.',
- 'debt.sum': 'Maandlast {m}, afbetaald over {t} (in {yr}). Totale rente: {i}.',
+ 'debt.sumEmpty': 'Vul de maandlast en de resterende looptijd in, dan zie je de uitkomst.',
+ 'debt.sum': 'Je betaalt {m} per maand, nog {t} (tot {yr}).',
+ 'debt.sumBal': 'Aan het einde betaal je daarnaast {v} in één keer.',
+ 'debt.sumOnlyBal': 'Over {t} (in {yr}) betaal je {v} in één keer.',
  'debt.sumAge': 'Je bent dan {a} jaar.', 'debt.sumFree': 'Daarna heb je {m} per maand minder nodig.',
- 'debt.sumNever': 'Met {m} per maand wordt de schuld niet kleiner. De berekening telt de maandlast tot het einde mee.',
- 'debt.m': '{m} maanden', 'debt.shareLine': '{n}: {m} per maand, afbetaald over {t}', 'debt.shareNever': '{n}: {m} per maand, wordt niet afbetaald',
+ 'debt.m': '{m} maanden', 'debt.shareLine': '{n}: {m} per maand, nog {t}', 'debt.shareBal': ', plus {v} in één keer aan het einde', 'debt.shareOnly': '{n}: {v} in één keer over {t}',
  'ins.debt': 'Schuld',
  'rel.15.v': 'Versie 15 · november 2026',
- 'rel.15.n1': 'Schuld: vul een hypotheek of lening in en zie de kosten per maand en wanneer het is afbetaald'
+ 'rel.15.n1': 'Schuld: vul je maandlast, de resterende looptijd en een eventueel aflossingsvrij bedrag in'
 });
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
- 'debt.s': 'Hypothek oder Kredit: monatliche Kosten und wann alles getilgt ist',
- 'debt.intro': 'Zahlen Sie noch eine Hypothek oder einen Kredit ab? Tragen Sie ein, was Sie noch schulden, den Zins und die monatliche Rate oder die Restlaufzeit. Die Berechnung zählt die Rate mit, bis die Schuld getilgt ist. Die Rate bleibt in Euro gleich, in heutigem Geld wird sie also jedes Jahr etwas leichter.',
+ 'debt.s': 'Hypothek oder Kredit: Rate, Laufzeit und tilgungsfreier Teil',
+ 'debt.intro': 'Zahlen Sie noch eine Hypothek oder einen Kredit ab? Tragen Sie ein, was Sie pro Monat zahlen, wie lange das noch läuft und ob ein tilgungsfreier Teil dabei ist. Den Zins brauchen Sie nicht einzutragen: er steckt schon in Ihrer Rate. Eine Hypothek mit mehreren Darlehensteilen? Fügen Sie dann jeden Teil einzeln hinzu. Die Rate bleibt in Euro gleich, in heutigem Geld wird sie also jedes Jahr etwas leichter.',
  'debt.opb': 'Solange Sie sparen, zahlen Sie das aus Ihrem Einkommen. Die Berechnung zählt es ab Ihrem Rentenalter mit.',
  'debt.add': 'Schuld hinzufügen', 'debt.del': 'Diese Schuld entfernen', 'debt.name': 'Name der Schuld', 'debt.namePh': 'Name, zum Beispiel Hypothek', 'debt.nameN': 'Schuld {n}',
- 'debt.kind': 'Was wissen Sie?', 'debt.kM': 'Ich kenne die Rate', 'debt.kT': 'Ich kenne die Laufzeit',
- 'debt.owed': 'Noch offen', 'debt.rate': 'Zins pro Jahr', 'debt.pm': 'Monatliche Rate', 'debt.yrs': 'Restlaufzeit', 'debt.unitM': '{cur} pro Monat',
+ 'debt.pm': 'Monatliche Rate', 'debt.yrs': 'Restlaufzeit', 'debt.bal': 'Tilgungsfreier Betrag (optional)', 'debt.unitM': '{cur} pro Monat',
+ 'debt.balHint': 'Tilgungsfrei heißt: Diesen Teil zahlen Sie während der Laufzeit nicht ab. Die Berechnung zählt den Betrag am Ende der Laufzeit als eine Zahlung aus Ihrem Vermögen. Zahlen Sie ihn später aus dem Verkauf Ihres Hauses? Dann lassen Sie das Feld leer.',
  'debt.in': 'Ist die Rate schon in Ihrem Monatsbudget enthalten?', 'debt.inY': 'Ja', 'debt.inN': 'Nein, kommt dazu',
  'debt.inHint': 'Bei Ja sinkt Ihr Budget um diese Rate, sobald die Schuld getilgt ist. Bei Nein kommt die Rate bis dahin zu Ihrem Budget hinzu.',
- 'debt.sumEmpty': 'Tragen Sie ein, was Sie schulden, und die Rate oder die Laufzeit, dann sehen Sie das Ergebnis.',
- 'debt.sum': 'Rate {m}, getilgt in {t} (im Jahr {yr}). Zinsen insgesamt: {i}.',
+ 'debt.sumEmpty': 'Tragen Sie die Rate und die Restlaufzeit ein, dann sehen Sie das Ergebnis.',
+ 'debt.sum': 'Sie zahlen {m} pro Monat, noch {t} (bis {yr}).',
+ 'debt.sumBal': 'Am Ende zahlen Sie zusätzlich {v} auf einmal.',
+ 'debt.sumOnlyBal': 'Im Jahr {yr} (Restlaufzeit {t}) zahlen Sie {v} auf einmal.',
  'debt.sumAge': 'Sie sind dann {a} Jahre alt.', 'debt.sumFree': 'Danach brauchen Sie {m} pro Monat weniger.',
- 'debt.sumNever': 'Bei {m} pro Monat wird die Schuld nicht kleiner. Die Berechnung zählt die Rate bis zum Ende mit.',
- 'debt.m': '{m} Monate', 'debt.shareLine': '{n}: {m} pro Monat, getilgt in {t}', 'debt.shareNever': '{n}: {m} pro Monat, wird nicht getilgt',
+ 'debt.m': '{m} Monate', 'debt.shareLine': '{n}: {m} pro Monat, noch {t}', 'debt.shareBal': ', dazu am Ende {v} auf einmal', 'debt.shareOnly': '{n}: {v} auf einmal, Restlaufzeit {t}',
  'ins.debt': 'Schulden',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Schulden: Hypothek oder Kredit eintragen und die monatlichen Kosten sowie das Tilgungsende sehen'
+ 'rel.15.n1': 'Schulden: Rate, Restlaufzeit und einen etwaigen tilgungsfreien Betrag eintragen'
 });
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
- 'debt.s': 'Prêt immobilier ou crédit : coût mensuel et date de fin de remboursement',
- 'debt.intro': 'Vous remboursez encore un prêt immobilier ou un crédit ? Indiquez ce qu’il vous reste à rembourser, le taux et la mensualité ou la durée restante. Le calcul compte la mensualité jusqu’à la fin du remboursement. Elle reste la même en euros, donc en argent d’aujourd’hui elle pèse un peu moins chaque année.',
+ 'debt.s': 'Prêt immobilier ou crédit : mensualité, durée et partie in fine',
+ 'debt.intro': 'Vous remboursez encore un prêt immobilier ou un crédit ? Indiquez ce que vous payez par mois, combien de temps cela dure encore et s’il y a une partie in fine (sans remboursement du capital pendant la durée). Pas besoin du taux : il est déjà dans votre mensualité. Un prêt immobilier en plusieurs parties ? Ajoutez chaque partie séparément. La mensualité reste la même en euros, donc en argent d’aujourd’hui elle pèse un peu moins chaque année.',
  'debt.opb': 'Tant que vous épargnez, vous la payez avec vos revenus. Le calcul la compte à partir de l’âge de la retraite.',
  'debt.add': 'Ajouter une dette', 'debt.del': 'Supprimer cette dette', 'debt.name': 'Nom de la dette', 'debt.namePh': 'Nom, par exemple Prêt immobilier', 'debt.nameN': 'Dette {n}',
- 'debt.kind': 'Que connaissez-vous ?', 'debt.kM': 'Je connais la mensualité', 'debt.kT': 'Je connais la durée',
- 'debt.owed': 'Reste dû', 'debt.rate': 'Taux par an', 'debt.pm': 'Mensualité', 'debt.yrs': 'Durée restante', 'debt.unitM': '{cur} par mois',
+ 'debt.pm': 'Mensualité', 'debt.yrs': 'Durée restante', 'debt.bal': 'Montant in fine (facultatif)', 'debt.unitM': '{cur} par mois',
+ 'debt.balHint': 'In fine signifie que vous ne remboursez pas cette partie pendant la durée du prêt. Le calcul compte ce montant à la fin comme un seul paiement prélevé sur votre patrimoine. Vous le paierez avec la vente de votre logement ? Laissez alors le champ vide.',
  'debt.in': 'Cette mensualité est-elle déjà dans votre budget mensuel ?', 'debt.inY': 'Oui', 'debt.inN': 'Non, en plus',
  'debt.inHint': 'Si oui, votre budget baisse de cette mensualité dès que la dette est remboursée. Si non, la mensualité s’ajoute à votre budget jusque-là.',
- 'debt.sumEmpty': 'Indiquez ce que vous devez et la mensualité ou la durée pour voir le résultat.',
- 'debt.sum': 'Mensualité {m}, remboursée en {t} (en {yr}). Intérêts totaux : {i}.',
+ 'debt.sumEmpty': 'Indiquez la mensualité et la durée restante pour voir le résultat.',
+ 'debt.sum': 'Vous payez {m} par mois, encore {t} (jusqu’en {yr}).',
+ 'debt.sumBal': 'À la fin, vous payez en plus {v} en une fois.',
+ 'debt.sumOnlyBal': 'Dans {t} (en {yr}), vous payez {v} en une fois.',
  'debt.sumAge': 'Vous aurez alors {a} ans.', 'debt.sumFree': 'Ensuite, il vous faut {m} de moins par mois.',
- 'debt.sumNever': 'Avec {m} par mois, la dette ne diminue pas. Le calcul compte la mensualité jusqu’à la fin.',
- 'debt.m': '{m} mois', 'debt.shareLine': '{n} : {m} par mois, remboursée en {t}', 'debt.shareNever': '{n} : {m} par mois, non remboursée',
+ 'debt.m': '{m} mois', 'debt.shareLine': '{n} : {m} par mois, encore {t}', 'debt.shareBal': ', plus {v} en une fois à la fin', 'debt.shareOnly': '{n} : {v} en une fois dans {t}',
  'ins.debt': 'Dette',
  'rel.15.v': 'Version 15 · novembre 2026',
- 'rel.15.n1': 'Dette : saisissez un prêt immobilier ou un crédit et voyez le coût mensuel et la date de fin'
+ 'rel.15.n1': 'Dette : indiquez la mensualité, la durée restante et un éventuel montant in fine'
 });
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
- 'debt.s': 'Hipoteca o préstamo: coste mensual y cuándo se termina de pagar',
- 'debt.intro': '¿Todavía pagas una hipoteca o un préstamo? Indica lo que aún debes, el interés y la cuota mensual o el plazo restante. El cálculo cuenta la cuota hasta que la deuda esté pagada. La cuota se mantiene igual en euros, así que en dinero de hoy pesa un poco menos cada año.',
+ 'debt.s': 'Hipoteca o préstamo: cuota, plazo y parte sin amortizar',
+ 'debt.intro': '¿Todavía pagas una hipoteca o un préstamo? Indica lo que pagas al mes, cuánto tiempo falta y si una parte no se amortiza durante el plazo. No hace falta el interés: ya está en tu cuota. ¿Una hipoteca con varios tramos? Añade cada tramo por separado. La cuota se mantiene igual en euros, así que en dinero de hoy pesa un poco menos cada año.',
  'debt.opb': 'Mientras ahorras, la pagas con tus ingresos. El cálculo la cuenta a partir de la edad de jubilación.',
  'debt.add': 'Añadir una deuda', 'debt.del': 'Quitar esta deuda', 'debt.name': 'Nombre de la deuda', 'debt.namePh': 'Nombre, por ejemplo Hipoteca', 'debt.nameN': 'Deuda {n}',
- 'debt.kind': '¿Qué sabes?', 'debt.kM': 'Conozco la cuota', 'debt.kT': 'Conozco el plazo',
- 'debt.owed': 'Aún debes', 'debt.rate': 'Interés anual', 'debt.pm': 'Cuota mensual', 'debt.yrs': 'Plazo restante', 'debt.unitM': '{cur} al mes',
+ 'debt.pm': 'Cuota mensual', 'debt.yrs': 'Plazo restante', 'debt.bal': 'Importe sin amortizar (opcional)', 'debt.unitM': '{cur} al mes',
+ 'debt.balHint': 'Sin amortizar significa que no devuelves esa parte durante el plazo. El cálculo cuenta ese importe al final como un único pago de tu patrimonio. ¿Lo pagarás con la venta de tu vivienda? Entonces déjalo vacío.',
  'debt.in': '¿Esta cuota ya está en tu presupuesto mensual?', 'debt.inY': 'Sí', 'debt.inN': 'No, se suma',
  'debt.inHint': 'Si es que sí, tu presupuesto baja en esta cuota cuando la deuda esté pagada. Si no, la cuota se suma a tu presupuesto hasta entonces.',
- 'debt.sumEmpty': 'Indica lo que debes y la cuota o el plazo para ver el resultado.',
- 'debt.sum': 'Cuota {m}, pagada en {t} (en {yr}). Intereses totales: {i}.',
+ 'debt.sumEmpty': 'Indica la cuota y el plazo restante para ver el resultado.',
+ 'debt.sum': 'Pagas {m} al mes, {t} más (hasta {yr}).',
+ 'debt.sumBal': 'Al final pagas además {v} de una vez.',
+ 'debt.sumOnlyBal': 'Dentro de {t} (en {yr}) pagas {v} de una vez.',
  'debt.sumAge': 'Tendrás entonces {a} años.', 'debt.sumFree': 'Después necesitas {m} menos al mes.',
- 'debt.sumNever': 'Con {m} al mes la deuda no se reduce. El cálculo cuenta la cuota hasta el final.',
- 'debt.m': '{m} meses', 'debt.shareLine': '{n}: {m} al mes, pagada en {t}', 'debt.shareNever': '{n}: {m} al mes, no se paga',
+ 'debt.m': '{m} meses', 'debt.shareLine': '{n}: {m} al mes, {t} más', 'debt.shareBal': ', más {v} de una vez al final', 'debt.shareOnly': '{n}: {v} de una vez dentro de {t}',
  'ins.debt': 'Deudas',
  'rel.15.v': 'Versión 15 · noviembre de 2026',
- 'rel.15.n1': 'Deuda: introduce una hipoteca o un préstamo y mira el coste mensual y cuándo se termina de pagar'
+ 'rel.15.n1': 'Deuda: introduce la cuota, el plazo restante y, si lo hay, un importe sin amortizar'
 });
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
@@ -5602,8 +5601,8 @@ Object.assign(I18N.es, {
   function cleanLists(o) {
     var r = { perP: [], perD: [], pots: [], debts: [] };
     if (!o || typeof o !== 'object') return r;
-    (Array.isArray(o.debts) ? o.debts : []).slice(0, 4).forEach(function (x) {
-      if (x) r.debts.push({ n: String(x.n || '').slice(0, 30), a: fin(x.a, 0, 1e8, 0), r: fin(x.r, 0, 30, 0), k: x.k === 't' ? 't' : 'm', m: fin(x.m, 0, 1e6, 0), y: fin(x.y, 0, 60, 0), b: x.b === 0 ? 0 : 1 });
+    (Array.isArray(o.debts) ? o.debts : []).slice(0, 6).forEach(function (x) {
+      if (x) r.debts.push({ n: String(x.n || '').slice(0, 30), m: fin(x.m, 0, 1e6, 0), y: fin(x.y, 0, 60, 0), v: fin(x.v, 0, 1e8, 0), b: x.b === 0 ? 0 : 1 });
     });
     ['perP', 'perD'].forEach(function (k) {
       (Array.isArray(o[k]) ? o[k] : []).slice(0, 12).forEach(function (x) { if (x) r[k].push({ a: fin(x.a, 0, 110, 50), b: fin(x.b, 0, 110, 67), m: fin(x.m, 0, 1e6, 0) }); });
@@ -6009,7 +6008,7 @@ Object.assign(I18N.es, {
     }).join('');
     P.forEach(function (q, i) { potSum(i); });
   }
-  /* schulden: restschuld, rente en maandlast of looptijd; de uitkomst (afbetaald over, totale rente) staat onder elke regel */
+  /* schulden: maandlast, resterende looptijd en eventueel een aflossingsvrij bedrag; de uitkomst staat onder elke regel */
   function durTxt(n) {
     var y = Math.floor(n / 12 + 1e-9), m = Math.round(n - 12 * y);
     if (m === 12) { y++; m = 0; }
@@ -6022,35 +6021,34 @@ Object.assign(I18N.es, {
     var c = debtCalc(q);
     el.classList.toggle('muted', !c.ok);
     if (!c.ok) { el.textContent = t1('debt.sumEmpty'); return; }
-    if (c.never) { el.textContent = t1('debt.sumNever', { m: eur(c.pm) }); return; }
-    var dt = new Date(); dt.setMonth(dt.getMonth() + Math.round(c.n));
-    var s = t1('debt.sum', { m: eur(c.pm), t: durTxt(c.n), yr: dt.getFullYear(), i: eur(c.interest) });
-    if (!two()) s += ' ' + t1('debt.sumAge', { a: Math.round(state.leeftijdPaul + c.n / 12) });
-    if (q.b !== 0) s += ' ' + t1('debt.sumFree', { m: eur(c.pm) });
-    el.textContent = s;
+    var dt = new Date(); dt.setMonth(dt.getMonth() + c.n);
+    var yr = dt.getFullYear(), s = [];
+    if (c.pm > 0) { s.push(t1('debt.sum', { m: eur(c.pm), t: durTxt(c.n), yr: yr })); if (c.v > 0) s.push(t1('debt.sumBal', { v: eur(c.v) })); }
+    else s.push(t1('debt.sumOnlyBal', { v: eur(c.v), t: durTxt(c.n), yr: yr }));
+    if (!two()) s.push(t1('debt.sumAge', { a: Math.round(state.leeftijdPaul + c.n / 12) }));
+    if (q.b !== 0 && c.pm > 0) s.push(t1('debt.sumFree', { m: eur(c.pm) }));
+    el.textContent = s.join(' ');
   }
   function renderDebts() {
     var host = $('debts-list'); if (!host) return;
     var D = lists.debts;
     $('debts-n').hidden = !D.length; $('debts-n').textContent = D.length;
-    $('debt-add').hidden = D.length >= 4;
+    $('debt-add').hidden = D.length >= 6;
     $('debts-opb').hidden = !(state.opbouw && D.length);
     if (D.length) $('debts-box').open = true;
     function opt(i, f, v, lab, cur) { return '<label class="seg-opt"><input type="radio" name="debt-' + f + '-' + i + '" data-dk="' + f + '" data-i="' + i + '" value="' + v + '"' + (cur ? ' checked' : '') + '><span>' + lab + '</span></label>'; }
     host.innerHTML = D.map(function (q, i) {
-      var L = 'data-l="debts" data-i="' + i + '"', id = 'debt-' + i + '-', byT = q.k === 't';
+      var L = 'data-l="debts" data-i="' + i + '"', id = 'debt-' + i + '-';
       return '<div class="pot">' +
         '<div class="pot-top"><input type="text" class="pot-name" id="' + id + 'n" maxlength="30" ' + L + ' data-f="n" value="' + esc(q.n) + '" placeholder="' + esc(t1('debt.namePh')) + '" aria-label="' + esc(t1('debt.name')) + '">' +
         '<button type="button" class="per-x" data-del="debts" data-i="' + i + '" aria-label="' + esc(t1('debt.del')) + '">✕</button></div>' +
-        '<div class="pot-segs"><div class="seg" role="radiogroup" aria-label="' + esc(t1('debt.kind')) + '">' + opt(i, 'k', 'm', t1('debt.kM'), !byT) + opt(i, 'k', 't', t1('debt.kT'), byT) + '</div></div>' +
         '<div class="fields pot-f">' +
-        fldL(id + 'a', t1('debt.owed'), numIn(id + 'a', L + ' data-f="a"', q.a, true), curSym()) +
-        fldL(id + 'r', t1('debt.rate'), numIn(id + 'r', L + ' data-f="r" min="0" max="30"', q.r), '%') +
-        (byT ? fldL(id + 'y', t1('debt.yrs'), numIn(id + 'y', L + ' data-f="y" min="0" max="60"', q.y > 0 ? q.y : ''), t1('u.years'))
-          : fldL(id + 'm', t1('debt.pm'), numIn(id + 'm', L + ' data-f="m"', q.m, true), t1('debt.unitM', { cur: curSym() }))) +
-        '</div>' +
+        fldL(id + 'm', t1('debt.pm'), numIn(id + 'm', L + ' data-f="m"', q.m, true), t1('debt.unitM', { cur: curSym() })) +
+        fldL(id + 'y', t1('debt.yrs'), numIn(id + 'y', L + ' data-f="y" min="0" max="60"', q.y > 0 ? q.y : ''), t1('u.years')) +
+        fldL(id + 'v', t1('debt.bal'), numIn(id + 'v', L + ' data-f="v"', q.v, true), curSym()) +
+        '</div>' + (i === 0 ? '<p class="hint pot-taxh">' + t1('debt.balHint') + '</p>' : '') +
         '<div class="pot-segs"><span class="debt-q">' + t1('debt.in') + '</span><div class="seg" role="radiogroup" aria-label="' + esc(t1('debt.in')) + '">' + opt(i, 'b', '1', t1('debt.inY'), q.b !== 0) + opt(i, 'b', '0', t1('debt.inN'), q.b === 0) + '</div></div>' +
-        '<p class="hint pot-taxh">' + t1('debt.inHint') + '</p><p class="pot-sum" id="debt-sum-' + i + '"></p></div>';
+        (i === 0 ? '<p class="hint pot-taxh">' + t1('debt.inHint') + '</p>' : '') + '<p class="pot-sum" id="debt-sum-' + i + '"></p></div>';
     }).join('');
     D.forEach(function (q, i) { debtSum(i); });
   }
@@ -6066,7 +6064,7 @@ Object.assign(I18N.es, {
       var v = e.value === '' ? (keep ? NaN : 0) : numOf(e);
       if (!isFinite(v)) return;
       if (f === 'x') v = Math.max(0, Math.min(100, v));
-      if (l === 'debts') { if (f === 'r') v = Math.max(0, Math.min(30, v)); else if (f === 'y') v = Math.max(0, Math.min(60, v)); }
+      if (l === 'debts' && f === 'y') v = Math.max(0, Math.min(60, v));
       it[f] = v;
     }
     if (l === 'pots') potSum(i); else if (l === 'debts') debtSum(i); else perWarn(l.slice(3));
@@ -6081,7 +6079,7 @@ Object.assign(I18N.es, {
   document.addEventListener('change', function (ev) {
     var e = ev.target, f = e.getAttribute && e.getAttribute('data-dk'); if (!f || !e.checked) return;
     var it = lists.debts[parseInt(e.getAttribute('data-i'), 10)]; if (!it) return;
-    if (f === 'k') it.k = e.value === 't' ? 't' : 'm'; else it.b = e.value === '0' ? 0 : 1;
+    if (f === 'b') it.b = e.value === '0' ? 0 : 1;
     renderDebts(); update();
   });
   document.addEventListener('click', function (ev) {
@@ -6093,10 +6091,10 @@ Object.assign(I18N.es, {
       return;
     }
     if (b.id === 'debt-add') {
-      if (lists.debts.length >= 4) return;
-      lists.debts.push({ n: '', a: 0, r: 3.5, k: 'm', m: 0, y: 0, b: 1 });
+      if (lists.debts.length >= 6) return;
+      lists.debts.push({ n: '', m: 0, y: 0, v: 0, b: 1 });
       renderDebts(); update();
-      var dn = $('debt-' + (lists.debts.length - 1) + '-a'); if (dn) dn.focus();
+      var dn = $('debt-' + (lists.debts.length - 1) + '-m'); if (dn) dn.focus();
       return;
     }
     if (b.classList.contains('wk-tog')) {
@@ -7248,7 +7246,8 @@ var TRK = {
     L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
     lists.debts.forEach(function (q, i) {
       var c = debtCalc(q); if (!c.ok) return;
-      L.push(t1(c.never ? 'debt.shareNever' : 'debt.shareLine', { n: debtName(q, i), m: eur(c.pm), t: c.never ? '' : durTxt(c.n) }));
+      L.push(c.pm > 0 ? t1('debt.shareLine', { n: debtName(q, i), m: eur(c.pm), t: durTxt(c.n) }) + (c.v > 0 ? t1('debt.shareBal', { v: eur(c.v) }) : '')
+        : t1('debt.shareOnly', { n: debtName(q, i), v: eur(c.v), t: durTxt(c.n) }));
     });
     L.push(t1('pl.r.end') + ': ' + fmtAge(state.eindleeftijd));
     if (adv) L.push(t1('pl.r.c90') + ': ' + eur(adv.c90));
@@ -7674,7 +7673,7 @@ var TRK = {
       'Work income (net): ' + both(wk('P'), wk('D')));
     lists.debts.forEach(function (q, i) {
       var c = debtCalc(q); if (!c.ok) return;
-      L.push('Debt ' + (i + 1) + ': owed ' + money(q.a) + ' at ' + q.r + '%, payment ' + money(c.pm) + '/m, ' + (c.never ? 'not paid off' : 'paid off in ' + Math.round(c.n) + ' months') + ', ' + (q.b !== 0 ? 'inside the monthly budget' : 'on top of the monthly budget'));
+      L.push('Debt ' + (i + 1) + ': payment ' + money(c.pm) + '/m for ' + Math.round(c.n) + ' months' + (c.v > 0 ? ', interest-only amount ' + money(c.v) + ' at the end' : '') + ', ' + (q.b !== 0 ? 'inside the monthly budget' : 'on top of the monthly budget'));
     });
     lists.pots.forEach(function (q, i) {
       L.push('Extra pot ' + (i + 1) + ': ' + (q.k === 'l' ? 'lump sum ' + money(q.a) + ' at ' + ag(q.f) : money(q.a) + '/m from ' + ag(q.f) + (q.u > 0 ? ' until ' + ag(q.u) : ' for life')) + ', tax ' + (q.x || 0) + '%' + (tw ? ', ' + (q.w ? 'partner' : 'person 1') : ''));
