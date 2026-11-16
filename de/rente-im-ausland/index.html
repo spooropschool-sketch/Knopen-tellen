@@ -1865,6 +1865,19 @@ html.pro-locked .curve-f .seg-opt:not(:first-child) .curve-img { opacity: .8; }
 .kn-sep img { width: 22px; height: 22px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
 html.is-empty .kn-sep.nd { display: none; }
 @media print { .kn-sep { display: none !important; } }
+/* kladblok: plaatje bij de kop, en het sluitkruisje rechtsonder (daar zit ook de knop waarmee je het opent, zodat je met je duim open- en dichtgaat) */
+.nt-top { justify-content: flex-start; gap: 12px; }
+.nt-spot { flex: 0 0 auto; height: 58px; width: auto; display: block; }
+.nt-end { display: flex; align-items: flex-end; gap: 12px; }
+.nt-end .hint { flex: 1 1 auto; margin: 0; }
+.nt-close { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); background: var(--accent-soft); color: var(--ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.35); }
+.nt-close:hover { background: var(--surface2); }
+.nt-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.nt-close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+@media (max-width: 560px) {
+  .nt-pop.sheet .nt-close { width: 50px; height: 50px; }
+  .nt-pop.sheet .nt-end { margin: 0 -8px -6px 0; }   /* precies boven de kladblokknop: 18 px van rechts en 92 px van onderen */
+}
 /* onderschrift onder het wiel: alle teksten liggen op elkaar, alleen de gekozen is zichtbaar.
    Zo is de ruimte altijd die van het langste onderschrift (op de telefoon twee regels) en schuift de pagina niet mee met het wiel. */
 .slot-sub { display: grid; min-height: 3.1em; min-height: 2lh; }
@@ -2200,7 +2213,7 @@ html.is-empty .kn-sep.nd { display: none; }
 
 <button type="button" class="nt-fab" id="nt-fab" data-t-aria="nt.open" aria-expanded="false" aria-controls="nt-pop" aria-label="Notizen öffnen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h3.5"/></svg><span class="nt-dot" id="nt-dot" hidden></span></button>
 <div class="nt-pop" id="nt-pop" role="dialog" aria-labelledby="nt-h" hidden>
-  <div class="nt-top"><h2 id="nt-h" data-t="nt.h">Notizen</h2><button class="fb-x" type="button" id="nt-close" data-t-aria="b.close" aria-label="Schließen">✕</button></div>
+  <div class="nt-top"><img loading="lazy" decoding="async" class="nt-spot" src="/img/kladblok.webp" alt="" width="131" height="150"><h2 id="nt-h" data-t="nt.h">Notizen</h2></div>
   <p class="nt-sub" data-t="nt.sub">Fragen an sich selbst, Gedanken und offene Punkte. Praktisch neben Ihrem Plan.</p>
   <div class="nt-bar" role="group" data-t-aria="nt.add" aria-label="Hinzufügen">
     <button type="button" class="btn ghost sm" data-nt="q" data-t="nt.q">+ Frage</button>
@@ -2217,7 +2230,7 @@ html.is-empty .kn-sep.nd { display: none; }
     <p data-t="nt.sure">Alle Notizen löschen? Das lässt sich nicht rückgängig machen.</p>
     <div class="btn-row"><button type="button" class="btn ghost sm" id="nt-no" data-t="nt.no">Abbrechen</button><button type="button" class="btn primary sm" id="nt-yes" data-t="nt.yes">Ja, leeren</button></div>
   </div>
-  <p class="hint" data-t="nt.priv">Ihre Notizen bleiben in diesem Browser auf diesem Gerät. Sie werden nicht geteilt und nirgendwohin gesendet.</p>
+  <div class="nt-end"><p class="hint" data-t="nt.priv">Ihre Notizen bleiben in diesem Browser auf diesem Gerät. Sie werden nicht geteilt und nirgendwohin gesendet.</p><button class="nt-close" type="button" id="nt-close" data-t-aria="b.close" aria-label="Schließen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button></div>
 </div>
 
 <div class="modal" id="rel" hidden>
@@ -5359,7 +5372,10 @@ Object.assign(I18N.en, {
  'debt.m': '{m} months', 'debt.shareLine': '{n}: {m} a month, {t} to go', 'debt.shareBal': ', plus {v} in one go at the end', 'debt.shareOnly': '{n}: {v} in one go in {t}',
  'ins.debt': 'Debt',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Debt: count your mortgage or loan, with monthly payment, term and any interest-only part. A Pro feature: tap the lock and say whether you want it.'
+ 'rel.15.n1': 'Debt: count your mortgage or loan, with monthly payment, term and any interest-only part. A Pro feature: tap the lock and say whether you want it.',
+ 'rel.16.v': 'Version 16 · November 2026',
+ 'rel.16.n1': 'New photos throughout the app: at the top of each tab, with your result and in the steps.',
+ 'rel.16.n2': 'At the start you pick an age group instead of your exact age.'
 });
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
@@ -5379,7 +5395,10 @@ Object.assign(I18N.nl, {
  'debt.m': '{m} maanden', 'debt.shareLine': '{n}: {m} per maand, nog {t}', 'debt.shareBal': ', plus {v} in één keer aan het einde', 'debt.shareOnly': '{n}: {v} in één keer over {t}',
  'ins.debt': 'Schuld',
  'rel.15.v': 'Versie 15 · november 2026',
- 'rel.15.n1': 'Schuld: tel je hypotheek of lening mee, met maandlast, looptijd en een eventueel aflossingsvrij deel. Een Pro-functie: tik op het slotje en laat weten of je dit wilt.'
+ 'rel.15.n1': 'Schuld: tel je hypotheek of lening mee, met maandlast, looptijd en een eventueel aflossingsvrij deel. Een Pro-functie: tik op het slotje en laat weten of je dit wilt.',
+ 'rel.16.v': 'Versie 16 · november 2026',
+ 'rel.16.n1': 'Nieuwe foto’s door de hele app: bovenaan elk tabblad, bij je uitkomst en bij de stappen.',
+ 'rel.16.n2': 'Aan het begin kies je een leeftijdsgroep in plaats van je exacte leeftijd.'
 });
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
@@ -5399,7 +5418,10 @@ Object.assign(I18N.de, {
  'debt.m': '{m} Monate', 'debt.shareLine': '{n}: {m} pro Monat, noch {t}', 'debt.shareBal': ', dazu am Ende {v} auf einmal', 'debt.shareOnly': '{n}: {v} auf einmal, Restlaufzeit {t}',
  'ins.debt': 'Schulden',
  'rel.15.v': 'Version 15 · November 2026',
- 'rel.15.n1': 'Schulden: Hypothek oder Kredit mitrechnen, mit Rate, Laufzeit und einem etwaigen tilgungsfreien Teil. Eine Pro-Funktion: Tippen Sie auf das Schloss und sagen Sie, ob Sie sie wollen.'
+ 'rel.15.n1': 'Schulden: Hypothek oder Kredit mitrechnen, mit Rate, Laufzeit und einem etwaigen tilgungsfreien Teil. Eine Pro-Funktion: Tippen Sie auf das Schloss und sagen Sie, ob Sie sie wollen.',
+ 'rel.16.v': 'Version 16 · November 2026',
+ 'rel.16.n1': 'Neue Fotos in der ganzen App: oben auf jedem Tab, bei Ihrem Ergebnis und in den Schritten.',
+ 'rel.16.n2': 'Zu Beginn wählen Sie eine Altersgruppe statt Ihres genauen Alters.'
 });
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
@@ -5419,7 +5441,10 @@ Object.assign(I18N.fr, {
  'debt.m': '{m} mois', 'debt.shareLine': '{n} : {m} par mois, encore {t}', 'debt.shareBal': ', plus {v} en une fois à la fin', 'debt.shareOnly': '{n} : {v} en une fois dans {t}',
  'ins.debt': 'Dette',
  'rel.15.v': 'Version 15 · novembre 2026',
- 'rel.15.n1': 'Dette : comptez votre prêt immobilier ou crédit, avec mensualité, durée et une éventuelle partie in fine. Une fonction Pro : touchez le cadenas et dites si vous la voulez.'
+ 'rel.15.n1': 'Dette : comptez votre prêt immobilier ou crédit, avec mensualité, durée et une éventuelle partie in fine. Une fonction Pro : touchez le cadenas et dites si vous la voulez.',
+ 'rel.16.v': 'Version 16 · novembre 2026',
+ 'rel.16.n1': 'De nouvelles photos dans toute l’application : en haut de chaque onglet, avec votre résultat et dans les étapes.',
+ 'rel.16.n2': 'Au début, vous choisissez une tranche d’âge au lieu de votre âge exact.'
 });
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
@@ -5439,7 +5464,10 @@ Object.assign(I18N.es, {
  'debt.m': '{m} meses', 'debt.shareLine': '{n}: {m} al mes, {t} más', 'debt.shareBal': ', más {v} de una vez al final', 'debt.shareOnly': '{n}: {v} de una vez dentro de {t}',
  'ins.debt': 'Deudas',
  'rel.15.v': 'Versión 15 · noviembre de 2026',
- 'rel.15.n1': 'Deuda: cuenta tu hipoteca o préstamo, con cuota, plazo y una posible parte sin amortizar. Una función Pro: toca el candado y di si la quieres.'
+ 'rel.15.n1': 'Deuda: cuenta tu hipoteca o préstamo, con cuota, plazo y una posible parte sin amortizar. Una función Pro: toca el candado y di si la quieres.',
+ 'rel.16.v': 'Versión 16 · noviembre de 2026',
+ 'rel.16.n1': 'Fotos nuevas en toda la app: arriba en cada pestaña, junto a tu resultado y en los pasos.',
+ 'rel.16.n2': 'Al empezar eliges un grupo de edad en lugar de tu edad exacta.'
 });
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
@@ -7743,7 +7771,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 16, n: 2, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
