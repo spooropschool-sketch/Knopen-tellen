@@ -1,5 +1,5 @@
 /* Buttons: offline support. Network first, so updates arrive; cache as fallback. */
-var V = 'buttons-v20';
+var V = 'buttons-v21';
 var CORE = ['/fonts/fraunces-600.woff2', '/fonts/inter-400.woff', '/fonts/inter-500.woff', '/fonts/inter-600.woff', '/fonts/inter-700.woff', '/', '/nl/', '/de/', '/fr/', '/es/', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/img/hero-overzicht.webp', '/img/hero-inzicht.webp', '/img/hero-over.webp', '/img/uitkomst-ruim.webp', '/img/uitkomst-krap.webp', '/img/uitkomst-tekort.webp', '/img/knoop-sage.webp', '/img/knoop-rose.webp', '/img/knoop-cream.webp', '/img/knoop-terra.webp', '/img/knoop-slate.webp', '/img/knoop-butter.webp', '/img/knoop-lilac.webp', '/img/knoop-caramel.webp'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
