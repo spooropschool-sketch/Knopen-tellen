@@ -1801,8 +1801,72 @@ html.pro-locked #pots-box > summary, html.pro-locked #debts-box > summary, html.
 .share-plan { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: -4px 0 14px; }
 .share-plan svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 html.is-empty .share-plan { display: none; }
+/* ---------- beeldreeks v2: één tafel, één licht ---------- */
+:root .hero-art img, :root .pt-art img, :root .modal-hero img, :root .ec-img img { filter: none !important; }
+#intro .modal-hero img { object-position: 50% 42%; }
+/* welkom: leeftijd als drie knoppen */
+.agebox .age-seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-self: stretch; width: 100%; }
+.agebox .age-seg .seg-opt span { padding: 12px 4px; text-align: center; font-size: 15.5px; font-variant-numeric: tabular-nums; }
+.age-note { margin: 2px 0 0; font-size: 12.5px; line-height: 1.4; color: var(--muted); text-align: center; }
+/* uitkomst: kansring en buidel */
+.status .st-vis { display: flex; align-items: center; justify-content: center; gap: 2px; min-width: 0; }
+.status .gauge { width: 206px; max-width: 206px; flex: 0 0 auto; }
+.st-pouch { width: 122px; height: auto; flex: 0 0 auto; }
+.st-pouch[hidden] { display: none; }
+@media (min-width: 1021px) { .status { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); } .status .st-vis { grid-row: span 2; } }
+@media (max-width: 1020px) { .status .st-vis { justify-self: center; } .status .gauge { width: 188px; max-width: 188px; } .st-pouch { width: 110px; } }
+@media (max-width: 420px) { .status .gauge { width: 172px; max-width: 172px; } .st-pouch { width: 100px; } }
+.kring { position: relative; width: 100%; aspect-ratio: 1 / 1; }
+.kring .kr-b { position: absolute; width: 14%; height: auto; filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .38)); }
+.kring .kr-e { position: absolute; width: 11.5%; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 50%; border: 1.5px dashed color-mix(in srgb, var(--muted) 75%, transparent); box-sizing: border-box; }
+.kring .kr-c { position: absolute; inset: 23%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.kring .kr-c b { font-family: var(--f-display); font-weight: 600; font-size: 36px; line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+.kring .kr-c span { margin-top: 5px; font-size: 11.5px; line-height: 1.2; color: var(--muted); }
+@media (max-width: 420px) { .kring .kr-c b { font-size: 30px; } }
+/* stappen met voorwerpen */
+.stepper .num { position: relative; width: 46px !important; height: 46px !important; background: var(--surface) !important; border: 1px solid var(--line) !important; color: transparent !important; box-shadow: none !important; }
+.stepper .num img { position: absolute; left: 5px; top: 5px; width: calc(100% - 10px); height: calc(100% - 10px); object-fit: contain; }
+.stepper .num i { position: absolute; right: -5px; bottom: -5px; min-width: 18px; height: 18px; padding: 0 3px; box-sizing: border-box; border-radius: 9px; background: var(--surface2); border: 1px solid var(--line); color: var(--ink2); font: 700 10.5px/16px var(--f-body); font-style: normal; text-align: center; }
+.stepper button[aria-current="step"] .num { border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-soft) !important; background: var(--surface2) !important; }
+.stepper button[aria-current="step"] .num i { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.stepper button.done .num::after { display: none !important; }
+.stepper button.done .num i { font-size: 0; }
+.stepper button.done .num i::after { content: "\2713"; font-size: 10.5px; }
+.step-head.has-spot { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; align-items: center; }
+.step-head.has-spot .step-spot { grid-column: 1; grid-row: 1 / span 2; width: 64px; height: 58px; object-fit: contain; }
+.step-head.has-spot .step-k, .step-head.has-spot h2 { grid-column: 2; }
+.step-head.has-spot .sub { grid-column: 1 / -1; }
+/* levensstijl als stapel: 3, 4 en 7 knopen op dezelfde schaal */
+.lvl-b .lvl-pic { display: flex; align-items: flex-end; height: 62px; margin-bottom: 2px; }
+.lvl-b .lvl-img { display: block; width: auto; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .2)); }
+.lvl-b .lvl-img.l1 { height: 30px; } .lvl-b .lvl-img.l2 { height: 42px; } .lvl-b .lvl-img.l3 { height: 60px; }
+@media (max-width: 560px) {
+  .lvl-b { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; align-items: center; }
+  .lvl-b .lvl-pic { grid-column: 1; grid-row: 1 / span 3; margin: 0; justify-content: center; }
+  .lvl-b > b, .lvl-b .lvl-a, .lvl-b .lvl-e { grid-column: 2; }
+}
+/* uitgavenverloop: knoopmaat */
+.curve-f .seg-opt .curve-img { display: block; width: 92%; max-width: 104px; height: 18px; object-fit: contain; margin: 0 auto 6px; }
+html.pro-locked .curve-f .seg-opt:not(:first-child) .curve-img { opacity: .8; }
+/* één voorwerp per kaart */
+.nlink .nb { width: 60px !important; height: 46px !important; left: 12px !important; }
+.nlink .nb img, .panel-head.has-nb .nb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.next-grid .nlink { padding-left: 86px !important; }
+.panel-head.has-nb { display: grid !important; grid-template-columns: 64px minmax(0, 1fr) !important; align-items: center; column-gap: 14px; }
+.panel-head.has-nb .nb { grid-column: 1 !important; grid-row: 1 / span 2 !important; width: 64px !important; height: 50px !important; align-self: center; }
+.panel-head.has-nb > h2, .panel-head.has-nb > .sub { grid-column: 2; }
+.about-grid .panel-head.has-nb { margin-bottom: 6px; }
+.pl-ic.pl-ic-img { width: 74px !important; height: 56px !important; background: none !important; border-radius: 0 !important; }
+.pl-ic.pl-ic-img img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.support-card .sup-spot { display: block; width: 78px; height: auto; margin: 0 auto -4px; }
+/* scheiding: gestippelde lijn met één knoop */
+.kn-sep { display: flex; align-items: center; gap: 12px; margin: 0 6px; align-self: stretch; }
+.kn-sep::before, .kn-sep::after { content: ""; flex: 1; height: 0; border-top: 2px dashed color-mix(in srgb, var(--copper) 50%, transparent); }
+.kn-sep img { width: 22px; height: 22px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+html.is-empty .kn-sep.nd { display: none; }
+@media print { .kn-sep { display: none !important; } }
 </style>
-<link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -1845,7 +1909,7 @@ html.is-empty .share-plan { display: none; }
         <a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden>Start filling in</a>
         <div class="ov-tiles" id="ov-tiles" hidden></div>
       </div>
-      <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/buidel.jpg" alt="A leather pouch with buttons rolling across a wooden table" data-t-alt="alt.pouch"></div>
+      <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/hero-overzicht.webp" alt="A hand stacking pastel buttons next to an open leather pouch" data-t-alt="alt.pouch" width="1200" height="800" style="object-position: 50% 42%"></div>
     </header>
     <section class="card opb-card" id="opb-card" aria-live="polite" hidden></section>
     <div class="home-grid">
@@ -1858,12 +1922,13 @@ html.is-empty .share-plan { display: none; }
       </aside>
       <div class="home-main">
         <div class="card status" id="status-card" aria-live="polite">
-        <div class="gauge" id="gauge"></div>
+        <div class="st-vis"><div class="gauge" id="gauge"></div><img loading="lazy" decoding="async" class="st-pouch" id="st-pouch" src="/img/uitkomst-ruim.webp" alt="" width="480" height="587" hidden></div>
         <div class="verdict" id="verdict"></div>
         <div class="srcline" data-src="le,mkt"></div>
       </div>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
         <section class="card support-card needs-data" id="support-ov" hidden></section>
+        <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
         <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">How your savings develop</h2><p class="sub" id="fan-sub"></p></div>
         <div class="fan-head">
@@ -1906,12 +1971,13 @@ html.is-empty .share-plan { display: none; }
         </div>
         <div class="srcline" data-src="sp,pen"></div>
       </section>
+        <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
         <section class="next" aria-labelledby="next-h">
         <h2 class="more" id="next-h" data-t="next.h">More insight</h2>
         <div class="next-grid">
-          <a class="card nlink" href="#insight" data-scroll="sec-pf"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><b data-t="next.pf">Compare portfolios</b><span data-t="next.pfS">Defensive, balanced and aggressive side by side</span></a>
-          <a class="card nlink" href="#insight" data-scroll="sec-ladder"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.4"/><circle r="6" fill="none" stroke="#6FAF8C" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="2.2" r="1.1" fill="#6FAF8C"/></svg></span><b data-t="next.ld">A different monthly budget</b><span data-t="next.ldS">What a bit more or less per month takes</span></a>
-          <a class="card nlink" href="#insight" data-scroll="sec-koop"><span class="nb"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><b data-t="next.kp">Purchasing power by country</b><span data-t="next.kpS">What your budget is worth elsewhere</span></a>
+          <a class="card nlink" href="#insight" data-scroll="sec-pf"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/portefeuilles.webp" alt=""></span><b data-t="next.pf">Compare portfolios</b><span data-t="next.pfS">Defensive, balanced and aggressive side by side</span></a>
+          <a class="card nlink" href="#insight" data-scroll="sec-ladder"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/stijl-gemiddeld.webp" alt=""></span><b data-t="next.ld">A different monthly budget</b><span data-t="next.ldS">What a bit more or less per month takes</span></a>
+          <a class="card nlink" href="#insight" data-scroll="sec-koop"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/koopkracht.webp" alt=""></span><b data-t="next.kp">Purchasing power by country</b><span data-t="next.kpS">What your budget is worth elsewhere</span></a>
         </div>
       </section>
         <p class="fb-line"><span data-t="fb.line">Got a tip or an addition? We’d love to hear it.</span> <button class="btn ghost fb-open" type="button" data-cat="idea"><span aria-hidden="true">✎</span> <span data-t="fb.btn">Share a tip</span></button></p>
@@ -1932,7 +1998,7 @@ html.is-empty .share-plan { display: none; }
       </section>
     <div class="snel-home" hidden>
       <section class="card snel" id="snel" aria-labelledby="snel-h">
-        <div class="ec-img"><img loading="lazy" decoding="async" src="/img/boekje.jpg" alt="An open notebook with buttons in neat rows" data-t-alt="alt.notebook"></div>
+        <div class="ec-img"><img loading="lazy" decoding="async" src="/img/hero-over.webp" alt="An open notebook beside buttons laid out like a small bar chart" data-t-alt="alt.notebook" width="1200" height="800"></div>
         <div class="snel-body">
           <span class="eyebrow" data-t="q.eyebrow">Quick estimate</span>
           <h2 id="snel-h" data-t="q.h">What do you need?</h2>
@@ -1946,7 +2012,7 @@ html.is-empty .share-plan { display: none; }
             <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">How do you want to live later?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="How do you want to live later?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Guide amounts per person in today’s money, based on the Dutch Nibud minimum (2025) and CBS spending by income, converted to 2025. For two people we use 1.4 times, because you share housing costs. For other euro countries we scale by price levels. Averages, not advice. You can change the amount below.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">What would you like to spend each month?</span><span class="opb-q" data-t="f.budgetOpb">What do you want to spend per month later?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ net per month</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">How does your spending change later?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Research shows that people spend differently in different stages of life. That is why you choose here how your spending develops later.</p>
-              <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="How does your spending change later?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><span data-t="curve.o0">Flat</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><span data-t="curve.o1">Typical</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><span data-t="curve.o2">Falling faster</span><small class="curve-cap" data-cap="2"></small></span></label></div>
+              <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="How does your spending change later?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-vlak.webp" alt=""><span data-t="curve.o0">Flat</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-typisch.webp" alt=""><span data-t="curve.o1">Typical</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-sterk.webp" alt=""><span data-t="curve.o2">Falling faster</span><small class="curve-cap" data-cap="2"></small></span></label></div>
               <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">How much have you saved or invested so far?</span> <span class="opt" data-t="q.optional">(optional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
@@ -1987,29 +2053,32 @@ html.is-empty .share-plan { display: none; }
           <button type="button" class="chip-btn" data-jump="sec-koop" data-t="next.kp">Purchasing power by country</button>
         </div>
       </div>
-      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/weegschaal.jpg" alt="Buttons in a brass balance scale, weighing one choice against another" data-t-alt="alt.stacks"></div>
+      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/hero-inzicht.webp" alt="Buttons in a brass balance scale, weighing one choice against another" data-t-alt="alt.stacks" width="1200" height="800" style="object-position: 50% 38%"></div>
     </header>
     <section class="card panel" id="sec-plans" aria-labelledby="pl-h">
-      <div class="panel-head has-pro"><span class="pro-tag corner" data-pro="plans"></span><h2 id="pl-h" data-t="pl.h">Compare two plans</h2><p class="sub" data-t="pl.sub">Save what you have filled in as plan A or B, change something and see the difference side by side.</p></div>
+      <div class="panel-head has-nb has-pro"><span class="pro-tag corner" data-pro="plans"></span><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/plannen-vergelijken.webp" alt=""></span><h2 id="pl-h" data-t="pl.h">Compare two plans</h2><p class="sub" data-t="pl.sub">Save what you have filled in as plan A or B, change something and see the difference side by side.</p></div>
       <div id="plans"></div>
     </section>
     <div class="card empty-note"><p data-t="iz.empty">First enter what you’d like to spend each month under <a href="#overview">Overview</a>; the comparisons then appear here.</p></div>
+    <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
     <section class="card panel needs-data" id="sec-pf" aria-labelledby="pf-h">
-      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#8DB8E8" stroke="#5E8FC6" stroke-width="1.4"/><circle r="6" fill="none" stroke="#5E8FC6" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#5E8FC6"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#5E8FC6"/><circle cx="2.2" cy="2.2" r="1.1" fill="#5E8FC6"/></svg></span><h2 id="pf-h" data-t="pf.h">How the portfolios behave</h2><p class="sub" id="pf-sub"></p></div>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/portefeuilles.webp" alt=""></span><h2 id="pf-h" data-t="pf.h">How the portfolios behave</h2><p class="sub" id="pf-sub"></p></div>
       <div class="cmp" id="pf"></div>
       <h3 class="subh" id="pf-tbl-h"></h3>
       <div class="tbl" id="pf-tbl"></div>
       <p class="hint" id="pf-note"></p>
       <div class="srcline" data-src="mkt,tax"></div>
     </section>
+    <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
     <section class="card panel needs-data" id="sec-ladder" aria-labelledby="ld-h">
-      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#9ED3B4" stroke="#6FAF8C" stroke-width="1.4"/><circle r="6" fill="none" stroke="#6FAF8C" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#6FAF8C"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#6FAF8C"/><circle cx="2.2" cy="2.2" r="1.1" fill="#6FAF8C"/></svg></span><h2 id="ld-h" data-t="ld.h">Capital needed per monthly budget</h2><p class="sub" data-t="ld.sub">What if you spent a little more or less? Same assumptions, only the monthly budget changes. The middle row is what you’ve entered now.</p></div>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/stijl-gemiddeld.webp" alt=""></span><h2 id="ld-h" data-t="ld.h">Capital needed per monthly budget</h2><p class="sub" data-t="ld.sub">What if you spent a little more or less? Same assumptions, only the monthly budget changes. The middle row is what you’ve entered now.</p></div>
       <div class="ladder" id="ladder"></div>
       <div class="lnote"><span><span class="capkey"></span><span data-t="ld.cap">Starting capital</span></span><span><span class="st ok">✓</span> <span data-t="ld.ok">feasible</span></span><span><span class="st no">✕</span> <span data-t="ld.no">short</span></span></div>
       <div class="srcline" data-src="mkt,sp,tax"></div>
     </section>
+    <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
     <section class="card panel needs-data" id="sec-koop" aria-labelledby="kp-h">
-      <div class="panel-head has-nb has-pro"><span class="pro-tag corner" data-pro="purchasing-power"></span><span class="nb" aria-hidden="true"><svg viewBox="-10 -10 20 20"><circle r="8.6" fill="#F2A97E" stroke="#D47F50" stroke-width="1.4"/><circle r="6" fill="none" stroke="#D47F50" stroke-width=".9" opacity=".7"/><circle cx="-2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="-2.2" r="1.1" fill="#D47F50"/><circle cx="-2.2" cy="2.2" r="1.1" fill="#D47F50"/><circle cx="2.2" cy="2.2" r="1.1" fill="#D47F50"/></svg></span><h2 id="kp-h" data-t="kp.h">What your budget is worth by country</h2><p class="sub" id="kp-sub"></p></div>
+      <div class="panel-head has-nb has-pro"><span class="pro-tag corner" data-pro="purchasing-power"></span><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/koopkracht.webp" alt=""></span><h2 id="kp-h" data-t="kp.h">What your budget is worth by country</h2><p class="sub" id="kp-sub"></p></div>
       <div class="rank" id="koop"></div>
       <p class="insight" id="koop-insight"></p>
       <p class="hint" id="koop-note"></p>
@@ -2027,8 +2096,9 @@ html.is-empty .share-plan { display: none; }
           <button class="btn ghost" type="button" id="btn-tour" data-t="about.tour">Start the tour</button>
         </div>
       </div>
-      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/over.jpg" alt="An open notebook with buttons in neat rows" data-t-alt="alt.notebook"></div>
+      <div class="pt-art"><img loading="lazy" decoding="async" src="/img/hero-over.webp" alt="An open notebook beside buttons laid out like a small bar chart" data-t-alt="alt.notebook" width="1200" height="800" style="object-position: 50% 50%"></div>
     </header>
+    <div class="kn-sep" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
     <div class="about-grid">
       <section class="card panel faq" id="faq" aria-labelledby="ab-faq">
       <h2 id="ab-faq" data-t="faq.h">Frequently asked questions</h2>
@@ -2042,11 +2112,11 @@ html.is-empty .share-plan { display: none; }
       <details class="faq-i"><summary data-t="faq.q6">Is this financial advice?</summary><div class="faq-a" data-t="faq.a6"><p>No. Button Counter is a general calculation tool that gives estimates based on simplified rules and assumptions. It does not give advice about your personal situation. Check official sources and consult an independent, licensed adviser before you make important financial decisions.</p></div></details>
     </section>
       <section class="card panel" aria-labelledby="ab-c">
-      <h2 id="ab-c" data-t="about.ctryH">Your country in Button Counter</h2>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/koopkracht.webp" alt=""></span><h2 id="ab-c" data-t="about.ctryH">Your country in Button Counter</h2></div>
       <div id="ctry-facts"></div>
     </section>
       <section class="card panel fb-card" aria-labelledby="ab-fb">
-      <h2 id="ab-fb" data-t="fb.aboutH">Help make Button Counter better</h2>
+      <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/tip-briefje.webp" alt=""></span><h2 id="ab-fb" data-t="fb.aboutH">Help make Button Counter better</h2></div>
       <p data-t="fb.aboutP">Missing a rule for your country, spotted an error, or have an idea? Tell us. Every tip helps us keep Button Counter right for everyone.</p>
       <div class="btn-row"><button class="btn primary fb-open" type="button" data-cat="idea" data-t="fb.btn">Share a tip</button></div>
     </section>
@@ -2073,7 +2143,7 @@ html.is-empty .share-plan { display: none; }
 <div class="modal" id="intro" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h0" id="intro-card">
     <div class="modal-hero">
-      <img loading="lazy" decoding="async" src="/img/over.jpg" alt="An open notebook with buttons in neat rows" data-t-alt="alt.notebook">
+      <img loading="lazy" decoding="async" src="/img/hero-overzicht.webp" alt="A hand stacking pastel buttons next to an open leather pouch" data-t-alt="alt.pouch" width="1200" height="800">
       <span class="modal-brand"><svg class="bmark" viewBox="-20 -20 40 40" aria-hidden="true"><circle r="18" class="bm-o"/><circle r="12.5" class="bm-r"/><circle cx="-4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="-4.4" r="2.3" class="bm-h"/><circle cx="-4.4" cy="4.4" r="2.3" class="bm-h"/><circle cx="4.4" cy="4.4" r="2.3" class="bm-h"/><path d="M-4.4 -4.4L4.4 4.4M4.4 -4.4L-4.4 4.4" class="bm-t"/></svg><span class="wordmark" id="intro-brand" data-t-en="brand">Button Counter</span></span>
     </div>
     <div class="modal-body intro-s0" id="intro-s0">
@@ -2092,9 +2162,9 @@ html.is-empty .share-plan { display: none; }
       <div class="about-body intro-about" data-t="about.body"><p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p><p>It started with my own research into the financial situation of my partner and me. Being able to tweak variables showed me which strategy suits us best for defining and reaching a desired financial situation. I want to give you that same insight.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but above all about what you can do with it.</p></div>
       <h2 id="intro-h" data-t="intro.ask">What are you curious about?</h2>
       <p class="sub" data-t="intro.promise">Is it enough? That’s what we work out, with no sales pitch and a source for every figure.</p>
-      <div class="agebox" id="agebox"><label class="age-q" for="age-r" data-t="age.q">How old are you?</label><div class="age-read"><b id="age-v">50</b> <span data-t="u.years">years</span></div>
-        <input type="range" id="age-r" min="20" max="65" step="1" value="50" data-t-aria="age.aria" aria-label="Your age">
-        <div class="age-zones" aria-hidden="true"><span data-z="0">20–35</span><span data-z="1">35–50</span><span data-z="2">50–65+</span></div></div>
+      <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Roughly how old are you?</span>
+        <div class="seg seg3 age-seg" role="radiogroup" aria-labelledby="age-q"><label class="seg-opt"><input type="radio" name="age-band" value="0"><span>20–34</span></label><label class="seg-opt"><input type="radio" name="age-band" value="1"><span>35–49</span></label><label class="seg-opt"><input type="radio" name="age-band" value="2"><span>50+</span></label></div>
+        <p class="age-note" data-t="age.note">An age group is enough. You can enter your exact age later, if you like.</p></div>
       <div class="slot" id="slot">
         <div class="slot-machine">
           <div class="slot-window" id="slot-window" tabindex="0" role="spinbutton" data-t-aria="slot.pick" aria-valuemin="1" aria-valuemax="5" aria-label="Choose a question">
@@ -2390,7 +2460,7 @@ I18N.en = {
   'brand': 'Button Counter',
   'brand.aria': 'Button Counter, go to the overview', 'nav.aria': 'Pages', 'lang.label': 'Language',
   'tab.overview': 'Overview', 'tab.input': 'Fine-tune', 'tab.insight': 'Insights', 'tab.about': 'About',
-  'alt.pouch': 'A leather pouch with buttons rolling across a wooden table', 'alt.notebook': 'An open notebook with buttons in neat rows',
+  'alt.pouch': 'A hand stacking pastel buttons next to an open leather pouch', 'alt.notebook': 'An open notebook beside buttons laid out like a small bar chart',
   'alt.bowls': 'Buttons sorted by colour in small bowls', 'alt.stacks': 'Buttons in a brass balance scale, weighing one choice against another', 'alt.path': 'A winding path of buttons towards a sunny horizon',
   'ov.h': 'Where do you stand?',
   'ov.subEmpty': 'Enter your age and what you want to spend per month under Quick estimate below.',
@@ -2566,7 +2636,7 @@ I18N.en = {
 I18N.nl = {
   'brand.aria': 'Knopenteller, naar het overzicht', 'nav.aria': 'Pagina’s', 'lang.label': 'Taal',
   'tab.overview': 'Overzicht', 'tab.input': 'Invullen', 'tab.insight': 'Inzicht', 'tab.about': 'Over',
-  'alt.pouch': 'Een leren buidel waaruit knopen over een houten tafel rollen', 'alt.notebook': 'Een opengeslagen notitieboekje met knopen in rijtjes',
+  'alt.pouch': 'Een hand stapelt pastelknopen naast een open leren buidel', 'alt.notebook': 'Een opengeslagen notitieboek naast knopen die als een staafdiagram liggen',
   'alt.bowls': 'Knopen gesorteerd op kleur in kleine schaaltjes', 'alt.stacks': 'Knopen in een messing weegschaal, een keuze afgewogen tegen een andere', 'alt.path': 'Een kronkelend pad van knopen naar een zonnige horizon',
   'ov.h': 'Zo sta je ervoor', 'ov.h_2': 'Zo staan jullie ervoor',
   'ov.subEmpty': 'Vul hieronder bij Snel rekenen je leeftijd in en wat je per maand wilt besteden.', 'ov.subEmpty_2': 'Vul hieronder bij Snel rekenen jullie leeftijden in en wat jullie per maand willen besteden.',
@@ -2745,7 +2815,7 @@ I18N.nl = {
 I18N.de = {
   'brand.aria': 'Button Counter, zur Übersicht', 'nav.aria': 'Seiten', 'lang.label': 'Sprache',
   'tab.overview': 'Übersicht', 'tab.input': 'Eingeben', 'tab.insight': 'Einblick', 'tab.about': 'Über',
-  'alt.pouch': 'Ein Lederbeutel, aus dem Knöpfe über einen Holztisch rollen', 'alt.notebook': 'Ein aufgeschlagenes Notizbuch mit Knöpfen in Reihen',
+  'alt.pouch': 'Eine Hand stapelt Pastellknöpfe neben einem offenen Lederbeutel', 'alt.notebook': 'Ein aufgeschlagenes Notizbuch neben Knöpfen, die wie ein kleines Balkendiagramm liegen',
   'alt.bowls': 'Nach Farbe sortierte Knöpfe in kleinen Schalen', 'alt.stacks': 'Knöpfe in einer Messingwaage, eine Entscheidung gegen eine andere abgewogen', 'alt.path': 'Ein gewundener Weg aus Knöpfen zu einem sonnigen Horizont',
   'ov.h': 'Wo stehen Sie?',
   'ov.subEmpty': 'Geben Sie unten bei Schnell rechnen Ihr Alter ein und was Sie pro Monat ausgeben möchten.',
@@ -2921,7 +2991,7 @@ I18N.de = {
 I18N.fr = {
   'brand.aria': 'Button Counter, vers l’aperçu', 'nav.aria': 'Pages', 'lang.label': 'Langue',
   'tab.overview': 'Aperçu', 'tab.input': 'Saisir', 'tab.insight': 'Analyse', 'tab.about': 'À propos',
-  'alt.pouch': 'Une bourse en cuir d’où des boutons roulent sur une table en bois', 'alt.notebook': 'Un carnet ouvert avec des boutons alignés',
+  'alt.pouch': 'Une main empile des boutons pastel à côté d’une bourse en cuir ouverte', 'alt.notebook': 'Un carnet ouvert à côté de boutons disposés comme un petit diagramme en barres',
   'alt.bowls': 'Des boutons triés par couleur dans de petits bols', 'alt.stacks': 'Boutons dans une balance en laiton, un choix pesé contre un autre', 'alt.path': 'Un chemin sinueux de boutons vers un horizon ensoleillé',
   'ov.h': 'Où en êtes-vous ?',
   'ov.subEmpty': 'Indiquez ci-dessous, dans Calcul rapide, votre âge et ce que vous voulez dépenser par mois.',
@@ -3097,7 +3167,7 @@ I18N.fr = {
 I18N.es = {
   'brand.aria': 'Button Counter, ir al resumen', 'nav.aria': 'Páginas', 'lang.label': 'Idioma',
   'tab.overview': 'Resumen', 'tab.input': 'Rellenar', 'tab.insight': 'Análisis', 'tab.about': 'Acerca de',
-  'alt.pouch': 'Una bolsa de cuero de la que ruedan botones sobre una mesa de madera', 'alt.notebook': 'Un cuaderno abierto con botones en filas',
+  'alt.pouch': 'Una mano apila botones pastel junto a una bolsa de cuero abierta', 'alt.notebook': 'Un cuaderno abierto junto a botones colocados como un pequeño gráfico de barras',
   'alt.bowls': 'Botones ordenados por color en cuencos pequeños', 'alt.stacks': 'Botones en una balanza de latón, una decisión sopesada frente a otra', 'alt.path': 'Un camino sinuoso de botones hacia un horizonte soleado',
   'ov.h': '¿Cómo estás?', 'ov.h_2': '¿Cómo estáis?',
   'ov.subEmpty': 'Indica abajo, en Cálculo rápido, tu edad y cuánto quieres gastar al mes.', 'ov.subEmpty_2': 'Indicad abajo, en Cálculo rápido, vuestras edades y cuánto queréis gastar al mes.',
@@ -4839,8 +4909,9 @@ Object.assign(I18N.es, {
 "lp.abroad.desc": "Compara el poder adquisitivo de tu presupuesto mensual en 31 países europeos y prueba tu plan con las normas de diez países. Sin cuenta."
 });
 Object.assign(I18N.nl, {
- "age.q": "Hoe oud ben je?",
+ "age.q": "Hoe oud ben je ongeveer?",
  "age.aria": "Je leeftijd",
+ "age.note": "Een leeftijdsgroep is genoeg. Je precieze leeftijd kun je later invullen, als je wilt.",
  "goalY.2.t": "Haal ik mijn pensioen zo?",
  "goalY.2.s": "Zet je inleg naast je pensioen en zie of het genoeg wordt.",
  "goalY.3.t": "Wat scheelt een beetje meer sparen?",
@@ -4886,8 +4957,9 @@ Object.assign(I18N.nl, {
  "lvl.hintX": "Buiten Nederland is dit een indicatie: de bedragen zijn Nederlands en omgerekend met prijsniveaus, niet gebaseerd op de uitgavenpatronen van jouw land."
 });
 Object.assign(I18N.en, {
- "age.q": "How old are you?",
+ "age.q": "Roughly how old are you?",
  "age.aria": "Your age",
+ "age.note": "An age group is enough. You can enter your exact age later, if you like.",
  "goalY.2.t": "Will this get me to my pension?",
  "goalY.2.s": "Put your saving next to your retirement and see if it will be enough.",
  "goalY.3.t": "What does saving a bit more change?",
@@ -4933,8 +5005,9 @@ Object.assign(I18N.en, {
  "lvl.hintX": "Outside the Netherlands this is an indication: the amounts are Dutch and converted with price levels, not based on spending patterns in your own country."
 });
 Object.assign(I18N.de, {
- "age.q": "Wie alt sind Sie?",
+ "age.q": "Wie alt sind Sie ungefähr?",
  "age.aria": "Ihr Alter",
+ "age.note": "Eine Altersgruppe genügt. Ihr genaues Alter können Sie später eintragen, wenn Sie möchten.",
  "goalY.2.t": "Komme ich so bis zur Rente?",
  "goalY.2.s": "Stellen Sie Ihre Sparrate neben Ihre Rente und sehen Sie, ob es reicht.",
  "goalY.3.t": "Was bringt etwas mehr Sparen?",
@@ -4980,8 +5053,9 @@ Object.assign(I18N.de, {
  "lvl.hintX": "Außerhalb der Niederlande ist das eine Orientierung: Die Beträge sind niederländisch und mit Preisniveaus umgerechnet, nicht auf Ausgabenmustern Ihres Landes beruhend."
 });
 Object.assign(I18N.fr, {
- "age.q": "Quel âge avez-vous ?",
+ "age.q": "Quel âge avez-vous, à peu près ?",
  "age.aria": "Votre âge",
+ "age.note": "Une tranche d’âge suffit. Vous pourrez indiquer votre âge exact plus tard, si vous le souhaitez.",
  "goalY.2.t": "Aurai-je assez pour ma retraite ?",
  "goalY.2.s": "Mettez votre épargne à côté de votre retraite et voyez si cela suffira.",
  "goalY.3.t": "Que change un peu plus d’épargne ?",
@@ -5027,8 +5101,9 @@ Object.assign(I18N.fr, {
  "lvl.hintX": "En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays."
 });
 Object.assign(I18N.es, {
- "age.q": "¿Cuántos años tienes?",
+ "age.q": "¿Qué edad tienes, más o menos?",
  "age.aria": "Tu edad",
+ "age.note": "Basta con un grupo de edad. Si quieres, puedes indicar tu edad exacta más adelante.",
  "goalY.2.t": "¿Me alcanzará para la jubilación?",
  "goalY.2.s": "Pon tu ahorro junto a tu jubilación y mira si será suficiente.",
  "goalY.3.t": "¿Qué cambia ahorrar un poco más?",
@@ -5759,12 +5834,13 @@ Object.assign(I18N.es, {
         '<button class="reset" id="reset" type="button" data-t="b.resetAll"></button>';
     } }
   ];
+  var STEP_IMG = ['stap-basis', 'stap-over-jou', 'stap-pensioen', 'stap-keuzes', 'stap-aannames'];
   $('steps').innerHTML = STEPS.map(function (st, i) {
-    return '<div class="step" id="step-' + (i + 1) + '"' + (i ? ' hidden' : '') + '><div class="step-head"><span class="step-k" data-stepk="' + (i + 1) + '"></span><h2 data-t="' + st.h + '"></h2><p class="sub" data-t="' + st.s + '"></p></div>' + st.html() + '</div>';
+    return '<div class="step" id="step-' + (i + 1) + '"' + (i ? ' hidden' : '') + '><div class="step-head has-spot"><img class="step-spot" src="img/' + STEP_IMG[i] + '.webp" alt=""><span class="step-k" data-stepk="' + (i + 1) + '"></span><h2 data-t="' + st.h + '"></h2><p class="sub" data-t="' + st.s + '"></p></div>' + st.html() + '</div>';
   }).join('');
   (function () { var sn = $('snel'), slot = $('step1-slot'); if (sn && slot) slot.appendChild(sn); })();
   $('stepper').innerHTML = STEPS.map(function (st, i) {
-    return '<li><button type="button" data-go="' + (i + 1) + '"><span class="num">' + (i + 1) + '</span><span class="lbl" data-t="' + st.t + '"></span></button></li>';
+    return '<li><button type="button" data-go="' + (i + 1) + '"><span class="num"><img src="img/' + STEP_IMG[i] + '.webp" alt=""><i>' + (i + 1) + '</i></span><span class="lbl" data-t="' + st.t + '"></span></button></li>';
   }).join('');
 
   /* ================= teksten op de pagina zetten ================= */
@@ -6447,7 +6523,7 @@ Object.assign(I18N.es, {
     var el = $('lvl'); if (!el || !lvlOk()) return;
     var hh = $('lvl-hint'); if (hh) hh.textContent = t1('lvl.hint') + (prefs.country === 'NL' ? '' : ' ' + t1('lvl.hintX'));
     el.innerHTML = [1, 2, 3].map(function (n) {
-      return '<button type="button" class="lvl-b' + (state.levend === n ? ' on' : '') + '" role="radio" aria-checked="' + (state.levend === n) + '" data-l="' + n + '"><b>' + t1('lvl.' + n + '.n') + '</b><span class="lvl-a">' + t1('lvl.pm', { a: eur(lvlAmt(n)) }) + '</span><span class="lvl-e">' + t1('lvl.' + n + '.e') + '</span></button>';
+      return '<button type="button" class="lvl-b' + (state.levend === n ? ' on' : '') + '" role="radio" aria-checked="' + (state.levend === n) + '" data-l="' + n + '"><span class="lvl-pic"><img class="lvl-img l' + n + '" src="img/stijl-' + ['sober', 'gemiddeld', 'ruim'][n - 1] + '.webp" alt=""></span><b>' + t1('lvl.' + n + '.n') + '</b><span class="lvl-a">' + t1('lvl.pm', { a: eur(lvlAmt(n)) }) + '</span><span class="lvl-e">' + t1('lvl.' + n + '.e') + '</span></button>';
     }).join('');
   }
   function renderOpb() {
@@ -6640,16 +6716,32 @@ Object.assign(I18N.es, {
   each('#fan-legend .lg', function (el) { el.addEventListener('click', function () { var k = el.getAttribute('data-k'); fanShow[k] = !fanShow[k]; renderFan(); }); });
 
   /* knopen en meter */
+  /* kansring: 20 gefotografeerde knopen, één knoop is 5 %; daarnaast de buidel: vol, half of bijna leeg */
+  var KN = ['sage', 'rose', 'cream', 'terra', 'slate', 'butter', 'lilac', 'caramel'];
+  var KN_ROT = [12, -18, 7, 25, -9, 31, -22, 4, 17, -27, 9, -5, 22, -14, 28, -3, 14, -20, 6, -11];
   function renderGauge() {
     var g = $('gauge'), card = $('status-card'); if (!g) return;
     var empty = state.budget <= 0, v = empty ? 0 : curSucc;
     var cls = empty ? '' : (v >= 0.9 ? 'good' : (v >= 0.75 ? 'warn' : 'bad'));
     card.className = 'card status ' + cls;
-    var arc = 'M16 104 A84 84 0 0 1 184 104';
-    var s = '<svg viewBox="0 0 200 124" role="img" aria-label="' + esc(t1('w.success') + ': ' + (empty ? '–' : pct(v, 0))) + '"><path d="' + arc + '" class="g-bg"/>';
-    if (!empty && v > 0.004) s += '<path d="' + arc + '" class="g-val ' + cls + '" pathLength="100" stroke-dasharray="' + (v * 100).toFixed(1) + ' 100"/>';
-    s += '<text x="100" y="96" class="g-num">' + (empty ? '–' : pct(v, 0)) + '</text><text x="100" y="120" class="g-lbl">' + esc(t1('g.lbl')) + '</text></svg>';
-    g.innerHTML = s;
+    var n = empty ? 0 : Math.max(0, Math.min(20, Math.round(v * 20))), lbl = empty ? '\u2013' : pct(v, 0);
+    var key = n + '|' + lbl + '|' + t1('g.lbl');
+    if (g._k !== key) {
+      g._k = key;
+      var s = '';
+      for (var i = 0; i < 20; i++) {
+        var a = (-90 + i * 18) * Math.PI / 180, x = (50 + 39 * Math.cos(a)).toFixed(2), y = (50 + 39 * Math.sin(a)).toFixed(2);
+        s += i < n ? '<img class="kr-b" src="img/knoop-' + KN[i % 8] + '.webp" alt="" width="96" height="96" style="left:' + x + '%;top:' + y + '%;transform:translate(-50%,-50%) rotate(' + KN_ROT[i] + 'deg)">'
+          : '<span class="kr-e" style="left:' + x + '%;top:' + y + '%"></span>';
+      }
+      g.innerHTML = '<div class="kring" role="img" aria-label="' + esc(t1('w.success') + ': ' + lbl) + '">' + s + '<div class="kr-c"><b>' + lbl + '</b><span>' + esc(t1('g.lbl')) + '</span></div></div>';
+    }
+    var po = $('st-pouch');
+    if (po) {
+      po.hidden = empty;
+      var src = 'img/uitkomst-' + (cls === 'good' ? 'ruim' : (cls === 'warn' ? 'krap' : 'tekort')) + '.webp';
+      if (!empty && po.getAttribute('src') !== src) po.setAttribute('src', src);
+    }
   }
   var route = 'overview';
   function updMini() { $('mini').classList.toggle('show', route !== 'overview' && state.budget > 0); }
@@ -6785,7 +6877,7 @@ Object.assign(I18N.es, {
     ].join(' · ') + '.';
     renderTrust();
     if (KOFI) {
-      $('support-ov').innerHTML = duoHtml(t1('sup.after')); $('support-ov').hidden = false;
+      $('support-ov').innerHTML = '<img class="sup-spot" src="img/tip-briefje.webp" alt="">' + duoHtml(t1('sup.after')); $('support-ov').hidden = false;
       $('support-sh').innerHTML = duoHtml(t1('sup.after')); $('support-sh').hidden = false;
       $('support-ab').innerHTML = duoHtml(t1('sup.text')); $('support-ab').hidden = false;
     }
@@ -7477,7 +7569,7 @@ var TRK = {
   }
   function openIntro(step) {
     lastFocus = document.activeElement;
-    ageTouched = false; ageSet(Math.max(20, Math.min(65, state.leeftijdPaul || 50)));
+    ageTouched = false; bandSet(ui.introSeen ? bandOf(state.leeftijdPaul || 50) : -1);
     if ($('slot-cyl') && typeof SLN === 'number') slotBuild();
     $('intro').hidden = false;
     introStep(step === 0 ? 0 : 1);
@@ -7494,6 +7586,7 @@ var TRK = {
   var GTXT = { rich: 'goalY.5', free: 'goalY.6', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
   var introBand = 2, ageTouched = false;
   function bandOf(a) { return a < 35 ? 0 : (a < 50 ? 1 : 2); }
+  var BAND_AGE = [27, 42, 57];   /* alleen een richtleeftijd per groep; de precieze leeftijd vul je zelf in bij Invullen */
   function gtx(g, suf) { return t1((GTXT[g] || 'goal.5') + suf); }
   function goalTarget(g) {
     if (g === 'rich' || g === 'free') return { hash: '#overview', id: 'opb-card' };
@@ -7514,7 +7607,7 @@ var TRK = {
   function pickGoal(g) {
     var young = introBand < 2, list = SETS[introBand];
     ui.goal = list.indexOf(g) >= 0 ? g : ''; state.opbouw = young ? 1 : 0;
-    if (ageTouched) { var av = parseInt($('age-r').value, 10); state.leeftijdPaul = av; if (two() && state.leeftijdDiana === DEF.leeftijdDiana) state.leeftijdDiana = av; }
+    if (ageTouched && bandOf(state.leeftijdPaul) !== introBand) { var av = BAND_AGE[introBand]; state.leeftijdPaul = av; if (two() && state.leeftijdDiana === DEF.leeftijdDiana) state.leeftijdDiana = av; }
     saveUi(); showGoal(); track('reach-goal-' + (ui.goal || 'unsure')); if (introBand === 0) track('reach-young'); else if (introBand === 1) track('reach-midlife');
     update();
     closeIntro(false);
@@ -7598,13 +7691,13 @@ var TRK = {
     });
   })();
   $('slot-ok').addEventListener('click', function () { pickGoal(slotG()[slotIdx]); });
-  function ageSet(a) {
-    var r = $('age-r'); if (!r) return;
-    r.value = a; $('age-v').textContent = a + (a >= 65 ? '+' : '');
-    var b = bandOf(a); each('.age-zones span', function (z) { z.classList.toggle('on', parseInt(z.getAttribute('data-z'), 10) === b); });
-    if (b !== introBand) { introBand = b; if ($('slot-cyl') && typeof SLN === 'number') slotBuild(); }
+  /* leeftijd als groep: geen exacte leeftijd aan het begin; -1 = nog niets gekozen (dan de vragen voor 50+) */
+  function bandSet(b) {
+    each('input[name="age-band"]', function (r) { r.checked = parseInt(r.value, 10) === b; });
+    var nb = b < 0 ? 2 : b;
+    if (nb !== introBand) { introBand = nb; if ($('slot-cyl') && typeof SLN === 'number') slotBuild(); }
   }
-  if ($('age-r')) $('age-r').addEventListener('input', function () { ageTouched = true; ageSet(parseInt(this.value, 10)); });
+  each('input[name="age-band"]', function (r) { r.addEventListener('change', function () { ageTouched = true; bandSet(parseInt(this.value, 10)); }); });
   slotBuild();
 
   $('gb-go').addEventListener('click', function () {
@@ -7935,7 +8028,8 @@ var TRK = {
       each('.pl-gated', function (pn) {
         var g = pn.querySelector('.pl-gate'); if (!g || pn.hidden || !pn.offsetParent) return;
         var r = pn.getBoundingClientRect(), gh = g.offsetHeight || 150;
-        var top = Math.max(124, Math.min(hb - r.top, r.height - gh - 90));
+        var hd = pn.querySelector('.panel-head'), mt = hd ? Math.max(124, hd.offsetTop + hd.offsetHeight + 14) : 124;   /* nooit over de kop heen, ook niet als het voorwerp die hoger maakt */
+        var top = Math.max(mt, Math.min(hb - r.top, r.height - gh - 90));
         g.style.top = Math.round(top) + 'px';
       });
     }
@@ -7946,7 +8040,7 @@ var TRK = {
 
   /* het venster */
   var plM = document.createElement('div'); plM.className = 'pl-modal'; plM.hidden = true;
-  plM.innerHTML = '<div class="pl-sheet" role="dialog" aria-modal="true" aria-labelledby="pl-h2"><div class="pl-top"><span class="pl-ic">' + PL_LOCK + '</span><h2 id="pl-h2"></h2></div><p class="pl-why" id="pl-why"></p><p class="pl-wip" id="pl-wip"></p><p class="pl-lh" id="pl-lh"></p><ul id="pl-list"></ul>' +
+  plM.innerHTML = '<div class="pl-sheet" role="dialog" aria-modal="true" aria-labelledby="pl-h2"><div class="pl-top"><span class="pl-ic pl-ic-img"><img src="img/pro-slot.webp" alt=""></span><h2 id="pl-h2"></h2></div><p class="pl-why" id="pl-why"></p><p class="pl-wip" id="pl-wip"></p><p class="pl-lh" id="pl-lh"></p><ul id="pl-list"></ul>' +
     '<div id="pl-s1"><button type="button" class="pl-buy" id="pl-want"></button></div>' +
     '<div id="pl-s2" hidden><p class="pl-done" id="pl-thanks"></p><div class="pl-prices" id="pl-prices"></div><p class="pl-note" id="pl-only"></p></div>' +
     '<p class="pl-done" id="pl-bye" hidden></p><button type="button" class="pl-later" id="pl-close"></button></div>';
@@ -7986,7 +8080,7 @@ var TRK = {
       var s = $(a[0]); if (!s) return; s.classList.add('pl-gated');
       var g = s.querySelector('.pl-gate');
       if (!g) { g = document.createElement('button'); g.type = 'button'; g.className = 'pl-gate'; g.setAttribute('data-pl', a[1]); s.appendChild(g); }
-      var T = plT(); g.innerHTML = '<span class="pl-ic">' + PL_LOCK + '</span><p>' + esc(T.f[a[1]][1]) + '</p><small>' + esc(T.tap) + '</small>';
+      var T = plT(); g.innerHTML = '<span class="pl-ic pl-ic-img"><img src="img/pro-slot.webp" alt=""></span><p>' + esc(T.f[a[1]][1]) + '</p><small>' + esc(T.tap) + '</small>';
     });
   }
 

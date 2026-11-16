@@ -189,7 +189,7 @@ def build_page(src, lang, d, goal=None):
     head = head.replace('href="icon-192.png"', 'href="/icon-192.png"').replace('href="apple-touch-icon.png"', 'href="/apple-touch-icon.png"')
     head = head.replace('url("fonts/', 'url("/fonts/')
     head = head.replace('<style>', '<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>\n<style>', 1)
-    head = head.replace('</style>', '</style>\n<link rel="preload" as="image" href="/img/buidel.jpg" fetchpriority="high">', 1)
+    head = head.replace('</style>', '</style>\n<link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">', 1)
     body = fill_body(body, d)
     body = body.replace('src="img/', 'src="/img/')
     body = body.replace('<!--LANGLINKS-->', lang_links(lang))
