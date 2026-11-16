@@ -7208,7 +7208,10 @@ var TRK = {
     x = Math.max(8, Math.min(w - sz - 8, x)); y = Math.max(8, Math.min(h - sz - 8, y));
     fab.style.left = x + 'px'; fab.style.top = y + 'px'; fab.style.right = 'auto'; fab.style.bottom = 'auto';
   }
-  function fabRestore() { try { var q = JSON.parse(localStorage.getItem(NPOS) || 'null'); if (q && isFinite(q.fx) && isFinite(q.fy)) fabClamp(q.fx * window.innerWidth, q.fy * window.innerHeight); } catch (e) {} }
+  function fabSmall() { return window.innerWidth <= 560; }
+  function fabRestore() {
+    if (fabSmall()) { fab.style.left = ''; fab.style.top = ''; fab.style.right = ''; fab.style.bottom = ''; return; }   /* op de telefoon altijd rechtsonder, binnen duimbereik */
+    try { var q = JSON.parse(localStorage.getItem(NPOS) || 'null'); if (q && isFinite(q.fx) && isFinite(q.fy)) fabClamp(q.fx * window.innerWidth, q.fy * window.innerHeight); } catch (e) {} }
   function ntPlace() {
     if (pop.hidden) return;
     var small = window.innerWidth <= 560; pop.classList.toggle('sheet', small);
@@ -7223,7 +7226,7 @@ var TRK = {
     if (on) { $('nt-sure').hidden = true; ntPlace(); setTimeout(function () { var ta = $('nt-text'); ta.focus({ preventScroll: true }); try { ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {} }, 30); }
     else { clearTimeout(ntT); ntSave(); fab.focus({ preventScroll: true }); }
   }
-  fab.addEventListener('pointerdown', function (ev) { if (ev.button > 0) return; var r = fab.getBoundingClientRect(); drag = { sx: ev.clientX, sy: ev.clientY, x: r.left, y: r.top, moved: false }; try { fab.setPointerCapture(ev.pointerId); } catch (e) {} });
+  fab.addEventListener('pointerdown', function (ev) { if (ev.button > 0 || fabSmall()) return; var r = fab.getBoundingClientRect(); drag = { sx: ev.clientX, sy: ev.clientY, x: r.left, y: r.top, moved: false }; try { fab.setPointerCapture(ev.pointerId); } catch (e) {} });
   fab.addEventListener('pointermove', function (ev) {
     if (!drag) return; var dx = ev.clientX - drag.sx, dy = ev.clientY - drag.sy;
     if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 7) return;
