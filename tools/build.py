@@ -203,6 +203,8 @@ def build_page(src, lang, d, goal=None):
         return tag.replace('<img ', '<img loading="lazy" decoding="async" ')
     body = re.sub(r'<img [^>]*>', img, body)
     script = script.replace("register('sw.js')", "register('/sw.js')")
+    # beelden die het script zelf neerzet (stappen, kansring, buidel, Pro-slot): vanaf de hoofdmap, ook op /nl/, /de/ enz.
+    script = script.replace('"img/', '"/img/').replace("'img/", "'/img/")
     return head + body + script
 
 

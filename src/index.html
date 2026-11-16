@@ -1853,6 +1853,11 @@ html.pro-locked .curve-f .seg-opt:not(:first-child) .curve-img { opacity: .8; }
 .kn-sep img { width: 22px; height: 22px; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
 html.is-empty .kn-sep.nd { display: none; }
 @media print { .kn-sep { display: none !important; } }
+/* onderschrift onder het wiel: alle teksten liggen op elkaar, alleen de gekozen is zichtbaar.
+   Zo is de ruimte altijd die van het langste onderschrift (op de telefoon twee regels) en schuift de pagina niet mee met het wiel. */
+.slot-sub { display: grid; min-height: 3.1em; min-height: 2lh; }
+.slot-sub > span { grid-area: 1 / 1; visibility: hidden; }
+.slot-sub > span.on { visibility: visible; }
 </style>
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -4916,7 +4921,7 @@ Object.assign(I18N.nl, {
  "opb.note": "Het midden van {n} rekenvoorbeelden, in geld van vandaag, na kosten en belasting. Een rekenvoorbeeld, geen belofte.",
  "opb.edit": "Bedrag aanpassen",
  "goalY.5.t": "Hoe rijk word ik van sparen en beleggen?",
- "goalY.5.s": "Zonder hype: wat een vast bedrag per maand echt oplevert, ook als het tegenzit.",
+ "goalY.5.s": "Zonder hype: wat elke maand inleggen echt oplevert, ook als het tegenzit.",
  "goalY.6.t": "Wanneer ben ik financieel vrij (FIRE)?",
  "goalY.6.s": "Zie vanaf welke leeftijd je vermogen genoeg is om van te leven.",
  "opb.mixh": "Hetzelfde bedrag, drie manieren van beleggen",
@@ -4964,7 +4969,7 @@ Object.assign(I18N.en, {
  "opb.note": "The middle of {n} simulated paths, in today’s money, after costs and tax. An illustration, not a promise.",
  "opb.edit": "Adjust amount",
  "goalY.5.t": "Will saving and investing actually make me rich?",
- "goalY.5.s": "No hype: what a fixed amount each month really builds, even if markets disappoint.",
+ "goalY.5.s": "No hype: what a fixed monthly amount really builds, even in bad years.",
  "goalY.6.t": "When can I be financially free (FIRE)?",
  "goalY.6.s": "See from which age your wealth is enough to live on.",
  "opb.mixh": "The same amount, three ways of investing",
@@ -5012,7 +5017,7 @@ Object.assign(I18N.de, {
  "opb.note": "Die Mitte von {n} Rechenbeispielen, in heutigem Geld, nach Kosten und Steuern. Ein Rechenbeispiel, kein Versprechen.",
  "opb.edit": "Betrag ändern",
  "goalY.5.t": "Werde ich vom Sparen und Anlegen wirklich reich?",
- "goalY.5.s": "Ohne Hype: was ein fester Betrag pro Monat wirklich bringt, auch wenn es schlecht läuft.",
+ "goalY.5.s": "Ohne Hype: was monatliches Sparen bringt, auch wenn es schlecht läuft.",
  "goalY.6.t": "Wann bin ich finanziell frei (FIRE)?",
  "goalY.6.s": "Sehen Sie, ab welchem Alter Ihr Vermögen zum Leben reicht.",
  "opb.mixh": "Derselbe Betrag, drei Arten der Geldanlage",
@@ -5060,7 +5065,7 @@ Object.assign(I18N.fr, {
  "opb.note": "Le milieu de {n} scénarios simulés, en argent d’aujourd’hui, après frais et impôts. Une illustration, pas une promesse.",
  "opb.edit": "Modifier le montant",
  "goalY.5.t": "Vais-je vraiment m’enrichir en épargnant et en investissant ?",
- "goalY.5.s": "Sans battage : ce qu’un montant fixe par mois rapporte vraiment, même si cela tourne mal.",
+ "goalY.5.s": "Ce que rapporte vraiment un montant fixe par mois, même en cas de baisse.",
  "goalY.6.t": "Quand serai-je financièrement libre (FIRE) ?",
  "goalY.6.s": "Voyez à partir de quel âge votre patrimoine suffit pour vivre.",
  "opb.mixh": "Le même montant, trois façons d’investir",
@@ -7606,6 +7611,7 @@ var TRK = {
   /* draaiwiel: sleep omhoog of omlaag (of pijltjes, scrollwiel, tikken op de vraag erboven of eronder) */
   function slotG() { return SETS[introBand].concat('unsure'); }
   var slotIdx = 0, slotBusy = false;
+  var SUB_ALL = ['rich', 'free', 'retire', 'more', 'invest', 'enough', 'spend', 'earlier', 'abroad', 'unsure'];
   var SLN = 15, SLA = 360 / SLN, slAng = 0, slR = 0;
   function slotFh() { var w = $('slot-window'); return w ? (parseFloat(getComputedStyle(w).getPropertyValue('--fh')) || 128) : 128; }
   function slotBuild() {
@@ -7617,6 +7623,11 @@ var TRK = {
       h += '<div class="slot-face" data-i="' + i + '" aria-hidden="true" style="transform: rotateX(' + (-f * SLA) + 'deg) translateZ(' + slR.toFixed(1) + 'px)"><b>' + gtx(slotG()[i], '.t') + '</b></div>';
     }
     cyl.innerHTML = h;
+    var sb = $('slot-sub');
+    if (sb) {   /* alle onderschriften op elkaar in één cel: de ruimte is altijd die van het langste, dus niets verspringt tijdens het draaien */
+      sb.textContent = '';
+      SUB_ALL.forEach(function (g) { var sp = document.createElement('span'); sp.setAttribute('data-g', g); sp.textContent = gtx(g, '.s'); sb.appendChild(sp); });
+    }
     slotPos(slotIdx * SLA, false);
   }
   function slotPos(a, anim) {
@@ -7627,7 +7638,8 @@ var TRK = {
     var k = ((Math.round(a / SLA) % SLN) + SLN) % SLN;
     slotIdx = k % 5;
     var w = $('slot-window');
-    var sb = $('slot-sub'); if (sb) sb.textContent = gtx(slotG()[slotIdx], '.s');
+    var cur = slotG()[slotIdx];
+    each('#slot-sub > span', function (sp) { sp.classList.toggle('on', sp.getAttribute('data-g') === cur); });
     if (w) { w.setAttribute('aria-valuenow', slotIdx + 1); w.setAttribute('aria-valuetext', gtx(slotG()[slotIdx], '.t')); }
   }
   function slotShow(i) { slotPos(i * SLA, false); }
