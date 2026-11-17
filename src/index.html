@@ -6031,6 +6031,11 @@ Object.assign(I18N.nl, {"opb.lbl": "Haalbaar maandbudget", "opb.span": "Zoveel k
 Object.assign(I18N.de, {"opb.lbl": "Erreichbares Monatsbudget", "opb.span": "So viel können Sie jeden Monat ausgeben, von {an} bis {en} Jahren, in heutigem Geld."});
 Object.assign(I18N.fr, {"opb.lbl": "Budget mensuel atteignable", "opb.span": "Ce que vous pouvez dépenser chaque mois de {a} jusqu’à {e}, en argent d’aujourd’hui."});
 Object.assign(I18N.es, {"opb.lbl": "Presupuesto mensual alcanzable", "opb.span": "Lo que puedes gastar al mes desde los {an} hasta los {en}, en dinero de hoy."});
+Object.assign(I18N.en, {"opb.fireInfo": "Your wish is achievable here. Financially free is a stricter bar: living on your own money alone, without state pension or pension, without using it up. That takes about {t}."});
+Object.assign(I18N.nl, {"opb.fireInfo": "Je wens is hier haalbaar. Financieel vrij is een strengere lat: alleen leven van je eigen vermogen, zonder staatspensioen of pensioen, zonder het op te maken. Daar is zo’n {t} voor nodig."});
+Object.assign(I18N.de, {"opb.fireInfo": "Ihr Wunsch ist hier erreichbar. Finanziell frei ist eine strengere Latte: nur vom eigenen Vermögen leben, ohne Renten, ohne es aufzubrauchen. Dafür sind etwa {t} nötig."});
+Object.assign(I18N.fr, {"opb.fireInfo": "Votre souhait est atteignable ici. Être financièrement libre est plus exigeant : vivre uniquement de votre patrimoine, sans retraites, sans l’épuiser. Il faut pour cela environ {t}."});
+Object.assign(I18N.es, {"opb.fireInfo": "Tu deseo es alcanzable aquí. Ser financieramente libre es más exigente: vivir solo de tu propio dinero, sin pensiones, sin agotarlo. Para eso hacen falta unos {t}."});
 
 /* samen opzij leggen en bijverdienen (versie 21) */
 Object.assign(I18N.en, {"q.inleg_2": "How much do you put aside together each month?", "f.inlegP": "Puts aside per month", "h.inlegSplit": "Together this is the amount from step 1. How you split it does not change the result.", "wk.hBij": "Earning extra after you stop", "f.bijAmt": "Extra income, net per month", "h.bijAmt": "Counts from your stop age. The app never asks for your current salary: what you put aside is what counts.", "f.bijEnd": "Earn extra until age", "h.bijEnd": "From your stop age ({a}) up to this age. Equal to your stop age means no extra income.", "rel.21.n6": "Putting money aside now has one name everywhere: the total in step 1, split per person in step 2. In the saving phase, “Work” is now honestly called “Earning extra after you stop”."});
@@ -7190,8 +7195,11 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     if (want > 0) {
       var tgt = 25 * 12 * want, fa = null;
       for (var j = 0; j <= k; j++) if (sim.q(j, 0.5) >= tgt) { fa = Math.round(now + j); break; }
+      /* als de wens al haalbaar is, is "financieel vrij" een strengere, andere vraag (4%-regel, zonder staatspensioen
+         of pensioen): dan geen oranje waarschuwing maar een neutrale uitleg, anders spreekt de kaart zichzelf tegen */
       msg = fa !== null ? '<p class="opb-msg yes">' + t1('opb.fireYes', { n: fa, t: eur(tgt), b: eur(want) }) + '</p>'
-        : '<p class="opb-msg no">' + t1('opb.fireNot', { t: eur(tgt), y: num(Math.round(stop - now), 0) }) + '</p>';
+        : (bud >= want ? '<p class="opb-note">' + t1('opb.fireInfo', { t: eur(tgt) }) + '</p>'
+        : '<p class="opb-msg no">' + t1('opb.fireNot', { t: eur(tgt), y: num(Math.round(stop - now), 0) }) + '</p>');
     } else msg = '<p class="opb-note">' + t1('opb.fireAsk') + '</p>';
     var chips = ex.list.map(function (c) { return '<button type="button" data-opb-wi="' + c.k + '" aria-pressed="' + (opbWi[c.k] ? 'true" class="on"' : 'false"') + '>' + esc(c.l) + '</button>'; }).join('');
     var st = function (key, label, val) {
