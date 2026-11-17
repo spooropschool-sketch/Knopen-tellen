@@ -892,6 +892,9 @@ a.kofi:hover { background: var(--surface2); }
 .fb-actions .btn[aria-disabled="true"] { opacity: 0.55; }
 .fb-status { margin: 0; font-size: 14px; color: var(--good); font-weight: 600; min-height: 0; }
 .fb-status:empty { display: none; }
+.fb-actions .btn[disabled] { opacity: 0.55; cursor: default; }
+.fb-fallback { margin: 0; font-size: 13.5px; }
+.fb-fallback a { color: var(--ink2); text-decoration: underline; }
 .fb-mail { font-family: var(--f-num); color: var(--ink); user-select: all; -webkit-user-select: all; }
 button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: var(--copper); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; white-space: nowrap; }
 .fb-dlg .modal-actions { position: static; box-shadow: none; background: none; padding-bottom: 0; }
@@ -1459,7 +1462,7 @@ a { color: var(--accent); }
 #sec-pf { background: linear-gradient(135deg, var(--surface), var(--tint-pf)); }
 #sec-ladder { background: linear-gradient(135deg, var(--surface), var(--tint-ld)); }
 #sec-koop { background: linear-gradient(135deg, var(--surface), var(--tint-kp)); }
-.is-calc .status .gauge, .is-calc .ovt-chance, .is-calc .kpis, .is-calc .mini, .is-calc #plans .pl-v.now, .is-calc #fb-form { opacity: 0.55; transition: opacity 0.15s; }
+.is-calc .status .gauge, .is-calc .ovt-chance, .is-calc .kpis, .is-calc .mini, .is-calc #plans .pl-v.now, .is-calc #fb-send { opacity: 0.55; transition: opacity 0.15s; }
 
 /* ---------- knoppen en velden ---------- */
 .btn { border-radius: 12px; font-family: var(--f-body); font-weight: 600; min-height: 46px; padding: 10px 20px; }
@@ -2255,7 +2258,7 @@ html.is-empty .kn-sep.nd { display: none; }
   <div class="modal-card fb-dlg" role="dialog" aria-modal="true" aria-labelledby="fb-h">
     <div class="modal-body">
       <div class="fb-top"><h2 id="fb-h" data-t="fb.h">What can we do better?</h2><button class="fb-x" type="button" id="fb-close" data-t-aria="b.close" aria-label="Close">✕</button></div>
-      <p class="sub" data-t="fb.sub">Pick a topic and tell us what you noticed. We’ll fill in the form for you; you only press Submit.</p>
+      <p class="sub" data-t="fb.sub">Pick a topic and tell us what you noticed.</p>
       <fieldset class="fb-cats"><legend data-t="fb.topic">What is it about?</legend>
         <label><input type="radio" name="fb-cat" value="data"><span data-t="fb.cat.data">A figure or source is off</span></label>
         <label><input type="radio" name="fb-cat" value="country"><span data-t="fb.cat.country">Rules for my country</span></label>
@@ -2267,11 +2270,12 @@ html.is-empty .kn-sep.nd { display: none; }
       <label class="fb-lbl" for="fb-msg" data-t="fb.msg">Your tip or addition</label>
       <textarea id="fb-msg" rows="5" maxlength="1500"></textarea>
       <label class="check fb-incl"><input type="checkbox" id="fb-incl"> <span data-t="fb.incl">Add my numbers (ages, budget, savings) so you can see what I see</span></label>
-      <p class="hint" data-t="fb.privacy">Nothing is sent automatically. A form opens in a new tab with everything filled in and you decide whether to submit it.</p>
+      <p class="hint" data-t="fb.privacy">Nothing is sent until you press Send. Your tip reaches us directly.</p>
       <div class="modal-actions fb-actions">
-        <a class="btn primary" id="fb-form" href="https://forms.gle/HKhCDKQoaD2aFzsm9" target="_blank" rel="noopener" data-t="fb.send">Send via form</a>
+        <button class="btn primary" type="button" id="fb-send" data-t="fb.send">Send</button>
       </div>
       <p class="fb-status" id="fb-status" aria-live="polite"></p>
+      <p class="fb-fallback" id="fb-fallback" hidden><a id="fb-form" href="https://forms.gle/HKhCDKQoaD2aFzsm9" target="_blank" rel="noopener" data-t="fb.fallback">Still not working? Open the form yourself</a></p>
     </div>
   </div>
 </div>
@@ -3769,9 +3773,8 @@ Object.assign(I18N.es, {
 });
 
 Object.assign(I18N.en, {
-  "fb.send": "Send via form", "fb.mail": "Email instead", "fb.sub": "Pick a topic and tell us what you noticed. We’ll fill in the form for you; you only press Submit.", "fb.privacy": "Nothing is sent automatically. A form opens in a new tab with everything filled in and you decide whether to submit it.", "fb.afterForm": "The form has opened in a new tab with your tip filled in. Press Submit there and we’ll receive it.",
-  'fb.ctry': 'Country', 'fb.persons': 'People',
-  "fb.line": "Got a tip or an addition? We’d love to hear it.", "fb.btn": "Share a tip", "fb.aboutH": "Help make Button Counter better", "fb.aboutP": "Missing a rule for your country, spotted an error, or have an idea? Tell us. Every tip helps us keep Button Counter right for everyone.", "fb.h": "What can we do better?", "fb.topic": "What is it about?", "fb.cat": "Topic", "fb.section": "Section", "fb.cat.data": "A figure or source is off", "fb.cat.country": "Rules for my country", "fb.cat.text": "Text or translation", "fb.cat.idea": "Idea or addition", "fb.cat.other": "Something else", "fb.msg": "Your tip or addition", "fb.ph.data": "Which figure and what should it be? A link to the source helps us a lot.", "fb.ph.country": "Which rule is missing or different where you live?", "fb.ph.text": "Which text and how would you put it?", "fb.ph.idea": "What would make Button Counter more useful for you?", "fb.ph.other": "Tell us what’s on your mind.", "fb.incl": "Add my numbers (ages, budget, savings) so you can see what I see", "fb.copy": "Copy text", "fb.after": "Your email app should open now with your message ready. Didn’t it? Copy the text and send it to {mail}.", "fb.copied": "Copied. Paste it into an email to {mail}.", "fb.empty": "Write a few words first, then we’ll prepare the email.", "fb.direct": "Or email us directly:", "fb.spot": "Spot an error?",
+  "fb.send": "Send", "fb.sending": "Sending…", "fb.sent": "Thank you! Your tip has been sent.", "fb.fail": "Sending failed. Check your connection and try again.", "fb.fallback": "Still not working? Open the form yourself", "fb.mail": "Email instead", "fb.sub": "Pick a topic and tell us what you noticed.", "fb.privacy": "Nothing is sent until you press Send. Your tip reaches us directly.",   'fb.ctry': 'Country', 'fb.persons': 'People',
+  "fb.line": "Got a tip or an addition? We’d love to hear it.", "fb.btn": "Share a tip", "fb.aboutH": "Help make Button Counter better", "fb.aboutP": "Missing a rule for your country, spotted an error, or have an idea? Tell us. Every tip helps us keep Button Counter right for everyone.", "fb.h": "What can we do better?", "fb.topic": "What is it about?", "fb.cat": "Topic", "fb.section": "Section", "fb.cat.data": "A figure or source is off", "fb.cat.country": "Rules for my country", "fb.cat.text": "Text or translation", "fb.cat.idea": "Idea or addition", "fb.cat.other": "Something else", "fb.msg": "Your tip or addition", "fb.ph.data": "Which figure and what should it be? A link to the source helps us a lot.", "fb.ph.country": "Which rule is missing or different where you live?", "fb.ph.text": "Which text and how would you put it?", "fb.ph.idea": "What would make Button Counter more useful for you?", "fb.ph.other": "Tell us what’s on your mind.", "fb.incl": "Add my numbers (ages, budget, savings) so you can see what I see", "fb.copy": "Copy text", "fb.after": "Your email app should open now with your message ready. Didn’t it? Copy the text and send it to {mail}.", "fb.copied": "Copied. Paste it into an email to {mail}.", "fb.empty": "Write a few words first, then you can send it.", "fb.direct": "Or email us directly:", "fb.spot": "Spot an error?",
   'src.sep': ': ', 'h.penAge': 'The start age on your pension statement. We assume it starts with your {sp}; change it if yours differs.', 'penName': 'workplace pension', 'w.sp': '{Sp}', 'w.pension': '{Pen}',
   'st3.h': '{Sp} and {pen}', 'f.penOn': 'Has a {pen}', 'f.penAmt': '{Pen}, net per month',
   'h.penAmt': 'Enter it as a net monthly amount, without the {sp}. If yours is a pot rather than a monthly amount, add it to your savings instead.',
@@ -3792,9 +3795,8 @@ Object.assign(I18N.en, {
 
 Object.assign(I18N.nl, {
   'brand': 'Knopenteller',
-  "fb.send": "Verstuur via formulier", "fb.mail": "Liever per mail", "fb.sub": "Kies een onderwerp en vertel ons wat je opviel. Wij vullen het formulier voor je in; jij drukt alleen op Verzenden.", "fb.privacy": "Er wordt niets automatisch verstuurd. Er opent een formulier in een nieuw tabblad met alles ingevuld en jij beslist of je het verzendt.", "fb.afterForm": "Het formulier staat open in een nieuw tabblad, met je tip ingevuld. Druk daar op Verzenden, dan komt hij bij ons binnen.",
-  'fb.ctry': 'Land', 'fb.persons': 'Personen',
-  "fb.line": "Heb je een tip of aanvulling? We horen het graag.", "fb.btn": "Geef een tip", "fb.aboutH": "Help Knopenteller beter maken", "fb.aboutP": "Mis je een regel voor je land, zie je een fout of heb je een idee? Laat het ons weten. Elke tip helpt om Knopenteller voor iedereen kloppend te houden.", "fb.h": "Wat kunnen we beter doen?", "fb.topic": "Waar gaat het over?", "fb.cat": "Onderwerp", "fb.section": "Onderdeel", "fb.cat.data": "Een cijfer of bron klopt niet", "fb.cat.country": "Regels voor mijn land", "fb.cat.text": "Tekst of vertaling", "fb.cat.idea": "Idee of aanvulling", "fb.cat.other": "Iets anders", "fb.msg": "Je tip of aanvulling", "fb.ph.data": "Welk cijfer en wat zou het moeten zijn? Een link naar de bron helpt ons enorm.", "fb.ph.country": "Welke regel mist er, of is anders waar jij woont?", "fb.ph.text": "Welke tekst en hoe zou jij het zeggen?", "fb.ph.idea": "Wat zou Knopenteller nuttiger voor je maken?", "fb.ph.other": "Vertel ons wat je bezighoudt.", "fb.incl": "Voeg mijn getallen toe (leeftijden, budget, vermogen), zodat jullie zien wat ik zie", "fb.copy": "Kopieer tekst", "fb.after": "Je mailprogramma opent nu met je bericht klaar. Gebeurde er niets? Kopieer de tekst en stuur hem naar {mail}.", "fb.copied": "Gekopieerd. Plak het in een mail aan {mail}.", "fb.empty": "Schrijf eerst een paar woorden, dan zetten we de mail klaar.", "fb.direct": "Of mail ons direct:", "fb.spot": "Fout gezien?",
+  "fb.send": "Verstuur", "fb.sending": "Bezig met versturen…", "fb.sent": "Bedankt! Je tip is verstuurd.", "fb.fail": "Versturen lukte niet. Controleer je verbinding en probeer het opnieuw.", "fb.fallback": "Lukt het niet? Open het formulier zelf", "fb.mail": "Liever per mail", "fb.sub": "Kies een onderwerp en vertel ons wat je opviel.", "fb.privacy": "Er wordt pas iets verstuurd als je op Verstuur drukt. Je tip komt direct bij ons binnen.",   'fb.ctry': 'Land', 'fb.persons': 'Personen',
+  "fb.line": "Heb je een tip of aanvulling? We horen het graag.", "fb.btn": "Geef een tip", "fb.aboutH": "Help Knopenteller beter maken", "fb.aboutP": "Mis je een regel voor je land, zie je een fout of heb je een idee? Laat het ons weten. Elke tip helpt om Knopenteller voor iedereen kloppend te houden.", "fb.h": "Wat kunnen we beter doen?", "fb.topic": "Waar gaat het over?", "fb.cat": "Onderwerp", "fb.section": "Onderdeel", "fb.cat.data": "Een cijfer of bron klopt niet", "fb.cat.country": "Regels voor mijn land", "fb.cat.text": "Tekst of vertaling", "fb.cat.idea": "Idee of aanvulling", "fb.cat.other": "Iets anders", "fb.msg": "Je tip of aanvulling", "fb.ph.data": "Welk cijfer en wat zou het moeten zijn? Een link naar de bron helpt ons enorm.", "fb.ph.country": "Welke regel mist er, of is anders waar jij woont?", "fb.ph.text": "Welke tekst en hoe zou jij het zeggen?", "fb.ph.idea": "Wat zou Knopenteller nuttiger voor je maken?", "fb.ph.other": "Vertel ons wat je bezighoudt.", "fb.incl": "Voeg mijn getallen toe (leeftijden, budget, vermogen), zodat jullie zien wat ik zie", "fb.copy": "Kopieer tekst", "fb.after": "Je mailprogramma opent nu met je bericht klaar. Gebeurde er niets? Kopieer de tekst en stuur hem naar {mail}.", "fb.copied": "Gekopieerd. Plak het in een mail aan {mail}.", "fb.empty": "Schrijf eerst een paar woorden, dan kun je versturen.", "fb.direct": "Of mail ons direct:", "fb.spot": "Fout gezien?",
   'src.sep': ': ', 'h.penAge': 'De ingangsleeftijd op je pensioenoverzicht. We gaan ervan uit dat het tegelijk met je {sp} ingaat; pas het aan als dat bij jou anders is.', 'penName': 'pensioen via werk', 'w.sp': '{Sp}', 'w.pension': '{Pen}',
   'st3.h': '{Sp} en {pen}', 'f.penOn': 'Bouwt {pen} op', 'f.penAmt': '{Pen}, netto per maand',
   'h.penAmt': 'Vul het in als netto bedrag per maand, zonder {sp}. Heb je een pot in plaats van een maandbedrag? Tel die dan op bij je vermogen.',
@@ -3814,9 +3816,8 @@ Object.assign(I18N.nl, {
 });
 
 Object.assign(I18N.de, {
-  "fb.send": "Per Formular senden", "fb.mail": "Lieber per E-Mail", "fb.sub": "Wählen Sie ein Thema und sagen Sie uns, was Ihnen aufgefallen ist. Wir füllen das Formular für Sie aus; Sie drücken nur auf Senden.", "fb.privacy": "Es wird nichts automatisch gesendet. In einem neuen Tab öffnet sich ein ausgefülltes Formular und Sie entscheiden, ob Sie es absenden.", "fb.afterForm": "Das Formular ist in einem neuen Tab geöffnet, Ihr Tipp ist eingetragen. Drücken Sie dort auf Senden, dann erreicht er uns.",
-  'fb.ctry': 'Land', 'fb.persons': 'Personen',
-  "fb.line": "Haben Sie einen Tipp oder eine Ergänzung? Wir freuen uns darauf.", "fb.btn": "Tipp geben", "fb.aboutH": "Helfen Sie, Button Counter besser zu machen", "fb.aboutP": "Fehlt eine Regel für Ihr Land, haben Sie einen Fehler entdeckt oder eine Idee? Sagen Sie es uns. Jeder Tipp hilft, Button Counter für alle richtig zu halten.", "fb.h": "Was können wir besser machen?", "fb.topic": "Worum geht es?", "fb.cat": "Thema", "fb.section": "Bereich", "fb.cat.data": "Eine Zahl oder Quelle stimmt nicht", "fb.cat.country": "Regeln für mein Land", "fb.cat.text": "Text oder Übersetzung", "fb.cat.idea": "Idee oder Ergänzung", "fb.cat.other": "Etwas anderes", "fb.msg": "Ihr Tipp oder Ihre Ergänzung", "fb.ph.data": "Welche Zahl und wie sollte sie lauten? Ein Link zur Quelle hilft uns sehr.", "fb.ph.country": "Welche Regel fehlt oder ist dort, wo Sie leben, anders?", "fb.ph.text": "Welcher Text und wie würden Sie es sagen?", "fb.ph.idea": "Was würde Button Counter für Sie nützlicher machen?", "fb.ph.other": "Sagen Sie uns, was Sie beschäftigt.", "fb.incl": "Meine Zahlen anhängen (Alter, Budget, Vermögen), damit Sie sehen, was ich sehe", "fb.copy": "Text kopieren", "fb.after": "Ihr E-Mail-Programm sollte sich jetzt mit Ihrer Nachricht öffnen. Passiert nichts? Kopieren Sie den Text und senden Sie ihn an {mail}.", "fb.copied": "Kopiert. Fügen Sie ihn in eine E-Mail an {mail} ein.", "fb.empty": "Schreiben Sie zuerst ein paar Worte, dann bereiten wir die E-Mail vor.", "fb.direct": "Oder schreiben Sie uns direkt:", "fb.spot": "Fehler entdeckt?",
+  "fb.send": "Senden", "fb.sending": "Wird gesendet …", "fb.sent": "Danke! Ihr Tipp wurde gesendet.", "fb.fail": "Das Senden hat nicht geklappt. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.", "fb.fallback": "Klappt es nicht? Öffnen Sie das Formular selbst", "fb.mail": "Lieber per E-Mail", "fb.sub": "Wählen Sie ein Thema und sagen Sie uns, was Ihnen aufgefallen ist.", "fb.privacy": "Es wird erst etwas gesendet, wenn Sie auf Senden drücken. Ihr Tipp erreicht uns direkt.",   'fb.ctry': 'Land', 'fb.persons': 'Personen',
+  "fb.line": "Haben Sie einen Tipp oder eine Ergänzung? Wir freuen uns darauf.", "fb.btn": "Tipp geben", "fb.aboutH": "Helfen Sie, Button Counter besser zu machen", "fb.aboutP": "Fehlt eine Regel für Ihr Land, haben Sie einen Fehler entdeckt oder eine Idee? Sagen Sie es uns. Jeder Tipp hilft, Button Counter für alle richtig zu halten.", "fb.h": "Was können wir besser machen?", "fb.topic": "Worum geht es?", "fb.cat": "Thema", "fb.section": "Bereich", "fb.cat.data": "Eine Zahl oder Quelle stimmt nicht", "fb.cat.country": "Regeln für mein Land", "fb.cat.text": "Text oder Übersetzung", "fb.cat.idea": "Idee oder Ergänzung", "fb.cat.other": "Etwas anderes", "fb.msg": "Ihr Tipp oder Ihre Ergänzung", "fb.ph.data": "Welche Zahl und wie sollte sie lauten? Ein Link zur Quelle hilft uns sehr.", "fb.ph.country": "Welche Regel fehlt oder ist dort, wo Sie leben, anders?", "fb.ph.text": "Welcher Text und wie würden Sie es sagen?", "fb.ph.idea": "Was würde Button Counter für Sie nützlicher machen?", "fb.ph.other": "Sagen Sie uns, was Sie beschäftigt.", "fb.incl": "Meine Zahlen anhängen (Alter, Budget, Vermögen), damit Sie sehen, was ich sehe", "fb.copy": "Text kopieren", "fb.after": "Ihr E-Mail-Programm sollte sich jetzt mit Ihrer Nachricht öffnen. Passiert nichts? Kopieren Sie den Text und senden Sie ihn an {mail}.", "fb.copied": "Kopiert. Fügen Sie ihn in eine E-Mail an {mail} ein.", "fb.empty": "Schreiben Sie zuerst ein paar Worte, dann können Sie senden.", "fb.direct": "Oder schreiben Sie uns direkt:", "fb.spot": "Fehler entdeckt?",
   'src.sep': ': ', 'h.penAge': 'Das Beginnalter aus Ihrer Rentenmitteilung. Wir nehmen an, dass sie mit Ihrer {sp} beginnt; ändern Sie es, wenn das bei Ihnen anders ist.', 'penName': 'Betriebs- oder Zusatzrente', 'w.sp': '{Sp}', 'w.pension': '{Pen}',
   'st3.h': '{Sp} und {Pen}', 'f.penOn': 'Hat eine {Pen}', 'f.penAmt': '{Pen}, netto pro Monat',
   'h.penAmt': 'Tragen Sie sie als monatlichen Nettobetrag ein, ohne {sp}. Haben Sie einen Topf statt eines Monatsbetrags? Dann zählen Sie ihn zu Ihrem Vermögen.',
@@ -3836,9 +3837,8 @@ Object.assign(I18N.de, {
 });
 
 Object.assign(I18N.fr, {
-  "fb.send": "Envoyer via le formulaire", "fb.mail": "Plutôt par e-mail", "fb.sub": "Choisissez un sujet et dites-nous ce que vous avez remarqué. Nous remplissons le formulaire pour vous ; vous n’avez qu’à cliquer sur Envoyer.", "fb.privacy": "Rien n’est envoyé automatiquement. Un formulaire rempli s’ouvre dans un nouvel onglet et c’est vous qui décidez de l’envoyer.", "fb.afterForm": "Le formulaire s’est ouvert dans un nouvel onglet avec votre astuce. Cliquez sur Envoyer et nous la recevrons.",
-  'fb.ctry': 'Pays', 'fb.persons': 'Personnes',
-  "fb.line": "Une astuce ou un ajout ? Nous serions ravis de vous lire.", "fb.btn": "Donner une astuce", "fb.aboutH": "Aidez-nous à améliorer Button Counter", "fb.aboutP": "Il manque une règle pour votre pays, vous avez repéré une erreur ou vous avez une idée ? Dites-le-nous. Chaque astuce nous aide à garder Button Counter juste pour tous.", "fb.h": "Que pouvons-nous améliorer ?", "fb.topic": "De quoi s’agit-il ?", "fb.cat": "Sujet", "fb.section": "Rubrique", "fb.cat.data": "Un chiffre ou une source est faux", "fb.cat.country": "Règles de mon pays", "fb.cat.text": "Texte ou traduction", "fb.cat.idea": "Idée ou ajout", "fb.cat.other": "Autre chose", "fb.msg": "Votre astuce ou ajout", "fb.ph.data": "Quel chiffre et que devrait-il être ? Un lien vers la source nous aide beaucoup.", "fb.ph.country": "Quelle règle manque ou diffère là où vous vivez ?", "fb.ph.text": "Quel texte et comment le diriez-vous ?", "fb.ph.idea": "Qu’est-ce qui rendrait Button Counter plus utile pour vous ?", "fb.ph.other": "Dites-nous ce qui vous occupe.", "fb.incl": "Ajouter mes chiffres (âges, budget, patrimoine) pour que vous voyiez ce que je vois", "fb.copy": "Copier le texte", "fb.after": "Votre messagerie devrait s’ouvrir avec votre message prêt. Rien ne s’est passé ? Copiez le texte et envoyez-le à {mail}.", "fb.copied": "Copié. Collez-le dans un e-mail à {mail}.", "fb.empty": "Écrivez d’abord quelques mots, puis nous préparons l’e-mail.", "fb.direct": "Ou écrivez-nous directement :", "fb.spot": "Une erreur ?",
+  "fb.send": "Envoyer", "fb.sending": "Envoi en cours…", "fb.sent": "Merci ! Votre astuce a bien été envoyée.", "fb.fail": "L’envoi a échoué. Vérifiez votre connexion et réessayez.", "fb.fallback": "Ça ne marche pas ? Ouvrez vous-même le formulaire", "fb.mail": "Plutôt par e-mail", "fb.sub": "Choisissez un sujet et dites-nous ce que vous avez remarqué.", "fb.privacy": "Rien n’est envoyé tant que vous ne cliquez pas sur Envoyer. Votre astuce nous parvient directement.",   'fb.ctry': 'Pays', 'fb.persons': 'Personnes',
+  "fb.line": "Une astuce ou un ajout ? Nous serions ravis de vous lire.", "fb.btn": "Donner une astuce", "fb.aboutH": "Aidez-nous à améliorer Button Counter", "fb.aboutP": "Il manque une règle pour votre pays, vous avez repéré une erreur ou vous avez une idée ? Dites-le-nous. Chaque astuce nous aide à garder Button Counter juste pour tous.", "fb.h": "Que pouvons-nous améliorer ?", "fb.topic": "De quoi s’agit-il ?", "fb.cat": "Sujet", "fb.section": "Rubrique", "fb.cat.data": "Un chiffre ou une source est faux", "fb.cat.country": "Règles de mon pays", "fb.cat.text": "Texte ou traduction", "fb.cat.idea": "Idée ou ajout", "fb.cat.other": "Autre chose", "fb.msg": "Votre astuce ou ajout", "fb.ph.data": "Quel chiffre et que devrait-il être ? Un lien vers la source nous aide beaucoup.", "fb.ph.country": "Quelle règle manque ou diffère là où vous vivez ?", "fb.ph.text": "Quel texte et comment le diriez-vous ?", "fb.ph.idea": "Qu’est-ce qui rendrait Button Counter plus utile pour vous ?", "fb.ph.other": "Dites-nous ce qui vous occupe.", "fb.incl": "Ajouter mes chiffres (âges, budget, patrimoine) pour que vous voyiez ce que je vois", "fb.copy": "Copier le texte", "fb.after": "Votre messagerie devrait s’ouvrir avec votre message prêt. Rien ne s’est passé ? Copiez le texte et envoyez-le à {mail}.", "fb.copied": "Copié. Collez-le dans un e-mail à {mail}.", "fb.empty": "Écrivez d’abord quelques mots, puis vous pourrez envoyer.", "fb.direct": "Ou écrivez-nous directement :", "fb.spot": "Une erreur ?",
   'src.sep': ' : ', 'h.penAge': 'L’âge de départ indiqué sur votre relevé. Nous supposons qu’elle commence avec votre {sp} ; modifiez-le si ce n’est pas votre cas.', 'penName': 'retraite complémentaire', 'w.sp': '{Sp}', 'w.pension': '{Pen}',
   'st3.h': '{Sp} et {pen}', 'f.penOn': 'A une {pen}', 'f.penAmt': '{Pen}, nette par mois',
   'h.penAmt': 'Indiquez-la en montant net par mois, sans la {sp}. Vous avez une cagnotte plutôt qu’un montant mensuel ? Ajoutez-la à votre patrimoine.',
@@ -3858,9 +3858,8 @@ Object.assign(I18N.fr, {
 });
 
 Object.assign(I18N.es, {
-  "fb.send": "Enviar por formulario", "fb.mail": "Mejor por correo", "fb.sub": "Elige un tema y cuéntanos lo que has visto. Nosotros rellenamos el formulario; tú solo pulsas Enviar.", "fb.privacy": "No se envía nada automáticamente. Se abre un formulario relleno en una pestaña nueva y tú decides si lo envías.", "fb.afterForm": "El formulario se ha abierto en una pestaña nueva con tu consejo. Pulsa Enviar allí y nos llegará.",
-  'fb.ctry': 'País', 'fb.persons': 'Personas',
-  "fb.line": "¿Tienes un consejo o una aportación? Nos encantará leerlo.", "fb.btn": "Enviar un consejo", "fb.aboutH": "Ayúdanos a mejorar Button Counter", "fb.aboutP": "¿Falta una regla de tu país, has visto un error o tienes una idea? Cuéntanoslo. Cada consejo nos ayuda a mantener Button Counter correcto para todos.", "fb.h": "¿Qué podemos mejorar?", "fb.topic": "¿De qué se trata?", "fb.cat": "Tema", "fb.section": "Sección", "fb.cat.data": "Una cifra o fuente no cuadra", "fb.cat.country": "Reglas de mi país", "fb.cat.text": "Texto o traducción", "fb.cat.idea": "Idea o aportación", "fb.cat.other": "Otra cosa", "fb.msg": "Tu consejo o aportación", "fb.ph.data": "¿Qué cifra y cuál debería ser? Un enlace a la fuente nos ayuda mucho.", "fb.ph.country": "¿Qué regla falta o es distinta donde vives?", "fb.ph.text": "¿Qué texto y cómo lo dirías tú?", "fb.ph.idea": "¿Qué haría Button Counter más útil para ti?", "fb.ph.other": "Cuéntanos lo que tienes en mente.", "fb.incl": "Añadir mis cifras (edades, presupuesto, patrimonio) para que veáis lo que yo veo", "fb.copy": "Copiar texto", "fb.after": "Tu correo debería abrirse ahora con el mensaje listo. ¿No ha pasado nada? Copia el texto y envíalo a {mail}.", "fb.copied": "Copiado. Pégalo en un correo a {mail}.", "fb.empty": "Escribe primero unas palabras y te preparamos el correo.", "fb.direct": "O escríbenos directamente:", "fb.spot": "¿Ves un error?",
+  "fb.send": "Enviar", "fb.sending": "Enviando…", "fb.sent": "¡Gracias! Tu consejo se ha enviado.", "fb.fail": "No se pudo enviar. Comprueba tu conexión e inténtalo de nuevo.", "fb.fallback": "¿No funciona? Abre tú mismo el formulario", "fb.mail": "Mejor por correo", "fb.sub": "Elige un tema y cuéntanos lo que has visto.", "fb.privacy": "No se envía nada hasta que pulses Enviar. Tu consejo nos llega directamente.",   'fb.ctry': 'País', 'fb.persons': 'Personas',
+  "fb.line": "¿Tienes un consejo o una aportación? Nos encantará leerlo.", "fb.btn": "Enviar un consejo", "fb.aboutH": "Ayúdanos a mejorar Button Counter", "fb.aboutP": "¿Falta una regla de tu país, has visto un error o tienes una idea? Cuéntanoslo. Cada consejo nos ayuda a mantener Button Counter correcto para todos.", "fb.h": "¿Qué podemos mejorar?", "fb.topic": "¿De qué se trata?", "fb.cat": "Tema", "fb.section": "Sección", "fb.cat.data": "Una cifra o fuente no cuadra", "fb.cat.country": "Reglas de mi país", "fb.cat.text": "Texto o traducción", "fb.cat.idea": "Idea o aportación", "fb.cat.other": "Otra cosa", "fb.msg": "Tu consejo o aportación", "fb.ph.data": "¿Qué cifra y cuál debería ser? Un enlace a la fuente nos ayuda mucho.", "fb.ph.country": "¿Qué regla falta o es distinta donde vives?", "fb.ph.text": "¿Qué texto y cómo lo dirías tú?", "fb.ph.idea": "¿Qué haría Button Counter más útil para ti?", "fb.ph.other": "Cuéntanos lo que tienes en mente.", "fb.incl": "Añadir mis cifras (edades, presupuesto, patrimonio) para que veáis lo que yo veo", "fb.copy": "Copiar texto", "fb.after": "Tu correo debería abrirse ahora con el mensaje listo. ¿No ha pasado nada? Copia el texto y envíalo a {mail}.", "fb.copied": "Copiado. Pégalo en un correo a {mail}.", "fb.empty": "Escribe primero unas palabras y luego podrás enviar.", "fb.direct": "O escríbenos directamente:", "fb.spot": "¿Ves un error?",
   'src.sep': ': ', 'h.penAge': 'La edad de inicio que figura en tu informe. Suponemos que empieza a la vez que tu {sp}; cámbiala si en tu caso es distinto.', 'penName': 'plan de pensiones de empresa', 'w.sp': '{Sp}', 'w.pension': '{Pen}',
   'st3.h': '{Sp} y {pen}', 'f.penOn': 'Tiene un {pen}', 'f.penAmt': '{Pen}, neto al mes',
   'h.penAmt': 'Indícalo como importe neto al mes, sin la {sp}. ¿Tienes un fondo acumulado en lugar de un importe mensual? Súmalo a tu patrimonio.',
@@ -5391,7 +5390,10 @@ Object.assign(I18N.en, {
  'rel.16.n3': 'The notepad now has a little picture of its own.',
  'rel.17.v': 'Version 17 · November 2026',
  'rel.17.n1': 'The introduction is easier to follow: split into clear parts, with new text that explains better what Button Counter does.',
- 'rel.17.n2': 'In the introduction you now always pick a question. Skipping is no longer possible.'
+ 'rel.17.n2': 'In the introduction you now always pick a question. Skipping is no longer possible.',
+ 'rel.18.v': 'Version 18 · November 2026',
+ 'rel.18.n1': 'Sending a tip is now one step: press Send and you’re done, with no extra screen.',
+ 'rel.18.n2': 'If you choose “I don’t know yet”, the button now says what comes next: a short tour.'
 });
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
@@ -5418,7 +5420,10 @@ Object.assign(I18N.nl, {
  'rel.16.n3': 'Het kladblok heeft nu een eigen plaatje.',
  'rel.17.v': 'Versie 17 · november 2026',
  'rel.17.n1': 'De introductie is overzichtelijker: in duidelijke delen en met nieuwe tekst die beter uitlegt wat Knopenteller doet.',
- 'rel.17.n2': 'In de introductie kies je nu altijd een vraag. Overslaan kan niet meer.'
+ 'rel.17.n2': 'In de introductie kies je nu altijd een vraag. Overslaan kan niet meer.',
+ 'rel.18.v': 'Versie 18 · november 2026',
+ 'rel.18.n1': 'Een tip geven gaat nu in één keer: je drukt op Verstuur en klaar, zonder extra scherm.',
+ 'rel.18.n2': 'Kies je “Ik weet het nog niet”, dan zegt de knop nu wat er volgt: een korte rondleiding.'
 });
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
@@ -5445,7 +5450,10 @@ Object.assign(I18N.de, {
  'rel.16.n3': 'Die Notizen haben jetzt ein eigenes Bildchen.',
  'rel.17.v': 'Version 17 · November 2026',
  'rel.17.n1': 'Die Einführung ist übersichtlicher: in klare Abschnitte gegliedert und mit neuem Text, der besser erklärt, was Button Counter tut.',
- 'rel.17.n2': 'In der Einführung wählen Sie jetzt immer eine Frage. Überspringen ist nicht mehr möglich.'
+ 'rel.17.n2': 'In der Einführung wählen Sie jetzt immer eine Frage. Überspringen ist nicht mehr möglich.',
+ 'rel.18.v': 'Version 18 · November 2026',
+ 'rel.18.n1': 'Einen Tipp zu geben geht jetzt in einem Schritt: auf Senden drücken, fertig, ohne zusätzlichen Bildschirm.',
+ 'rel.18.n2': 'Wählen Sie „Ich weiß es noch nicht“, sagt die Schaltfläche jetzt, was folgt: eine kurze Tour.'
 });
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
@@ -5472,7 +5480,10 @@ Object.assign(I18N.fr, {
  'rel.16.n3': 'Le bloc-notes a maintenant sa propre petite image.',
  'rel.17.v': 'Version 17 · novembre 2026',
  'rel.17.n1': 'L’introduction est plus claire : découpée en parties distinctes, avec un nouveau texte qui explique mieux ce que fait Button Counter.',
- 'rel.17.n2': 'Dans l’introduction, vous choisissez désormais toujours une question. Il n’est plus possible de passer.'
+ 'rel.17.n2': 'Dans l’introduction, vous choisissez désormais toujours une question. Il n’est plus possible de passer.',
+ 'rel.18.v': 'Version 18 · novembre 2026',
+ 'rel.18.n1': 'Donner une astuce se fait désormais en une étape : vous cliquez sur Envoyer et c’est terminé, sans écran supplémentaire.',
+ 'rel.18.n2': 'Si vous choisissez « Je ne sais pas encore », le bouton indique désormais ce qui suit : une courte visite guidée.'
 });
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
@@ -5499,7 +5510,10 @@ Object.assign(I18N.es, {
  'rel.16.n3': 'El bloc de notas ahora tiene su propia imagen.',
  'rel.17.v': 'Versión 17 · noviembre de 2026',
  'rel.17.n1': 'La introducción es más clara: dividida en partes bien diferenciadas y con un texto nuevo que explica mejor qué hace Button Counter.',
- 'rel.17.n2': 'En la introducción ahora siempre eliges una pregunta. Ya no se puede omitir.'
+ 'rel.17.n2': 'En la introducción ahora siempre eliges una pregunta. Ya no se puede omitir.',
+ 'rel.18.v': 'Versión 18 · noviembre de 2026',
+ 'rel.18.n1': 'Enviar un consejo ahora es un solo paso: pulsas Enviar y listo, sin pantalla adicional.',
+ 'rel.18.n2': 'Si eliges «Todavía no lo sé», el botón ahora dice lo que sigue: un breve recorrido.'
 });
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
@@ -5731,7 +5745,7 @@ Object.assign(I18N.es, {
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '12 · 2026-11';
+  var APPV = '18 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
@@ -7717,6 +7731,8 @@ var TRK = {
     var cur = slotG()[slotIdx];
     each('#slot-sub > span', function (sp) { sp.classList.toggle('on', sp.getAttribute('data-g') === cur); });
     if (w) { w.setAttribute('aria-valuenow', slotIdx + 1); w.setAttribute('aria-valuetext', gtx(slotG()[slotIdx], '.t')); }
+    var ok = $('slot-ok');   /* wie nog geen vraag heeft, krijgt de rondleiding: de knop zegt dat */
+    if (ok) { var ak = cur === 'unsure' ? 'b.showHow' : 'slot.ok'; ok.setAttribute('data-t', ak); ok.innerHTML = t1(ak); }
   }
   function slotShow(i) { slotPos(i * SLA, false); }
   function slotSnap(a) { slotPos(Math.round(a / SLA) * SLA, true); }
@@ -7806,7 +7822,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -7835,7 +7851,7 @@ var TRK = {
   }
 
   /* ================= feedback per mail ================= */
-  var fbCtx = '', fbFocus = null;
+  var fbCtx = '', fbFocus = null, fbSending = false, fbSentOk = false;
   /* Google-formulier: antwoorden komen in het gekoppelde spreadsheet */
   var FB_FORM = 'https://docs.google.com/forms/d/e/1FAIpQLScOj9gCX_pPJd7RsF5-AVnuOVoq5LeAGzmqa0F34aGc0KbrUw/viewform';
   var FB_E = { topic: 'entry.862323177', msg: 'entry.1725021484', country: 'entry.1839444150', lang: 'entry.1235630570', section: 'entry.1924711593', details: 'entry.1617613850' };
@@ -7869,12 +7885,16 @@ var TRK = {
       'Chance of success: ' + Math.round(curSucc * 100) + '%');
     return L;
   }
-  function fbFormUrl() {
+  /* de ingevulde velden voor het formulier; leeg wordt weggelaten */
+  function fbEntries() {
     var cat = fbCat(), msg = ($('fb-msg').value || '').trim(), det = ['App: Button Counter ' + APPV, 'Currency: ' + prefs.cur];
     if ($('fb-incl').checked) det = det.concat(fbDetails());
-    var q = [[FB_E.topic, I18N.en['fb.cat.' + cat]], [FB_E.msg, msg], [FB_E.country, cName(prefs.country, 'en') + ' (' + prefs.country + ')'],
-      [FB_E.lang, LANGNAME[prefs.lang]], [FB_E.section, fbCtx], [FB_E.details, det.join('\n')]];
-    return FB_FORM + '?usp=pp_url&' + q.filter(function (x) { return x[1]; }).map(function (x) { return x[0] + '=' + encodeURIComponent(x[1]); }).join('&');
+    return [[FB_E.topic, I18N.en['fb.cat.' + cat]], [FB_E.msg, msg], [FB_E.country, cName(prefs.country, 'en') + ' (' + prefs.country + ')'],
+      [FB_E.lang, LANGNAME[prefs.lang]], [FB_E.section, fbCtx], [FB_E.details, det.join('\n')]].filter(function (x) { return x[1]; });
+  }
+  /* reserve: het ingevulde formulier zelf openen, als versturen niet lukt */
+  function fbFormUrl() {
+    return FB_FORM + '?usp=pp_url&' + fbEntries().map(function (x) { return x[0] + '=' + encodeURIComponent(x[1]); }).join('&');
   }
   function fbCat() { var r = document.querySelector('input[name="fb-cat"]:checked'); return r ? r.value : 'idea'; }
   function fbText() {
@@ -7889,13 +7909,14 @@ var TRK = {
   function fbUpdate() {
     var f = fbText(), ph = 'fb.ph.' + fbCat();
     $('fb-msg').setAttribute('placeholder', t1(ph));
-    $('fb-form').href = fbFormUrl(); $('fb-form').setAttribute('aria-disabled', f.msg ? 'false' : 'true');
+    $('fb-form').href = fbFormUrl();
     $('fb-ctx').hidden = !fbCtx; $('fb-ctx').textContent = fbCtx ? t1('fb.section') + ': ' + fbCtx : '';
   }
   function openFb(cat, ctx) {
     fbFocus = document.activeElement; fbCtx = ctx || '';
     each('input[name="fb-cat"]', function (r) { r.checked = r.value === (cat || 'idea'); });
-    $('fb-status').textContent = '';
+    $('fb-status').textContent = ''; $('fb-status').classList.remove('warn'); $('fb-fallback').hidden = true;
+    $('fb-send').disabled = false; fbSending = false; fbSentOk = false;
     $('fb').hidden = false; updateNow(); fbUpdate();
     setTimeout(function () { $('fb-msg').focus({ preventScroll: true }); var c = document.querySelector('.fb-dlg'); if (c) c.scrollTop = 0; }, 30);
   }
@@ -7915,15 +7936,30 @@ var TRK = {
   });
   $('fb-close').addEventListener('click', closeFb);
   $('fb').addEventListener('click', function (ev) { if (ev.target === $('fb')) closeFb(); });
-  $('fb-msg').addEventListener('input', function () { if ($('fb-status').classList.contains('warn')) { $('fb-status').textContent = ''; $('fb-status').classList.remove('warn'); } fbUpdate(); });
+  $('fb-msg').addEventListener('input', function () {
+    if (fbSentOk || $('fb-status').classList.contains('warn')) { $('fb-status').textContent = ''; $('fb-status').classList.remove('warn'); fbSentOk = false; $('fb-send').disabled = false; }
+    fbUpdate();
+  });
   $('fb-incl').addEventListener('change', fbUpdate);
   each('input[name="fb-cat"]', function (r) { r.addEventListener('change', fbUpdate); });
-  function fbGo(ev, key) {
-    if (busy()) { ev.preventDefault(); $('fb-status').textContent = t1('calc'); return; }
-    if (!fbText().msg) { ev.preventDefault(); $('fb-status').textContent = t1('fb.empty'); $('fb-status').classList.add('warn'); $('fb-msg').focus(); return; }
-    $('fb-status').classList.remove('warn'); $('fb-status').textContent = t1(key);
+  /* direct naar het formulier sturen (formResponse), zonder dat de bezoeker het formulier ziet.
+     no-cors: het antwoord van Google is niet te lezen, een fout zien we alleen als het netwerk uitvalt. */
+  function fbSend() {
+    if (fbSending) return;
+    var st = $('fb-status');
+    st.classList.remove('warn');
+    if (busy()) { st.textContent = t1('calc'); return; }
+    if (!fbText().msg) { st.textContent = t1('fb.empty'); st.classList.add('warn'); $('fb-msg').focus(); return; }
+    fbSending = true; $('fb-send').disabled = true; $('fb-fallback').hidden = true; st.textContent = t1('fb.sending');
+    var body = new URLSearchParams();
+    fbEntries().forEach(function (q) { body.append(q[0], q[1]); });
+    fetch(FB_FORM.replace('/viewform', '/formResponse'), { method: 'POST', mode: 'no-cors', body: body, keepalive: true }).then(function () {
+      fbSending = false; fbSentOk = true; $('fb-msg').value = ''; st.textContent = t1('fb.sent'); fbUpdate();
+    }, function () {
+      fbSending = false; $('fb-send').disabled = false; st.classList.add('warn'); st.textContent = t1('fb.fail'); $('fb-fallback').hidden = false; fbUpdate();
+    });
   }
-  $('fb-form').addEventListener('click', function (ev) { fbGo(ev, 'fb.afterForm'); });
+  $('fb-send').addEventListener('click', fbSend);
 
   /* ================= rondleiding ================= */
   var TOUR = ['ov-main', 'status-card', 'kpis', 'fan', 'flow', 'tab-insight', 'tab-about', 'tab-input'];

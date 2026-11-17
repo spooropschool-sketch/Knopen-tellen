@@ -51,6 +51,9 @@ def extract():
     base = 'http://127.0.0.1:%d/src/index.html' % srv.server_address[1]
     out = {}
     problems = []
+    # texts the code asks for by name, such as t1('fb.sent'); keys glued together at run time are not covered
+    with open(SRC, encoding='utf-8') as f:
+        js_keys = sorted(set(re.findall(r"""\b(?:t1?|look)\(\s*'([A-Za-z0-9_]+\.[A-Za-z0-9_.]+)'\s*[,)]""", f.read())))
     with sync_playwright() as pw:
         br = pw.chromium.launch()
         for lang in LANGS:
@@ -64,7 +67,7 @@ def extract():
             pg.on('pageerror', lambda e: errs.append(str(e)))
             pg.goto(base)
             pg.wait_for_timeout(700)
-            data = pg.evaluate("""() => {
+            data = pg.evaluate("""(jsKeys) => {
               const t = {}, alt = {}, aria = {};
               document.querySelectorAll('[data-t]').forEach(e => { const k = e.getAttribute('data-t'); if (!(k in t)) t[k] = e.innerHTML; });
               document.querySelectorAll('[data-t-alt]').forEach(e => { alt[e.getAttribute('data-t-alt')] = e.getAttribute('alt') || ''; });
@@ -75,14 +78,15 @@ def extract():
               document.querySelectorAll('[data-t],[data-t-alt],[data-t-aria]').forEach(e => ['data-t', 'data-t-alt', 'data-t-aria'].forEach(a => { const k = e.getAttribute(a); if (k) used.add(k); }));
               const L = I18N[document.documentElement.lang] || {};
               const missing = [...used].filter(k => L[k] === undefined).sort();
+              const jsMissing = jsKeys.filter(k => L[k] === undefined).sort();
               const relMissing = Object.keys(I18N.en).filter(k => /^rel\\.\\d+\\./.test(k) && L[k] === undefined).sort();
-              return { t, alt, aria, faq, lp, missing, relMissing, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
-            }""")
+              return { t, alt, aria, faq, lp, missing, jsMissing, relMissing, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
+            }""", js_keys)
             assert not errs, errs
             assert data['lang'] == lang, (lang, data['lang'])
             # Every text shown on the page, and every release note, needs its own translation in every language.
             # Without it the app silently falls back to English, so stop the build instead.
-            gaps = [k for k in data['missing'] if k not in LANGUAGE_NEUTRAL] + data['relMissing']
+            gaps = [k for k in data['missing'] + data['jsMissing'] if k not in LANGUAGE_NEUTRAL] + data['relMissing']
             if gaps:
                 problems.append('%s: no translation for %s' % (lang, ', '.join(gaps)))
             out[lang] = data
