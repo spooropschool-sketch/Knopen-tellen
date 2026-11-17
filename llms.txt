@@ -51,7 +51,7 @@ That depends on your monthly budget, your age and the pension you will receive. 
 
 ### How is the chance of success calculated?
 
-Button Counter runs 4,000 simulations in which returns go up and down each year. It does this for three portfolios (defensive, balanced and aggressive), after costs, tax and inflation, so every amount is in today’s money. The chance of success is the share of simulations in which your money lasts until your end age. Two crash scenarios, one like 2008 and one like 2022, are shown separately.
+Button Counter runs 4,000 simulations in which returns go up and down each year. It does this for four mixes (defensive, balanced, aggressive, and savings without investing), after costs, tax and inflation, so every amount is in today’s money. The chance of success is the share of simulations in which your money lasts until your end age. Two crash scenarios, one like 2008 and one like 2022, are shown separately.
 
 ### Does my spending stay the same in the calculation, or does it fall?
 
