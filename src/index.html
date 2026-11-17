@@ -2024,6 +2024,12 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
 
 .lrow.lhead { padding-bottom: 1px; }
 .lrow.lhead .lb, .lrow.lhead .lv { font-family: var(--f-body); font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; color: var(--muted); white-space: normal; line-height: 1.25; }
+
+.opb-meter.has-want { margin-top: 30px; }
+.opb-meter .want { width: 4px; top: -7px; bottom: -4px; transform: translateX(-50%); }
+.opb-meter .want-ppl { position: absolute; top: -24px; transform: translateX(-50%); display: inline-flex; gap: 1px; color: var(--warn); line-height: 0; filter: drop-shadow(0 1px 0 var(--bg)); }
+
+.opb-wait .opb-big, .opb-wait .opb-want, .opb-wait .opb-meter, .opb-wait .opb-lvls, .opb-wait .opb-tiles, .opb-wait .opb-msg, .opb-wait .opb-split { opacity: 0.45; transition: opacity 0.15s; }
 </style>
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -6023,6 +6029,13 @@ Object.assign(I18N.de, {"ld.colBud": "Budget pro Monat", "ld.colNeed": "Dafür n
 Object.assign(I18N.fr, {"ld.colBud": "Budget par mois", "ld.colNeed": "Patrimoine nécessaire pour cela", "ld.none": "rien à prévoir"});
 Object.assign(I18N.es, {"ld.colBud": "Presupuesto al mes", "ld.colNeed": "Patrimonio que necesitas para ello", "ld.none": "nada necesario"});
 
+/* poppetjes op je gewenste budget */
+Object.assign(I18N.en, {"opb.wantMark": "This is you: the budget you want"});
+Object.assign(I18N.nl, {"opb.wantMark": "Dit ben jij: het budget dat je wilt"});
+Object.assign(I18N.de, {"opb.wantMark": "Das sind Sie: das gewünschte Budget"});
+Object.assign(I18N.fr, {"opb.wantMark": "C’est vous : le budget souhaité"});
+Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quieres"});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -7101,6 +7114,7 @@ Object.assign(I18N.es, {"ld.colBud": "Presupuesto al mes", "ld.colNeed": "Patrim
   }
   function renderOpb() {
     var el = $('opb-card'); if (!el) return;
+    el.classList.remove('opb-wait');
     var root = document.documentElement;
     root.classList.toggle('is-opb', !!state.opbouw);
     root.classList.toggle('no-bud', !(state.budget > 0));
@@ -7115,27 +7129,28 @@ Object.assign(I18N.es, {"ld.colBud": "Presupuesto al mes", "ld.colNeed": "Patrim
     if (stop - now < 1) { el.innerHTML = head + '<p class="opb-empty">' + t1('opb.late') + '</p>'; return; }
     /* "Wat als": knoppen die alleen in deze kaart meerekenen; je invoer verandert niet */
     var ex = opbExtra(), OV = ex.ov, inl = OV.inleg;
-    var p = params(OV), rows = [1, 2, 3].map(function (i) {
-      var pf = portStat(i), m = runModel(params(Object.assign({}, OV, { bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true }))), sim = simulate(m, pf, p);
-      return { pf: pf, m: m, sim: sim, k: Math.min(m.tStop, sim.last) };
-    });
-    var ci = effIdx(), cur = rows[ci - 1] || rows[1], sim = cur.sim, k = cur.k, mid = sim.q(k, 0.5);
+    var p = params(OV), pfs = [portStat(1), portStat(2), portStat(3)];
+    var ci = effIdx(); if (!(ci >= 1 && ci <= 3)) ci = 2;
+    var curPf = pfs[ci - 1], curM = runModel(params(Object.assign({}, OV, { bruto: curPf.mu * 100, spaarDeel: curPf.w[2] * 100, skipMax: true })));
+    var sim = simulate(curM, curPf, p), k = Math.min(curM.tStop, sim.last), mid = sim.q(k, 0.5);
     var put = state.startkapitaal, inlX = inl - state.inleg;
     for (var ya = Math.floor(now); ya < stop; ya++) put += 12 * Math.max(0, inlAt(ya) + inlX);
     /* het haalbare maandbudget (9 van de 10 kans tot de eindleeftijd) is de hoofdzaak; het eindbedrag staat eronder */
     var bud = opbBud(OV, ci), base = ex.any ? opbBud({ inleg: state.inleg }, ci) : bud;
     opbBudNow = base; opbHeroOk();
     var want = ex.want;
-    var tiles = rows.map(function (r, i) {
+    var tiles = pfs.map(function (pf2, i) {
       var bi = (i + 1 === ci) ? bud : opbBud(OV, i + 1);
-      return '<button type="button" data-opb-pf="' + (i + 1) + '"' + (r === cur ? ' class="cur" aria-pressed="true"' : ' aria-pressed="false"') + '><small>' + esc(r.pf.n) + '</small><b>' + eur(bi) + '</b><span>' + t1('opb.pm') + '</span></button>';
+      return '<button type="button" data-opb-pf="' + (i + 1) + '"' + (i + 1 === ci ? ' class="cur" aria-pressed="true"' : ' aria-pressed="false"') + '><small>' + esc(pf2.n) + '</small><b>' + eur(bi) + '</b><span>' + t1('opb.pm') + '</span></button>';
     }).join('');
     var lv = '';
     if (lvlOk()) {
       var lf = OV.personen === 2 ? 1.42 : 1, la = function (n) { return Math.round(lvlAmt(n) * lf / 25) * 25; };
       var top = Math.max(want, la(3), bud) * 1.05, pc = function (x) { return Math.min(100, x / top * 100).toFixed(1); };
-      lv = '<div class="opb-meter" aria-hidden="true"><i class="fill" style="width:' + pc(bud) + '%"></i>' +
-        (want ? '<i class="want" style="left:' + pc(want) + '%"></i>' : '') + '</div>' +
+      var pplN = OV.personen === 2 || two() ? 2 : 1;
+      var PPL = '<svg width="11" height="14" viewBox="0 0 11 14" fill="currentColor" aria-hidden="true"><circle cx="5.5" cy="2.6" r="2.4"/><path d="M5.5 5.8c-2.6 0-4.1 1.7-4.1 4.1V14h8.2V9.9c0-2.4-1.5-4.1-4.1-4.1z"/></svg>';
+      lv = '<div class="opb-meter' + (want ? ' has-want' : '') + '" aria-hidden="true"><i class="fill" style="width:' + pc(bud) + '%"></i>' +
+        (want ? '<i class="want" style="left:' + pc(want) + '%"></i><span class="want-ppl" style="left:' + pc(want) + '%" title="' + esc(t1('opb.wantMark')) + '">' + PPL + (pplN === 2 ? PPL : '') + '</span>' : '') + '</div>' +
         '<div class="opb-lvls">' + [1, 2, 3].map(function (n) { return '<span class="' + (bud >= la(n) ? 'hit' : '') + '">' + t1('lvl.' + n + '.n') + ' ' + eur(la(n)) + '</span>'; }).join('') + '</div>';
     }
     var msg = '';
@@ -7201,8 +7216,15 @@ Object.assign(I18N.es, {"ld.colBud": "Presupuesto al mes", "ld.colNeed": "Patrim
     if (key === 'inleg') state.inleg = Math.max(0, Math.round((state.inleg + d * 50) / 50) * 50);
     else if (key === 'budget') { state.levend = 0; state.budget = Math.max(0, Math.round((state.budget + d * 100) / 100) * 100); }
     else if (key === 'stop') { state.autoPenAge = 0; state.pensioenLeeftijd = Math.max(Math.ceil(state.leeftijdPaul) + 1, Math.min(75, Math.round(state.pensioenLeeftijd) + d)); }
-    track('extra-step-' + key); update(); scheduleSim(true);
+    /* de waarde in het kaartje springt direct mee; de berekening volgt pas als je even niet meer klikt */
+    var bEl = document.querySelector('[data-opb-st="' + key + '"]'), host = bEl && bEl.closest('.opb-st-c'), vEl = host && host.querySelector('b');
+    if (vEl) vEl.textContent = key === 'stop' ? fmtAge(state.pensioenLeeftijd) : eur(key === 'inleg' ? state.inleg : state.budget);
+    var card = $('opb-card'); if (card) card.classList.add('opb-wait');
+    track('extra-step-' + key);
+    clearTimeout(opbStepT);
+    opbStepT = setTimeout(function () { update(); scheduleSim(true); }, 550);
   }
+  var opbStepT = 0;
   document.addEventListener('click', function (ev) {
     if (!ev.target.closest) return;
     var w = ev.target.closest('[data-opb-wi]');
@@ -7210,13 +7232,20 @@ Object.assign(I18N.es, {"ld.colBud": "Presupuesto al mes", "ld.colNeed": "Patrim
     var sb = ev.target.closest('[data-opb-st]');
     if (sb) { opbStep(sb.getAttribute('data-opb-st'), parseInt(sb.getAttribute('data-d'), 10)); return; }
     var t = ev.target.closest('[data-opb-pf]');
-    if (t) { state.portfolio = parseInt(t.getAttribute('data-opb-pf'), 10); track('extra-portfolio'); update(); return; }
+    if (t) {
+      state.portfolio = parseInt(t.getAttribute('data-opb-pf'), 10); track('extra-portfolio');
+      each('[data-opb-pf]', function (b) { var on = parseInt(b.getAttribute('data-opb-pf'), 10) === state.portfolio; b.classList.toggle('cur', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      var card = $('opb-card'); if (card) card.classList.add('opb-wait');
+      clearTimeout(opbStepT); opbStepT = setTimeout(function () { update(); scheduleSim(true); }, 60);
+      return;
+    }
     if (ev.target.closest('[data-opb-more]')) { pendingScroll = null; showStep(1, false); track('extra-whatif-more'); }
   });
   /* hoogste maandbudget dat met 9 van de 10 kans meegaat tot de eindleeftijd, bij gegeven aanpassingen en beleggingsmix (afgerond op 10) */
   var opbBudNow = null, opbBudC = {}, opbWarm = {};
   function opbBud(ov, i) {
-    var key = [JSON.stringify(params()), JSON.stringify(ov), i].join('|');
+    var pf0 = portStat(i);
+    var key = JSON.stringify(params(Object.assign({}, ov, { budget: 0, skipMax: true, bruto: pf0.mu * 100, spaarDeel: pf0.w[2] * 100, portfolio: 0 }))) + '|' + i;
     if (opbBudC[key] !== undefined) return opbBudC[key];
     var pf = portStat(i);
     function q(b) { var p = params(Object.assign({}, ov, { budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 })); return simQuick(runModel(p), pf, p).succ; }
