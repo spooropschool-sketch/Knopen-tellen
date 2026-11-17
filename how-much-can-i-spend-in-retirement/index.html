@@ -2187,7 +2187,7 @@ html.is-empty .kn-sep.nd { display: none; }
     </div>
     <div class="modal-body" id="intro-s1" hidden>
       <h2 class="intro-about-h" data-t="pay.h">Time to take stock.<br><span>Time to move forward.</span></h2>
-      <div class="about-body intro-about" data-t="intro.about"><p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p><p>It started with my own research into the financial situation of my partner and me. Being able to tweak variables showed me which strategy suits us best for defining and reaching a desired financial situation. I want to give you that same insight.</p><p>You explore scenarios, test choices and see what they mean for your future. Everything is in today’s money and stays in your own browser.</p><p>Because it’s not just about what you’ve built up, but above all about what you can do with it.</p></div>
+      <div class="about-body intro-about" data-t="intro.about"><p class="ia-lead">Button Counter is your personal financial cockpit.</p><p class="ia-show">It shows you:</p><ul class="ia-list"><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your savings</li></ul><div class="ia-sum"><h3>Your savings are a sum with two sides</h3><div class="ia-sides"><div class="ia-side"><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in a bit more each month?</span><span>Or if you keep working for longer?</span></div><div class="ia-side"><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class="ia-why">I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class="ia-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class="ia-priv"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser. Nothing is shared or tracked.</span></p></div>
       <h2 id="intro-h" data-t="intro.ask">What are you curious about?</h2>
       <p class="sub" data-t="intro.promise">Is it enough? That’s what we work out, with no sales pitch and a source for every figure.</p>
       <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Roughly how old are you?</span>
@@ -2201,7 +2201,7 @@ html.is-empty .kn-sep.nd { display: none; }
         </div>
         <p class="slot-sub" id="slot-sub" aria-hidden="true"></p>
         <p class="slot-hint" data-t="slot.hint">Turn the wheel with your finger until your question is in the middle, then confirm.</p>
-        <button class="btn primary slot-ok" type="button" id="slot-ok" data-t="slot.ok">This is my question</button>
+        <button class="btn primary slot-ok" type="button" id="slot-ok" data-t="slot.ok">I’d like an answer to this question</button>
       </div>
     </div>
   </div>
@@ -3880,6 +3880,7 @@ Object.assign(I18N.es, {
 });
 
 Object.assign(I18N.en, {
+ "intro.about": "<p class='ia-lead'>Button Counter is your personal financial cockpit.</p><p class='ia-show'>It shows you:</p><ul class='ia-list'><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your savings</li></ul><div class='ia-sum'><h3>Your savings are a sum with two sides</h3><div class='ia-sides'><div class='ia-side'><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in a bit more each month?</span><span>Or if you keep working for longer?</span></div><div class='ia-side'><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class='ia-why'>I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class='ia-close'>Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser. Nothing is shared or tracked.</span></p>",
  "intro.ask": "What are you curious about?",
  "intro.promise": "One honest answer to one question: is it enough? No sales pitch and every figure comes with its source.",
  "goal.bar": "Your question",
@@ -3919,6 +3920,7 @@ Object.assign(I18N.nl, {
 });
 
 Object.assign(I18N.de, {
+ "intro.about": "<p class='ia-lead'>Button Counter ist Ihr persönliches Finanzcockpit.</p><p class='ia-show'>Es zeigt Ihnen:</p><ul class='ia-list'><li>wo Sie heute stehen, auch wenn Sie gerade erst anfangen</li><li>wie viel Spielraum Sie damit jetzt haben</li><li>wie Ihr Einkommen dazu beiträgt, dass Ihr Vermögen wächst</li></ul><div class='ia-sum'><h3>Ihr Vermögen ist eine Rechnung mit zwei Seiten</h3><div class='ia-sides'><div class='ia-side'><b>Was einfließt</b><span>Was passiert, wenn Sie Ihr Einkommen erhöhen?</span><span>Wenn Sie jeden Monat etwas mehr einlegen?</span><span>Oder wenn Sie länger arbeiten?</span></div><div class='ia-side'><b>Was Sie damit machen</b><span>Was passiert zum Beispiel, wenn Sie offensiver investieren?</span></div></div><p>Verändern Sie beide Seiten, und es entstehen Szenarien nach Maß. So sehen Sie, wie sich Ihr Verhalten und Ihr Einsatz später auswirken.</p></div><p>Sie erkunden Szenarien und rechnen Entscheidungen durch, etwa früher mit dem Sparen anzufangen oder früher aufzuhören zu arbeiten. So sehen Sie, was sie für Ihre Zukunft bedeuten. <b>Die Inflation ist bereits eingerechnet.</b> So sehen Sie, was Sie später wirklich kaufen können.</p><p class='ia-why'>Ich habe Button Counter für mich selbst gebaut. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill. Diese Einsicht möchte ich auch Ihnen geben.</p><p class='ia-close'>Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Ihre Daten bleiben bei Ihnen.</b> Sie bleiben auf Ihrem eigenen Gerät, in Ihrem eigenen Browser. Es wird nichts geteilt oder verfolgt.</span></p>",
  "intro.ask": "Was möchten Sie wissen?",
  "intro.promise": "Eine ehrliche Antwort auf eine Frage: Reicht es? Ohne Verkaufsgespräch und zu jeder Zahl gibt es die Quelle.",
  "goal.bar": "Ihre Frage",
@@ -3938,6 +3940,7 @@ Object.assign(I18N.de, {
 });
 
 Object.assign(I18N.fr, {
+ "intro.about": "<p class='ia-lead'>Button Counter est votre tableau de bord financier personnel.</p><p class='ia-show'>Il vous montre :</p><ul class='ia-list'><li>où vous en êtes aujourd’hui, même si vous débutez</li><li>la marge que cela vous donne maintenant</li><li>comment vos revenus contribuent à la croissance de votre patrimoine</li></ul><div class='ia-sum'><h3>Votre patrimoine est une somme à deux côtés</h3><div class='ia-sides'><div class='ia-side'><b>Ce qui entre</b><span>Que se passe-t-il si vous augmentez vos revenus ?</span><span>Si vous mettez un peu plus de côté chaque mois ?</span><span>Ou si vous travaillez plus longtemps ?</span></div><div class='ia-side'><b>Ce que vous en faites</b><span>Que se passe-t-il, par exemple, si vous investissez de façon plus agressive ?</span></div></div><p>Ajustez les deux côtés et vous obtenez des scénarios sur mesure. Vous voyez comment votre comportement et vos efforts se répercutent plus tard.</p></div><p>Vous explorez des scénarios et testez des choix, comme commencer à épargner plus tôt ou arrêter de travailler plus tôt. Vous voyez ce qu’ils signifient pour votre avenir. <b>L’inflation est déjà prise en compte.</b> Vous voyez donc ce que vous pourrez vraiment acheter plus tard.</p><p class='ia-why'>J’ai créé Button Counter pour moi-même. Je ne voulais pas seulement savoir où j’en étais, mais aussi ce que je pouvais faire pour arriver où je voulais. Cette compréhension, je souhaite aussi vous l’offrir.</p><p class='ia-close'>Car l’important n’est pas seulement ce que vous construisez, mais surtout ce que vous pouvez en faire.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Vos données restent à vous.</b> Elles restent sur votre appareil, dans votre navigateur. Rien n’est partagé ni suivi.</span></p>",
  "intro.ask": "Qu’aimeriez-vous savoir ?",
  "intro.promise": "Une réponse honnête à une question : est-ce suffisant ? Pas de discours commercial et chaque chiffre a sa source.",
  "goal.bar": "Votre question",
@@ -3957,6 +3960,7 @@ Object.assign(I18N.fr, {
 });
 
 Object.assign(I18N.es, {
+ "intro.about": "<p class='ia-lead'>Button Counter es tu panel financiero personal.</p><p class='ia-show'>Te muestra:</p><ul class='ia-list'><li>dónde estás hoy, incluso si estás empezando</li><li>cuánto margen te da eso ahora</li><li>cómo contribuyen tus ingresos al crecimiento de tu patrimonio</li></ul><div class='ia-sum'><h3>Tu patrimonio es una suma con dos lados</h3><div class='ia-sides'><div class='ia-side'><b>Lo que entra</b><span>¿Qué pasa si aumentas tus ingresos?</span><span>¿Si aportas un poco más cada mes?</span><span>¿O si sigues trabajando más tiempo?</span></div><div class='ia-side'><b>Lo que haces con ello</b><span>¿Qué pasa, por ejemplo, si inviertes de forma más agresiva?</span></div></div><p>Mueve los dos lados y obtendrás escenarios a tu medida. Así ves cómo influyen más adelante tu comportamiento y tu esfuerzo.</p></div><p>Exploras escenarios y pruebas decisiones, como empezar a ahorrar antes o dejar de trabajar antes. Ves lo que significan para tu futuro. <b>La inflación ya está descontada.</b> Así ves lo que podrás comprar de verdad más adelante.</p><p class='ia-why'>Hice Button Counter para mí. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería. Esa misma visión quiero dártela también a ti.</p><p class='ia-close'>Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Tus datos siguen siendo tuyos.</b> Se quedan en tu propio dispositivo, en tu propio navegador. No se comparte ni se rastrea nada.</span></p>",
  "intro.ask": "¿Qué le gustaría saber?",
  "intro.promise": "Una respuesta honesta a una pregunta: ¿es suficiente? Sin discurso comercial y cada cifra lleva su fuente.",
  "goal.bar": "Su pregunta",
@@ -4119,7 +4123,7 @@ Object.assign(I18N.en, {
  "disc.h": "Disclaimer",
  "disc.body": "<p>Button Counter is a general calculation tool for information only. It is <strong>not</strong> financial, investment, tax, pension or legal advice, and no advice is given about your personal situation.</p><p>Results are estimates based on simplified rules and assumptions about returns, inflation and life expectancy. The future can differ from what is shown, and the rules per country may be incomplete or out of date. No rights can be derived from the results.</p><p>Use of this site is at your own risk. To the extent permitted by law, the maker accepts no liability for decisions made or damage suffered based on this site. Check official sources and consult an independent, licensed adviser before making important financial decisions.</p>",
  "slot.spin": "Spin",
- "slot.ok": "This is my question",
+ "slot.ok": "I’d like an answer to this question",
  "slot.hint": "Turn the wheel with your finger until your question is in the middle, then confirm.",
  "slot.pick": "Choose a question",
  "seo.title": "How long will your savings last? See your financial future | Button Counter",
@@ -4228,7 +4232,7 @@ Object.assign(I18N.nl, {
  "disc.h": "Disclaimer",
  "disc.body": "<p>Knopenteller is een algemeen rekenhulpmiddel, alleen bedoeld als informatie. Het is <strong>geen</strong> financieel, beleggings-, belasting-, pensioen- of juridisch advies, en er wordt geen advies gegeven over jouw persoonlijke situatie.</p><p>De uitkomsten zijn schattingen op basis van vereenvoudigde regels en aannames over rendement, inflatie en levensduur. De toekomst kan afwijken van wat er staat, en de regels per land kunnen onvolledig of verouderd zijn. Aan de uitkomsten kunnen geen rechten worden ontleend.</p><p>Gebruik van deze site is voor eigen risico. Voor zover de wet dat toestaat, aanvaardt de maker geen aansprakelijkheid voor beslissingen of schade die voortvloeien uit het gebruik van deze site. Controleer officiële bronnen en raadpleeg een onafhankelijke, erkende adviseur voordat je belangrijke financiële beslissingen neemt.</p>",
  "slot.spin": "Draai",
- "slot.ok": "Dit is mijn vraag",
+ "slot.ok": "Ik wil graag antwoord op deze vraag",
  "slot.hint": "Draai het wiel met je vinger tot je vraag in het midden staat en bevestig dan.",
  "slot.pick": "Kies een vraag",
  "seo.title": "Hoe lang gaat je spaargeld mee? Zie je financiële toekomst | Knopenteller",
@@ -4332,7 +4336,7 @@ Object.assign(I18N.de, {
  "disc.h": "Haftungsausschluss",
  "disc.body": "<p>Button Counter ist ein allgemeines Rechenwerkzeug und dient nur der Information. Es ist <strong>keine</strong> Finanz-, Anlage-, Steuer-, Renten- oder Rechtsberatung, und es erfolgt keine Beratung zu Ihrer persönlichen Situation.</p><p>Die Ergebnisse sind Schätzungen auf Grundlage vereinfachter Regeln und Annahmen zu Rendite, Inflation und Lebensdauer. Die Zukunft kann abweichen, und die Regeln je Land können unvollständig oder veraltet sein. Aus den Ergebnissen können keine Rechte abgeleitet werden.</p><p>Die Nutzung dieser Seite erfolgt auf eigenes Risiko. Soweit gesetzlich zulässig, übernimmt der Betreiber keine Haftung für Entscheidungen oder Schäden, die sich aus der Nutzung dieser Seite ergeben. Prüfen Sie offizielle Quellen und ziehen Sie vor wichtigen finanziellen Entscheidungen eine unabhängige, zugelassene Beratung hinzu.</p>",
  "slot.spin": "Drehen",
- "slot.ok": "Das ist meine Frage",
+ "slot.ok": "Ich möchte eine Antwort auf diese Frage",
  "slot.hint": "Drehen Sie das Rad mit dem Finger, bis Ihre Frage in der Mitte steht, und bestätigen Sie dann.",
  "slot.pick": "Frage wählen",
  "seo.title": "Wie lange reicht Ihr Erspartes? Ihre finanzielle Zukunft im Blick | Button Counter",
@@ -4436,7 +4440,7 @@ Object.assign(I18N.fr, {
  "disc.h": "Avertissement",
  "disc.body": "<p>Button Counter est un outil de calcul général, à titre d’information uniquement. Ce n’est <strong>pas</strong> un conseil financier, en placement, fiscal, de retraite ou juridique, et aucun conseil n’est donné sur votre situation personnelle.</p><p>Les résultats sont des estimations fondées sur des règles simplifiées et des hypothèses de rendement, d’inflation et d’espérance de vie. L’avenir peut différer, et les règles par pays peuvent être incomplètes ou dépassées. Aucun droit ne peut être tiré des résultats.</p><p>L’utilisation de ce site se fait à vos propres risques. Dans la mesure permise par la loi, l’auteur décline toute responsabilité pour les décisions prises ou les dommages subis en raison de ce site. Vérifiez les sources officielles et consultez un conseiller indépendant et agréé avant toute décision financière importante.</p>",
  "slot.spin": "Tourner",
- "slot.ok": "C’est ma question",
+ "slot.ok": "Je souhaite une réponse à cette question",
  "slot.hint": "Tournez la roue du doigt jusqu’à ce que votre question soit au milieu, puis confirmez.",
  "slot.pick": "Choisir une question",
  "seo.title": "Combien de temps durera votre épargne ? Votre avenir financier en vue | Button Counter",
@@ -4545,7 +4549,7 @@ Object.assign(I18N.es, {
  "disc.h": "Aviso legal",
  "disc.body": "<p>Button Counter es una herramienta de cálculo general, solo con fines informativos. <strong>No</strong> es asesoramiento financiero, de inversión, fiscal, de pensiones ni jurídico, y no se ofrece asesoramiento sobre tu situación personal.</p><p>Los resultados son estimaciones basadas en reglas simplificadas y supuestos sobre rentabilidad, inflación y esperanza de vida. El futuro puede diferir y las reglas de cada país pueden estar incompletas o desactualizadas. De los resultados no se puede derivar ningún derecho.</p><p>El uso de este sitio es bajo tu propia responsabilidad. En la medida permitida por la ley, el autor no asume responsabilidad por decisiones tomadas ni daños sufridos a raíz de este sitio. Consulta las fuentes oficiales y a un asesor independiente y autorizado antes de tomar decisiones financieras importantes.</p>",
  "slot.spin": "Girar",
- "slot.ok": "Esta es mi pregunta",
+ "slot.ok": "Quiero una respuesta a esta pregunta",
  "slot.hint": "Gira la rueda con el dedo hasta que tu pregunta quede en el centro y confirma.",
  "slot.pick": "Elegir una pregunta",
  "seo.title": "¿Cuánto durarán tus ahorros? Mira tu futuro financiero | Button Counter",
@@ -5384,7 +5388,10 @@ Object.assign(I18N.en, {
  'rel.16.v': 'Version 16 · November 2026',
  'rel.16.n1': 'New photos throughout the app: at the top of each tab, with your result and in the steps.',
  'rel.16.n2': 'At the start you pick an age group instead of your exact age.',
- 'rel.16.n3': 'The notepad now has a little picture of its own.'
+ 'rel.16.n3': 'The notepad now has a little picture of its own.',
+ 'rel.17.v': 'Version 17 · November 2026',
+ 'rel.17.n1': 'The introduction is easier to follow: split into clear parts, with new text that explains better what Button Counter does.',
+ 'rel.17.n2': 'In the introduction you now always pick a question. Skipping is no longer possible.'
 });
 Object.assign(I18N.nl, {
  'debt.h': 'Schuld',
@@ -5408,7 +5415,10 @@ Object.assign(I18N.nl, {
  'rel.16.v': 'Versie 16 · november 2026',
  'rel.16.n1': 'Nieuwe foto’s door de hele app: bovenaan elk tabblad, bij je uitkomst en bij de stappen.',
  'rel.16.n2': 'Aan het begin kies je een leeftijdsgroep in plaats van je exacte leeftijd.',
- 'rel.16.n3': 'Het kladblok heeft nu een eigen plaatje.'
+ 'rel.16.n3': 'Het kladblok heeft nu een eigen plaatje.',
+ 'rel.17.v': 'Versie 17 · november 2026',
+ 'rel.17.n1': 'De introductie is overzichtelijker: in duidelijke delen en met nieuwe tekst die beter uitlegt wat Knopenteller doet.',
+ 'rel.17.n2': 'In de introductie kies je nu altijd een vraag. Overslaan kan niet meer.'
 });
 Object.assign(I18N.de, {
  'debt.h': 'Schulden',
@@ -5432,7 +5442,10 @@ Object.assign(I18N.de, {
  'rel.16.v': 'Version 16 · November 2026',
  'rel.16.n1': 'Neue Fotos in der ganzen App: oben auf jedem Tab, bei Ihrem Ergebnis und in den Schritten.',
  'rel.16.n2': 'Zu Beginn wählen Sie eine Altersgruppe statt Ihres genauen Alters.',
- 'rel.16.n3': 'Die Notizen haben jetzt ein eigenes Bildchen.'
+ 'rel.16.n3': 'Die Notizen haben jetzt ein eigenes Bildchen.',
+ 'rel.17.v': 'Version 17 · November 2026',
+ 'rel.17.n1': 'Die Einführung ist übersichtlicher: in klare Abschnitte gegliedert und mit neuem Text, der besser erklärt, was Button Counter tut.',
+ 'rel.17.n2': 'In der Einführung wählen Sie jetzt immer eine Frage. Überspringen ist nicht mehr möglich.'
 });
 Object.assign(I18N.fr, {
  'debt.h': 'Dette',
@@ -5456,7 +5469,10 @@ Object.assign(I18N.fr, {
  'rel.16.v': 'Version 16 · novembre 2026',
  'rel.16.n1': 'De nouvelles photos dans toute l’application : en haut de chaque onglet, avec votre résultat et dans les étapes.',
  'rel.16.n2': 'Au début, vous choisissez une tranche d’âge au lieu de votre âge exact.',
- 'rel.16.n3': 'Le bloc-notes a maintenant sa propre petite image.'
+ 'rel.16.n3': 'Le bloc-notes a maintenant sa propre petite image.',
+ 'rel.17.v': 'Version 17 · novembre 2026',
+ 'rel.17.n1': 'L’introduction est plus claire : découpée en parties distinctes, avec un nouveau texte qui explique mieux ce que fait Button Counter.',
+ 'rel.17.n2': 'Dans l’introduction, vous choisissez désormais toujours une question. Il n’est plus possible de passer.'
 });
 Object.assign(I18N.es, {
  'debt.h': 'Deuda',
@@ -5480,7 +5496,10 @@ Object.assign(I18N.es, {
  'rel.16.v': 'Versión 16 · noviembre de 2026',
  'rel.16.n1': 'Fotos nuevas en toda la app: arriba en cada pestaña, junto a tu resultado y en los pasos.',
  'rel.16.n2': 'Al empezar eliges un grupo de edad en lugar de tu edad exacta.',
- 'rel.16.n3': 'El bloc de notas ahora tiene su propia imagen.'
+ 'rel.16.n3': 'El bloc de notas ahora tiene su propia imagen.',
+ 'rel.17.v': 'Versión 17 · noviembre de 2026',
+ 'rel.17.n1': 'La introducción es más clara: dividida en partes bien diferenciadas y con un texto nuevo que explica mejor qué hace Button Counter.',
+ 'rel.17.n2': 'En la introducción ahora siempre eliges una pregunta. Ya no se puede omitir.'
 });
 /* veelgestelde vraag uitgavenverloop en tip bij de naamvelden (versie 13) */
 Object.assign(I18N.en, {
@@ -5514,8 +5533,6 @@ Object.assign(I18N.es, {
  'h.names2': 'Aquí también vale un nombre inventado, por ejemplo «María Pérez».'
 });
 
-/* introductietekst: alleen de Nederlandse is herschreven; de andere talen houden hun bestaande tekst */
-['en', 'de', 'fr', 'es'].forEach(function (l) { if (I18N[l]['intro.about'] === undefined) I18N[l]['intro.about'] = I18N[l]['about.body']; });
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -7789,7 +7806,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {

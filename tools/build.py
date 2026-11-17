@@ -28,6 +28,10 @@ LANDING = {
 }
 
 
+# texts that are the same in every language on purpose (no translation needed)
+LANGUAGE_NEUTRAL = {'brand', 'p.n1', 'p.n2', 'u.cur', 'u.pct'}
+
+
 def lp_path(goal, lang):
     slug = LANDING[goal][lang]
     return '/%s/' % slug if lang == 'en' else '/%s/%s/' % (lang, slug)
@@ -46,6 +50,7 @@ def extract():
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     base = 'http://127.0.0.1:%d/src/index.html' % srv.server_address[1]
     out = {}
+    problems = []
     with sync_playwright() as pw:
         br = pw.chromium.launch()
         for lang in LANGS:
@@ -66,14 +71,26 @@ def extract():
               document.querySelectorAll('[data-t-aria]').forEach(e => { aria[e.getAttribute('data-t-aria')] = e.getAttribute('aria-label') || ''; });
               const faq = [...document.querySelectorAll('.faq-i')].map(d => [d.querySelector('summary').textContent.trim(), d.querySelector('.faq-a').textContent.trim()]);
               const lp = {}; Object.keys(I18N[document.documentElement.lang] || {}).forEach(k => { if (k.startsWith('lp.')) lp[k] = I18N[document.documentElement.lang][k]; });
-              return { t, alt, aria, faq, lp, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
+              const used = new Set();
+              document.querySelectorAll('[data-t],[data-t-alt],[data-t-aria]').forEach(e => ['data-t', 'data-t-alt', 'data-t-aria'].forEach(a => { const k = e.getAttribute(a); if (k) used.add(k); }));
+              const L = I18N[document.documentElement.lang] || {};
+              const missing = [...used].filter(k => L[k] === undefined).sort();
+              const relMissing = Object.keys(I18N.en).filter(k => /^rel\\.\\d+\\./.test(k) && L[k] === undefined).sort();
+              return { t, alt, aria, faq, lp, missing, relMissing, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
             }""")
             assert not errs, errs
             assert data['lang'] == lang, (lang, data['lang'])
+            # Every text shown on the page, and every release note, needs its own translation in every language.
+            # Without it the app silently falls back to English, so stop the build instead.
+            gaps = [k for k in data['missing'] if k not in LANGUAGE_NEUTRAL] + data['relMissing']
+            if gaps:
+                problems.append('%s: no translation for %s' % (lang, ', '.join(gaps)))
             out[lang] = data
             ctx.close()
         br.close()
     srv.shutdown()
+    if problems:
+        sys.exit('Translations missing, build stopped:\n  ' + '\n  '.join(problems))
     return out
 
 
