@@ -5858,6 +5858,13 @@ Object.assign(I18N.de, {"f.eindleeftijd": "Alter, bis zu dem Ihr Geld aufgebrauc
 Object.assign(I18N.fr, {"f.eindleeftijd": "Âge auquel votre argent peut être épuisé", "f.restkapitaal": "Ce qui doit rester à cet âge", "ins.rest": "Reste à la fin", "opb.cta": "Je veux changer ça", "rel.20.n6": "L’impôt sur le patrimoine est maintenant replié, et le résultat a un bouton clair pour le changer."});
 Object.assign(I18N.es, {"f.eindleeftijd": "Edad a la que tu dinero puede acabarse", "f.restkapitaal": "Lo que debe quedar a esa edad", "ins.rest": "Lo que queda al final", "opb.cta": "Quiero cambiar esto", "rel.20.n6": "El impuesto sobre el patrimonio ahora está plegado, y el resultado tiene un botón claro para cambiarlo."});
 
+/* overige schulden (versie 20) */
+Object.assign(I18N.en, {"oth.h": "Other debts", "oth.s": "Loan, instalments or buy now pay later, up to 50,000", "oth.intro": "Paying off another loan, such as a personal loan, a car, instalments or buy now pay later? Enter what is still outstanding, what you repay each month and until when. Up to 50,000. This card does not count in your result.", "oth.r": "Outstanding debt", "oth.e": "Last repayment year", "oth.iHint": "We calculate without interest unless you enter it here. The rate is in your loan agreement.", "oth.cap": "This card goes up to {max}. For a larger loan or a mortgage, use the {debt} card (Pro).", "oth.cap0": "This card goes up to {max}.", "rel.20.n7": "New card Other debts, for loans and instalments up to 50,000."});
+Object.assign(I18N.nl, {"oth.h": "Overige schulden", "oth.s": "Lening, afbetaling of achteraf betalen, tot 50.000", "oth.intro": "Los je een andere lening af, zoals een persoonlijke lening, een auto, een afbetaling of achteraf betalen? Vul in wat er nog openstaat, wat je per maand terugbetaalt en tot wanneer. Tot 50.000. Dit vak telt niet mee in je uitkomst.", "oth.r": "Openstaande schuld", "oth.e": "Laatste aflosjaar", "oth.iHint": "We rekenen zonder rente, tenzij je die hier invult. De rente staat in je leningsovereenkomst.", "oth.cap": "Dit vak gaat tot {max}. Voor een grotere lening of hypotheek is de kaart {debt} (Pro).", "oth.cap0": "Dit vak gaat tot {max}.", "rel.20.n7": "Nieuw vak Overige schulden, voor leningen en afbetalingen tot 50.000."});
+Object.assign(I18N.de, {"oth.h": "Sonstige Schulden", "oth.s": "Kredit, Ratenkauf oder später bezahlen, bis 50.000", "oth.intro": "Zahlen Sie einen anderen Kredit ab, etwa einen Privatkredit, ein Auto, einen Ratenkauf oder „Jetzt kaufen, später bezahlen“? Geben Sie ein, was noch offen ist, was Sie monatlich zurückzahlen und bis wann. Bis 50.000. Diese Karte zählt nicht in Ihr Ergebnis.", "oth.r": "Offene Schuld", "oth.e": "Letztes Rückzahlungsjahr", "oth.iHint": "Wir rechnen ohne Zinsen, außer Sie tragen sie hier ein. Der Zins steht in Ihrem Kreditvertrag.", "oth.cap": "Diese Karte reicht bis {max}. Für einen größeren Kredit oder eine Hypothek gibt es die Karte {debt} (Pro).", "oth.cap0": "Diese Karte reicht bis {max}.", "rel.20.n7": "Neue Karte Sonstige Schulden, für Kredite und Ratenzahlungen bis 50.000."});
+Object.assign(I18N.fr, {"oth.h": "Autres dettes", "oth.s": "Prêt, paiement échelonné ou paiement différé, jusqu’à 50 000", "oth.intro": "Vous remboursez un autre prêt, comme un prêt personnel, une voiture, un paiement échelonné ou un paiement différé ? Indiquez ce qui reste dû, votre mensualité et jusqu’à quand. Jusqu’à 50 000. Cette carte ne compte pas dans votre résultat.", "oth.r": "Reste dû", "oth.e": "Dernière année de remboursement", "oth.iHint": "Nous calculons sans intérêts, sauf si vous les indiquez ici. Le taux figure dans votre contrat de prêt.", "oth.cap": "Cette carte va jusqu’à {max}. Pour un prêt plus important ou un prêt immobilier, utilisez la carte {debt} (Pro).", "oth.cap0": "Cette carte va jusqu’à {max}.", "rel.20.n7": "Nouvelle carte Autres dettes, pour les prêts et paiements échelonnés jusqu’à 50 000."});
+Object.assign(I18N.es, {"oth.h": "Otras deudas", "oth.s": "Préstamo, pago a plazos o pago aplazado, hasta 50.000", "oth.intro": "¿Estás pagando otro préstamo, como un préstamo personal, un coche, un pago a plazos o un «compra ahora, paga después»? Indica lo que queda, lo que devuelves al mes y hasta cuándo. Hasta 50.000. Esta tarjeta no cuenta en tu resultado.", "oth.r": "Deuda pendiente", "oth.e": "Último año de pago", "oth.iHint": "Calculamos sin intereses, salvo que los indiques aquí. El interés figura en tu contrato de préstamo.", "oth.cap": "Esta tarjeta llega hasta {max}. Para un préstamo mayor o una hipoteca, usa la tarjeta {debt} (Pro).", "oth.cap0": "Esta tarjeta llega hasta {max}.", "rel.20.n7": "Nueva tarjeta Otras deudas, para préstamos y pagos a plazos de hasta 50.000."});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -6061,13 +6068,16 @@ Object.assign(I18N.es, {"f.eindleeftijd": "Edad a la que tu dinero puede acabars
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
   /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
-  var lists = { perP: [], perD: [], pots: [], debts: [], stud: [] };
+  var lists = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [] };
   function fin(v, lo, hi, d) { v = parseFloat(v); return isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d; }
   function cleanLists(o) {
-    var r = { perP: [], perD: [], pots: [], debts: [], stud: [] };
+    var r = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [] };
     if (!o || typeof o !== 'object') return r;
     (Array.isArray(o.stud) ? o.stud : []).slice(0, 2).forEach(function (x) {
       r.stud.push(x ? { r: fin(x.r, 0, 1e8, 0), m: fin(x.m, 0, 1e6, 0), e: fin(x.e, 0, 2200, 0), i: fin(x.i, -1, 30, -1) } : { r: 0, m: 0, e: 0, i: -1 });
+    });
+    (Array.isArray(o.oth) ? o.oth : []).slice(0, 2).forEach(function (x) {
+      r.oth.push(x ? { r: fin(x.r, 0, 50000, 0), m: fin(x.m, 0, 1e6, 0), e: fin(x.e, 0, 2200, 0), i: fin(x.i, -1, 30, -1) } : { r: 0, m: 0, e: 0, i: -1 });
     });
     (Array.isArray(o.debts) ? o.debts : []).slice(0, 6).forEach(function (x) {
       if (x) r.debts.push({ n: String(x.n || '').slice(0, 30), m: fin(x.m, 0, 1e6, 0), y: fin(x.y, 0, 60, 0), v: fin(x.v, 0, 1e8, 0), b: x.b === 0 ? 0 : 1 });
@@ -6197,6 +6207,8 @@ Object.assign(I18N.es, {"f.eindleeftijd": "Edad a la que tu dinero puede acabars
         '<details class="card pots sl" id="stud-box"><summary><span class="pots-h"><b id="sl-title" data-t="sl.h"></b><span class="pots-n" id="sl-n" hidden></span></span><span class="pots-s" data-t="sl.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="sl.intro"></p><div id="sl-list"></div>' +
         '<button type="button" class="sl-pro" data-sl-pro="1"><img src="/img/pro-slot.webp" alt=""><span><b data-t="sl.proQ"></b><small data-t="sl.proS"></small></span><span class="pro-tag" data-pro="plans"></span></button></div></details>' +
+        '<details class="card pots sl" id="oth-box"><summary><span class="pots-h"><b data-t="oth.h"></b><span class="pots-n" id="oth-n" hidden></span></span><span class="pots-s" data-t="oth.s"></span></summary>' +
+        '<div class="pots-in"><p class="hint" data-t="oth.intro"></p><div id="oth-list"></div></div></details>' +
         '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pro-tag" data-pro="debts"></span><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="debt.intro"></p><p class="hint debts-opb" id="debts-opb" data-t="debt.opb" hidden></p><div id="debts-list"></div><button type="button" class="btn ghost sm" id="debt-add" data-t="debt.add"></button></div></details>';
     } },
@@ -8142,7 +8154,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 20, n: 6, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -8588,11 +8600,11 @@ var TRK = {
   function slItem(k) { while (lists.stud.length <= k) lists.stud.push({ r: 0, m: 0, e: 0, i: -1 }); return lists.stud[k]; }
   function slRate(q) { return q.i >= 0 ? q.i : slDefRate(); }
   function slPct(p) { return num(p, 2) + (prefs.lang === 'en' || prefs.lang === 'nl' ? '%' : ' %'); }
-  function slCalc(q) {
+  function slCalc(q, rate) {
     var now = new Date(), y0 = now.getFullYear(), m0 = now.getMonth();
     if (!(q.r > 0)) return { k: 'empty' };
     if (!(q.m > 0)) return { k: 'notYet' };
-    var ir = slRate(q) / 100 / 12, lim = q.e > y0 ? (q.e - y0) * 12 + (11 - m0) : 720, b = q.r, n = 0;
+    var ir = (rate !== undefined ? rate : slRate(q)) / 100 / 12, lim = q.e > y0 ? (q.e - y0) * 12 + (11 - m0) : 720, b = q.r, n = 0;
     while (n < lim && b > 0) { b = b * (1 + ir) - q.m; n++; }
     if (b <= 0) return { k: 'free', yr: y0 + Math.floor((m0 + n) / 12), n: n };
     if (q.e > y0) return { k: 'open', yr: q.e, v: b };
@@ -8680,8 +8692,8 @@ var TRK = {
     var b = band(), R = document.documentElement;
     [0, 1, 2].forEach(function (x) { R.classList.toggle('band-' + x, x === b); });
     var sig = [prefs.country, prefs.lang, prefs.cur, two(), nm1(), nm2()].join('|');
-    if (sig !== v20Sig) { v20Sig = sig; slRender(); } else slHead();
-    if (b !== v20Band) { v20Band = b; plGates(); for (var k = 0; k < (two() ? 2 : 1); k++) slSum(k); }
+    if (sig !== v20Sig) { v20Sig = sig; slRender(); othRender(); } else { slHead(); othHead(); }
+    if (b !== v20Band) { v20Band = b; plGates(); for (var k = 0; k < (two() ? 2 : 1); k++) { slSum(k); othSum(k); } }
   }
   var finishUpdate20 = finishUpdate;
   finishUpdate = function () { finishUpdate20(); v20Hook(); };
@@ -8746,6 +8758,63 @@ var TRK = {
     var a = ev.target.closest ? ev.target.closest('[data-jump]') : null; if (!a) return;
     pendingScroll = a.getAttribute('data-jump'); showStep(1, false);
   }, true);
+
+
+  /* overige schulden (lening, afbetaling, achteraf betalen): zelfde opzet als studieschuld, tot 50.000, rente standaard 0 en zelf in te vullen.
+     Telt niet mee in de uitkomst; een hypotheek of grotere lening hoort bij de kaart Schuld (Pro). */
+  var OTH_MAX = 50000, othOver = [];
+  TRK['extra-otherdebt'] = ['extra', 'Overige schuld ingevuld (bedrag en maandbedrag)'];
+  function othItem(k) { while (lists.oth.length <= k) lists.oth.push({ r: 0, m: 0, e: 0, i: -1 }); return lists.oth[k]; }
+  function othRate(q) { return q.i >= 0 ? q.i : 0; }
+  function othHead() { var n = 0; lists.oth.forEach(function (q, k) { if (k < (two() ? 2 : 1) && q && q.r > 0) n++; }); var c = $('oth-n'); if (c) { c.hidden = !n; c.textContent = n; } return n; }
+  function othSum(k, over) {
+    var q = lists.oth[k], el = $('oth-' + k + '-sum'); if (!q || !el) return;
+    var c = slCalc(q, othRate(q)), y0 = new Date().getFullYear(), notes = [], txt;
+    if (!othOver) othOver = [];
+    if (over !== undefined) othOver[k] = over;
+    if (othOver[k]) notes.push(t1(band() > 0 ? 'oth.cap' : 'oth.cap0', { max: eur(OTH_MAX), debt: t1('debt.h') }));
+    if (q.e > 0 && q.e <= y0) notes.push(t1('sl.past'));
+    else if (q.e > y0 + 45) notes.push(t1('sl.long'));
+    var nt = $('oth-' + k + '-note'); nt.hidden = !notes.length; nt.textContent = notes.join(' ');
+    if (c.k === 'free') txt = c.n < 12 ? t1('sl.free1', { yr: c.yr, m: eur(q.m) }) : t1('sl.free', { yr: c.yr, n: Math.round(c.n / 12), m: eur(q.m) });
+    else if (c.k === 'open') txt = t1('sl.open', { yr: c.yr, v: eur(c.v) });
+    else txt = t1('sl.' + c.k);
+    el.textContent = txt; el.classList.toggle('muted', c.k === 'empty' || c.k === 'notYet');
+    $('oth-' + k + '-iv').textContent = slPct(othRate(q));
+    if (q.r > 0 && q.m > 0) track('extra-otherdebt');
+  }
+  function othRender() {
+    var host = $('oth-list'); if (!host) return;
+    var cnt = two() ? 2 : 1, h = '', k;
+    for (k = 0; k < cnt; k++) {
+      var q = othItem(k), id = 'oth-' + k + '-', A = 'data-oth="' + k + '"';
+      h += '<div class="pot">' + (two() ? '<h4>' + esc(k ? nm2() : nm1()) + '</h4>' : '') +
+        '<div class="fields pot-f">' +
+        fldL(id + 'r', t1('oth.r'), numIn(id + 'r', A + ' data-f="r"', q.r, true), curSym()) +
+        fldL(id + 'm', t1('sl.m'), numIn(id + 'm', A + ' data-f="m"', q.m, true), t1('debt.unitM', { cur: curSym() })) +
+        fldL(id + 'e', t1('oth.e'), '<input id="' + id + 'e" type="text" inputmode="numeric" autocomplete="off" maxlength="4" ' + A + ' data-f="e" value="' + (q.e > 0 ? q.e : '') + '" placeholder="' + esc(t1('sl.ePh')) + '">', '') +
+        '</div>' +
+        '<details class="sl-rate"><summary>' + esc(t1('sl.i')) + ': <b id="' + id + 'iv"></b></summary><div class="fields pot-f">' +
+        fldL(id + 'i', t1('sl.i'), numIn(id + 'i', A + ' data-f="i"', othRate(q)), '%') + '</div><p class="hint">' + esc(t1('oth.iHint')) + '</p></details>' +
+        '<p class="sl-note" id="' + id + 'note" hidden></p><p class="pot-sum" id="' + id + 'sum"></p></div>';
+    }
+    host.innerHTML = h;
+    for (k = 0; k < cnt; k++) othSum(k);
+    if (othHead()) $('oth-box').open = true;
+  }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target, a = e.getAttribute ? e.getAttribute('data-oth') : null; if (a == null) return;
+    var k = parseInt(a, 10), f = e.getAttribute('data-f'), q = othItem(k), v, over = false;
+    if (f === 'e') { v = parseInt(String(e.value).replace(/\D/g, ''), 10); q.e = v >= 1900 && v <= 2200 ? v : 0; }
+    else if (f === 'i') { v = e.value === '' ? NaN : numOf(e); q.i = isFinite(v) ? Math.max(0, Math.min(30, v)) : -1; }
+    else { v = e.value === '' ? 0 : numOf(e); if (!isFinite(v)) return; v = Math.max(0, v); if (f === 'r' && v > OTH_MAX) { v = OTH_MAX; over = true; } q[f] = v; }
+    othSum(k, f === 'r' ? over : undefined); othHead(); persist();
+  });
+  document.addEventListener('focusout', function (ev) {
+    var e = ev.target; if (!e.getAttribute || e.getAttribute('data-oth') == null || e.getAttribute('data-f') !== 'r') return;
+    var q = othItem(parseInt(e.getAttribute('data-oth'), 10)); if (numOf(e) > OTH_MAX) e.value = grp(q.r);
+  });
+  othRender();
 
 })();
 
