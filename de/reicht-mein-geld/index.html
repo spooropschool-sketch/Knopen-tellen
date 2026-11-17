@@ -2244,7 +2244,7 @@ html.band-0 .curve-f, html.band-0 #debts-box, html.band-0 #pots-box, html.band-0
       <h2 id="intro-h" data-t="intro.ask">Was möchten Sie wissen?</h2>
       <p class="sub" data-t="intro.promise">Reicht es? Das rechnen wir aus, ohne Verkaufsgespräch und mit Quelle zu jeder Zahl.</p>
       <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Wie alt sind Sie ungefähr?</span>
-        <div class="seg seg3 age-seg" role="radiogroup" aria-labelledby="age-q"><label class="seg-opt"><input type="radio" name="age-band" value="0"><span>20–34</span></label><label class="seg-opt"><input type="radio" name="age-band" value="1"><span>35–49</span></label><label class="seg-opt"><input type="radio" name="age-band" value="2"><span>50+</span></label></div>
+        <div class="seg seg3 age-seg" role="radiogroup" aria-labelledby="age-q"><label class="seg-opt"><input type="radio" name="age-band" value="0"><span>18–34</span></label><label class="seg-opt"><input type="radio" name="age-band" value="1"><span>35–49</span></label><label class="seg-opt"><input type="radio" name="age-band" value="2"><span>50+</span></label></div>
         <p class="age-note" data-t="age.note">Eine Altersgruppe genügt. Ihr genaues Alter können Sie später eintragen, wenn Sie möchten.</p></div>
       <div class="slot" id="slot">
         <div class="slot-machine">
@@ -5632,7 +5632,7 @@ Object.assign(I18N.en, {
  "sl.open": "At the end of your repayment period ({yr}), {v} is still outstanding.",
  "sl.never": "This payment does not pay the loan off: the interest is higher than what you repay.",
  "sl.slow": "At this payment, repaying takes more than 60 years.",
- "sl.fg.NL": "DUO then cancels whatever is left.",
+ "sl.fg.NL": "DUO then automatically cancels whatever is left, except any missed payments.",
  "sl.fg.GB": "In the UK, whatever is left is then written off.",
  "sl.fg.DE": "With BAföG you never repay more than €10,010.",
  "sl.big": "This is higher than a student loan usually is. Is the amount right?",
@@ -5678,7 +5678,7 @@ Object.assign(I18N.nl, {
  "sl.open": "Aan het einde van je aflosfase ({yr}) staat nog {v} open.",
  "sl.never": "Met dit maandbedrag los je niet af: de rente is hoger dan wat je terugbetaalt.",
  "sl.slow": "Met dit maandbedrag duurt aflossen langer dan 60 jaar.",
- "sl.fg.NL": "Wat dan nog openstaat, scheldt DUO kwijt.",
+ "sl.fg.NL": "Wat dan nog openstaat, scheldt DUO automatisch kwijt, behalve achterstallige maandbedragen.",
  "sl.fg.GB": "In het Verenigd Koninkrijk wordt wat dan nog openstaat kwijtgescholden.",
  "sl.fg.DE": "Bij BAföG betaal je nooit meer dan € 10.010 terug.",
  "sl.big": "Dit is hoger dan een studieschuld meestal is. Klopt het bedrag?",
@@ -5724,7 +5724,7 @@ Object.assign(I18N.de, {
  "sl.open": "Am Ende der Rückzahlung ({yr}) sind noch {v} offen.",
  "sl.never": "Mit dieser Rate wird das Darlehen nicht getilgt: Die Zinsen sind höher als die Rückzahlung.",
  "sl.slow": "Mit dieser Rate dauert die Tilgung länger als 60 Jahre.",
- "sl.fg.NL": "Was dann noch offen ist, erlässt DUO.",
+ "sl.fg.NL": "Was dann noch offen ist, erlässt DUO automatisch, außer rückständigen Raten.",
  "sl.fg.GB": "Im Vereinigten Königreich wird der Rest dann erlassen.",
  "sl.fg.DE": "Beim BAföG zahlen Sie höchstens 10.010 € zurück.",
  "sl.big": "Das ist mehr, als ein Studienkredit meist beträgt. Stimmt der Betrag?",
@@ -5770,7 +5770,7 @@ Object.assign(I18N.fr, {
  "sl.open": "À la fin du remboursement ({yr}), il reste {v} à payer.",
  "sl.never": "Avec cette mensualité, le prêt ne diminue pas : les intérêts dépassent le remboursement.",
  "sl.slow": "À ce rythme, le remboursement prend plus de 60 ans.",
- "sl.fg.NL": "Ce qui reste est alors annulé par DUO.",
+ "sl.fg.NL": "Ce qui reste est alors annulé automatiquement par DUO, sauf les mensualités impayées.",
  "sl.fg.GB": "Au Royaume-Uni, ce qui reste est alors annulé.",
  "sl.fg.DE": "Avec le BAföG, vous ne remboursez jamais plus de 10 010 €.",
  "sl.big": "C’est plus qu’un prêt étudiant habituel. Le montant est-il juste ?",
@@ -5816,7 +5816,7 @@ Object.assign(I18N.es, {
  "sl.open": "Al final de la devolución ({yr}) quedan {v} pendientes.",
  "sl.never": "Con esta cuota no se salda: el interés es mayor que lo que devuelves.",
  "sl.slow": "Con esta cuota, devolverlo lleva más de 60 años.",
- "sl.fg.NL": "Lo que quede lo condona DUO.",
+ "sl.fg.NL": "Lo que quede lo condona DUO automáticamente, salvo las cuotas atrasadas.",
  "sl.fg.GB": "En el Reino Unido, lo que quede se cancela.",
  "sl.fg.DE": "Con el BAföG nunca devuelves más de 10.010 €.",
  "sl.big": "Es más de lo habitual en un préstamo de estudios. ¿Es correcto el importe?",
@@ -5845,7 +5845,7 @@ Object.assign(I18N.es, {
 });
 
 /* pensioen als uitklapvak (versie 20) */
-Object.assign(I18N.en, {"f.penOn": "I'm building up a {pen} and know how much it will be", "f.penOn_2": "Is building up a {pen} and knows how much it will be", "f.penHint": "Don't know yet? Leave it unticked and fill it in later.", "f.penPh": "net per month", "rel.20.n5": "State pension and pension now fold open. Under 35 the pension is off by default until you know how much it will be."});
+Object.assign(I18N.en, {"f.penOn": "I know how much my {pen} will be", "f.penOn_2": "Knows how much their {pen} will be", "f.penHint": "Don't know yet? Leave it unticked and fill it in later.", "f.penPh": "net per month", "rel.20.n5": "State pension and pension now fold open. Under 35 the pension is off by default until you know how much it will be."});
 Object.assign(I18N.nl, {"f.penOn": "Ik bouw {pen} op en weet hoeveel het is", "f.penOn_2": "Bouwt {pen} op en weet hoeveel het is", "f.penHint": "Weet je het nog niet? Laat het vinkje dan uit en vul het later aan.", "f.penPh": "netto per maand", "rel.20.n5": "Staatspensioen en pensioen klap je nu open. Onder de 35 staat het pensioen standaard uit, tot je weet hoeveel het wordt."});
 Object.assign(I18N.de, {"f.penOn": "Ich baue eine {Pen} auf und weiß, wie hoch sie wird", "f.penOn_2": "Baut eine {Pen} auf und weiß, wie hoch sie wird", "f.penHint": "Noch unbekannt? Lassen Sie das Häkchen weg und ergänzen Sie es später.", "f.penPh": "netto pro Monat", "rel.20.n5": "Gesetzliche Rente und Rente klappen Sie jetzt auf. Unter 35 ist die Rente standardmäßig aus, bis Sie wissen, wie hoch sie wird."});
 Object.assign(I18N.fr, {"f.penOn": "Je cotise à une {pen} et je connais son montant", "f.penOn_2": "Cotise à une {pen} et en connaît le montant", "f.penHint": "Vous ne savez pas encore ? Laissez la case décochée et complétez plus tard.", "f.penPh": "net par mois", "rel.20.n5": "La retraite de base et la retraite se déplient maintenant. Avant 35 ans, la retraite est désactivée par défaut tant que vous n’en connaissez pas le montant."});
