@@ -1913,6 +1913,35 @@ html.is-empty .kn-sep.nd { display: none; }
 .slot-sub { display: grid; min-height: 3.1em; min-height: 2lh; }
 .slot-sub > span { grid-area: 1 / 1; visibility: hidden; }
 .slot-sub > span.on { visibility: visible; }
+
+/* studieschuld (versie 20) */
+.sl .pot h4 { margin: 0 0 2px; font-size: 14px; }
+.sl-rate { margin: 0; }
+.sl-rate > summary { cursor: pointer; color: var(--ink2); font-size: 14px; }
+.sl-rate[open] > summary { margin-bottom: 10px; }
+.sl-note { margin: 0; color: var(--warn); font-size: 14px; }
+.sl-fg { margin: 0; color: var(--ink2); font-size: 14px; }
+.sl-pro { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border: 1px dashed var(--copper); border-radius: 10px; background: transparent; color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.sl-pro img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.sl-pro > span:not(.pro-tag) { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.sl-pro small { color: var(--ink2); font-size: 13px; }
+.sl-reset { align-self: flex-start; }
+html.band-0 .curve-f, html.band-0 #debts-box, html.band-0 #pots-box, html.band-0 .wk-tog, html.band-0 .wk-tip { display: none !important; }
+
+.pdrop { border: 1px solid var(--line); border-radius: 10px; }
+.pdrop > summary { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 10px 12px; min-height: 44px; cursor: pointer; list-style: none; font-weight: 600; font-size: 14px; }
+.pdrop > summary::-webkit-details-marker { display: none; }
+.pdrop > summary::after { content: ""; width: 8px; height: 8px; margin: 0 4px 4px auto; border-right: 2px solid var(--ink2); border-bottom: 2px solid var(--ink2); transform: rotate(45deg); transition: transform .15s; }
+.pdrop[open] > summary::after { transform: rotate(-135deg); margin-bottom: -4px; }
+.pdrop > summary input { width: 20px; height: 20px; accent-color: var(--accent); margin: 0; flex: none; }
+.pdrop .pd-t { flex: 1; }
+.pdrop .pd-h { order: 3; flex-basis: 100%; margin: 0 0 0 30px; font-weight: 400; }
+.pdrop > .dep { padding: 4px 12px 14px; }
+
+.tdrop { grid-column: 1 / -1; }
+.tdrop > .knob { border-top: 0; padding: 0 12px 14px; }
+.tdrop .knob-top { display: none; }
+.tdrop .pd-h { margin-left: 0; }
 </style>
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -2149,7 +2178,7 @@ html.is-empty .kn-sep.nd { display: none; }
     <div class="kn-sep" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
     <section class="card panel about-story" id="about-story" aria-labelledby="ab-story-h">
       <h2 id="ab-story-h" data-t="about.h">The idea behind Button Counter</h2>
-      <div class="ab-story" data-t="about.body"><p class="ab-lead">Button Counter began as a personal project. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be.</p><p>So I started calculating. I laid out my own situation and changed one thing at a time.</p><p class="ab-ifs"><span>What if I put in more?</span><span>What if I keep working for longer?</span><span>What if I invest differently?</span></p><p>After every change, I saw what it did. That showed me which strategy suits me best, not only to work out where I wanted to end up, but also to get there.</p><p class="ab-turn">I want to give you that same insight.</p><p>So my own calculations became an app for anyone with the same question. Whether you’re just starting out, in the middle of building up, or retirement is already in sight: you enter your own situation and try out what makes the difference.</p><p>And because it’s your money, everything stays in your own browser. Nothing is shared or tracked.</p><p class="ab-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p></div>
+      <div class="ab-story" data-t="about.body"><p class="ab-lead">Button Counter began as a personal project. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be.</p><p>So I started calculating. I laid out my own situation and changed one thing at a time.</p><p class="ab-ifs"><span>What if I put in more?</span><span>What if I keep working for longer?</span><span>What if I invest differently?</span></p><p>After every change, I saw what it did. That showed me which strategy suits me best, not only to work out where I wanted to end up, but also to get there.</p><p class="ab-turn">I want to give you that same insight.</p><p>So my own calculations became an app for anyone with the same question. Whether you’re just starting out, in the middle of building up, or retirement is already in sight: you enter your own situation and try out what makes the difference.</p><p>And because it’s your money, everything stays in your own browser.</p><p class="ab-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p></div>
     </section>
     <div class="about-grid">
       <section class="card panel faq" id="faq" aria-labelledby="ab-faq">
@@ -2211,7 +2240,7 @@ html.is-empty .kn-sep.nd { display: none; }
     </div>
     <div class="modal-body" id="intro-s1" hidden>
       <h2 class="intro-about-h" data-t="pay.h">Time to take stock.<br><span>Time to move forward.</span></h2>
-      <div class="about-body intro-about" data-t="intro.about"><p class="ia-lead">Button Counter is your personal financial cockpit.</p><p class="ia-show">It shows you:</p><ul class="ia-list"><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your savings</li></ul><div class="ia-sum"><h3>Your savings are a sum with two sides</h3><div class="ia-sides"><div class="ia-side"><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in a bit more each month?</span><span>Or if you keep working for longer?</span></div><div class="ia-side"><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class="ia-why">I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class="ia-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class="ia-priv"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser. Nothing is shared or tracked.</span></p></div>
+      <div class="about-body intro-about" data-t="intro.about"><p class="ia-lead">Button Counter is your personal financial cockpit.</p><p class="ia-show">It shows you:</p><ul class="ia-list"><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your financial future</li></ul><div class="ia-sum"><h3>Your financial future is a sum with two sides</h3><div class="ia-sides"><div class="ia-side"><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in or pay off a bit more each month?</span><span>Or if you keep working longer, or a bit less?</span></div><div class="ia-side"><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class="ia-why">I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class="ia-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class="ia-priv"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser.</span></p></div>
       <h2 id="intro-h" data-t="intro.ask">What are you curious about?</h2>
       <p class="sub" data-t="intro.promise">Is it enough? That’s what we work out, with no sales pitch and a source for every figure.</p>
       <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Roughly how old are you?</span>
@@ -3464,7 +3493,7 @@ Object.assign(I18N.en, {
   'tour.7.p': 'Here you’ll find the idea behind Button Counter, the rules for your country and all our sources. You can restart this tour from here too.',
   'tour.8.p': 'Want it more precise? In five short steps you can add pensions, side income and your own choices. Then just play with the sliders.',
   'about.lead': '<p>Button Counter is your personal financial cockpit. It shows you what you have, how much room that gives you now and later and how your savings could develop.</p>',
-  'about.body': '<p class="ab-lead">Button Counter began as a personal project. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be.</p><p>So I started calculating. I laid out my own situation and changed one thing at a time.</p><p class="ab-ifs"><span>What if I put in more?</span><span>What if I keep working for longer?</span><span>What if I invest differently?</span></p><p>After every change, I saw what it did. That showed me which strategy suits me best, not only to work out where I wanted to end up, but also to get there.</p><p class="ab-turn">I want to give you that same insight.</p><p>So my own calculations became an app for anyone with the same question. Whether you’re just starting out, in the middle of building up, or retirement is already in sight: you enter your own situation and try out what makes the difference.</p><p>And because it’s your money, everything stays in your own browser. Nothing is shared or tracked.</p><p class="ab-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p>',
+  'about.body': '<p class="ab-lead">Button Counter began as a personal project. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be.</p><p>So I started calculating. I laid out my own situation and changed one thing at a time.</p><p class="ab-ifs"><span>What if I put in more?</span><span>What if I keep working for longer?</span><span>What if I invest differently?</span></p><p>After every change, I saw what it did. That showed me which strategy suits me best, not only to work out where I wanted to end up, but also to get there.</p><p class="ab-turn">I want to give you that same insight.</p><p>So my own calculations became an app for anyone with the same question. Whether you’re just starting out, in the middle of building up, or retirement is already in sight: you enter your own situation and try out what makes the difference.</p><p>And because it’s your money, everything stays in your own browser.</p><p class="ab-close">Because it isn’t only about what you build up, but above all about what you can do with it.</p>',
   'fact.intro': 'This is what we assume {inCountry}. You can change every number under Fine-tune.',
   'about.disclaimer': 'Button Counter gives you insight, not tax or investment advice. We’ve simplified the rules per country, so do check the official sources.',
   'sup.text': 'Does Button Counter help you?',
@@ -3551,7 +3580,7 @@ Object.assign(I18N.nl, {
   'tour.7.p': 'Hier vind je de gedachte achter Knopenteller, de regels voor jouw land en al onze bronnen. Je kunt deze rondleiding hier ook opnieuw starten.',
   'tour.8.p': 'Wil je het preciezer? In vijf korte stappen voeg je pensioen, bijverdienen en je eigen keuzes toe. Daarna kun je lekker schuiven met de knoppen.',
   'about.lead': '<p>Knopenteller is je persoonlijke financiële cockpit. Het laat je zien wat je hebt, hoeveel ruimte dat geeft nu en later en hoe je vermogen zich kan ontwikkelen.</p>',
-  'about.body': '<p class="ab-lead">Knopenteller begon als een persoonlijk project. Ik wilde niet alleen weten waar ik stond, maar ook wat ik kon doen om te komen waar ik wilde zijn.</p><p>Dus ging ik rekenen. Ik zette mijn eigen situatie op een rij en veranderde steeds één ding.</p><p class="ab-ifs"><span>Wat als ik meer inleg?</span><span>Wat als ik langer blijf werken?</span><span>Wat als ik anders ga beleggen?</span></p><p>Na elke aanpassing zag ik wat het deed. Zo kreeg ik inzicht in welke strategie het beste bij mij past, niet alleen om te bepalen waar ik naartoe wilde, maar ook om er te komen.</p><p class="ab-turn">Datzelfde inzicht wil ik jou ook geven.</p><p>Daarom werd mijn eigen rekenwerk een app voor iedereen met dezelfde vraag. Of je nu net begint, midden in je opbouw zit of je pensioen al in zicht hebt: je vult je eigen situatie in en probeert zelf uit wat het verschil maakt.</p><p>En omdat het om jouw geld gaat, blijft alles in je eigen browser. Er wordt niets gedeeld of gevolgd.</p><p class="ab-close">Want het gaat niet alleen om wat je opbouwt, maar vooral om wat je daarmee kunt.</p>',
+  'about.body': '<p class="ab-lead">Knopenteller begon als een persoonlijk project. Ik wilde niet alleen weten waar ik stond, maar ook wat ik kon doen om te komen waar ik wilde zijn.</p><p>Dus ging ik rekenen. Ik zette mijn eigen situatie op een rij en veranderde steeds één ding.</p><p class="ab-ifs"><span>Wat als ik meer inleg?</span><span>Wat als ik langer blijf werken?</span><span>Wat als ik anders ga beleggen?</span></p><p>Na elke aanpassing zag ik wat het deed. Zo kreeg ik inzicht in welke strategie het beste bij mij past, niet alleen om te bepalen waar ik naartoe wilde, maar ook om er te komen.</p><p class="ab-turn">Datzelfde inzicht wil ik jou ook geven.</p><p>Daarom werd mijn eigen rekenwerk een app voor iedereen met dezelfde vraag. Of je nu net begint, midden in je opbouw zit of je pensioen al in zicht hebt: je vult je eigen situatie in en probeert zelf uit wat het verschil maakt.</p><p>En omdat het om jouw geld gaat, blijft alles in je eigen browser.</p><p class="ab-close">Want het gaat niet alleen om wat je opbouwt, maar vooral om wat je daarmee kunt.</p>',
   'fact.intro': 'Dit nemen we aan {inCountry}. Elk getal kun je aanpassen bij Invullen.',
   'about.disclaimer': 'Knopenteller geeft je inzicht, geen belasting- of beleggingsadvies. De regels per land hebben we vereenvoudigd, dus kijk ook even bij de officiële bronnen.',
   'sup.text': 'Heb je iets aan Knopenteller?',
@@ -3628,7 +3657,7 @@ Object.assign(I18N.de, {
   'tour.7.p': 'Hier finden Sie die Idee hinter Button Counter, die Regeln für Ihr Land und alle unsere Quellen. Auch diesen Rundgang starten Sie hier neu.',
   'tour.8.p': 'Möchten Sie es genauer? In fünf kurzen Schritten ergänzen Sie Renten, Nebenverdienst und eigene Entscheidungen. Danach drehen Sie einfach an den Reglern.',
   'about.lead': '<p>Button Counter ist Ihr persönliches Finanzcockpit. Es zeigt Ihnen, was Sie haben, wie viel Spielraum das heute und später gibt und wie sich Ihr Vermögen entwickeln kann.</p>',
-  'about.body': '<p class="ab-lead">Button Counter begann als persönliches Projekt. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill.</p><p>Also fing ich an zu rechnen. Ich legte meine eigene Situation offen und veränderte immer nur eine Sache.</p><p class="ab-ifs"><span>Was, wenn ich mehr einzahle?</span><span>Was, wenn ich länger arbeite?</span><span>Was, wenn ich anders anlege?</span></p><p>Nach jeder Änderung sah ich, was sie bewirkte. So erkannte ich, welche Strategie am besten zu mir passt, nicht nur, um zu bestimmen, wohin ich will, sondern auch, um dort anzukommen.</p><p class="ab-turn">Diese Einsicht möchte ich auch Ihnen geben.</p><p>Deshalb wurde aus meinen eigenen Berechnungen eine App für alle, die dieselbe Frage haben. Ob Sie gerade erst anfangen, mitten im Aufbau stehen oder die Rente schon in Sicht ist: Sie geben Ihre eigene Situation ein und probieren selbst aus, was den Unterschied macht.</p><p>Und weil es um Ihr Geld geht, bleibt alles in Ihrem eigenen Browser. Es wird nichts geteilt oder verfolgt.</p><p class="ab-close">Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p>',
+  'about.body': '<p class="ab-lead">Button Counter begann als persönliches Projekt. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill.</p><p>Also fing ich an zu rechnen. Ich legte meine eigene Situation offen und veränderte immer nur eine Sache.</p><p class="ab-ifs"><span>Was, wenn ich mehr einzahle?</span><span>Was, wenn ich länger arbeite?</span><span>Was, wenn ich anders anlege?</span></p><p>Nach jeder Änderung sah ich, was sie bewirkte. So erkannte ich, welche Strategie am besten zu mir passt, nicht nur, um zu bestimmen, wohin ich will, sondern auch, um dort anzukommen.</p><p class="ab-turn">Diese Einsicht möchte ich auch Ihnen geben.</p><p>Deshalb wurde aus meinen eigenen Berechnungen eine App für alle, die dieselbe Frage haben. Ob Sie gerade erst anfangen, mitten im Aufbau stehen oder die Rente schon in Sicht ist: Sie geben Ihre eigene Situation ein und probieren selbst aus, was den Unterschied macht.</p><p>Und weil es um Ihr Geld geht, bleibt alles in Ihrem eigenen Browser.</p><p class="ab-close">Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p>',
   'fact.intro': 'Das nehmen wir {inCountry} an. Jede Zahl können Sie unter Eingeben ändern.',
   'about.disclaimer': 'Button Counter gibt Ihnen Einblick, keine Steuer- oder Anlageberatung. Die Regeln je Land haben wir vereinfacht; schauen Sie also auch in die offiziellen Quellen.',
   'sup.text': 'Hilft Ihnen Button Counter?',
@@ -3705,7 +3734,7 @@ Object.assign(I18N.fr, {
   'tour.7.p': 'Vous trouverez ici l’idée derrière Button Counter, les règles de votre pays et toutes nos sources. Vous pouvez aussi relancer cette visite d’ici.',
   'tour.8.p': 'Envie de plus de précision ? En cinq étapes courtes, ajoutez retraites, revenus d’appoint et vos propres choix. Ensuite, jouez simplement avec les curseurs.',
   'about.lead': '<p>Button Counter est votre tableau de bord financier personnel. Il vous montre ce que vous avez, la marge que cela vous donne aujourd’hui et demain et comment votre patrimoine peut évoluer.</p>',
-  'about.body': '<p class="ab-lead">Button Counter a commencé comme un projet personnel. Je ne voulais pas seulement savoir où j’en étais, mais aussi ce que je pouvais faire pour arriver où je voulais.</p><p>Alors je me suis mis à calculer. J’ai posé ma propre situation à plat et j’ai changé une seule chose à la fois.</p><p class="ab-ifs"><span>Et si je mettais davantage de côté ?</span><span>Et si je travaillais plus longtemps ?</span><span>Et si j’investissais autrement ?</span></p><p>Après chaque changement, je voyais ce que cela donnait. J’ai ainsi compris quelle stratégie me convient le mieux, non seulement pour décider où je voulais aller, mais aussi pour y arriver.</p><p class="ab-turn">Cette compréhension, je souhaite aussi vous l’offrir.</p><p>Mes propres calculs sont donc devenus une application pour tous ceux qui se posent la même question. Que vous débutiez, que vous soyez en pleine construction ou que la retraite soit déjà en vue : vous saisissez votre situation et vous testez ce qui change la donne.</p><p>Et comme il s’agit de votre argent, tout reste dans votre propre navigateur. Rien n’est partagé ni suivi.</p><p class="ab-close">Car l’important n’est pas seulement ce que vous construisez, mais surtout ce que vous pouvez en faire.</p>',
+  'about.body': '<p class="ab-lead">Button Counter a commencé comme un projet personnel. Je ne voulais pas seulement savoir où j’en étais, mais aussi ce que je pouvais faire pour arriver où je voulais.</p><p>Alors je me suis mis à calculer. J’ai posé ma propre situation à plat et j’ai changé une seule chose à la fois.</p><p class="ab-ifs"><span>Et si je mettais davantage de côté ?</span><span>Et si je travaillais plus longtemps ?</span><span>Et si j’investissais autrement ?</span></p><p>Après chaque changement, je voyais ce que cela donnait. J’ai ainsi compris quelle stratégie me convient le mieux, non seulement pour décider où je voulais aller, mais aussi pour y arriver.</p><p class="ab-turn">Cette compréhension, je souhaite aussi vous l’offrir.</p><p>Mes propres calculs sont donc devenus une application pour tous ceux qui se posent la même question. Que vous débutiez, que vous soyez en pleine construction ou que la retraite soit déjà en vue : vous saisissez votre situation et vous testez ce qui change la donne.</p><p>Et comme il s’agit de votre argent, tout reste dans votre propre navigateur.</p><p class="ab-close">Car l’important n’est pas seulement ce que vous construisez, mais surtout ce que vous pouvez en faire.</p>',
   'fact.intro': 'Voici ce que nous retenons {inCountry}. Vous pouvez modifier chaque chiffre dans Saisir.',
   'about.disclaimer': 'Button Counter vous donne un éclairage, pas un conseil fiscal ou en placement. Nous avons simplifié les règles par pays : consultez aussi les sources officielles.',
   'sup.text': 'Button Counter vous est utile ?',
@@ -3791,7 +3820,7 @@ Object.assign(I18N.es, {
   'tour.7.p': 'Aquí encontrarás la idea detrás de Button Counter, las reglas de tu país y todas nuestras fuentes. También puedes reiniciar esta visita desde aquí.',
   'tour.8.p': '¿Lo quieres más preciso? En cinco pasos cortos añades pensiones, ingresos extra y tus propias decisiones. Después, juega con los controles.',
   'about.lead': '<p>Button Counter es tu panel financiero personal. Te muestra lo que tienes, cuánto margen te da ahora y más adelante y cómo puede evolucionar tu patrimonio.</p>',
-  'about.body': '<p class="ab-lead">Button Counter empezó como un proyecto personal. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería.</p><p>Así que me puse a calcular. Puse mi propia situación en orden y cambié una sola cosa cada vez.</p><p class="ab-ifs"><span>¿Y si aporto más?</span><span>¿Y si sigo trabajando más tiempo?</span><span>¿Y si invierto de otra forma?</span></p><p>Tras cada cambio veía qué efecto tenía. Así descubrí qué estrategia me encaja mejor, no solo para decidir adónde quería llegar, sino también para llegar.</p><p class="ab-turn">Esa misma visión quiero dártela también a ti.</p><p>Por eso mis propios cálculos se convirtieron en una app para cualquiera que se haga la misma pregunta. Si estás empezando, en plena construcción o con la jubilación ya a la vista: introduces tu situación y pruebas qué marca la diferencia.</p><p>Y como se trata de tu dinero, todo se queda en tu propio navegador. No se comparte ni se rastrea nada.</p><p class="ab-close">Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p>',
+  'about.body': '<p class="ab-lead">Button Counter empezó como un proyecto personal. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería.</p><p>Así que me puse a calcular. Puse mi propia situación en orden y cambié una sola cosa cada vez.</p><p class="ab-ifs"><span>¿Y si aporto más?</span><span>¿Y si sigo trabajando más tiempo?</span><span>¿Y si invierto de otra forma?</span></p><p>Tras cada cambio veía qué efecto tenía. Así descubrí qué estrategia me encaja mejor, no solo para decidir adónde quería llegar, sino también para llegar.</p><p class="ab-turn">Esa misma visión quiero dártela también a ti.</p><p>Por eso mis propios cálculos se convirtieron en una app para cualquiera que se haga la misma pregunta. Si estás empezando, en plena construcción o con la jubilación ya a la vista: introduces tu situación y pruebas qué marca la diferencia.</p><p>Y como se trata de tu dinero, todo se queda en tu propio navegador.</p><p class="ab-close">Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p>',
   'fact.intro': 'Esto es lo que suponemos {inCountry}. Puedes cambiar cada cifra en Rellenar.',
   'about.disclaimer': 'Button Counter te da una visión, no asesoramiento fiscal ni de inversión. Hemos simplificado las reglas de cada país, así que consulta también las fuentes oficiales.',
   'sup.text': '¿Te ayuda Button Counter?',
@@ -3905,7 +3934,7 @@ Object.assign(I18N.es, {
 });
 
 Object.assign(I18N.en, {
- "intro.about": "<p class='ia-lead'>Button Counter is your personal financial cockpit.</p><p class='ia-show'>It shows you:</p><ul class='ia-list'><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your savings</li></ul><div class='ia-sum'><h3>Your savings are a sum with two sides</h3><div class='ia-sides'><div class='ia-side'><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in a bit more each month?</span><span>Or if you keep working for longer?</span></div><div class='ia-side'><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class='ia-why'>I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class='ia-close'>Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser. Nothing is shared or tracked.</span></p>",
+ "intro.about": "<p class='ia-lead'>Button Counter is your personal financial cockpit.</p><p class='ia-show'>It shows you:</p><ul class='ia-list'><li>where you stand today, even if you’re just starting out</li><li>how much room that gives you now</li><li>how your income adds to the growth of your financial future</li></ul><div class='ia-sum'><h3>Your financial future is a sum with two sides</h3><div class='ia-sides'><div class='ia-side'><b>What goes in</b><span>What happens if you raise your income?</span><span>If you put in or pay off a bit more each month?</span><span>Or if you keep working longer, or a bit less?</span></div><div class='ia-side'><b>What you do with it</b><span>What happens if, for example, you invest more aggressively?</span></div></div><p>Adjust both sides and you get scenarios made for you. You see how your behaviour and effort play out later on.</p></div><p>You explore scenarios and work through choices, such as starting to save earlier or stopping work earlier. You see what they mean for your future. <b>Inflation is already taken into account.</b> So you see what you can really buy later on.</p><p class='ia-why'>I made Button Counter for myself. I didn’t only want to know where I stood, but also what I could do to get where I wanted to be. I want to give you that insight too.</p><p class='ia-close'>Because it isn’t only about what you build up, but above all about what you can do with it.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Your data stays yours.</b> It stays on your own device, in your own browser.</span></p>",
  "intro.ask": "What are you curious about?",
  "intro.promise": "One honest answer to one question: is it enough? No sales pitch and every figure comes with its source.",
  "goal.bar": "Your question",
@@ -3925,7 +3954,7 @@ Object.assign(I18N.en, {
 });
 
 Object.assign(I18N.nl, {
- "intro.about": "<p class='ia-lead'>Knopenteller is je persoonlijke financiële cockpit.</p><p class='ia-show'>Het laat je zien:</p><ul class='ia-list'><li>waar je nu staat, ook als je nog aan het begin staat</li><li>hoeveel ruimte je daarmee nu hebt</li><li>hoe je inkomsten bijdragen aan de groei van je vermogen</li></ul><div class='ia-sum'><h3>Je vermogen is een som met twee kanten</h3><div class='ia-sides'><div class='ia-side'><b>Wat erin gaat</b><span>Wat gebeurt er als je je inkomen verhoogt?</span><span>Als je elke maand iets meer inlegt?</span><span>Of als je langer blijft werken?</span></div><div class='ia-side'><b>Wat je ermee doet</b><span>Wat gebeurt er bijvoorbeeld als je agressief belegt?</span></div></div><p>Schuif aan beide kanten en je krijgt scenario’s op maat. Zo zie je hoe jouw gedrag en inzet doorwerken in later.</p></div><p>Je verkent scenario’s en rekent keuzes door, zoals eerder beginnen met sparen of eerder stoppen met werken. Zo zie je wat ze betekenen voor je toekomst. <b>Inflatie is al verrekend.</b> Zo zie je wat je later echt kunt kopen.</p><p class='ia-why'>Ik maakte Knopenteller voor mezelf. Ik wilde niet alleen weten waar ik stond, maar ook wat ik kon doen om te komen waar ik wilde zijn. Dat inzicht wil ik ook jou geven.</p><p class='ia-close'>Want het gaat niet alleen om wat je opbouwt, maar vooral om wat je daarmee kunt.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Jouw gegevens blijven van jou.</b> Ze blijven op je eigen device, in je eigen browser. Er wordt niets gedeeld of gevolgd.</span></p>",
+ "intro.about": "<p class='ia-lead'>Knopenteller is je persoonlijke financiële cockpit.</p><p class='ia-show'>Het laat je zien:</p><ul class='ia-list'><li>waar je nu staat, ook als je nog aan het begin staat</li><li>hoeveel ruimte je daarmee nu hebt</li><li>hoe je inkomsten bijdragen aan de groei van je financiële toekomst</li></ul><div class='ia-sum'><h3>Je financiële toekomst is een som met twee kanten</h3><div class='ia-sides'><div class='ia-side'><b>Wat erin gaat</b><span>Wat gebeurt er als je je inkomen verhoogt?</span><span>Als je elke maand iets meer inlegt of aflost?</span><span>Of als je langer blijft werken, of juist iets minder?</span></div><div class='ia-side'><b>Wat je ermee doet</b><span>Wat gebeurt er bijvoorbeeld als je agressief belegt?</span></div></div><p>Schuif aan beide kanten en je krijgt scenario’s op maat. Zo zie je hoe jouw gedrag en inzet doorwerken in later.</p></div><p>Je verkent scenario’s en rekent keuzes door, zoals eerder beginnen met sparen of eerder stoppen met werken. Zo zie je wat ze betekenen voor je toekomst. <b>Inflatie is al verrekend.</b> Zo zie je wat je later echt kunt kopen.</p><p class='ia-why'>Ik maakte Knopenteller voor mezelf. Ik wilde niet alleen weten waar ik stond, maar ook wat ik kon doen om te komen waar ik wilde zijn. Dat inzicht wil ik ook jou geven.</p><p class='ia-close'>Want het gaat niet alleen om wat je opbouwt, maar vooral om wat je daarmee kunt.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Jouw gegevens blijven van jou.</b> Ze blijven op je eigen device, in je eigen browser.</span></p>",
  "intro.ask": "Waar ben je benieuwd naar?",
  "intro.promise": "Eén eerlijk antwoord op één vraag: is het genoeg? Geen verkooppraatje en bij elk getal staat de bron.",
  "goal.bar": "Jouw vraag",
@@ -3945,7 +3974,7 @@ Object.assign(I18N.nl, {
 });
 
 Object.assign(I18N.de, {
- "intro.about": "<p class='ia-lead'>Button Counter ist Ihr persönliches Finanzcockpit.</p><p class='ia-show'>Es zeigt Ihnen:</p><ul class='ia-list'><li>wo Sie heute stehen, auch wenn Sie gerade erst anfangen</li><li>wie viel Spielraum Sie damit jetzt haben</li><li>wie Ihr Einkommen dazu beiträgt, dass Ihr Vermögen wächst</li></ul><div class='ia-sum'><h3>Ihr Vermögen ist eine Rechnung mit zwei Seiten</h3><div class='ia-sides'><div class='ia-side'><b>Was einfließt</b><span>Was passiert, wenn Sie Ihr Einkommen erhöhen?</span><span>Wenn Sie jeden Monat etwas mehr einlegen?</span><span>Oder wenn Sie länger arbeiten?</span></div><div class='ia-side'><b>Was Sie damit machen</b><span>Was passiert zum Beispiel, wenn Sie offensiver investieren?</span></div></div><p>Verändern Sie beide Seiten, und es entstehen Szenarien nach Maß. So sehen Sie, wie sich Ihr Verhalten und Ihr Einsatz später auswirken.</p></div><p>Sie erkunden Szenarien und rechnen Entscheidungen durch, etwa früher mit dem Sparen anzufangen oder früher aufzuhören zu arbeiten. So sehen Sie, was sie für Ihre Zukunft bedeuten. <b>Die Inflation ist bereits eingerechnet.</b> So sehen Sie, was Sie später wirklich kaufen können.</p><p class='ia-why'>Ich habe Button Counter für mich selbst gebaut. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill. Diese Einsicht möchte ich auch Ihnen geben.</p><p class='ia-close'>Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Ihre Daten bleiben bei Ihnen.</b> Sie bleiben auf Ihrem eigenen Gerät, in Ihrem eigenen Browser. Es wird nichts geteilt oder verfolgt.</span></p>",
+ "intro.about": "<p class='ia-lead'>Button Counter ist Ihr persönliches Finanzcockpit.</p><p class='ia-show'>Es zeigt Ihnen:</p><ul class='ia-list'><li>wo Sie heute stehen, auch wenn Sie gerade erst anfangen</li><li>wie viel Spielraum Sie damit jetzt haben</li><li>wie Ihr Einkommen zum Wachstum Ihrer finanziellen Zukunft beiträgt</li></ul><div class='ia-sum'><h3>Ihre finanzielle Zukunft ist eine Rechnung mit zwei Seiten</h3><div class='ia-sides'><div class='ia-side'><b>Was einfließt</b><span>Was passiert, wenn Sie Ihr Einkommen erhöhen?</span><span>Wenn Sie jeden Monat etwas mehr einlegen oder tilgen?</span><span>Oder wenn Sie länger arbeiten, oder etwas weniger?</span></div><div class='ia-side'><b>Was Sie damit machen</b><span>Was passiert zum Beispiel, wenn Sie offensiver investieren?</span></div></div><p>Verändern Sie beide Seiten, und es entstehen Szenarien nach Maß. So sehen Sie, wie sich Ihr Verhalten und Ihr Einsatz später auswirken.</p></div><p>Sie erkunden Szenarien und rechnen Entscheidungen durch, etwa früher mit dem Sparen anzufangen oder früher aufzuhören zu arbeiten. So sehen Sie, was sie für Ihre Zukunft bedeuten. <b>Die Inflation ist bereits eingerechnet.</b> So sehen Sie, was Sie später wirklich kaufen können.</p><p class='ia-why'>Ich habe Button Counter für mich selbst gebaut. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill. Diese Einsicht möchte ich auch Ihnen geben.</p><p class='ia-close'>Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Ihre Daten bleiben bei Ihnen.</b> Sie bleiben auf Ihrem eigenen Gerät, in Ihrem eigenen Browser.</span></p>",
  "intro.ask": "Was möchten Sie wissen?",
  "intro.promise": "Eine ehrliche Antwort auf eine Frage: Reicht es? Ohne Verkaufsgespräch und zu jeder Zahl gibt es die Quelle.",
  "goal.bar": "Ihre Frage",
@@ -3965,7 +3994,7 @@ Object.assign(I18N.de, {
 });
 
 Object.assign(I18N.fr, {
- "intro.about": "<p class='ia-lead'>Button Counter est votre tableau de bord financier personnel.</p><p class='ia-show'>Il vous montre :</p><ul class='ia-list'><li>où vous en êtes aujourd’hui, même si vous débutez</li><li>la marge que cela vous donne maintenant</li><li>comment vos revenus contribuent à la croissance de votre patrimoine</li></ul><div class='ia-sum'><h3>Votre patrimoine est une somme à deux côtés</h3><div class='ia-sides'><div class='ia-side'><b>Ce qui entre</b><span>Que se passe-t-il si vous augmentez vos revenus ?</span><span>Si vous mettez un peu plus de côté chaque mois ?</span><span>Ou si vous travaillez plus longtemps ?</span></div><div class='ia-side'><b>Ce que vous en faites</b><span>Que se passe-t-il, par exemple, si vous investissez de façon plus agressive ?</span></div></div><p>Ajustez les deux côtés et vous obtenez des scénarios sur mesure. Vous voyez comment votre comportement et vos efforts se répercutent plus tard.</p></div><p>Vous explorez des scénarios et testez des choix, comme commencer à épargner plus tôt ou arrêter de travailler plus tôt. Vous voyez ce qu’ils signifient pour votre avenir. <b>L’inflation est déjà prise en compte.</b> Vous voyez donc ce que vous pourrez vraiment acheter plus tard.</p><p class='ia-why'>J’ai créé Button Counter pour moi-même. Je ne voulais pas seulement savoir où j’en étais, mais aussi ce que je pouvais faire pour arriver où je voulais. Cette compréhension, je souhaite aussi vous l’offrir.</p><p class='ia-close'>Car l’important n’est pas seulement ce que vous construisez, mais surtout ce que vous pouvez en faire.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Vos données restent à vous.</b> Elles restent sur votre appareil, dans votre navigateur. Rien n’est partagé ni suivi.</span></p>",
+ "intro.about": "<p class='ia-lead'>Button Counter est votre tableau de bord financier personnel.</p><p class='ia-show'>Il vous montre :</p><ul class='ia-list'><li>où vous en êtes aujourd’hui, même si vous débutez</li><li>la marge que cela vous donne maintenant</li><li>comment vos revenus contribuent à la croissance de votre avenir financier</li></ul><div class='ia-sum'><h3>Votre avenir financier est une somme à deux côtés</h3><div class='ia-sides'><div class='ia-side'><b>Ce qui entre</b><span>Que se passe-t-il si vous augmentez vos revenus ?</span><span>Si vous mettez de côté ou remboursez un peu plus chaque mois ?</span><span>Ou si vous travaillez plus longtemps, ou un peu moins ?</span></div><div class='ia-side'><b>Ce que vous en faites</b><span>Que se passe-t-il, par exemple, si vous investissez de façon plus agressive ?</span></div></div><p>Ajustez les deux côtés et vous obtenez des scénarios sur mesure. Vous voyez comment votre comportement et vos efforts se répercutent plus tard.</p></div><p>Vous explorez des scénarios et testez des choix, comme commencer à épargner plus tôt ou arrêter de travailler plus tôt. Vous voyez ce qu’ils signifient pour votre avenir. <b>L’inflation est déjà prise en compte.</b> Vous voyez donc ce que vous pourrez vraiment acheter plus tard.</p><p class='ia-why'>J’ai créé Button Counter pour moi-même. Je ne voulais pas seulement savoir où j’en étais, mais aussi ce que je pouvais faire pour arriver où je voulais. Cette compréhension, je souhaite aussi vous l’offrir.</p><p class='ia-close'>Car l’important n’est pas seulement ce que vous construisez, mais surtout ce que vous pouvez en faire.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Vos données restent à vous.</b> Elles restent sur votre appareil, dans votre navigateur.</span></p>",
  "intro.ask": "Qu’aimeriez-vous savoir ?",
  "intro.promise": "Une réponse honnête à une question : est-ce suffisant ? Pas de discours commercial et chaque chiffre a sa source.",
  "goal.bar": "Votre question",
@@ -3985,7 +4014,7 @@ Object.assign(I18N.fr, {
 });
 
 Object.assign(I18N.es, {
- "intro.about": "<p class='ia-lead'>Button Counter es tu panel financiero personal.</p><p class='ia-show'>Te muestra:</p><ul class='ia-list'><li>dónde estás hoy, incluso si estás empezando</li><li>cuánto margen te da eso ahora</li><li>cómo contribuyen tus ingresos al crecimiento de tu patrimonio</li></ul><div class='ia-sum'><h3>Tu patrimonio es una suma con dos lados</h3><div class='ia-sides'><div class='ia-side'><b>Lo que entra</b><span>¿Qué pasa si aumentas tus ingresos?</span><span>¿Si aportas un poco más cada mes?</span><span>¿O si sigues trabajando más tiempo?</span></div><div class='ia-side'><b>Lo que haces con ello</b><span>¿Qué pasa, por ejemplo, si inviertes de forma más agresiva?</span></div></div><p>Mueve los dos lados y obtendrás escenarios a tu medida. Así ves cómo influyen más adelante tu comportamiento y tu esfuerzo.</p></div><p>Exploras escenarios y pruebas decisiones, como empezar a ahorrar antes o dejar de trabajar antes. Ves lo que significan para tu futuro. <b>La inflación ya está descontada.</b> Así ves lo que podrás comprar de verdad más adelante.</p><p class='ia-why'>Hice Button Counter para mí. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería. Esa misma visión quiero dártela también a ti.</p><p class='ia-close'>Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Tus datos siguen siendo tuyos.</b> Se quedan en tu propio dispositivo, en tu propio navegador. No se comparte ni se rastrea nada.</span></p>",
+ "intro.about": "<p class='ia-lead'>Button Counter es tu panel financiero personal.</p><p class='ia-show'>Te muestra:</p><ul class='ia-list'><li>dónde estás hoy, incluso si estás empezando</li><li>cuánto margen te da eso ahora</li><li>cómo contribuyen tus ingresos al crecimiento de tu futuro financiero</li></ul><div class='ia-sum'><h3>Tu futuro financiero es una suma con dos lados</h3><div class='ia-sides'><div class='ia-side'><b>Lo que entra</b><span>¿Qué pasa si aumentas tus ingresos?</span><span>¿Si aportas o amortizas un poco más cada mes?</span><span>¿O si sigues trabajando más tiempo, o un poco menos?</span></div><div class='ia-side'><b>Lo que haces con ello</b><span>¿Qué pasa, por ejemplo, si inviertes de forma más agresiva?</span></div></div><p>Mueve los dos lados y obtendrás escenarios a tu medida. Así ves cómo influyen más adelante tu comportamiento y tu esfuerzo.</p></div><p>Exploras escenarios y pruebas decisiones, como empezar a ahorrar antes o dejar de trabajar antes. Ves lo que significan para tu futuro. <b>La inflación ya está descontada.</b> Así ves lo que podrás comprar de verdad más adelante.</p><p class='ia-why'>Hice Button Counter para mí. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería. Esa misma visión quiero dártela también a ti.</p><p class='ia-close'>Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p><p class='ia-priv'><svg viewBox='0 0 24 24' width='18' height='18' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='9' rx='2'/><path d='M8 11V8a4 4 0 0 1 8 0v3'/></svg><span><b>Tus datos siguen siendo tuyos.</b> Se quedan en tu propio dispositivo, en tu propio navegador.</span></p>",
  "intro.ask": "¿Qué le gustaría saber?",
  "intro.promise": "Una respuesta honesta a una pregunta: ¿es suficiente? Sin discurso comercial y cada cifra lleva su fuente.",
  "goal.bar": "Su pregunta",
@@ -5583,6 +5612,252 @@ Object.assign(I18N.es, {
  'h.names2': 'Aquí también vale un nombre inventado, por ejemplo «María Pérez».'
 });
 
+/* studieschuld, leeftijdsgroepen en nieuwe wielvragen (versie 20) */
+Object.assign(I18N.en, {
+ "sl.h": "Student loan",
+ "sl.s": "Balance, monthly payment and end of repayment",
+ "sl.intro": "Do you have a student loan? Enter what is still outstanding, what you repay each month and until when you repay. Then you see when you are debt-free. This card does not count in your result.",
+ "sl.r": "Outstanding balance",
+ "sl.m": "Repayment per month",
+ "sl.e": "End of repayment (year)",
+ "sl.ePh": "empty = until paid off",
+ "sl.i": "Interest per year",
+ "sl.iHint": "{InCountry} we fill in {p}. Not right for your loan? Change it; you can find your rate at {src}.",
+ "sl.iHintEst": "{InCountry}, {p} is an estimate. Change it to the rate of your own loan.",
+ "sl.iReset": "Back to {p}",
+ "sl.empty": "Enter your balance and monthly payment to see when you are debt-free.",
+ "sl.notYet": "You are not repaying yet. Fill in the monthly payment once repayment starts.",
+ "sl.free": "Debt-free in {yr}, in about {n} years. After that, {m} a month is freed up.",
+ "sl.free1": "Debt-free within a year ({yr}). After that, {m} a month is freed up.",
+ "sl.open": "At the end of your repayment period ({yr}), {v} is still outstanding.",
+ "sl.never": "This payment does not pay the loan off: the interest is higher than what you repay.",
+ "sl.slow": "At this payment, repaying takes more than 60 years.",
+ "sl.fg.NL": "DUO then cancels whatever is left.",
+ "sl.fg.GB": "In the UK, whatever is left is then written off.",
+ "sl.fg.DE": "With BAföG you never repay more than €10,010.",
+ "sl.big": "This is higher than a student loan usually is. Is the amount right?",
+ "sl.bigPro": "Is it a mortgage or another loan? Use the {debt} card (Pro) for that.",
+ "sl.past": "Choose a year after this one.",
+ "sl.long": "Repayment rarely lasts more than 45 years. Is the year right?",
+ "sl.proQ": "Pay off or invest?",
+ "sl.proS": "Compare two plans",
+ "tz.plans.0": "Pay off or invest?",
+ "tz.plans.1": "Save more now or later?",
+ "tz.plans.2": "Stop earlier or keep working?",
+ "tz.pp.0": "Study, work or live abroad?",
+ "tz.pp.1": "Moving abroad with your family?",
+ "tz.pp.2": "Where does your money last longest?",
+ "goalY.7.t": "When will I be debt-free?",
+ "goalY.7.s": "See when your student loan is gone and what you free up each month after that.",
+ "goalY.8.t": "Study, work or live abroad?",
+ "goalY.8.s": "Compare what the same amount is worth in other countries.",
+ "goalY.9.t": "Moving abroad with your family?",
+ "goalY.9.s": "Compare what the same amount is worth in other countries.",
+ "rel.20.v": "Version 20 · November 2026",
+ "rel.20.n1": "New: the Student loan card. Enter your balance, monthly payment and end of repayment and see when you are debt-free. It works in every country, with an interest rate you can change yourself.",
+ "rel.20.n2": "Under 35 the app is simpler: mortgage, extra pot and spending pattern are left out. As you get older they appear, and what you entered stays.",
+ "rel.20.n3": "New questions on the start wheel, such as “When will I be debt-free?” and “Moving abroad with your family?”.",
+  "rel.20.n4": "The introduction now talks about your financial future, with more examples such as paying off a bit more or working a bit less."
+});
+Object.assign(I18N.nl, {
+ "sl.h": "Studieschuld",
+ "sl.s": "Restschuld, maandbedrag en einde aflosfase",
+ "sl.intro": "Heb je een studieschuld of studielening? Vul in hoeveel er nog openstaat, wat je per maand terugbetaalt en tot wanneer je aflost. Dan zie je wanneer je schuldenvrij bent. Dit vak telt niet mee in je uitkomst.",
+ "sl.r": "Restschuld",
+ "sl.m": "Per maand terug",
+ "sl.e": "Einde aflosfase (jaar)",
+ "sl.ePh": "leeg = tot afgelost",
+ "sl.i": "Rente per jaar",
+ "sl.iHint": "{InCountry} vullen we {p} in. Klopt dat niet voor jouw lening? Pas het aan; je rente staat bij {src}.",
+ "sl.iHintEst": "{InCountry} is {p} een schatting. Pas het aan naar de rente van jouw lening.",
+ "sl.iReset": "Terug naar {p}",
+ "sl.empty": "Vul je restschuld en maandbedrag in, dan zie je wanneer je schuldenvrij bent.",
+ "sl.notYet": "Je lost nog niet af. Vul het maandbedrag in zodra je aflosfase begint.",
+ "sl.free": "Schuldenvrij in {yr}, over ongeveer {n} jaar. Daarna komt {m} per maand vrij.",
+ "sl.free1": "Schuldenvrij binnen een jaar ({yr}). Daarna komt {m} per maand vrij.",
+ "sl.open": "Aan het einde van je aflosfase ({yr}) staat nog {v} open.",
+ "sl.never": "Met dit maandbedrag los je niet af: de rente is hoger dan wat je terugbetaalt.",
+ "sl.slow": "Met dit maandbedrag duurt aflossen langer dan 60 jaar.",
+ "sl.fg.NL": "Wat dan nog openstaat, scheldt DUO kwijt.",
+ "sl.fg.GB": "In het Verenigd Koninkrijk wordt wat dan nog openstaat kwijtgescholden.",
+ "sl.fg.DE": "Bij BAföG betaal je nooit meer dan € 10.010 terug.",
+ "sl.big": "Dit is hoger dan een studieschuld meestal is. Klopt het bedrag?",
+ "sl.bigPro": "Gaat het om een hypotheek of andere lening? Daarvoor is de kaart {debt} (Pro).",
+ "sl.past": "Kies een jaar na dit jaar.",
+ "sl.long": "Een aflosfase duurt zelden langer dan 45 jaar. Klopt het jaartal?",
+ "sl.proQ": "Aflossen of beleggen?",
+ "sl.proS": "Vergelijk twee plannen",
+ "tz.plans.0": "Aflossen of beleggen?",
+ "tz.plans.1": "Nu meer sparen of later?",
+ "tz.plans.2": "Eerder stoppen of doorwerken?",
+ "tz.pp.0": "Studeren, werken of wonen in het buitenland?",
+ "tz.pp.1": "Verhuizen met je gezin?",
+ "tz.pp.2": "Waar kom je het langst mee uit?",
+ "goalY.7.t": "Wanneer ben ik schuldenvrij?",
+ "goalY.7.s": "Zie wanneer je studieschuld weg is en wat er daarna per maand vrijkomt.",
+ "goalY.8.t": "Studeren, werken of wonen in het buitenland?",
+ "goalY.8.s": "Vergelijk wat hetzelfde bedrag in andere landen waard is.",
+ "goalY.9.t": "Verhuizen met je gezin?",
+ "goalY.9.s": "Vergelijk wat hetzelfde bedrag in andere landen waard is.",
+ "rel.20.v": "Versie 20 · november 2026",
+ "rel.20.n1": "Nieuw: het vak Studieschuld. Vul je restschuld, maandbedrag en einde aflosfase in en zie wanneer je schuldenvrij bent. Het werkt in elk land, met een rente die je zelf kunt aanpassen.",
+ "rel.20.n2": "Onder de 35 is de app eenvoudiger: hypotheek, extra pot en uitgavenverloop staan er niet in. Word je ouder, dan komen ze erbij en blijft wat je hebt ingevuld staan.",
+ "rel.20.n3": "Nieuwe vragen in het startwiel, zoals “Wanneer ben ik schuldenvrij?” en “Verhuizen met je gezin?”.",
+  "rel.20.n4": "De introductie gaat nu over je financiële toekomst, met meer voorbeelden, zoals iets meer aflossen of juist iets minder werken."
+});
+Object.assign(I18N.de, {
+ "sl.h": "Studienkredit",
+ "sl.s": "Restschuld, Monatsrate und Ende der Rückzahlung",
+ "sl.intro": "Haben Sie einen Studienkredit oder BAföG-Schulden? Geben Sie ein, wie viel noch offen ist, was Sie monatlich zurückzahlen und bis wann. Dann sehen Sie, wann Sie schuldenfrei sind. Diese Karte zählt nicht in Ihr Ergebnis.",
+ "sl.r": "Restschuld",
+ "sl.m": "Monatliche Rate",
+ "sl.e": "Ende der Rückzahlung (Jahr)",
+ "sl.ePh": "leer = bis getilgt",
+ "sl.i": "Zins pro Jahr",
+ "sl.iHint": "{InCountry} tragen wir {p} ein. Stimmt das für Ihr Darlehen nicht? Ändern Sie es; Ihren Zins finden Sie unter {src}.",
+ "sl.iHintEst": "{InCountry} sind {p} eine Schätzung. Ändern Sie den Wert auf den Zins Ihres Darlehens.",
+ "sl.iReset": "Zurück zu {p}",
+ "sl.empty": "Geben Sie Restschuld und Monatsrate ein, dann sehen Sie, wann Sie schuldenfrei sind.",
+ "sl.notYet": "Sie zahlen noch nicht zurück. Tragen Sie die Monatsrate ein, sobald die Rückzahlung beginnt.",
+ "sl.free": "Schuldenfrei {yr}, in etwa {n} Jahren. Danach werden {m} im Monat frei.",
+ "sl.free1": "Schuldenfrei innerhalb eines Jahres ({yr}). Danach werden {m} im Monat frei.",
+ "sl.open": "Am Ende der Rückzahlung ({yr}) sind noch {v} offen.",
+ "sl.never": "Mit dieser Rate wird das Darlehen nicht getilgt: Die Zinsen sind höher als die Rückzahlung.",
+ "sl.slow": "Mit dieser Rate dauert die Tilgung länger als 60 Jahre.",
+ "sl.fg.NL": "Was dann noch offen ist, erlässt DUO.",
+ "sl.fg.GB": "Im Vereinigten Königreich wird der Rest dann erlassen.",
+ "sl.fg.DE": "Beim BAföG zahlen Sie höchstens 10.010 € zurück.",
+ "sl.big": "Das ist mehr, als ein Studienkredit meist beträgt. Stimmt der Betrag?",
+ "sl.bigPro": "Geht es um eine Hypothek oder einen anderen Kredit? Dafür gibt es die Karte {debt} (Pro).",
+ "sl.past": "Wählen Sie ein Jahr nach diesem.",
+ "sl.long": "Eine Rückzahlung dauert selten länger als 45 Jahre. Stimmt die Jahreszahl?",
+ "sl.proQ": "Tilgen oder anlegen?",
+ "sl.proS": "Zwei Pläne vergleichen",
+ "tz.plans.0": "Tilgen oder anlegen?",
+ "tz.plans.1": "Jetzt mehr sparen oder später?",
+ "tz.plans.2": "Früher aufhören oder weiterarbeiten?",
+ "tz.pp.0": "Im Ausland studieren, arbeiten oder wohnen?",
+ "tz.pp.1": "Mit der Familie ins Ausland ziehen?",
+ "tz.pp.2": "Wo reicht Ihr Geld am längsten?",
+ "goalY.7.t": "Wann bin ich schuldenfrei?",
+ "goalY.7.s": "Sehen Sie, wann Ihr Studienkredit abbezahlt ist und was danach monatlich frei wird.",
+ "goalY.8.t": "Im Ausland studieren, arbeiten oder wohnen?",
+ "goalY.8.s": "Vergleichen Sie, was derselbe Betrag in anderen Ländern wert ist.",
+ "goalY.9.t": "Mit der Familie ins Ausland ziehen?",
+ "goalY.9.s": "Vergleichen Sie, was derselbe Betrag in anderen Ländern wert ist.",
+ "rel.20.v": "Version 20 · November 2026",
+ "rel.20.n1": "Neu: die Karte Studienkredit. Geben Sie Restschuld, Monatsrate und Ende der Rückzahlung ein und sehen Sie, wann Sie schuldenfrei sind. Sie funktioniert in jedem Land, mit einem Zins, den Sie selbst ändern können.",
+ "rel.20.n2": "Unter 35 ist die App einfacher: Hypothek, Extra-Topf und Ausgabenverlauf fehlen. Werden Sie älter, kommen sie dazu, und Ihre Eingaben bleiben erhalten.",
+ "rel.20.n3": "Neue Fragen im Startrad, etwa „Wann bin ich schuldenfrei?“ und „Mit der Familie ins Ausland ziehen?“.",
+  "rel.20.n4": "Die Einführung spricht jetzt von Ihrer finanziellen Zukunft, mit mehr Beispielen wie etwas mehr tilgen oder etwas weniger arbeiten."
+});
+Object.assign(I18N.fr, {
+ "sl.h": "Prêt étudiant",
+ "sl.s": "Solde, mensualité et fin du remboursement",
+ "sl.intro": "Vous avez un prêt étudiant ? Indiquez ce qui reste à rembourser, votre mensualité et jusqu’à quand vous remboursez. Vous voyez alors quand vous serez libéré de cette dette. Cette carte ne compte pas dans votre résultat.",
+ "sl.r": "Reste à rembourser",
+ "sl.m": "Mensualité",
+ "sl.e": "Fin du remboursement (année)",
+ "sl.ePh": "vide = jusqu’au solde",
+ "sl.i": "Taux d’intérêt annuel",
+ "sl.iHint": "{InCountry}, nous indiquons {p}. Ce n’est pas le taux de votre prêt ? Modifiez-le ; votre taux figure chez {src}.",
+ "sl.iHintEst": "{InCountry}, {p} est une estimation. Remplacez-le par le taux de votre prêt.",
+ "sl.iReset": "Revenir à {p}",
+ "sl.empty": "Indiquez le solde et la mensualité pour voir quand vous serez libéré de la dette.",
+ "sl.notYet": "Vous ne remboursez pas encore. Indiquez la mensualité dès que le remboursement commence.",
+ "sl.free": "Libéré de la dette en {yr}, dans environ {n} ans. Ensuite, {m} par mois se libèrent.",
+ "sl.free1": "Libéré de la dette d’ici un an ({yr}). Ensuite, {m} par mois se libèrent.",
+ "sl.open": "À la fin du remboursement ({yr}), il reste {v} à payer.",
+ "sl.never": "Avec cette mensualité, le prêt ne diminue pas : les intérêts dépassent le remboursement.",
+ "sl.slow": "À ce rythme, le remboursement prend plus de 60 ans.",
+ "sl.fg.NL": "Ce qui reste est alors annulé par DUO.",
+ "sl.fg.GB": "Au Royaume-Uni, ce qui reste est alors annulé.",
+ "sl.fg.DE": "Avec le BAföG, vous ne remboursez jamais plus de 10 010 €.",
+ "sl.big": "C’est plus qu’un prêt étudiant habituel. Le montant est-il juste ?",
+ "sl.bigPro": "S’agit-il d’un prêt immobilier ou d’un autre crédit ? Utilisez alors la carte {debt} (Pro).",
+ "sl.past": "Choisissez une année postérieure à celle-ci.",
+ "sl.long": "Un remboursement dure rarement plus de 45 ans. L’année est-elle juste ?",
+ "sl.proQ": "Rembourser ou investir ?",
+ "sl.proS": "Comparer deux plans",
+ "tz.plans.0": "Rembourser ou investir ?",
+ "tz.plans.1": "Épargner plus maintenant ou plus tard ?",
+ "tz.plans.2": "Arrêter plus tôt ou continuer à travailler ?",
+ "tz.pp.0": "Étudier, travailler ou vivre à l’étranger ?",
+ "tz.pp.1": "Partir à l’étranger en famille ?",
+ "tz.pp.2": "Où votre argent dure-t-il le plus longtemps ?",
+ "goalY.7.t": "Quand serai-je libéré de mes dettes ?",
+ "goalY.7.s": "Voyez quand votre prêt étudiant sera remboursé et ce qui se libère ensuite chaque mois.",
+ "goalY.8.t": "Étudier, travailler ou vivre à l’étranger ?",
+ "goalY.8.s": "Comparez ce que vaut la même somme dans d’autres pays.",
+ "goalY.9.t": "Partir à l’étranger en famille ?",
+ "goalY.9.s": "Comparez ce que vaut la même somme dans d’autres pays.",
+ "rel.20.v": "Version 20 · novembre 2026",
+ "rel.20.n1": "Nouveau : la carte Prêt étudiant. Indiquez le solde, la mensualité et la fin du remboursement, et voyez quand vous serez libéré de la dette. Elle fonctionne dans chaque pays, avec un taux que vous pouvez modifier.",
+ "rel.20.n2": "Avant 35 ans, l’application est plus simple : sans prêt immobilier, cagnotte supplémentaire ni évolution des dépenses. Plus tard, ils apparaissent et vos saisies restent.",
+ "rel.20.n3": "Nouvelles questions dans la roue de départ, comme « Quand serai-je libéré de mes dettes ? » et « Partir à l’étranger en famille ? ».",
+  "rel.20.n4": "L’introduction parle maintenant de votre avenir financier, avec plus d’exemples, comme rembourser un peu plus ou travailler un peu moins."
+});
+Object.assign(I18N.es, {
+ "sl.h": "Préstamo de estudios",
+ "sl.s": "Saldo, cuota mensual y fin de la devolución",
+ "sl.intro": "¿Tienes un préstamo de estudios? Indica lo que queda por pagar, lo que devuelves al mes y hasta cuándo. Así ves cuándo quedarás libre de deudas. Esta tarjeta no cuenta en tu resultado.",
+ "sl.r": "Saldo pendiente",
+ "sl.m": "Cuota mensual",
+ "sl.e": "Fin de la devolución (año)",
+ "sl.ePh": "vacío = hasta saldarlo",
+ "sl.i": "Interés anual",
+ "sl.iHint": "{InCountry} ponemos un {p}. ¿No es el de tu préstamo? Cámbialo; tu interés aparece en {src}.",
+ "sl.iHintEst": "{InCountry}, el {p} es una estimación. Cámbialo por el interés de tu préstamo.",
+ "sl.iReset": "Volver al {p}",
+ "sl.empty": "Indica el saldo y la cuota mensual para ver cuándo quedarás libre de deudas.",
+ "sl.notYet": "Aún no devuelves nada. Indica la cuota cuando empiece la devolución.",
+ "sl.free": "Libre de deudas en {yr}, dentro de unos {n} años. Después quedan libres {m} al mes.",
+ "sl.free1": "Libre de deudas en menos de un año ({yr}). Después quedan libres {m} al mes.",
+ "sl.open": "Al final de la devolución ({yr}) quedan {v} pendientes.",
+ "sl.never": "Con esta cuota no se salda: el interés es mayor que lo que devuelves.",
+ "sl.slow": "Con esta cuota, devolverlo lleva más de 60 años.",
+ "sl.fg.NL": "Lo que quede lo condona DUO.",
+ "sl.fg.GB": "En el Reino Unido, lo que quede se cancela.",
+ "sl.fg.DE": "Con el BAföG nunca devuelves más de 10.010 €.",
+ "sl.big": "Es más de lo habitual en un préstamo de estudios. ¿Es correcto el importe?",
+ "sl.bigPro": "¿Es una hipoteca u otro préstamo? Para eso está la tarjeta {debt} (Pro).",
+ "sl.past": "Elige un año posterior a este.",
+ "sl.long": "La devolución rara vez dura más de 45 años. ¿Es correcto el año?",
+ "sl.proQ": "¿Amortizar o invertir?",
+ "sl.proS": "Compara dos planes",
+ "tz.plans.0": "¿Amortizar o invertir?",
+ "tz.plans.1": "¿Ahorrar más ahora o después?",
+ "tz.plans.2": "¿Parar antes o seguir trabajando?",
+ "tz.pp.0": "¿Estudiar, trabajar o vivir en el extranjero?",
+ "tz.pp.1": "¿Mudarte al extranjero con tu familia?",
+ "tz.pp.2": "¿Dónde te dura más el dinero?",
+ "goalY.7.t": "¿Cuándo estaré libre de deudas?",
+ "goalY.7.s": "Mira cuándo terminas de pagar tu préstamo de estudios y cuánto te queda libre al mes después.",
+ "goalY.8.t": "¿Estudiar, trabajar o vivir en el extranjero?",
+ "goalY.8.s": "Compara lo que vale la misma cantidad en otros países.",
+ "goalY.9.t": "¿Mudarte al extranjero con tu familia?",
+ "goalY.9.s": "Compara lo que vale la misma cantidad en otros países.",
+ "rel.20.v": "Versión 20 · noviembre de 2026",
+ "rel.20.n1": "Nuevo: la tarjeta Préstamo de estudios. Indica el saldo, la cuota mensual y el fin de la devolución y mira cuándo quedarás libre de deudas. Funciona en todos los países, con un interés que puedes cambiar tú.",
+ "rel.20.n2": "Por debajo de 35 años la app es más sencilla: sin hipoteca, fondo extra ni evolución del gasto. Al cumplir más años aparecen, y lo que has rellenado se mantiene.",
+ "rel.20.n3": "Nuevas preguntas en la rueda de inicio, como «¿Cuándo estaré libre de deudas?» y «¿Mudarte al extranjero con tu familia?».",
+  "rel.20.n4": "La introducción habla ahora de tu futuro financiero, con más ejemplos, como amortizar un poco más o trabajar un poco menos."
+});
+
+/* pensioen als uitklapvak (versie 20) */
+Object.assign(I18N.en, {"f.penOn": "I'm building up a {pen} and know how much it will be", "f.penOn_2": "Is building up a {pen} and knows how much it will be", "f.penHint": "Don't know yet? Leave it unticked and fill it in later.", "f.penPh": "net per month", "rel.20.n5": "State pension and pension now fold open. Under 35 the pension is off by default until you know how much it will be."});
+Object.assign(I18N.nl, {"f.penOn": "Ik bouw {pen} op en weet hoeveel het is", "f.penOn_2": "Bouwt {pen} op en weet hoeveel het is", "f.penHint": "Weet je het nog niet? Laat het vinkje dan uit en vul het later aan.", "f.penPh": "netto per maand", "rel.20.n5": "Staatspensioen en pensioen klap je nu open. Onder de 35 staat het pensioen standaard uit, tot je weet hoeveel het wordt."});
+Object.assign(I18N.de, {"f.penOn": "Ich baue eine {Pen} auf und weiß, wie hoch sie wird", "f.penOn_2": "Baut eine {Pen} auf und weiß, wie hoch sie wird", "f.penHint": "Noch unbekannt? Lassen Sie das Häkchen weg und ergänzen Sie es später.", "f.penPh": "netto pro Monat", "rel.20.n5": "Gesetzliche Rente und Rente klappen Sie jetzt auf. Unter 35 ist die Rente standardmäßig aus, bis Sie wissen, wie hoch sie wird."});
+Object.assign(I18N.fr, {"f.penOn": "Je cotise à une {pen} et je connais son montant", "f.penOn_2": "Cotise à une {pen} et en connaît le montant", "f.penHint": "Vous ne savez pas encore ? Laissez la case décochée et complétez plus tard.", "f.penPh": "net par mois", "rel.20.n5": "La retraite de base et la retraite se déplient maintenant. Avant 35 ans, la retraite est désactivée par défaut tant que vous n’en connaissez pas le montant."});
+Object.assign(I18N.es, {"f.penOn": "Estoy acumulando un {pen} y sé cuánto será", "f.penOn_2": "Acumula un {pen} y sabe cuánto será", "f.penHint": "¿Aún no lo sabes? Deja la casilla sin marcar y complétalo más tarde.", "f.penPh": "neto al mes", "rel.20.n5": "La pensión pública y la pensión ahora se despliegan. Por debajo de 35 años, la pensión está desactivada por defecto hasta que sepas cuánto será."});
+
+/* woorden voor alle leeftijden, belasting dichtgeklapt, oproep bij de uitkomst (versie 20) */
+Object.assign(I18N.en, {"f.eindleeftijd": "Age at which your money may run out", "f.restkapitaal": "What should be left at that age", "ins.rest": "Left at the end", "opb.cta": "I want to change this", "rel.20.n6": "Tax on savings now folds away, and the result has a clear button to change it."});
+Object.assign(I18N.nl, {"f.eindleeftijd": "Leeftijd waarop je geld op mag zijn", "f.restkapitaal": "Wat er dan nog over moet zijn", "ins.rest": "Wat er over moet zijn", "opb.cta": "Dit wil ik veranderen", "rel.20.n6": "Belasting over vermogen is nu standaard dichtgeklapt, en bij de uitkomst staat een duidelijke knop om die te veranderen."});
+Object.assign(I18N.de, {"f.eindleeftijd": "Alter, bis zu dem Ihr Geld aufgebraucht sein darf", "f.restkapitaal": "Was dann noch übrig sein soll", "ins.rest": "Rest am Ende", "opb.cta": "Das möchte ich ändern", "rel.20.n6": "Die Steuer auf das Vermögen ist jetzt eingeklappt, und beim Ergebnis gibt es eine klare Schaltfläche, um es zu ändern."});
+Object.assign(I18N.fr, {"f.eindleeftijd": "Âge auquel votre argent peut être épuisé", "f.restkapitaal": "Ce qui doit rester à cet âge", "ins.rest": "Reste à la fin", "opb.cta": "Je veux changer ça", "rel.20.n6": "L’impôt sur le patrimoine est maintenant replié, et le résultat a un bouton clair pour le changer."});
+Object.assign(I18N.es, {"f.eindleeftijd": "Edad a la que tu dinero puede acabarse", "f.restkapitaal": "Lo que debe quedar a esa edad", "ins.rest": "Lo que queda al final", "opb.cta": "Quiero cambiar esto", "rel.20.n6": "El impuesto sobre el patrimonio ahora está plegado, y el resultado tiene un botón claro para cambiarlo."});
+
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
 (function () {
@@ -5781,16 +6056,19 @@ Object.assign(I18N.es, {
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '19 · 2026-11';
+  var APPV = '20 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
   /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
-  var lists = { perP: [], perD: [], pots: [], debts: [] };
+  var lists = { perP: [], perD: [], pots: [], debts: [], stud: [] };
   function fin(v, lo, hi, d) { v = parseFloat(v); return isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d; }
   function cleanLists(o) {
-    var r = { perP: [], perD: [], pots: [], debts: [] };
+    var r = { perP: [], perD: [], pots: [], debts: [], stud: [] };
     if (!o || typeof o !== 'object') return r;
+    (Array.isArray(o.stud) ? o.stud : []).slice(0, 2).forEach(function (x) {
+      r.stud.push(x ? { r: fin(x.r, 0, 1e8, 0), m: fin(x.m, 0, 1e6, 0), e: fin(x.e, 0, 2200, 0), i: fin(x.i, -1, 30, -1) } : { r: 0, m: 0, e: 0, i: -1 });
+    });
     (Array.isArray(o.debts) ? o.debts : []).slice(0, 6).forEach(function (x) {
       if (x) r.debts.push({ n: String(x.n || '').slice(0, 30), m: fin(x.m, 0, 1e6, 0), y: fin(x.y, 0, 60, 0), v: fin(x.v, 0, 1e8, 0), b: x.b === 0 ? 0 : 1 });
     });
@@ -5916,6 +6194,9 @@ Object.assign(I18N.es, {
             '<div class="field"><div class="ftop"><label for="nm-' + n + '" data-t="f.name' + n + '"></label></div><input id="nm-' + n + '" type="text" maxlength="20" autocomplete="off" data-ph-n="' + n + '"><p class="hint" data-t="h.names' + n + '"></p></div>' +
             wkHtml(n === 1 ? 'P' : 'D') + '</div>';
         }).join('') + '</div>' +
+        '<details class="card pots sl" id="stud-box"><summary><span class="pots-h"><b id="sl-title" data-t="sl.h"></b><span class="pots-n" id="sl-n" hidden></span></span><span class="pots-s" data-t="sl.s"></span></summary>' +
+        '<div class="pots-in"><p class="hint" data-t="sl.intro"></p><div id="sl-list"></div>' +
+        '<button type="button" class="sl-pro" data-sl-pro="1"><img src="/img/pro-slot.webp" alt=""><span><b data-t="sl.proQ"></b><small data-t="sl.proS"></small></span><span class="pro-tag" data-pro="plans"></span></button></div></details>' +
         '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pro-tag" data-pro="debts"></span><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="debt.intro"></p><p class="hint debts-opb" id="debts-opb" data-t="debt.opb" hidden></p><div id="debts-list"></div><button type="button" class="btn ghost sm" id="debt-add" data-t="debt.add"></button></div></details>';
     } },
@@ -5923,10 +6204,10 @@ Object.assign(I18N.es, {
       return '<div class="cols2">' + [1, 2].map(function (n) {
         var s = n === 1 ? 'P' : 'D', ka = n === 1 ? 'aowPaul' : 'aowDiana', ks = 'sp' + s, kp = n === 1 ? ['pensioenPaul', 'pensioenLeeftijd'] : ['pensioenDiana', 'pensioenLeeftijdDiana'];
         return '<div class="card pcard' + (n === 2 ? ' only2' : '') + '"><h3><span class="pn' + n + '"></span></h3>' +
-          '<label class="check"><input type="checkbox" id="c-aowAan' + s + '"> <span data-t="f.spOn"></span></label>' +
-          '<div class="dep" data-dep="aowAan' + s + '">' + fieldHtml(ka) + fieldHtml(ks) + '</div>' +
-          '<label class="check"><input type="checkbox" id="c-pensAan' + s + '"> <span data-t="f.penOn"></span></label>' +
-          '<div class="dep" data-dep="pensAan' + s + '">' + kp.map(fieldHtml).join('') + '</div></div>';
+          '<details class="pdrop" data-pd="aowAan' + s + '"><summary><input type="checkbox" id="c-aowAan' + s + '" data-t-aria="f.spOn"><span class="pd-t" data-t="f.spOn"></span></summary>' +
+          '<div class="dep" data-dep="aowAan' + s + '">' + fieldHtml(ka) + fieldHtml(ks) + '</div></details>' +
+          '<details class="pdrop" data-pd="pensAan' + s + '"><summary><input type="checkbox" id="c-pensAan' + s + '" data-t-aria="f.penOn"><span class="pd-t" data-t="f.penOn"></span><span class="hint pd-h" data-t="f.penHint"></span></summary>' +
+          '<div class="dep" data-dep="pensAan' + s + '">' + kp.map(fieldHtml).join('') + '</div></details></div>';
       }).join('') + '</div><button class="reset" id="sp-reset" type="button" data-t="b.spAuto"></button>' +
         '<details class="card pots" id="pots-box"><summary><span class="pots-h"><b data-t="pot.h"></b><span class="pro-tag" data-pro="pots"></span><span class="pots-n" id="pots-n" hidden></span></span><span class="pots-s" data-t="pot.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="pot.intro"></p><div id="pots-list"></div><button type="button" class="btn ghost sm" id="pot-add" data-t="pot.add"></button></div></details>';
@@ -5934,8 +6215,8 @@ Object.assign(I18N.es, {
     { t: 'st4.t', h: 'st4.h', s: 'st4.s', html: function () {
       return '<div class="card knobs">' +
         segBlock('f.portfolio', 'aanname', 's-portfolio', 'portfolio', [{ v: '0', l: 'pf.auto' }, { v: '1', l: 'pf.def' }, { v: '2', l: 'pf.mid' }, { v: '3', l: 'pf.agg' }], 'pf-hint') +
-        '<div class="nl-only" style="display:contents">' + segBlock('f.box3', 'aanname', 's-box3', 'box3', [{ v: '1', l: 'b3.o1' }, { v: '2', l: 'b3.o2' }, { v: '3', l: 'b3.o3' }, { v: '0', l: 'b3.o0' }], 'b3-hint') + '</div>' +
-        '<div class="knob wide not-nl"><div class="knob-top"><span class="t" style="font-weight:600;font-size:14px" data-t="f.tax"></span></div><div class="fields">' + fieldHtml('taxRate') + fieldHtml('taxAllow') + '</div><p class="hint" id="tax-hint"></p><button class="reset" id="tax-reset" type="button" data-t="b.taxReset"></button></div>' +
+        '<details class="pdrop tdrop nl-only"><summary><span class="pd-t" data-t="f.box3"></span><span class="hint pd-h" id="b3-cur"></span></summary>' + segBlock('f.box3', 'aanname', 's-box3', 'box3', [{ v: '1', l: 'b3.o1' }, { v: '2', l: 'b3.o2' }, { v: '3', l: 'b3.o3' }, { v: '0', l: 'b3.o0' }], 'b3-hint') + '</details>' +
+        '<details class="pdrop tdrop not-nl"><summary><span class="pd-t" data-t="f.tax"></span><span class="hint pd-h" id="tax-cur"></span></summary><div class="knob wide"><div class="fields">' + fieldHtml('taxRate') + fieldHtml('taxAllow') + '</div><p class="hint" id="tax-hint"></p><button class="reset" id="tax-reset" type="button" data-t="b.taxReset"></button></div></details>' +
         '<div class="only2" style="display:contents">' + segBlock('f.runUntil', 'zelf', 's-eindDiana', 'eindDiana', [{ v: '1', l: 'p.n2' }, { v: '0', l: 'p.n1' }], '', 'h.runUntil') + '</div>' +
         '<div class="knob wide"><div class="fields">' + fieldHtml('eindleeftijd') + fieldHtml('restkapitaal') + '</div><button class="reset" id="auto-reset" type="button" data-t="b.auto"></button></div></div>';
     } },
@@ -6686,7 +6967,7 @@ Object.assign(I18N.es, {
       '<p class="opb-split">' + t1('opb.split', { put: eur(put), inl: eur(state.inleg), y: num(Math.round(stop - now), 0) }) + '</p>' +
       '<h3 class="opb-h">' + t1('opb.mixh') + '</h3><ul class="opb-mix">' + mixHtml + '</ul>' + fire +
       '<p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p>' +
-      '<div class="opb-act"><a class="btn ghost" href="#input">' + t1('opb.edit') + '</a></div>';
+      '<div class="opb-act"><a class="btn primary" href="#input" data-jump="q-inleg">' + t1('opb.cta') + '</a></div>';
   }
   function renderPortfolios() {
     renderOpb();
@@ -7700,8 +7981,8 @@ var TRK = {
     if (thenTour) startTour(); else if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
   var GOALS = ['enough', 'spend', 'earlier', 'abroad'];
-  var SETS = [['rich', 'free', 'more', 'invest'], ['retire', 'more', 'earlier', 'enough'], ['enough', 'spend', 'earlier', 'abroad']];
-  var GTXT = { rich: 'goalY.5', free: 'goalY.6', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
+  var SETS = [['rich', 'free', 'more', 'invest', 'abroadY', 'debtfree'], ['retire', 'more', 'earlier', 'enough', 'move'], ['enough', 'spend', 'earlier', 'abroad']];
+  var GTXT = { debtfree: 'goalY.7', abroadY: 'goalY.8', move: 'goalY.9', rich: 'goalY.5', free: 'goalY.6', retire: 'goalY.2', more: 'goalY.3', invest: 'goalY.4', enough: 'goal.1', spend: 'goal.2', earlier: 'goal.3', abroad: 'goal.4' };
   var introBand = 2, ageTouched = false;
   function bandOf(a) { return a < 35 ? 0 : (a < 50 ? 1 : 2); }
   var BAND_AGE = [27, 42, 57];   /* alleen een richtleeftijd per groep; de precieze leeftijd vul je zelf in bij Invullen */
@@ -7714,6 +7995,8 @@ var TRK = {
     if (g === 'enough') return { hash: '#overview', id: 'status-card' };
     if (g === 'spend') return { hash: '#overview', id: 'ov-main' };
     if (g === 'earlier') return { hash: '#input', step: 2 };
+    if (g === 'debtfree') return { hash: '#input', step: 2, id: 'stud-box' };
+    if (g === 'abroadY' || g === 'move') g = 'abroad';
     if (g === 'abroad') return { hash: '#insight', id: $('sec-koop') && !$('sec-koop').hidden ? 'sec-koop' : 'sec-pf' };
     return null;
   }
@@ -7735,17 +8018,18 @@ var TRK = {
   }
   /* fruitautomaat: draai tot je vraag verschijnt, bevestig dan */
   /* draaiwiel: sleep omhoog of omlaag (of pijltjes, scrollwiel, tikken op de vraag erboven of eronder) */
-  function slotG() { return SETS[introBand].concat('unsure'); }
+  function slotG() { var L = SETS[introBand].slice(), top = introBand === 0 ? L.pop() : null; L.push('unsure'); if (top) L.push(top); return L; }
   var slotIdx = 0, slotBusy = false;
-  var SUB_ALL = ['rich', 'free', 'retire', 'more', 'invest', 'enough', 'spend', 'earlier', 'abroad', 'unsure'];
+  var SUB_ALL = ['rich', 'free', 'retire', 'more', 'invest', 'enough', 'spend', 'earlier', 'abroad', 'abroadY', 'move', 'debtfree', 'unsure'];
   var SLN = 15, SLA = 360 / SLN, slAng = 0, slR = 0;
   function slotFh() { var w = $('slot-window'); return w ? (parseFloat(getComputedStyle(w).getPropertyValue('--fh')) || 128) : 128; }
   function slotBuild() {
     var cyl = $('slot-cyl'), h = '', f, i;
     if (!cyl) return;
+    var nG = slotG().length; SLN = nG * 3; SLA = 360 / SLN; if (slotIdx >= nG) slotIdx = 0;
     slR = slotFh() / 2 / Math.tan(Math.PI / SLN);
     for (f = 0; f < SLN; f++) {
-      i = f % 5;
+      i = f % nG;
       h += '<div class="slot-face" data-i="' + i + '" aria-hidden="true" style="transform: rotateX(' + (-f * SLA) + 'deg) translateZ(' + slR.toFixed(1) + 'px)"><b>' + gtx(slotG()[i], '.t') + '</b></div>';
     }
     cyl.innerHTML = h;
@@ -7762,7 +8046,7 @@ var TRK = {
     cyl.classList.toggle('run', !!anim);
     cyl.style.transform = 'translateZ(' + (-slR).toFixed(1) + 'px) rotateX(' + a.toFixed(2) + 'deg)';
     var k = ((Math.round(a / SLA) % SLN) + SLN) % SLN;
-    slotIdx = k % 5;
+    slotIdx = k % slotG().length;
     var w = $('slot-window');
     var cur = slotG()[slotIdx];
     each('#slot-sub > span', function (sp) { sp.classList.toggle('on', sp.getAttribute('data-g') === cur); });
@@ -7858,7 +8142,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 20, n: 6, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -8237,6 +8521,7 @@ var TRK = {
     var t = ev.target, w = null, g = t.closest('.pl-gate'), pt = t.closest('.pro-tag');
     if (pt) w = pt.getAttribute('data-pro');
     else if (g) w = g.getAttribute('data-pl');
+    else if (t.closest('[data-sl-pro]')) { w = 'plans'; track('pro-sl-teaser'); }
     else if (t.closest('#pots-box > summary')) w = 'pots';
     else if (t.closest('#debts-box > summary')) w = 'debts';
     else if (t.closest('#sh-print')) w = 'print';
@@ -8280,6 +8565,187 @@ var TRK = {
       navigator.share({ title: document.title, text: msg }).then(function () { track('reach-tip-sent'); }).catch(function (e) { if (e && e.name !== 'AbortError') { track('reach-tip-copy'); copyText(msg, t1('tip.copied')); } });
     } else { track('reach-tip-copy'); copyText(msg, t1('tip.copied')); }
   }); });
+
+  /* ================= studieschuld en leeftijdsgroepen (versie 20) ================= */
+  /* Studieschuld: een eigen vak per persoon met restschuld (r), maandbedrag (m), einde aflosfase als jaartal (e, 0 = tot afgelost)
+     en rente (i, -1 = standaard voor het land). Telt niet mee in de uitkomst: het laat alleen zien wanneer je schuldenvrij bent.
+     De rente staat vooraf ingevuld en is altijd zelf aan te passen. Bronnen: DUO 2,33% (2026) en 2,70% (2027); BAföG-lening
+     rentevrij; VK Plan 2 net onder 5%; VS federale lening 2026-27 6,52%. Overige landen: 3%, gemarkeerd als schatting. */
+  var SL_RATE = { NL: 2.5, DE: 0, GB: 5, US: 6.5 }, SL_EST = 3;
+  var SL_SRC = { NL: 'Mijn DUO', DE: 'bva.bund.de', GB: 'gov.uk', US: 'studentaid.gov' };
+  var SL_TAG = { NL: 'DUO', DE: 'BAföG' };
+  var SL_BIG = { EUR: 100000, GBP: 150000, USD: 250000 };   /* daarboven een melding, geen blokkade */
+  TRK['extra-studyloan'] = ['extra', 'Studieschuld ingevuld (restschuld en maandbedrag)'];
+  TRK['extra-studyloan-rate'] = ['extra', 'Rente studieschuld zelf aangepast'];
+  TRK['pro-sl-teaser'] = ['pro', 'Teaser Aflossen of beleggen op de studieschuldkaart getikt'];
+  TRK['reach-goal-debtfree'] = ['bereik', 'Welkom: kies doel Wanneer ben ik schuldenvrij'];
+  TRK['reach-goal-abroadY'] = ['bereik', 'Welkom: kies doel Studeren, werken of wonen in het buitenland'];
+  TRK['reach-goal-move'] = ['bereik', 'Welkom: kies doel Verhuizen met je gezin'];
+
+  /* leeftijdsgroep volgt de leeftijd van de eerste persoon: 0 = onder 35, 1 = 35 tot 50, 2 = 50+ */
+  function band() { return bandOf(state.leeftijdPaul); }
+  function slDefRate() { return SL_RATE.hasOwnProperty(prefs.country) ? SL_RATE[prefs.country] : SL_EST; }
+  function slItem(k) { while (lists.stud.length <= k) lists.stud.push({ r: 0, m: 0, e: 0, i: -1 }); return lists.stud[k]; }
+  function slRate(q) { return q.i >= 0 ? q.i : slDefRate(); }
+  function slPct(p) { return num(p, 2) + (prefs.lang === 'en' || prefs.lang === 'nl' ? '%' : ' %'); }
+  function slCalc(q) {
+    var now = new Date(), y0 = now.getFullYear(), m0 = now.getMonth();
+    if (!(q.r > 0)) return { k: 'empty' };
+    if (!(q.m > 0)) return { k: 'notYet' };
+    var ir = slRate(q) / 100 / 12, lim = q.e > y0 ? (q.e - y0) * 12 + (11 - m0) : 720, b = q.r, n = 0;
+    while (n < lim && b > 0) { b = b * (1 + ir) - q.m; n++; }
+    if (b <= 0) return { k: 'free', yr: y0 + Math.floor((m0 + n) / 12), n: n };
+    if (q.e > y0) return { k: 'open', yr: q.e, v: b };
+    return { k: q.m <= q.r * ir ? 'never' : 'slow' };
+  }
+  function slCount() { var n = 0; lists.stud.forEach(function (q, k) { if (k < (two() ? 2 : 1) && q && q.r > 0) n++; }); return n; }
+  function slHead() {
+    var t = $('sl-title'); if (t) t.textContent = t1('sl.h') + (SL_TAG[prefs.country] ? ' (' + SL_TAG[prefs.country] + ')' : '');
+    var n = slCount(), c = $('sl-n'); if (c) { c.hidden = !n; c.textContent = n; }
+  }
+  function slSum(k) {
+    var q = lists.stud[k], el = $('sl-' + k + '-sum'); if (!q || !el) return;
+    var c = slCalc(q), y0 = new Date().getFullYear(), notes = [], txt;
+    if (q.r > (SL_BIG[prefs.cur] || SL_BIG.EUR)) notes.push(t1('sl.big') + (band() > 0 ? ' ' + t1('sl.bigPro', { debt: t1('debt.h') }) : ''));
+    if (q.e > 0 && q.e <= y0) notes.push(t1('sl.past'));
+    else if (q.e > y0 + 45) notes.push(t1('sl.long'));
+    var nt = $('sl-' + k + '-note'); nt.hidden = !notes.length; nt.textContent = notes.join(' ');
+    if (c.k === 'free') txt = c.n < 12 ? t1('sl.free1', { yr: c.yr, m: eur(q.m) }) : t1('sl.free', { yr: c.yr, n: Math.round(c.n / 12), m: eur(q.m) });
+    else if (c.k === 'open') txt = t1('sl.open', { yr: c.yr, v: eur(c.v) });
+    else txt = t1('sl.' + c.k);
+    el.textContent = txt; el.classList.toggle('muted', c.k === 'empty' || c.k === 'notYet');
+    var fk = 'sl.fg.' + prefs.country, fg = $('sl-' + k + '-fg');
+    var show = dict()[fk] !== undefined && q.r > 0 && (c.k === 'open' || prefs.country === 'DE');
+    fg.hidden = !show; fg.textContent = show ? t1(fk) : '';
+    var dr = slDefRate();
+    $('sl-' + k + '-iv').textContent = slPct(slRate(q));
+    $('sl-' + k + '-ih').textContent = SL_SRC[prefs.country] ? t1('sl.iHint', { country: cName(prefs.country), p: slPct(dr), src: SL_SRC[prefs.country] }) : t1('sl.iHintEst', { country: cName(prefs.country), p: slPct(dr) });
+    var rb = $('sl-' + k + '-ir'); rb.hidden = !(q.i >= 0) || q.i === dr; rb.textContent = t1('sl.iReset', { p: slPct(dr) });
+    if (q.r > 0 && q.m > 0) track('extra-studyloan');
+  }
+  function slRender(openRate) {
+    var host = $('sl-list'); if (!host) return;
+    var cnt = two() ? 2 : 1, h = '', k;
+    for (k = 0; k < cnt; k++) {
+      var q = slItem(k), id = 'sl-' + k + '-', A = 'data-sl="' + k + '"';
+      h += '<div class="pot">' + (two() ? '<h4>' + esc(k ? nm2() : nm1()) + '</h4>' : '') +
+        '<div class="fields pot-f">' +
+        fldL(id + 'r', t1('sl.r'), numIn(id + 'r', A + ' data-f="r"', q.r, true), curSym()) +
+        fldL(id + 'm', t1('sl.m'), numIn(id + 'm', A + ' data-f="m"', q.m, true), t1('debt.unitM', { cur: curSym() })) +
+        fldL(id + 'e', t1('sl.e'), '<input id="' + id + 'e" type="text" inputmode="numeric" autocomplete="off" maxlength="4" ' + A + ' data-f="e" value="' + (q.e > 0 ? q.e : '') + '" placeholder="' + esc(t1('sl.ePh')) + '">', '') +
+        '</div>' +
+        '<details class="sl-rate"' + (openRate === k ? ' open' : '') + '><summary>' + esc(t1('sl.i')) + ': <b id="' + id + 'iv"></b></summary><div class="fields pot-f">' +
+        fldL(id + 'i', t1('sl.i'), numIn(id + 'i', A + ' data-f="i"', slRate(q)), '%') + '</div><p class="hint" id="' + id + 'ih"></p>' +
+        '<button type="button" class="btn link sm sl-reset" id="' + id + 'ir" data-sl-reset="' + k + '"></button></details>' +
+        '<p class="sl-note" id="' + id + 'note" hidden></p><p class="pot-sum" id="' + id + 'sum"></p><p class="sl-fg" id="' + id + 'fg" hidden></p></div>';
+    }
+    host.innerHTML = h;
+    for (k = 0; k < cnt; k++) slSum(k);
+    if (slCount()) $('stud-box').open = true;
+    slHead();
+  }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target, a = e.getAttribute ? e.getAttribute('data-sl') : null; if (a == null) return;
+    var k = parseInt(a, 10), f = e.getAttribute('data-f'), q = slItem(k), v;
+    if (f === 'e') { v = parseInt(String(e.value).replace(/\D/g, ''), 10); q.e = v >= 1900 && v <= 2200 ? v : 0; }
+    else if (f === 'i') { v = e.value === '' ? NaN : numOf(e); q.i = isFinite(v) ? Math.max(0, Math.min(30, v)) : -1; track('extra-studyloan-rate'); }
+    else { v = e.value === '' ? 0 : numOf(e); if (!isFinite(v)) return; q[f] = Math.max(0, v); }
+    slSum(k); slHead(); persist();
+  });
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest) return;
+    var b = ev.target.closest('[data-sl-reset]');
+    if (b) { var k = parseInt(b.getAttribute('data-sl-reset'), 10); slItem(k).i = -1; persist(); slRender(k); return; }
+    /* de teaser op de kaart: in het Pro-venster dezelfde vraag als op de kaart */
+    if (ev.target.closest('[data-sl-pro]') && !plM.hidden) $('pl-why').textContent = t1('sl.proQ') + ' ' + plT().f.plans[1];
+  }, true);
+  $('gb-go').addEventListener('click', function () { if (ui.goal === 'debtfree' && $('stud-box')) $('stud-box').open = true; });
+
+  /* Pro-teasers met een vraag die bij de leeftijdsgroep past */
+  var TZ = { plans: 'tz.plans.', 'purchasing-power': 'tz.pp.' };
+  function plQ(w) { return TZ[w] ? t1(TZ[w] + band()) : ''; }
+  var plOpen20 = plOpen;
+  plOpen = function (w) { plOpen20(w); var q = plQ(plCur); if (q) $('pl-why').textContent = q + ' ' + plT().f[plCur][1]; };
+  var plGates20 = plGates;
+  plGates = function () {
+    plGates20();
+    [['sec-plans', 'plans'], ['sec-koop', 'purchasing-power']].forEach(function (a) {
+      var p = $(a[0]) && $(a[0]).querySelector('.pl-gate p'); if (p) p.textContent = plQ(a[1]) + ' ' + plT().f[a[1]][1];
+    });
+  };
+
+  /* na elke berekening: groep op de pagina zetten (onder 35 geen hypotheek, extra pot, uitgavenverloop en perioden) en de studieschuld bijwerken */
+  var v20Sig = '', v20Band = -1;
+  function v20Hook() {
+    var b = band(), R = document.documentElement;
+    [0, 1, 2].forEach(function (x) { R.classList.toggle('band-' + x, x === b); });
+    var sig = [prefs.country, prefs.lang, prefs.cur, two(), nm1(), nm2()].join('|');
+    if (sig !== v20Sig) { v20Sig = sig; slRender(); } else slHead();
+    if (b !== v20Band) { v20Band = b; plGates(); for (var k = 0; k < (two() ? 2 : 1); k++) slSum(k); }
+  }
+  var finishUpdate20 = finishUpdate;
+  finishUpdate = function () { finishUpdate20(); v20Hook(); };
+  v20Hook();
+
+
+  /* staatspensioen en pensioen als uitklapvak: openklappen zet het vinkje aan, uitvinken klapt het dicht.
+     Onder 35 staat het pensioen standaard uit zolang er geen bedrag is en de gebruiker het niet zelf heeft aangezet. */
+  function pdSync(key) {
+    var d = document.querySelector('details[data-pd="' + key + '"]'); if (!d) return;
+    if (state[key] === 0 && d.open) d.open = false;
+  }
+  each('details.pdrop', function (d) {
+    var key = d.getAttribute('data-pd');
+    d.addEventListener('toggle', function () {
+      if (!d.open || state[key] !== 0) return;
+      var c = $('c-' + key); if (!c) return;
+      c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    var c = $('c-' + key); if (!c) return;
+    c.addEventListener('change', function () {
+      if (/^pensAan/.test(key)) { ui.penTouched = 1; saveUi(); }
+      d.open = c.checked;
+    });
+  });
+  function penDefault() {
+    var ch = false;
+    if (band() === 0 && !ui.penTouched) {
+      if (state.pensAanP !== 0 && !(state.pensioenPaul > 0)) { state.pensAanP = 0; ch = true; }
+      if (state.pensAanD !== 0 && !(state.pensioenDiana > 0)) { state.pensAanD = 0; ch = true; }
+    }
+    penPh();
+    ['aowAanP', 'aowAanD', 'pensAanP', 'pensAanD'].forEach(pdSync);
+    if (ch) update();
+  }
+  function penPh() {
+    ['pensioenPaul', 'pensioenDiana'].forEach(function (k) {
+      var e = $('n-' + k); if (!e) return;
+      e.placeholder = t1('f.penPh');
+      if (document.activeElement !== e && !(state[k] > 0)) e.value = '';
+    });
+  }
+  var syncInputs20b = syncInputs;
+  syncInputs = function () { syncInputs20b(); setTimeout(penPh, 0); };
+  var finishUpdate20b = finishUpdate;
+  finishUpdate = function () { finishUpdate20b(); penDefault(); };
+  penDefault();
+
+
+  /* belasting over vermogen: standaard dichtgeklapt, met de huidige keuze in de kop */
+  function taxCur() {
+    var a = $('b3-cur'); if (a) { var r = document.querySelector('input[name="s-box3"]:checked'); a.textContent = r && r.nextElementSibling ? r.nextElementSibling.textContent : ''; }
+    var b = $('tax-cur'); if (b) b.textContent = num(state.taxRate, 2) + '%';
+  }
+  var finishUpdate20c = finishUpdate;
+  finishUpdate = function () { finishUpdate20c(); taxCur(); };
+  taxCur();
+
+
+  /* de oproep bij de uitkomst springt direct naar wat je per maand opzij legt */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('[data-jump]') : null; if (!a) return;
+    pendingScroll = a.getAttribute('data-jump'); showStep(1, false);
+  }, true);
 
 })();
 
