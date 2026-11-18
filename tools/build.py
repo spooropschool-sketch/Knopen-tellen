@@ -180,6 +180,17 @@ def lang_links(lang):
     return '<nav class="site-langs" aria-label="Language">' + ''.join(a) + '</nav>'
 
 
+def ver(text):
+    """Short content hash, so a changed file gets a new address and no browser keeps an old copy next to a new page."""
+    import hashlib
+    return hashlib.sha1(text.encode('utf-8')).hexdigest()[:8]
+
+
+def read_src(name):
+    with open(os.path.join(ROOT, 'src', name), encoding='utf-8') as f:
+        return f.read()
+
+
 def split(src):
     i = src.index('<body>')
     j = src.index('<script>', i)
@@ -213,6 +224,7 @@ def build_page(src, lang, d, goal=None):
     head = head.replace('</style>', '</style>\n<link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">', 1)
     body = fill_body(body, d)
     body = body.replace('src="img/', 'src="/img/')
+    body = body.replace('<script src="model.js" data-model></script>', '<script src="/model.js?v=%s" data-model></script>' % ver(read_src('model.js')), 1)
     body = body.replace('<!--LANGLINKS-->', lang_links(lang))
     # images: only the first one is above the fold
     first = [True]
@@ -253,6 +265,7 @@ def write(path, text):
 def main():
     src = open(SRC, encoding='utf-8').read()
     data = extract()
+    write('model.js', read_src('model.js'))
     for lang in LANGS:
         write('index.html' if lang == 'en' else '%s/index.html' % lang, build_page(src, lang, data[lang]))
     for goal in LANDING:
