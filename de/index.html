@@ -103,7 +103,7 @@ input[type="number"], input[type="text"] {
 input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; margin: 0; }
 input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
-.tag { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 99px; letter-spacing: 0.02em; white-space: nowrap; }
+.tag { font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 99px; letter-spacing: 0.02em; white-space: nowrap; }
 .tag.bevestigd { display: none; }
 .tag.bron { background: var(--accent-soft); color: var(--accent); }
 .tag.aanname { background: var(--warn-bg); color: var(--warn); }
@@ -146,7 +146,7 @@ input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px 
 .cmp-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .cmp-card.cur { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
 .cmp-card h3 { margin: 0; font-family: var(--f-display); font-size: 16px; font-weight: 600; line-height: 1.25; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-.chip { font-family: var(--f-body); font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 99px; padding: 1px 8px; }
+.chip { font-family: var(--f-body); font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 99px; padding: 1px 8px; }
 .cmp-big { font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 500; }
 .cmp-delta { font-size: 12.5px; color: var(--ink2); }
 .cmp-delta.more { color: var(--bad); }
@@ -163,7 +163,7 @@ input:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px 
 .legend i.mark { border-top: 1px solid var(--muted); width: 14px; }
 .chart { position: relative; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 6px 4px 2px; touch-action: pan-y; }
 .chart svg { display: block; width: 100%; height: auto; }
-.chart text { font-family: var(--f-num); font-size: 11px; fill: var(--muted); }
+.chart text { font-family: var(--f-num); font-size: 12px; fill: var(--muted); }
 .chart text.lbl { fill: var(--ink2); }
 .chart .grid { stroke: var(--grid); stroke-width: 1; }
 .chart .zero { stroke: var(--ink2); stroke-width: 1; }
@@ -205,8 +205,8 @@ select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .rname { display: flex; align-items: center; gap: 4px 8px; flex-wrap: wrap; font-weight: 600; font-size: 14.5px; margin-bottom: 5px; }
 .rdet { font-size: 12px; color: var(--muted); margin-top: 5px; }
 .rv { font-family: var(--f-num); font-variant-numeric: tabular-nums; text-align: right; font-size: 15px; }
-.rv small { display: block; font-size: 11.5px; color: var(--muted); font-family: var(--f-body); }
-.rsep { border-top: 1px dashed var(--line); margin: 2px 6px; font-size: 11.5px; color: var(--muted); padding-top: 3px; }
+.rv small { display: block; font-size: 12px; color: var(--muted); font-family: var(--f-body); }
+.rsep { border-top: 1px dashed var(--line); margin: 2px 6px; font-size: 12px; color: var(--muted); padding-top: 3px; }
 .rules { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--ink); }
 .lfields { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 18px; }
 .lh { display: flex; gap: 6px 10px; align-items: baseline; flex-wrap: wrap; }
@@ -225,7 +225,7 @@ table.mxt { min-width: 540px; width: 100%; border-collapse: separate; border-spa
 .mxt th { font-size: 12px; padding: 6px 4px; text-align: center; white-space: nowrap; border-bottom: 0; font-family: var(--f-num); }
 .mxt th.cc { color: var(--accent); }
 .mxt th.rn, .mxt td.rn { text-align: left; font-family: var(--f-body); font-size: 13.5px; font-weight: 600; position: sticky; left: 0; background: var(--surface); z-index: 1; padding: 6px 8px; min-width: 118px; border-bottom: 0; white-space: normal; }
-.mxt td.rn small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
+.mxt td.rn small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
 .mxt tr.sel td.rn { color: var(--accent); }
 .mxt td.c { padding: 0; border-bottom: 0; text-align: center; }
 .mxt td.c button { width: 100%; font-family: var(--f-num); font-size: 12.5px; border: 0; border-radius: 6px; padding: 9px 2px; cursor: pointer; font-variant-numeric: tabular-nums; }
@@ -233,7 +233,7 @@ table.mxt { min-width: 540px; width: 100%; border-collapse: separate; border-spa
 .mxt td.w button { background: var(--warn-bg); color: var(--warn); }
 .mxt td.b button { background: var(--bad-bg); color: var(--bad); }
 .mxt td.cur button { box-shadow: inset 0 0 0 2px var(--ink); }
-.mxt tr.sep td { padding: 2px 8px; font-size: 11.5px; color: var(--muted); border-bottom: 0; text-align: left; font-family: var(--f-body); }
+.mxt tr.sep td { padding: 2px 8px; font-size: 12px; color: var(--muted); border-bottom: 0; text-align: left; font-family: var(--f-body); }
 
 /* bailout */
 .chip.good { color: var(--good); background: var(--good-bg); }
@@ -287,7 +287,7 @@ footer .tag a:hover { text-decoration: underline; }
 .brandrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .wordmark { font-family: var(--f-display); font-size: 25px; font-weight: 700; letter-spacing: -0.015em; line-height: 1; }
-.v2 { font-family: var(--f-num); font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; letter-spacing: 0.06em; }
+.v2 { font-family: var(--f-num); font-size: 12px; font-weight: 500; color: var(--accent); border: 1px solid var(--line); border-radius: 99px; padding: 2px 8px; letter-spacing: 0.06em; }
 .hashtag { font-size: 16px; font-weight: 700; color: #1E1209; background: var(--brand); padding: 9px 16px; border-radius: 99px; text-decoration: none; letter-spacing: 0.01em; white-space: nowrap; }
 .hashtag:hover { filter: brightness(1.08); }
 .hashtag:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -346,7 +346,7 @@ h2.more { font-size: 13px; font-weight: 600; letter-spacing: 0.09em; text-transf
   .mini b { font-size: 14px; }
   button.reset { min-height: 44px; }
   .tbl table { font-size: 12.5px; min-width: 0; }
-  .tbl th, .tbl td { padding: 6px 4px; font-size: 11px; }
+  .tbl th, .tbl td { padding: 6px 4px; font-size: 12px; }
   .fan-head { gap: 8px; }
   .fan-head .seg { display: inline-flex; align-self: flex-start; }
   .fan-head .seg-opt span { padding: 12px 14px; }
@@ -551,7 +551,7 @@ html.is-empty .needs-data { display: none; }
   body { padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
   .topbar-in { justify-content: space-between; }
   .tabs { position: fixed; left: 0; right: 0; bottom: 0; margin: 0; z-index: 70; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; background: var(--surface); border-top: 1px solid var(--line); padding-top: 6px; padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); }
-  .tabs a { flex-direction: column; justify-content: center; gap: 3px; padding: 6px 2px; font-size: 11.5px; border-radius: 12px; min-height: 54px; }
+  .tabs a { flex-direction: column; justify-content: center; gap: 3px; padding: 6px 2px; font-size: 12px; border-radius: 12px; min-height: 54px; }
   .tabs a svg { width: 21px; height: 21px; }
   .topbar .wordmark { font-size: 19px; }
   .topbar .hashtag { font-size: 14px; padding: 7px 12px; }
@@ -846,7 +846,7 @@ a.kofi:hover { background: var(--surface2); }
 .facts .kv > span:last-child { font-family: var(--f-body); }
 @media (max-width: 360px) {
   .topbar .wordmark { font-size: 15px; }
-  .topbar .hashtag { font-size: 11.5px; padding: 6px 8px; }
+  .topbar .hashtag { font-size: 12px; padding: 6px 8px; }
   .lang-pick { padding-left: 4px; }
   .lang-pick select { padding: 4px 2px; }
   .brand { gap: 5px; }
@@ -927,7 +927,9 @@ button.fb-spot { background: none; border: 0; padding: 0; font: inherit; color: 
 .intro-about .ia-priv { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; font-size: 13.5px; line-height: 1.45; background: var(--surface2); border-radius: 12px; }
 .intro-about .ia-priv svg { flex: none; margin-top: 1px; color: var(--copper); }
 @media (max-width: 520px) { .intro-about .ia-sides { grid-template-columns: 1fr; } }
-#intro-s1 #intro-h { margin-top: 8px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 22px; }
+#intro-s1 #intro-h { margin-top: 0; font-size: 22px; }
+.agebox.need { outline: 2px solid var(--copper); outline-offset: 4px; border-radius: 14px; }
+.age-need { margin: 6px 0 0; font-size: 14px; font-weight: 600; color: var(--copper); text-align: center; }
 .slot { --fh: 52px; --wh: 250px; display: grid; gap: 10px; margin: 8px 0 4px; }
 .slot-machine { padding: 8px; border: 2px solid var(--copper); border-radius: 18px; background: linear-gradient(180deg, #4a3a30, #2a211b); box-shadow: 0 6px 18px rgba(152, 90, 50, 0.18); }
 .slot-window { position: relative; height: var(--wh); overflow: hidden; border-radius: 12px; background: #f4efe7; perspective: 600px; perspective-origin: 50% 50%; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
@@ -965,6 +967,32 @@ html.is-opb.no-bud #status-card { display: none; }
 .opb-big { margin: 0; font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: clamp(32px, 7vw, 46px); font-weight: 500; line-height: 1.1; color: var(--ink); overflow-wrap: anywhere; }
 .opb-range, .opb-split { margin: 0; font-size: 15px; color: var(--ink2); }
 .opb-span { margin: 0; font-size: 14px; color: var(--muted); }
+.icon-btn, .opb-st-c button { position: relative; }
+.icon-btn::after, .opb-st-c button::after { content: ""; position: absolute; inset: -5px; }
+#tab-notes { display: none; cursor: pointer; }
+@media (max-width: 560px) {
+  .tabs { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+  #tab-notes { display: flex; }
+  .nt-fab { display: none !important; }
+}
+/* 10: het overzicht korter. 18-34 heeft het oordeel al op de kaart; 'Jouw cijfers' klapt in op de telefoon */
+html.band-0.is-opb #status-card { display: none; }
+.side-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.side-tog { display: none; }
+@media (max-width: 760px) {
+  .side-tog { display: inline-flex; }
+  .side-card.sc-closed #ov-quick, .side-card.sc-closed .side-more { display: none; }
+  .home-side { align-self: stretch; width: 100%; }
+}
+.opb-debt { margin: 0; font-size: 15px; color: var(--ink2); }
+.wi50 { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.wi50 .opb-h { margin: 0; }
+.wi50-res { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.opb-debt b { color: var(--ink); }
+.intro-more { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+.wk1-till { margin-top: 10px; }
+.wk1-till label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.chart .f-sal, .sw.f-sal { fill: var(--muted); background: var(--muted); opacity: .32; }
 .opb-note, .opb-empty { margin: 0; font-size: 13px; color: var(--muted); }
 .opb-empty { font-size: 15px; color: var(--ink2); }
 .lvl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
@@ -1018,7 +1046,7 @@ html.no-lvl #lvl-box { display: none !important; }
 .rel-vers { display: flex; flex-direction: column; gap: 10px; }
 .rel-ver { display: flex; flex-direction: column; gap: 8px; }
 .rel-ver + .rel-ver { border-top: 1px dashed var(--line); padding-top: 14px; }
-.pro-tag { display: inline-flex; align-items: center; gap: 3px; margin-left: 7px; padding: 2px 6px 2px 4px; border: 1px solid var(--copper); border-radius: 99px; color: var(--copper); font-family: var(--f-body); font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; line-height: 1.2; vertical-align: 0.15em; white-space: nowrap; cursor: help; opacity: 0.85; }
+.pro-tag { display: inline-flex; align-items: center; gap: 3px; margin-left: 7px; padding: 2px 6px 2px 4px; border: 1px solid var(--copper); border-radius: 99px; color: var(--copper); font-family: var(--f-body); font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; line-height: 1.2; vertical-align: 0.15em; white-space: nowrap; cursor: help; opacity: 0.85; }
 .pro-tag svg, .share-opt .pro-tag svg { width: 11px; min-width: 0; margin: 0; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; flex: none; }
 .panel-head.has-pro { position: relative; }
 .panel-head.has-pro > .pro-tag.corner { position: absolute; top: 2px; right: 0; margin: 0; }
@@ -1052,7 +1080,7 @@ html.no-lvl #lvl-box { display: none !important; }
 .rel-list.fix li::before { background: transparent; border: 2px solid var(--copper); box-sizing: border-box; }
 .inst-steps { margin: 6px 0 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; }
 .inst-steps li.plain { list-style: none; margin-left: -22px; }
-@media (max-width: 340px) { .topbar .wordmark { font-size: 13.5px; } .topbar .brand svg, .topbar .bmark { width: 26px; height: 26px; } .topbar .hashtag { font-size: 10.5px; padding: 5px 7px; } .install { width: 30px; min-width: 30px; min-height: 30px; } .lang-pick { min-height: 30px; } .lang-pick select { font-size: 12px; } .tb-right { gap: 4px; } .topbar-in { gap: 4px; } }
+@media (max-width: 340px) { .topbar .wordmark { font-size: 13.5px; } .topbar .brand svg, .topbar .bmark { width: 26px; height: 26px; } .topbar .hashtag { font-size: 12px; padding: 5px 7px; } .install { width: 30px; min-width: 30px; min-height: 30px; } .lang-pick { min-height: 30px; } .lang-pick select { font-size: 12px; } .tb-right { gap: 4px; } .topbar-in { gap: 4px; } }
 #page-input .goal-bar { grid-column: 1 / -1; flex-direction: row; padding-block: 12px; gap: 8px 16px; }
 .goal-bar .gb-text { flex: 1 1 240px; }
 .goal-bar .eyebrow { margin-bottom: 2px; }
@@ -1119,7 +1147,7 @@ html.no-lvl #lvl-box { display: none !important; }
 .ovt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
 .ovt { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding: 11px 14px 12px; background: var(--surface2); border: 1px solid var(--line); border-radius: 12px; }
 .ovt.auto { border-style: dashed; border-color: #B9C9DA; }
-.ovt-l { font-size: 11.5px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.ovt-l { font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
 .ovt-v { font-family: var(--f-num); font-variant-numeric: tabular-nums; font-size: 21px; font-weight: 500; line-height: 1.15; color: var(--ink2); overflow-wrap: anywhere; }
 .ovt-s { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
 .ovt-note { margin: 0; font-size: 12.5px; color: var(--muted); }
@@ -1239,7 +1267,7 @@ input::placeholder { font-weight: 400; }
 .srcs > summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 11px 4px 9px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink2); font-weight: 600; font-size: 12.5px; cursor: pointer; user-select: none; transition: background 0.15s, border-color 0.15s; }
 .srcs > summary::-webkit-details-marker { display: none; }
 .srcs > summary svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.srcs > summary i { font-style: normal; font-weight: 700; font-size: 11px; min-width: 18px; padding: 1px 5px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); text-align: center; }
+.srcs > summary i { font-style: normal; font-weight: 700; font-size: 12px; min-width: 18px; padding: 1px 5px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); text-align: center; }
 .srcs > summary:hover { background: var(--surface2); }
 .srcs > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .srcs[open] > summary { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
@@ -1403,7 +1431,7 @@ a { color: var(--accent); }
 .ovt-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .ovt { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
 .ovt.auto { border-style: dashed; border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
-.ovt-l { font-size: 11px; letter-spacing: 0.08em; color: var(--muted); }
+.ovt-l { font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
 .ovt-v { font-family: var(--f-num); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
 .ovt-chance .ovt-v { font-family: var(--f-display); font-weight: 600; font-size: 30px; }
 .ovt-note { color: var(--muted); }
@@ -1592,7 +1620,7 @@ footer { color: var(--muted); }
   .wrap { padding-top: 18px; padding-bottom: 120px; }
   .card { padding: 18px; }
   .tabs { left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); margin: 0; padding: 5px; border: 1px solid var(--line); border-radius: 20px; background: var(--glass); -webkit-backdrop-filter: saturate(1.5) blur(18px); backdrop-filter: saturate(1.5) blur(18px); box-shadow: 0 16px 36px -14px rgba(0, 0, 0, 0.35); }
-  .tabs a { border-radius: 15px; padding: 7px 4px; font-size: 11.5px; gap: 3px; }
+  .tabs a { border-radius: 15px; padding: 7px 4px; font-size: 12px; gap: 3px; }
   .tabs a[aria-current="page"] { background: var(--accent); color: var(--on-accent); box-shadow: none; }
   .tabs a[aria-current="page"] svg { stroke: var(--on-accent); }
   .icon-btn .ib-l { display: none; } .icon-btn, .icon-btn.install { padding: 0; width: 36px; min-width: 36px; height: 36px; border-radius: 10px; }
@@ -1848,7 +1876,7 @@ html.is-empty .share-plan { display: none; }
 .kring .kr-e { position: absolute; width: 11.5%; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); border-radius: 50%; border: 1.5px dashed color-mix(in srgb, var(--muted) 75%, transparent); box-sizing: border-box; }
 .kring .kr-c { position: absolute; inset: 23%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .kring .kr-c b { font-family: var(--f-display); font-weight: 600; font-size: 36px; line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
-.kring .kr-c span { margin-top: 5px; font-size: 11.5px; line-height: 1.2; color: var(--muted); }
+.kring .kr-c span { margin-top: 5px; font-size: 12px; line-height: 1.2; color: var(--muted); }
 @media (max-width: 420px) { .kring .kr-c b { font-size: 30px; } }
 /* stappenbalk: alleen nummers; het voorwerp staat groot bij de kop van de stap */
 .stepper .num { position: relative; width: 34px !important; height: 34px !important; background: var(--surface) !important; border: 1px solid var(--line) !important; color: var(--ink2) !important; box-shadow: none !important; }
@@ -1961,6 +1989,7 @@ html.band-0 .curve-f, html.band-0 #debts-box, html.band-0 #pots-box, html.band-0
 .opb-tiles button { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface2); color: var(--ink); font: inherit; cursor: pointer; min-width: 0; }
 .opb-tiles button.cur { border: 2px solid var(--accent); background: var(--accent-soft); }
 .opb-tiles small { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.opb-tiles em { font-style: normal; font-size: 12px; color: var(--ink2); font-weight: 600; margin-top: 3px; text-align: center; }
 .opb-tiles b { font-size: 15px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .opb-msg { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 15px; line-height: 1.5; }
 .opb-msg.yes { background: var(--good-bg); color: var(--good); }
@@ -2042,7 +2071,7 @@ html.band-0 .curve-f, html.band-0 #debts-box, html.band-0 #pots-box, html.band-0
 html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
 
 .lrow.lhead { padding-bottom: 1px; }
-.lrow.lhead .lb, .lrow.lhead .lv { font-family: var(--f-body); font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; color: var(--muted); white-space: normal; line-height: 1.25; }
+.lrow.lhead .lb, .lrow.lhead .lv { font-family: var(--f-body); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; color: var(--muted); white-space: normal; line-height: 1.25; }
 
 .opb-meter.has-want { margin-top: 30px; }
 .opb-meter .want { width: 4px; top: -7px; bottom: -4px; transform: translateX(-50%); }
@@ -2068,6 +2097,7 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
       <a href="#input" id="tab-input"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M4 12h7M4 17h5M15.5 18.5l-1 .5.5-1 5.2-5.2 1 1z"/><circle cx="17" cy="7" r="2.2"/></svg><span data-t="tab.input">Eingeben</span></a>
       <a href="#insight" id="tab-insight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M5 8h14M5 8l-2.5 6h5zM19 8l-2.5 6h5zM8 20h8"/></svg><span data-t="tab.insight">Einblick</span></a>
       <a href="#about" id="tab-about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg><span data-t="tab.about">Über</span></a>
+      <a id="tab-notes" role="button" tabindex="0" aria-controls="nt-pop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h3.5"/></svg><span data-t="nt.h">Notizen</span></a>
     </nav>
     <div class="tb-right">
       <button class="icon-btn share-app" type="button" data-t-aria="tip.btn" aria-label="Teilen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="17.5" cy="5.5" r="2.6"/><circle cx="6.5" cy="12" r="2.6"/><circle cx="17.5" cy="18.5" r="2.6"/><path d="M8.8 10.7l6.4-3.9M8.8 13.3l6.4 3.9"/></svg><span class="ib-l" data-t="tip.btn">Teilen</span></button>
@@ -2099,7 +2129,7 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
     <div class="home-grid">
       <aside class="home-side" aria-labelledby="quick-h">
         <div class="card side-card">
-          <h2 class="side-h" id="quick-h" data-t="home.quick">Ihre Zahlen</h2>
+          <div class="side-top"><h2 class="side-h" id="quick-h" data-t="home.quick">Ihre Zahlen</h2><button type="button" class="btn link sm side-tog" id="side-tog" aria-expanded="true" aria-controls="ov-quick" hidden></button></div>
           <div id="ov-quick"></div>
           <a class="btn ghost side-more" href="#input"><span data-t="home.more">Alles verfeinern</span><span aria-hidden="true"> →</span></a>
         </div>
@@ -2149,10 +2179,12 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
           <span><span class="sw box f-aow"></span><span data-t="w.sp">Gesetzliche Rente</span></span>
           <span><span class="sw box f-pen"></span><span data-t="w.pension">Betriebsrente</span></span>
           <span><span class="sw box f-wk"></span><span data-t="w.work">Einkommen aus Arbeit</span></span>
+          <span id="lg-sal" hidden><span class="sw box f-sal"></span><span data-t="flow.sal">Arbeitsjahre: Sie leben von Ihrem Lohn</span></span>
           <span id="lg-pot" hidden><span class="sw box f-pot"></span><span data-t="w.pots">Zusätzliche Töpfe</span></span>
           <span><span class="sw box f-cap"></span><span data-t="w.fromCap">Aus dem Vermögen</span></span>
           <span><i class="dash"></i><span data-t="w.spendLine">Monatsbudget</span></span>
         </div>
+        <p class="hint" id="flow-note" hidden></p>
         <div class="srcline" data-src="sp,pen"></div>
       </section>
         <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
@@ -2193,13 +2225,16 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Planen Sie für eine oder für zwei Personen?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 Person</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 Personen</span></label></div></div>
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Frau</span></label></div></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geschlecht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Mann</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Frau</span></label></div></div>
-            <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Wie möchten Sie später leben?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Wie möchten Sie später leben?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Richtwerte pro Person in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern. Außerhalb der Niederlande ist das eine Orientierung: Die Beträge sind niederländisch und mit Preisniveaus umgerechnet, nicht auf Ausgabenmustern Ihres Landes beruhend.</p></div>
+            <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Wie möchten Sie später leben?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Wie möchten Sie später leben?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Richtwerte in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern. Außerhalb der Niederlande ist das eine Orientierung: Die Beträge sind niederländisch und mit Preisniveaus umgerechnet, nicht auf Ausgabenmustern Ihres Landes beruhend.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Was möchten Sie pro Monat ausgeben?</span><span class="opb-q" data-t="f.budgetOpb">Wie viel möchten Sie später pro Monat ausgeben?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Wie entwickeln sich die Ausgaben später?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Studien zeigen, dass Menschen in verschiedenen Lebensphasen unterschiedlich ausgeben. Deshalb wählen Sie hier, wie sich Ihre Ausgaben später entwickeln.</p>
               <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="Wie entwickeln sich die Ausgaben später?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-vlak.webp" alt=""><span data-t="curve.o0">Gleichbleibend</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-typisch.webp" alt=""><span data-t="curve.o1">Typisch</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-sterk.webp" alt=""><span data-t="curve.o2">Stärker sinkend</span><small class="curve-cap" data-cap="2"></small></span></label></div>
               <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Wie viel haben Sie bisher gespart oder angelegt?</span> <span class="opt" data-t="q.optional">(optional)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
+            <div class="field not-opb" id="wk1-box" hidden><label for="wk1-amt" data-t="wk1.q">Arbeiten Sie noch? Was verdienen Sie netto pro Monat?</label><div class="inrow"><input id="wk1-amt" data-wk1="amt" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div>
+              <div class="wk1-till" id="wk1-till" hidden><label for="wk1-age" data-t="wk1.till">Bis zu welchem Alter arbeiten Sie?</label><div class="inrow"><input id="wk1-age" data-wk1="age" type="number" inputmode="numeric" min="18" max="80" step="1"><span class="unit" data-t="u.years">Jahre</span></div></div>
+              <p class="hint" data-t="wk1.hint">Leer lassen, wenn Sie schon aufgehört haben. So rechnen wir nicht, als würden Sie heute aufhören zu arbeiten.</p></div>
             <div class="field opb-q"><label for="q-inleg" data-t="q.inleg">Wie viel legen Sie pro Monat zurück?</label><div class="inrow"><input id="q-inleg" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div><div class="field opb-q inl-per" id="inl-per"></div>
             <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
             <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ netto pro Monat</span></div></div>
@@ -2257,7 +2292,7 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
     <section class="card panel needs-data" id="sec-ladder" aria-labelledby="ld-h">
       <div class="panel-head has-nb"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/stijl-gemiddeld.webp" alt=""></span><h2 id="ld-h" data-t="ld.h">Nötiges Vermögen je Monatsbudget</h2><p class="sub" data-t="ld.sub">Und wenn Sie etwas mehr oder weniger ausgeben? Gleiche Annahmen, nur das Monatsbudget ändert sich. Die mittlere Zeile ist Ihr aktueller Betrag.</p></div>
       <div class="ladder" id="ladder"></div>
-      <div class="lnote"><span><span class="capkey"></span><span data-t="ld.cap">Startkapital</span></span><span><span class="st ok">✓</span> <span data-t="ld.ok">machbar</span></span><span><span class="st no">✕</span> <span data-t="ld.no">Lücke</span></span></div>
+      <div class="lnote"><span><span class="capkey"></span><span data-t="ld.cap">Was Sie jetzt haben</span></span><span><span class="st ok">✓</span> <span data-t="ld.ok">machbar</span></span><span><span class="st no">✕</span> <span data-t="ld.no">Lücke</span></span></div>
       <div class="srcline" data-src="mkt,sp,tax"></div>
     </section>
     <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
@@ -2346,13 +2381,11 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
       </div>
     </div>
     <div class="modal-body" id="intro-s1" hidden>
-      <h2 class="intro-about-h" data-t="pay.h">Zeit, Bilanz zu ziehen.<br><span>Zeit, weiterzugehen.</span></h2>
-      <div class="about-body intro-about" data-t="intro.about"><p class="ia-lead">Button Counter ist Ihr persönliches Finanzcockpit.</p><p class="ia-show">Es zeigt Ihnen:</p><ul class="ia-list"><li>wo Sie heute stehen, auch wenn Sie gerade erst anfangen</li><li>wie viel Spielraum Sie damit jetzt haben</li><li>wie Ihr Einkommen zum Wachstum Ihrer finanziellen Zukunft beiträgt</li></ul><div class="ia-sum"><h3>Ihre finanzielle Zukunft ist eine Rechnung mit zwei Seiten</h3><div class="ia-sides"><div class="ia-side"><b>Was einfließt</b><span>Was passiert, wenn Sie Ihr Einkommen erhöhen?</span><span>Wenn Sie jeden Monat etwas mehr einlegen oder tilgen?</span><span>Oder wenn Sie länger arbeiten, oder etwas weniger?</span></div><div class="ia-side"><b>Was Sie damit machen</b><span>Was passiert zum Beispiel, wenn Sie offensiver investieren?</span></div></div><p>Verändern Sie beide Seiten, und es entstehen Szenarien nach Maß. So sehen Sie, wie sich Ihr Verhalten und Ihr Einsatz später auswirken.</p></div><p>Sie erkunden Szenarien und rechnen Entscheidungen durch, etwa früher mit dem Sparen anzufangen oder früher aufzuhören zu arbeiten. So sehen Sie, was sie für Ihre Zukunft bedeuten. <b>Die Inflation ist bereits eingerechnet.</b> So sehen Sie, was Sie später wirklich kaufen können.</p><p class="ia-why">Ich habe Button Counter für mich selbst gebaut. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill. Diese Einsicht möchte ich auch Ihnen geben.</p><p class="ia-close">Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p><p class="ia-priv"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span><b>Ihre Daten bleiben bei Ihnen.</b> Sie bleiben auf Ihrem eigenen Gerät, in Ihrem eigenen Browser.</span></p></div>
       <h2 id="intro-h" data-t="intro.ask">Was möchten Sie wissen?</h2>
       <p class="sub" data-t="intro.promise">Reicht es? Das rechnen wir aus, ohne Verkaufsgespräch und mit Quelle zu jeder Zahl.</p>
       <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Wie alt sind Sie ungefähr?</span>
         <div class="seg seg3 age-seg" role="radiogroup" aria-labelledby="age-q"><label class="seg-opt"><input type="radio" name="age-band" value="0"><span>18–34</span></label><label class="seg-opt"><input type="radio" name="age-band" value="1"><span>35–49</span></label><label class="seg-opt"><input type="radio" name="age-band" value="2"><span>50+</span></label></div>
-        <p class="age-note" data-t="age.note">Eine Altersgruppe genügt. Ihr genaues Alter können Sie später eintragen, wenn Sie möchten.</p></div>
+        <p class="age-note" data-t="age.note">Eine Altersgruppe genügt. Ihr genaues Alter können Sie später eintragen, wenn Sie möchten.</p><p class="age-need" id="age-need" data-t="age.need" hidden>First choose your age group.</p></div>
       <div class="slot" id="slot">
         <div class="slot-machine">
           <div class="slot-window" id="slot-window" tabindex="0" role="spinbutton" data-t-aria="slot.pick" aria-valuemin="1" aria-valuemax="5" aria-label="Frage wählen">
@@ -2360,8 +2393,12 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
           </div>
         </div>
         <p class="slot-sub" id="slot-sub" aria-hidden="true"></p>
-        <p class="slot-hint" data-t="slot.hint">Drehen Sie das Rad mit dem Finger, bis Ihre Frage in der Mitte steht, und bestätigen Sie dann.</p>
         <button class="btn primary slot-ok" type="button" id="slot-ok" data-t="slot.ok">Ich möchte eine Antwort auf diese Frage</button>
+        <p class="slot-hint" data-t="slot.hint">Drehen Sie das Rad mit dem Finger, bis Ihre Frage in der Mitte steht, und bestätigen Sie dann.</p>
+      </div>
+      <div class="intro-more">
+      <h2 class="intro-about-h" data-t="pay.h">Zeit, Bilanz zu ziehen.<br><span>Zeit, weiterzugehen.</span></h2>
+      <div class="about-body intro-about" data-t="intro.about"><p class="ia-lead">Button Counter ist Ihr persönliches Finanzcockpit.</p><p class="ia-show">Es zeigt Ihnen:</p><ul class="ia-list"><li>wo Sie heute stehen, auch wenn Sie gerade erst anfangen</li><li>wie viel Spielraum Sie damit jetzt haben</li><li>wie Ihr Einkommen zum Wachstum Ihrer finanziellen Zukunft beiträgt</li></ul><div class="ia-sum"><h3>Ihre finanzielle Zukunft ist eine Rechnung mit zwei Seiten</h3><div class="ia-sides"><div class="ia-side"><b>Was einfließt</b><span>Was passiert, wenn Sie Ihr Einkommen erhöhen?</span><span>Wenn Sie jeden Monat etwas mehr einlegen oder tilgen?</span><span>Oder wenn Sie länger arbeiten, oder etwas weniger?</span></div><div class="ia-side"><b>Was Sie damit machen</b><span>Was passiert zum Beispiel, wenn Sie offensiver investieren?</span></div></div><p>Verändern Sie beide Seiten, und es entstehen Szenarien nach Maß. So sehen Sie, wie sich Ihr Verhalten und Ihr Einsatz später auswirken.</p></div><p>Sie erkunden Szenarien und rechnen Entscheidungen durch, etwa früher mit dem Sparen anzufangen oder früher aufzuhören zu arbeiten. So sehen Sie, was sie für Ihre Zukunft bedeuten. <b>Die Inflation ist bereits eingerechnet.</b> So sehen Sie, was Sie später wirklich kaufen können.</p><p class="ia-why">Ich habe Button Counter für mich selbst gebaut. Ich wollte nicht nur wissen, wo ich stehe, sondern auch, was ich tun kann, um dorthin zu kommen, wo ich hinwill. Diese Einsicht möchte ich auch Ihnen geben.</p><p class="ia-close">Denn es geht nicht nur darum, was Sie aufbauen, sondern vor allem darum, was Sie damit erreichen können.</p><p class="ia-priv"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg><span><b>Ihre Daten bleiben bei Ihnen.</b> Sie bleiben auf Ihrem eigenen Gerät, in Ihrem eigenen Browser.</span></p></div>
       </div>
     </div>
   </div>
@@ -4411,7 +4448,7 @@ Object.assign(I18N.nl, {
  "faq.q2": "Hoeveel spaargeld heb ik nodig om te stoppen met werken?",
  "faq.a2": "<p>Dat hangt af van je maandbudget, je leeftijd en het pensioen dat je krijgt. Knopenteller rekent het bedrag uit waarmee je 90% kans hebt dat je geld genoeg is. Als grove vuistregel heb je vaak 25 tot 30 keer de jaaruitgaven nodig die je AOW en pensioen niet dekken.</p>",
  "faq.q3": "Hoe wordt de kans op slagen berekend?",
- "faq.a3": "<p>Knopenteller draait 4.000 simulaties waarin het rendement elk jaar meevalt of tegenvalt. Dat gebeurt voor vier mixen (defensief, neutraal, offensief en sparen zonder beleggen), na kosten, belasting en inflatie, dus alle bedragen zijn in geld van nu. De kans op slagen is het deel van de simulaties waarin je geld meegaat tot je eindleeftijd. Twee crashscenario’s, een zoals 2008 en een zoals 2022, zie je apart.</p>",
+ "faq.a3": "<p>Knopenteller draait 4.000 simulaties waarin het rendement elk jaar meevalt of tegenvalt. Dat gebeurt voor vier mixen (defensief, neutraal, agressief en sparen zonder beleggen), na kosten, belasting en inflatie, dus alle bedragen zijn in geld van nu. De kans op slagen is het deel van de simulaties waarin je geld meegaat tot je eindleeftijd. Twee crashscenario’s, een zoals 2008 en een zoals 2022, zie je apart.</p>",
  "faq.q4": "Voor welke landen werkt Knopenteller?",
  "faq.a4": "<p>Knopenteller heeft eigen regels voor Nederland, België, Duitsland, Frankrijk, Spanje, Italië, Portugal, Ierland, het Verenigd Koninkrijk en de Verenigde Staten, plus een algemene instelling voor andere landen. Elk land heeft zijn eigen staatspensioen, pensioenleeftijd en belasting op vermogen, zoals AOW en box 3 in Nederland. Daarnaast vergelijkt Knopenteller wat je budget waard is in 31 Europese landen, op basis van prijsniveaus van Eurostat.</p>",
  "faq.q5": "Is Knopenteller gratis, en wat gebeurt er met mijn gegevens?",
@@ -4619,7 +4656,7 @@ Object.assign(I18N.fr, {
  "faq.q2": "De combien d’épargne ai-je besoin pour arrêter de travailler ?",
  "faq.a2": "<p>Cela dépend de votre budget mensuel, de votre âge et de la pension que vous recevrez. Button Counter calcule le montant nécessaire pour avoir 90 % de chances que votre argent suffise. En règle générale, il faut souvent 25 à 30 fois les dépenses annuelles que vos pensions ne couvrent pas.</p>",
  "faq.q3": "Comment la probabilité de réussite est-elle calculée ?",
- "faq.a3": "<p>Button Counter exécute 4 000 simulations dans lesquelles le rendement varie chaque année. Le calcul est fait pour quatre répartitions (défensif, équilibré, offensif et épargne sans investir), après frais, impôts et inflation ; tous les montants sont donc en argent d’aujourd’hui. La probabilité de réussite est la part des simulations dans lesquelles votre argent dure jusqu’à votre âge de fin. Deux scénarios de krach, l’un comme 2008 et l’autre comme 2022, sont présentés à part.</p>",
+ "faq.a3": "<p>Button Counter exécute 4 000 simulations dans lesquelles le rendement varie chaque année. Le calcul est fait pour quatre répartitions (prudent, équilibré, dynamique et épargne sans investir), après frais, impôts et inflation ; tous les montants sont donc en argent d’aujourd’hui. La probabilité de réussite est la part des simulations dans lesquelles votre argent dure jusqu’à votre âge de fin. Deux scénarios de krach, l’un comme 2008 et l’autre comme 2022, sont présentés à part.</p>",
  "faq.q4": "Pour quels pays Button Counter fonctionne-t-il ?",
  "faq.a4": "<p>Button Counter a ses propres règles pour les Pays-Bas, la Belgique, l’Allemagne, la France, l’Espagne, l’Italie, le Portugal, l’Irlande, le Royaume-Uni et les États-Unis, ainsi qu’un réglage général pour les autres pays. Chaque pays a sa propre pension d’État, son âge de la retraite et sa fiscalité des placements. Button Counter compare aussi ce que vaut votre budget dans 31 pays européens, d’après les niveaux de prix d’Eurostat.</p>",
  "faq.q5": "Button Counter est-il gratuit, et que deviennent mes données ?",
@@ -4728,7 +4765,7 @@ Object.assign(I18N.es, {
  "faq.q2": "¿Cuántos ahorros necesito para dejar de trabajar?",
  "faq.a2": "<p>Depende de tu presupuesto mensual, tu edad y la pensión que vayas a recibir. Button Counter calcula la cantidad que necesitas para tener un 90 % de probabilidad de que tu dinero alcance. Como regla general, suele hacer falta entre 25 y 30 veces el gasto anual que tus pensiones no cubren.</p>",
  "faq.q3": "¿Cómo se calcula la probabilidad de éxito?",
- "faq.a3": "<p>Button Counter ejecuta 4.000 simulaciones en las que la rentabilidad sube y baja cada año. Lo hace para cuatro mezclas (defensiva, equilibrada, agresiva y ahorro sin invertir), después de costes, impuestos e inflación, así que todas las cantidades están en dinero de hoy. La probabilidad de éxito es la parte de las simulaciones en las que tu dinero dura hasta tu edad final. Dos escenarios de crisis, uno como 2008 y otro como 2022, se muestran aparte.</p>",
+ "faq.a3": "<p>Button Counter ejecuta 4.000 simulaciones en las que la rentabilidad sube y baja cada año. Lo hace para cuatro mezclas (conservadora, equilibrada, agresiva y ahorro sin invertir), después de costes, impuestos e inflación, así que todas las cantidades están en dinero de hoy. La probabilidad de éxito es la parte de las simulaciones en las que tu dinero dura hasta tu edad final. Dos escenarios de crisis, uno como 2008 y otro como 2022, se muestran aparte.</p>",
  "faq.q4": "¿Para qué países funciona Button Counter?",
  "faq.a4": "<p>Button Counter tiene reglas propias para Países Bajos, Bélgica, Alemania, Francia, España, Italia, Portugal, Irlanda, Reino Unido y Estados Unidos, además de un ajuste general para otros países. Cada país tiene su propia pensión pública, edad de jubilación e impuesto sobre las inversiones. Button Counter también compara lo que vale tu presupuesto en 31 países europeos, según los niveles de precios de Eurostat.</p>",
  "faq.q5": "¿Button Counter es gratis y qué pasa con mis datos?",
@@ -5149,7 +5186,7 @@ Object.assign(I18N.nl, {
  "lvl.1.e": "Kleine huurwoning, zelf koken, fiets en ov, af en toe uit.",
  "lvl.2.e": "Gewone woning, regelmatig uit eten, een auto of goed ov, een vakantie per jaar.",
  "lvl.3.e": "Ruime woning, vaak uit, auto, meerdere reizen per jaar.",
- "lvl.hint": "Richtbedragen per persoon in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.",
+ "lvl.hint": "Richtbedragen in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.",
  "src.nibudmin": "Nibud, minimumvoorbeeldbegrotingen juli 2025",
  "src.cbsb": "CBS, bestedingen huishoudens",
  "lvl.hintX": "Buiten Nederland is dit een indicatie: de bedragen zijn Nederlands en omgerekend met prijsniveaus, niet gebaseerd op de uitgavenpatronen van jouw land."
@@ -5197,7 +5234,7 @@ Object.assign(I18N.en, {
  "lvl.1.e": "Small rented flat, cooking at home, bike and public transport, the occasional night out.",
  "lvl.2.e": "An ordinary home, eating out regularly, a car or good public transport, one holiday a year.",
  "lvl.3.e": "A spacious home, going out often, a car, several trips a year.",
- "lvl.hint": "Guide amounts per person in today’s money, based on the Dutch Nibud minimum (2025) and CBS spending by income, converted to 2025. For two people we use 1.4 times, because you share housing costs. For other euro countries we scale by price levels. Averages, not advice. You can change the amount below.",
+ "lvl.hint": "Guide amounts in today’s money, based on the Dutch Nibud minimum (2025) and CBS spending by income, converted to 2025. For two people we use 1.4 times, because you share housing costs. For other euro countries we scale by price levels. Averages, not advice. You can change the amount below.",
  "src.nibudmin": "Nibud, minimum budgets July 2025",
  "src.cbsb": "CBS, household spending",
  "lvl.hintX": "Outside the Netherlands this is an indication: the amounts are Dutch and converted with price levels, not based on spending patterns in your own country."
@@ -5245,7 +5282,7 @@ Object.assign(I18N.de, {
  "lvl.1.e": "Kleine Mietwohnung, selbst kochen, Fahrrad und ÖPNV, ab und zu ausgehen.",
  "lvl.2.e": "Normale Wohnung, regelmäßig essen gehen, Auto oder guter ÖPNV, ein Urlaub im Jahr.",
  "lvl.3.e": "Große Wohnung, oft ausgehen, Auto, mehrere Reisen im Jahr.",
- "lvl.hint": "Richtwerte pro Person in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern.",
+ "lvl.hint": "Richtwerte in heutigem Geld, auf Basis des niederländischen Nibud-Minimums (2025) und der CBS-Ausgaben nach Einkommen, auf 2025 umgerechnet. Für zwei Personen rechnen wir das 1,4-Fache, weil Sie Wohnkosten teilen. Für andere Euroländer skalieren wir mit Preisniveaus. Durchschnittswerte, keine Beratung. Den Betrag können Sie unten ändern.",
  "src.nibudmin": "Nibud, Mindestbudgets Juli 2025",
  "src.cbsb": "CBS, Haushaltsausgaben",
  "lvl.hintX": "Außerhalb der Niederlande ist das eine Orientierung: Die Beträge sind niederländisch und mit Preisniveaus umgerechnet, nicht auf Ausgabenmustern Ihres Landes beruhend."
@@ -5293,7 +5330,7 @@ Object.assign(I18N.fr, {
  "lvl.1.e": "Petit logement loué, cuisine maison, vélo et transports en commun, quelques sorties.",
  "lvl.2.e": "Logement ordinaire, restaurant régulièrement, voiture ou bons transports, des vacances par an.",
  "lvl.3.e": "Grand logement, sorties fréquentes, voiture, plusieurs voyages par an.",
- "lvl.hint": "Montants indicatifs par personne en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous.",
+ "lvl.hint": "Montants indicatifs en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous.",
  "src.nibudmin": "Nibud, budgets minimaux juillet 2025",
  "src.cbsb": "CBS, dépenses des ménages",
  "lvl.hintX": "En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays."
@@ -5341,7 +5378,7 @@ Object.assign(I18N.es, {
  "lvl.1.e": "Piso pequeño de alquiler, cocinar en casa, bici y transporte público, alguna salida.",
  "lvl.2.e": "Vivienda normal, comer fuera con regularidad, coche o buen transporte público, unas vacaciones al año.",
  "lvl.3.e": "Vivienda amplia, salir a menudo, coche, varios viajes al año.",
- "lvl.hint": "Importes orientativos por persona en dinero de hoy, basados en el mínimo neerlandés del Nibud (2025) y el gasto del CBS por ingresos, convertidos a 2025. Para dos personas usamos 1,4 veces, porque compartís los gastos de vivienda. Para otros países del euro escalamos con los niveles de precios. Medias, no un consejo. Puedes cambiar el importe abajo.",
+ "lvl.hint": "Importes orientativos en dinero de hoy, basados en el mínimo neerlandés del Nibud (2025) y el gasto del CBS por ingresos, convertidos a 2025. Para dos personas usamos 1,4 veces, porque compartís los gastos de vivienda. Para otros países del euro escalamos con los niveles de precios. Medias, no un consejo. Puedes cambiar el importe abajo.",
  "src.nibudmin": "Nibud, presupuestos mínimos julio 2025",
  "src.cbsb": "CBS, gasto de los hogares",
  "lvl.hintX": "Fuera de los Países Bajos es una indicación: los importes son neerlandeses y se convierten con los niveles de precios, no se basan en los patrones de gasto de tu país."
@@ -6070,6 +6107,43 @@ Object.assign(I18N.nl, {"opb.wantMark": "Dit ben jij: het budget dat je wilt"});
 Object.assign(I18N.de, {"opb.wantMark": "Das sind Sie: das gewünschte Budget"});
 Object.assign(I18N.fr, {"opb.wantMark": "C’est vous : le budget souhaité"});
 Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quieres"});
+/* v23-i18n */
+Object.assign(I18N.en, {"opb.incSp": "{n} {v} a month", "wk1.hint": "Leave empty if you have already stopped. This way the result does not assume you stop working today.", "k.bufNone": "You need no savings to start for this budget.", "k.need": "Savings needed to start", "opb.tWish": "chance of your wish: {p}", "pf.need": "Savings needed, average path", "flow.sal": "Your income from work (until you stop)", "opb.tLegend": "The amount works out in 9 out of 10 cases. The chance shows how often you reach the amount you want.", "wk1.q": "Still working? What do you earn net per month?", "wk1.till": "Until what age will you work?", "ld.cap": "What you have now", "opb.tLegend0": "The amount works out in 9 out of 10 cases.", "f.startkapitaal": "What you have now", "k.need90": "Savings needed to start (90% chance)", "opb.tSure": "a month, 9 times out of 10"});
+Object.assign(I18N.nl, {"opb.incSp": "{n} {v} per maand", "wk1.hint": "Laat leeg als je al gestopt bent. Zo rekenen we niet alsof je vandaag stopt met werken.", "k.bufNone": "Voor dit budget hoef je niets te hebben om mee te beginnen.", "k.need": "Nodig om mee te beginnen", "opb.tWish": "kans op je wens: {p}", "pf.need": "Nodig om mee te beginnen, gemiddeld verloop", "flow.sal": "Je inkomen uit werk (tot je stopt)", "opb.tLegend": "Het bedrag lukt in 9 van de 10 gevallen. De kans laat zien hoe vaak je het bedrag haalt dat je wilt.", "wk1.q": "Werk je nog? Wat verdien je netto per maand?", "wk1.till": "Tot welke leeftijd werk je?", "ld.cap": "Wat je nu hebt", "opb.tLegend0": "Het bedrag lukt in 9 van de 10 gevallen.", "f.startkapitaal": "Wat je nu hebt", "k.need90": "Nodig om mee te beginnen (90% kans)", "opb.tSure": "per maand, 9 op de 10 keer"});
+Object.assign(I18N.de, {"opb.incSp": "{n} {v} pro Monat", "wk1.hint": "Leer lassen, wenn Sie schon aufgehört haben. So rechnen wir nicht, als würden Sie heute aufhören zu arbeiten.", "k.bufNone": "Für dieses Budget brauchen Sie kein Vermögen zum Start.", "k.need": "Nötiges Vermögen zum Start", "opb.tWish": "Chance auf Ihren Wunsch: {p}", "pf.need": "Nötiges Vermögen, durchschnittlicher Verlauf", "flow.sal": "Ihr Arbeitseinkommen (bis Sie aufhören)", "opb.tLegend": "Der Betrag klappt in 9 von 10 Fällen. Die Chance zeigt, wie oft Sie Ihren Wunschbetrag erreichen.", "wk1.q": "Arbeiten Sie noch? Was verdienen Sie netto pro Monat?", "wk1.till": "Bis zu welchem Alter arbeiten Sie?", "ld.cap": "Was Sie jetzt haben", "opb.tLegend0": "Der Betrag klappt in 9 von 10 Fällen.", "f.startkapitaal": "Was Sie jetzt haben", "k.need90": "Nötiges Vermögen zum Start (90 % Chance)", "opb.tSure": "pro Monat, in 9 von 10 Fällen"});
+Object.assign(I18N.fr, {"opb.incSp": "{n} {v} par mois", "wk1.hint": "Laissez vide si vous avez déjà arrêté. Ainsi, le calcul ne suppose pas que vous arrêtez de travailler aujourd’hui.", "k.bufNone": "Aucune épargne de départ n’est nécessaire pour ce budget.", "k.need": "Épargne nécessaire au départ", "opb.tWish": "chance d’atteindre votre souhait : {p}", "pf.need": "Épargne nécessaire, parcours moyen", "flow.sal": "Vos revenus du travail (jusqu’à l’arrêt)", "opb.tLegend": "Le montant est atteint dans 9 cas sur 10. La chance montre à quelle fréquence vous atteignez le montant souhaité.", "wk1.q": "Vous travaillez encore ? Combien gagnez-vous net par mois ?", "wk1.till": "Jusqu’à quel âge travaillerez-vous ?", "ld.cap": "Ce que vous avez", "opb.tLegend0": "Le montant est atteint dans 9 cas sur 10.", "f.startkapitaal": "Ce que vous avez aujourd’hui", "k.need90": "Épargne nécessaire au départ (90 % de chances)", "opb.tSure": "par mois, 9 fois sur 10"});
+Object.assign(I18N.es, {"opb.incSp": "{n} {v} al mes", "wk1.hint": "Déjalo vacío si ya has parado. Así no calculamos como si dejaras de trabajar hoy.", "k.bufNone": "Para este presupuesto no hace falta ahorro inicial.", "k.need": "Ahorro necesario al empezar", "opb.tWish": "probabilidad de tu deseo: {p}", "pf.need": "Ahorro necesario, trayectoria media", "flow.sal": "Tus ingresos del trabajo (hasta que pares)", "opb.tLegend": "El importe sale bien en 9 de cada 10 casos. La probabilidad muestra cuántas veces alcanzas el importe que quieres.", "wk1.q": "¿Sigues trabajando? ¿Cuánto ganas neto al mes?", "wk1.till": "¿Hasta qué edad trabajarás?", "ld.cap": "Lo que tienes", "opb.tLegend0": "El importe sale bien en 9 de cada 10 casos.", "f.startkapitaal": "Lo que tienes ahora", "k.need90": "Ahorro necesario al empezar (90 % de prob.)", "opb.tSure": "al mes, 9 de cada 10 veces"});
+Object.assign(I18N.nl, {"pf.endMid": "Over aan het eind, midden", "pf.endBad": "Over aan het eind, 1 op 20 pech", "ov.k.cap": "Je hebt nu", "pf.mid": "Neutraal", "next.pfS": "Sparen, defensief, neutraal en agressief naast elkaar"});
+Object.assign(I18N.de, {"pf.endMid": "Übrig am Ende, Mitte", "pf.endBad": "Übrig am Ende, 1 von 20 Pech"});
+Object.assign(I18N.fr, {"pf.endMid": "Reste à la fin, milieu", "pf.endBad": "Reste à la fin, 1 malchance sur 20"});
+Object.assign(I18N.es, {"pf.endMid": "Queda al final, centro", "pf.endBad": "Queda al final, 1 de 20 con mala suerte"});
+Object.assign(I18N.en, {"k.wrLater": "of your savings per year, {m} a month. This drops once your pension starts.", "k.taxCaut": "cautious assumption", "intro.country": "Country", "intro.lang": "What language do you prefer?"});
+Object.assign(I18N.nl, {"k.wrLater": "van het vermogen per jaar, {m} per maand. Dit daalt zodra je pensioen ingaat.", "k.taxCaut": "voorzichtige aanname", "intro.country": "Land", "intro.lang": "Welke taal wil je?"});
+Object.assign(I18N.de, {"k.wrLater": "des Vermögens pro Jahr, {m} pro Monat. Das sinkt, sobald Ihre Rente beginnt.", "k.taxCaut": "vorsichtige Annahme", "intro.country": "Land", "intro.lang": "Welche Sprache bevorzugen Sie?"});
+Object.assign(I18N.fr, {"k.wrLater": "de votre patrimoine par an, {m} par mois. Cela baisse dès que votre retraite commence.", "k.taxCaut": "hypothèse prudente", "intro.country": "Pays", "intro.lang": "Quelle langue préférez-vous ?"});
+Object.assign(I18N.es, {"k.wrLater": "de tu patrimonio al año, {m} al mes. Baja en cuanto empiece tu pensión.", "k.taxCaut": "supuesto prudente", "intro.country": "País", "intro.lang": "¿Qué idioma prefieres?"});
+Object.assign(I18N.es, {"intro.ask": "¿Qué te gustaría saber?"});
+Object.assign(I18N.en, {"age.need": "First choose your age group.", "home.quickTog": "Change", "home.quickHide": "Hide", "opb.debtFree": "Your debt is paid off in <b>{y}</b>.", "opb.debtAsk": "Enter what you repay each month on your debt and you will see here when you are debt-free.", "opb.debtSlow": "At this monthly amount your debt does not shrink. Try a higher amount under Fine-tune.", "opb.to90": "If you live to {n}: {v} a month is achievable."});
+Object.assign(I18N.nl, {"age.need": "Kies eerst je leeftijdsgroep.", "home.quickTog": "Aanpassen", "home.quickHide": "Inklappen", "opb.debtFree": "Je schuld is afgelost in <b>{y}</b>.", "opb.debtAsk": "Vul bij je schuld in wat je per maand aflost, dan zie je hier wanneer je schuldenvrij bent.", "opb.debtSlow": "Met dit maandbedrag wordt je schuld niet kleiner. Probeer een hoger bedrag bij Invullen.", "opb.to90": "Word je {n}? Dan is {v} per maand haalbaar."});
+Object.assign(I18N.de, {"age.need": "Wählen Sie zuerst Ihre Altersgruppe.", "home.quickTog": "Ändern", "home.quickHide": "Einklappen", "opb.debtFree": "Ihre Schulden sind <b>{y}</b> abbezahlt.", "opb.debtAsk": "Tragen Sie bei Ihren Schulden ein, was Sie monatlich tilgen, dann sehen Sie hier, wann Sie schuldenfrei sind.", "opb.debtSlow": "Mit diesem Monatsbetrag werden Ihre Schulden nicht kleiner. Versuchen Sie unter „Eingeben“ einen höheren Betrag.", "opb.to90": "Werden Sie {n}? Dann sind {v} pro Monat erreichbar."});
+Object.assign(I18N.fr, {"age.need": "Choisissez d’abord votre tranche d’âge.", "home.quickTog": "Modifier", "home.quickHide": "Replier", "opb.debtFree": "Votre dette sera remboursée en <b>{y}</b>.", "opb.debtAsk": "Indiquez ce que vous remboursez chaque mois, et vous verrez ici quand vous serez sans dette.", "opb.debtSlow": "Avec ce montant mensuel, votre dette ne diminue pas. Essayez un montant plus élevé sous « Saisir ».", "opb.to90": "Si vous vivez jusqu’à {n} ans : {v} par mois sont atteignables."});
+Object.assign(I18N.es, {"age.need": "Elige primero tu grupo de edad.", "home.quickTog": "Cambiar", "home.quickHide": "Ocultar", "opb.debtFree": "Tu deuda estará pagada en <b>{y}</b>.", "opb.debtAsk": "Indica cuánto pagas al mes de tu deuda y verás aquí cuándo quedarás sin deudas.", "opb.debtSlow": "Con este importe mensual tu deuda no baja. Prueba un importe mayor en «Rellenar».", "opb.to90": "Si llegas a los {n}: {v} al mes es alcanzable."});
+Object.assign(I18N.en, {"wi.penLow": "Pension 20% lower", "wi.crash": "Markets drop 30%", "wi.gift": "A one-off {v} extra", "wi.budLess": "{v} less a month", "wi.work1": "Work 1 year longer", "wi.res": "Then the chance becomes {p} (now {q}). What you entered stays as it is."});
+Object.assign(I18N.nl, {"wi.penLow": "Pensioen 20% lager", "wi.crash": "Beurs zakt 30%", "wi.gift": "Eenmalig {v} erbij", "wi.budLess": "{v} minder per maand", "wi.work1": "1 jaar langer werken", "wi.res": "Dan wordt de kans {p} (nu {q}). Je invoer blijft gewoon staan."});
+Object.assign(I18N.de, {"wi.penLow": "Rente 20 % niedriger", "wi.crash": "Börse fällt um 30 %", "wi.gift": "Einmalig {v} dazu", "wi.budLess": "{v} weniger pro Monat", "wi.work1": "1 Jahr länger arbeiten", "wi.res": "Dann liegt die Chance bei {p} (jetzt {q}). Ihre Eingaben bleiben unverändert."});
+Object.assign(I18N.fr, {"wi.penLow": "Retraite 20 % plus basse", "wi.crash": "La bourse chute de 30 %", "wi.gift": "{v} en plus, une fois", "wi.budLess": "{v} de moins par mois", "wi.work1": "Travailler 1 an de plus", "wi.res": "La chance passe alors à {p} (aujourd’hui {q}). Vos saisies restent inchangées."});
+Object.assign(I18N.es, {"wi.penLow": "Pensión un 20 % menor", "wi.crash": "La bolsa cae un 30 %", "wi.gift": "{v} extra una sola vez", "wi.budLess": "{v} menos al mes", "wi.work1": "Trabajar 1 año más", "wi.res": "Entonces la probabilidad pasa a {p} (ahora {q}). Lo que has rellenado no cambia."});
+Object.assign(I18N.en, {"rel.23.v": "Version 23 · November 2026", "rel.23.n1": "Each investment tile now shows two things: the amount that works out 9 times out of 10, and the chance of reaching the amount you want.", "rel.23.n2": "One number per idea: the key figures now match the result card and the advice, and the income chart is right for people who are still saving.", "rel.23.n3": "A shorter welcome: your age group and question come first, and the first screen is in your own language.", "rel.23.n4": "New on the result: the year your debt is paid off, what is achievable if you live to 90, and “What if…” buttons from age 35 and for 50-plus. Step 1 now asks whether you still work.", "rel.23.n5": "A shorter overview, larger tap areas, notes in the tab bar on phones, a complete and more private share link, and faster on slower phones."});
+Object.assign(I18N.nl, {"rel.23.v": "Versie 23 · november 2026", "rel.23.n1": "Elke beleggingstegel toont nu twee dingen: het bedrag dat 9 op de 10 keer lukt, en de kans dat je het bedrag haalt dat je wilt.", "rel.23.n2": "Eén getal per begrip: de kerncijfers passen nu bij de uitkomstkaart en het advies, en de inkomensgrafiek klopt voor wie nog spaart.", "rel.23.n3": "Een kortere welkomst: eerst je leeftijdsgroep en je vraag, en het eerste scherm in je eigen taal.", "rel.23.n4": "Nieuw bij de uitkomst: het jaar waarin je schuld is afgelost, wat haalbaar is als je 90 wordt, en “Wat als…”-knoppen vanaf 35 jaar en voor 50-plus. Stap 1 vraagt nu of je nog werkt.", "rel.23.n5": "Een korter overzicht, grotere tikvlakken, het kladblok in de tabbalk op je telefoon, een complete en meer besloten deel-link, en sneller op tragere telefoons."});
+Object.assign(I18N.de, {"rel.23.v": "Version 23 · November 2026", "rel.23.n1": "Jede Anlagekachel zeigt jetzt zwei Dinge: den Betrag, der in 9 von 10 Fällen klappt, und die Chance, Ihren Wunschbetrag zu erreichen.", "rel.23.n2": "Eine Zahl pro Begriff: Die Kennzahlen passen jetzt zur Ergebniskarte und zur Empfehlung, und das Einkommensdiagramm stimmt für alle, die noch sparen.", "rel.23.n3": "Eine kürzere Begrüßung: zuerst Ihre Altersgruppe und Ihre Frage, und der erste Bildschirm in Ihrer eigenen Sprache.", "rel.23.n4": "Neu beim Ergebnis: das Jahr, in dem Ihre Schulden abbezahlt sind, was erreichbar ist, wenn Sie 90 werden, und „Was wäre, wenn…“-Tasten ab 35 und für 50 plus. Schritt 1 fragt jetzt, ob Sie noch arbeiten.", "rel.23.n5": "Eine kürzere Übersicht, größere Tippflächen, der Notizblock in der Tableiste auf dem Handy, ein vollständiger und privaterer Teilen-Link und schneller auf langsameren Handys."});
+Object.assign(I18N.fr, {"rel.23.v": "Version 23 · novembre 2026", "rel.23.n1": "Chaque tuile de placement montre maintenant deux choses : le montant atteint 9 fois sur 10, et la chance d’atteindre le montant souhaité.", "rel.23.n2": "Un chiffre par notion : les chiffres clés correspondent maintenant à la carte de résultat et au conseil, et le graphique des revenus est juste pour ceux qui épargnent encore.", "rel.23.n3": "Un accueil plus court : d’abord votre tranche d’âge et votre question, et le premier écran dans votre langue.", "rel.23.n4": "Nouveau dans le résultat : l’année où votre dette est remboursée, ce qui est atteignable si vous vivez jusqu’à 90 ans, et des boutons « Et si… » dès 35 ans et pour les 50 ans et plus. L’étape 1 demande maintenant si vous travaillez encore.", "rel.23.n5": "Un aperçu plus court, des zones tactiles plus grandes, le bloc-notes dans la barre d’onglets sur téléphone, un lien de partage complet et plus privé, et plus rapide sur les téléphones lents."});
+Object.assign(I18N.es, {"rel.23.v": "Versión 23 · noviembre de 2026", "rel.23.n1": "Cada tesela de inversión muestra ahora dos cosas: el importe que sale bien 9 de cada 10 veces y la probabilidad de alcanzar el importe que quieres.", "rel.23.n2": "Una cifra por concepto: las cifras clave coinciden ahora con la tarjeta de resultado y el consejo, y el gráfico de ingresos es correcto para quien aún ahorra.", "rel.23.n3": "Una bienvenida más corta: primero tu grupo de edad y tu pregunta, y la primera pantalla en tu idioma.", "rel.23.n4": "Nuevo en el resultado: el año en que tu deuda queda pagada, lo que es alcanzable si llegas a los 90, y botones «¿Y si…?» desde los 35 y para mayores de 50. El paso 1 pregunta ahora si sigues trabajando.", "rel.23.n5": "Un resumen más corto, zonas táctiles más grandes, las notas en la barra de pestañas en el móvil, un enlace para compartir completo y más privado, y más rápido en móviles lentos."});
+Object.assign(I18N.en, {"flow.sal": "Working years: you live on your pay", "flow.salNote": "Grey: until {a} we assume you work and live on your pay. You do not need to enter that pay; your savings stay untouched and keep growing. Want to live on your savings sooner? Lower “{l}” on the result card."});
+Object.assign(I18N.nl, {"flow.sal": "Werkjaren: je leeft van je loon", "flow.salNote": "Grijs: tot je {a} gaan we ervan uit dat je werkt en van je loon leeft. Dat loon hoef je niet in te vullen; je vermogen blijft dan staan en groeit door. Wil je eerder van je vermogen leven? Zet “{l}” op de uitkomstkaart lager."});
+Object.assign(I18N.de, {"flow.sal": "Arbeitsjahre: Sie leben von Ihrem Lohn", "flow.salNote": "Grau: Bis {a} gehen wir davon aus, dass Sie arbeiten und von Ihrem Lohn leben. Diesen Lohn müssen Sie nicht eingeben; Ihr Vermögen bleibt unangetastet und wächst weiter. Möchten Sie früher von Ihrem Vermögen leben? Stellen Sie „{l}“ auf der Ergebniskarte niedriger ein."});
+Object.assign(I18N.fr, {"flow.sal": "Années de travail : vous vivez de votre salaire", "flow.salNote": "En gris : jusqu’à {a}, nous supposons que vous travaillez et vivez de votre salaire. Inutile de saisir ce salaire ; votre patrimoine reste intact et continue de croître. Vous voulez vivre de votre patrimoine plus tôt ? Baissez « {l} » sur la carte de résultat."});
+Object.assign(I18N.es, {"flow.sal": "Años de trabajo: vives de tu sueldo", "flow.salNote": "En gris: hasta los {a} suponemos que trabajas y vives de tu sueldo. No hace falta indicar ese sueldo; tu patrimonio queda intacto y sigue creciendo. ¿Quieres vivir antes de tu patrimonio? Baja «{l}» en la tarjeta de resultado."});
+/* v23-i18n-end */
 
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
 
@@ -6269,7 +6343,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1, inlegD: 0,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
   };
-  var APPV = '22 · 2026-11';
+  var APPV = '23 · 2026-11';
   var state = {};
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
@@ -6473,7 +6547,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       return main;
     }
     each('.ctry-sel', function (s) {
-      var main = list(s.id === 'country-intro' ? 'en' : prefs.lang);
+      var main = list(prefs.lang);
       s.innerHTML = main.map(function (o) { return '<option value="' + o.c + '"' + (o.c === prefs.country ? ' selected' : '') + '>' + esc(o.n) + '</option>'; }).join('');
     });
     var sc = $('s-cur');
@@ -6486,7 +6560,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     each('[data-t]', function (e) { e.innerHTML = t(e.getAttribute('data-t')); });
     /* Fraunces: de haak van de f dekt de punt van de i af en de staart van de J raakt de volgende letter; geef die twee paren een haartje lucht */
     each('h1', function (e) { if (e.children.length === 0 && !/kn">/.test(e.innerHTML)) e.innerHTML = e.innerHTML.replace(/f(?=i)/g, '<span class="kn">f</span>').replace(/\bJ(?=[a-zà-ÿ])/g, '<span class="kn j">J</span>'); });
-    each('[data-t-en]', function (e) { e.innerHTML = fill(I18N.en[e.getAttribute('data-t-en')] || ''); });
+    each('[data-t-en]', function (e) { var k = e.getAttribute('data-t-en'), L = I18N[prefs.lang]; e.innerHTML = fill((L && L[k]) || I18N.en[k] || ''); });
     each('[data-t-aria]', function (e) { e.setAttribute('aria-label', t(e.getAttribute('data-t-aria')).replace(/<[^>]+>/g, '')); });
     each('[data-t-ph]', function (e) { e.setAttribute('placeholder', t(e.getAttribute('data-t-ph'))); });
     each('[data-t-alt]', function (e) { e.setAttribute('alt', t1(e.getAttribute('data-t-alt'))); });
@@ -6900,14 +6974,15 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     while (i < n) { u1 = rnd() || 1e-12; u2 = rnd(); r = Math.sqrt(-2 * Math.log(u1)); th = 2 * Math.PI * u2; z[i++] = r * Math.cos(th); if (i < n) z[i++] = r * Math.sin(th); }
     zc[N] = z; return z;
   }
-  function simCore(m, pf, p, keep) {
+  function simCore(m, pf, p, keep, nSim) {
+    var NS = nSim || SIMN;
     var N = m.N, z = normalsFor(N), c = p.kosten / 100, inf = p.inflatie / 100, rr = Math.sqrt(1 - RHO * RHO);
     var w0 = pf.w[0], w1 = pf.w[1], w2 = pf.w[2];
     var mu0 = ASSET[0].mu / 100, mu1 = ASSET[1].mu / 100, mu2 = ASSET[2].mu / 100;
     var sd0 = ASSET[0].sd / 100, sd1 = ASSET[1].sd / 100, sd2 = ASSET[2].sd / 100;
     var vals = keep ? [] : null; if (keep) for (var ti = 0; ti <= N; ti++) vals.push(new Float64Array(SIMN));
     var fin = new Float64Array(SIMN), ok = 0, s, t2, K, failed;
-    for (s = 0; s < SIMN; s++) {
+    for (s = 0; s < NS; s++) {
       K = p.startkapitaal; failed = false;
       var base = s * N * 3;
       for (t2 = 0; t2 < N; t2++) {
@@ -6922,7 +6997,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       if (keep && !failed) vals[N][s] = K;
       if (!failed && K >= p.restkapitaal - 1e-6) ok++;
     }
-    return { ok: ok, fin: fin, vals: vals, N: N };
+    return { ok: ok, fin: fin, vals: vals, N: N, n: NS };
   }
   function simulate(m, pf, p) {
     var r = simCore(m, pf, p, true), vals = r.vals, ts = [];
@@ -6932,7 +7007,8 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     function zero(k) { var v = vals[k], c = 0; while (c < SIMN && v[c] <= 0) c++; return c / SIMN; }
     return { succ: r.ok / SIMN, ts: ts, q: function (k, f) { return q(vals[k], f); }, zero: zero, last: ts.length - 1 };
   }
-  function simQuick(m, pf, p) { var r = simCore(m, pf, p, false); r.fin.sort(); return { succ: r.ok / SIMN, med: r.fin[Math.round(SIMN / 2)] }; }
+  /* nSim: reken met minder simulaties voor een grove eerste schatting (dan is alleen de kans bruikbaar) */
+  function simQuick(m, pf, p, nSim) { var r = simCore(m, pf, p, false, nSim); if (nSim) return { succ: r.ok / r.n, med: 0 }; r.fin.sort(); return { succ: r.ok / SIMN, med: r.fin[Math.round(SIMN / 2)] }; }
   function stressRun(m, pf, p, shock) {
     var N = m.N, c = p.kosten / 100, inf = p.inflatie / 100, K = p.startkapitaal;
     var r0 = (pf.w[0] * shock[0] + pf.w[1] * shock[1] + pf.w[2] * shock[2]) / 100;
@@ -7052,11 +7128,44 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>' + wi50Html();
+    wi50M = m;
   }
+  /* wat-als voor wie van zijn vermogen leeft: de knoppen rekenen alleen hier mee, de invoer verandert niet */
+  var wi50 = {}, wi50M = null;
+  function wi50Html() {
+    if (state.opbouw || state.budget <= 0) return '';
+    var L = [{ k: 'bud', l: t1('wi.budLess', { v: eur(250) }) }];
+    if (state.startkapitaal > 0) L.push({ k: 'crash', l: t1('wi.crash') });
+    if ((state.pensAanP !== 0 && state.pensioenPaul > 0) || (two() && state.pensAanD !== 0 && state.pensioenDiana > 0)) L.push({ k: 'penLow', l: t1('wi.penLow') });
+    if (state.werkP > 0 && !(lists.perP && lists.perP.length)) L.push({ k: 'work1', l: t1('wi.work1') });
+    var ov = { skipMax: true }, any = false;
+    L.forEach(function (c) {
+      if (!wi50[c.k]) return; any = true;
+      if (c.k === 'bud') ov.budget = Math.max(0, state.budget - 250);
+      else if (c.k === 'crash') ov.startkapitaal = state.startkapitaal * 0.7;
+      else if (c.k === 'penLow') { ov.pensioenPaul = state.pensioenPaul * 0.8; ov.pensioenDiana = state.pensioenDiana * 0.8; }
+      else if (c.k === 'work1') ov.werkTotP = state.werkTotP + 1;
+    });
+    var res = '';
+    if (any) { var pf = portStat(effIdx()), p = params(Object.assign({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }, ov)); res = '<p class="wi50-res">' + t1('wi.res', { p: pct(simQuick(runModel(p), pf, p).succ, 0), q: pct(curSucc, 0) }) + '</p>'; }
+    return '<div class="wi50"><h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + L.map(function (c) { return '<button type="button" data-wi50="' + c.k + '" aria-pressed="' + (wi50[c.k] ? 'true" class="on"' : 'false"') + '>' + esc(c.l) + '</button>'; }).join('') + '</div>' + res + '</div>';
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('[data-wi50]') : null; if (!b) return;
+    var k = b.getAttribute('data-wi50'); wi50[k] = !wi50[k]; track('extra-whatif50-' + k);
+    if (wi50M) renderVerdict(wi50M);
+  });
   function renderKpis(m) {
-    var maxB = adv ? max90 : m.maxBudget, room = maxB - state.budget, empty = state.budget <= 0;
-    var haveR = Math.round(capEff()), needR = Math.round(m.req0), bufR = haveR - needR;
+    /* één getal per begrip: in opbouw is het maximum het bedrag van de uitkomstkaart (gekozen mix); 'nodig' is het bedrag
+       uit het advies (9 van de 10), niet meer het bedrag bij gemiddeld rendement */
+    var opbCi = effIdx(); if (!(opbCi >= 1 && opbCi <= 4)) opbCi = 2;
+    var opbOn = state.opbouw && state.budget > 0 && state.pensioenLeeftijd - state.leeftijdPaul >= 1;
+    var opbV = opbOn ? opbBudC[opbKey({ inleg: state.inleg }, opbCi)] : 0, opbWait = opbOn && opbV === undefined;   /* nog niet uitgerekend: de kaart vult dit zo in */
+    var maxB = opbOn ? (opbWait ? 0 : opbV) : (adv ? max90 : m.maxBudget), room = maxB - state.budget, empty = state.budget <= 0;
+    var need90 = !!(adv && adv.c90 >= 0);
+    var haveR = Math.round(capEff()), needR = Math.round(need90 ? adv.c90 : m.req0), bufR = haveR - needR;
+    var bufP = needR > 0 ? bufR / needR : 0;
     var link = !empty && state.startkapitaal > 0 && haveR > 0 && needR > 0;
     function split(hl) {
       var a = bufR >= 0 ? needR / haveR : haveR / needR;
@@ -7064,15 +7173,17 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     }
     var items = [
       { l: t1('k.end'), v: eur(m.K[m.N]), s: t1('k.endS'), c: m.K[m.N] < 0 ? 'neg' : '' },
-      { l: t1('k.need'), v: eur(needR), s: link ? t('k.needOf', { t: eur(haveR), b: eur(state.budget) }) : t1('k.needS', { b: eur(state.budget) }), c: '', bar: link ? split('need') : '' },
+      { l: t1(need90 ? 'k.need90' : 'k.need'), v: eur(needR), s: link ? t('k.needOf', { t: eur(haveR), b: eur(state.budget) }) : t1('k.needS', { b: eur(state.budget) }), c: '', bar: link ? split('need') : '' },
       { l: empty ? t1('k.bufOrShort') : (bufR >= 0 ? t1('k.buffer') : t1('k.short')), v: (bufR >= 0 ? '+' : '') + eur(bufR),
-        s: needR <= 0 ? t1('k.bufNone') : link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(m.buffer, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-m.marge / m.req0, 0) }))
-          : (bufR >= 0 ? t1('k.bufS', { p: pct(m.buffer, 0) }) : t1('k.shortS', { p: pct(-m.marge / m.req0, 0) })),
+        s: needR <= 0 ? t1('k.bufNone') : link ? (bufR >= 0 ? t1('k.bufSum', { t: eur(haveR), n: eur(needR), p: pct(bufP, 0) }) : t1('k.shortSum', { t: eur(haveR), n: eur(needR), p: pct(-bufP, 0) }))
+          : (bufR >= 0 ? t1('k.bufS', { p: pct(bufP, 0) }) : t1('k.shortS', { p: pct(-bufP, 0) })),
         c: bufR >= 0 ? 'pos' : 'neg', bar: link ? split('buf') : '' },
-      { l: t1(adv ? 'k.max90' : 'k.max'), v: eur(maxB), s: t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
-      m.draws[0] < 0 ? { l: t1('k.wr'), v: pct(0, 1), s: t1('k.wrSave', { m: eur(-m.draws[0] / 12) }), c: 'pos' } : { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1('k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
-      { l: t1('k.tax'), v: eur(m.belastingJaar1), s: taxLabel(), c: '' }
+      { l: t1(adv || opbOn ? 'k.max90' : 'k.max'), v: opbWait ? '…' : eur(maxB), s: opbWait ? '' : t1('k.maxS', { c: eur(capEff()), d: (room >= 0 ? '+' : '−') + eur(Math.abs(room)) }), c: '' },
+      m.draws[0] < 0 ? { l: t1('k.wr'), v: pct(0, 1), s: t1('k.wrSave', { m: eur(-m.draws[0] / 12) }), c: 'pos' } : { l: t1('k.wr'), v: pct(m.eersteJaarOpname, 1), s: t1(m.incomes.some(function (v, ti) { return ti > 0 && v > m.incomes[0] * 1.2 + 1; }) ? 'k.wrLater' : 'k.wrS', { m: eur(m.draws[0] / 12) }), c: '' },
+      { l: t1('k.tax'), v: eur(m.belastingJaar1), s: taxLabel() + (isNL() && state.box3 === 1 ? ' · ' + t1('k.taxCaut') : ''), c: '' }
     ];
+    /* wie nog opbouwt heeft niets aan 'nodig om te beginnen', 'buffer' en 'opname in jaar 1': die horen bij leven van je vermogen */
+    if (state.opbouw) items = [items[0], items[3], items[5]];
     if (empty) items = items.map(function (i) { return { l: i.l, v: '–', s: '', c: '' }; });
     $('kpis').innerHTML = items.map(function (i) { return '<div class="kpi"><span class="k-label">' + i.l + '</span><span class="k-val ' + i.c + '">' + i.v + '</span>' + (i.bar || '') + '<span class="k-sub">' + i.s + '</span></div>'; }).join('') +
       '<div class="srcline kpi-src">' + srcLine('sp,tax,mkt,le') + '</div>';
@@ -7156,6 +7267,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     root.classList.toggle('no-bud', !(state.budget > 0));
     root.classList.toggle('no-lvl', !lvlOk());
     renderLvl();
+    opbShare = null;
     if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; return; }
     el.hidden = false;
     var stop = state.pensioenLeeftijd, now = state.leeftijdPaul;
@@ -7169,25 +7281,47 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     var ci = effIdx(); if (!(ci >= 1 && ci <= 4)) ci = 2;
     var curPf = pfs[ci - 1], curM = runModel(params(Object.assign({}, OV, { bruto: curPf.mu * 100, spaarDeel: curPf.w[2] * 100, skipMax: true })));
     var sim = simulate(curM, curPf, p), k = Math.min(curM.tStop, sim.last), mid = sim.q(k, 0.5);
-    var put = state.startkapitaal, inlX = inl - state.inleg;
+    var put = OV.startkapitaal !== undefined ? OV.startkapitaal : state.startkapitaal, inlX = inl - state.inleg;
     for (var ya = Math.floor(now); ya < stop; ya++) put += 12 * Math.max(0, inlAt(ya) + inlX);
     /* het haalbare maandbudget (9 van de 10 kans tot de eindleeftijd) is de hoofdzaak; het eindbedrag staat eronder */
     var bud = opbBud(OV, ci), base = ex.any ? opbBud({ inleg: state.inleg }, ci) : bud;
     opbBudNow = base; opbHeroOk();
+    opbShare = ex.any ? null : { pf: curPf, m: curM, sim: sim };
+    if (last && !ex.any) renderKpis(last);
     var want = ex.want;
-    var buds = pfs.map(function (pf2, i) { return (i + 1 === ci) ? bud : opbBud(OV, i + 1); });
+    /* alleen de gekozen mix wordt direct uitgerekend; de andere tegels, de kansen en 'tot 90' volgen in losse stapjes,
+       zodat de pagina tussendoor blijft reageren. Wat al eens is uitgerekend staat er meteen. */
+    var pend = [];
+    function lazyBud(ov2, i2, wk2) { var v = opbBudC[opbKey(ov2, i2)]; if (v === undefined) pend.push(function () { opbBud(ov2, i2, wk2); }); return v; }
+    function lazySucc(ov2, i2, b2) { var v = opbSucc(ov2, i2, b2, true); if (v === undefined) pend.push(function () { opbSucc(ov2, i2, b2); }); return v; }
+    var buds = pfs.map(function (pf2, i) { return (i + 1 === ci) ? bud : lazyBud(OV, i + 1); });
+    /* twee regels per tegel: het bedrag dat in 9 van de 10 gevallen lukt, en de kans dat je je wens haalt. Zo zie je dat sparen zeker
+       is maar je wens zelden haalt, en dat beleggen minder zeker is maar vaker genoeg oplevert. */
+    var succs = pfs.map(function (pf2, i) { return want > 0 ? lazySucc(OV, i + 1, want) : null; });
     var tiles = pfs.map(function (pf2, i) {
-      return '<button type="button" data-opb-pf="' + (i + 1) + '"' + (i + 1 === ci ? ' class="cur" aria-pressed="true"' : ' aria-pressed="false"') + '><small>' + esc(pf2.n) + '</small><b>' + eur(buds[i]) + '</b><span>' + t1('opb.pm') + '</span></button>';
+      return '<button type="button" data-opb-pf="' + (i + 1) + '"' + (i + 1 === ci ? ' class="cur" aria-pressed="true"' : ' aria-pressed="false"') + '><small>' + esc(pf2.n) + '</small><b>' + (buds[i] === undefined ? '…' : eur(buds[i])) + '</b><span>' + t1('opb.tSure') + '</span>' +
+        (succs[i] !== null ? '<em>' + t1('opb.tWish', { p: succs[i] === undefined ? '…' : pct(succs[i], 0) }) + '</em>' : '') + '</button>';
     }).join('');
     /* als voorzichtig hier hoger uitkomt dan agressief is dat geen fout: bij 9-van-de-10-zekerheid wegen grote schommelingen zwaar; in Nederland drukt box 3 beleggen extra */
-    var mixWhy = buds[0] >= buds[2] ? '<p class="opb-note">' + t1('opb.mixWhy') + (isNL() && state.box3 > 0 ? ' ' + t1('opb.mixWhyB3') : '') + '</p>' : '';
+    var mixWhy = buds[0] !== undefined && buds[2] !== undefined && buds[0] >= buds[2] ? '<p class="opb-note">' + t1('opb.mixWhy') + (isNL() && state.box3 > 0 ? ' ' + t1('opb.mixWhyB3') : '') + '</p>' : '';
     /* wat er naast je eigen pot meetelt vanaf je stopleeftijd, zodat je het bedrag kunt narekenen */
     var incParts = [];
     var spSum = (p.aowAanP !== 0 ? (p.spP || 0) : 0) + (p.personen !== 1 && p.aowAanD !== 0 ? (p.spD || 0) : 0);
     var penSum = (p.pensAanP !== 0 ? (p.pensioenPaul || 0) : 0) + (p.personen !== 1 && p.pensAanD !== 0 ? (p.pensioenDiana || 0) : 0);
-    if (spSum > 0) incParts.push(t1('opb.incSp', { v: eur(spSum) }));
+    if (spSum > 0) incParts.push(t1('opb.incSp', { n: esc(spName()), v: eur(spSum) }));
     if (penSum > 0) incParts.push(t1('opb.incPen', { v: eur(penSum) }));
     if (curM.incWk.some(function (v, ti) { return ti >= curM.tStop && v > 0; })) incParts.push(t1('opb.incWk'));
+    /* schuldenvrij: het laatste jaar waarin een ingevulde studieschuld of overige schuld is afgelost */
+    var dYr = 0, dAsk = false, dSlow = false, dAny = false;
+    ['stud', 'oth'].forEach(function (d) { (lists[d] || []).forEach(function (q, kk) {
+      if (!(kk < (two() ? 2 : 1) && q && q.r > 0)) return;
+      dAny = true;
+      var dc = slCalc(q, d === 'stud' ? undefined : (q.i >= 0 ? q.i : 0));
+      if (dc.k === 'free' || dc.k === 'open') dYr = Math.max(dYr, dc.yr); else if (dc.k === 'notYet') dAsk = true; else dSlow = true;
+    }); });
+    var debtLine = !dAny ? '' : '<p class="opb-debt">' + (dSlow ? t1('opb.debtSlow') : (dAsk ? t1('opb.debtAsk') : t1('opb.debtFree', { y: dYr }))) + '</p>';
+    /* wie langer leeft dan gemiddeld: hetzelfde bedrag gerekend tot 90 */
+    var to90 = state.autoEind && state.eindleeftijd < 90 ? '<p class="opb-note">' + t1('opb.to90', { n: 90, v: (function () { var v9 = lazyBud(Object.assign({}, OV, { eindleeftijd: 90 }), ci, 'L'); return v9 === undefined ? '…' : eur(v9); })() }) + '</p>' : '';
     var incLine = incParts.length ? '<p class="opb-note opb-inc">' + t1('opb.inc', { list: incParts.join(' + ') }) + '</p>' : '';
     var lv = '';
     if (lvlOk()) {
@@ -7228,13 +7362,15 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       (want ? '<p class="opb-want ' + (bud >= want ? 'ok' : 'short') + '">' + t1(bud >= want ? 'opb.wantOk' : (OV.personen === 2 ? 'opb.wantShort2' : 'opb.wantShort'), { w: eur(want), d: eur(Math.max(0, want - bud)) }) + '</p>' : '') +
       lv +
       (mid > 0 || put > 0 ? '<p class="opb-split">' + t1(mid < put ? 'opb.endLineLow' : 'opb.endLine', { a: a, v: eur(mid), put: eur(put), an: AN.an }) + '</p>' : '') +
-      incLine +
+      incLine + to90 + debtLine +
       '<details class="opb-more"><summary>' + t1('opb.more') + '</summary><p class="opb-range">' + t1('opb.budWhy', { e: end, en: AN.en }) + '</p>' + (state.autoEind ? '<p class="opb-range">' + t1('opb.life', { en: AN.en }) + '</p>' : '') + '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p><p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p></details>' +
       '<h3 class="opb-h">' + t1('opb.stH') + '</h3>' + emptyHint + steps +
       (ex.list.length ? '<h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + chips + '</div>' : '') +
       '<p class="opb-delta">' + (ex.any && bud !== base ? t1(bud > base ? 'opb.wiDeltaB' : 'opb.wiDeltaM', { v: eur(Math.abs(bud - base)) }) : '') + '</p>' +
-      '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div>' + mixWhy + msg +
+      '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + '</p>' + mixWhy + msg +
       '<div class="opb-act"><a class="btn primary" href="#input" data-opb-more="1">' + t1('opb.moreBtn') + '</a></div>';
+    opbTok++; el.classList.toggle('opb-part', pend.length > 0);
+    if (pend.length) { var tok = opbTok; setTimeout(function nextPend() { if (tok !== opbTok) return; var f = pend.shift(); if (!f) { renderOpb(); return; } f(); setTimeout(nextPend, 0); }, 0); }
     /* niveaulabels die elkaar overlappen schuiven naar een tweede regel (alleen te meten als de kaart zichtbaar is) */
     var lvEl = el.querySelector('.opb-lvls');
     if (lvEl && lvEl.offsetWidth > 0) {
@@ -7265,8 +7401,17 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     }); });
     if (hasDebt) L.push({ k: 'debt', l: t1('opb.wiNoDebt') });
     if (!two()) L.push({ k: 'two', l: t1('opb.wiTwo') });
-    var any = false;
-    L.forEach(function (c) { if (opbWi[c.k]) any = true; });
+    /* vanaf 35: de vragen van iemand midden in de opbouw. Valt mijn pensioen tegen, zakt de beurs, krijg ik eens iets extra? */
+    if (bandOf(state.leeftijdPaul) >= 1) {
+      if ((state.pensAanP !== 0 && state.pensioenPaul > 0) || (two() && state.pensAanD !== 0 && state.pensioenDiana > 0)) L.push({ k: 'penLow', l: t1('wi.penLow') });
+      if (state.startkapitaal > 0) L.push({ k: 'crash', l: t1('wi.crash') });
+      L.push({ k: 'gift', l: t1('wi.gift', { v: eur(25000) }) });
+    }
+    var any = false, on = {};
+    L.forEach(function (c) { if (opbWi[c.k]) { any = true; on[c.k] = 1; } });
+    if (on.penLow) { ov.pensioenPaul = state.pensioenPaul * 0.8; ov.pensioenDiana = state.pensioenDiana * 0.8; }
+    if (on.crash) ov.startkapitaal = state.startkapitaal * 0.7;
+    if (on.gift) ov.startkapitaal = (ov.startkapitaal !== undefined ? ov.startkapitaal : state.startkapitaal) + 25000;
     if (opbWi.debt) ov.inleg += dv;
     var want = state.budget > 0 ? state.budget : 0;
     /* met z'n tweeën: een partner van dezelfde leeftijd met hetzelfde pensioen, die evenveel opzij legt; het budget gaat mee naar twee personen (1,42 keer, zoals bij de levensstijl) */
@@ -7311,25 +7456,41 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     if (ev.target.closest('[data-opb-more]')) { pendingScroll = null; showStep(1, false); track('extra-whatif-more'); }
   });
   /* hoogste maandbudget dat met 9 van de 10 kans meegaat tot de eindleeftijd, bij gegeven aanpassingen en beleggingsmix (afgerond op 10) */
-  var opbBudNow = null, opbBudC = {}, opbWarm = {};
-  function opbBud(ov, i) {
-    var pf0 = portStat(i);
-    var key = JSON.stringify(params(Object.assign({}, ov, { budget: 0, skipMax: true, bruto: pf0.mu * 100, spaarDeel: pf0.w[2] * 100, portfolio: 0 }))) + '|' + i;
+  var opbBudNow = null, opbBudC = {}, opbWarm = {}, opbTok = 0, opbShare = null;
+  function opbKey(ov, i) { var pf0 = portStat(i); return JSON.stringify(params(Object.assign({}, ov, { budget: 0, skipMax: true, bruto: pf0.mu * 100, spaarDeel: pf0.w[2] * 100, portfolio: 0 }))) + '|' + i; }
+  function opbBud(ov, i, wk) {
+    var wi = i + (wk || ''), key = opbKey(ov, i);
     if (opbBudC[key] !== undefined) return opbBudC[key];
-    var pf = portStat(i);
-    function q(b) { var p = params(Object.assign({}, ov, { budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 })); return simQuick(runModel(p), pf, p).succ; }
-    /* warme start: het antwoord ligt vrijwel altijd dicht bij de vorige uitkomst van dezelfde mix */
-    var w = opbWarm[i], lo, hi, g = 0;
-    if (w > 0 && q(w + 300) < 0.9 && q(Math.max(0, w - 300)) >= 0.9) { lo = Math.max(0, w - 300); hi = w + 300; }
+    var pf = portStat(i), NQ = Math.round(SIMN / 4);
+    function q(b, n) { var p = params(Object.assign({}, ov, { budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 })); return simQuick(runModel(p), pf, p, n).succ; }
+    var w = opbWarm[wi], lo, hi, g = 0, c;
+    if (w > 0) c = w;   /* warme start: het antwoord ligt vrijwel altijd dicht bij de vorige uitkomst van dezelfde mix */
     else {
-      lo = 0; hi = Math.max(state.budget * 2, w > 0 ? w * 2 : 0, 1000);
-      while (q(hi) >= 0.9 && g++ < 6) { lo = hi; hi *= 1.6; }
+      /* koude start: eerst grof zoeken met een kwart van de simulaties */
+      lo = 0; hi = Math.max(state.budget * 2, 1000);
+      while (q(hi, NQ) >= 0.9 && g++ < 6) { lo = hi; hi *= 1.6; }
+      while (hi - lo > 40) { var mq = (lo + hi) / 2; if (q(mq, NQ) >= 0.9) lo = mq; else hi = mq; }
+      c = (lo + hi) / 2;
     }
+    /* afmaken met alle simulaties, in een smal venster rond die schatting; het venster schuift op als het antwoord erbuiten ligt */
+    lo = Math.max(0, c - 80); hi = c + 80; g = 0;
+    while (lo > 0 && q(lo) < 0.9 && g++ < 8) { hi = lo; lo = Math.max(0, lo - 160 * g); }
+    g = 0;
+    while (q(hi) >= 0.9 && g++ < 8) { lo = hi; hi += 160 * g; }
     while (hi - lo > 10) { var md = (lo + hi) / 2; if (q(md) >= 0.9) lo = md; else hi = md; }
     var r = Math.floor(lo / 10) * 10;
     if (Object.keys(opbBudC).length > 80) opbBudC = {};
-    opbWarm[i] = r;
+    opbWarm[wi] = r;
     return (opbBudC[key] = r);
+  }
+  /* kans dat je met deze mix het gewenste maandbudget haalt (zelfde aanpassingen als opbBud) */
+  var opbSuccC = {};
+  function opbSucc(ov, i, b, peek) {
+    var pf = portStat(i), p = params(Object.assign({}, ov, { budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, portfolio: 0 }));
+    var key = JSON.stringify(p) + '|' + i;
+    if (opbSuccC[key] !== undefined || peek) return opbSuccC[key];
+    if (Object.keys(opbSuccC).length > 80) opbSuccC = {};
+    return (opbSuccC[key] = simQuick(runModel(p), pf, p).succ);
   }
   /* onder het ingevulde budget bovenaan, en in de balk op Invullen: wat er nu haalbaar is */
   function opbHeroOk() {
@@ -7343,11 +7504,15 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       if (mn) { mn.classList.remove('st-good', 'st-warn', 'st-bad'); mn.classList.add('st-' + c); }
     }
   }
+  var pfStale = false;
   function renderPortfolios() {
     renderOpb();
     var p = params(), html = '', chosen = null, ref = youngestName();
+    var lazy = route !== 'insight'; pfStale = lazy;   /* de vier vergelijkkaarten kosten veel rekenwerk: alleen als Inzicht open staat */
     [1, 2, 3, 4].forEach(function (i) {
       var pf = portStat(i), cur = i === effIdx();
+      if (lazy && !cur) return;
+      if (lazy && opbShare && opbShare.pf.n === pf.n) { chosen = opbShare; return; }   /* de kaart heeft deze simulatie net gedraaid */
       var m = runModel(params({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, maxIter: 30 }));
       var sim = simulate(m, pf, p);
       if (cur) chosen = { pf: pf, m: m, sim: sim };
@@ -7366,7 +7531,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
         '<span class="cmp-big">' + pct(sim.succ, 0) + '</span><span class="cmp-delta">' + t('pf.chance', { r: esc(refTxt()) }) + ' ' + chip + '</span>' +
         rows.map(function (r) { return '<div class="kv"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('') + '</div>';
     });
-    $('pf').innerHTML = html;
+    if (!lazy) $('pf').innerHTML = html;
     $('pf-sub').textContent = t1('pf.sub', { n: num(SIMN, 0) });
     if (chosen) {
       var sim = chosen.sim;
@@ -7534,11 +7699,17 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     var N = m.N, rows = [], i2, mx = state.budget, tw = two();
     for (i2 = 0; i2 < N; i2++) {
       var aow = m.incSp[i2] / 12, pen = m.incPen[i2] / 12, wk = m.incWk[i2] / 12, pot = m.incPot[i2] / 12;
+      /* opbouw: tot de stopleeftijd leef je van je loon; dat deel van het jaar komt er niets uit het vermogen en telt later inkomen nog niet mee */
+      var fw = state.opbouw ? Math.max(0, Math.min(1, state.pensioenLeeftijd - (state.leeftijdPaul + i2))) : 0, fr = 1 - fw;
+      aow *= fr; pen *= fr; wk *= fr; pot *= fr;
       var inc = aow + pen + wk + pot;
-      rows.push({ aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, bud: m.spend[i2], cap: Math.max(0, m.spend[i2] - inc) });
+      rows.push({ sal: fw * m.spend[i2], aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, bud: m.spend[i2], cap: Math.max(0, fr * m.spend[i2] - inc) });
       mx = Math.max(mx, inc);
     }
     var hasPot = rows.some(function (r) { return r.pot > 0.5 || r.lump > 0; }), lg = $('lg-pot'); if (lg) lg.hidden = !hasPot;
+    var hasSal = rows.some(function (r) { return r.sal > 0.5; }), lgS = $('lg-sal'); if (lgS) lgS.hidden = !hasSal;
+    /* het grijze deel is een aanname, geen ingevuld inkomen: zeg dat erbij en hoe je het verandert */
+    var fn = $('flow-note'); if (fn) { fn.hidden = !hasSal; if (hasSal) { var sa = fmtAge(state.pensioenLeeftijd); if (/^\d+$/.test(sa)) sa += ' ' + t1('u.years'); fn.textContent = t1('flow.salNote', { a: sa, l: t1('opb.stStop') }); } }
     var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 230 : 270;
     var tk = niceTicks(0, mx * 1.1, 4), ymax = Math.max(mx * 1.1, tk.ticks[tk.ticks.length - 1]);
     var ml = labW(tk.ticks), mr = 14, mt = 14, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
@@ -7549,7 +7720,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
     s += '<rect id="flowhl" class="f-hl" x="0" y="' + mt + '" width="' + bw + '" height="' + ph + '" style="display:none"/>';
     rows.forEach(function (r, i) {
       var x0 = ml + i * bw + gap / 2, w = Math.max(1, bw - gap), base = 0;
-      [['aow', 'f-aow'], ['pen', 'f-pen'], ['wk', 'f-wk'], ['pot', 'f-pot'], ['cap', 'f-cap']].forEach(function (p2) {
+      [['sal', 'f-sal'], ['aow', 'f-aow'], ['pen', 'f-pen'], ['wk', 'f-wk'], ['pot', 'f-pot'], ['cap', 'f-cap']].forEach(function (p2) {
         var v = r[p2[0]]; if (v <= 0.5) return;
         s += '<rect class="' + p2[1] + '" x="' + x0.toFixed(1) + '" y="' + y(base + v).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + (y(base) - y(base + v)).toFixed(1) + '"/>';
         base += v;
@@ -7571,7 +7742,7 @@ Object.assign(I18N.es, {"opb.wantMark": "Este eres tú: el presupuesto que quier
       hl.style.display = ''; hl.setAttribute('x', ml + i * bw);
       var line = function (l, v) { return '<div class="row"><span>' + l + '</span><span>' + eur(v) + '</span></div>'; };
       tip.style.display = '';
-      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + (r.pot > 0 ? line(t1('w.pots'), r.pot) : '') + line(t1('w.fromCap'), r.cap) + (r.lump > 0 ? line(t1('w.lump'), r.lump) : '') + (r.inc > r.bud ? line(t1('flow.over'), r.inc - r.bud) : '');
+      tip.innerHTML = '<b>' + ageTxt(i) + '</b>' + (r.sal > 0.5 ? line(t1('flow.sal'), r.sal) : '') + line(esc(spName()), r.aow) + line(t1('w.pension'), r.pen) + (r.wk > 0 ? line(t1('w.work'), r.wk) : '') + (r.pot > 0 ? line(t1('w.pots'), r.pot) : '') + line(t1('w.fromCap'), r.cap) + (r.lump > 0 ? line(t1('w.lump'), r.lump) : '') + (r.inc > r.bud ? line(t1('flow.over'), r.inc - r.bud) : '');
       var sc = rc.width / W, cx2 = (ml + (i + 0.5) * bw) * sc, left = cx2 + 12;
       if (left + 210 > rc.width) left = cx2 - 210 - 12;
       tip.style.left = Math.max(4, left) + 'px'; tip.style.top = '10px';
@@ -8120,8 +8291,11 @@ var TRK = {
   function shareUrl() {
     var d = {}; Object.keys(DEF).forEach(function (k) { if (state[k] !== DEF[k]) d[k] = state[k]; });
     var base = location.origin + location.pathname, o = { s: d, c: prefs.country, u: prefs.cur };
-    if (lists.perP.length || lists.perD.length || lists.pots.length || debtsList().length) o.l = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList() };
-    return base + '?plan=' + b64u(JSON.stringify(o)) + '#overview';
+    /* alle lijsten gaan mee, ook studieschuld, overige schulden en 'later meer opzij'. De cijfers staan achter het hekje:
+       dat deel van een adres blijft in de browser en gaat niet mee naar de server. */
+    var Ls = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList(), stud: lists.stud, oth: lists.oth, inl: lists.inl };
+    if (Object.keys(Ls).some(function (k) { return Ls[k] && Ls[k].length; })) o.l = Ls;
+    return base + '#plan=' + b64u(JSON.stringify(o));
   }
   function shareText() {
     var L = [t1('brand') + ': ' + t1('home.h1'), ''];
@@ -8176,7 +8350,7 @@ var TRK = {
   var planFromLink = false;
   (function () {
     try {
-      var m = /[?&]plan=([A-Za-z0-9_-]+)/.exec(location.search || ''); if (!m) return;
+      var m = /^#plan=([A-Za-z0-9_-]+)/.exec(location.hash || '') || /[?&]plan=([A-Za-z0-9_-]+)/.exec(location.search || ''); if (!m) return;
       var o = JSON.parse(b64d(m[1]));
       loadNums(state, o && o.s);
       lists = cleanLists(o && o.l);
@@ -8295,6 +8469,7 @@ var TRK = {
     if (route === 'input') showStep(curStep, false);
     updMini();
     if (route === 'overview' && last) { lastW = 0; renderFan(); renderFlow(last); }
+    if (route === 'insight' && pfStale && last) renderPortfolios();
     window.scrollTo(0, 0);
     if (pendingScroll && $(pendingScroll)) {
       var id = pendingScroll; pendingScroll = null;
@@ -8322,7 +8497,8 @@ var TRK = {
   go();
   update();
   if (planFromLink) { track('reach-shared-link'); ui.introSeen = true; saveUi(); setTimeout(function () { toast(t1('sh.loaded')); }, 400); }
-  scheduleSim(true);
+  /* eerst de pagina laten tekenen, dan pas het zware rekenwerk van de kaart en de grafiek */
+  setTimeout(function () { scheduleSim(true); }, 0);
   var rt;
   function onResize() {
     clearTimeout(rt);
@@ -8340,7 +8516,7 @@ var TRK = {
   function introStep(n) {
     $('intro-s0').hidden = n !== 0; $('intro-s1').hidden = n !== 1;
     var ib = $('intro-brand');
-    if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = I18N.en.brand; }
+    if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = t1('brand'); }
     else { ib.removeAttribute('data-t-en'); ib.setAttribute('data-t', 'brand'); ib.textContent = t1('brand'); }
     $('intro-card').setAttribute('aria-labelledby', n === 0 ? 'intro-h0' : 'intro-h');
     setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'slot-window'); if (n !== 0 && $('slot-window')) { $('slot-window').classList.remove('nudge'); void $('slot-window').offsetWidth; $('slot-window').classList.add('nudge'); if (typeof slotBuild === 'function') slotBuild(); } if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
@@ -8479,14 +8655,19 @@ var TRK = {
       else if (ev.key === 'Enter') { ev.preventDefault(); pickGoal(slotG()[slotIdx]); }
     });
   })();
-  $('slot-ok').addEventListener('click', function () { pickGoal(slotG()[slotIdx]); });
+  /* zonder gekozen leeftijdsgroep zou iedereen ongemerkt in de groep 50-plus belanden: vraag er eerst om */
+  $('slot-ok').addEventListener('click', function () {
+    var any = false; each('input[name="age-band"]', function (r) { if (r.checked) any = true; });
+    if (!any) { var ab = $('agebox'), an = $('age-need'); if (ab) { ab.classList.add('need'); ab.scrollIntoView({ block: 'center' }); } if (an) an.hidden = false; var r0 = document.querySelector('input[name="age-band"]'); if (r0) r0.focus({ preventScroll: true }); return; }
+    pickGoal(slotG()[slotIdx]);
+  });
   /* leeftijd als groep: geen exacte leeftijd aan het begin; -1 = nog niets gekozen (dan de vragen voor 50+) */
   function bandSet(b) {
     each('input[name="age-band"]', function (r) { r.checked = parseInt(r.value, 10) === b; });
     var nb = b < 0 ? 2 : b;
     if (nb !== introBand) { introBand = nb; if ($('slot-cyl') && typeof SLN === 'number') slotBuild(); }
   }
-  each('input[name="age-band"]', function (r) { r.addEventListener('change', function () { ageTouched = true; bandSet(parseInt(this.value, 10)); }); });
+  each('input[name="age-band"]', function (r) { r.addEventListener('change', function () { ageTouched = true; var ab = $('agebox'), an = $('age-need'); if (ab) ab.classList.remove('need'); if (an) an.hidden = true; bandSet(parseInt(this.value, 10)); }); });
   slotBuild();
 
   $('gb-go').addEventListener('click', function () {
@@ -8520,7 +8701,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 23, n: 5, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -8695,8 +8876,9 @@ var TRK = {
     arrow.style.left = Math.max(14, Math.min(tw - 28, (left + right) / 2 - tl - 7)) + 'px';
     tip.style.visibility = '';
   }
-  $('tour-next').addEventListener('click', function () { if (tourI === TOUR.length - 1) { endTour(true); return; } tourI++; placeTour(true); });
-  $('tour-prev').addEventListener('click', function () { if (tourI > 0) { tourI--; placeTour(true); } });
+  function tourVis(i) { var e = $(TOUR[i]); return !!(e && (e.offsetParent !== null || TOUR[i].indexOf('tab-') === 0)); }
+  $('tour-next').addEventListener('click', function () { if (tourI === TOUR.length - 1) { endTour(true); return; } do { tourI++; } while (tourI < TOUR.length - 1 && !tourVis(tourI)); placeTour(true); });
+  $('tour-prev').addEventListener('click', function () { var j = tourI; do { j--; } while (j > 0 && !tourVis(j)); if (j >= 0) { tourI = j; placeTour(true); } });
   $('tour-skip').addEventListener('click', function () { endTour(false); });
   window.addEventListener('scroll', function () { if (tourI >= 0) placeTour(false); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
@@ -9299,6 +9481,46 @@ var TRK = {
   var finishUpdate21b = finishUpdate;
   finishUpdate = function () { finishUpdate21b(); inlSplitSync(); relabelWerk(); };
   inlSplitSync(); relabelWerk();
+
+  /* ================= versie 23 ================= */
+  /* stap 1 voor wie van zijn vermogen gaat leven: werk je nog, en tot wanneer? Zonder deze vraag rekent de eerste uitkomst
+     alsof je vandaag stopt. De velden schrijven naar dezelfde gegevens als 'inkomen uit werk' verderop. */
+  function wk1Sync() {
+    var box = $('wk1-box'); if (!box) return;
+    var show = !state.opbouw && state.leeftijdPaul < state.aowPaul && !(lists.perP && lists.perP.length);
+    box.hidden = !show; if (!show) return;
+    var a = $('wk1-amt'), g = $('wk1-age'), tl = $('wk1-till');
+    if (a && document.activeElement !== a) a.value = state.werkP > 0 ? grp(state.werkP) : '';
+    if (tl) tl.hidden = !(state.werkP > 0);
+    if (g && document.activeElement !== g) g.value = state.werkP > 0 ? Math.floor(state.werkTotP) : '';
+  }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target, k = e.getAttribute ? e.getAttribute('data-wk1') : null; if (!k) return;
+    if (k === 'amt') { var v = e.value === '' ? 0 : numOf(e); if (!isFinite(v)) return; state.werkP = Math.max(0, v); track('extra-work-step1'); }
+    else { var g = parseFloat(e.value); if (!isFinite(g)) return; state.autoWerk = 0; state.werkTotP = Math.max(Math.ceil(state.leeftijdPaul), Math.min(80, g)); }
+    persist(); updateSoon();
+  });
+  TRK['extra-work-step1'] = ['extra', 'Stap 1: inkomen uit werk ingevuld'];
+  ['penLow', 'crash', 'gift'].forEach(function (k) { TRK['extra-whatif-' + k] = ['extra', 'Uitkomstkaart: wat als ' + k]; });
+  ['bud', 'crash', 'penLow', 'work1'].forEach(function (k) { TRK['extra-whatif50-' + k] = ['extra', 'Oordeel 50-plus: wat als ' + k]; });
+  /* 'Jouw cijfers' op het overzicht: op de telefoon ingeklapt zodra er een uitkomst is; open als je nog moet beginnen */
+  var scOpen = false;
+  function sideSync() {
+    var c = document.querySelector('.side-card'), b = $('side-tog'); if (!c || !b) return;
+    var can = state.budget > 0, closed = can && !scOpen;
+    c.classList.toggle('sc-closed', closed); b.hidden = !can;
+    b.setAttribute('aria-expanded', closed ? 'false' : 'true'); b.textContent = t1(closed ? 'home.quickTog' : 'home.quickHide');
+  }
+  if ($('side-tog')) $('side-tog').addEventListener('click', function () { scOpen = !scOpen; sideSync(); });
+  /* het kladblok zit op de telefoon in de tabbalk, zodat er geen knop over de inhoud zweeft */
+  var tn = $('tab-notes');
+  if (tn) {
+    tn.addEventListener('click', function (ev) { ev.preventDefault(); $('nt-fab').click(); });
+    tn.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); $('nt-fab').click(); } });
+  }
+  var finishUpdate23 = finishUpdate;
+  finishUpdate = function () { finishUpdate23(); wk1Sync(); sideSync(); };
+  wk1Sync(); sideSync();
 
 })();
 
