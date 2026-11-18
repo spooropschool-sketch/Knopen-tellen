@@ -233,7 +233,7 @@ def main():
             pg.check('input[name="q-geslD"][value="%s"]' % v, force=True)
             pg.wait_for_timeout(1500)
             vals.append(pg.evaluate("() => JSON.parse(localStorage.getItem('%s')).state.geslD" % KEY))
-        check('man/vrouw: derde keuze "Liever niet" bewaart -1 (gemiddelde)', vals == [0, 1, -1] and not errs, vals)
+        check('man/vrouw: derde keuze "Anders" bewaart -1 (gemiddelde)', vals == [0, 1, -1] and not errs, vals)
         ctx.close()
 
         # ---------- doorstuurkaartje ----------
