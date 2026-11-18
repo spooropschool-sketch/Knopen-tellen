@@ -2,70 +2,84 @@ User-agent: *
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: GPTBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Claude-SearchBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Claude-User
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Perplexity-User
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Applebot-Extended
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: CCBot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /src/
 Disallow: /tools/
+Disallow: /tests/
 
 Sitemap: https://countingbuttons.com/sitemap.xml

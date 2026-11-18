@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Build the site from src/index.html.
+"""Build the site from src/.
 
-Writes one static, pre-filled page per language (/, /nl/, /de/, /fr/, /es/),
-plus sitemap.xml, robots.txt, llms.txt and 404.html. The app itself is one
-file; this script only fills in the texts and the head so that search engines
+The source is split: src/index.html (markup and the app script), src/app.css (styles),
+src/model.js (calculation model and simulation; also loaded by the worker and the tests)
+and src/i18n/<lang>.js (texts, one file per language).
+
+Writes one static, pre-filled page per language (/, /nl/, /de/, /fr/, /es/) and the
+question pages, plus app.css, model.js and i18n/<lang>.js in the site root, and
+sitemap.xml, robots.txt, llms.txt and 404.html. A language page loads only its own
+language (see lang_bundle). The texts are filled into the markup so that search engines
 and AI crawlers that do not run JavaScript can read the page.
 
 Usage:  python3 tools/build.py [--artifact OUT.html]
@@ -323,8 +328,8 @@ def main():
 
     bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
             'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'Bingbot', 'Googlebot']
-    rb = 'User-agent: *\nAllow: /\nDisallow: /src/\nDisallow: /tools/\n\n'
-    rb += ''.join('User-agent: %s\nAllow: /\nDisallow: /src/\nDisallow: /tools/\n\n' % b for b in bots)
+    rb = 'User-agent: *\nAllow: /\nDisallow: /src/\nDisallow: /tools/\nDisallow: /tests/\n\n'
+    rb += ''.join('User-agent: %s\nAllow: /\nDisallow: /src/\nDisallow: /tools/\nDisallow: /tests/\n\n' % b for b in bots)
     rb += 'Sitemap: %s/sitemap.xml\n' % SITE
     write('robots.txt', rb)
 

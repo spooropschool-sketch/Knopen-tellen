@@ -2151,8 +2151,10 @@
     document.documentElement.classList.add('is-calc');
     /* ook de eerste berekening bij het opstarten gaat naar de worker, zodat de pagina meteen kan tekenen en reageren;
        zonder worker (calcX valt dan terug) rekent de pagina zelf, zoals voorheen */
-    var id = calcX(X, function (r) { if (id === hvLatest && r) cb(r); });
+    /* het nummer staat vast voordat er gerekend wordt: zonder worker komt het antwoord meteen, nog binnen calcX */
+    var id = hvSeq + 1;
     hvLatest = id;
+    calcX(X, function (r) { if (id === hvLatest && r) cb(r); });
   }
   /* bewaren, delen en feedback wachten tot de uitslag bij de invoer hoort */
   var readyQ = [];
