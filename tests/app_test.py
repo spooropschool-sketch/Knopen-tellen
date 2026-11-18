@@ -8,6 +8,7 @@ Controleert:
   geen scriptfouten, land en valuta uit de link, een uitkomst, het doorstuurkaartje, geen te brede pagina op 390 px,
   en de privacytekst (zonder de zin over 'zonder winstoogmerk', de rest staat er nog).
 - de deellink heen en terug: link maken in de app, openen in een browser met een andere taal, zelfde uitkomst.
+- de worker: het zware rekenwerk, ook de eerste berekening bij het opstarten, draait in een worker die model.js laadt.
 - de welkomst: zonder leeftijdsgroep kun je niet verder; met een groep wel.
 - de werkvraag in stap 1: zichtbaar voor 50+, verborgen voor wie nog spaart, en wat je invult wordt bewaard.
 - het doorstuurkaartje: weg na doorsturen, ook na herladen.
@@ -121,6 +122,7 @@ def main():
                 name = '%s %s' % (lang, g)
                 opbouw = 'opbouw' in st
                 check(name + ': geen scriptfouten', not errs, errs[:2])
+                check(name + ': rekenwerk in de worker (model.js)', len(pg.workers) == 1 and 'model.js' in pg.workers[0].url, [w.url for w in pg.workers])
                 check(name + ': land en valuta uit de link', r['ctry'] == ctry and r['cur'] == cur, '%s %s' % (r['ctry'], r['cur']))
                 check(name + ': link geladen zonder welkomstvenster', not r['intro'] and 'reach-shared-link' in r['trk'], r['trk'])
                 if opbouw:

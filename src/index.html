@@ -2120,7 +2120,7 @@
   }
   /* Elke berekening krijgt een eigen nummer. De hoofduitslag gebruikt alleen het antwoord op de laatste vraag;
      scenario's rekenen in dezelfde worker mee zonder de hoofduitslag te verstoren. */
-  var hvW = null, hvSeq = 0, hvLatest = 0, hvCbs = {}, hvPend = {}, hvFirst = true;
+  var hvW = null, hvSeq = 0, hvLatest = 0, hvCbs = {}, hvPend = {};
   function hvFall() {
     hvW = false;
     Object.keys(hvCbs).forEach(function (id) { var cb = hvCbs[id], X = hvPend[id]; delete hvCbs[id]; delete hvPend[id]; var r = null; try { r = hvRun(X); } catch (x) {} cb(r); });
@@ -2149,7 +2149,8 @@
   }
   function heavy(X, cb) {
     document.documentElement.classList.add('is-calc');
-    if (hvFirst) { hvFirst = false; hvLatest = ++hvSeq; cb(hvRun(X)); return; }
+    /* ook de eerste berekening bij het opstarten gaat naar de worker, zodat de pagina meteen kan tekenen en reageren;
+       zonder worker (calcX valt dan terug) rekent de pagina zelf, zoals voorheen */
     var id = calcX(X, function (r) { if (id === hvLatest && r) cb(r); });
     hvLatest = id;
   }
@@ -2157,6 +2158,7 @@
   var readyQ = [];
   function busy() { return !!updTimer || document.documentElement.classList.contains('is-calc'); }
   function whenReady(fn) { if (!busy()) { fn(); return; } readyQ.push(fn); updateNow(); }
+  var firstDone = false;
   function update() {
     applyAuto();
     applyText();
@@ -2165,6 +2167,8 @@
     heavy(hvCtx(), function (res) {
       adv = res.adv; altC90 = res.altC90; autoInfo = res.autoInfo; autoIdx = res.autoIdx; curSucc = res.curSucc; max90 = res.max90;
       finishUpdate();
+      /* na de eerste uitslag: eerst laten tekenen, dan pas het rekenwerk van de kaart en de grafiek */
+      if (!firstDone) { firstDone = true; setTimeout(function () { scheduleSim(true); }, 0); }
     });
   }
   function finishUpdate() {
@@ -2707,10 +2711,10 @@ var TRK = {
   syncInputs();
   renderLists();
   go();
+  /* de uitslag komt uit de worker; of er al iets is ingevuld weet de pagina meteen, zodat een lege start niet verspringt */
+  document.documentElement.classList.toggle('is-empty', state.budget <= 0 && !(state.opbouw && state.inleg > 0));
   update();
   if (planFromLink) { track('reach-shared-link'); ui.introSeen = true; saveUi(); setTimeout(function () { toast(t1('sh.loaded')); }, 400); }
-  /* eerst de pagina laten tekenen, dan pas het zware rekenwerk van de kaart en de grafiek */
-  setTimeout(function () { scheduleSim(true); }, 0);
   var rt;
   function onResize() {
     clearTimeout(rt);
