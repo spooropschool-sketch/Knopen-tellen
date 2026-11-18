@@ -204,6 +204,38 @@ def main():
         check('werkvraag 18-34: verborgen (wie spaart, werkt al)', pg.evaluate("() => document.getElementById('wk1-box').hidden") and not errs)
         ctx.close()
 
+        # ---------- uitleg achter een i en derde keuze bij man/vrouw ----------
+        ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(dict(GROUPS['50+'], pensioenPaul=1200), 'NL', 'EUR'), 'nl-NL')
+        pg.evaluate("() => { location.hash = '#input'; }")
+        pg.wait_for_timeout(800)
+        pg.evaluate("() => { document.querySelector('input[name=\"in-mode\"][value=\"all\"]').click(); document.querySelectorAll('details').forEach(d => d.open = true); }")
+        pg.wait_for_timeout(2000)
+        r = pg.evaluate("""() => {
+          const vis = [...document.querySelectorAll('.ib')].filter(b => b.offsetParent).map(b => b.dataset.ib);
+          const loose = [...document.querySelectorAll('.page:not([hidden]) .hint')].filter(e => e.offsetParent && !e.closest('.ipop') && /Nibud|forfait|ingangsleeftijd|levensverwachting bij je leeftijd/.test(e.innerText)).length;
+          return { vis, loose, closed: [...document.querySelectorAll('.ipop')].every(p => p.hidden) };
+        }""")
+        need = ['sex', 'spAge', 'spAmt', 'penAmt', 'penAge', 'pf', 'box3', 'eind', 'rest', 'infl', 'cost', 'cur']
+        check('uitleg: een i bij elk achtergrondveld, kaders dicht, geen losse achtergrondtekst',
+              all(k in r['vis'] for k in need) and r['closed'] and r['loose'] == 0 and not errs, (sorted(set(need) - set(r['vis'])), r['loose']))
+        b = pg.locator('.ib[data-ib="box3"]').first
+        b.click()
+        pg.wait_for_timeout(300)
+        o = pg.evaluate("""() => { const b = document.querySelector('.ib[data-ib="box3"]'), p = document.getElementById(b.getAttribute('aria-controls'));
+          return { open: !p.hidden, exp: b.getAttribute('aria-expanded'), txt: p.innerText.length, others: [...document.querySelectorAll('.ipop')].filter(x => !x.hidden).length, trk: window.__trkTest.slice() }; }""")
+        pg.keyboard.press('Escape')
+        pg.wait_for_timeout(200)
+        shut = pg.evaluate("() => [...document.querySelectorAll('.ipop')].every(p => p.hidden)")
+        check('uitleg: i opent het kader (een tegelijk), Escape sluit, geteld',
+              o['open'] and o['exp'] == 'true' and o['txt'] > 40 and o['others'] == 1 and shut and 'extra-info-box3' in o['trk'], o)
+        vals = []
+        for v in ['0', '1', '-1']:
+            pg.check('input[name="q-geslD"][value="%s"]' % v, force=True)
+            pg.wait_for_timeout(1500)
+            vals.append(pg.evaluate("() => JSON.parse(localStorage.getItem('%s')).state.geslD" % KEY))
+        check('man/vrouw: derde keuze "Liever niet" bewaart -1 (gemiddelde)', vals == [0, 1, -1] and not errs, vals)
+        ctx.close()
+
         # ---------- doorstuurkaartje ----------
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['18-34'], 'NL', 'EUR'), 'nl-NL')
         pg.click('#tc-go')

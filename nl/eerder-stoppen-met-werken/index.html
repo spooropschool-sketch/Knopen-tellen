@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=55dfeb78">
+<link rel="stylesheet" href="/app.css?v=3ec6a04b">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -192,8 +192,8 @@
             <div class="field"><label for="q-country" data-t="f.country">Voor welk land reken je?</label><select id="q-country" class="ctry-sel"></select></div>
             <div class="field"><span class="flabel" data-t="f.persons">Reken je voor één of voor twee?</span>
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Reken je voor één of voor twee?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 persoon</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 personen</span></label></div></div>
-            <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">jaar</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Man</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Vrouw</span></label></div></div>
-            <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">jaar</span></div></div><div class="seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Man</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Vrouw</span></label></div></div>
+            <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">jaar</span></div></div><div class="seg seg3 sex-seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Man</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Vrouw</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="-1"><span data-t="sex.none">Liever niet</span></label></div><p class="hint sex-info" data-t="sex.info">Je keuze bepaalt alleen met welke levensverwachting we rekenen. Vrouwen leven gemiddeld een paar jaar langer dan mannen, en hoe langer je leeft, hoe langer je geld mee moet. Kies wat bij je past. Bij “Liever niet” rekenen we met het gemiddelde van beide. De eindleeftijd kun je verderop ook zelf kiezen.</p></div>
+            <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">jaar</span></div></div><div class="seg seg3 sex-seg" role="radiogroup" data-t-aria="f.sex" aria-label="Geslacht"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Man</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Vrouw</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="-1"><span data-t="sex.none">Liever niet</span></label></div><p class="hint sex-info" data-t="sex.info">Je keuze bepaalt alleen met welke levensverwachting we rekenen. Vrouwen leven gemiddeld een paar jaar langer dan mannen, en hoe langer je leeft, hoe langer je geld mee moet. Kies wat bij je past. Bij “Liever niet” rekenen we met het gemiddelde van beide. De eindleeftijd kun je verderop ook zelf kiezen.</p></div>
             <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Hoe wil je later leven?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Hoe wil je later leven?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Richtbedragen in geld van vandaag, gebaseerd op het Nibud-minimum (2025) en CBS-uitgaven naar inkomen, omgerekend naar 2025. Voor twee personen rekenen we 1,4 keer, omdat je woonkosten deelt. Voor andere eurolanden schalen we met prijsniveaus. Gemiddelden, geen advies. Je kunt het bedrag hieronder aanpassen.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Wat wil je per maand te besteden hebben?</span><span class="opb-q" data-t="f.budgetOpb">Wat wil je later per maand te besteden hebben?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ netto per maand</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Hoe verlopen de uitgaven later?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Onderzoek laat zien dat mensen in verschillende fasen van hun leven anders uitgeven. Daarom kies je hier hoe je uitgaven later verlopen.</p>
@@ -477,7 +477,7 @@
 </div>
 
 <script src="/model.js?v=411575d1" data-model></script>
-<script src="/i18n/nl.js?v=248a043a"></script>
+<script src="/i18n/nl.js?v=cb49681f"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -798,6 +798,7 @@
     var f = F[k];
     return '<div class="field"><div class="ftop"><label for="n-' + k + '" data-t="' + lab(k) + '"></label>' + tagHtml(f.tag) + '</div>' +
       '<div class="inrow"><input id="n-' + k + '" ' + numAttr(k) + '><span class="unit" data-t="' + f.u + '"></span></div>' +
+      (k === 'pensioenPaul' || k === 'pensioenDiana' ? '<p class="hint pen-short" data-t="h.penShort"></p>' : '') +
       '<p class="hint" data-t="' + hintKey(k) + '"' + (k === 'aowPaul' || k === 'aowDiana' || k === 'pensioenPaul' || k === 'pensioenDiana' ? ' data-hfor="' + k + '"' : '') + '></p></div>';
   }
   function segK(name, key, opts, aria) {
@@ -1838,7 +1839,7 @@
       host.innerHTML = '<div class="ph">' + t('fan.empty') + '</div>';
       $('fan-succ').textContent = '–'; $('fan-wr').textContent = '–'; $('fan-wr-s').textContent = t1('fan.wr');
       $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.assumpLater') + '</li></ul>';
-      $('fan-sub').textContent = t1('fan.subEmpty');
+      $('fan-sub').textContent = t1('fan.subEmpty'); $('fan-sub').hidden = false;
       return;
     }
     if (!fanSrc) return;
@@ -1908,7 +1909,7 @@
     $('fan-wr').textContent = m.draws[0] < 0 ? '+' + eur(-m.draws[0] / 12) : eur(m.draws[0] / 12);
     $('fan-wr-s').textContent = m.draws[0] < 0 ? t1('fan.wrSave') : t1('fan.wrS', { p: pct(m.eersteJaarOpname, 1) });
     $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.mix', { a: Math.round(pf.w[0] * 100), b: Math.round(pf.w[1] * 100), c: Math.round(pf.w[2] * 100) }) + '</li><li>' + t1('fan.costs', { p: pct(state.kosten / 100, 1) }) + '</li><li>' + taxLabel() + '</li></ul>';
-    $('fan-sub').textContent = t1('fan.sub', { pf: pf.n.toLowerCase(), n: num(SIMN, 0) });
+    $('fan-sub').textContent = t1('fan.sub', { pf: pf.n.toLowerCase(), n: num(SIMN, 0) }); $('fan-sub').hidden = true;   /* staat in het ⓘ-venster */
     each('#fan-legend .lg', function (el) { el.classList.toggle('off', !fanShow[el.getAttribute('data-k')]); });
   }
   each('input[name="fanMode"]', function (r) { r.addEventListener('change', function () { if (r.checked) { fanMode = r.value; renderFan(); } }); });
@@ -1918,7 +1919,8 @@
   function closeFanPop(back) { if (!fanPop || fanPop.hidden) return; fanPop.hidden = true; fanInfo.setAttribute('aria-expanded', 'false'); if (back) fanInfo.focus(); }
   function openFanPop() {
     fanPop.innerHTML = '<div class="fp-top"><h3 id="fan-pop-h">' + t1('fan.infoH') + '</h3><button type="button" class="fp-x" id="fan-pop-x" aria-label="' + esc(t1('b.close')) + '">✕</button></div>' +
-      '<dl><div><dt>' + t1('fan.nominal') + '</dt><dd>' + t1('fan.infoNom', { p: pct(state.inflatie / 100, 1) }) + '</dd></div><div><dt>' + t1('fan.real') + '</dt><dd>' + t1('fan.infoReal') + '</dd></div></dl>';
+      '<dl><div><dt>' + t1('fan.nominal') + '</dt><dd>' + t1('fan.infoNom', { p: pct(state.inflatie / 100, 1) }) + '</dd></div><div><dt>' + t1('fan.real') + '</dt><dd>' + t1('fan.infoReal') + '</dd></div></dl>' +
+      ($('fan-sub').hidden ? '<p class="fp-lead">' + esc($('fan-sub').textContent) + '</p>' : '');
     fanPop.hidden = false; fanInfo.setAttribute('aria-expanded', 'true');
     $('fan-pop-x').addEventListener('click', function () { closeFanPop(true); });
     $('fan-pop-x').focus();
@@ -3355,6 +3357,80 @@ var TRK = {
     } else { track('reach-tip-copy'); copyText(msg, t1('tip.copied')); }
   }
   each('.share-app', function (b) { b.addEventListener('click', function () { track('reach-tip-app'); tipApp('tip'); }); });
+
+  /* ================= uitleg achter een ⓘ (versie 23) ================= */
+  /* Achtergrond (bronnen, aannames, hoe er gerekend wordt) staat achter een ⓘ naast het label. Wat je nodig hebt om goed in te
+     vullen, blijft uitgeschreven. De toelichting blijft hetzelfde element (de app ververst de tekst zoals altijd); hij verhuist
+     alleen naar een kadertje direct onder het label, dat de ⓘ opent en sluit. [sleutel, toelichting, eventueel vast anker] */
+  var IB = [
+    ['lvl', '#lvl-hint'], ['curve', '[data-t="curve.intro"]'], ['sex', '.sex-info'],
+    ['spAge', '[data-t="h.spAge"]'], ['spAmt', '[data-t="h.spAmt"]'], ['penAmt', '[data-hfor="pensioenPaul"],[data-hfor="pensioenDiana"]'], ['penAge', '[data-t="h.penAge"]'],
+    ['wkEnd', '[data-t="h.wkEnd"]'], ['bijAmt', '[data-t="h.bijAmt"]'], ['bijEnd', '[data-t="h.bijEnd"]'],
+    ['pf', '#pf-hint'], ['box3', '#b3-hint'], ['eind', '[data-t="h.eindleeftijd"]'], ['rest', '[data-t="h.restkapitaal"]'],
+    ['infl', '[data-t="h.inflatie"]'], ['cost', '[data-t="h.kosten"]'], ['cur', '[data-t="h.cur"]'],
+    ['flow', '#flow-note', '#flow-h'], ['pfcmp', '#pf-note', '#pf-h'], ['koop', '#koop-note', '#kp-h']
+  ];
+  var ibN = 0, IB_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/></svg>';
+  function ibAnchor(el, fixed) {
+    if (fixed) return $(fixed.slice(1));
+    if (el.classList.contains('sex-info')) return el.parentNode.querySelector('.sex-seg');
+    if (el.id === 'b3-hint') return el.parentNode.querySelector(':scope > .seg');   /* de kop staat in het uitklapvak al bovenaan en is hier verborgen */
+    var c = el.closest('.field, .knob'); if (!c) return null;
+    return c.querySelector(':scope > .ftop > label, :scope > .ftop > .flabel, :scope > .knob-top > .t, :scope > label, :scope > .flabel');
+  }
+  function ibMake() {
+    IB.forEach(function (d) {
+      each(d[1], function (h) {
+        if (h.closest('.ipop')) return;
+        var a = ibAnchor(h, d[2]); if (!a) return;
+        var row = a.parentNode.classList.contains('ib-row') ? a.parentNode : null;
+        if (!row) { row = document.createElement('span'); row.className = 'ib-row' + (a.classList.contains('seg') ? ' ib-seg' : ''); a.parentNode.insertBefore(row, a); row.appendChild(a); }
+        var id = 'ip' + (++ibN), b = document.createElement('button');
+        b.type = 'button'; b.className = 'ib'; b.setAttribute('data-ib', d[0]); b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', id);
+        b.setAttribute('data-t-aria', 'ib.more'); b.setAttribute('aria-label', t1('ib.more')); b.innerHTML = IB_SVG;
+        row.appendChild(b);
+        var box = document.createElement('div'); box.className = 'ipop'; box.id = id; box.hidden = true;
+        box.innerHTML = '<button type="button" class="ipop-x" data-t-aria="b.close" aria-label="' + esc(t1('b.close')) + '"><span aria-hidden="true">✕</span></button>';
+        var after = /\b(ftop|knob-top)\b/.test(row.parentNode.className) ? row.parentNode : row;
+        after.parentNode.insertBefore(box, after.nextSibling);
+        box.appendChild(h);
+      });
+    });
+    ibSync();
+  }
+  function ibSync() {
+    each('.ipop', function (box) {
+      var h = box.querySelector('.hint'), b = document.querySelector('.ib[aria-controls="' + box.id + '"]'); if (!b) return;
+      var empty = !h || h.hidden || !h.textContent.trim();
+      if (b.hidden !== empty) b.hidden = empty;
+      if (empty && !box.hidden) { box.hidden = true; b.setAttribute('aria-expanded', 'false'); }
+    });
+  }
+  function ibClose(back) {
+    each('.ipop', function (box) {
+      if (box.hidden) return; box.hidden = true;
+      var b = document.querySelector('.ib[aria-controls="' + box.id + '"]'); if (b) { b.setAttribute('aria-expanded', 'false'); if (back) b.focus(); }
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.ib') : null;
+    if (b) {
+      e.preventDefault();
+      var box = $(b.getAttribute('aria-controls')), open = box && box.hidden;
+      ibClose(false);
+      if (open) { box.hidden = false; b.setAttribute('aria-expanded', 'true'); track('extra-info-' + b.getAttribute('data-ib')); }
+      return;
+    }
+    var x = e.target.closest ? e.target.closest('.ipop-x') : null;
+    if (x) { ibClose(true); return; }
+    if (!(e.target.closest && e.target.closest('.ipop'))) ibClose(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ibClose(true); });
+  IB.forEach(function (d) { TRK['extra-info-' + d[0]] = ['extra', 'Uitleg (ⓘ) geopend: ' + d[0]]; });
+  /* stappen en kaarten worden opnieuw opgebouwd: houd de ⓘ's bij */
+  var ibQ = false;
+  if (window.MutationObserver) new MutationObserver(function () { if (ibQ) return; ibQ = true; requestAnimationFrame(function () { ibQ = false; ibMake(); }); }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'], characterData: true });
+  ibMake();
 
   /* doorstuurkaartje onder de uitkomst (versie 23): verschijnt zodra er een uitkomst is, verdwijnt na een tik op doorsturen of op het kruisje */
   TRK['reach-tip-card'] = ['bereik', 'Doorstuurkaartje: app doorsturen getikt'];

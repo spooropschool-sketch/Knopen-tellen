@@ -719,5 +719,8 @@ Object.assign(I18N.fr, {"rel.23.v": "Version 23 · novembre 2026", "rel.23.n1": 
 Object.assign(I18N.fr, {"tc.h": "Vous connaissez quelqu’un que cela intéresserait ?", "tc.s": "Vous partagez seulement l’appli. Vos chiffres restent chez vous.", "tc.btn": "Partager l’appli", "tc.x": "Ne plus afficher", "rel.23.n6": "Vous connaissez quelqu’un que cela intéresserait ? Sous votre résultat, vous pouvez maintenant partager l’appli d’un geste. Vos chiffres restent chez vous."});
 Object.assign(I18N.fr, {"flow.sal": "Années de travail : vous vivez de votre salaire", "flow.salNote": "En gris : jusqu’à {a}, nous supposons que vous travaillez et vivez de votre salaire. Inutile de saisir ce salaire ; votre patrimoine reste intact et continue de croître. Vous voulez vivre de votre patrimoine plus tôt ? Baissez « {l} » sur la carte de résultat."});
 
+/* uitleg achter een ⓘ en derde keuze bij man/vrouw (versie 23) */
+Object.assign(I18N.fr, {"ib.more": "Plus d’infos", "sex.none": "Non précisé", "h.penShort": "Net par mois, sans la {sp}.", "sex.info": "Votre choix détermine seulement l’espérance de vie utilisée dans le calcul. En moyenne, les femmes vivent quelques années de plus que les hommes, et plus vous vivez longtemps, plus votre argent doit durer. Choisissez ce qui vous correspond. Avec « Non précisé », nous prenons la moyenne des deux. Plus loin, vous pouvez aussi fixer vous-même l’âge de fin."});
+
 /* Franse leestekens: een smalle vaste spatie voor ? ! : ; » en na « */
 (function () { var d = I18N.fr; Object.keys(d).forEach(function (k) { d[k] = d[k].replace(/ ([?!:;»])/g, '\u202f$1').replace(/« /g, '«\u202f'); }); })();
