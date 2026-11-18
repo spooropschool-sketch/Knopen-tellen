@@ -7,8 +7,9 @@ Controleert:
 - 5 talen x 3 leeftijdsgroepen (18-34 en 35-49 sparen nog, 50+ leeft van vermogen), geopend via een deellink:
   geen scriptfouten, land en valuta uit de link, een uitkomst, het doorstuurkaartje, geen te brede pagina op 390 px,
   en de privacytekst (zonder de zin over 'zonder winstoogmerk', de rest staat er nog).
-- het overzicht in vijf delen (ronde 1): wegwijzer, deelkoppen, volgorde, wat als en knoppen in deel 2, kerncijfers
-  zonder getallen die al groot in deel 1 of 2 staan; de wegwijzer brengt je naar het deel; leeg overzicht zonder wegwijzer.
+- het overzicht in vijf delen (ronde 1): deelkoppen, volgorde, wat als en knoppen in deel 2, kerncijfers zonder getallen
+  die al groot in deel 1 of 2 staan; leeg overzicht zonder deelkoppen.
+- je vraag (goal-bar) staat alleen aan het eind van Invullen: na stap 5, of onderaan bij alles in één overzicht.
 - de deellink heen en terug: link maken in de app, openen in een browser met een andere taal, zelfde uitkomst.
 - de worker: het zware rekenwerk, ook de eerste berekening bij het opstarten, draait in een worker die model.js laadt.
 - de welkomst: zonder leeftijdsgroep kun je niet verder; met een groep wel.
@@ -119,8 +120,6 @@ def main():
                     tip: vis('tip-card'), intro: !document.getElementById('intro').hidden,
                     sw: document.documentElement.scrollWidth, vw: innerWidth,
                     priv: pb ? pb.innerHTML : '', trk: window.__trkTest.slice(),
-                    nav: [...document.querySelectorAll('#ch-nav [data-ch-go]')].filter(b => !b.hidden).length,
-                    navVis: vis('ch-nav'),
                     heads: [...document.querySelectorAll('#page-overview .ch-head')].filter(h => getComputedStyle(h).display !== 'none').map(h => h.id),
                     order: [...document.querySelectorAll('#page-overview .ch-head, #status-card, #opb-card, #opb-play, #adv-card, #wi-card, #tip-card, #panel-fan, #panel-flow, #kpis, #page-overview .next, #support-ov')].map(e => e.id || 'next'),
                     kpis: +(document.getElementById('kpis').getAttribute('data-n') || 0),
@@ -140,7 +139,7 @@ def main():
                 check(name + ': doorstuurkaartje zichtbaar', r['tip'] and not r['empty'])
                 # ronde 1: overzicht in vijf delen
                 o = r['order']
-                check(name + ': wegwijzer met 5 delen, 4 koppen', r['navVis'] and r['nav'] == 5 and r['heads'] == ['ch-2', 'ch-3', 'ch-4', 'ch-5'], '%s %s' % (r['nav'], r['heads']))
+                check(name + ': vier deelkoppen', r['heads'] == ['ch-2', 'ch-3', 'ch-4', 'ch-5'], r['heads'])
                 check(name + ': volgorde van de delen', o.index('ch-2') < o.index('tip-card') < o.index('ch-3') < o.index('panel-fan') < o.index('panel-flow') < o.index('ch-4') < o.index('kpis') < o.index('ch-5') < o.index('next') < o.index('support-ov'), o)
                 if opbouw:
                     check(name + ': knoppen en mix in deel 2 (eigen kaart)', r['play'] and o.index('opb-play') > o.index('ch-2'))
@@ -153,19 +152,25 @@ def main():
                 check(name + ': privacytekst aangepast, rest staat er', PRIV_GONE[lang] not in p and PRIV_KEPT[lang] in p and PRIV_HEAD[lang] in p)
                 ctx.close()
 
-        # ---------- wegwijzer: tik brengt je naar het deel en licht het op ----------
-        ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['50+'], 'NL', 'EUR'), 'nl-NL')
-        for n in (3, 5, 2):
-            pg.click('[data-ch-go="%d"]' % n)
-            pg.wait_for_timeout(1300)
-            w = pg.evaluate('''(n) => { const nav = document.getElementById('ch-nav').getBoundingClientRect(), h = document.getElementById('ch-' + n).getBoundingClientRect();
-                return { cur: document.querySelector('#ch-nav [aria-current]').getAttribute('data-ch-go'), gap: Math.round(h.top - nav.bottom), hash: location.hash }; }''', n)
-            check('wegwijzer: deel %d in beeld en opgelicht' % n, w['cur'] == str(n) and -30 <= w['gap'] <= 10 and w['hash'] == '#overview', w)
-        check('wegwijzer: meetpunt extra-ch-*', 'extra-ch-3' in pg.evaluate('window.__trkTest'))
-        check('wegwijzer: geen scriptfouten', not errs, errs[:2])
-        ctx.close()
         ctx, pg, errs = open_page('/nl/', 'nl-NL')
-        check('leeg overzicht: geen wegwijzer en geen deelkoppen', pg.evaluate("getComputedStyle(document.getElementById('ch-nav')).display === 'none' && [...document.querySelectorAll('.ch-head')].every(h => getComputedStyle(h).display === 'none')"))
+        check('leeg overzicht: geen deelkoppen', pg.evaluate("[...document.querySelectorAll('.ch-head')].every(h => getComputedStyle(h).display === 'none')"))
+        ctx.close()
+        # je vraag (goal-bar) alleen aan het eind van Invullen: niet bij stap 1 tot 4, wel bij stap 5 en bij alles in één overzicht
+        ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['50+'], 'NL', 'EUR'), 'nl-NL')
+        pg.wait_for_timeout(300); pg.close()   # de app bewaart haar ui bij het sluiten; daarna pas de vraag zetten
+        ctx.add_init_script("(() => { try { const u = JSON.parse(localStorage.getItem('%s-ui') || '{}'); u.goal = 'retire'; u.mode = 'steps'; u.step = 1; localStorage.setItem('%s-ui', JSON.stringify(u)); } catch (e) {} })()" % (KEY, KEY))
+        pg = ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg.goto(base + '/nl/#input'); pg.wait_for_timeout(3000)
+        gvis = "() => { const g = document.getElementById('goal-bar'); return !g.hidden && getComputedStyle(g).display !== 'none'; }"
+        seen = []
+        for k in range(1, 6):
+            seen.append(pg.evaluate(gvis))
+            if k < 5:
+                pg.click('#step-next'); pg.wait_for_timeout(300)
+        check('je vraag: alleen bij stap 5 (niet bij 1-4)', seen == [False, False, False, False, True], seen)
+        pg.check('input[name=in-mode][value=all]', force=True); pg.wait_for_timeout(500)
+        check('je vraag: zichtbaar bij alles in één overzicht, onder de stappen', pg.evaluate(gvis) and pg.evaluate("document.getElementById('steps').compareDocumentPosition(document.getElementById('goal-bar')) === Node.DOCUMENT_POSITION_FOLLOWING"))
+        check('je vraag: geen scriptfouten', not errs, errs[:2])
         ctx.close()
 
         # ---------- deellink heen en terug ----------

@@ -2054,7 +2054,7 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
 }
 @media print { .tipcard { display: none !important; } }
 /* opstarten: de eerste berekening loopt in de worker; tot die er is blijft alles onder de kop verborgen */
-html.is-boot #opb-card, html.is-boot .home-grid, html.is-boot #ch-nav { display: none !important; }
+html.is-boot #opb-card, html.is-boot .home-grid { display: none !important; }
 /* uitleg achter een ⓘ (versie 23): de ⓘ loopt in de tekstregel mee, direct achter het laatste woord van het label;
    de toelichting gaat open in een kadertje direct onder het label */
 .ib-row { display: block; min-width: 0; }
@@ -2079,18 +2079,11 @@ html.is-boot #opb-card, html.is-boot .home-grid, html.is-boot #ch-nav { display:
 @media print { .ib, .ipop-x { display: none !important; } }
 
 /* ================= overzicht in vijf delen (ronde 1) =================
-   Wegwijzer die onder de bovenbalk meeloopt, een kop per deel met een knoop in de eigen kleur, kerncijfers in één kaart */
-.ch-nav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--tb-h, 57px)); z-index: 40; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 14px 0 6px; padding: 8px 0; background: var(--bg); border-bottom: 1px solid var(--line); }
-.ch-nav::-webkit-scrollbar { display: none; }
-.ch-nav button { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 6px 13px 6px 7px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink2); font: 600 13.5px/1 var(--f-body); cursor: pointer; }
-.ch-nav button img { width: 20px; height: 20px; border-radius: 50%; display: block; }
-.ch-nav button[aria-current="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
-.ch-nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+   Een kop per deel met een knoop in de eigen kleur, kerncijfers in één kaart */
 .ch-head { display: flex; align-items: center; gap: 12px; align-self: stretch; width: 100%; box-sizing: border-box; margin-top: 18px; padding-top: 22px; border-top: 1px solid var(--line); }
 .ch-head.ch-empty { display: none !important; }
 .ch-k { flex: none; width: 42px; height: 42px; border-radius: 50%; display: block; }
 .ch-t { min-width: 0; }
-.ch-n { margin: 0; font: 600 11.5px/1.25 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .ch-head h2 { margin: 2px 0 0; font-size: 23px; line-height: 1.15; text-wrap: balance; }
 .ch-s { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
 .wi-card { padding: 16px 18px; }
@@ -2102,11 +2095,9 @@ html.is-boot #opb-card, html.is-boot .home-grid, html.is-boot #ch-nav { display:
 @media (min-width: 761px) {
   #kpis[data-n="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   #kpis[data-n="6"], #kpis[data-n="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .home-side { top: calc(env(safe-area-inset-top, 0px) + var(--tb-h, 64px) + var(--chn-h, 54px) + 16px); }
 }
 .side-sum { display: none; margin: 0; font-size: 14.5px; color: var(--ink2); font-variant-numeric: tabular-nums; }
 @media (max-width: 760px) {
-  .ch-nav { margin: 10px calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 4px calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
   .side-card.sc-closed { gap: 4px; padding-block: 12px; }
   .side-card.sc-closed .side-h { font-size: 19px; }
   .side-card.sc-closed .side-sum { display: block; }
@@ -2114,5 +2105,7 @@ html.is-boot #opb-card, html.is-boot .home-grid, html.is-boot #ch-nav { display:
   html:not(.is-empty) #page-overview .hero .trust { display: none !important; }
   html:not(.is-empty) #page-overview .hero { gap: 8px; }
 }
-@media print { .ch-nav { display: none !important; } .ch-head { break-after: avoid; } }
+@media print { .ch-head { break-after: avoid; } }
 #ch-5 ~ .next > .more { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+#page-input:not(.gb-end) .goal-bar { display: none !important; }
+#page-input .goal-bar { margin-top: 18px; }
