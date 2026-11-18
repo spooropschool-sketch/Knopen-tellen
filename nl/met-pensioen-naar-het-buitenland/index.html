@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=3ec6a04b">
+<link rel="stylesheet" href="/app.css?v=6bda5ae9">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -88,30 +88,34 @@
       </div>
       <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/hero-overzicht.webp" alt="Een hand stapelt pastelknopen naast een open leren buidel" data-t-alt="alt.pouch" width="1200" height="800" style="object-position: 50% 42%"></div>
     </header>
-    <section class="card opb-card" id="opb-card" aria-live="polite" hidden></section>
+    <nav class="ch-nav needs-data" id="ch-nav" data-t-aria="ch.nav" aria-label="Delen van het overzicht"><button type="button" data-ch-go="1" aria-current="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"><span data-t="ch.1">Uitkomst</span></button><button type="button" data-ch-go="2"><img loading="lazy" decoding="async" src="/img/knoop-terra.webp" alt="" width="96" height="96"><span data-t="ch.2">Wat kun je doen</span></button><button type="button" data-ch-go="3"><img loading="lazy" decoding="async" src="/img/knoop-slate.webp" alt="" width="96" height="96"><span data-t="ch.3">Hoe verloopt het</span></button><button type="button" data-ch-go="4"><img loading="lazy" decoding="async" src="/img/knoop-butter.webp" alt="" width="96" height="96"><span data-t="ch.4">Alle cijfers</span></button><button type="button" data-ch-go="5"><img loading="lazy" decoding="async" src="/img/knoop-lilac.webp" alt="" width="96" height="96"><span data-t="ch.5">Meer</span></button></nav>
     <div class="home-grid">
       <aside class="home-side" aria-labelledby="quick-h">
         <div class="card side-card">
           <div class="side-top"><h2 class="side-h" id="quick-h" data-t="home.quick">Jouw cijfers</h2><button type="button" class="btn link sm side-tog" id="side-tog" aria-expanded="true" aria-controls="ov-quick" hidden></button></div>
+          <p class="side-sum" id="side-sum"></p>
           <div id="ov-quick"></div>
           <a class="btn ghost side-more" href="#input"><span data-t="home.more">Alles verfijnen</span><span aria-hidden="true"> →</span></a>
         </div>
       </aside>
       <div class="home-main">
+        <section class="card opb-card" id="opb-card" aria-live="polite" hidden></section>
         <div class="card status" id="status-card" aria-live="polite">
         <div class="st-vis"><div class="gauge" id="gauge"></div><img loading="lazy" decoding="async" class="st-pouch" id="st-pouch" src="/img/uitkomst-ruim.webp" alt="" width="480" height="587" hidden></div>
         <div class="verdict" id="verdict"></div>
         <div class="srcline" data-src="le,mkt"></div>
       </div>
+        <div class="ch-head needs-data" id="ch-2" data-ch="2"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-terra.webp" alt="" width="96" height="96"><div class="ch-t"><p class="ch-n"></p><h2 data-t="ch.2">Wat kun je doen</h2><p class="ch-s" data-t="ch.s2">Knoppen om aan te draaien</p></div></div>
+        <section class="card opb-card opb-play" id="opb-play" hidden></section>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
+        <section class="card wi-card" id="wi-card" hidden></section>
         <section class="card tipcard needs-data" id="tip-card" aria-labelledby="tc-h" hidden>
           <span class="tc-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="17.5" cy="5.5" r="2.6"/><circle cx="6.5" cy="12" r="2.6"/><circle cx="17.5" cy="18.5" r="2.6"/><path d="M8.8 10.7l6.4-3.9M8.8 13.3l6.4 3.9"/></svg></span>
           <div class="tc-t"><h2 id="tc-h" data-t="tc.h">Ken je iemand die dit ook wil weten?</h2><p data-t="tc.s">Stuur alleen de app door. Jouw cijfers gaan niet mee.</p></div>
           <button type="button" class="btn primary tc-go" id="tc-go" data-t="tc.btn">Stuur de app door</button>
           <button type="button" class="tc-x" id="tc-x" data-t-aria="tc.x" aria-label="Niet meer tonen"><span aria-hidden="true">✕</span></button>
         </section>
-        <section class="card support-card needs-data" id="support-ov" hidden></section>
-        <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
+        <div class="ch-head needs-data" id="ch-3" data-ch="3"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-slate.webp" alt="" width="96" height="96"><div class="ch-t"><p class="ch-n"></p><h2 data-t="ch.3">Hoe verloopt het</h2><p class="ch-s" data-t="ch.s3">Je vermogen en inkomen per jaar</p></div></div>
         <section class="card panel" id="panel-fan" aria-labelledby="fan-h">
         <div class="panel-head"><h2 id="fan-h" data-t="fan.h">Verloop van je vermogen</h2><p class="sub" id="fan-sub"></p></div>
         <div class="fan-head">
@@ -140,7 +144,6 @@
           <div class="tbl" id="tbl"></div>
         </details>
       </section>
-        <div class="kpis" id="kpis"></div>
         <section class="card panel" id="panel-flow" aria-labelledby="flow-h">
         <div class="panel-head"><h2 id="flow-h" data-t="flow.h">Wat wil je per maand te besteden hebben en waar komt dat vandaan?</h2><p class="sub" data-t="flow.sub">Per jaar, in geld van vandaag: wat er uit staatspensioen, pensioen en werk komt en wat we uit je vermogen halen. Tik of beweeg over een staaf voor de cijfers.</p></div>
         <div class="chart" id="flow"></div>
@@ -156,7 +159,9 @@
         <p class="hint" id="flow-note" hidden></p>
         <div class="srcline" data-src="sp,pen"></div>
       </section>
-        <div class="kn-sep nd" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/knoop-sage.webp" alt="" width="96" height="96"></div>
+        <div class="ch-head needs-data" id="ch-4" data-ch="4"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-butter.webp" alt="" width="96" height="96"><div class="ch-t"><p class="ch-n"></p><h2 data-t="ch.4">Alle cijfers</h2><p class="ch-s" data-t="ch.s4">De getallen op een rij</p></div></div>
+        <div class="kpis" id="kpis"></div>
+        <div class="ch-head needs-data" id="ch-5" data-ch="5"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-lilac.webp" alt="" width="96" height="96"><div class="ch-t"><p class="ch-n"></p><h2 data-t="ch.5">Meer</h2><p class="ch-s" data-t="ch.s5">Verder kijken en delen</p></div></div>
         <section class="next" aria-labelledby="next-h">
         <h2 class="more" id="next-h" data-t="next.h">Meer inzicht</h2>
         <div class="next-grid">
@@ -165,6 +170,7 @@
           <a class="card nlink" href="#insight" data-scroll="sec-koop"><span class="nb" aria-hidden="true"><img loading="lazy" decoding="async" src="/img/koopkracht.webp" alt=""></span><b data-t="next.kp">Koopkracht per land</b><span data-t="next.kpS">Wat je budget elders waard is</span></a>
         </div>
       </section>
+        <section class="card support-card needs-data" id="support-ov" hidden></section>
         <p class="fb-line"><span data-t="fb.line">Heb je een tip of aanvulling? We horen het graag.</span> <button class="btn ghost fb-open" type="button" data-cat="idea"><span aria-hidden="true">✎</span> <span data-t="fb.btn">Geef een tip</span></button></p>
       </div>
     </div>
@@ -477,7 +483,7 @@
 </div>
 
 <script src="/model.js?v=411575d1" data-model></script>
-<script src="/i18n/nl.js?v=2ecb8c7e"></script>
+<script src="/i18n/nl.js?v=3c639f00"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -1389,6 +1395,7 @@
   }
   function renderVerdict(m) {
     var el = $('verdict');
+    if (state.budget <= 0 && $('wi-card')) { $('wi-card').hidden = true; $('wi-card').innerHTML = ''; }
     if (state.budget <= 0) { el.className = 'verdict'; el.innerHTML = '<div class="verdict-head"><span class="pill">' + t1('v.empty') + '</span></div><p class="verdict-text">' + t('v.emptyText') + '</p>'; return; }
     var cls, label, icon;
     if (curSucc >= 0.9) { cls = 'good'; label = t1('v.good'); icon = '✓'; }
@@ -1408,8 +1415,10 @@
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>' + wi50Html();
-    wi50M = m;
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    /* wat-als staat sinds ronde 1 in deel 2 (Wat kun je doen), in een eigen kaart */
+    var wc = $('wi-card'); if (wc) { var wh = wi50Html(); wc.innerHTML = wh; wc.hidden = !wh; }
+    wi50M = m; chSync();
   }
   /* wat-als voor wie van zijn vermogen leeft: de knoppen rekenen alleen hier mee, de invoer verandert niet */
   var wi50 = {}, wi50M = null;
@@ -1464,6 +1473,12 @@
     ];
     /* wie nog opbouwt heeft niets aan 'nodig om te beginnen', 'buffer' en 'opname in jaar 1': die horen bij leven van je vermogen */
     if (state.opbouw) items = [items[0], items[3], items[5]];
+    /* één getal, één plek (ronde 1): wat al groot in deel 1 of 2 staat, herhalen we hier niet. Het advies toont 'nodig' en
+       het tekort of overschot; de uitkomstkaart van de spaarders toont het maximale maandbudget */
+    var advOn = !!(adv && !state.opbouw && !empty), opbBig = opbOn && !opbWait && !empty;
+    if (advOn) items = [items[0], items[3], items[4], items[5]];
+    else if (opbBig) items = [items[0], items[2]];
+    $('kpis').setAttribute('data-n', items.length);
     if (empty) items = items.map(function (i) { return { l: i.l, v: '–', s: '', c: '' }; });
     $('kpis').innerHTML = items.map(function (i) { return '<div class="kpi"><span class="k-label">' + i.l + '</span><span class="k-val ' + i.c + '">' + i.v + '</span>' + (i.bar || '') + '<span class="k-sub">' + i.s + '</span></div>'; }).join('') +
       '<div class="srcline kpi-src">' + srcLine('sp,tax,mkt,le') + '</div>';
@@ -1548,7 +1563,8 @@
     root.classList.toggle('no-lvl', !lvlOk());
     renderLvl();
     opbShare = null;
-    if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; return; }
+    var opl = $('opb-play'); if (opl) opl.classList.remove('opb-wait');
+    if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; if (opl) { opl.hidden = true; opl.innerHTML = ''; } chSync(); return; }
     el.hidden = false;
     var stop = state.pensioenLeeftijd, now = state.leeftijdPaul;
     var a = fmtAge(stop); if (/^\d+$/.test(a)) a += ' ' + t1('u.years');
@@ -1643,13 +1659,16 @@
       lv +
       (mid > 0 || put > 0 ? '<p class="opb-split">' + t1(mid < put ? 'opb.endLineLow' : 'opb.endLine', { a: a, v: eur(mid), put: eur(put), an: AN.an }) + '</p>' : '') +
       incLine + to90 + debtLine +
-      '<details class="opb-more"><summary>' + t1('opb.more') + '</summary><p class="opb-range">' + t1('opb.budWhy', { e: end, en: AN.en }) + '</p>' + (state.autoEind ? '<p class="opb-range">' + t1('opb.life', { en: AN.en }) + '</p>' : '') + '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p><p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p></details>' +
+      '<details class="opb-more"><summary>' + t1('opb.more') + '</summary><p class="opb-range">' + t1('opb.budWhy', { e: end, en: AN.en }) + '</p>' + (state.autoEind ? '<p class="opb-range">' + t1('opb.life', { en: AN.en }) + '</p>' : '') + '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p><p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p></details>';
+    var play = $('opb-play'); if (play) { play.hidden = false; play.innerHTML = 
       '<h3 class="opb-h">' + t1('opb.stH') + '</h3>' + emptyHint + steps +
       (ex.list.length ? '<h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + chips + '</div>' : '') +
       '<p class="opb-delta">' + (ex.any && bud !== base ? t1(bud > base ? 'opb.wiDeltaB' : 'opb.wiDeltaM', { v: eur(Math.abs(bud - base)) }) : '') + '</p>' +
       '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + '</p>' + mixWhy + msg +
       '<div class="opb-act"><a class="btn primary" href="#input" data-opb-more="1">' + t1('opb.moreBtn') + '</a></div>';
-    opbTok++; el.classList.toggle('opb-part', pend.length > 0);
+    }
+    opbTok++; el.classList.toggle('opb-part', pend.length > 0); if (play) play.classList.toggle('opb-part', pend.length > 0);
+    chSync();
     if (pend.length) { var tok = opbTok; setTimeout(function nextPend() { if (tok !== opbTok) return; var f = pend.shift(); if (!f) { renderOpb(); return; } f(); setTimeout(nextPend, 0); }, 0); }
     /* niveaulabels die elkaar overlappen schuiven naar een tweede regel (alleen te meten als de kaart zichtbaar is) */
     var lvEl = el.querySelector('.opb-lvls');
@@ -1713,12 +1732,13 @@
     /* de waarde in het kaartje springt direct mee; de berekening volgt pas als je even niet meer klikt */
     var bEl = document.querySelector('[data-opb-st="' + key + '"]'), host = bEl && bEl.closest('.opb-st-c'), vEl = host && host.querySelector('b');
     if (vEl) vEl.textContent = key === 'stop' ? fmtAge(state.pensioenLeeftijd) : eur(key === 'inleg' ? state.inleg : state.budget);
-    var card = $('opb-card'); if (card) card.classList.add('opb-wait');
+    opbWaitOn();
     track('extra-step-' + key);
     clearTimeout(opbStepT);
     opbStepT = setTimeout(function () { update(); scheduleSim(true); }, 550);
   }
   var opbStepT = 0;
+  function opbWaitOn() { ['opb-card', 'opb-play'].forEach(function (id) { var c = $(id); if (c) c.classList.add('opb-wait'); }); }
   document.addEventListener('click', function (ev) {
     if (!ev.target.closest) return;
     var w = ev.target.closest('[data-opb-wi]');
@@ -1729,7 +1749,7 @@
     if (t) {
       state.portfolio = parseInt(t.getAttribute('data-opb-pf'), 10); track('extra-portfolio');
       each('[data-opb-pf]', function (b) { var on = parseInt(b.getAttribute('data-opb-pf'), 10) === state.portfolio; b.classList.toggle('cur', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-      var card = $('opb-card'); if (card) card.classList.add('opb-wait');
+      opbWaitOn();
       clearTimeout(opbStepT); opbStepT = setTimeout(function () { update(); scheduleSim(true); }, 60);
       return;
     }
@@ -3824,8 +3844,70 @@ var TRK = {
     var can = state.budget > 0, closed = can && !scOpen;
     c.classList.toggle('sc-closed', closed); b.hidden = !can;
     b.setAttribute('aria-expanded', closed ? 'false' : 'true'); b.textContent = t1(closed ? 'home.quickTog' : 'home.quickHide');
+    /* ingeklapt: één regel met de kern van wat je invulde, zodat je ziet waar de uitkomst over gaat */
+    var sum = $('side-sum');
+    if (sum) {
+      var ag = Math.floor(state.leeftijdPaul), parts = [two() ? t1('sum.two', { a: ag, b: Math.floor(state.leeftijdDiana) }) : t1('sum.one', { a: ag })];
+      if (state.startkapitaal > 0) parts.push(t1('sum.cap', { c: eur(state.startkapitaal) }));
+      if (state.budget > 0) parts.push(t1('sum.bud', { b: eur(state.budget) }));
+      sum.textContent = parts.join(' · ');
+    }
   }
   if ($('side-tog')) $('side-tog').addEventListener('click', function () { scOpen = !scOpen; sideSync(); });
+  /* ================= overzicht in vijf delen (ronde 1) =================
+     Koppen per deel en een wegwijzer die bovenaan meeloopt. Een deel zonder zichtbare inhoud valt weg, de nummering
+     ("Deel 2 van 5") telt alleen de delen die er zijn. Deel 1 heeft geen eigen kop: de wegwijzer staat er direct boven. */
+  function chVis(el) { return !el.hidden && getComputedStyle(el).display !== 'none' && (el.id !== 'kpis' || el.children.length > 0); }
+  function chSync() {
+    var heads = document.querySelectorAll('#page-overview .ch-head'), on = [1];
+    Array.prototype.forEach.call(heads, function (h) {
+      var any = false, n = h.nextElementSibling;
+      while (n && !n.classList.contains('ch-head')) { if (n.id !== 'side-sum' && chVis(n)) { any = true; break; } n = n.nextElementSibling; }
+      h.classList.toggle('ch-empty', !any);
+      if (any) on.push(parseInt(h.getAttribute('data-ch'), 10));
+    });
+    var tot = on.length;
+    Array.prototype.forEach.call(heads, function (h) { var i = on.indexOf(parseInt(h.getAttribute('data-ch'), 10)); var p = h.querySelector('.ch-n'); if (p && i > 0) p.textContent = t1('ch.of', { n: i + 1, t: tot }); });
+    each('#ch-nav [data-ch-go]', function (b) { b.hidden = on.indexOf(parseInt(b.getAttribute('data-ch-go'), 10)) < 0; });
+    chSpy();
+  }
+  function chTop() {
+    var tb = document.querySelector('.topbar'), nv = $('ch-nav');
+    var a = tb ? tb.getBoundingClientRect().height : 0, b = nv ? nv.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--tb-h', Math.round(a) + 'px');
+    document.documentElement.style.setProperty('--chn-h', Math.round(b) + 'px');
+    return a + b;
+  }
+  var chCur = 1, chLock = 0;
+  function chSpy() {
+    var nv = $('ch-nav'); if (!nv || route !== 'overview' || !nv.offsetParent) return;
+    if (Date.now() < chLock) return;
+    var lim = chTop() + 60, cur = 1;
+    each('#page-overview .ch-head', function (h) { if (!h.classList.contains('ch-empty') && h.getBoundingClientRect().top <= lim) cur = parseInt(h.getAttribute('data-ch'), 10); });
+    /* helemaal onderaan: dan het laatste deel, ook als die kop niet tot bovenaan kan komen */
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) { var last = document.querySelectorAll('#page-overview .ch-head:not(.ch-empty)'); if (last.length) cur = parseInt(last[last.length - 1].getAttribute('data-ch'), 10); }
+    chMark(cur);
+  }
+  function chMark(cur) {
+    if (cur === chCur && document.querySelector('#ch-nav [aria-current]')) return;
+    chCur = cur; var nv = $('ch-nav'), act = null;
+    each('#ch-nav [data-ch-go]', function (b) { var on = parseInt(b.getAttribute('data-ch-go'), 10) === cur; if (on) { b.setAttribute('aria-current', 'true'); act = b; } else b.removeAttribute('aria-current'); });
+    if (act && nv.scrollWidth > nv.clientWidth) { var x = act.offsetLeft - 16; try { nv.scrollTo({ left: Math.max(0, x), behavior: 'smooth' }); } catch (e) { nv.scrollLeft = Math.max(0, x); } }
+  }
+  var chRaf = 0;
+  window.addEventListener('scroll', function () { if (chRaf) return; chRaf = requestAnimationFrame(function () { chRaf = 0; chSpy(); }); }, { passive: true });
+  window.addEventListener('resize', function () { chTop(); chSpy(); });
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('[data-ch-go]') : null; if (!b) return;
+    var n = parseInt(b.getAttribute('data-ch-go'), 10), tgt = n === 1 ? document.querySelector('#page-overview .home-grid') : $('ch-' + n);
+    if (!tgt) return;
+    var y = tgt.getBoundingClientRect().top + window.scrollY - chTop() + (n === 1 ? -12 : 8);   /* bij een deelkop valt de scheidingslijn net onder de wegwijzer */
+    var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    chMark(n); chLock = Date.now() + (rm ? 100 : 900);
+    try { window.scrollTo({ top: Math.max(0, y), behavior: rm ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, Math.max(0, y)); }
+    track('extra-ch-' + n);
+  });
+  [1, 2, 3, 4, 5].forEach(function (n) { TRK['extra-ch-' + n] = ['extra', 'Overzicht: wegwijzer naar deel ' + n]; });
   /* het kladblok zit op de telefoon in de tabbalk, zodat er geen knop over de inhoud zweeft */
   var tn = $('tab-notes');
   if (tn) {
@@ -3833,7 +3915,7 @@ var TRK = {
     tn.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); $('nt-fab').click(); } });
   }
   var finishUpdate23 = finishUpdate;
-  finishUpdate = function () { finishUpdate23(); wk1Sync(); sideSync(); };
+  finishUpdate = function () { finishUpdate23(); wk1Sync(); sideSync(); chSync(); };
   wk1Sync(); sideSync();
 
 })();

@@ -7,6 +7,8 @@ Controleert:
 - 5 talen x 3 leeftijdsgroepen (18-34 en 35-49 sparen nog, 50+ leeft van vermogen), geopend via een deellink:
   geen scriptfouten, land en valuta uit de link, een uitkomst, het doorstuurkaartje, geen te brede pagina op 390 px,
   en de privacytekst (zonder de zin over 'zonder winstoogmerk', de rest staat er nog).
+- het overzicht in vijf delen (ronde 1): wegwijzer, deelkoppen, volgorde, wat als en knoppen in deel 2, kerncijfers
+  zonder getallen die al groot in deel 1 of 2 staan; de wegwijzer brengt je naar het deel; leeg overzicht zonder wegwijzer.
 - de deellink heen en terug: link maken in de app, openen in een browser met een andere taal, zelfde uitkomst.
 - de worker: het zware rekenwerk, ook de eerste berekening bij het opstarten, draait in een worker die model.js laadt.
 - de welkomst: zonder leeftijdsgroep kun je niet verder; met een groep wel.
@@ -116,7 +118,13 @@ def main():
                     status: vis('status-card'), verdict: ((document.getElementById('verdict') || {}).innerText || '').trim(),
                     tip: vis('tip-card'), intro: !document.getElementById('intro').hidden,
                     sw: document.documentElement.scrollWidth, vw: innerWidth,
-                    priv: pb ? pb.innerHTML : '', trk: window.__trkTest.slice()
+                    priv: pb ? pb.innerHTML : '', trk: window.__trkTest.slice(),
+                    nav: [...document.querySelectorAll('#ch-nav [data-ch-go]')].filter(b => !b.hidden).length,
+                    navVis: vis('ch-nav'),
+                    heads: [...document.querySelectorAll('#page-overview .ch-head')].filter(h => getComputedStyle(h).display !== 'none').map(h => h.id),
+                    order: [...document.querySelectorAll('#page-overview .ch-head, #status-card, #opb-card, #opb-play, #adv-card, #wi-card, #tip-card, #panel-fan, #panel-flow, #kpis, #page-overview .next, #support-ov')].map(e => e.id || 'next'),
+                    kpis: +(document.getElementById('kpis').getAttribute('data-n') || 0),
+                    wi: vis('wi-card'), play: vis('opb-play'), wiInVerdict: !!document.querySelector('#verdict .wi50')
                   };
                 }""", None)
                 name = '%s %s' % (lang, g)
@@ -130,10 +138,35 @@ def main():
                 else:
                     check(name + ': oordeel met tekst', r['status'] and len(r['verdict']) > 10, r['verdict'][:80])
                 check(name + ': doorstuurkaartje zichtbaar', r['tip'] and not r['empty'])
+                # ronde 1: overzicht in vijf delen
+                o = r['order']
+                check(name + ': wegwijzer met 5 delen, 4 koppen', r['navVis'] and r['nav'] == 5 and r['heads'] == ['ch-2', 'ch-3', 'ch-4', 'ch-5'], '%s %s' % (r['nav'], r['heads']))
+                check(name + ': volgorde van de delen', o.index('ch-2') < o.index('tip-card') < o.index('ch-3') < o.index('panel-fan') < o.index('panel-flow') < o.index('ch-4') < o.index('kpis') < o.index('ch-5') < o.index('next') < o.index('support-ov'), o)
+                if opbouw:
+                    check(name + ': knoppen en mix in deel 2 (eigen kaart)', r['play'] and o.index('opb-play') > o.index('ch-2'))
+                    check(name + ': kerncijfers zonder dubbel maandbudget', r['kpis'] == 2, r['kpis'])
+                else:
+                    check(name + ': wat als in deel 2, niet meer in het oordeel', r['wi'] and not r['wiInVerdict'] and o.index('wi-card') > o.index('ch-2'))
+                    check(name + ': kerncijfers zonder dubbel nodig/tekort', r['kpis'] == 4, r['kpis'])
                 check(name + ': niet breder dan 390 px', r['sw'] <= r['vw'], '%s > %s' % (r['sw'], r['vw']))
                 p = r['priv']
                 check(name + ': privacytekst aangepast, rest staat er', PRIV_GONE[lang] not in p and PRIV_KEPT[lang] in p and PRIV_HEAD[lang] in p)
                 ctx.close()
+
+        # ---------- wegwijzer: tik brengt je naar het deel en licht het op ----------
+        ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['50+'], 'NL', 'EUR'), 'nl-NL')
+        for n in (3, 5, 2):
+            pg.click('[data-ch-go="%d"]' % n)
+            pg.wait_for_timeout(1300)
+            w = pg.evaluate('''(n) => { const nav = document.getElementById('ch-nav').getBoundingClientRect(), h = document.getElementById('ch-' + n).getBoundingClientRect();
+                return { cur: document.querySelector('#ch-nav [aria-current]').getAttribute('data-ch-go'), gap: Math.round(h.top - nav.bottom), hash: location.hash }; }''', n)
+            check('wegwijzer: deel %d in beeld en opgelicht' % n, w['cur'] == str(n) and -30 <= w['gap'] <= 10 and w['hash'] == '#overview', w)
+        check('wegwijzer: meetpunt extra-ch-*', 'extra-ch-3' in pg.evaluate('window.__trkTest'))
+        check('wegwijzer: geen scriptfouten', not errs, errs[:2])
+        ctx.close()
+        ctx, pg, errs = open_page('/nl/', 'nl-NL')
+        check('leeg overzicht: geen wegwijzer en geen deelkoppen', pg.evaluate("getComputedStyle(document.getElementById('ch-nav')).display === 'none' && [...document.querySelectorAll('.ch-head')].every(h => getComputedStyle(h).display === 'none')"))
+        ctx.close()
 
         # ---------- deellink heen en terug ----------
         lists = {'perP': [], 'perD': [], 'pots': [{'n': 'Pot', 'w': 0, 'k': 'l', 'a': 25000, 'f': 67, 'u': 0, 'x': 0}],
