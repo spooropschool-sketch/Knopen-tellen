@@ -20,6 +20,7 @@ LOCALE = {'en': 'en_GB', 'nl': 'nl_NL', 'de': 'de_DE', 'fr': 'fr_FR', 'es': 'es_
 COUNTRY = {'en': 'GB', 'nl': 'NL', 'de': 'DE', 'fr': 'FR', 'es': 'ES'}
 TODAY = datetime.date.today().isoformat()
 BUNDLE_VER = {}
+CSS_TAG = '<link rel="stylesheet" href="app.css">'
 # landingspagina per vraag (doel), in alle vijf talen
 LANDING = {
     'enough': {'nl': 'is-mijn-geld-genoeg', 'en': 'will-my-money-last', 'de': 'reicht-mein-geld', 'fr': 'mon-argent-suffira-t-il', 'es': 'me-llegara-el-dinero'},
@@ -210,6 +211,11 @@ def lang_bundle(lang, data):
     return out
 
 
+def site_css():
+    """The stylesheet as served from the site root: fonts by absolute path."""
+    return read_src('app.css').replace('url("fonts/', 'url("/fonts/')
+
+
 def split(src):
     i = src.index('<body>')
     j = src.index('<script>', i)
@@ -238,9 +244,8 @@ def build_page(src, lang, d, goal=None):
         head = head.replace('name="apple-mobile-web-app-title" content="Button Counter"', 'name="apple-mobile-web-app-title" content="Knopenteller"')
     head = head.replace('href="manifest.webmanifest"', 'href="/manifest.webmanifest"')
     head = head.replace('href="favicon-32.png"', 'href="/favicon-32.png"').replace('href="icon-192.png"', 'href="/icon-192.png"').replace('href="apple-touch-icon.png"', 'href="/apple-touch-icon.png"')
-    head = head.replace('url("fonts/', 'url("/fonts/')
-    head = head.replace('<style>', '<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>\n<style>', 1)
-    head = head.replace('</style>', '</style>\n<link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">', 1)
+    assert head.count(CSS_TAG) == 1, 'stylesheet link not found'
+    head = head.replace(CSS_TAG, '<link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>\n<link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>\n<link rel="stylesheet" href="/app.css?v=%s">\n<link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">' % ver(site_css()), 1)
     body = fill_body(body, d)
     body = body.replace('src="img/', 'src="/img/')
     tags = ''.join('<script src="i18n/%s.js"></script>\n' % l for l in LANGS)
@@ -267,7 +272,7 @@ def build_artifact(src, d):
     """A copy for the Claude preview: no site head, relative paths."""
     head, body, script = split(src)
     i = head.index('<title>')
-    j = head.index('</style>') + len('</style>')
+    j = head.index(CSS_TAG) + len(CSS_TAG)
     keep = head[i:j]
     keep = re.sub(r'<meta name="robots"[^>]*><!--TEMPLATE-ONLY-->\n', '', keep)
     keep = re.sub(r'<meta name="description"[^>]*>\n', '<meta name="description" content="">\n', keep)
@@ -288,6 +293,7 @@ def main():
     src = open(SRC, encoding='utf-8').read()
     data = extract()
     write('model.js', read_src('model.js'))
+    write('app.css', site_css())
     # the app may only read English directly where lang_bundle knows about it; otherwise a language page would miss a text
     n_en = src.count('I18N.en')
     if n_en != EN_USES:
