@@ -28,6 +28,7 @@
 <meta name="robots" content="noindex"><!--TEMPLATE-ONLY-->
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Button Counter: your financial future, one button at a time. In five languages, for eleven countries.">
+<script>/* tot de eerste uitslag er is blijft alles onder de kop verborgen (zie is-boot in app.css); de tijdklok is een vangnet */document.documentElement.classList.add('is-boot');setTimeout(function(){document.documentElement.classList.remove('is-boot');},6000);</script>
 <link rel="stylesheet" href="app.css">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -2169,8 +2170,8 @@
     heavy(hvCtx(), function (res) {
       adv = res.adv; altC90 = res.altC90; autoInfo = res.autoInfo; autoIdx = res.autoIdx; curSucc = res.curSucc; max90 = res.max90;
       finishUpdate();
-      /* na de eerste uitslag: eerst laten tekenen, dan pas het rekenwerk van de kaart en de grafiek */
-      if (!firstDone) { firstDone = true; setTimeout(function () { scheduleSim(true); }, 0); }
+      /* na de eerste uitslag: de kaart en de grafiek uitrekenen en dan pas alles onder de kop laten zien */
+      if (!firstDone) { firstDone = true; setTimeout(function () { scheduleSim(true); document.documentElement.classList.remove('is-boot'); }, 0); }
     });
   }
   function finishUpdate() {

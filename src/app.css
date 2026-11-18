@@ -2054,3 +2054,5 @@ html.is-opb .wk-tog, html.is-opb .wk-tip { display: none !important; }
   .tc-go { grid-column: 1 / -1; width: 100%; }
 }
 @media print { .tipcard { display: none !important; } }
+/* opstarten: de eerste berekening loopt in de worker; tot die er is blijft alles onder de kop verborgen */
+html.is-boot #opb-card, html.is-boot .home-grid { display: none !important; }
