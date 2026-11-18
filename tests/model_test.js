@@ -8,16 +8,32 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const SRC = path.join(__dirname, '..', 'src', 'index.html');
-const html = fs.readFileSync(SRC, 'utf8');
-const start = html.lastIndexOf('<script>', html.indexOf('function runModel('));
-const endMark = "if (typeof module !== 'undefined') module.exports = runModel;";
-const end = html.indexOf(endMark, start);
-if (start < 0 || end < 0) { console.error('Rekenmodel niet gevonden in src/index.html'); process.exit(2); }
-const sandbox = { module: { exports: {} }, Math, Infinity, isFinite, parseFloat };
-vm.runInNewContext(html.slice(start + '<script>'.length, end + endMark.length), sandbox);
-const runModel = sandbox.module.exports;
-if (typeof runModel !== 'function') { console.error('runModel is geen functie'); process.exit(2); }
+const ROOT = path.join(__dirname, '..');
+const SNAP = path.join(__dirname, 'model_snapshot.json');
+/* Het model staat in src/model.js. Staat dat bestand er (nog) niet, dan wordt het uit src/index.html gehaald,
+   zoals voor de opsplitsing van versie 23; zo is dezelfde test voor en na de opsplitsing te draaien. */
+function loadModel() {
+  const mp = path.join(ROOT, 'src', 'model.js');
+  let code;
+  if (fs.existsSync(mp)) code = fs.readFileSync(mp, 'utf8');
+  else {
+    const html = fs.readFileSync(path.join(ROOT, 'src', 'index.html'), 'utf8');
+    const start = html.lastIndexOf('<script>', html.indexOf('function runModel('));
+    const endMark = "if (typeof module !== 'undefined') module.exports = runModel;";
+    const end = html.indexOf(endMark, start);
+    if (start < 0 || end < 0) { console.error('Rekenmodel niet gevonden'); process.exit(2); }
+    const fn = name => { const i = html.indexOf('\n  function ' + name + '('); if (i < 0) throw new Error(name + ' niet gevonden'); const nl = html.indexOf('\n', i + 1); const one = html.slice(i, nl); if (/\}\s*$/.test(one) && !/\{\s*$/.test(one)) return one; return html.slice(i, html.indexOf('\n  }\n', i) + 4); };
+    const line = re => { const m = re.exec(html); if (!m) throw new Error('constante niet gevonden'); return m[0]; };
+    code = html.slice(start + '<script>'.length, end + endMark.length) + '\n' + line(/var RHO = [^\n]+/) + '\n' + line(/var ASSET = \[[^\n]+/) + '\nvar zc = {};' +
+      ['c90For', 'normalsFor', 'simCore', 'simQuick', 'hvRun'].map(fn).join('\n');
+  }
+  const sandbox = { module: { exports: {} } };
+  vm.runInNewContext(code + '\n;this.__m = { runModel: runModel, debtCalc: debtCalc, simQuick: simQuick, c90For: c90For, hvRun: hvRun, ASSET: ASSET, RHO: RHO, SIMN: SIMN };', sandbox);
+  if (sandbox.module.exports !== sandbox.__m.runModel) { console.error('module.exports is niet runModel'); process.exit(2); }
+  return sandbox.__m;
+}
+const M = loadModel();
+const runModel = M.runModel;
 
 /* standaardinvoer zoals de pagina die meegeeft (Nederland, box 3, vlak uitgavenverloop) */
 const BASE = {
@@ -122,5 +138,36 @@ PROPS.forEach(([name, fn]) => {
   CASES.forEach(c => { try { fn(c); } catch (e) { checks++; fails++; console.log('  FOUT  [' + name + '] geval ' + c.n + ' — ' + e.message); } });
   console.log((fails === before ? 'ok    ' : 'FOUT  ') + name);
 });
+/* ---------- momentopname: de uitkomsten zelf, tot op de laatste decimaal ----------
+   Het model en de simulatie (vaste toevalsreeks) geven bij dezelfde invoer altijd dezelfde getallen. De momentopname
+   legt die vast; elke afwijking laat de test falen. Alleen bewust vernieuwen: node tests/model_test.js --update-snapshot */
+function snapshot() {
+  const PORT = { 1: [0.20, 0.60, 0.20], 2: [0.50, 0.40, 0.10], 3: [0.80, 0.15, 0.05], 4: [0, 0, 1] }, ports = {};
+  Object.keys(PORT).forEach(i => {
+    const w = PORT[i]; let mu = 0, v = 0;
+    for (let a = 0; a < 3; a++) mu += w[a] * M.ASSET[a].mu / 100;
+    for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) { const c = a === b ? 1 : ((a === 0 && b === 1) || (a === 1 && b === 0) ? M.RHO : 0); v += w[a] * w[b] * (M.ASSET[a].sd / 100) * (M.ASSET[b].sd / 100) * c; }
+    ports[i] = { w: w, mu: mu, sd: Math.sqrt(v) };
+  });
+  const out = {};
+  CASES.forEach(c => {
+    const p = P(c), m = runModel(p), sum = a => a.reduce((x, y) => x + y, 0);
+    const X = { st: p, cap: p.startkapitaal, nl: p.taxMode === 'nlbox3', pfUser: 0, autoIdx: 2, ports: ports, alts: [0, 1, 2].filter(k => k !== p.uitgaveDaling) };
+    const pf = ports[2], pq = Object.assign({}, p, { bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100, skipMax: true });
+    out[c.n] = {
+      model: { N: m.N, req0: m.req0, maxBudget: m.maxBudget, emptyAt: m.emptyAt, sumDraws: sum(m.draws), sumTaxes: sum(m.taxes), endK: m.K[m.K.length - 1], R0: m.R[0], spend0: m.spend[0], spendLast: m.spend[m.N - 1] },
+      sim: M.simQuick(runModel(pq), pf, pq),
+      heavy: M.hvRun(X)
+    };
+  });
+  return JSON.parse(JSON.stringify(out));
+}
+(function () {
+  const now = JSON.stringify(snapshot(), null, 1) + '\n';
+  if (process.argv.indexOf('--update-snapshot') >= 0 || !fs.existsSync(SNAP)) { fs.writeFileSync(SNAP, now); console.log('momentopname geschreven: tests/model_snapshot.json'); return; }
+  checks++;
+  if (fs.readFileSync(SNAP, 'utf8') === now) console.log('ok    momentopname: uitkomsten gelijk aan tests/model_snapshot.json');
+  else { fails++; console.log('FOUT  momentopname: uitkomsten wijken af van tests/model_snapshot.json'); }
+})();
 console.log(fails ? fails + ' van ' + checks + ' controles mislukt' : 'Alle ' + checks + ' controles geslaagd');
 process.exit(fails ? 1 : 0);
