@@ -140,6 +140,10 @@ const PROPS = [
     const a = run(c, { spaarDeel: 100, bruto: 2.5, kosten: 0 }), b = run(c, { spaarDeel: 100, bruto: 2.5, kosten: 1.5 });
     const belegd = run(c, { kosten: 0 }), duur = run(c, { kosten: 1.5 });
     check('12', c, Math.abs(a.maxBudget - b.maxBudget) < 1e-6 && duur.maxBudget < belegd.maxBudget, Math.round(a.maxBudget) + ' vs ' + Math.round(b.maxBudget));
+  }],
+  ['13 grote uitgave later: verlaagt het haalbare budget; een leeftijd in het verleden telt niet mee', c => {
+    const p = P(c), basis = run(c), met = run(c, { big: [{ a: 50000, f: Math.ceil(p.leeftijdPaul) + 3 }] }), oud = run(c, { big: [{ a: 50000, f: Math.floor(p.leeftijdPaul) - 2 }] });
+    check('13', c, met.maxBudget < basis.maxBudget && met.req0 >= basis.req0 && JSON.stringify(oud.draws) === JSON.stringify(basis.draws), Math.round(met.maxBudget) + ' vs ' + Math.round(basis.maxBudget));
   }]
 ];
 

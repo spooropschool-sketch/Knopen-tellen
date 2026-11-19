@@ -194,6 +194,15 @@ def main():
         w = pg.evaluate("({ span: document.querySelector('#opb-card .opb-span').innerText, inc: document.querySelector('#opb-card .opb-inc').innerText, big: parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10), st: JSON.parse(localStorage.getItem('%s')).state })" % KEY)
         check('v25: stoppen op 55 rekent vanaf 55, AOW blijft op 68 jaar en 9 mnd', 'vanaf 55 jaar' in w['span'] and 'vanaf 68 jaar en 9 mnd' in w['inc'] and w['big'] < 2000, w['span'] + ' | ' + w['inc'])
         check('v25: stopleeftijd bewaard, pensioenleeftijd ongewijzigd', w['st'].get('stopLeeftijd') == 55 and abs(w['st'].get('pensioenLeeftijd', 0) - 68.75) < 0.01 and w['st'].get('autoPenAge') == 1, {k: w['st'].get(k) for k in ('stopLeeftijd', 'pensioenLeeftijd', 'autoPenAge')})
+        # grote uitgave later: € 100.000 op je 60e verlaagt het haalbare bedrag en staat onder de uitkomst
+        pg.click('#tab-input'); pg.wait_for_timeout(400)
+        pg.check('input[name=in-mode][value=all]', force=True); pg.wait_for_timeout(400)
+        pg.evaluate("document.getElementById('big-box').open = true")
+        pg.click('#big-add'); pg.fill('#big-a-0', '100000'); pg.locator('#big-a-0').blur()
+        pg.click('#tab-overview')
+        pg.wait_for_function("!document.getElementById('big-line').hidden && parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10) < %d" % w['big'], timeout=60000)
+        bl = pg.evaluate("({ line: document.getElementById('big-line').innerText, l: JSON.parse(localStorage.getItem('%s')).lists.big })" % KEY)
+        check('v25: grote uitgave verlaagt de uitkomst, staat erbij en is bewaard', '100.000' in bl['line'] and '60' in bl['line'] and bl['l'] == [{'a': 100000, 'f': 60}], bl)
         check('v25: geen scriptfouten', not errs, errs[:2])
         ctx.close()
         for wdt in (768, 1024):

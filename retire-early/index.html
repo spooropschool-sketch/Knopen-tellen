@@ -105,6 +105,7 @@
         <div class="srcline" data-src="le,mkt"></div>
       </div>
         <p class="disc-line needs-data" id="disc-line"><span data-t="disc.line">This is a worked example based on assumptions, not personal advice.</span> <a href="#about" data-disc-go="1" data-t="disc.lineA">Read the disclaimer</a></p>
+        <p class="disc-line big-line needs-data" id="big-line" hidden></p>
         <div class="ch-head needs-data" id="ch-2" data-ch="2"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-terra.webp" alt="" width="96" height="96"><div class="ch-t"><h2 data-t="ch.2">What you can do</h2><p class="ch-s" data-t="ch.s2">Settings to try out</p></div></div>
         <section class="card opb-card opb-play" id="opb-play" hidden></section>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
@@ -483,8 +484,8 @@
   </div>
 </div>
 
-<script src="/model.js?v=d101f86f" data-model></script>
-<script src="/i18n/en.js?v=6a760f6b"></script>
+<script src="/model.js?v=56b03d22" data-model></script>
+<script src="/i18n/en.js?v=2a32e41e"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -692,12 +693,13 @@
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
   /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
-  var lists = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [], inl: [] };
+  var lists = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [], inl: [], big: [] };
   function fin(v, lo, hi, d) { v = parseFloat(v); return isFinite(v) ? Math.max(lo, Math.min(hi, v)) : d; }
   function cleanLists(o) {
-    var r = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [], inl: [] };
+    var r = { perP: [], perD: [], pots: [], debts: [], stud: [], oth: [], inl: [], big: [] };
     /* eerst controleren of er lijsten zijn: een deellink zonder lijsten (o = undefined) liep hier vast, waardoor land en valuta uit de link niet werden overgenomen */
     if (!o || typeof o !== 'object') return r;
+    (Array.isArray(o.big) ? o.big : []).slice(0, 3).forEach(function (x) { if (x) r.big.push({ a: fin(x.a, 0, 1e8, 0), f: fin(x.f, 18, 110, 60) }); });
     (Array.isArray(o.inl) ? o.inl : []).slice(0, 4).forEach(function (x) { if (x) r.inl.push({ a: fin(x.a, 18, 100, 30), m: fin(x.m, 0, 1e5, 0) }); });
     (Array.isArray(o.stud) ? o.stud : []).slice(0, 2).forEach(function (x) {
       r.stud.push(x ? { r: fin(x.r, 0, 1e8, 0), m: fin(x.m, 0, 1e6, 0), e: fin(x.e, 0, 2200, 0), i: fin(x.i, -1, 30, -1) } : { r: 0, m: 0, e: 0, i: -1 });
@@ -836,6 +838,8 @@
         '<button type="button" class="sl-pro" data-sl-pro="1"><img src="/img/pro-slot.webp" alt=""><span><b data-t="sl.proQ"></b><small data-t="sl.proS"></small></span><span class="pro-tag" data-pro="plans"></span></button></div></details>' +
         '<details class="card pots sl" id="oth-box"><summary><span class="pots-h"><b data-t="oth.h"></b><span class="pots-n" id="oth-n" hidden></span></span><span class="pots-s" data-t="oth.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="oth.intro"></p><div id="oth-list"></div></div></details>' +
+        '<details class="card pots" id="big-box"><summary><span class="pots-h"><b data-t="big.h"></b><span class="pots-n" id="big-n" hidden></span></span><span class="pots-s" data-t="big.s"></span></summary>' +
+        '<div class="pots-in"><p class="hint" data-t="big.intro"></p><div id="big-list"></div></div></details>' +
         '<details class="card pots debts" id="debts-box"><summary><span class="pots-h"><b data-t="debt.h"></b><span class="pro-tag" data-pro="debts"></span><span class="pots-n" id="debts-n" hidden></span></span><span class="pots-s" data-t="debt.s"></span></summary>' +
         '<div class="pots-in"><p class="hint" data-t="debt.intro"></p><p class="hint debts-opb" id="debts-opb" data-t="debt.opb" hidden></p><div id="debts-list"></div><button type="button" class="btn ghost sm" id="debt-add" data-t="debt.add"></button></div></details>';
     } },
@@ -1267,7 +1271,7 @@
     var p = {};
     Object.keys(DEF).forEach(function (k) { p[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
     p.startkapitaal = capEff();
-    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots; p.debts = debtsList();
+    p.perP = lists.perP; p.perD = lists.perD; p.pots = lists.pots; p.debts = debtsList(); p.big = lists.big;
     p.inlRows = state.opbouw && bandOf(state.leeftijdPaul) === 0 ? lists.inl : []; p.inlBase = state.inleg;
     p.taxMode = isNL() ? 'nlbox3' : 'returns';
     if (isNL()) p.box3 = state.box3;
@@ -2160,7 +2164,7 @@
   function hvCtx() {
     var st = {}, ports = {};
     Object.keys(DEF).forEach(function (k) { st[k] = isFinite(state[k]) ? state[k] : DEF[k]; });
-    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots; st.debts = debtsList();
+    st.perP = lists.perP; st.perD = lists.perD; st.pots = lists.pots; st.debts = debtsList(); st.big = lists.big;
     st.inlRows = state.opbouw && bandOf(state.leeftijdPaul) === 0 ? lists.inl : []; st.inlBase = state.inleg;
     [1, 2, 3, 4].forEach(function (i) { var ps = portStat(i); ports[i] = { w: ps.w, mu: ps.mu, sd: ps.sd }; });
     return { st: st, cap: state.startkapitaal, nl: isNL(), pfUser: state.portfolio, autoIdx: autoIdx, ports: ports, alts: [0, 1, 2].filter(function (k) { return k !== state.uitgaveDaling; }) };
@@ -2558,7 +2562,7 @@ var TRK = {
     var base = location.origin + location.pathname, o = { s: d, c: prefs.country, u: prefs.cur };
     /* alle lijsten gaan mee, ook studieschuld, overige schulden en 'later meer opzij'. De cijfers staan achter het hekje:
        dat deel van een adres blijft in de browser en gaat niet mee naar de server. */
-    var Ls = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList(), stud: lists.stud, oth: lists.oth, inl: lists.inl };
+    var Ls = { perP: lists.perP, perD: lists.perD, pots: lists.pots, debts: debtsList(), stud: lists.stud, oth: lists.oth, inl: lists.inl, big: lists.big };
     if (Object.keys(Ls).some(function (k) { return Ls[k] && Ls[k].length; })) o.l = Ls;
     return base + '#plan=' + b64u(JSON.stringify(o));
   }
@@ -2968,7 +2972,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 25, n: 6, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 25, n: 7, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -3921,9 +3925,49 @@ var TRK = {
   })();
   TRK['extra-stop-age'] = ['extra', 'Stopleeftijd ingevuld (stap 1)'];
   document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('[data-disc-go]')) setTimeout(function () { var d = $('disclaimer'); if (d) d.scrollIntoView({ block: 'start' }); }, 80); });
+  /* grote uitgave later: maximaal drie bedragen ineens (tweede woning, boot, verbouwing), elk op een leeftijd */
+  var bigSig = '';
+  function bigOn() { return lists.big.filter(function (q) { return q.a > 0 && q.f >= Math.floor(state.leeftijdPaul); }); }
+  function bigRender(force) {
+    var host = $('big-list'); if (!host) return;
+    var sig = [prefs.lang, prefs.cur, two(), JSON.stringify(lists.big)].join('|');
+    if (force || sig !== bigSig) {
+      bigSig = sig;
+      var R = lists.big;
+      host.innerHTML = R.map(function (r, i) {
+        var A = 'data-big="' + i + '"';
+        return '<div class="inl-row">' + numIn('big-a-' + i, A + ' data-f="a" aria-label="' + esc(t1('big.amt')) + '"', r.a, true) + '<span class="unit">' + esc(curSym()) + '</span><span>' + esc(t1('big.at')) + '</span>' +
+          '<input type="text" inputmode="numeric" maxlength="3" class="inl-a" ' + A + ' data-f="f" value="' + r.f + '" aria-label="' + esc(t1('big.at')) + '"><span>' + esc(t1('u.years')) + '</span>' +
+          '<button type="button" class="per-x" data-big-del="' + i + '" aria-label="' + esc(t1('big.del')) + '">✕</button></div>';
+      }).join('') + (R.length < 3 ? '<button type="button" class="btn ghost sm" id="big-add">' + esc(t1('big.add')) + '</button>' : '') + (two() ? '<p class="hint">' + esc(t1('q.stopTwo')) + '</p>' : '');
+    }
+    var on = bigOn(), n = $('big-n'); if (n) { n.hidden = !on.length; n.textContent = on.length; }
+    var ln = $('big-line');
+    if (ln) { ln.hidden = !on.length || !(state.budget > 0); if (on.length) ln.textContent = t1('big.line', { list: on.map(function (q) { return t1('big.item', { v: eur(q.a), a: Math.round(q.f) }); }).join(' + ') }); }
+  }
+  document.addEventListener('input', function (ev) {
+    var e = ev.target, a = e.getAttribute ? e.getAttribute('data-big') : null; if (a == null) return;
+    var r = lists.big[parseInt(a, 10)]; if (!r) return;
+    if (e.getAttribute('data-f') === 'f') { var v = parseInt(String(e.value).replace(/\D/g, ''), 10); if (!(v >= 18 && v <= 110)) return; r.f = v; }
+    else { var m = e.value === '' ? 0 : numOf(e); if (!isFinite(m)) return; r.a = Math.max(0, m); }
+    bigSig = [prefs.lang, prefs.cur, two(), JSON.stringify(lists.big)].join('|');
+    persist(); updateSoon();
+  });
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest) return;
+    if (ev.target.closest('#big-add')) {
+      lists.big.push({ a: 0, f: Math.max(Math.ceil(state.leeftijdPaul) + 1, 60) });
+      track('extra-big-spend'); bigRender(true); persist();
+      var n = $('big-a-' + (lists.big.length - 1)); if (n) n.focus();
+      return;
+    }
+    var d = ev.target.closest('[data-big-del]');
+    if (d) { lists.big.splice(parseInt(d.getAttribute('data-big-del'), 10), 1); bigRender(true); update(); }
+  });
+  TRK['extra-big-spend'] = ['extra', 'Grote uitgave later toegevoegd'];
   var finishUpdate25 = finishUpdate;
-  finishUpdate = function () { finishUpdate25(); stopSync(); };
-  stopSync();
+  finishUpdate = function () { finishUpdate25(); stopSync(); bigRender(false); };
+  stopSync(); bigRender(true);
 
 })();
 

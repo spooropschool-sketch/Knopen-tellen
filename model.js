@@ -45,6 +45,13 @@ function runModel(p) {
     var tb = Math.round(dc.n / 12);
     if (dc.v > 0 && tb < N) debtL[tb] += dc.v / Math.pow(1 + i, dc.n / 12);
   });
+  /* grote uitgave later (versie 25): een bedrag in geld van vandaag dat in één keer uit het vermogen gaat, in het jaar dat
+     de eerste persoon leeftijd f heeft. Ligt die leeftijd al achter je of na de eindleeftijd, dan telt de uitgave niet mee. */
+  (p.big || []).forEach(function (q) {
+    if (!q || !(q.a > 0)) return;
+    var tq = Math.floor((q.f || 0) - ageP + 1e-9);
+    if (tq >= 0 && tq < N) debtL[tq] += q.a;
+  });
   function baseOf(bud) { return Math.max(0, bud - debtIn); }
   var fac = [], spend = [];
   for (var uy = 0; uy < N; uy++) { fac.push(Math.pow(1 - uDec, Math.max(0, uRef + uy - uStart))); spend.push(baseOf(p.budget) * fac[uy] + debtM[uy] / 12); }
