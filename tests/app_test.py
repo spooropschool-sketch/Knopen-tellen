@@ -213,6 +213,24 @@ def main():
             check('v25: tablet %d px: knoppen passen en de pagina schuift niet zijwaarts' % wdt, t['page'] and t['st'], t)
             ctx.close()
 
+        # ---------- voorbeeldplan (versie 25): één tik geeft een uitkomst, met melding; eigen cijfers wist het voorbeeld ----------
+        for band, want in ((1, ('80.000', '800')), (2, ('62 jaar', '450.000'))):
+            ctx = br.new_context(locale='nl-NL', viewport={'width': 390, 'height': 844}); pg = ctx.new_page(); errs = []
+            pg.on('pageerror', lambda e: errs.append(str(e)))
+            pg.goto(base + '/nl/'); pg.wait_for_timeout(1200); pg.click('#intro-next'); pg.wait_for_timeout(400)
+            pg.evaluate("document.querySelector('input[name=age-band][value=\"%d\"]').click()" % band); pg.wait_for_timeout(500)
+            pg.click('#slot-ok'); pg.wait_for_timeout(1200)
+            pg.click('#ex-try button')
+            pg.wait_for_function("!document.getElementById('ex-bar-ov').hidden", timeout=60000); pg.wait_for_timeout(4000)
+            e = pg.evaluate("({ bar: document.getElementById('ex-bar-ov').innerText, st: JSON.parse(localStorage.getItem('%s')).state, tryHidden: document.getElementById('ov-ex').hidden, wide: document.documentElement.scrollWidth <= innerWidth, all: document.getElementById('page-overview').innerText })" % KEY)
+            check('voorbeeld groep %d: melding met de bedragen, knop weg, pagina past' % band, 'Voorbeeld' in e['bar'] and all(w in e['bar'] for w in want) and e['tryHidden'] and e['wide'], e['bar'])
+            check('voorbeeld groep %d: er staat een uitkomst en geen kans onder 50%%' % band, e['st']['budget'] > 0 and e['st']['exBud'] == e['st']['budget'] and '<1%' not in e['all'] and 'Niet haalbaar' not in e['all'], e['all'][:200])
+            pg.click('#ex-bar-ov [data-ex-own]'); pg.wait_for_timeout(1500)
+            o = pg.evaluate("({ st: JSON.parse(localStorage.getItem('%s')).state, bar: document.getElementById('ex-bar-in').hidden, inp: !document.getElementById('page-input').hidden, tr: !document.getElementById('ex-try').hidden })" % KEY)
+            check('voorbeeld groep %d: eigen cijfers wist het voorbeeld en gaat naar Invullen' % band, o['st']['budget'] == 0 and o['st']['startkapitaal'] == 0 and o['st']['inleg'] == 0 and o['st']['leeftijdPaul'] in (42, 50) and o['st']['exBud'] == 0 and o['bar'] and o['inp'] and o['tr'], o)
+            check('voorbeeld groep %d: geen scriptfouten' % band, not errs, errs[:2])
+            ctx.close()
+
         # ---------- deellink heen en terug ----------
         lists = {'perP': [], 'perD': [], 'pots': [{'n': 'Pot', 'w': 0, 'k': 'l', 'a': 25000, 'f': 67, 'u': 0, 'x': 0}],
                  'debts': [], 'stud': [], 'oth': [], 'inl': []}

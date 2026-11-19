@@ -2122,3 +2122,13 @@ html.is-boot #opb-card, html.is-boot .home-grid { display: none !important; }
 .lvl-own { margin-top: 6px; }
 /* tablet (staand, 761 tot 1100 px): de bovenbalk paste niet en liet de pagina zijwaarts schuiven; knoppen daar zonder tekst */
 @media (min-width: 761px) and (max-width: 1100px) { .topbar .icon-btn .ib-l { display: none; } .topbar .icon-btn, .topbar .icon-btn.install { padding: 0; width: 40px; min-width: 40px; } }
+
+/* versie 25: voorbeeldplan */
+.ex-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 18px; padding: 12px 16px; border: 1.5px dashed color-mix(in srgb, var(--copper) 60%, transparent); border-radius: 16px; background: color-mix(in srgb, var(--copper) 8%, var(--surface)); font-size: 15px; line-height: 1.45; }
+.ex-bar[hidden] { display: none; }
+.ex-bar .ex-t { flex: 1 1 260px; min-width: 0; }
+.ex-bar b { color: var(--copper); }
+.ex-bar .btn { flex: 0 0 auto; }
+.ex-try { margin: 6px 0 4px; }
+.ex-try[hidden], .ov-ex[hidden] { display: none; }
+.ov-ex { align-self: flex-start; margin-top: 4px; }

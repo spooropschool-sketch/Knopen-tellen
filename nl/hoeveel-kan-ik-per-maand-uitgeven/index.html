@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=0c7df6fd">
+<link rel="stylesheet" href="/app.css?v=5c23e86e">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -84,10 +84,12 @@
         <p class="trust" id="trust" hidden></p>
         <p class="hero-sub" id="ov-sub"></p>
         <a class="btn primary ov-start" id="ov-start" href="#input" data-t="ov.start" hidden>Begin met invullen</a>
+        <button class="btn ghost ov-ex" type="button" id="ov-ex" data-ex-try data-t="ex.try" hidden>Probeer eerst een voorbeeld</button>
         <div class="ov-tiles" id="ov-tiles" hidden></div>
       </div>
       <div class="hero-art"><img fetchpriority="high" decoding="async" src="/img/hero-overzicht.webp" alt="Een hand stapelt pastelknopen naast een open leren buidel" data-t-alt="alt.pouch" width="1200" height="800" style="object-position: 50% 42%"></div>
     </header>
+    <div class="ex-bar" id="ex-bar-ov" role="status" hidden></div>
     <div class="home-grid">
       <aside class="home-side" aria-labelledby="quick-h">
         <div class="card side-card">
@@ -184,6 +186,7 @@
         <p class="sub" data-t="in.sub">Alles rekent mee terwijl je typt en niets verlaat deze browser.</p>
       </div>
     </header>
+    <div class="ex-bar" id="ex-bar-in" role="status" hidden></div>
     <div class="snel-home" hidden>
       <section class="card snel" id="snel" aria-labelledby="snel-h">
         <div class="ec-img"><img loading="lazy" decoding="async" src="/img/hero-over.webp" alt="Een opengeslagen notitieboek naast knopen die als een staafdiagram liggen" data-t-alt="alt.notebook" width="1200" height="800"></div>
@@ -191,6 +194,7 @@
           <span class="eyebrow" data-t="q.eyebrow">Snel rekenen</span>
           <h2 id="snel-h" data-t="q.h">Wat heb je nodig?</h2>
           <p class="sub" data-t="q.sub">Met je leeftijd en wat je per maand wilt besteden rekenen we de rest voor je uit: de leeftijd voor je staatspensioen, de gemiddelde levensverwachting en een pot die op het eind leeg mag zijn.</p>
+          <p class="ex-try" id="ex-try" hidden><button class="btn ghost" type="button" data-ex-try data-t="ex.try">Probeer eerst een voorbeeld</button></p>
           <div class="snel-grid">
             <div class="field"><label for="q-country" data-t="f.country">Voor welk land reken je?</label><select id="q-country" class="ctry-sel"></select></div>
             <div class="field"><span class="flabel" data-t="f.persons">Reken je voor één of voor twee?</span>
@@ -485,7 +489,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/nl.js?v=fcf72795"></script>
+<script src="/i18n/nl.js?v=cd50d665"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -684,7 +688,8 @@
     spP: 0, spD: 0, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67,
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1, inlegD: 0,
     geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0,
-    stopLeeftijd: 0   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
+    stopLeeftijd: 0,   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
+    exCap: 0, exBud: 0, exInl: 0, exAge: 0   /* voorbeeldplan (versie 25): de bedragen die de knop 'Probeer eerst een voorbeeld' heeft ingevuld; 0 = geen voorbeeld */
   };
   var APPV = '25 · 2026-11';
   var state = {};
@@ -3968,6 +3973,53 @@ var TRK = {
   var finishUpdate25 = finishUpdate;
   finishUpdate = function () { finishUpdate25(); stopSync(); bigRender(false); };
   stopSync(); bigRender(true);
+
+  /* ================= voorbeeldplan (versie 25) =================
+     Wie nog niets heeft ingevuld ziet niets. Eén tik vult een voorbeeld in voor de gekozen leeftijdsgroep, met een melding dat het
+     een voorbeeld is. Een bedrag telt als voorbeeld zolang het nog precies de ingevulde waarde is: wijzig je het, dan is het van jou. */
+  var EXK = [['exAge', 'leeftijdPaul'], ['exCap', 'startkapitaal'], ['exInl', 'inleg'], ['exBud', 'budget']];
+  function exActive() { return EXK.filter(function (q) { return state[q[0]] > 0 && state[q[1]] === state[q[0]]; }); }
+  function exEmpty() { return !(state.budget > 0) && !(state.startkapitaal > 0) && !(state.inleg > 0); }
+  function exVals() {
+    var f = (PLI[prefs.country][0] / PLI.NL[0]) * (two() ? 1.42 : 1), b = state.opbouw ? (bandOf(state.leeftijdPaul) === 0 ? 0 : 1) : 2;
+    function rd(v, st) { return Math.max(st, Math.round(v * f / st) * st); }
+    return { age: b === 2 && state.leeftijdPaul === DEF.leeftijdPaul && !two() ? 62 : 0, cap: [rd(15000, 1000), rd(80000, 5000), rd(450000, 10000)][b], inl: b === 2 ? 0 : [rd(500, 50), rd(800, 50)][b], bud: lvlAmt(2) };
+  }
+  function exFill() {
+    var v = exVals();
+    state.startkapitaal = state.exCap = v.cap; state.budget = state.exBud = v.bud; state.levend = 0;
+    if (state.opbouw) state.inleg = state.exInl = v.inl; else state.exInl = 0;
+    /* 50-plus leeft in het voorbeeld van vermogen: op de standaardleeftijd van 50 zou dat 19 jaar overbruggen zijn, daarom rekent het voorbeeld met 62 */
+    state.exAge = v.age; if (v.age) state.leeftijdPaul = v.age;
+    syncInputs(); persist(); track('core-example'); update();
+    var tb = $('tab-overview'); if (tb) tb.click();
+  }
+  function exOwn() {
+    EXK.forEach(function (q) { if (state[q[0]] > 0 && state[q[1]] === state[q[0]]) state[q[1]] = DEF[q[1]]; state[q[0]] = 0; });
+    state.levend = 0; syncInputs(); persist(); track('core-example-own'); update();
+    showStep(1, false); if (location.hash !== '#input') location.hash = '#input'; else go();
+    setTimeout(function () { var b = $('q-budget'); if (b && b.offsetParent) { b.scrollIntoView({ block: 'center' }); b.focus(); } }, 400);
+  }
+  function exSync() {
+    var act = exActive(), on = act.length > 0, txt = '';
+    if (on) {
+      var parts = [];
+      act.forEach(function (q) { var k = q[1]; parts.push(k === 'leeftijdPaul' ? t1('ex.ageL', { v: state[k] }) : t1(k === 'startkapitaal' ? 'ex.capL' : k === 'inleg' ? 'ex.inlL' : 'ex.budL', { v: eur(state[k]) })); });
+      txt = '<span class="ex-t"><b>' + esc(t1('ex.tag')) + '</b> ' + esc(t1('ex.bar', { c: parts.join(', ') })) + '</span><button type="button" class="btn primary" data-ex-own>' + esc(t1('ex.own')) + '</button>';
+    }
+    ['ex-bar-ov', 'ex-bar-in'].forEach(function (id) { var e = $(id); if (!e) return; e.hidden = !on; if (e.getAttribute('data-s') !== txt) { e.innerHTML = txt; e.setAttribute('data-s', txt); } });
+    var show = !on && exEmpty(), a = $('ov-ex'), b = $('ex-try'); if (a) a.hidden = !show; if (b) b.hidden = !show;
+  }
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest) return;
+    if (ev.target.closest('[data-ex-try]')) { exFill(); return; }
+    if (ev.target.closest('[data-ex-own]')) exOwn();
+  });
+  TRK['core-example'] = ['basis', 'Voorbeeld ingevuld (knop Probeer eerst een voorbeeld)'];
+  TRK['core-example-own'] = ['basis', 'Na een voorbeeld: Vul mijn eigen cijfers in getikt'];
+  var finishUpdate25b = finishUpdate;
+  finishUpdate = function () { finishUpdate25b(); exSync(); };
+  exSync();
 
 })();
 
