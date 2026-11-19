@@ -294,9 +294,9 @@ function hvRun(X) {
     });
     var b = res.reduce(function (a, c) { return c.succ > a.succ ? c : a; });
     var near = res.filter(function (x) { return x.succ >= b.succ - 0.01; });
-    /* opbouw (versie 25): de uitkomst is daar het bedrag bij 9 op de 10. Haalt geen mix de wens, kies dan de mix met het hoogste bedrag
-       bij 9 op de 10. Eerder won de mix met de grootste (kleine) kans op de wens, en die gaf juist het laagste bedrag. */
-    if (X.st.opbouw && b.succ < 0.9 && X.st.budget > 0) { near = res; near.forEach(function (x) { x.b90 = bud90(x.i); }); }
+    /* opbouw (versie 25): de uitkomst is daar het bedrag bij 9 op de 10. Haalt geen mix de wens in minstens de helft van de gevallen,
+       kies dan de mix met het hoogste bedrag bij 9 op de 10. Eerder won de mix met de grootste (kleine) kans op de wens, en die gaf juist het laagste bedrag. */
+    if (X.st.opbouw && b.succ < 0.5 && X.st.budget > 0) { near = res; near.forEach(function (x) { x.b90 = bud90(x.i); }); }
     var pk = near.reduce(function (a, c) { return (a.b90 !== undefined ? c.b90 > a.b90 : c.med > a.med) ? c : a; });
     return { idx: pk.i, succ: pk.succ };
   }
