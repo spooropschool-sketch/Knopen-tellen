@@ -129,6 +129,17 @@ const PROPS = [
     const a = run(c), b = run(c);
     const pick = m => JSON.stringify([m.req0, m.maxBudget, m.draws, m.K, m.taxes]);
     check('10', c, pick(a) === pick(b));
+  }],
+  ['11 stopleeftijd los van pensioenleeftijd: leeg = zoals voorheen, eerder stoppen = minder haalbaar, pensioen gaat niet eerder in', c => {
+    const p = P(c); if (!p.opbouw) { check('11', c, true); return; }
+    const basis = run(c), zelfde = run(c, { stopLeeftijd: 0 }), eerder = run(c, { stopLeeftijd: Math.ceil(p.leeftijdPaul) + 5 });
+    const zelfdeOk = JSON.stringify(basis.draws) === JSON.stringify(zelfde.draws);
+    check('11', c, zelfdeOk && eerder.tStop === 5 && eerder.maxBudget <= basis.maxBudget + 0.5 && JSON.stringify(eerder.incPen) === JSON.stringify(basis.incPen) && JSON.stringify(eerder.incSp) === JSON.stringify(basis.incSp), Math.round(eerder.maxBudget) + ' vs ' + Math.round(basis.maxBudget));
+  }],
+  ['12 beleggingskosten alleen over het belegde deel: bij alleen sparen maken kosten niets uit', c => {
+    const a = run(c, { spaarDeel: 100, bruto: 2.5, kosten: 0 }), b = run(c, { spaarDeel: 100, bruto: 2.5, kosten: 1.5 });
+    const belegd = run(c, { kosten: 0 }), duur = run(c, { kosten: 1.5 });
+    check('12', c, Math.abs(a.maxBudget - b.maxBudget) < 1e-6 && duur.maxBudget < belegd.maxBudget, Math.round(a.maxBudget) + ' vs ' + Math.round(b.maxBudget));
   }]
 ];
 

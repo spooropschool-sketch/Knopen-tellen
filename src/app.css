@@ -2109,3 +2109,16 @@ html.is-boot #opb-card, html.is-boot .home-grid { display: none !important; }
 #ch-5 ~ .next > .more { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 #page-input:not(.gb-end) .goal-bar { display: none !important; }
 #page-input .goal-bar { margin-top: 18px; }
+
+/* ================= versie 25 ================= */
+/* knoppen bij "Speel met je cijfers": op tablet liepen label en plus/min over elkaar; nu breder per knop en het label mag afbreken */
+.opb-steps { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.opb-st { flex-wrap: wrap; min-width: 0; }
+.opb-st > span { min-width: 0; flex: 1 1 90px; }
+.opb-st-c b { white-space: nowrap; }
+.opb-tiles button .opb-med { display: block; font-style: normal; font-size: 12.5px; color: var(--ink2); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.disc-line { margin: 2px 4px 0; font-size: 13px; color: var(--muted); }
+.disc-line a { color: var(--accent); white-space: nowrap; }
+.lvl-own { margin-top: 6px; }
+/* tablet (staand, 761 tot 1100 px): de bovenbalk paste niet en liet de pagina zijwaarts schuiven; knoppen daar zonder tekst */
+@media (min-width: 761px) and (max-width: 1100px) { .topbar .icon-btn .ib-l { display: none; } .topbar .icon-btn, .topbar .icon-btn.install { padding: 0; width: 40px; min-width: 40px; } }

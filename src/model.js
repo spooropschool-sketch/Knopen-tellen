@@ -20,7 +20,8 @@ function runModel(p) {
   var BOX3 = { tarief: 0.36, vrij: two ? b3s.vrij : b3s.vrij / 2, spaar: 0.0128, beleg: b3s.beleg };
   var spP = p.spP || 0, spD = p.spD || 0;
   var aowOnP = p.aowAanP !== 0, aowOnD = two && p.aowAanD !== 0, penOnP = p.pensAanP !== 0, penOnD = two && p.pensAanD !== 0;
-  var b = p.bruto / 100, c = p.kosten / 100, i = p.inflatie / 100;
+  /* beleggingskosten gelden alleen voor het belegde deel: een spaarrekening heeft geen fonds- of platformkosten (versie 25) */
+  var b = p.bruto / 100, c = p.kosten / 100 * (1 - Math.max(0, Math.min(100, p.spaarDeel || 0)) / 100), i = p.inflatie / 100;
   var ageP = p.leeftijdPaul, ageD = p.leeftijdDiana;
   var youngest = (p.eindDiana === 0 || !two) ? ageP : ageD;
   var N = Math.max(1, Math.round(p.eindleeftijd - youngest));
@@ -98,7 +99,9 @@ function runModel(p) {
     return { B: B, next: B * grow - tx, tax: tx };
   }
   /* opbouw: tot de pensioenleeftijd gaat de maandelijkse inleg in het vermogen (geld van vandaag); daarna geldt het gewone budget */
-  var stopAge = p.opbouw ? (p.pensioenLeeftijd || 67) : 0, saveM = p.opbouw ? Math.max(0, p.inleg || 0) : 0;
+  /* stopLeeftijd (versie 25): de leeftijd waarop je stopt met werken, los van de leeftijd waarop je pensioen ingaat.
+     Niet ingevuld (0)? Dan stop je op de pensioenleeftijd, zoals in eerdere versies. */
+  var stopAge = p.opbouw ? (p.stopLeeftijd > 0 ? p.stopLeeftijd : (p.pensioenLeeftijd || 67)) : 0, saveM = p.opbouw ? Math.max(0, p.inleg || 0) : 0;
   /* sparen per periode: vanaf een leeftijd een ander maandbedrag; 'inlBase' is de ingevulde inleg, het verschil met p.inleg is een wat-als-extra */
   var inlRows = p.opbouw && p.inlRows && p.inlRows.length ? p.inlRows.slice().sort(function (x, y) { return x.a - y.a; }) : [], inlExtra = saveM - Math.max(0, p.inlBase !== undefined ? p.inlBase : saveM);
   function saveAt(age) {
@@ -191,7 +194,7 @@ function normalsFor(N) {
 }
 function simCore(m, pf, p, keep, nSim) {
   var NS = nSim || SIMN;
-  var N = m.N, z = normalsFor(N), c = p.kosten / 100, inf = p.inflatie / 100, rr = Math.sqrt(1 - RHO * RHO);
+  var N = m.N, z = normalsFor(N), c = p.kosten / 100 * (1 - pf.w[2]), inf = p.inflatie / 100, rr = Math.sqrt(1 - RHO * RHO);
   var w0 = pf.w[0], w1 = pf.w[1], w2 = pf.w[2];
   var mu0 = ASSET[0].mu / 100, mu1 = ASSET[1].mu / 100, mu2 = ASSET[2].mu / 100;
   var sd0 = ASSET[0].sd / 100, sd1 = ASSET[1].sd / 100, sd2 = ASSET[2].sd / 100;

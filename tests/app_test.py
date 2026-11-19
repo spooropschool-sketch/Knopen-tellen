@@ -173,6 +173,36 @@ def main():
         check('je vraag: geen scriptfouten', not errs, errs[:2])
         ctx.close()
 
+        # ---------- versie 25: stopleeftijd vooraan, verwachting per mix, kans nooit 100%, disclaimer-regel ----------
+        fleur = {'personen': 1, 'leeftijdPaul': 42, 'opbouw': 1, 'startkapitaal': 80000, 'budget': 2500, 'inleg': 800}
+        ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(fleur, 'NL', 'EUR'), 'nl-NL')
+        pg.wait_for_function("document.querySelectorAll('.opb-tiles .opb-med').length === 4 && ![...document.querySelectorAll('.opb-tiles button')].some(b => b.innerText.includes('…'))", timeout=60000)
+        v = pg.evaluate('''() => { const num = t => parseInt(t.replace(/[^0-9]/g, ''), 10);
+            const T = [...document.querySelectorAll('.opb-tiles button')].map(b => ({ sure: num(b.querySelector('b').innerText), med: num(b.querySelector('.opb-med').innerText.split(':')[1]) }));
+            return { T, all: document.getElementById('page-overview').innerText, inc: document.querySelector('#opb-card .opb-inc').innerText, disc: document.getElementById('disc-line').innerText, span: document.querySelector('#opb-card .opb-span').innerText }; }''')
+        check('v25: per mix is het bedrag van 5 op de 10 keer minstens dat van 9 op de 10 keer', all(t['med'] >= t['sure'] for t in v['T']), v['T'])
+        check('v25: beleggen levert in het midden meer op dan sparen', v['T'][2]['med'] > v['T'][3]['med'], v['T'])
+        check('v25: nergens "100%" als kans', '100%' not in v['all'] and '>99%' in v['all'])
+        check('v25: AOW-regel noemt de AOW-leeftijd, niet de stopleeftijd', 'vanaf 68 jaar en 9 mnd' in v['inc'] and 'stopleeftijd' not in v['inc'], v['inc'])
+        check('v25: disclaimer-regel onder de uitkomst', 'geen persoonlijk advies' in v['disc'])
+        check('v25: geen "automatisch gekozen" meer', 'automatisch gekozen' not in v['all'])
+        pg.click('#tab-input'); pg.wait_for_timeout(600)
+        check('v25: stopleeftijd staat bij stap 1 en is leeg (doorwerken tot AOW)', pg.evaluate("(() => { const e = document.getElementById('q-stop'); return !!e.offsetParent && e.value === '' && !!e.closest('#step-1'); })()"))
+        pg.fill('#q-stop', '55'); pg.locator('#q-stop').blur()
+        pg.click('#tab-overview')
+        pg.wait_for_function("document.querySelector('#opb-card .opb-span') && document.querySelector('#opb-card .opb-span').innerText.includes('55')", timeout=60000)
+        w = pg.evaluate("({ span: document.querySelector('#opb-card .opb-span').innerText, inc: document.querySelector('#opb-card .opb-inc').innerText, big: parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10), st: JSON.parse(localStorage.getItem('%s')).state })" % KEY)
+        check('v25: stoppen op 55 rekent vanaf 55, AOW blijft op 68 jaar en 9 mnd', 'vanaf 55 jaar' in w['span'] and 'vanaf 68 jaar en 9 mnd' in w['inc'] and w['big'] < 2000, w['span'] + ' | ' + w['inc'])
+        check('v25: stopleeftijd bewaard, pensioenleeftijd ongewijzigd', w['st'].get('stopLeeftijd') == 55 and abs(w['st'].get('pensioenLeeftijd', 0) - 68.75) < 0.01 and w['st'].get('autoPenAge') == 1, {k: w['st'].get(k) for k in ('stopLeeftijd', 'pensioenLeeftijd', 'autoPenAge')})
+        check('v25: geen scriptfouten', not errs, errs[:2])
+        ctx.close()
+        for wdt in (768, 1024):
+            ctx = br.new_context(locale='nl-NL', viewport={'width': wdt, 'height': 900}); pg = ctx.new_page()
+            pg.goto(base + '/nl/#plan=' + plan_hash(fleur, 'NL', 'EUR')); pg.wait_for_selector('#opb-play .opb-st', timeout=60000); pg.wait_for_timeout(1500)
+            t = pg.evaluate("({ page: document.documentElement.scrollWidth <= innerWidth, st: [...document.querySelectorAll('.opb-st')].every(s => s.querySelector('.opb-st-c').getBoundingClientRect().right <= s.getBoundingClientRect().right + 0.5 && s.scrollWidth <= s.clientWidth) })")
+            check('v25: tablet %d px: knoppen passen en de pagina schuift niet zijwaarts' % wdt, t['page'] and t['st'], t)
+            ctx.close()
+
         # ---------- deellink heen en terug ----------
         lists = {'perP': [], 'perD': [], 'pots': [{'n': 'Pot', 'w': 0, 'k': 'l', 'a': 25000, 'f': 67, 'u': 0, 'x': 0}],
                  'debts': [], 'stud': [], 'oth': [], 'inl': []}

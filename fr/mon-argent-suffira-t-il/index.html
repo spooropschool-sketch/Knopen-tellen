@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=2644b09b">
+<link rel="stylesheet" href="/app.css?v=0c7df6fd">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -104,6 +104,7 @@
         <div class="verdict" id="verdict"></div>
         <div class="srcline" data-src="le,mkt"></div>
       </div>
+        <p class="disc-line needs-data" id="disc-line"><span data-t="disc.line">Ceci est un exemple de calcul fondé sur des hypothèses, pas un conseil personnalisé.</span> <a href="#about" data-disc-go="1" data-t="disc.lineA">Lire l’avertissement</a></p>
         <div class="ch-head needs-data" id="ch-2" data-ch="2"><img loading="lazy" decoding="async" class="ch-k" src="/img/knoop-terra.webp" alt="" width="96" height="96"><div class="ch-t"><h2 data-t="ch.2">Ce que vous pouvez faire</h2><p class="ch-s" data-t="ch.s2">Des réglages à essayer</p></div></div>
         <section class="card opb-card opb-play" id="opb-play" hidden></section>
         <section class="card adv-card" id="adv-card"><div class="adv-in" id="advies" aria-live="polite" hidden></div></section>
@@ -195,7 +196,8 @@
               <div class="seg" role="radiogroup" data-t-aria="f.persons" aria-label="Vous prévoyez pour une ou pour deux personnes ?"><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="1"><span data-t="p.one">1 personne</span></label><label class="seg-opt"><input type="radio" name="q-personen" data-k="personen" value="2"><span data-t="p.two">2 personnes</span></label></div></div>
             <div class="qp"><div class="field"><label for="q-leeftijdPaul"><span class="pq1"></span></label><div class="inrow"><input id="q-leeftijdPaul" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">ans</span></div></div><div class="seg seg3 sex-seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexe"><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="0"><span data-t="sex.m">Homme</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="1"><span data-t="sex.f">Femme</span></label><label class="seg-opt"><input type="radio" name="q-geslP" data-k="geslP" value="-1"><span data-t="sex.none">Autre</span></label></div><p class="hint sex-info" data-t="sex.info">Votre choix détermine seulement l’espérance de vie utilisée dans le calcul. En moyenne, les femmes vivent quelques années de plus que les hommes, et plus vous vivez longtemps, plus votre argent doit durer. Choisissez ce qui vous correspond. Avec « Autre », nous prenons la moyenne des deux. Plus loin, vous pouvez aussi fixer vous-même l’âge de fin.</p></div>
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">ans</span></div></div><div class="seg seg3 sex-seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexe"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Homme</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Femme</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="-1"><span data-t="sex.none">Autre</span></label></div><p class="hint sex-info" data-t="sex.info">Votre choix détermine seulement l’espérance de vie utilisée dans le calcul. En moyenne, les femmes vivent quelques années de plus que les hommes, et plus vous vivez longtemps, plus votre argent doit durer. Choisissez ce qui vous correspond. Avec « Autre », nous prenons la moyenne des deux. Plus loin, vous pouvez aussi fixer vous-même l’âge de fin.</p></div>
-            <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Comment voulez-vous vivre plus tard ?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Comment voulez-vous vivre plus tard ?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Montants indicatifs en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous. En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays.</p></div>
+            <div class="field opb-q" id="stop-box"><label for="q-stop" data-t="q.stop">À quel âge voulez-vous arrêter de travailler ?</label><div class="inrow"><input id="q-stop" type="number" inputmode="numeric" min="19" max="75" step="1"><span class="unit" data-t="u.years">ans</span></div><p class="hint" id="q-stop-hint"></p></div>
+            <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Comment voulez-vous vivre plus tard ?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Comment voulez-vous vivre plus tard ?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Montants indicatifs en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous. En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays.</p><p class="hint lvl-own" data-t="lvl.own">Vous vivez avec moins, ou avec plus ? Indiquez votre propre montant ci-dessous.</p></div>
             <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Combien aimeriez-vous dépenser par mois ?</span><span class="opb-q" data-t="f.budgetOpb">Combien voulez-vous dépenser par mois plus tard ?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Comment évoluent les dépenses plus tard ?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Les études montrent qu’on dépense différemment selon les étapes de la vie. C’est pourquoi vous choisissez ici comment vos dépenses évoluent plus tard.</p>
               <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="Comment évoluent les dépenses plus tard ?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-vlak.webp" alt=""><span data-t="curve.o0">Constantes</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-typisch.webp" alt=""><span data-t="curve.o1">Typique</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-sterk.webp" alt=""><span data-t="curve.o2">En forte baisse</span><small class="curve-cap" data-cap="2"></small></span></label></div>
@@ -481,8 +483,8 @@
   </div>
 </div>
 
-<script src="/model.js?v=411575d1" data-model></script>
-<script src="/i18n/fr.js?v=c5cae4b5"></script>
+<script src="/model.js?v=d101f86f" data-model></script>
+<script src="/i18n/fr.js?v=85507dcf"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -656,6 +658,8 @@
     catch (e) { return eur(n); }
   }
   function pct(x, d) { d = d === undefined ? 1 : d; if (!isFinite(x)) return '–'; return nfmt('p' + d, { style: 'percent', minimumFractionDigits: d, maximumFractionDigits: d }).format(x); }
+  /* een kans als heel procent; nooit '100%' of '0%' als het dat niet exact is: dat klinkt als een garantie (versie 25) */
+  function kans(x) { if (!isFinite(x)) return '–'; if (x >= 0.995) return '>' + pct(0.99, 0); if (x < 0.005) return '<' + pct(0.01, 0); return pct(x, 0); }
   function num(x, d) { return nfmt('n' + d, { maximumFractionDigits: d }).format(x); }
   function curSym() {
     try { var p = nfmt('m', { style: 'currency', currency: prefs.cur, currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0, minimumFractionDigits: 0 }).formatToParts(1); for (var i = 0; i < p.length; i++) if (p[i].type === 'currency') return p[i].value; } catch (e) {}
@@ -678,10 +682,13 @@
     portfolio: 0, inflatie: 2.4, kosten: 0.4,
     spP: 0, spD: 0, pensioenPaul: 0, pensioenDiana: 0, pensioenLeeftijd: 67, pensioenLeeftijdDiana: 67,
     personen: 1, aowAanP: 1, aowAanD: 1, pensAanP: 1, pensAanD: 1, inlegD: 0,
-    geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0
+    geslP: -1, geslD: -1, autoAow: 1, autoEind: 1, autoSp: 1, autoPenAge: 1, taxRate: 0, taxAllow: 0,
+    stopLeeftijd: 0   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
   };
-  var APPV = '23 · 2026-11';
+  var APPV = '25 · 2026-11';
   var state = {};
+  /* stopleeftijd in de opbouw: zelf gekozen, of anders de leeftijd waarop je pensioen ingaat */
+  function stopAge() { return state.stopLeeftijd > 0 ? state.stopLeeftijd : state.pensioenLeeftijd; }
   Object.keys(DEF).forEach(function (k) { state[k] = DEF[k]; });
   var names = { n1: '', n2: '' };
   /* lijsten naast de getallen: inkomen per periode (per partner) en extra potten */
@@ -761,7 +768,7 @@
   /* ================= velden en stappen ================= */
   var F = {
     startkapitaal: { u: 'u.cur', min: 0, max: 2000000, step: 5000, tag: 'zelf', r: [100000, 2000000] },
-    budget: { u: 'u.netMonth', min: 0, max: 10000, step: 25, tag: 'zelf', r: [1000, 6000] },
+    budget: { u: 'u.netMonth', min: 0, max: 10000, step: 25, tag: 'zelf', r: [500, 6000] },
     inleg: { u: 'u.netMonth', min: 0, max: 5000, step: 25, tag: 'zelf', r: [0, 1500] },
     werkP: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
     werkD: { u: 'u.netMonth', min: 0, max: 30000, step: 50, tag: 'zelf', lab: 'f.wkAmt', hint: 'h.wkAmt' },
@@ -1337,7 +1344,7 @@
     }
     var sc = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : 'bad');
     tl.innerHTML = '<div class="ovt-row">' +
-      '<button type="button" class="ovt ovt-chance ' + sc + '"><span class="ovt-l">' + t1('g.lbl') + '</span><b class="ovt-v">' + pct(curSucc, 0) + '</b></button>' +
+      '<button type="button" class="ovt ovt-chance ' + sc + '"><span class="ovt-l">' + t1('g.lbl') + '</span><b class="ovt-v">' + kans(curSucc) + '</b></button>' +
       tile(t1('ov.k.cap'), eur(capEff()), hasCap ? '' : t1('ov.k.capAuto'), hasCap ? '' : 'auto') +
       '<div class="ovt ovt-bud"><span class="ovt-l">' + t1('ov.k.bud') + '</span><b class="ovt-v">' + eur(state.budget) + '</b><span class="ovt-ok" id="ovt-ok" hidden></span></div>' +
       tile(t1('ov.k.end'), endAge, two() ? t1('ov.k.endOf', { n: esc(youngestName()) }) : '') +
@@ -1402,7 +1409,7 @@
     else if (curSucc >= 0.5) { cls = 'bad'; label = t1('v.risky'); icon = '✕'; }
     else { cls = 'bad'; label = t1('v.bad'); icon = '✕'; }
     var lvl = curSucc >= 0.9 ? 'good' : (curSucc >= 0.75 ? 'warn' : (curSucc >= 0.5 ? 'risky' : 'bad'));
-    var lead = '<strong>' + t1('v.lead', { l: t1('v.lvl.' + lvl), p: pct(curSucc, 0) }) + '</strong> ';
+    var lead = '<strong>' + t1('v.lead', { l: t1('v.lvl.' + lvl), p: kans(curSucc) }) + '</strong> ';
     var text;
     if (m.buffer >= 0) {
       text = t('v.ok', { c: eur(capEff()), b: eur(state.budget), r: esc(refTxt()), e: eur(m.K[m.N]) });
@@ -1414,7 +1421,7 @@
       text = two() ? t('v.shortTwo', { n: esc(youngestName()), a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) }) : t('v.shortOne', { a: age, g: eur(gap), mb: eur(adv ? max90 : m.maxBudget) });
     }
     el.className = 'verdict ' + cls;
-    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + pct(curSucc, 0) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
+    el.innerHTML = '<div class="verdict-head"><span class="pill">' + icon + ' ' + label + '</span><span class="scope">' + t1('w.success') + ' ' + kans(curSucc) + '</span><span class="scope">' + esc(cName(prefs.country)) + ', ' + taxLabel() + '</span><span class="scope">' + t1('v.pf', { pf: portStat(effIdx()).n.toLowerCase() }) + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')') + '</span>' + (m.incWk.some(function (v) { return v > 0; }) ? '<span class="scope">' + t1('v.wk') + '</span>' : '') + (potsOn().length ? '<span class="scope">' + t1('v.pots', { n: potsOn().length }) + '</span>' : '') + '</div><p class="verdict-text">' + lead + text + '</p><p class="hint" id="v-sim" style="margin-top:6px">' + simText + '</p>';
     /* wat-als staat sinds ronde 1 in deel 2 (Wat kun je doen), in een eigen kaart */
     var wc = $('wi-card'); if (wc) { var wh = wi50Html(); wc.innerHTML = wh; wc.hidden = !wh; }
     wi50M = m; chSync();
@@ -1436,7 +1443,7 @@
       else if (c.k === 'work1') ov.werkTotP = state.werkTotP + 1;
     });
     var res = '';
-    if (any) { var pf = portStat(effIdx()), p = params(Object.assign({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }, ov)); res = '<p class="wi50-res">' + t1('wi.res', { p: pct(simQuick(runModel(p), pf, p).succ, 0), q: pct(curSucc, 0) }) + '</p>'; }
+    if (any) { var pf = portStat(effIdx()), p = params(Object.assign({ bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }, ov)); res = '<p class="wi50-res">' + t1('wi.res', { p: kans(simQuick(runModel(p), pf, p).succ), q: kans(curSucc) }) + '</p>'; }
     return '<div class="wi50"><h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + L.map(function (c) { return '<button type="button" data-wi50="' + c.k + '" aria-pressed="' + (wi50[c.k] ? 'true" class="on"' : 'false"') + '>' + esc(c.l) + '</button>'; }).join('') + '</div>' + res + '</div>';
   }
   document.addEventListener('click', function (ev) {
@@ -1448,7 +1455,7 @@
     /* één getal per begrip: in opbouw is het maximum het bedrag van de uitkomstkaart (gekozen mix); 'nodig' is het bedrag
        uit het advies (9 van de 10), niet meer het bedrag bij gemiddeld rendement */
     var opbCi = effIdx(); if (!(opbCi >= 1 && opbCi <= 4)) opbCi = 2;
-    var opbOn = state.opbouw && state.budget > 0 && state.pensioenLeeftijd - state.leeftijdPaul >= 1;
+    var opbOn = state.opbouw && state.budget > 0 && stopAge() - state.leeftijdPaul >= 1;
     var opbV = opbOn ? opbBudC[opbKey({ inleg: state.inleg }, opbCi)] : 0, opbWait = opbOn && opbV === undefined;   /* nog niet uitgerekend: de kaart vult dit zo in */
     var maxB = opbOn ? (opbWait ? 0 : opbV) : (adv ? max90 : m.maxBudget), room = maxB - state.budget, empty = state.budget <= 0;
     var need90 = !!(adv && adv.c90 >= 0);
@@ -1565,7 +1572,7 @@
     var opl = $('opb-play'); if (opl) opl.classList.remove('opb-wait');
     if (!state.opbouw) { el.hidden = true; el.innerHTML = ''; if (opl) { opl.hidden = true; opl.innerHTML = ''; } chSync(); return; }
     el.hidden = false;
-    var stop = state.pensioenLeeftijd, now = state.leeftijdPaul;
+    var stop = stopAge(), now = state.leeftijdPaul;
     var a = fmtAge(stop); if (/^\d+$/.test(a)) a += ' ' + t1('u.years');
     var head = '<p class="opb-k">' + t1('opb.k', { a: a }) + '</p>';
     var emptyHint = !(state.inleg > 0) ? '<p class="opb-empty">' + t1('opb.empty') + '</p>' : '';
@@ -1587,24 +1594,32 @@
     /* alleen de gekozen mix wordt direct uitgerekend; de andere tegels, de kansen en 'tot 90' volgen in losse stapjes,
        zodat de pagina tussendoor blijft reageren. Wat al eens is uitgerekend staat er meteen. */
     var pend = [];
-    function lazyBud(ov2, i2, wk2) { var v = opbBudC[opbKey(ov2, i2)]; if (v === undefined) pend.push(function () { opbBud(ov2, i2, wk2); }); return v; }
+    function lazyBud(ov2, i2, wk2, tg2) { var v = opbBudC[opbKey(ov2, i2, tg2)]; if (v === undefined) pend.push(function () { opbBud(ov2, i2, wk2, tg2); }); return v; }
     function lazySucc(ov2, i2, b2) { var v = opbSucc(ov2, i2, b2, true); if (v === undefined) pend.push(function () { opbSucc(ov2, i2, b2); }); return v; }
     var buds = pfs.map(function (pf2, i) { return (i + 1 === ci) ? bud : lazyBud(OV, i + 1); });
     /* twee regels per tegel: het bedrag dat in 9 van de 10 gevallen lukt, en de kans dat je je wens haalt. Zo zie je dat sparen zeker
        is maar je wens zelden haalt, en dat beleggen minder zeker is maar vaker genoeg oplevert. */
     var succs = pfs.map(function (pf2, i) { return want > 0 ? lazySucc(OV, i + 1, want) : null; });
+    /* derde regel per tegel (versie 25): het bedrag dat in de helft van de gevallen lukt. Zo zie je naast het slechte geval ook de gewone verwachting. */
+    var meds = pfs.map(function (pf2, i) { return lazyBud(OV, i + 1, 'M', 0.5); });
     var tiles = pfs.map(function (pf2, i) {
       return '<button type="button" data-opb-pf="' + (i + 1) + '"' + (i + 1 === ci ? ' class="cur" aria-pressed="true"' : ' aria-pressed="false"') + '><small>' + esc(pf2.n) + '</small><b>' + (buds[i] === undefined ? '…' : eur(buds[i])) + '</b><span>' + t1('opb.tSure') + '</span>' +
-        (succs[i] !== null ? '<em>' + t1('opb.tWish', { p: succs[i] === undefined ? '…' : pct(succs[i], 0) }) + '</em>' : '') + '</button>';
+        '<i class="opb-med">' + t1('opb.tMed', { v: meds[i] === undefined ? '…' : eur(meds[i]) }) + '</i>' +
+        (succs[i] !== null ? '<em>' + t1('opb.tWish', { p: succs[i] === undefined ? '…' : kans(succs[i]) }) + '</em>' : '') + '</button>';
     }).join('');
     /* als voorzichtig hier hoger uitkomt dan agressief is dat geen fout: bij 9-van-de-10-zekerheid wegen grote schommelingen zwaar; in Nederland drukt box 3 beleggen extra */
-    var mixWhy = buds[0] !== undefined && buds[2] !== undefined && buds[0] >= buds[2] ? '<p class="opb-note">' + t1('opb.mixWhy') + (isNL() && state.box3 > 0 ? ' ' + t1('opb.mixWhyB3') : '') + '</p>' : '';
+    var savTop = buds[3] !== undefined && buds[0] !== undefined && buds[1] !== undefined && buds[2] !== undefined && buds[3] >= Math.max(buds[0], buds[1], buds[2]);
+    var mixWhy = savTop ? '<p class="opb-note">' + t1('opb.savWhy') + (isNL() && state.box3 > 0 ? ' ' + t1('opb.mixWhyB3') : '') + '</p>'
+      : (buds[0] !== undefined && buds[2] !== undefined && buds[0] >= buds[2] ? '<p class="opb-note">' + t1('opb.mixWhy') + (isNL() && state.box3 > 0 ? ' ' + t1('opb.mixWhyB3') : '') + '</p>' : '');
     /* wat er naast je eigen pot meetelt vanaf je stopleeftijd, zodat je het bedrag kunt narekenen */
     var incParts = [];
     var spSum = (p.aowAanP !== 0 ? (p.spP || 0) : 0) + (p.personen !== 1 && p.aowAanD !== 0 ? (p.spD || 0) : 0);
     var penSum = (p.pensAanP !== 0 ? (p.pensioenPaul || 0) : 0) + (p.personen !== 1 && p.pensAanD !== 0 ? (p.pensioenDiana || 0) : 0);
-    if (spSum > 0) incParts.push(t1('opb.incSp', { n: esc(spName()), v: eur(spSum) }));
-    if (penSum > 0) incParts.push(t1('opb.incPen', { v: eur(penSum) }));
+    /* met de leeftijd waarop het ingaat: wie eerder stopt, krijgt staatspensioen en pensioen pas later (versie 25) */
+    var ageL = function (x) { var t = fmtAge(x); return /^\d+$/.test(t) ? t + ' ' + t1('u.years') : t; };
+    var from2 = function (onP, aP, onD, aD) { var L2 = []; if (onP) L2.push(ageL(aP)); if (p.personen !== 1 && onD && (!onP || Math.abs(aD - aP) > 0.01)) L2.push(ageL(aD)); return L2.join(' / '); };
+    if (spSum > 0) incParts.push(t1('opb.incSp2', { n: esc(spName()), v: eur(spSum), a: from2(p.aowAanP !== 0 && p.spP > 0, p.aowPaul, p.aowAanD !== 0 && p.spD > 0, p.aowDiana) }));
+    if (penSum > 0) incParts.push(t1('opb.incPen2', { v: eur(penSum), a: from2(p.pensAanP !== 0 && p.pensioenPaul > 0, p.pensioenLeeftijd, p.pensAanD !== 0 && p.pensioenDiana > 0, p.pensioenLeeftijdDiana) }));
     if (curM.incWk.some(function (v, ti) { return ti >= curM.tStop && v > 0; })) incParts.push(t1('opb.incWk'));
     /* schuldenvrij: het laatste jaar waarin een ingevulde studieschuld of overige schuld is afgelost */
     var dYr = 0, dAsk = false, dSlow = false, dAny = false;
@@ -1617,7 +1632,7 @@
     var debtLine = !dAny ? '' : '<p class="opb-debt">' + (dSlow ? t1('opb.debtSlow') : (dAsk ? t1('opb.debtAsk') : t1('opb.debtFree', { y: dYr }))) + '</p>';
     /* wie langer leeft dan gemiddeld: hetzelfde bedrag gerekend tot 90 */
     var to90 = state.autoEind && state.eindleeftijd < 90 ? '<p class="opb-note">' + t1('opb.to90', { n: 90, v: (function () { var v9 = lazyBud(Object.assign({}, OV, { eindleeftijd: 90 }), ci, 'L'); return v9 === undefined ? '…' : eur(v9); })() }) + '</p>' : '';
-    var incLine = incParts.length ? '<p class="opb-note opb-inc">' + t1('opb.inc', { list: incParts.join(' + ') }) + '</p>' : '';
+    var incLine = incParts.length ? '<p class="opb-note opb-inc">' + t1('opb.inc2', { list: incParts.join(' + ') }) + '</p>' : '';
     var lv = '';
     if (lvlOk()) {
       var lf = OV.personen === 2 ? 1.42 : 1, la = function (n) { return Math.round(lvlAmt(n) * lf / 25) * 25; };
@@ -1663,7 +1678,7 @@
       '<h3 class="opb-h">' + t1('opb.stH') + '</h3>' + emptyHint + steps +
       (ex.list.length ? '<h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + chips + '</div>' : '') +
       '<p class="opb-delta">' + (ex.any && bud !== base ? t1(bud > base ? 'opb.wiDeltaB' : 'opb.wiDeltaM', { v: eur(Math.abs(bud - base)) }) : '') + '</p>' +
-      '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + '</p>' + mixWhy + msg +
+      '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + ' ' + t1('opb.tLegendMed') + '</p>' + mixWhy + msg +
       '<div class="opb-act"><a class="btn primary" href="#input" data-opb-more="1">' + t1('opb.moreBtn') + '</a></div>';
     }
     opbTok++; el.classList.toggle('opb-part', pend.length > 0); if (play) play.classList.toggle('opb-part', pend.length > 0);
@@ -1685,7 +1700,7 @@
   /* "Wat als": knoppen die alleen in deze kaart meerekenen; je invoer verandert niet. De plus- en minknoppen veranderen je invoer wel. */
   var opbWi = {};
   function opbExtra() {
-    var L = [], ov = { inleg: state.inleg }, now = state.leeftijdPaul, stop = state.pensioenLeeftijd, span = Math.max(1, stop - now);
+    var L = [], ov = { inleg: state.inleg }, now = state.leeftijdPaul, stop = stopAge(), span = Math.max(1, stop - now);
     /* zonder schuld: alsof er geen studieschuld en geen overige schuld is; alles wat je nu per maand aflost gaat naar sparen.
        De knop staat er alleen als er een schuld met een maandbedrag is ingevuld (bij jou of je partner). */
     /* Zonder maandbedrag (bijvoorbeeld nog studerend) schatten we de maandlast: een annuïteit tot het ingevulde eindjaar, anders 35 jaar (studieschuld) of 10 jaar (overig). */
@@ -1727,10 +1742,10 @@
   function opbStep(key, d) {
     if (key === 'inleg') state.inleg = Math.max(0, Math.round((state.inleg + d * 50) / 50) * 50);
     else if (key === 'budget') { state.levend = 0; state.budget = Math.max(0, Math.round((state.budget + d * 100) / 100) * 100); }
-    else if (key === 'stop') { state.autoPenAge = 0; state.pensioenLeeftijd = Math.max(Math.ceil(state.leeftijdPaul) + 1, Math.min(75, Math.round(state.pensioenLeeftijd) + d)); }
+    else if (key === 'stop') { state.stopLeeftijd = Math.max(Math.ceil(state.leeftijdPaul) + 1, Math.min(75, Math.round(stopAge()) + d)); }   /* alleen de stopleeftijd; je pensioen gaat in op de leeftijd bij Invullen */
     /* de waarde in het kaartje springt direct mee; de berekening volgt pas als je even niet meer klikt */
     var bEl = document.querySelector('[data-opb-st="' + key + '"]'), host = bEl && bEl.closest('.opb-st-c'), vEl = host && host.querySelector('b');
-    if (vEl) vEl.textContent = key === 'stop' ? fmtAge(state.pensioenLeeftijd) : eur(key === 'inleg' ? state.inleg : state.budget);
+    if (vEl) vEl.textContent = key === 'stop' ? fmtAge(stopAge()) : eur(key === 'inleg' ? state.inleg : state.budget);
     opbWaitOn();
     track('extra-step-' + key);
     clearTimeout(opbStepT);
@@ -1756,9 +1771,10 @@
   });
   /* hoogste maandbudget dat met 9 van de 10 kans meegaat tot de eindleeftijd, bij gegeven aanpassingen en beleggingsmix (afgerond op 10) */
   var opbBudNow = null, opbBudC = {}, opbWarm = {}, opbTok = 0, opbShare = null;
-  function opbKey(ov, i) { var pf0 = portStat(i); return JSON.stringify(params(Object.assign({}, ov, { budget: 0, skipMax: true, bruto: pf0.mu * 100, spaarDeel: pf0.w[2] * 100, portfolio: 0 }))) + '|' + i; }
-  function opbBud(ov, i, wk) {
-    var wi = i + (wk || ''), key = opbKey(ov, i);
+  function opbKey(ov, i, tg) { var pf0 = portStat(i); return JSON.stringify(params(Object.assign({}, ov, { budget: 0, skipMax: true, bruto: pf0.mu * 100, spaarDeel: pf0.w[2] * 100, portfolio: 0 }))) + '|' + i + (tg && tg !== 0.9 ? '|' + tg : ''); }
+  /* tg = de kans waarmee het budget moet lukken: 0,9 (9 op de 10, standaard) of 0,5 (de helft van de gevallen, de gewone verwachting) */
+  function opbBud(ov, i, wk, tg) {
+    var T = tg || 0.9, wi = i + (wk || '') + (T !== 0.9 ? 'q' + T : ''), key = opbKey(ov, i, T);
     if (opbBudC[key] !== undefined) return opbBudC[key];
     var pf = portStat(i), NQ = Math.round(SIMN / 4);
     function q(b, n) { var p = params(Object.assign({}, ov, { budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 })); return simQuick(runModel(p), pf, p, n).succ; }
@@ -1767,16 +1783,16 @@
     else {
       /* koude start: eerst grof zoeken met een kwart van de simulaties */
       lo = 0; hi = Math.max(state.budget * 2, 1000);
-      while (q(hi, NQ) >= 0.9 && g++ < 6) { lo = hi; hi *= 1.6; }
-      while (hi - lo > 40) { var mq = (lo + hi) / 2; if (q(mq, NQ) >= 0.9) lo = mq; else hi = mq; }
+      while (q(hi, NQ) >= T && g++ < 6) { lo = hi; hi *= 1.6; }
+      while (hi - lo > 40) { var mq = (lo + hi) / 2; if (q(mq, NQ) >= T) lo = mq; else hi = mq; }
       c = (lo + hi) / 2;
     }
     /* afmaken met alle simulaties, in een smal venster rond die schatting; het venster schuift op als het antwoord erbuiten ligt */
     lo = Math.max(0, c - 80); hi = c + 80; g = 0;
-    while (lo > 0 && q(lo) < 0.9 && g++ < 8) { hi = lo; lo = Math.max(0, lo - 160 * g); }
+    while (lo > 0 && q(lo) < T && g++ < 8) { hi = lo; lo = Math.max(0, lo - 160 * g); }
     g = 0;
-    while (q(hi) >= 0.9 && g++ < 8) { lo = hi; hi += 160 * g; }
-    while (hi - lo > 10) { var md = (lo + hi) / 2; if (q(md) >= 0.9) lo = md; else hi = md; }
+    while (q(hi) >= T && g++ < 8) { lo = hi; hi += 160 * g; }
+    while (hi - lo > 10) { var md = (lo + hi) / 2; if (q(md) >= T) lo = md; else hi = md; }
     var r = Math.floor(lo / 10) * 10;
     if (Object.keys(opbBudC).length > 80) opbBudC = {};
     opbWarm[wi] = r;
@@ -1827,7 +1843,7 @@
         rows.push([t1(sh.k), res.fail !== undefined ? t1('pf.emptyAt', { n: esc(ref), a: res.fail }) : (res.ok ? t1('pf.left', { v: short(res.end) }) : t1('pf.below', { v: short(res.end) }))]);
       });
       html += '<div class="cmp-card' + (cur ? ' cur' : '') + '"><h3>' + pf.n + (cur ? ' <span class="chip dim">' + t1(state.portfolio ? 'w.picked' : 'w.autoPicked') + '</span>' : '') + '</h3>' +
-        '<span class="cmp-big">' + pct(sim.succ, 0) + '</span><span class="cmp-delta">' + t('pf.chance', { r: esc(refTxt()) }) + ' ' + chip + '</span>' +
+        '<span class="cmp-big">' + kans(sim.succ) + '</span><span class="cmp-delta">' + t('pf.chance', { r: esc(refTxt()) }) + ' ' + chip + '</span>' +
         rows.map(function (r) { return '<div class="kv"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('') + '</div>';
     });
     if (!lazy) $('pf').innerHTML = html;
@@ -1924,7 +1940,7 @@
     }
     hit.addEventListener('pointermove', show); hit.addEventListener('pointerdown', show);
     hit.addEventListener('pointerleave', function () { hv.style.display = 'none'; tip.style.display = 'none'; });
-    $('fan-succ').textContent = pct(curSucc, 0);
+    $('fan-succ').textContent = kans(curSucc);
     $('fan-wr').textContent = m.draws[0] < 0 ? '+' + eur(-m.draws[0] / 12) : eur(m.draws[0] / 12);
     $('fan-wr-s').textContent = m.draws[0] < 0 ? t1('fan.wrSave') : t1('fan.wrS', { p: pct(m.eersteJaarOpname, 1) });
     $('fan-assump').innerHTML = '<span class="ft">' + t1('fan.assump') + '</span><ul><li>' + t1('fan.mix', { a: Math.round(pf.w[0] * 100), b: Math.round(pf.w[1] * 100), c: Math.round(pf.w[2] * 100) }) + '</li><li>' + t1('fan.costs', { p: pct(state.kosten / 100, 1) }) + '</li><li>' + taxLabel() + '</li></ul>';
@@ -1960,7 +1976,7 @@
     var empty = state.budget <= 0, v = empty ? 0 : curSucc;
     var cls = empty ? '' : (v >= 0.9 ? 'good' : (v >= 0.75 ? 'warn' : 'bad'));
     card.className = 'card status ' + cls;
-    var n = empty ? 0 : Math.max(0, Math.min(20, Math.round(v * 20))), lbl = empty ? '\u2013' : pct(v, 0);
+    var n = empty ? 0 : Math.max(0, Math.min(20, Math.round(v * 20))), lbl = empty ? '\u2013' : kans(v);
     var key = n + '|' + lbl + '|' + t1('g.lbl');
     if (g._k !== key) {
       g._k = key;
@@ -1987,7 +2003,7 @@
     var withCap = capEff() > 0, showNeed = state.startkapitaal > 0 || !adv;
     $('mini').innerHTML = '<span class="mini-main">' + t1('mini.bud') + ' <b id="mini-bud"></b> <small>' + t1('opb.pm') + '</small></span>' +
       '<span>' + t1('mini.want', { w: '<b>' + eur(state.budget) + '</b>' }) + '</span>' +
-      '<span><b class="' + cls + '">' + pct(curSucc, 0) + '</b> ' + t1('mini.chance') + '</span>';
+      '<span><b class="' + cls + '">' + kans(curSucc) + '</b> ' + t1('mini.chance') + '</span>';
     opbHeroOk();
     updMini();
   }
@@ -2000,7 +2016,7 @@
     for (i2 = 0; i2 < N; i2++) {
       var aow = m.incSp[i2] / 12, pen = m.incPen[i2] / 12, wk = m.incWk[i2] / 12, pot = m.incPot[i2] / 12;
       /* opbouw: tot de stopleeftijd leef je van je loon; dat deel van het jaar komt er niets uit het vermogen en telt later inkomen nog niet mee */
-      var fw = state.opbouw ? Math.max(0, Math.min(1, state.pensioenLeeftijd - (state.leeftijdPaul + i2))) : 0, fr = 1 - fw;
+      var fw = state.opbouw ? Math.max(0, Math.min(1, stopAge() - (state.leeftijdPaul + i2))) : 0, fr = 1 - fw;
       aow *= fr; pen *= fr; wk *= fr; pot *= fr;
       var inc = aow + pen + wk + pot;
       rows.push({ sal: fw * m.spend[i2], aow: aow, pen: pen, wk: wk, pot: pot, lump: m.lump[i2], inc: inc, bud: m.spend[i2], cap: Math.max(0, fr * m.spend[i2] - inc) });
@@ -2009,7 +2025,7 @@
     var hasPot = rows.some(function (r) { return r.pot > 0.5 || r.lump > 0; }), lg = $('lg-pot'); if (lg) lg.hidden = !hasPot;
     var hasSal = rows.some(function (r) { return r.sal > 0.5; }), lgS = $('lg-sal'); if (lgS) lgS.hidden = !hasSal;
     /* het grijze deel is een aanname, geen ingevuld inkomen: zeg dat erbij en hoe je het verandert */
-    var fn = $('flow-note'); if (fn) { fn.hidden = !hasSal; if (hasSal) { var sa = fmtAge(state.pensioenLeeftijd); if (/^\d+$/.test(sa)) sa += ' ' + t1('u.years'); fn.textContent = t1('flow.salNote', { a: sa, l: t1('opb.stStop') }); } }
+    var fn = $('flow-note'); if (fn) { fn.hidden = !hasSal; if (hasSal) { var sa = fmtAge(stopAge()); if (/^\d+$/.test(sa)) sa += ' ' + t1('u.years'); fn.textContent = t1('flow.salNote', { a: sa, l: t1('opb.stStop') }); } }
     var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 230 : 270;
     var tk = niceTicks(0, mx * 1.1, 4), ymax = Math.max(mx * 1.1, tk.ticks[tk.ticks.length - 1]);
     var ml = labW(tk.ticks), mr = 14, mt = 14, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
@@ -2057,7 +2073,7 @@
       ch.innerHTML = t1('curve.h' + cd, { a: 65, b: 85, x: pct(1 - Math.pow(1 - cd / 100, 20), 0) }) + (cd > 0 ? (two() ? ' ' + t1('curve.two') : '') + ' ' + t1('curve.note') : '');
     }
     var pst = portStat(effIdx()), pfh = $('pf-hint');
-    if (pfh) pfh.textContent = (autoInfo ? t1('pf.autoHint', { pf: pst.n, p: pct(autoInfo.succ, 0) }) + ' ' : pst.n + ': ') + t1('pf.mixHint', { a: Math.round(pst.w[0] * 100), b: Math.round(pst.w[1] * 100), c: Math.round(pst.w[2] * 100), r: pct(pst.mu, 1), s: pct(pst.sd, 0) });
+    if (pfh) pfh.textContent = (autoInfo ? t1('pf.autoHint', { pf: pst.n, p: kans(autoInfo.succ) }) + ' ' : pst.n + ': ') + t1('pf.mixHint', { a: Math.round(pst.w[0] * 100), b: Math.round(pst.w[1] * 100), c: Math.round(pst.w[2] * 100), r: pct(pst.mu, 1), s: pct(pst.sd, 0) });
     var bh = $('b3-hint');
     if (bh) { var h = function (v) { return eur(two() ? v : v / 2); }; bh.textContent = t1('b3.h' + state.box3, { a: h(118714), b: h(61692), c: h(78825), who: t1(two() ? 'b3.both' : 'b3.you') }); }
     var th = $('tax-hint'); if (th) th.innerHTML = t1('taxNote.' + prefs.country);
@@ -2213,7 +2229,7 @@
     renderHints();
     var m = runModel(params());
     last = m;
-    simText = t1('v.sim', { pf: portStat(effIdx()).n.toLowerCase(), p: pct(curSucc, 0) });
+    simText = t1('v.sim', { pf: portStat(effIdx()).n.toLowerCase(), p: kans(curSucc) });
     renderHead(); renderGauge(); renderVerdict(m); renderKpis(m); renderKoop(); renderMini(m);
     renderTable(m); renderLadder(m); renderAbout(); renderPlans();
     if (route === 'input' && inAll()) renderInSum();
@@ -2499,7 +2515,7 @@ var TRK = {
     ['A', 'B'].forEach(function (k) { var pl = plans[k]; cols.push({ k: k, n: t1(k === 'A' ? 'pl.a' : 'pl.b'), s: pl ? (planCalc(pl) || 'calc') : null }); });
     function cell(sm, f) { return sm === 'calc' ? '<span class="pl-none">…</span>' : (sm ? f(sm) : '<span class="pl-none">–</span>'); }
     var rows = [
-      ['pl.r.succ', function (x) { var c = x.succ >= 0.9 ? 'good' : (x.succ >= 0.75 ? 'warn' : 'bad'); return '<b class="pl-succ ' + c + '">' + pct(x.succ, 0) + '</b>'; }],
+      ['pl.r.succ', function (x) { var c = x.succ >= 0.9 ? 'good' : (x.succ >= 0.75 ? 'warn' : 'bad'); return '<b class="pl-succ ' + c + '">' + kans(x.succ) + '</b>'; }],
       ['pl.r.bud', function (x) { return moneyIn(x.bud, x.cur); }],
       ['pl.r.cap', function (x) { return moneyIn(x.cap, x.cur); }],
       ['pl.r.end', function (x) { return fmtAge(x.end); }],
@@ -2548,7 +2564,7 @@ var TRK = {
   }
   function shareText() {
     var L = [t1('brand') + ': ' + t1('home.h1'), ''];
-    L.push(t1('pl.r.succ') + ': ' + pct(curSucc, 0));
+    L.push(t1('pl.r.succ') + ': ' + kans(curSucc));
     L.push(t1('pl.r.bud') + ': ' + eur(state.budget));
     L.push(t1('curve.lbl') + ': ' + t1('curve.o' + (state.uitgaveDaling || 0)));
     L.push(t1('pl.r.cap') + ': ' + eur(capEff()));
@@ -2952,7 +2968,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 25, n: 6, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -3745,7 +3761,7 @@ var TRK = {
     if (ev.target.closest('.inl-pro')) { ev.preventDefault(); ev.stopImmediatePropagation(); plOpen('period'); $('pl-why').textContent = t1('inl.proWhy'); return; }
     if (ev.target.closest('#inl-add')) {
       var last = lists.inl[lists.inl.length - 1], age = Math.ceil(state.leeftijdPaul);
-      lists.inl.push({ a: Math.min(Math.round(state.pensioenLeeftijd) - 1, (last ? last.a : age) + 5), m: (last ? last.m : state.inleg) + 200 });
+      lists.inl.push({ a: Math.min(Math.round(stopAge()) - 1, (last ? last.a : age) + 5), m: (last ? last.m : state.inleg) + 200 });
       track('extra-inl-period'); inlRender(true); update();
       var n = $('inl-m-' + (lists.inl.length - 1)); if (n) n.focus();
       return;
@@ -3809,7 +3825,7 @@ var TRK = {
     M.forEach(function (m) { each(m[0], function (el) { var k = opb ? m[1] : m[2]; if (el.getAttribute('data-t') !== k) { el.setAttribute('data-t', k); el.innerHTML = t1(k); } }); });
     [['n-werkP', 'h.bijAmt', 'h.wkAmt'], ['n-werkD', 'h.bijAmt', 'h.wkAmt'], ['n-werkTotP', 'h.bijEnd', 'h.wkEnd'], ['n-werkTotD', 'h.bijEnd', 'h.wkEnd']].forEach(function (m) {
       var f = $(m[0]); if (!f) return; var hint = f.closest('.field') && f.closest('.field').querySelector('.hint');
-      if (hint) { var k = opb ? m[1] : m[2]; if (hint.getAttribute('data-t') !== k) { hint.setAttribute('data-t', k); hint.innerHTML = t1(k, { a: fmtAge(state.pensioenLeeftijd) }); } }
+      if (hint) { var k = opb ? m[1] : m[2]; if (hint.getAttribute('data-t') !== k) { hint.setAttribute('data-t', k); hint.innerHTML = t1(k, { a: fmtAge(stopAge()) }); } }
     });
     each('.wk-h', function (el) { var k = opb ? 'wk.hBij' : 'wk.h'; if (el.getAttribute('data-t') !== k) { el.setAttribute('data-t', k); el.innerHTML = t1(k); } });
   }
@@ -3875,6 +3891,39 @@ var TRK = {
   var finishUpdate23 = finishUpdate;
   finishUpdate = function () { finishUpdate23(); wk1Sync(); sideSync(); chSync(); };
   wk1Sync(); sideSync();
+
+  /* ================= versie 25: stopleeftijd vooraan =================
+     Wie spaart, kiest bij stap 1 zelf wanneer hij stopt met werken. Leeg = doorwerken tot het pensioen ingaat (zoals voorheen).
+     De stopleeftijd staat los van de leeftijd waarop staatspensioen en pensioen ingaan. */
+  function stopSync() {
+    var e = $('q-stop'), h = $('q-stop-hint'); if (!e) return;
+    var lo = Math.ceil(state.leeftijdPaul) + 1;
+    if (state.stopLeeftijd > 0 && state.stopLeeftijd < lo && state.opbouw) state.stopLeeftijd = 0;
+    if (document.activeElement !== e) e.value = state.stopLeeftijd > 0 ? Math.round(state.stopLeeftijd) : '';
+    e.min = lo; e.placeholder = String(Math.floor(state.pensioenLeeftijd + 1e-6));
+    var a = fmtAge(state.aowPaul); if (/^\d+$/.test(a)) a += ' ' + t1('u.years');
+    if (h) h.textContent = t1(state.stopLeeftijd > 0 ? 'q.stopHintSet' : 'q.stopHint', { a: a }) + (two() ? ' ' + t1('q.stopTwo') : '');
+  }
+  (function () {
+    var e = $('q-stop'); if (!e) return;
+    e.addEventListener('input', function () {
+      var v = parseInt(e.value, 10);
+      if (e.value === '') state.stopLeeftijd = 0;
+      else if (isFinite(v) && v >= Math.ceil(state.leeftijdPaul) + 1 && v <= 75) state.stopLeeftijd = v;
+      else return;
+      track('extra-stop-age'); updateSoon();
+    });
+    e.addEventListener('change', function () {
+      var v = parseInt(e.value, 10);
+      if (e.value !== '' && isFinite(v)) { state.stopLeeftijd = Math.max(Math.ceil(state.leeftijdPaul) + 1, Math.min(75, v)); e.value = state.stopLeeftijd; }
+      updateNow();
+    });
+  })();
+  TRK['extra-stop-age'] = ['extra', 'Stopleeftijd ingevuld (stap 1)'];
+  document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('[data-disc-go]')) setTimeout(function () { var d = $('disclaimer'); if (d) d.scrollIntoView({ block: 'start' }); }, 80); });
+  var finishUpdate25 = finishUpdate;
+  finishUpdate = function () { finishUpdate25(); stopSync(); };
+  stopSync();
 
 })();
 
