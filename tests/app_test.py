@@ -193,6 +193,7 @@ def main():
         pg.wait_for_function("document.querySelector('#opb-card .opb-span') && document.querySelector('#opb-card .opb-span').innerText.includes('55')", timeout=60000)
         w = pg.evaluate("({ span: document.querySelector('#opb-card .opb-span').innerText, inc: document.querySelector('#opb-card .opb-inc').innerText, big: parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10), st: JSON.parse(localStorage.getItem('%s')).state })" % KEY)
         check('v25: stoppen op 55 rekent vanaf 55, AOW blijft op 68 jaar en 9 mnd', 'vanaf 55 jaar' in w['span'] and 'vanaf 68 jaar en 9 mnd' in w['inc'] and w['big'] < 2000, w['span'] + ' | ' + w['inc'])
+        check('v25: onhaalbare wens: rekenkeuze is de mix met het hoogste bedrag bij 9 op de 10', w['big'] >= 900, w['big'])
         check('v25: stopleeftijd bewaard, pensioenleeftijd ongewijzigd', w['st'].get('stopLeeftijd') == 55 and abs(w['st'].get('pensioenLeeftijd', 0) - 68.75) < 0.01 and w['st'].get('autoPenAge') == 1, {k: w['st'].get(k) for k in ('stopLeeftijd', 'pensioenLeeftijd', 'autoPenAge')})
         # grote uitgave later: € 100.000 op je 60e verlaagt het haalbare bedrag en staat onder de uitkomst
         pg.click('#tab-input'); pg.wait_for_timeout(400)

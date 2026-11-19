@@ -279,6 +279,13 @@ function hvRun(X) {
     });
     return best;
   }
+  function bud90(i) {
+    var pf = X.ports[i];
+    function q(b) { var p = prm({ budget: b, skipMax: true, bruto: pf.mu * 100, spaarDeel: pf.w[2] * 100 }); return simQuick(runModel(p), pf, p).succ; }
+    var lo = 0, hi = X.st.budget;
+    for (var k = 0; k < 11; k++) { var mid = (lo + hi) / 2; if (q(mid) >= 0.9) lo = mid; else hi = mid; }
+    return Math.floor(lo);
+  }
   function pick() {
     var p = prm(), res = [];
     [1, 2, 3].forEach(function (i) {
@@ -287,7 +294,10 @@ function hvRun(X) {
     });
     var b = res.reduce(function (a, c) { return c.succ > a.succ ? c : a; });
     var near = res.filter(function (x) { return x.succ >= b.succ - 0.01; });
-    var pk = near.reduce(function (a, c) { return c.med > a.med ? c : a; });
+    /* opbouw (versie 25): de uitkomst is daar het bedrag bij 9 op de 10. Haalt geen mix de wens, kies dan de mix met het hoogste bedrag
+       bij 9 op de 10. Eerder won de mix met de grootste (kleine) kans op de wens, en die gaf juist het laagste bedrag. */
+    if (X.st.opbouw && b.succ < 0.9 && X.st.budget > 0) { near = res; near.forEach(function (x) { x.b90 = bud90(x.i); }); }
+    var pk = near.reduce(function (a, c) { return (a.b90 !== undefined ? c.b90 > a.b90 : c.med > a.med) ? c : a; });
     return { idx: pk.i, succ: pk.succ };
   }
   if (X.st.budget > 0) { adv = advice(0); adv.long = advice(5, adv.pf); }

@@ -120,12 +120,12 @@
     "2": 0
    },
    "autoInfo": {
-    "idx": 3,
-    "succ": 0.69825
+    "idx": 1,
+    "succ": 0.5275
    },
-   "autoIdx": 3,
-   "curSucc": 0.69825,
-   "max90": 2287
+   "autoIdx": 1,
+   "curSucc": 0.5275,
+   "max90": 2288
   }
  },
  "4 opbouw, stel 42/40": {
@@ -163,11 +163,11 @@
     "2": 0
    },
    "autoInfo": {
-    "idx": 3,
-    "succ": 0.69025
+    "idx": 1,
+    "succ": 0.58325
    },
-   "autoIdx": 3,
-   "curSucc": 0.69025,
+   "autoIdx": 1,
+   "curSucc": 0.58325,
    "max90": 3238
   }
  },
