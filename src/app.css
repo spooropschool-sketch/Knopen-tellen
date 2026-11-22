@@ -2255,7 +2255,7 @@ img.tvr-dot.cur { outline: 2px solid var(--accent); outline-offset: 1px; }
 .tvr-stack.two { flex-direction: row; }
 .tvr-stack.two .tvr-choice { flex: 1 1 0; text-align: center; }
 .tvr-choice { width: 100%; min-height: 56px; text-align: left; font-size: 17px; }
-.tvr-fs { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.tvr-fsw { display: flex; flex-wrap: wrap; gap: 0 16px; }
 .tvr-field { display: flex; flex-direction: column; gap: 5px; margin: 0 0 16px; font-size: 14px; color: var(--ink2); }
 .tvr-fl { font-size: 14px; color: var(--ink2); }
 .tvr-inrow { display: flex; align-items: center; gap: 8px; }

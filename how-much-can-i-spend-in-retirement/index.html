@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=2fd35691">
+<link rel="stylesheet" href="/app.css?v=34200a9e">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -4377,7 +4377,7 @@ var TRK = {
     /* work (alleen 50-plus) */
     if (tvWorkYes === null) tvWorkYes = state.werkP > 0 || (two() && state.werkD > 0);
     return qq('tv.q.work') + '<div class="tvr-stack two">' + [0, 1].map(function (n) { return '<button type="button" class="tvr-choice' + ((tvWorkYes ? 1 : 0) === n && (tvTouched.work || tv.done.work || tvWorkYes) ? ' on' : '') + '" data-tvr-yn="' + n + '">' + esc(t1(n ? 'tv.v.yes' : 'tv.v.no')) + '</button>'; }).join('') + '</div>' +
-      (tvWorkYes ? hh('tv.h.work') + '<div class="tvr-fs">' + tvField('werkP', two() ? nm1() : t1('tv.job.f'), two() ? t1('tv.job.f') : '') + (two() ? tvField('werkD', nm2(), t1('tv.job.f')) : '') + '</div>' : '') + tvNav(q);
+      (tvWorkYes ? hh('tv.h.work') + '<div class="tvr-fsw">' + tvField('werkP', two() ? nm1() : t1('tv.job.f'), two() ? t1('tv.job.f') : '') + (two() ? tvField('werkD', nm2(), t1('tv.job.f')) : '') + '</div>' : '') + tvNav(q);
   }
   function tvKnoop(i, cls) { return '<img class="tvr-dot' + (cls ? ' ' + cls : '') + '" src="/img/knoop-' + KN[i % KN.length] + '.webp" alt="" width="96" height="96">'; }
   function tvBody() {
