@@ -1672,7 +1672,7 @@
     var st = function (key, label, val) {
       return '<div class="opb-st"><span>' + label + '</span><div class="opb-st-c"><button type="button" data-opb-st="' + key + '" data-d="-1" aria-label="' + esc(t1('opb.less')) + '">−</button><b>' + val + '</b><button type="button" data-opb-st="' + key + '" data-d="1" aria-label="' + esc(t1('opb.moreS')) + '">+</button></div></div>';
     };
-    var steps = '<div class="opb-steps">' + st('inleg', t1('opb.stSave'), eur(state.inleg)) + st('budget', t1('opb.stBud'), eur(state.budget)) + st('stop', t1('opb.stStop'), fmtAge(stop)) + '</div>';
+    var steps = '<div class="opb-steps">' + st('inleg', t1('opb.stSave'), eur(state.inleg)) + st('budget', t1('opb.stBud'), eur(state.budget)) + st('stop', t1('opb.stStop') + (two() ? ' (' + nm1() + ')' : ''), fmtAge(stop)) + '</div>';
     var end = fmtAge(state.eindleeftijd); if (/^\d+$/.test(end)) end += ' ' + t1('u.years');
     var AN = { an: fmtAge(stop), en: fmtAge(state.eindleeftijd) };
     /* eerst het label, dan het bedrag, dan pas de periode: zo is meteen duidelijk wát het grote getal is */
@@ -4086,7 +4086,7 @@ var TRK = {
     if (id === 'bud') return state.budget > 0 ? t1('tv.v.pm', { v: eur(state.budget) }) : '';
     if (id === 'cap') return eur(state.startkapitaal);
     if (id === 'inl') return t1('tv.v.pm', { v: eur(state.inleg) });
-    if (id === 'stop') return t1('tv.v.at', { a: tvAgeTxt(stopAge()) });
+    if (id === 'stop') return t1('tv.v.at', { a: tvAgeTxt(stopAge()) }) + (two() ? ' (' + nm1() + ')' : '');
     if (id === 'work') { var w = state.werkP + (two() ? state.werkD : 0); return w > 0 ? t1('tv.v.pm', { v: eur(w) }) : t1('tv.v.no'); }
     if (id === 'age') return two() ? Math.round(state.leeftijdPaul) + ' · ' + Math.round(state.leeftijdDiana) : t1('tv.v.age', { v: Math.round(state.leeftijdPaul) });
     if (tv.done[id]) { var s = tvJobSum(id); return s > 0 ? t1('tv.v.pm', { v: eur(s) }) : t1('tv.v.none'); }
@@ -4173,7 +4173,7 @@ var TRK = {
     if (!host) return;
     if (!host.querySelector('.tv-num')) host.innerHTML = '<p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>';
     var g = function (c) { return host.querySelector(c); }, dl = g('.tv-delta'), bar = g('.tv-bar'), ln = g('.tv-line'), w = state.budget, T = tv.tot || 0, d = id ? (tv.led[id] || 0) : 0;
-    g('.tv-k').textContent = state.opbouw ? t1('tv.pic.opb', { a: tvAgeTxt(stopAge()), y: fmtAge(stopAge()) }) : t1('tv.pic.now');
+    g('.tv-k').textContent = state.opbouw ? t1('tv.pic.opb', { a: tvAgeTxt(stopAge()), y: fmtAge(stopAge()) }) + (two() ? ' (' + nm1() + ')' : '') : t1('tv.pic.now');
     g('.tv-pm').textContent = t1('tv.pic.pm');
     host.classList.toggle('calc', tvWaiting);
     if (tv.tot === null) g('.tv-num').textContent = '…'; else tvAnim(g('.tv-num'), tv.tot);
@@ -4363,7 +4363,7 @@ var TRK = {
     }
     if (id === 'cap') return qq('tv.q.cap') + hh('tv.h.cap') + tvChipRow(state.opbouw ? [0, 5000, 20000, 50000, 100000] : [50000, 150000, 300000, 500000, 750000]) + tvField('startkapitaal', t1('tv.own')) + tvNav(q);
     if (id === 'inl') return qq('tv.q.inl') + hh('tv.h.inl') + tvChipRow([0, 100, 250, 500, 1000]) + tvField('inleg', t1('tv.own'), t1('tv.pic.pm')) + tvNav(q);
-    if (id === 'stop') return qq('tv.q.stop') + hh('tv.h.stop') + tvStepper('stopLeeftijd') + tvNav(q);
+    if (id === 'stop') return qq('tv.q.stop') + '<p class="tvr-h">' + esc(t1('tv.h.stop') + (two() ? ' ' + t1('q.stopTwo') : '')) + '</p>' + tvStepper('stopLeeftijd', two() ? nm1() : '') + tvNav(q);   /* met z'n tweeën: voor wie de stopleeftijd geldt (de eerste persoon) staat erbij */
     if (id === 'age') return qq('tv.q.age') + hh('tv.h.age') + tvStepper('leeftijdPaul', two() ? nm1() : '') + (two() ? tvStepper('leeftijdDiana', nm2()) : '') + tvNav(q);
     /* work (alleen 50-plus) */
     if (tvWorkYes === null) tvWorkYes = state.werkP > 0 || (two() && state.werkD > 0);
