@@ -392,6 +392,21 @@
   </div>
 </div>
 
+<div class="modal" id="wipe" hidden>
+  <div class="modal-card inst-dlg" role="dialog" aria-modal="true" aria-labelledby="wipe-h">
+    <div class="modal-body">
+      <h2 id="wipe-h" data-t="wipe.h"></h2>
+      <p class="sub" data-t="wipe.p1"></p>
+      <p class="sub" data-t="wipe.p2"></p>
+      <div class="modal-actions wipe-actions">
+        <button class="btn primary" type="button" id="wipe-no" data-t="wipe.no"></button>
+        <button class="btn ghost" type="button" id="wipe-save" data-t="wipe.save"></button>
+        <button class="btn danger" type="button" id="wipe-yes" data-t="wipe.yes"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <button type="button" class="nt-fab" id="nt-fab" data-t-aria="nt.open" aria-expanded="false" aria-controls="nt-pop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v3h3M9 11h6M9 14.5h6M9 18h3.5"/></svg><span class="nt-dot" id="nt-dot" hidden></span></button>
 <div class="nt-pop" id="nt-pop" role="dialog" aria-labelledby="nt-h" hidden>
   <div class="nt-top"><span class="nt-title"><img class="nt-spot" src="img/kladblok.webp" alt="" width="131" height="150"><h2 id="nt-h" data-t="nt.h"></h2></span><button class="fb-x" type="button" id="nt-close" data-t-aria="b.close">✕</button></div>
@@ -3164,10 +3179,11 @@ var TRK = {
   $('tour-skip').addEventListener('click', function () { endTour(false); });
   window.addEventListener('scroll', function () { if (tourI >= 0) placeTour(false); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
-    if (!pop.hidden && ev.key === 'Escape' && $('fb').hidden && $('rel').hidden && $('inst').hidden && $('intro').hidden && $('share').hidden) { ntShow(false); return; }
+    if (!pop.hidden && ev.key === 'Escape' && $('fb').hidden && $('rel').hidden && $('inst').hidden && $('wipe').hidden && $('intro').hidden && $('share').hidden) { ntShow(false); return; }
     if (!$('fb').hidden) { if (ev.key === 'Escape') closeFb(); else if (ev.key === 'Tab') trap($('fb'), ev); return; }
     if (!$('rel').hidden) { if (ev.key === 'Escape') closeRel(); else if (ev.key === 'Tab') trap($('rel'), ev); return; }
     if (!$('inst').hidden) { if (ev.key === 'Escape') closeInst(); return; }
+    if (!$('wipe').hidden) { if (ev.key === 'Escape') closeWipe(); else if (ev.key === 'Tab') trap($('wipe'), ev); return; }
     if (!$('intro').hidden) { if (ev.key === 'Escape') { if (ui.introSeen) closeIntro(false); else ev.preventDefault(); } else if (ev.key === 'Tab') trap($('intro'), ev); return; }
     if (tourI >= 0) {
       if (ev.key === 'Escape') endTour(false);
@@ -4672,7 +4688,7 @@ var TRK = {
     /* Over: uitleg, privacy en delen */
     var ha = '<div class="tvh-rows">';
     C.forEach(function (c) { if (c.g === 'over') ha += chRow(c); });
-    ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + ($('btn-install') && !$('btn-install').hidden ? tvRow({ act: 'a:install', t: t1('inst.btn'), s: t1('inst.sub') }) : '') + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div>' + tvTrustLine();
+    ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + ($('btn-install') && !$('btn-install').hidden ? tvRow({ act: 'a:install', t: t1('inst.btn'), s: t1('inst.sub') }) : '') + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.wipe')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:wipe', cls: 'danger', t: t1('wipe.row'), s: t1('wipe.rowS') }) + '</div>' + tvTrustLine();
     var LA = $('tva-list'); if (LA.getAttribute('data-s') !== ha) { LA.innerHTML = ha; LA.setAttribute('data-s', ha); }
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
     var hk = '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
@@ -4786,12 +4802,30 @@ var TRK = {
     else if (a === 'a:notes') { var nf = $('nt-fab'); if (nf) nf.click(); }
     else if (a === 'a:share') openShare();
     else if (a === 'a:tip') tipApp('tip');
+    else if (a === 'a:wipe') openWipe();
     else if (a === 'a:install') { var ib = $('btn-install'); if (ib) ib.click(); }   /* versie 26: dezelfde knop als in de bovenbalk */
     else if (a === 'a:pots') plOpen('pots');   /* een extra pensioen is een Pro-functie: het slot opent het Pro-venster */
     else if (a === 'a:fb') openFb('idea', '');   /* testversie 6: de tip staat alleen hier, onder Over */
     else if (a === 'a:lang') { $('intro').classList.add('tv-land'); openIntro(0); }
     else if (a === 'a:intro') { $('intro').classList.remove('tv-land'); openIntro(1); }
   });
+  /* ---- opnieuw beginnen: alles wat de app op dit toestel bewaart weggooien ----
+     Alle opslag van de app begint met 'buttons-' (plan, tweede plan, voorkeuren, schermen, kladblok en de plek van de kladblokknop, je telling).
+     Daarna schrijft deze pagina niets meer terug: de app bewaart ook tijdens het sluiten van een scherm, en dat zou het gewiste plan terugzetten. */
+  var wipeFocus = null;
+  function openWipe() { wipeFocus = document.activeElement; $('wipe').hidden = false; setTimeout(function () { $('wipe-no').focus(); }, 30); }
+  function closeWipe() { $('wipe').hidden = true; if (wipeFocus && wipeFocus.focus) wipeFocus.focus(); }
+  function wipeAll() {
+    [localStorage, sessionStorage].forEach(function (st) { try { Object.keys(st).forEach(function (k) { if (k.indexOf('buttons-') === 0) st.removeItem(k); }); } catch (e) {} });
+    try { var si = Storage.prototype.setItem; Storage.prototype.setItem = function (k) { if (String(k).indexOf('buttons-') === 0) return; return si.apply(this, arguments); }; } catch (e) {}
+    track('extra-wipe');
+    setTimeout(function () { location.replace(location.pathname); }, 250);
+  }
+  $('wipe-no').addEventListener('click', closeWipe);
+  $('wipe-save').addEventListener('click', function () { closeWipe(); openShare(); });
+  $('wipe-yes').addEventListener('click', wipeAll);
+  $('wipe').addEventListener('click', function (ev) { if (ev.target === $('wipe')) closeWipe(); });
+  TRK['extra-wipe'] = ['extra', 'Alles gewist (Opnieuw beginnen onder Over)'];
   TRK['core-route-start'] = ['basis', 'Versie 26: route gestart'];
   TRK['core-route-3'] = ['basis', 'Versie 26: vierde vraag van de route bereikt'];
   TRK['core-route-done'] = ['basis', 'Versie 26: route tot het eind doorlopen'];
