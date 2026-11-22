@@ -2466,6 +2466,8 @@ html.tv3 #big-box .pots-in { padding-top: 14px; }
 
 /* versie 26: de testlabels zijn weg; dankwoord bij de intro */
 .tvr-tag:empty { display: none; }
+/* zonder label stond het kruisje van een hoofdstuk links (space-between met één knop); net als bij een vraag en de vensters staat het rechts */
+.tvc-head .tvr-x { margin-left: auto; }
 .tv-in .tv-thanks { margin: 14px 0 0; padding-left: 14px; border-left: 3px solid var(--copper); font-size: 14px; line-height: 1.45; color: var(--ink2); }
 
 /* versie 26: regel met bijgewerkt, bronnen en gebruikers onderaan Overzicht en Over */

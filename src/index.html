@@ -1064,7 +1064,7 @@
   }
   function setLang(l) {
     if (LANGS.indexOf(l) < 0) return; prefs.lang = l; savePrefs();
-    if (SITE) { try { location.href = (document.documentElement.getAttribute('data-lp-' + l) || (l === 'en' ? '/' : '/' + l + '/')) + location.hash; return; } catch (e) {} }
+    if (SITE) { try { var lu = (document.documentElement.getAttribute('data-lp-' + l) || (l === 'en' ? '/' : '/' + l + '/')) + location.hash; if (ovDepth()) location.replace(lu); else location.href = lu; return; } catch (e) {} }   /* vanuit een venster: de stap van dat venster wordt de nieuwe taal, zodat terug niet eerst het venster terugbrengt */
     refreshAll();
   }
   function refreshAll() { NF = {}; fillSelects(); renderLists(); update(); fillPro(); ntState($('nt-text').value ? 'nt.saved' : ''); if (tourI >= 0) placeTour(false); }
@@ -2632,7 +2632,7 @@ var TRK = {
     $('sh-copy').addEventListener('click', function () { whenReady(function () { copyText(shareText(), t1('sh.done')); }); });
     $('sh-print').addEventListener('click', function () {
       closeShare();
-      if (location.hash !== '#overview' && location.hash !== '') location.hash = '#overview';
+      if (location.hash !== '#overview' && location.hash !== '') navTo('#overview');
       setTimeout(function () { each('details.table-view', function (d) { d.open = false; }); try { window.print(); } catch (e) {} }, 250);
     });
   }
@@ -2862,7 +2862,7 @@ var TRK = {
     if (TV) tvStart();
     update();
     closeIntro(false);
-    if (TV) { if (location.hash && location.hash !== '#overview') location.hash = '#overview'; else go(); window.scrollTo(0, 0); tvAfterIntro(); return; }
+    if (TV) { if (location.hash && location.hash !== '#overview') navTo('#overview'); else go(); window.scrollTo(0, 0); tvAfterIntro(); return; }
     if (!ui.goal) { startTour(); return; }
     showStep(1, false);
     if (location.hash !== '#input') location.hash = '#input'; else go();
@@ -4418,7 +4418,16 @@ var TRK = {
     /* terug uit een hoofdstuk: naar de pagina waar het bij hoort (cockpit, Invullen of Over); na de route of terugzetten: naar de cockpit */
     var to = top ? 'overview' : (tvFocusCh ? tvTabOf(tvFocusCh) : (location.hash || '#overview').slice(1));
     if (ROUTES.indexOf(to) < 0 || to === 'insight') to = 'overview';
-    if (tvFocusCh || (location.hash || '#overview') !== '#' + to) { if (top) tvHomeY = 0; location.hash = '#' + to; }
+    /* versie 26.1: het kruisje van een hoofdstuk doet hetzelfde als de terugknop van je telefoon. Zo komt er geen extra stap bij,
+       en brengt terug daarna niet opnieuw het hoofdstuk. Een hoofdstuk dat via een link van buiten opende, wordt vervangen door de pagina. */
+    if (tvFocusCh && !ovDepth()) {
+      if (!top && history.state && history.state.kn) { ovGo(-1, true); return; }
+      try { location.replace('#' + to); } catch (e) { location.hash = '#' + to; }
+      if (top) tvHomeY = 0;
+      return;
+    }
+    if (tvFocusCh && !top && history.state && history.state.kn) { ovGo(-(ovDepth() + 1), true); return; }   /* het kladblok staat nog open: dat sluit mee */
+    if (tvFocusCh || (location.hash || '#overview') !== '#' + to) { if (top) tvHomeY = 0; navTo('#' + to); }
     else if (top) window.scrollTo(0, 0);
   }
   function tvAdvance() {
@@ -4469,7 +4478,7 @@ var TRK = {
       { id: 'big', g: 'meer', page: 'input', step: 2, sel: ['#big-box'], open: 1 },
       { id: 'tax', g: 'meer', page: 'input', step: 4, sel: ['#step-4 > .card'] },
       { id: 'run', g: 'meer', page: 'input', step: 4, sel: ['#step-4 > .card'] },
-      { id: 'basis', g: 'meer', page: 'input', step: 1, sel: ['#snel'] },   /* testversie 5: alleen geslacht, uitgavenverloop en sparen per periode */
+      { id: 'basis', g: 'meer', page: 'input', step: 1, sel: ['#snel'], pro: 1 },   /* testversie 5: uitgavenverloop en sparen per periode (geslacht staat bij Naam en geslacht); versie 26.1: beide zijn Pro, dus een slotje in de lijst */
       { id: 'aan', g: 'meer', page: 'input', step: 5, sel: ['#step-5 > .keyline', '#step-5 > .card', '#step-5 > .table-view', '#reset'] },
       { id: 'uit', g: 'zien', page: 'overview', sel: ['#opb-card', '#status-card', '#disc-line', '#big-line', '#kpis'] },   /* de twee cijfervakken staan achter Meer uitleg */
       { id: 'doen', g: 'zien', page: 'overview', sel: ['#opb-play', '#adv-card', '#wi-card'] },
@@ -4497,9 +4506,12 @@ var TRK = {
     if (c.id === 'run') return t1('tv.cs.run', { a: fmtAge(state.eindleeftijd) });
     if (c.id === 'pp') return t1(state.opbouw ? (two() ? 'tv.cs.pp2' : 'tv.cs.pp') : 'tv.cs.pp50');
     if (c.id === 'aan') return t1('tv.cs.aan', { i: num(state.inflatie, 2) + '%', k: num(state.kosten, 2) + '%' });
+    if (c.id === 'basis') return [].concat(band() === 0 ? [] : [t1('f.curve')]).concat(state.opbouw ? [t1('inl.h')] : []).join(' ');   /* versie 26.1: de oude regel noemde nog het geslacht */
+    if (c.id === 'debt' && tvNoStud()) return t1('oth.h') + ' · ' + t1('debt.h');
     var k = { basis: 'tv.cs.basis', nm: 'tv.cs.nm', sp2: 'tv.cs.sp2', pot: 'tv.cs.pot', debt: 'tv.cs.debt', big: 'big.s', uit: 'tv.cs.uit', doen: 'ch.s2', loop: 'ch.s3', mix: 'next.pfS', lad: 'next.ldS', koop: 'next.kpS', plan: 'tv.cs.plan', over: 'tv.cs.over' }[c.id];
     return k ? t1(k) : '';
   }
+  function tvNoStud() { return !state.opbouw && !slCount(); }
   function tvEls(c) {
     var pg = $('page-' + c.page), out = []; if (!pg) return out;
     c.sel.forEach(function (s) { Array.prototype.forEach.call(pg.querySelectorAll(s), function (e) { out.push(e); }); });
@@ -4532,6 +4544,7 @@ var TRK = {
   function tvFocusKeep() {
     var ch = tvFocusCh; if (!tvReady || !ch) return;
     var pg = $('page-' + ch.page), keep = tvEls(ch); if (!pg) return;
+    var sbx = $('stud-box'); if (sbx) sbx.hidden = ch.id === 'debt' && tvNoStud();
     if (!keep.length) { Array.prototype.forEach.call(pg.children, function (s) { s.classList.add('tvc-hide'); }); return; }
     keep.forEach(function (el) {
       var n = el;
@@ -4547,6 +4560,7 @@ var TRK = {
     var root = document.documentElement, ch = tvFocusCh;
     each('.tvc-hide', function (e) { e.classList.remove('tvc-hide'); });
     root.classList.toggle('tvc-on', !!ch); if (ch) root.setAttribute('data-tvc', ch.id); else root.removeAttribute('data-tvc');
+    var sbx = $('stud-box'); if (sbx) sbx.hidden = !!(ch && ch.id === 'debt' && tvNoStud());   /* versie 26.1: bij 50-plus geen studieschuld, tenzij er al een staat */
     if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld staat hier onder de naam, met een eigen label */
     root.classList.remove('tvc-more'); var mb = $('tvc-more'); mb.hidden = true; mb.innerHTML = IB_SVG; mb.setAttribute('aria-label', t1('ib.more')); mb.setAttribute('aria-expanded', 'false'); if (ch) { tvMoreSync(); setTimeout(tvMoreSync, 700); setTimeout(tvMoreSync, 2000); }
     $('tvc').hidden = !ch; $('tvc-t').hidden = !ch;
@@ -4665,13 +4679,15 @@ var TRK = {
     /* je knopen: de vragen van de route, met wat elk antwoord bijdraagt */
     S.forEach(function (q) { ids[q.id] = 1; }); C.forEach(function (c) { ids[c.id] = 1; });
     Object.keys(tv.led).forEach(function (k) { if (!ids[k]) oth += tv.led[k]; });
-    h += '<h2 class="tvh-g">' + esc(t1('tv.g.knopen')) + '<span>' + esc(t1('tv.g.count', { n: n + (tv.base > 0 ? 1 : 0), m: m + (tv.base > 0 ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
+    h += '<h2 class="tvh-g">' + esc(t1('tv.g.knopen')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
     function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
     function adds(d) { return d ? t1(d > 0 ? 'tv.row.up' : 'tv.row.down', { v: eur(Math.abs(d)) }) : ''; }
     function join(a, b) { return a && b ? a + ' · ' + b : (a || b); }
     /* ronde 4: waar een vast staatspensioen bestaat, staat de knoop er altijd, ook als er nog niets van meetelt; anders is het scherm met ingangsleeftijd en aan/uit niet te bereiken */
-    if (tv.base > 0) h += kRow({ act: 'c:sp2', cls: 'done', ic: tvKnoop(7), t: tv.baseSp ? cap1(spName()) : t1('tv.fin.had'), s: join(join(t1('tv.v.pm', { v: eur(tv.base) }), tv.baseSp ? t1('tv.row.auto') : ''), adds(tv.led.sp2 || 0)), st: 'ok' });
-    else if (spFlat()) h += kRow({ act: 'c:sp2', cls: 'done', ic: tvKnoop(7), t: cap1(spName()), s: join(t1('tv.cs.sp2'), adds(tv.led.sp2 || 0)), st: 'ok' });
+    /* versie 26.1: de bovenste knoop opent het scherm van het staatspensioen en heet daar dus ook naar, in elke leeftijdsgroep.
+       Telde er bij de start al meer mee (eerder ingevuld, of na een andere leeftijdsgroep), dan zegt de regel eronder dat. */
+    if (spFlat()) h += kRow({ act: 'c:sp2', cls: 'done', ic: tvKnoop(7), t: cap1(spName()), s: join(tv.base > 0 ? join(t1('tv.v.pm', { v: eur(tv.base) }), t1(tv.baseSp ? 'tv.row.auto' : 'tv.row.had')) : t1('tv.cs.sp2'), adds(tv.led.sp2 || 0)), st: 'ok' });
+    else if (tv.base > 0) h += '<div class="tvh-row fix">' + tvKnoop(7) + '<span class="tvh-tx"><b>' + esc(t1('tv.fin.had')) + '</b><span>' + esc(t1('tv.v.pm', { v: eur(tv.base) })) + '</span></span></div>';   /* zonder vast staatspensioen: alleen ter info, het staatspensioen is daar een eigen knoop */
     S.forEach(function (q, i) {
       var done = !!tv.done[q.id], parked = q.job && !done && tv.jobs[q.id], d = tv.led[q.id] || 0;
       h += kRow({ act: 'q:' + i, cls: (done ? 'done' : (parked ? 'wait' : 'open')) + (tvFlash === q.id ? ' flash' : ''), ic: done ? tvKnoop(i) : '<span class="tvr-dot' + (parked ? ' wait' : '') + '"></span>', t: tvName(q),
@@ -4787,7 +4803,7 @@ var TRK = {
     if (T0.closest('#tvc-back') || T0.closest('[data-tvc-home]')) { tvToHome(false); return; }
     if (T0.closest('#tvc-more')) { var mo = document.documentElement.classList.toggle('tvc-more'); $('tvc-more').setAttribute('aria-expanded', mo ? 'true' : 'false'); if (tvFocusCh && tvFocusCh.id === 'uit') { try { renderOpb(); } catch (e) {} } return; }
     /* de link naar de disclaimer opent het hoofdstuk Privacy en disclaimer (de pagina Over is nu een lijst) */
-    if (T0.closest('[data-disc-go]')) { ev.preventDefault(); location.hash = '#k-priv'; return; }
+    if (T0.closest('[data-disc-go]')) { ev.preventDefault(); navTo('#k-priv', 1); return; }
     if (!(b = T0.closest('[data-tvh]'))) return;
     var a = b.getAttribute('data-tvh'), S = tvSteps(), i;
     if (tv.fin && !tv.hint) { tv.hint = 1; tvSave(); }
@@ -4798,7 +4814,7 @@ var TRK = {
     }
     else if (a.indexOf('job:') === 0) tvGoJob(a.slice(4));
     else if (a.indexOf('q:') === 0) { tv.on = 1; tv.step = +a.slice(2); tvView = 'step'; tvMode = ''; tvEdit = true; tvWorkYes = null; tvOpenUi(); }
-    else if (a.indexOf('c:') === 0) { if (tvIsOpen) tvCloseUi(); tvHomeY = window.pageYOffset || 0; track('extra-ch-' + a.slice(2)); location.hash = '#k-' + a.slice(2); }
+    else if (a.indexOf('c:') === 0) { if (tvIsOpen) tvCloseUi(); tvHomeY = window.pageYOffset || 0; track('extra-ch-' + a.slice(2)); navTo('#k-' + a.slice(2), 1); }
     else if (a === 'a:notes') { var nf = $('nt-fab'); if (nf) nf.click(); }
     else if (a === 'a:share') openShare();
     else if (a === 'a:tip') tipApp('tip');
@@ -4855,6 +4871,51 @@ var TRK = {
   /* het slotje van wat in de testversie open staat is een open slotje */
   var PL_OPEN = '<svg class="pl-lock pl-open" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/><path d="M5.3 7V4.4a2.7 2.7 0 0 1 5.2-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
   (function () { var N = { en: 'A different amount per period', nl: 'Per periode een ander bedrag', de: 'Je Zeitraum ein anderer Betrag', fr: 'Un montant différent par période', es: 'Un importe distinto por periodo' }; Object.keys(N).forEach(function (l) { if (PLT[l] && PLT[l].f && PLT[l].f.period) PLT[l].f.period[0] = N[l]; }); })();
+  /* ---- versie 26.1: terug is sluiten ----
+     Een vraag (de route), een venster en het kladblok openen over de pagina heen. Elk krijgt een eigen stap in de geschiedenis van
+     de browser ({kov: diepte}). De terugknop van je telefoon sluit dan wat bovenop ligt, net als het kruisje, in plaats van de app te
+     verlaten. Sluit je zelf (kruisje, Klaar, Escape), dan gaat die stap weer weg. Een hoofdstuk heeft een eigen adres (#k-…, {kn: 1}).
+     Nieuwe stappen komen er alleen bij als iets opengaat; Chrome slaat stappen over die een pagina zonder tik toevoegt. */
+  var OVL = [[plM, plClose], [$('share'), closeShare], [$('fb'), closeFb], [$('wipe'), closeWipe], [$('rel'), closeRel], [$('inst'), closeInst],
+    [$('intro'), function () { closeIntro(false); }, function () { return ui.introSeen; }],   /* de allereerste introductie is het begin van de app: daar verlaat terug de app, zoals altijd */
+    [$('tvr'), function () { var x = $('tvr-x'); if (x) x.click(); }],
+    [$('nt-pop'), function () { ntShow(false); }]].filter(function (o) { return o[0]; });   /* bovenste eerst */
+  var ovGoing = 0, ovGoT = 0;
+  function ovOpen() { return (OVL || []).filter(function (o) { return !o[0].hidden && (!o[2] || o[2]()); }); }
+  function ovDepth() { var s = history.state; return s && s.kov > 0 ? s.kov : 0; }
+  /* zelf terug in de geschiedenis; tot die stap binnen is, komt er geen tweede bij. asBack: daarna sluiten wat erboven ligt, zoals bij de terugknop */
+  function ovGo(n, asBack) { if (ovGoing) return; ovGoing = asBack ? 2 : 1; clearTimeout(ovGoT); ovGoT = setTimeout(function () { ovGoing = 0; }, 1500); history.go(n); }
+  function ovSync() {
+    if (ovGoing) return;
+    var n = ovOpen().length, d = ovDepth(), kn = history.state && history.state.kn ? 1 : 0;
+    try {
+      while (d < n) { d++; history.pushState({ kov: d, kn: kn }, '', location.href); }
+      if (d > n) ovGo(n - d);
+    } catch (e) {}
+  }
+  /* naar een ander scherm. Ging er net een venster of vraag dicht, dan neemt dat scherm de plek van die stap in (geen lege stap terug) */
+  function navTo(h, kn) {
+    try {
+      var rep = ovDepth() > 0 && !ovOpen().length;
+      if (location.hash === h) return;
+      if (rep) location.replace(h); else location.hash = h;
+      history.replaceState(kn ? { kn: 1 } : null, '', location.href);
+    } catch (e) { location.hash = h; }
+  }
+  window.addEventListener('popstate', function () {
+    var g = ovGoing; ovGoing = 0; clearTimeout(ovGoT);
+    if (g === 1) { ovSync(); return; }
+    var open = ovOpen(), d = ovDepth(), i;
+    for (i = 0; i < open.length - d; i++) open[i][1]();   /* terug: sluit wat boven deze stap ligt */
+    ovSync();   /* een lege stap (venster al dicht): nog een stap terug */
+  });
+  window.addEventListener('hashchange', function () { ovSync(); });
+  (function () {
+    var s = history.state;
+    if (s && s.kov) { try { history.replaceState(s.kn ? { kn: 1 } : null, '', location.href); } catch (e) {} }   /* na herladen hoort zo'n stap bij de vorige keer */
+    if (window.MutationObserver) { var mo = new MutationObserver(function () { ovSync(); }); OVL.forEach(function (o) { mo.observe(o[0], { attributes: true, attributeFilter: ['hidden'] }); }); }
+    ovSync();   /* Wat is er nieuw kan al open staan */
+  })();
   tvReady = true;
   tvFocusApply();
   if (firstDone) tvCalc();
