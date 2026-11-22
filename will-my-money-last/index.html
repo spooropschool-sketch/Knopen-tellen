@@ -514,7 +514,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/en.js?v=edfe28a0"></script>
+<script src="/i18n/en.js?v=95718f60"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -716,7 +716,7 @@
     stopLeeftijd: 0,   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
     exCap: 0, exBud: 0, exInl: 0, exAge: 0   /* voorbeeldplan (versie 25): de bedragen die de knop 'Probeer eerst een voorbeeld' heeft ingevuld; 0 = geen voorbeeld */
   };
-  var APPV = '26 · 2026-11', TV = true;   /* versie 26: de hele app rond je telling (was testversie 6) */
+  var APPV = '27 · 2026-11', TV = true;   /* versie 26: de hele app rond je telling (was testversie 6); versie 27: Invullen in drie lagen (was testversie 7) */
   document.documentElement.classList.add('tv3');
   var state = {};
   /* stopleeftijd in de opbouw: zelf gekozen, of anders de leeftijd waarop je pensioen ingaat */
@@ -3008,7 +3008,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 26, n: 7, f: 0 }, { v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 27, n: 4, f: 5 }, { v: 26, n: 7, f: 0 }, { v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -4908,11 +4908,11 @@ var TRK = {
   $('wipe-yes').addEventListener('click', wipeAll);
   $('wipe').addEventListener('click', function (ev) { if (ev.target === $('wipe')) closeWipe(); });
   TRK['extra-wipe'] = ['extra', 'Alles gewist (Opnieuw beginnen onder Over)'];
-  TRK['extra-ref-offer'] = ['extra', 'Testversie 7: aanbod om te verfijnen na de route getoond'];
-  TRK['extra-ref-offer-go'] = ['extra', 'Testversie 7: aanbod verfijnen aangenomen'];
-  TRK['extra-ref-offer-skip'] = ['extra', 'Testversie 7: aanbod verfijnen overgeslagen'];
-  TRK['extra-ref-done'] = ['extra', 'Testversie 7: een verfijnknoop telt mee'];
-  TRK['extra-ref-next'] = ['extra', 'Testversie 7: Volgende onder een verfijnscherm'];
+  TRK['extra-ref-offer'] = ['extra', 'Versie 27: aanbod om te verfijnen na de route getoond'];
+  TRK['extra-ref-offer-go'] = ['extra', 'Versie 27: aanbod verfijnen aangenomen'];
+  TRK['extra-ref-offer-skip'] = ['extra', 'Versie 27: aanbod verfijnen overgeslagen'];
+  TRK['extra-ref-done'] = ['extra', 'Versie 27: een verfijnknoop telt mee'];
+  TRK['extra-ref-next'] = ['extra', 'Versie 27: Volgende onder een verfijnscherm'];
   TRK['core-route-start'] = ['basis', 'Versie 26: route gestart'];
   TRK['core-route-3'] = ['basis', 'Versie 26: vierde vraag van de route bereikt'];
   TRK['core-route-done'] = ['basis', 'Versie 26: route tot het eind doorlopen'];
