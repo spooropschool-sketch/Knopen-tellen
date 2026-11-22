@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=5c23e86e">
+<link rel="stylesheet" href="/app.css?v=dbbf63c7">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -75,7 +75,13 @@
 
 <main class="wrap">
 
+  <div class="tvc" id="tvc" hidden>
+    <div class="tvc-head"><span class="tvr-tag" id="tvc-tag"></span><button type="button" class="tvr-x" id="tvc-back">×</button></div>
+    <section class="tv-pic" id="tvc-pic" aria-live="polite"></section>
+  </div>
+  <div class="tvc-t" id="tvc-t" hidden><div class="tvc-tr"><h1 id="tvc-h"></h1><button type="button" class="tvc-i" id="tvc-more" aria-expanded="false" hidden></button></div><p id="tvc-s"></p><div class="tvc-empty" id="tvc-empty" hidden><p id="tvc-empty-t"></p><button type="button" class="btn primary" data-tvc-home="1"><span aria-hidden="true">‹ </span><span data-t="tv.ch.back">Votre compte</span></button></div></div>
   <section class="page" id="page-overview" aria-labelledby="ov-h">
+    <div class="tvh" id="tvh"></div>
     <header class="hero" id="ov-main">
       <div class="hero-text">
         <p class="kicker"><span class="kdot" aria-hidden="true"></span><span data-t="home.kick">Perspective financière</span></p>
@@ -180,6 +186,7 @@
   </section>
 
   <section class="page" id="page-input" aria-labelledby="in-h" hidden>
+  <div class="tvi" id="tvi"></div>
     <header class="page-top">
       <div class="pt-text">
         <h2 class="pg-h" id="in-h" data-t="in.h">Cinq petits boutons</h2>
@@ -203,18 +210,18 @@
             <div class="qp only2"><div class="field"><label for="q-leeftijdDiana"><span class="pq2"></span></label><div class="inrow"><input id="q-leeftijdDiana" type="number" inputmode="numeric" min="18" max="100" step="1"><span class="unit" data-t="u.years">ans</span></div></div><div class="seg seg3 sex-seg" role="radiogroup" data-t-aria="f.sex" aria-label="Sexe"><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="0"><span data-t="sex.m">Homme</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="1"><span data-t="sex.f">Femme</span></label><label class="seg-opt"><input type="radio" name="q-geslD" data-k="geslD" value="-1"><span data-t="sex.none">Autre</span></label></div><p class="hint sex-info" data-t="sex.info">Votre choix détermine seulement l’espérance de vie utilisée dans le calcul. En moyenne, les femmes vivent quelques années de plus que les hommes, et plus vous vivez longtemps, plus votre argent doit durer. Choisissez ce qui vous correspond. Avec « Autre », nous prenons la moyenne des deux. Plus loin, vous pouvez aussi fixer vous-même l’âge de fin.</p></div>
             <div class="field opb-q" id="stop-box"><label for="q-stop" data-t="q.stop">À quel âge voulez-vous arrêter de travailler ?</label><div class="inrow"><input id="q-stop" type="number" inputmode="numeric" min="19" max="75" step="1"><span class="unit" data-t="u.years">ans</span></div><p class="hint" id="q-stop-hint"></p></div>
             <div class="field opb-q" id="lvl-box"><span class="flabel" data-t="lvl.q">Comment voulez-vous vivre plus tard ?</span><div class="lvl" id="lvl" role="radiogroup" data-t-aria="lvl.q" aria-label="Comment voulez-vous vivre plus tard ?"></div><p class="hint" id="lvl-hint" data-t="lvl.hint">Montants indicatifs en argent d’aujourd’hui, fondés sur le minimum néerlandais du Nibud (2025) et les dépenses CBS selon le revenu, converties en 2025. Pour deux personnes, nous comptons 1,4 fois, car vous partagez le logement. Pour les autres pays de la zone euro, nous ajustons selon les niveaux de prix. Moyennes, pas un conseil. Vous pouvez modifier le montant ci-dessous. En dehors des Pays-Bas, c’est une indication : les montants sont néerlandais et convertis avec les niveaux de prix, et non fondés sur les habitudes de dépenses de votre pays.</p><p class="hint lvl-own" data-t="lvl.own">Vous vivez avec moins, ou avec plus ? Indiquez votre propre montant ci-dessous.</p></div>
-            <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Combien aimeriez-vous dépenser par mois ?</span><span class="opb-q" data-t="f.budgetOpb">Combien voulez-vous dépenser par mois plus tard ?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
+            <div class="field"><label for="q-budget"><span class="not-opb" data-t="f.budget">Combien aimeriez-vous dépenser par mois ?</span><span class="opb-q" data-t="f.budgetOpb">Combien voulez-vous dépenser par mois plus tard ?</span></label><div class="inrow"><input id="q-budget" type="text" inputmode="numeric" autocomplete="off" data-money="1" data-t-ph="q.budgetPh"><span class="unit" data-t="u.netMonth">$ par mois sur votre compte</span></div></div>
             <div class="field curve-f"><div class="ftop"><span class="flabel" data-t="f.curve">Comment évoluent les dépenses plus tard ?</span><span class="pro-tag" data-pro="spend-curve"></span></div><p class="hint curve-intro" data-t="curve.intro">Les études montrent qu’on dépense différemment selon les étapes de la vie. C’est pourquoi vous choisissez ici comment vos dépenses évoluent plus tard.</p>
               <div class="seg seg3" role="radiogroup" data-t-aria="f.curve" aria-label="Comment évoluent les dépenses plus tard ?"><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="0"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-vlak.webp" alt=""><span data-t="curve.o0">Constantes</span><small class="curve-cap" data-cap="0"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="1"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-typisch.webp" alt=""><span data-t="curve.o1">Typique</span><small class="curve-cap" data-cap="1"></small></span></label><label class="seg-opt"><input type="radio" name="q-uitgaveDaling" data-k="uitgaveDaling" value="2"><span><img loading="lazy" decoding="async" class="curve-img" src="/img/verloop-sterk.webp" alt=""><span data-t="curve.o2">En forte baisse</span><small class="curve-cap" data-cap="2"></small></span></label></div>
               <p class="zk-cap" id="curve-cap" hidden></p><p class="zk-d" id="curve-delta" hidden></p>
               <p class="hint" id="curve-hint"></p></div>
             <div class="field"><label for="q-startkapitaal"><span data-t="q.capital">Combien avez-vous épargné ou investi jusqu’ici ?</span> <span class="opt" data-t="q.optional">(facultatif)</span></label><div class="inrow"><input id="q-startkapitaal" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.cur">$</span></div></div>
-            <div class="field not-opb" id="wk1-box" hidden><label for="wk1-amt" data-t="wk1.q">Vous travaillez encore ? Combien gagnez-vous net par mois ?</label><div class="inrow"><input id="wk1-amt" data-wk1="amt" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div>
+            <div class="field not-opb" id="wk1-box" hidden><label for="wk1-amt" data-t="wk1.q">Vous travaillez encore ? Combien gagnez-vous par mois sur votre compte ?</label><div class="inrow"><input id="wk1-amt" data-wk1="amt" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ par mois sur votre compte</span></div>
               <div class="wk1-till" id="wk1-till" hidden><label for="wk1-age" data-t="wk1.till">Jusqu’à quel âge travaillerez-vous ?</label><div class="inrow"><input id="wk1-age" data-wk1="age" type="number" inputmode="numeric" min="18" max="80" step="1"><span class="unit" data-t="u.years">ans</span></div></div>
               <p class="hint" data-t="wk1.hint">Laissez vide si vous avez déjà arrêté. Ainsi, le calcul ne suppose pas que vous arrêtez de travailler aujourd’hui.</p></div>
-            <div class="field opb-q"><label for="q-inleg" data-t="q.inleg">Combien mettez-vous de côté par mois ?</label><div class="inrow"><input id="q-inleg" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div><div class="field opb-q inl-per" id="inl-per"></div>
-            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
-            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ net par mois</span></div></div>
+            <div class="field opb-q"><label for="q-inleg" data-t="q.inleg">Combien mettez-vous de côté par mois ?</label><div class="inrow"><input id="q-inleg" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ par mois sur votre compte</span></div></div><div class="field opb-q inl-per" id="inl-per"></div>
+            <div class="field sp-q"><label for="q-spP"><span class="spq1"></span></label><div class="inrow"><input id="q-spP" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ par mois sur votre compte</span></div></div>
+            <div class="field sp-q only2"><label for="q-spD"><span class="spq2"></span></label><div class="inrow"><input id="q-spD" type="text" inputmode="numeric" autocomplete="off" data-money="1" placeholder="0"><span class="unit" data-t="u.netMonth">$ par mois sur votre compte</span></div></div>
           </div>
           <p class="hint sp-q" id="q-sp-hint"></p>
         </div>
@@ -287,6 +294,7 @@
   </section>
 
   <section class="page" id="page-about" aria-labelledby="ab-h" hidden>
+  <div class="tva" id="tva"></div>
     <header class="page-top has-art">
       <div class="pt-text">
         <h2 class="pg-h" id="ab-h" data-t="pay.h">L’heure de faire le point.<br><span>L’heure d’avancer.</span></h2>
@@ -344,6 +352,7 @@
 
 </main>
 
+<div class="tvr" id="tvr" role="dialog" aria-modal="true" aria-labelledby="tvr-q" hidden></div>
 <div class="modal" id="intro" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-h0" id="intro-card">
     <div class="modal-hero">
@@ -362,7 +371,7 @@
       </div>
     </div>
     <div class="modal-body" id="intro-s1" hidden>
-      <h2 id="intro-h" data-t="intro.ask">Qu’aimeriez-vous savoir ?</h2>
+      <h2 id="intro-h" data-t="intro.ask">Par quelle question voulez-vous commencer ?</h2>
       <p class="sub" data-t="intro.promise">Est-ce suffisant ? Nous le calculons, sans discours commercial et avec la source de chaque chiffre.</p>
       <div class="agebox" id="agebox"><span class="age-q" id="age-q" data-t="age.q">Quel âge avez-vous, à peu près ?</span>
         <div class="seg seg3 age-seg" role="radiogroup" aria-labelledby="age-q"><label class="seg-opt"><input type="radio" name="age-band" value="0"><span>18–34</span></label><label class="seg-opt"><input type="radio" name="age-band" value="1"><span>35–49</span></label><label class="seg-opt"><input type="radio" name="age-band" value="2"><span>50+</span></label></div>
@@ -489,7 +498,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=5f758903"></script>
+<script src="/i18n/fr.js?v=f303bc17"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -691,7 +700,8 @@
     stopLeeftijd: 0,   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
     exCap: 0, exBud: 0, exInl: 0, exAge: 0   /* voorbeeldplan (versie 25): de bedragen die de knop 'Probeer eerst een voorbeeld' heeft ingevuld; 0 = geen voorbeeld */
   };
-  var APPV = '25 · 2026-11';
+  var APPV = '26 · 2026-11', TV = true;   /* versie 26: de hele app rond je telling (was testversie 6) */
+  document.documentElement.classList.add('tv3');
   var state = {};
   /* stopleeftijd in de opbouw: zelf gekozen, of anders de leeftijd waarop je pensioen ingaat */
   function stopAge() { return state.stopLeeftijd > 0 ? state.stopLeeftijd : state.pensioenLeeftijd; }
@@ -1684,10 +1694,10 @@
       incLine + to90 + debtLine +
       '<details class="opb-more"><summary>' + t1('opb.more') + '</summary><p class="opb-range">' + t1('opb.budWhy', { e: end, en: AN.en }) + '</p>' + (state.autoEind ? '<p class="opb-range">' + t1('opb.life', { en: AN.en }) + '</p>' : '') + '<p class="opb-range">' + t1('opb.range', { lo: eur(sim.q(k, 0.1)), hi: eur(sim.q(k, 0.9)) }) + '</p><p class="opb-note">' + t1('opb.note', { n: num(SIMN, 0) }) + '</p></details>';
     var play = $('opb-play'); if (play) { play.hidden = false; play.innerHTML = 
-      '<h3 class="opb-h">' + t1('opb.stH') + '</h3>' + emptyHint + steps +
+      '<div class="opb-sec opb-sec-st"><h3 class="opb-h">' + t1('opb.stH') + '</h3>' + emptyHint + steps + '</div>' +
       (ex.list.length ? '<h3 class="opb-h">' + t1('opb.wiH') + '</h3><div class="opb-chips">' + chips + '</div>' : '') +
       '<p class="opb-delta">' + (ex.any && bud !== base ? t1(bud > base ? 'opb.wiDeltaB' : 'opb.wiDeltaM', { v: eur(Math.abs(bud - base)) }) : '') + '</p>' +
-      '<h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + ' ' + t1('opb.tLegendMed') + '</p>' + mixWhy + msg +
+      '<div class="opb-sec opb-sec-mix"><h3 class="opb-h">' + t1('opb.mixh2') + '</h3><div class="opb-tiles">' + tiles + '</div><p class="opb-note">' + t1(want > 0 ? 'opb.tLegend' : 'opb.tLegend0') + ' ' + t1('opb.tLegendMed') + '</p>' + mixWhy + '</div>' + msg +
       '<div class="opb-act"><a class="btn primary" href="#input" data-opb-more="1">' + t1('opb.moreBtn') + '</a></div>';
     }
     opbTok++; el.classList.toggle('opb-part', pend.length > 0); if (play) play.classList.toggle('opb-part', pend.length > 0);
@@ -2734,6 +2744,7 @@ var TRK = {
   var ROUTES = ['overview', 'input', 'insight', 'about'], pendingScroll = null, lastW = 0;
   function go() {
     var h = (location.hash || '').replace('#', '');
+    if (TV) h = tvRouteOf(h);
     route = ROUTES.indexOf(h) >= 0 ? h : 'overview';
     if (route !== 'overview') track('core-tab-' + route);
     ROUTES.forEach(function (r) {
@@ -2743,10 +2754,12 @@ var TRK = {
     });
     var sn = $('snel'), slot = $(route === 'overview' ? 'ov-quick' : 'step1-slot'); if (sn && slot && sn.parentNode !== slot) slot.appendChild(sn);
     if (route === 'input') showStep(curStep, false);
+    if (TV) tvFocusApply();
     updMini();
     if (route === 'overview' && last) { lastW = 0; renderFan(); renderFlow(last); }
     if (route === 'insight' && pfStale && last) renderPortfolios();
     window.scrollTo(0, 0);
+    if (TV) tvAfterGo();
     if (pendingScroll && $(pendingScroll)) {
       var id = pendingScroll; pendingScroll = null;
       /* de inhoud erboven en erin kan nog van hoogte veranderen terwijl de berekening klaar komt: daarom een paar keer opnieuw uitlijnen, tenzij de bezoeker zelf al scrolt */
@@ -2840,8 +2853,10 @@ var TRK = {
     ui.goal = list.indexOf(g) >= 0 ? g : ''; state.opbouw = young ? 1 : 0; ui.band = introBand;
     if (ageTouched && bandOf(state.leeftijdPaul) !== introBand) { var av = BAND_AGE[introBand]; state.leeftijdPaul = av; if (two() && state.leeftijdDiana === DEF.leeftijdDiana) state.leeftijdDiana = av; }
     saveUi(); showGoal(); track('reach-goal-' + (ui.goal || 'unsure')); if (introBand === 0) track('reach-young'); else if (introBand === 1) track('reach-midlife');
+    if (TV) tvStart();
     update();
     closeIntro(false);
+    if (TV) { if (location.hash && location.hash !== '#overview') location.hash = '#overview'; else go(); window.scrollTo(0, 0); tvAfterIntro(); return; }
     if (!ui.goal) { startTour(); return; }
     showStep(1, false);
     if (location.hash !== '#input') location.hash = '#input'; else go();
@@ -2977,7 +2992,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 26, n: 7, f: 0 }, { v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
@@ -3834,7 +3849,7 @@ var TRK = {
     M.forEach(function (m) { each(m[0], function (el) { var k = opb ? m[1] : m[2]; if (el.getAttribute('data-t') !== k) { el.setAttribute('data-t', k); el.innerHTML = t1(k); } }); });
     [['n-werkP', 'h.bijAmt', 'h.wkAmt'], ['n-werkD', 'h.bijAmt', 'h.wkAmt'], ['n-werkTotP', 'h.bijEnd', 'h.wkEnd'], ['n-werkTotD', 'h.bijEnd', 'h.wkEnd']].forEach(function (m) {
       var f = $(m[0]); if (!f) return; var hint = f.closest('.field') && f.closest('.field').querySelector('.hint');
-      if (hint) { var k = opb ? m[1] : m[2]; if (hint.getAttribute('data-t') !== k) { hint.setAttribute('data-t', k); hint.innerHTML = t1(k, { a: fmtAge(stopAge()) }); } }
+      if (hint) { var k = opb ? m[1] : m[2], hv = t1(k, { a: fmtAge(stopAge()) }); if (hint.getAttribute('data-t') !== k) hint.setAttribute('data-t', k); if (hint.innerHTML !== hv && hint.textContent !== hv) hint.innerHTML = hv; }
     });
     each('.wk-h', function (el) { var k = opb ? 'wk.hBij' : 'wk.h'; if (el.getAttribute('data-t') !== k) { el.setAttribute('data-t', k); el.innerHTML = t1(k); } });
   }
@@ -4001,6 +4016,7 @@ var TRK = {
     setTimeout(function () { var b = $('q-budget'); if (b && b.offsetParent) { b.scrollIntoView({ block: 'center' }); b.focus(); } }, 400);
   }
   function exSync() {
+    if (TV) { ['ex-bar-ov', 'ex-bar-in', 'ov-ex', 'ex-try'].forEach(function (id) { var e0 = $(id); if (e0) e0.hidden = true; }); return; }
     var act = exActive(), on = act.length > 0, txt = '';
     if (on) {
       var parts = [];
@@ -4021,6 +4037,799 @@ var TRK = {
   finishUpdate = function () { finishUpdate25b(); exSync(); };
   exSync();
 
+  /* ================= testversie 3: de hele app rond je telling =================
+     Staat los van de versiereeks (geen 'Wat is er nieuw'). Drie lagen, verder niets:
+     1. Thuis: je telling (het bedrag per maand, met de balk naar je doel) en daaronder een inhoudsopgave van schermbrede balken.
+     2. De route: de vragen van het begin, één per scherm. Dezelfde schermen openen als je thuis op een knoop tikt.
+     3. Een hoofdstuk: één onderdeel van de oude pagina's (Overzicht, Invullen, Inzicht, Over) alleen in beeld, met je telling erboven.
+        De onderdelen zelf zijn niet herschreven: het hoofdstuk verbergt de rest van de pagina (klasse tvc-hide). Zo blijven
+        alle velden, Pro-sloten, meetpunten en teksten werken, en is de rekenkern niet aangeraakt.
+     Elke wijziging, waar je hem ook maakt, komt te staan bij de knoop of het hoofdstuk waar hij bij hoort (tvSnap). */
+  var TVKEY = KEY + '-tv6';
+  KOFI = '';   /* testversie 6: geen koffie-opties */
+  /* testversie 6: Pro-functies tonen een slotje in plaats van het woord Pro */
+  function tvLock(open) { return '<span class="tv-lock' + (open ? ' is-open' : '') + '" role="img" title="' + esc(t1('pro.tip')) + '" aria-label="' + esc(t1('pro.tip')) + '">' + (open ? PL_OPEN : PL_LOCK) + '</span>'; }
+  function tvFresh() { return { on: 0, step: 0, done: {}, led: {}, base: null, baseSp: 0, tot: null, jobs: {}, closed: 0, fin: 0, last: 0, ctx: '', stopAuto: 0, hint: 0, snap: null }; }
+  var tv = tvFresh();
+  (function () {
+    try {
+      var o = JSON.parse(localStorage.getItem(TVKEY) || 'null'); if (!o || typeof o !== 'object') return;
+      ['on', 'step', 'closed', 'fin', 'last', 'baseSp', 'base', 'tot', 'stopAuto', 'hint'].forEach(function (k) { if (typeof o[k] === 'number' && isFinite(o[k])) tv[k] = o[k]; });
+      ['done', 'led', 'jobs', 'snap'].forEach(function (k) { if (o[k] && typeof o[k] === 'object') tv[k] = o[k]; });
+      if (typeof o.ctx === 'string') tv.ctx = o.ctx;
+      /* testversie 6, ronde 3: het scherm Beleggen, belasting en looptijd is gesplitst; wat er al stond verhuist mee */
+      if (tv.snap && typeof tv.snap.basis === 'string' && tv.snap.nm === undefined) { var ob2 = tv.snap.basis.split('|'); if (ob2.length >= 4) { tv.snap.nm = ob2.slice(0, 2).join('|'); tv.snap.basis = ob2.slice(2).join('|'); } }
+      if (tv.led.bel !== undefined) { tv.led.mix = (tv.led.mix || 0) + tv.led.bel; delete tv.led.bel; }
+      if (tv.snap && typeof tv.snap.bel === 'string') { var ob = tv.snap.bel.split('|'); tv.snap.mix = ob[0]; tv.snap.tax = ob.slice(1, 4).join('|'); tv.snap.run = ob.slice(4).join('|'); delete tv.snap.bel; }
+    } catch (e) {}
+  })();
+  var tvRet = false, tvChg = '', tvWaiting = false, tvMode = '', tvView = 'step', tvEdit = false, tvSeq = 0, tvTyp = 0, tvIsOpen = false, tvHello = false, tvWant = false, tvTouched = {}, tvTyped = {}, tvWorkYes = null, tvNeed = false, tvFlash = '';
+  var tvFocusCh, tvReady, tvHomeY;   /* zonder beginwaarde: de pagina-wissel (go) loopt al één keer voordat dit blok aan de beurt is */
+  try { if (tv.last && !sessionStorage.getItem(TVKEY)) tvRet = true; sessionStorage.setItem(TVKEY, '1'); } catch (e) {}
+  function tvSave() { try { localStorage.setItem(TVKEY, JSON.stringify(tv)); } catch (e) {} }
+  /* inlog per land, alleen waar de gekoppelde site een persoonlijk overzicht is; elders een algemene stap */
+  var TV_LOGIN = { pen: { NL: 'DigiD', BE: 'itsme / eID' }, sp: { BE: 'itsme / eID', FR: 'FranceConnect', ES: 'Cl@ve', IT: 'SPID / CIE', PT: 'Chave Móvel Digital', US: 'Login.gov / ID.me' } };
+
+  /* ---- de stappen ---- */
+  function tvSteps() {
+    var L = [{ id: 'pers' }, { id: 'bud', k: 'budget' }, { id: 'cap', k: 'startkapitaal' }];
+    if (state.opbouw) L.push({ id: 'inl', k: 'inleg' }, { id: 'stop' }); else L.push({ id: 'work' });
+    L.push({ id: 'age' });
+    if (!spFlat()) L.push({ id: 'sp', job: 1 });
+    L.push({ id: 'pen', job: 1 });
+    return L;
+  }
+  function tvCur() { var S = tvSteps(); if (tv.step > S.length - 1) tv.step = S.length - 1; if (tv.step < 0) tv.step = 0; return S[tv.step]; }
+  function tvRaw(q) { return q.id === 'pen' ? penName() : spName(); }
+  function tvName(q) { return q.job ? cap1(tvRaw(q)) : t1('tv.k.' + q.id); }
+  function tvAgeTxt(a) { var s = fmtAge(a); return /^\d+$/.test(s) ? s + ' ' + t1('u.years') : s; }
+  function tvWhen(ts) { try { return new Date(ts).toLocaleString(loc(), { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+  function tvJobSum(id) { return id === 'pen' ? (state.pensAanP !== 0 ? state.pensioenPaul : 0) + (two() && state.pensAanD !== 0 ? state.pensioenDiana : 0) : state.spP + (two() ? state.spD : 0); }
+  function tvJobFields(id) {
+    var a = id === 'pen' ? ['pensioenPaul', 'pensioenDiana'] : ['spP', 'spD'];
+    return two() ? [{ k: a[0], l: nm1() }, { k: a[1], l: nm2() }] : [{ k: a[0] }];
+  }
+  function tvAnswer(q) {
+    var id = q.id;
+    if (id === 'pers') return t1(two() ? 'tv.v.two' : 'tv.v.one');
+    if (id === 'bud') return state.budget > 0 ? t1('tv.v.pm', { v: eur(state.budget) }) : '';
+    if (id === 'cap') return eur(state.startkapitaal);
+    if (id === 'inl') return t1('tv.v.pm', { v: eur(state.inleg) });
+    if (id === 'stop') return t1('tv.v.at', { a: tvAgeTxt(stopAge()) });
+    if (id === 'work') { var w = state.werkP + (two() ? state.werkD : 0); return w > 0 ? t1('tv.v.pm', { v: eur(w) }) : t1('tv.v.no'); }
+    if (id === 'age') return two() ? Math.round(state.leeftijdPaul) + ' · ' + Math.round(state.leeftijdDiana) : t1('tv.v.age', { v: Math.round(state.leeftijdPaul) });
+    if (tv.done[id]) { var s = tvJobSum(id); return s > 0 ? t1('tv.v.pm', { v: eur(s) }) : t1('tv.v.none'); }
+    return tv.jobs[id] ? t1('tv.v.parked', { d: tvWhen(tv.jobs[id].t) }) : t1('tv.fin.open');
+  }
+
+  /* ---- je telling: het haalbare bedrag per maand, en wat elk antwoord eraan veranderde ---- */
+  function tvCtx() { return prefs.country + '|' + (state.opbouw ? 1 : 0); }
+  /* Per knoop en per hoofdstuk de velden die erbij horen. Verandert het bedrag, dan kijkt de telling welk groepje veranderd is
+     en zet het verschil daar neer. Zo maakt het niet uit op welk scherm je iets wijzigt. */
+  var TV_ORDER = ['pers', 'age', 'bud', 'cap', 'inl', 'stop', 'work', 'sp', 'pen', 'nm', 'basis', 'pp', 'sp2', 'pot', 'debt', 'big', 'mix', 'tax', 'run', 'aan'];   /* nm vóór run: een ander geslacht verschuift ook de eindleeftijd, en telt bij Naam en geslacht */
+  function tvSnap() {
+    var s = state, j = JSON.stringify, flat = spFlat(), wk = s.werkP + '|' + s.werkD + '|' + s.werkTotP + '|' + s.werkTotD + '|' + j(lists.perP) + j(lists.perD);
+    return {
+      pers: '' + s.personen, age: s.leeftijdPaul + '|' + s.leeftijdDiana, bud: s.budget + '|' + s.levend, cap: '' + s.startkapitaal, inl: '' + s.inleg, stop: '' + s.stopLeeftijd,
+      work: s.opbouw ? '' : wk, sp: s.spP + '|' + s.spD + (flat ? '' : '|' + s.aowPaul + '|' + s.aowDiana), pen: s.pensioenPaul + '|' + s.pensioenDiana + '|' + s.pensAanP + '|' + s.pensAanD + '|' + s.pensioenLeeftijd + '|' + s.pensioenLeeftijdDiana,
+      nm: s.geslP + '|' + s.geslD, basis: s.uitgaveDaling + '|' + j(lists.inl), pp: s.inlegD + (s.opbouw ? '|' + wk : ''),
+      sp2: (flat ? s.aowPaul + '|' + s.aowDiana + '|' : '') + s.aowAanP + '|' + s.aowAanD,
+      pot: j(lists.pots), debt: j(lists.debts) + j(lists.stud) + j(lists.oth), big: j(lists.big),
+      mix: '' + s.portfolio, tax: s.box3 + '|' + s.taxRate + '|' + s.taxAllow, run: s.eindleeftijd + '|' + s.restkapitaal + '|' + s.eindDiana, aan: s.inflatie + '|' + s.kosten
+    };
+  }
+  function tvCalc() {
+    var seq = ++tvSeq, snap = tvSnap();
+    function got(T) { if (seq === tvSeq) tvGot(T, snap); }
+    if (state.opbouw) {
+      /* hetzelfde bedrag als de uitkomstkaart (9 van de 10, gekozen mix); de kaart vindt het daarna terug in het geheugen */
+      setTimeout(function () {
+        if (seq !== tvSeq) return;
+        var ci = effIdx(), T = null; if (!(ci >= 1 && ci <= 4)) ci = 2;
+        try { T = stopAge() - state.leeftijdPaul >= 1 ? opbBud({ inleg: state.inleg }, ci) : 0; } catch (e) {}
+        got(T);
+      }, 20);
+    } else if (!(state.startkapitaal > 0)) {
+      /* zonder vermogen valt er niets te beleggen: het bedrag dat alleen uit inkomen kan */
+      var T0 = null; try { T0 = Math.max(0, Math.floor(runModel(params({ startkapitaal: 0 })).maxBudget / 10) * 10) || 0; } catch (e) {}
+      got(T0);
+    } else {
+      var X = hvCtx(); if (!(X.st.budget > 0)) X.st.budget = 1000;
+      calcX(X, function (r) { got(r && isFinite(r.max90) ? Math.floor(r.max90 / 10) * 10 : null); });
+    }
+  }
+  function tvGot(T, snap) {
+    var still = busy();
+    if (T !== null && isFinite(T)) {
+      T = Math.max(0, Math.round(T));
+      var cx = tvCtx();
+      if (tv.base === null || tv.ctx !== cx) {
+        tv.base = T; tv.tot = T; tv.led = {}; tv.ctx = cx;
+        tv.baseSp = spFlat() && exEmpty() && !(tvJobSum('pen') > 0) && !(state.werkP > 0) ? 1 : 0;
+      } else {
+        var d = T - tv.tot, ch = [];
+        if (tv.snap) TV_ORDER.forEach(function (k) { if (tv.snap[k] !== snap[k]) ch.push(k); });
+        if (d !== 0) {
+          var id = ch.length ? (ch.indexOf(tvChg) >= 0 ? tvChg : ch[0]) : '';
+          if (!id && Math.abs(d) <= 10) tv.base = Math.max(0, tv.base + d);   /* afronding van de zoektocht naar het bedrag, geen wijziging van jou */
+          else tv.led[id || 'oth'] = (tv.led[id || 'oth'] || 0) + d;
+          tv.tot = T;
+        }
+      }
+      tv.snap = snap;
+      if (!still) tvChg = '';
+      tvSave();
+    }
+    if (!still) tvWaiting = false;
+    tvTop(); tvHome();
+  }
+  function tvAnim(el, to) {
+    if (!el) return;
+    var from = typeof el._tvV === 'number' ? el._tvV : to; el._tvV = to;
+    if (el._tvR) cancelAnimationFrame(el._tvR);
+    var calm = false; try { calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (from === to || calm || !window.requestAnimationFrame || el.offsetParent === null) { el.textContent = eur(to); return; }
+    var t0 = performance.now();
+    (function f(now) {
+      var p = Math.min(1, (now - t0) / 650), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = eur(p < 1 ? Math.round((from + (to - from) * e) / 10) * 10 : to);
+      if (p < 1) el._tvR = requestAnimationFrame(f);
+    })(t0);
+  }
+  function tvSigned(d) { return (d > 0 ? '+ ' : '− ') + eur(Math.abs(d)); }
+  /* het blok 'je telling' staat op drie plekken (thuis, in de route, boven een hoofdstuk) en wordt overal door dezelfde functie getekend */
+  function tvPaint(host, id) {
+    if (!host) return;
+    if (!host.querySelector('.tv-num')) host.innerHTML = '<p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>';
+    var g = function (c) { return host.querySelector(c); }, dl = g('.tv-delta'), bar = g('.tv-bar'), ln = g('.tv-line'), w = state.budget, T = tv.tot || 0, d = id ? (tv.led[id] || 0) : 0;
+    g('.tv-k').textContent = state.opbouw ? t1('tv.pic.opb', { a: tvAgeTxt(stopAge()), y: fmtAge(stopAge()) }) : t1('tv.pic.now');
+    g('.tv-pm').textContent = t1('tv.pic.pm');
+    host.classList.toggle('calc', tvWaiting);
+    if (tv.tot === null) g('.tv-num').textContent = '…'; else tvAnim(g('.tv-num'), tv.tot);
+    dl.hidden = !d || tvWaiting;
+    if (d) { dl.textContent = tvSigned(d); dl.className = 'tv-delta ' + (d > 0 ? 'up' : 'down'); }
+    bar.hidden = !(w > 0);
+    if (w > 0) g('.tv-fill').style.width = Math.max(2, Math.min(100, T / w * 100)).toFixed(1) + '%';
+    bar.classList.toggle('ok', w > 0 && T >= w);
+    ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '') : t1('tv.pic.zero')));
+    ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
+  }
+  function tvTop() {
+    if (!tvReady) return;
+    if (tvIsOpen) tvPaint($('tvr-pic'), (tvCur() || {}).id);
+    if (tvFocusCh) tvPaint($('tvc-pic'), tvFocusCh.id); else { tvPaint($('tvh-pic'), ''); if ($('tvi-pic')) tvPaint($('tvi-pic'), ''); }
+  }
+
+  /* ---- waarden zetten ---- */
+  /* De route rekent met stoppen op een heel jaar: het eerste hele jaar na je pensioenleeftijd. Zolang je de stopleeftijd niet zelf kiest, loopt hij mee met je leeftijd. */
+  function tvStopSync() {
+    if (!state.opbouw || !tv.stopAuto) return;
+    applyAuto();
+    var pa = state.pensioenLeeftijd, c = Math.ceil(pa - 1e-6);
+    state.stopLeeftijd = c > pa + 1e-6 ? c : 0;
+  }
+  function tvPut(id, k, v) {
+    if (k === 'stopLeeftijd') { if (state.stopLeeftijd === v) return false; state.stopLeeftijd = v; tv.stopAuto = 0; }
+    else {
+      if (F[k]) v = Math.max(F[k].min, Math.min(F[k].max, v));
+      if (state[k] === v && !(k === 'budget' && state.levend)) return false;
+      manual(k); setNum(k, v);
+    }
+    if (k.indexOf('pensioenLeeftijd') === 0) state.autoPenAge = 0;
+    if (k === 'aowPaul' || k === 'aowDiana') state.autoAow = 0;
+    if (k === 'pensioenPaul' && v > 0) { state.pensAanP = 1; ui.penTouched = 1; saveUi(); }
+    if (k === 'pensioenDiana' && v > 0) { state.pensAanD = 1; ui.penTouched = 1; saveUi(); }
+    if (k === 'spP' && v > 0) state.aowAanP = 1;
+    if (k === 'spD' && v > 0) state.aowAanD = 1;
+    if (k === 'leeftijdPaul') tvStopSync();
+    tvChg = id; tvWaiting = true; tvTouched[id] = 1;
+    return true;
+  }
+  function tvParse(e) { var s = (e && e.value || '').replace(/[^0-9]/g, ''); return s === '' ? NaN : parseInt(s, 10); }
+  function tvFlush() {
+    clearTimeout(tvTyp); tvTyp = 0;
+    var q = tvView === 'step' ? tvCur() : null, any = false; if (!q) return;
+    Array.prototype.forEach.call($('tvr').querySelectorAll('.tvr-in[data-k]'), function (e) {
+      var k = e.getAttribute('data-k'), v = tvParse(e); if (!tvTyped[k]) return;
+      delete tvTyped[k]; if (!isFinite(v)) v = 0;
+      if (tvPut(q.id, k, v)) any = true;
+    });
+    if (any) { tvChips(); tvTop(); update(); }
+  }
+  function tvStVal(k) { return k === 'stopLeeftijd' ? (state.stopLeeftijd > 0 ? state.stopLeeftijd : Math.round(stopAge())) : Math.round(state[k]); }
+  function tvStBounds(k) {
+    if (k === 'stopLeeftijd') return [Math.ceil(state.leeftijdPaul) + 1, 75];
+    if (k === 'leeftijdPaul') return [[18, 35, 50][ui.band] || 18, Math.min(100, ageCap())];
+    if (k.indexOf('pensioenLeeftijd') === 0) return [F.pensioenLeeftijd.min, F.pensioenLeeftijd.max];
+    if (k === 'aowPaul' || k === 'aowDiana') return [F.aowPaul.min, F.aowPaul.max];
+    return [18, 100];
+  }
+  function tvLvlOn(n) { return state.opbouw ? state.levend === n : (state.budget > 0 && state.budget === lvlAmt(n)); }
+  function tvChips() {
+    var q = tvView === 'step' ? tvCur() : null; if (!q) return;
+    Array.prototype.forEach.call($('tvr').querySelectorAll('[data-tvr-chip]'), function (b) { var v = +b.getAttribute('data-tvr-chip'); b.classList.toggle('on', state[q.k] === v && !(q.id === 'bud' && state.levend) && (v > 0 || !!tvTouched[q.id] || !!tv.done[q.id])); });
+    Array.prototype.forEach.call($('tvr').querySelectorAll('[data-tvr-lvl]'), function (b) { b.classList.toggle('on', tvLvlOn(+b.getAttribute('data-tvr-lvl'))); });
+    Array.prototype.forEach.call($('tvr').querySelectorAll('[data-tvr-pers]'), function (b) { b.classList.toggle('on', (two() ? 2 : 1) === +b.getAttribute('data-tvr-pers') && (!!tvTouched.pers || !!tv.done.pers || two())); });
+  }
+
+  /* ---- opzoekwerk: site per land, agenda ---- */
+  function tvSite(id) {
+    var L = LOCAL[prefs.country] || {}, C = CTRY[prefs.country] || {}, url = id === 'pen' ? L.penUrl : C.url, site = id === 'pen' ? L.penSite : C.site;
+    return url && site ? { url: url, site: site, login: (TV_LOGIN[id] || {})[prefs.country] || '' } : null;
+  }
+  function tvLink(id) { return (canShareLink() ? location.origin + location.pathname : t1('tip.url')) + '?klus=' + id + '&utm_campaign=klus'; }
+  function tvOpts() {
+    var now = new Date(), a = new Date(now), tom = now.getHours() >= 19, s = new Date(now), d;
+    a.setHours(20, 0, 0, 0); if (tom) a.setDate(a.getDate() + 1);
+    s.setHours(10, 0, 0, 0); d = (6 - s.getDay() + 7) % 7; if (d === 0 && now.getHours() >= 9) d = 7; s.setDate(s.getDate() + d);
+    function tm(x) { try { return x.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+    var sat = ''; try { sat = cap1(s.toLocaleDateString(loc(), { weekday: 'long', day: 'numeric', month: 'short' })); } catch (e) {}
+    return [{ t: a.getTime(), l: t1(tom ? 'tv.when.tomorrow' : 'tv.when.tonight') + ' · ' + tm(a) }, { t: s.getTime(), l: sat + ' · ' + tm(s) }];
+  }
+  function tvStamp(z) { function p(n) { return (n < 10 ? '0' : '') + n; } return z.getFullYear() + p(z.getMonth() + 1) + p(z.getDate()) + 'T' + p(z.getHours()) + p(z.getMinutes()) + '00'; }
+  function tvEvt(id, ts) {
+    var S = tvSite(id);
+    return { title: t1('tv.ics.t', { brand: t1('brand'), x: tvRaw({ id: id }) }), desc: t1('tv.ics.d') + (S ? '\n' + t1('tv.ics.w', { site: S.site }) : '') + '\n' + tvLink(id), s: tvStamp(new Date(ts)), e: tvStamp(new Date(ts + 15 * 60000)) };
+  }
+  function tvGcal(id, ts) { var E = tvEvt(id, ts); return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(E.title) + '&dates=' + E.s + '/' + E.e + '&details=' + encodeURIComponent(E.desc); }
+  function tvIcs(id, ts) {
+    var E = tvEvt(id, ts), url = tvLink(id);
+    function ee(s) { return String(s).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/([,;])/g, '\\$1'); }
+    var txt = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Button Counter//EN', 'BEGIN:VEVENT', 'UID:' + id + '-' + ts + '@countingbuttons.com',
+      'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, ''), 'DTSTART:' + E.s, 'DTEND:' + E.e, 'SUMMARY:' + ee(E.title), 'DESCRIPTION:' + ee(E.desc), 'URL:' + url,
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + ee(E.title), 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    window.__tvIcs = txt;
+    try {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/calendar' })); a.download = 'button-counter.ics';
+      document.body.appendChild(a); a.click(); setTimeout(function () { try { URL.revokeObjectURL(a.href); a.remove(); } catch (e) {} }, 2000);
+      track('core-job-cal');
+    } catch (e) {}
+  }
+  function tvSelf(id) {
+    var msg = t1('tv.self.msg', { brand: t1('brand') }) + '\n' + tvLink(id); track('core-job-self');
+    if (navigator.share) navigator.share({ title: document.title, text: msg }).catch(function (e) { if (e && e.name !== 'AbortError') copyText(msg, t1('tv.when.copied')); });
+    else copyText(msg, t1('tv.when.copied'));
+  }
+  function tvAgenda(id) {
+    var j = tv.jobs[id]; if (!j) return '';
+    return '<div class="tvr-ag"><a class="btn ghost" target="_blank" rel="noopener" href="' + esc(tvGcal(id, j.t)) + '">' + esc(t1('tv.when.g')) + '</a>' + (canShareLink() ? '<button type="button" class="btn ghost" data-tvr-job="file" data-id="' + id + '">' + esc(t1('tv.when.file')) + '</button>' : '') + '<button type="button" class="btn link" data-tvr-job="self" data-id="' + id + '">' + esc(t1('tv.when.self')) + '</button></div>';
+  }
+
+  /* ---- schermen ---- */
+  function tvField(k, lab, unit) {
+    var v = state[k], txt = v > 0 ? grp(v) : '';
+    return '<label class="tvr-field">' + (lab ? '<span class="tvr-fl">' + esc(lab) + '</span>' : '') + '<span class="tvr-inrow"><span class="unit">' + esc(curSym()) + '</span>' +
+      '<input id="tvr-in-' + k + '" class="tvr-in" data-k="' + k + '" type="text" inputmode="numeric" autocomplete="off" value="' + esc(txt) + '" aria-label="' + esc(lab || t1('tv.job.f')) + '">' + (unit ? '<span class="unit">' + esc(unit) + '</span>' : '') + '</span></label>';
+  }
+  /* wie alleen een bedrag vóór belasting heeft: één eigen percentage, de app vult in wat er op de rekening komt */
+  function tvGross(k) {
+    var g = tv.gross && tv.gross[k], net = g ? Math.round(g.a * (1 - g.p / 100)) : 0;
+    if (g && net !== Math.round(state[k])) g = null;   /* het veld is daarna met de hand veranderd */
+    return '<details class="tvr-gross" data-g="' + k + '"' + (g ? ' open' : '') + '><summary>' + esc(t1('tv.g.q')) + '</summary><div class="tvr-gin">' +
+      '<label class="tvr-field"><span class="tvr-fl">' + esc(t1('tv.g.a')) + '</span><span class="tvr-inrow"><span class="unit">' + esc(curSym()) + '</span><input class="tvr-in tvr-gi" data-ga="1" type="text" inputmode="numeric" autocomplete="off" value="' + (g ? esc(grp(g.a)) : '') + '"></span></label>' +
+      '<label class="tvr-field"><span class="tvr-fl">' + esc(t1('tv.g.p')) + '</span><span class="tvr-inrow"><input class="tvr-in tvr-gi tvr-gp" data-gp="1" type="text" inputmode="decimal" autocomplete="off" value="' + (g ? esc(String(g.p).replace('.', ',')) : '') + '"><span class="unit">%</span></span></label>' +
+      '<p class="tvr-go" aria-live="polite">' + (g ? esc(t1('tv.g.o', { v: eur(net) })) : '') + '</p></div></details>';
+  }
+  function tvGrossCalc(box) {
+    var k = box.getAttribute('data-g'), A = box.querySelector('[data-ga]'), P = box.querySelector('[data-gp]'), out = box.querySelector('.tvr-go'), tgt = $('tvr-in-' + k);
+    var a = parseInt(String(A.value).replace(/[^0-9]/g, ''), 10), p = parseFloat(String(P.value).replace(',', '.'));
+    if (!(a > 0) || !isFinite(p) || p < 0 || p >= 100 || !tgt) { out.textContent = ''; return; }
+    var net = Math.round(a * (1 - p / 100));
+    tgt.value = grp(net); out.textContent = t1('tv.g.o', { v: eur(net) });
+    if (!tv.gross) tv.gross = {}; tv.gross[k] = { a: a, p: p }; tvSave();
+    tgt.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  function tvPenNote(k) { return state.opbouw && k.indexOf('pensioenLeeftijd') === 0 && Math.round(state[k]) < Math.round(stopAge()) ? t1('tv.pen.early') : ''; }
+  function tvStepper(k, lab) {
+    return '<div class="tvr-st" data-k="' + k + '">' + (lab ? '<span class="tvr-fl">' + esc(lab) + '</span>' : '') + '<span class="tvr-stc"><button type="button" data-tvr-st="-1" aria-label="−">−</button><output id="tvr-o-' + k + '">' + tvStVal(k) + '</output><button type="button" data-tvr-st="1" aria-label="+">+</button><span class="unit">' + esc(t1('u.years')) + '</span></span>' + (k.indexOf('pensioenLeeftijd') === 0 ? '<p class="tvr-pn" id="tvr-pn-' + k + '" aria-live="polite">' + esc(tvPenNote(k)) + '</p>' : '') + '</div>';
+  }
+  function tvChipRow(vals) { return '<div class="tvr-chips">' + vals.map(function (v) { return '<button type="button" class="tvr-chip" data-tvr-chip="' + v + '">' + esc(eur(v)) + '</button>'; }).join('') + '</div>'; }
+  function tvNav(q, opts) {
+    opts = opts || {};
+    var prev = opts.prev !== false && (tv.step > 0 || tvMode) && !(tvEdit && !tvMode);
+    return '<div class="tvr-nav">' + (prev ? '<button type="button" class="btn ghost" data-tvr="prev">' + esc(t1('tv.prev')) + '</button>' : '') +
+      (opts.next === false && !(tvEdit && !tvMode) ? '' : '<button type="button" class="btn primary" data-tvr="next">' + esc(t1(tvEdit ? 'tv.ready' : 'tv.next')) + '</button>') + '</div>';
+  }
+  function tvJobHtml(q) {
+    var id = q.id, S = tvSite(id), parked = tv.jobs[id], h = '';
+    function lnk(o) { return '<a href="' + o.url + '" target="_blank" rel="noopener">' + esc(o.site) + '</a>'; }
+    var head = '<h2 class="tvr-q" id="tvr-q" tabindex="-1">' + esc(t1('tv.q.job', { x: cap1(tvRaw(q)) })) + '</h2>';
+    if (tvMode === 'now') {
+      var st = [], personal = S && (S.login || id === 'sp' || prefs.country === 'NL' || prefs.country === 'BE');
+      if (personal) { st.push(esc(t1('tv.job.s1', { site: '@@S@@' })).replace('@@S@@', lnk(S))); if (S.login) st.push(esc(t1('tv.job.s2', { login: S.login }))); }
+      else st.push(esc(t1(id === 'pen' ? 'tv.job.s1x' : 'tv.job.s1sp')) + (S ? ' ' + esc(t1('tv.job.s1i', { site: '@@S@@' })).replace('@@S@@', lnk(S)) : ''));
+      st.push(esc(t1(id === 'pen' ? 'tv.job.s3pen' : 'tv.job.s3sp')));
+      return head + '<div class="tvr-where"><p><b>' + esc(t1('tv.job.where')) + '</b></p><ol>' + st.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol></div>' +
+        tvJobFields(id).map(function (f, n) {
+          var ak = n ? 'pensioenLeeftijdDiana' : 'pensioenLeeftijd';
+          return '<div class="tvr-pen">' + tvField(f.k, f.l ? f.l + ': ' + t1('tv.job.f').toLowerCase() : t1('tv.job.f'), '') + tvGross(f.k) + tvStepper(id === 'pen' ? ak : (n ? 'aowDiana' : 'aowPaul'), t1(id === 'pen' ? 'f.penAge' : 'f.spAge')) + '</div>';
+        }).join('') +
+        (id === 'pen' && band() !== 0 ? '<p class="tvr-links"><button type="button" class="btn link" data-tvh="a:pots">' + esc(t1('tv.pen.more')) + tvLock() + '</button></p>' : '') +
+        (tvNeed ? '<p class="tvr-need" role="alert">' + esc(t1('tv.job.need')) + '</p>' : '') + tvNav(q);
+    }
+    if (tvMode === 'later') {
+      var pad = function (n) { return (n < 10 ? '0' : '') + n; }, n0 = new Date(Date.now() + 3600000), mn = n0.getFullYear() + '-' + pad(n0.getMonth() + 1) + '-' + pad(n0.getDate()) + 'T' + pad(n0.getHours()) + ':00';
+      return '<h2 class="tvr-q" id="tvr-q" tabindex="-1">' + esc(t1('tv.when.h')) + '</h2><p class="tvr-h">' + esc(t1('tv.when.hh')) + '</p><div class="tvr-stack">' +
+        tvOpts().map(function (o) { return '<button type="button" class="tvr-choice" data-tvr-when="' + o.t + '">' + esc(o.l) + '</button>'; }).join('') + '</div>' +
+        '<div class="tvr-own"><label class="tvr-field"><span class="tvr-fl">' + esc(t1('tv.when.own')) + '</span><input type="datetime-local" id="tvr-dt" class="tvr-in tvr-dt" value="' + mn + '"></label><button type="button" class="btn ghost" data-tvr-when="own">' + esc(t1('tv.when.set')) + '</button></div>' + tvNav(q, { next: false });
+    }
+    if (tv.done[id]) {
+      var s = tvJobSum(id);
+      return head + '<p class="tvr-filled is-st"><span class="tvr-fs">' + esc(t1('tv.job.filled', { v: '' }).replace(/[\s:]+$/, '')) + '</span><b>' + esc(s > 0 ? t1('tv.v.pm', { v: eur(s) }) : t1('tv.v.none')) + '</b></p><div class="tvr-stack"><button type="button" class="tvr-choice" data-tvr-job="now">' + esc(t1('tv.change')) + '</button></div>' + tvNav(q);
+    }
+    h = head + '<p class="tvr-h">' + esc(t1('tv.h.job')) + '</p>' + (parked ? '<p class="tvr-filled">' + esc(t1('tv.when.parked', { d: tvWhen(parked.t) })) + '</p>' : '') +
+      '<div class="tvr-stack"><button type="button" class="tvr-choice" data-tvr-job="now">' + esc(t1('tv.job.now')) + '</button><button type="button" class="tvr-choice" data-tvr-job="later">' + esc(t1('tv.job.later')) + '</button>' +
+      (id === 'pen' ? '<button type="button" class="tvr-choice" data-tvr-job="none">' + esc(t1('tv.job.none')) + '</button>' : '') + '</div>';
+    return h + (parked ? tvAgenda(id) : '') + tvNav(q, { next: !!parked });
+  }
+  function tvStepHtml(q) {
+    var id = q.id, qq = function (k) { return '<h2 class="tvr-q" id="tvr-q" tabindex="-1">' + esc(t(k)) + '</h2>'; }, hh = function (k) { return '<p class="tvr-h">' + esc(t1(k)) + '</p>'; };
+    if (q.job) return tvJobHtml(q);
+    if (id === 'pers') return qq('tv.q.pers') + hh('tv.h.pers') + '<div class="tvr-stack two">' + [1, 2].map(function (n) { return '<button type="button" class="tvr-choice" data-tvr-pers="' + n + '">' + esc(t1(n === 1 ? 'tv.v.one' : 'tv.v.two')) + '</button>'; }).join('') + '</div>' + tvNav(q);
+    if (id === 'bud') {
+      var chips = lvlOk() ? '<div class="tvr-chips">' + [1, 2, 3].map(function (n) { return '<button type="button" class="tvr-chip lvl" data-tvr-lvl="' + n + '"><b>' + esc(t1('lvl.' + n + '.n')) + '</b><span>' + esc(eur(lvlAmt(n))) + '</span></button>'; }).join('') + '</div>' : tvChipRow([1500, 2500, 3500, 5000]);
+      return qq(state.opbouw ? 'tv.q.bud' : 'tv.q.budNow') + hh('tv.h.bud') + chips + tvField('budget', t1('tv.own'), t1('tv.pic.pm')) + tvNav(q);
+    }
+    if (id === 'cap') return qq('tv.q.cap') + hh('tv.h.cap') + tvChipRow(state.opbouw ? [0, 5000, 20000, 50000, 100000] : [50000, 150000, 300000, 500000, 750000]) + tvField('startkapitaal', t1('tv.own')) + tvNav(q);
+    if (id === 'inl') return qq('tv.q.inl') + hh('tv.h.inl') + tvChipRow([0, 100, 250, 500, 1000]) + tvField('inleg', t1('tv.own'), t1('tv.pic.pm')) + tvNav(q);
+    if (id === 'stop') return qq('tv.q.stop') + hh('tv.h.stop') + tvStepper('stopLeeftijd') + tvNav(q);
+    if (id === 'age') return qq('tv.q.age') + hh('tv.h.age') + tvStepper('leeftijdPaul', two() ? nm1() : '') + (two() ? tvStepper('leeftijdDiana', nm2()) : '') + tvNav(q);
+    /* work (alleen 50-plus) */
+    if (tvWorkYes === null) tvWorkYes = state.werkP > 0 || (two() && state.werkD > 0);
+    return qq('tv.q.work') + '<div class="tvr-stack two">' + [0, 1].map(function (n) { return '<button type="button" class="tvr-choice' + ((tvWorkYes ? 1 : 0) === n && (tvTouched.work || tv.done.work || tvWorkYes) ? ' on' : '') + '" data-tvr-yn="' + n + '">' + esc(t1(n ? 'tv.v.yes' : 'tv.v.no')) + '</button>'; }).join('') + '</div>' +
+      (tvWorkYes ? hh('tv.h.work') + '<div class="tvr-fs">' + tvField('werkP', two() ? nm1() : t1('tv.job.f'), two() ? t1('tv.job.f') : '') + (two() ? tvField('werkD', nm2(), t1('tv.job.f')) : '') + '</div>' : '') + tvNav(q);
+  }
+  function tvKnoop(i, cls) { return '<img class="tvr-dot' + (cls ? ' ' + cls : '') + '" src="/img/knoop-' + KN[i % KN.length] + '.webp" alt="" width="96" height="96">'; }
+  function tvBody() {
+    var el = $('tvr'), body = $('tvr-body'); if (!tvIsOpen || !body) return;
+    var S = tvSteps(), m = S.length, q = tvCur(), i = tv.step + 1;
+    $('tvr-tag').textContent = ''; $('tvr-x').setAttribute('aria-label', t1('tv.close'));
+    $('tvr-dots').innerHTML = S.map(function (x, k) { return tv.done[x.id] ? tvKnoop(k, k === tv.step ? 'cur' : '') : '<span class="tvr-dot' + (k === tv.step ? ' cur' : (x.job && tv.jobs[x.id] ? ' wait' : '')) + '"></span>'; }).join('');
+    body.innerHTML = '<p class="tvr-n' + (tvHello ? ' hello' : '') + '">' + esc(tvHello ? t1('tv.hello', { i: i, m: m }) : t1('tv.n', { i: i, m: m })) + '</p>' +
+      (tv.step === 0 && ui.goal && !tvEdit && !tvHello ? '<p class="tvr-goal">“' + esc(gtx(ui.goal, '.t')) + '” ' + esc(t1('tv.goal1')) + '</p>' : '') + tvStepHtml(q);
+    tvHello = false; tvNeed = false;
+    tvChips();
+    el.scrollTop = 0;
+    var hd = $('tvr-q'); if (hd) { try { hd.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  function tvOpenUi() {
+    var el = $('tvr'); if (!el) return;
+    if (!$('tvr-body')) el.innerHTML = '<div class="tvr-wrap"><header class="tvr-head"><span class="tvr-tag" id="tvr-tag"></span><div class="tvr-dots" id="tvr-dots" aria-hidden="true"></div><button type="button" class="tvr-x" id="tvr-x" data-tvr="close">×</button></header>' +
+      '<section class="tv-pic" id="tvr-pic" aria-live="polite"></section><div class="tvr-body" id="tvr-body"></div></div>';
+    el.hidden = false; tvIsOpen = true; document.documentElement.classList.add('tvr-on');
+    tv.closed = 0; if (!tv.last) tv.last = Date.now(); tvSave();
+    var n = el.querySelector('.tv-num'); if (n) n._tvV = undefined;
+    tvBody(); tvTop();
+  }
+  function tvCloseUi() {
+    tvFlush(); clearTimeout(tvTyp);
+    $('tvr').hidden = true; tvIsOpen = false; tvMode = ''; tvEdit = false; document.documentElement.classList.remove('tvr-on');
+    tvHome(); tvTop();
+  }
+  function tvTabOf(c) { return c ? ({ meer: 'input', over: 'about' }[c.g] || 'overview') : 'overview'; }
+  function tvToHome(top) {
+    /* terug uit een hoofdstuk: naar de pagina waar het bij hoort (cockpit, Invullen of Over); na de route of terugzetten: naar de cockpit */
+    var to = top ? 'overview' : (tvFocusCh ? tvTabOf(tvFocusCh) : (location.hash || '#overview').slice(1));
+    if (ROUTES.indexOf(to) < 0 || to === 'insight') to = 'overview';
+    if (tvFocusCh || (location.hash || '#overview') !== '#' + to) { if (top) tvHomeY = 0; location.hash = '#' + to; }
+    else if (top) window.scrollTo(0, 0);
+  }
+  function tvAdvance() {
+    var S = tvSteps(), q = tvCur();
+    tvMode = ''; tvWorkYes = null;
+    if (tvEdit) { tvFlash = q ? q.id : ''; tvSave(); tvCloseUi(); return; }
+    if (tv.step >= S.length - 1) { if (!tv.fin) { tv.fin = 1; track('core-route-done'); } tvSave(); tvCloseUi(); tvToHome(true); return; }
+    tv.step++; if (tv.step === 3) track('core-route-3');
+    tvSave(); tvBody(); tvTop();
+  }
+  function tvNext() {
+    var q = tvCur(); if (!q) return;
+    tvFlush();
+    if (q.job) {
+      if (tvMode === 'now') {
+        var any = false; tvJobFields(q.id).forEach(function (f) { if (isFinite(tvParse($('tvr-in-' + f.k)))) any = true; });
+        if (!any) { tvNeed = true; tvBody(); return; }
+        if (!tv.done[q.id]) track('core-job-done');
+        tv.done[q.id] = 1; delete tv.jobs[q.id];
+      } else if (!tv.done[q.id] && !tv.jobs[q.id]) { if (tvEdit) tvAdvance(); return; }
+    } else tv.done[q.id] = 1;
+    tvAdvance();
+  }
+  function tvPrev() {
+    tvFlush();
+    if (tvMode) { tvMode = ''; tvBody(); tvTop(); return; }
+    if (tv.step > 0) { tv.step--; tvWorkYes = null; tvSave(); tvBody(); tvTop(); }
+  }
+  function tvPark(id, ts) {
+    if (!isFinite(ts) || ts < Date.now() - 60000) return;
+    tv.jobs[id] = { t: ts }; tvSave(); track('core-job-later'); if (canShareLink()) tvIcs(id, ts);   /* in een ingesloten voorbeeld kan een pagina niets downloaden: daar blijft de agenda-link over */
+    tvAdvance();
+  }
+  function tvGoJob(id) {
+    var S = tvSteps(), ji = -1; S.forEach(function (q, i) { if (q.id === id) ji = i; });
+    if (ji < 0) return false;
+    tv.on = 1; tv.step = ji; tvView = 'step'; tvMode = 'now'; tvEdit = true; tvOpenUi(); return true;
+  }
+
+  /* ---- hoofdstukken: welk onderdeel van welke oude pagina ---- */
+  function tvChs() {
+    return [
+      { id: 'nm', g: 'meer', page: 'input', step: 2, sel: ['#step-2 > .cols2'] },
+      { id: 'pp', g: 'meer', page: 'input', step: 2, sel: ['#step-2 > .cols2'] },
+      { id: 'sp2', g: 'meer', hide: 1, page: 'input', step: 3, sel: ['#step-3 > .cols2', '#sp-reset'] },   /* testversie 5: alleen via de knoop zelf, niet nog eens onder Meer meetellen */
+      { id: 'pot', g: 'meer', page: 'input', step: 3, sel: ['#pots-box'], pro: 1 },
+      { id: 'debt', g: 'meer', page: 'input', step: 2, sel: ['#stud-box', '#oth-box', '#debts-box'] },
+      { id: 'big', g: 'meer', page: 'input', step: 2, sel: ['#big-box'], open: 1 },
+      { id: 'tax', g: 'meer', page: 'input', step: 4, sel: ['#step-4 > .card'] },
+      { id: 'run', g: 'meer', page: 'input', step: 4, sel: ['#step-4 > .card'] },
+      { id: 'basis', g: 'meer', page: 'input', step: 1, sel: ['#snel'] },   /* testversie 5: alleen geslacht, uitgavenverloop en sparen per periode */
+      { id: 'aan', g: 'meer', page: 'input', step: 5, sel: ['#step-5 > .keyline', '#step-5 > .card', '#step-5 > .table-view', '#reset'] },
+      { id: 'uit', g: 'zien', page: 'overview', sel: ['#opb-card', '#status-card', '#disc-line', '#big-line', '#kpis'] },   /* de twee cijfervakken staan achter Meer uitleg */
+      { id: 'doen', g: 'zien', page: 'overview', sel: ['#opb-play', '#adv-card', '#wi-card'] },
+      { id: 'loop', g: 'zien', page: 'overview', sel: ['#panel-fan', '#panel-flow'] },
+      { id: 'mix', g: 'zien', page: 'insight', sel: ['#sec-pf'] },
+      { id: 'lad', g: 'zien', page: 'insight', sel: ['#sec-ladder'] },
+      { id: 'koop', g: 'zien', page: 'insight', sel: ['#sec-koop'], pro: 1 },
+      { id: 'plan', g: 'zien', page: 'insight', sel: ['#sec-plans'], pro: 1 },
+      { id: 'faq', g: 'over', page: 'about', sel: ['#faq'] },
+      { id: 'over', g: 'over', page: 'about', sel: ['#about-story', '.fb-card', '#page-about > footer'] },
+      { id: 'priv', g: 'over', page: 'about', sel: ['#privacy', '#disclaimer'] }
+    ].filter(function (c) { return !(c.id === 'pot' && band() === 0); }).sort(function (x, y) { var d = ui.goal === 'debtfree' ? 1 : 0; return d ? ((y.id === 'debt') - (x.id === 'debt')) : 0; });   /* wie met 'Wanneer ben ik schuldenvrij?' begon, ziet Schulden bovenaan onder Meer meetellen (in versie 25 bracht die vraag je naar het schuldvak); de jongste groep heeft geen extra potten (zoals in de gewone app) */
+  }
+  function tvChTitle(c) {
+    var k = { basis: 'tv.c.basis', pp: 'tv.c.pp', sp2: 'st3.h', pot: 'tv.c.pot', debt: 'tv.c.debt', big: 'big.h', tax: 'tv.c.tax', run: 'tv.c.run', nm: 'tv.c.nm', aan: 'st5.h', uit: 'tv.c.uit', doen: 'ch.2', loop: 'ch.3', mix: 'tv.c.mix', lad: 'next.ld', koop: 'next.kp', plan: 'pl.h', faq: 'faq.h', over: 'about.h' }[c.id];
+    if (c.id === 'basis') return [].concat(band() === 0 ? [] : [t1('curve.lbl')]).concat(state.opbouw ? [t1('tv.c.per')] : []).join(' · ');
+    if (c.id === 'sp2') return cap1(spName());
+    if (c.id === 'pp' && !state.opbouw) return t1('tv.c.pp50');
+    if (c.id === 'pp' && two()) return t1('tv.c.pp2');
+    return c.id === 'priv' ? t1('priv.h') + ' · ' + t1('disc.h') : t1(k);
+  }
+  function tvChSub(c) {
+    if (c.id === 'mix') return portStat(effIdx()).n + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')');
+    if (c.id === 'tax') return isNL() ? (($('b3-cur') || {}).textContent || '') : taxLabel();
+    if (c.id === 'run') return t1('tv.cs.run', { a: fmtAge(state.eindleeftijd) });
+    if (c.id === 'pp') return t1(state.opbouw ? (two() ? 'tv.cs.pp2' : 'tv.cs.pp') : 'tv.cs.pp50');
+    if (c.id === 'aan') return t1('tv.cs.aan', { i: num(state.inflatie, 2) + '%', k: num(state.kosten, 2) + '%' });
+    var k = { basis: 'tv.cs.basis', nm: 'tv.cs.nm', sp2: 'tv.cs.sp2', pot: 'tv.cs.pot', debt: 'tv.cs.debt', big: 'big.s', uit: 'tv.cs.uit', doen: 'ch.s2', loop: 'ch.s3', mix: 'next.pfS', lad: 'next.ldS', koop: 'next.kpS', plan: 'tv.cs.plan', over: 'tv.cs.over' }[c.id];
+    return k ? t1(k) : '';
+  }
+  function tvEls(c) {
+    var pg = $('page-' + c.page), out = []; if (!pg) return out;
+    c.sel.forEach(function (s) { Array.prototype.forEach.call(pg.querySelectorAll(s), function (e) { out.push(e); }); });
+    if (c.id === 'over') { var cf = $('ctry-facts'); if (cf && cf.parentNode && out.indexOf(cf.parentNode) < 0) out.push(cf.parentNode); }
+    return out;
+  }
+  /* het adres bepaalt het scherm: #k-<hoofdstuk> opent een hoofdstuk, alles anders is thuis. Een oude link naar een pagina
+     (bijvoorbeeld de disclaimer onder de uitkomst) komt uit bij het hoofdstuk waar dat onderdeel nu in zit. */
+  function tvRouteOf(h) {
+    var ch = null, m = /^k-([a-z0-9]+)$/.exec(h), L = tvChs();
+    if (m) L.forEach(function (c) { if (c.id === m[1]) ch = c; });
+    if (!ch && h && h !== 'overview' && ROUTES.indexOf(h) >= 0) {
+      var tg = pendingScroll ? $(pendingScroll) : null;
+      if (tg) L.forEach(function (c) { if (!ch && c.page === h && tvEls(c).some(function (e) { return e === tg || e.contains(tg); })) ch = c; });
+    }
+    tvFocusCh = ch;
+    if (ch && ch.step) curStep = ch.step;
+    return ch ? ch.page : (h === 'input' || h === 'about' ? h : 'overview');   /* testversie 4: Overzicht, Invullen en Over zijn weer eigen pagina's */
+  }
+  /* ronde 4: de i naast de schermtitel toont de uitleg van dat scherm; hij staat er alleen als er iets te tonen valt */
+  function tvMoreSync() {
+    var mb = $('tvc-more'), root = document.documentElement; if (!mb || !tvFocusCh) return;
+    if (root.classList.contains('tvc-more')) { mb.hidden = false; return; }
+    function n() { var c = 0; each('main.wrap p, main.wrap .hint, main.wrap .sub, main.wrap .kpi, main.wrap h2, main.wrap h3, main.wrap .opb-note, main.wrap .opb-span, main.wrap .opb-split, main.wrap .verdict-text', function (e) { if (e.offsetParent) c++; }); return c; }
+    var a = n(); root.classList.add('tvc-more'); var b = n(); root.classList.remove('tvc-more');
+    mb.hidden = b <= a;
+  }
+  var TVC_MORE = { uit: 1, doen: 1, loop: 1, lad: 1, pot: 1 };   /* hoofdstukken waar de uitleg is ingeklapt */
+  /* ronde 5: een herberekening zet de klassen van sommige kaarten terug; verberg dan opnieuw wat niet bij het open scherm hoort (zonder de uitleg dicht te klappen) */
+  function tvFocusKeep() {
+    var ch = tvFocusCh; if (!tvReady || !ch) return;
+    var pg = $('page-' + ch.page), keep = tvEls(ch); if (!pg) return;
+    if (!keep.length) { Array.prototype.forEach.call(pg.children, function (s) { s.classList.add('tvc-hide'); }); return; }
+    keep.forEach(function (el) {
+      var n = el;
+      while (n && n !== pg) {
+        var p = n.parentNode; if (!p) break;
+        Array.prototype.forEach.call(p.children, function (s) { if (s !== n && keep.indexOf(s) < 0 && !keep.some(function (k) { return s.contains(k); }) && !s.classList.contains('tvc-hide')) s.classList.add('tvc-hide'); });
+        n = p;
+      }
+    });
+  }
+  function tvFocusApply() {
+    if (!tvReady) return;
+    var root = document.documentElement, ch = tvFocusCh;
+    each('.tvc-hide', function (e) { e.classList.remove('tvc-hide'); });
+    root.classList.toggle('tvc-on', !!ch); if (ch) root.setAttribute('data-tvc', ch.id); else root.removeAttribute('data-tvc');
+    if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld staat hier onder de naam, met een eigen label */
+    root.classList.remove('tvc-more'); var mb = $('tvc-more'); mb.hidden = true; mb.innerHTML = IB_SVG; mb.setAttribute('aria-label', t1('ib.more')); mb.setAttribute('aria-expanded', 'false'); if (ch) { tvMoreSync(); setTimeout(tvMoreSync, 700); setTimeout(tvMoreSync, 2000); }
+    $('tvc').hidden = !ch; $('tvc-t').hidden = !ch;
+    if (!ch) { tvHome(); tvTop(); return; }
+    var pg = $('page-' + ch.page), keep = tvEls(ch);
+    if (!keep.length) Array.prototype.forEach.call(pg.children, function (s) { s.classList.add('tvc-hide'); });
+    keep.forEach(function (el) {
+      if (ch.open && el.tagName === 'DETAILS') el.open = true;
+      var n = el;
+      while (n && n !== pg) {
+        var p = n.parentNode; if (!p) break;
+        Array.prototype.forEach.call(p.children, function (s) { if (s !== n && keep.indexOf(s) < 0 && !keep.some(function (k) { return s.contains(k); })) s.classList.add('tvc-hide'); });
+        n = p;
+      }
+    });
+    $('tvc-back').setAttribute('aria-label', t1('b.close')); $('tvc-tag').textContent = '';
+    $('tvc-h').textContent = tvChTitle(ch); $('tvc-s').textContent = tvChSub(ch); $('tvc-s').hidden = !tvChSub(ch);
+    var n0 = $('tvc-pic').querySelector('.tv-num'); if (n0) n0._tvV = undefined;
+    tvTop(); tvEmpty();
+    /* de uitkomstkaart is getekend terwijl hij verborgen was: opnieuw tekenen, zodat de labels onder de balk elkaar niet overlappen */
+    if (ch.id === 'uit' && firstDone) { try { renderOpb(); } catch (e) {} }
+  }
+  function tvEmpty() {
+    if (!tvReady || !tvFocusCh) return;
+    var vis = tvEls(tvFocusCh).some(function (e) { return e.offsetParent !== null && e.offsetHeight > 2; });
+    $('tvc-empty').hidden = vis; $('tvc-empty-t').textContent = t1('tv.ch.empty');
+    $('tvc-s').textContent = tvChSub(tvFocusCh);
+  }
+  function tvAfterGo() {
+    if (!tvReady || tvFocusCh || !tvHomeY) return;
+    var y = tvHomeY; tvHomeY = 0; setTimeout(function () { window.scrollTo(0, y); }, 0);
+  }
+
+  /* ---- thuis: je telling en de inhoudsopgave ---- */
+  function tvRow(o) {
+    return '<button type="button" class="tvh-row' + (o.cls ? ' ' + o.cls : '') + '" data-tvh="' + o.act + '">' + (o.ic || '') + '<span class="tvh-tx"><b>' + esc(o.t) + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span>' + (o.r || '') + '<span class="tvh-ch" aria-hidden="true">›</span></button>';
+  }
+  function tvDelta(d) { return d ? '<span class="tvh-d ' + (d > 0 ? 'up' : 'down') + '">' + esc(tvSigned(d)) + '</span>' : ''; }
+  /* ---- testversie 4: de cockpit ---- */
+  var TVK_IMG = { mix: 'portefeuilles', lad: 'stijl-gemiddeld', koop: 'koopkracht', plan: 'plannen-vergelijken' };
+  /* mini-waaier: dezelfde simulatie als de grote grafiek (gekozen mix, in geld van nu), 10% tot 90% met de middenlijn */
+  function tvMiniFan() {
+    if (!fanSrc || !(state.budget > 0)) return '<span class="tvk-ph">' + esc(t1('tv.ck.empty')) + '</span>';
+    var m = fanSrc.m, sim = fanSrc.sim, N = m.N, W = 320, H = 92, i, hi = [], lo = [], md = [], mx = 0;
+    if (!(N > 0)) return '';
+    for (i = 0; i <= N; i++) { lo.push(sim.q(i, 0.10)); md.push(sim.q(i, 0.5)); hi.push(sim.q(i, 0.90)); if (hi[i] > mx) mx = hi[i]; }
+    if (!(mx > 0)) mx = 1;
+    function P(v, j) { return (j / N * W).toFixed(1) + ' ' + (H - 3 - Math.max(0, Math.min(mx, v)) / mx * (H - 9)).toFixed(1); }
+    var top = hi.map(P), bot = lo.map(P).reverse(), mid = md.map(P), k = state.opbouw ? stopAge() - state.leeftijdPaul : 0, sx = k > 0 && k < N ? (k / N * W).toFixed(1) : '';
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="tvk-band" d="M' + top.join('L') + 'L' + bot.join('L') + 'Z"/>' +
+      (sx ? '<line class="tvk-stop" x1="' + sx + '" x2="' + sx + '" y1="2" y2="' + (H - 3) + '"/>' : '') + '<path class="tvk-mid" d="M' + mid.join('L') + '"/><line class="tvk-ax" x1="0" x2="' + W + '" y1="' + (H - 3) + '" y2="' + (H - 3) + '"/></svg>' +
+      '<span class="tvk-cap"><span>' + esc(tvAgeTxt(m.youngest)) + '</span><span>' + esc(tvAgeTxt(m.youngest + N)) + '</span></span>';
+  }
+  /* zes cijfervakken; elk vak opent de vraag of het hoofdstuk waar het cijfer vandaan komt */
+  function tvNums() {
+    var S = tvSteps(), ix = {}, out = [], has = state.budget > 0, gap = tv.tot != null && has ? tv.tot - state.budget : null, sx = $('fan-succ') ? $('fan-succ').textContent : '';
+    S.forEach(function (q, i) { ix[q.id] = i; });
+    function Q(id, v) { if (ix[id] != null) out.push({ a: '', l: tvName(S[ix[id]]), v: v }); }   /* ronde 3: je antwoorden staan er ter info; aanpassen doe je op één plek, onder Invullen */
+    Q('bud', has ? eur(state.budget) : '–');
+    out.push({ a: 'c:uit', l: t1('w.success'), v: has && sx ? sx : '–' });
+    out.push({ a: 'c:doen', l: t1(gap != null && gap >= 0 ? 'tv.n.room' : 'tv.n.gap'), v: gap == null ? '–' : eur(Math.abs(gap)), c: gap == null ? '' : (gap >= 0 ? 'pos' : 'neg') });
+    if (state.opbouw) {
+      var cs = null, k = Math.round(stopAge() - state.leeftijdPaul);
+      if (fanSrc && has && k >= 0 && k <= fanSrc.m.N) cs = fanSrc.sim.q(k, 0.5);
+      out.push({ a: 'c:loop', w: 1, l: t1('tv.n.cap'), v: cs == null ? '–' : eur(Math.round(cs / 1000) * 1000) });
+      Q('inl', eur(state.inleg)); Q('stop', fmtAge(stopAge()));
+    } else {
+      Q('cap', eur(state.startkapitaal));
+      out.push({ a: 'c:loop', w: 1, l: t1('k.end'), v: last && has ? eur(Math.round(last.K[last.N] / 1000) * 1000) : '–', c: last && has && last.K[last.N] < 0 ? 'neg' : '' });
+      /* ronde 3: de belasting in jaar 1 staat in Je uitkomst, achter Meer uitleg */
+    }
+    return out;
+  }
+  (function () {
+    var s1 = $('intro-s1'); if (!s1 || !$('agebox') || !$('intro-h')) return;
+    var b = document.createElement('div'); b.className = 'tv-in'; b.id = 'tv-in';
+    b.innerHTML = '<h2 data-t="tv.in.h"></h2><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul><p class="tv-thanks" data-t="intro.thanks"></p>';
+    s1.insertBefore(b, s1.firstChild); s1.insertBefore($('agebox'), $('intro-h'));
+  })();
+  function tvIntroText() { each('#tv-in [data-t]', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
+  var renderFanTv = renderFan; renderFan = function () { renderFanTv(); if (tvReady) tvHome(); };
+  function tvHome() {
+    var host = $('tvh'); if (!host || !tvReady) return;
+    if (!$('tvk')) {
+      $('tvi').innerHTML = '<header class="tvi-top"><h1 id="tvi-h"></h1><p id="tvi-s"></p></header><section class="tv-pic tvi-pic" id="tvi-pic" aria-live="polite"></section><div class="tvh-list" id="tvh-list"></div>';
+      $('tva').innerHTML = '<header class="tvi-top"><h1 id="tva-h"></h1></header><div class="tvh-list" id="tva-list"></div>';
+      host.innerHTML = '<section class="tvh-hero"><p class="tvh-k"><span class="kdot" aria-hidden="true"></span><span id="tvh-k"></span><span class="tvr-tag" id="tvh-tag"></span></p><h1 class="tvh-q" id="tvh-q"></h1>' +
+      '<section class="tv-pic" id="tvh-pic" aria-live="polite"></section><div class="tvh-status" id="tvh-status"></div></section><div class="tvk" id="tvk"></div>';
+      tvTop();
+    }
+    $('tvi-h').textContent = t1('tab.input'); $('tvi-s').textContent = t1('tv.in.s'); $('tva-h').textContent = t1('tv.g.over');
+    var S = tvSteps(), m = S.length, n = S.filter(function (q) { return tv.done[q.id]; }).length, wait = S.filter(function (q) { return q.job && !tv.done[q.id] && tv.jobs[q.id]; }), st = '', h = '', ids = {}, oth = 0, C = tvChs();
+    $('tvh-k').textContent = t1('tv.home.k'); $('tvh-tag').textContent = '';
+    var qt = ui.goal ? '“' + gtx(ui.goal, '.t') + '”' : t1('home.h1'); if ($('tvh-q').textContent !== qt) $('tvh-q').textContent = qt;
+    /* onder de telling: waar je was, of wat er klaarligt */
+    if (ui.introSeen && tv.on && !tv.fin) st += '<div class="tvh-box"><p>' + esc(t1('tv.home.goS', { i: tv.step + 1, m: m })) + '</p><button type="button" class="btn primary" data-tvh="route">' + esc(t1('tv.home.go')) + '</button></div>';
+    else if (ui.introSeen && !tv.on && n === 0) st += '<div class="tvh-box"><p>' + esc(t1('tv.home.startS')) + '</p><button type="button" class="btn primary" data-tvh="start">' + esc(t1('tv.home.start', { m: m })) + '</button></div>';
+    wait.forEach(function (q) {
+      var j = tv.jobs[q.id], due = j.t <= Date.now();
+      st += '<div class="tvh-box job"><p>' + esc((tvRet && due ? t1('tv.back.h') + '. ' : '') + (due ? t1('tv.back.job1', { x: tvRaw(q) }) : t1('tv.fin.job', { d: tvWhen(j.t), x: tvRaw(q) }))) + '</p><div class="tvh-ag"><button type="button" class="btn ' + (due ? 'primary' : 'ghost') + '" data-tvh="job:' + q.id + '">' + esc(t1('tv.back.go')) + '</button>' +
+        '<a class="btn link" target="_blank" rel="noopener" href="' + esc(tvGcal(q.id, j.t)) + '">' + esc(t1('tv.when.g')) + '</a>' + (canShareLink() ? '<button type="button" class="btn link" data-tvj="file:' + q.id + '">' + esc(t1('tv.when.file')) + '</button>' : '') +
+        '<button type="button" class="btn link" data-tvj="self:' + q.id + '">' + esc(t1('tv.when.self')) + '</button></div></div>';
+    });
+    if (tv.fin && !tv.hint && !wait.length) st += '<p class="tvh-hint">' + esc(t1('tv.home.hint', { t: t1('tab.input') })) + '</p>';
+    var sb = $('tvh-status'); if (sb.getAttribute('data-s') !== st) { sb.innerHTML = st; sb.setAttribute('data-s', st); }
+    sb.classList.toggle('low', wait.length > 0 && !(tv.on && !tv.fin) && wait.every(function (q) { return tv.jobs[q.id].t > Date.now(); }));   /* testversie 4: nog niet aan de beurt, dan onder de cijfers */
+    /* je knopen: de vragen van de route, met wat elk antwoord bijdraagt */
+    S.forEach(function (q) { ids[q.id] = 1; }); C.forEach(function (c) { ids[c.id] = 1; });
+    Object.keys(tv.led).forEach(function (k) { if (!ids[k]) oth += tv.led[k]; });
+    h += '<h2 class="tvh-g">' + esc(t1('tv.g.knopen')) + '<span>' + esc(t1('tv.g.count', { n: n + (tv.base > 0 ? 1 : 0), m: m + (tv.base > 0 ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
+    function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
+    function adds(d) { return d ? t1(d > 0 ? 'tv.row.up' : 'tv.row.down', { v: eur(Math.abs(d)) }) : ''; }
+    function join(a, b) { return a && b ? a + ' · ' + b : (a || b); }
+    /* ronde 4: waar een vast staatspensioen bestaat, staat de knoop er altijd, ook als er nog niets van meetelt; anders is het scherm met ingangsleeftijd en aan/uit niet te bereiken */
+    if (tv.base > 0) h += kRow({ act: 'c:sp2', cls: 'done', ic: tvKnoop(7), t: tv.baseSp ? cap1(spName()) : t1('tv.fin.had'), s: join(join(t1('tv.v.pm', { v: eur(tv.base) }), tv.baseSp ? t1('tv.row.auto') : ''), adds(tv.led.sp2 || 0)), st: 'ok' });
+    else if (spFlat()) h += kRow({ act: 'c:sp2', cls: 'done', ic: tvKnoop(7), t: cap1(spName()), s: join(t1('tv.cs.sp2'), adds(tv.led.sp2 || 0)), st: 'ok' });
+    S.forEach(function (q, i) {
+      var done = !!tv.done[q.id], parked = q.job && !done && tv.jobs[q.id], d = tv.led[q.id] || 0;
+      h += kRow({ act: 'q:' + i, cls: (done ? 'done' : (parked ? 'wait' : 'open')) + (tvFlash === q.id ? ' flash' : ''), ic: done ? tvKnoop(i) : '<span class="tvr-dot' + (parked ? ' wait' : '') + '"></span>', t: tvName(q),
+        s: join(done || q.job ? tvAnswer(q) : '', adds(d)), st: done ? 'ok' : (parked ? 'wait' : 'todo') });
+    });
+    if (oth) h += '<div class="tvh-row fix"><span class="tvr-dot"></span><span class="tvh-tx"><b>' + esc(t1('tv.fin.oth')) + '</b></span>' + tvDelta(oth) + '</div>';
+    h += '</div>';
+    function chRow(c) { return tvRow({ act: 'c:' + c.id, t: tvChTitle(c), s: tvChSub(c), r: tvDelta(tv.led[c.id] || 0) + (c.pro ? tvLock() : '') }); }
+    /* Invullen: je knopen en wat er nog meer kan meetellen, als brede balken */
+    h += '<h2 class="tvh-g sub">' + esc(t1('tv.g.meer')) + '</h2><div class="tvh-rows sub">';
+    C.forEach(function (c) { if (c.g === 'meer' && !c.hide) h += chRow(c); });   /* het scherm AOW en pensioen hoort bij de knoop AOW; waar die knoop niet bestaat, staat het er niet */
+    h += '</div>';
+    var L = $('tvh-list'); if (L.getAttribute('data-s') !== h) { L.innerHTML = h; L.setAttribute('data-s', h); }
+    /* Over: uitleg, privacy en delen */
+    var ha = '<div class="tvh-rows">';
+    C.forEach(function (c) { if (c.g === 'over') ha += chRow(c); });
+    ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div>';
+    var LA = $('tva-list'); if (LA.getAttribute('data-s') !== ha) { LA.innerHTML = ha; LA.setAttribute('data-s', ha); }
+    /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
+    var hk = '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
+    hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.num')) + '</h2><div class="tvk-nums">' + tvNums().map(function (x) {
+      return x.a ? '<button type="button" class="tvk-num' + (x.w ? ' wide' : '') + '" data-tvh="' + x.a + '"><span>' + esc(x.l) + '</span><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b></button>' : '';
+    }).join('') + '<p class="tvk-facts">' + tvNums().filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
+    hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.more')) + '</h2><div class="tvk-cards">';
+    C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/' + TVK_IMG[c.id] + '.webp" alt="" loading="lazy" width="120" height="120"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });
+    hk += '</div><p class="tvh-note">' + esc(t1('disc.line')) + '</p>';
+    var K = $('tvk'); if (K.getAttribute('data-s') !== hk) { K.innerHTML = hk; K.setAttribute('data-s', hk); }
+    if (tvFlash) setTimeout(function () { tvFlash = ''; }, 50);
+  }
+
+  /* ---- start en terugkomst ---- */
+  function tvStart() {
+    if (exEmpty()) { tv = tvFresh(); tv.on = 1; tv.last = Date.now(); tvChg = ''; tvView = 'step'; tvMode = ''; tvEdit = false; tvTouched = {}; tvWorkYes = null; tv.stopAuto = 1; tvStopSync(); tvSave(); track('core-route-start'); tvWant = true; }
+    else tvSave();   /* testversie 6: de introductie opnieuw doen wist niet meer wat elk antwoord bijdraagt */
+  }
+  function tvAfterIntro() { if (tvWant) { tvWant = false; tvOpenUi(); } else tvHome(); }
+
+  $('tvr').addEventListener('click', function (ev) {
+    var T0 = ev.target, b, q = tvView === 'step' ? tvCur() : null; if (!T0.closest) return;
+    if ((b = T0.closest('[data-tvr]'))) {
+      var a = b.getAttribute('data-tvr');
+      if (a === 'next') tvNext(); else if (a === 'prev') tvPrev();
+      else if (a === 'close') { if (!tv.fin) { tv.closed = 1; tvSave(); track('core-route-close'); } tvCloseUi(); }
+      return;
+    }
+    if ((b = T0.closest('[data-tvr-chip]')) && q) {
+      var v = +b.getAttribute('data-tvr-chip'), inp = $('tvr-in-' + q.k); if (inp) inp.value = v > 0 ? grp(v) : '0';
+      clearTimeout(tvTyp); delete tvTyped[q.k]; tvTouched[q.id] = 1;
+      if (tvPut(q.id, q.k, v)) { tvTop(); update(); }
+      tvChips(); return;
+    }
+    if ((b = T0.closest('[data-tvr-lvl]')) && q) {
+      var n = +b.getAttribute('data-tvr-lvl'), amt = lvlAmt(n), i2 = $('tvr-in-budget');
+      clearTimeout(tvTyp); delete tvTyped.budget;
+      if (state.opbouw) { if (state.levend !== n || state.budget !== amt) { state.levend = n; state.budget = amt; tvChg = 'bud'; tvWaiting = true; syncInputs(); tvTop(); update(); } }
+      else if (tvPut('bud', 'budget', amt)) { tvTop(); update(); }
+      tvTouched.bud = 1; if (i2) i2.value = grp(amt);
+      tvChips(); return;
+    }
+    if ((b = T0.closest('[data-tvr-pers]'))) {
+      var pn = b.getAttribute('data-tvr-pers'), r = document.querySelector('input[data-k="personen"][value="' + pn + '"]');
+      tvTouched.pers = 1;
+      if (r && !r.checked) { tvChg = 'pers'; tvWaiting = true; r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); tvTop(); }
+      tvChips(); return;
+    }
+    if ((b = T0.closest('[data-tvr-st]')) && q) {
+      var box = b.closest('.tvr-st'), k = box.getAttribute('data-k'), bd = tvStBounds(k), nv = Math.max(bd[0], Math.min(bd[1], tvStVal(k) + (+b.getAttribute('data-tvr-st'))));
+      if (tvPut(q.id, k, nv)) { $('tvr-o-' + k).textContent = nv; var pn = $('tvr-pn-' + k); if (pn) pn.textContent = tvPenNote(k); tvTop(); updateSoon(); }
+      return;
+    }
+    if ((b = T0.closest('[data-tvr-yn]'))) {
+      tvWorkYes = b.getAttribute('data-tvr-yn') === '1'; tvTouched.work = 1;
+      if (!tvWorkYes) { var c1 = tvPut('work', 'werkP', 0), c2 = tvPut('work', 'werkD', 0); if (c1 || c2) update(); }
+      tvBody(); tvTop();
+      if (tvWorkYes) { var wf = $('tvr-in-werkP'); if (wf) wf.focus(); }
+      return;
+    }
+    if ((b = T0.closest('[data-tvr-job]'))) {
+      var j = b.getAttribute('data-tvr-job'), jid = b.getAttribute('data-id') || (q && q.id);
+      if (j === 'now' || j === 'later') { tvMode = j; tvBody(); tvTop(); }
+      else if (j === 'none' && q) {
+        var d1 = tvPut('pen', 'pensioenPaul', 0), d2 = tvPut('pen', 'pensioenDiana', 0);
+        if (!tv.done.pen) track('core-job-done');
+        tv.done.pen = 1; delete tv.jobs.pen; if (d1 || d2) update(); tvAdvance();
+      }
+      else if (j === 'self' && jid) tvSelf(jid);
+      else if (j === 'file' && jid && tv.jobs[jid]) tvIcs(jid, tv.jobs[jid].t);
+      return;
+    }
+    if ((b = T0.closest('[data-tvr-when]')) && q) {
+      var w = b.getAttribute('data-tvr-when'), ts = w === 'own' ? new Date(($('tvr-dt') || {}).value || '').getTime() : parseInt(w, 10);
+      tvPark(q.id, ts); return;
+    }
+  });
+  $('tvr').addEventListener('input', function (ev) {
+    var e = ev.target; if (e.classList && e.classList.contains('tvr-gi')) { tvGrossCalc(e.closest('.tvr-gross')); return; }
+    if (!e.classList || !e.classList.contains('tvr-in') || !e.getAttribute('data-k')) return;
+    var q = tvCur(); tvTyped[e.getAttribute('data-k')] = 1; if (q) tvTouched[q.id] = 1;
+    clearTimeout(tvTyp); tvTyp = setTimeout(tvFlush, 600);
+  });
+  /* veld aangetikt: schuif het naar het midden, zodat het veld en Volgende boven het toetsenbord staan */
+  $('tvr').addEventListener('focusin', function (ev) {
+    var e = ev.target; if (!e.classList || !e.classList.contains('tvr-in')) return;
+    setTimeout(function () { if (document.activeElement === e && e.scrollIntoView) { try { e.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (x) {} } }, 350);
+  });
+  $('tvr').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') { var x = $('tvr-x'); if (x) x.click(); return; }
+    if (ev.key === 'Enter' && ev.target.classList && ev.target.classList.contains('tvr-in') && ev.target.getAttribute('data-k')) { ev.preventDefault(); ev.target.blur(); tvNext(); }
+  });
+  document.addEventListener('click', function (ev) {
+    var T0 = ev.target, b; if (!T0.closest) return;
+    if ((b = T0.closest('[data-tvj]'))) { var pj = b.getAttribute('data-tvj').split(':'); if (pj[0] === 'self') tvSelf(pj[1]); else if (tv.jobs[pj[1]]) tvIcs(pj[1], tv.jobs[pj[1]].t); return; }
+    if (T0.closest('#tvc-back') || T0.closest('[data-tvc-home]')) { tvToHome(false); return; }
+    if (T0.closest('#tvc-more')) { var mo = document.documentElement.classList.toggle('tvc-more'); $('tvc-more').setAttribute('aria-expanded', mo ? 'true' : 'false'); if (tvFocusCh && tvFocusCh.id === 'uit') { try { renderOpb(); } catch (e) {} } return; }
+    /* de link naar de disclaimer opent het hoofdstuk Privacy en disclaimer (de pagina Over is nu een lijst) */
+    if (T0.closest('[data-disc-go]')) { ev.preventDefault(); location.hash = '#k-priv'; return; }
+    if (!(b = T0.closest('[data-tvh]'))) return;
+    var a = b.getAttribute('data-tvh'), S = tvSteps(), i;
+    if (tv.fin && !tv.hint) { tv.hint = 1; tvSave(); }
+    if (a === 'route' || a === 'start') {
+      if (a === 'start') { tv.on = 1; tv.step = 0; track('core-route-start'); }
+      else { for (i = 0; i < S.length; i++) if (!tv.done[S[i].id] && !(S[i].job && tv.jobs[S[i].id])) break; tv.step = Math.min(i, S.length - 1); }
+      tvView = 'step'; tvMode = ''; tvEdit = false; tvOpenUi();
+    }
+    else if (a.indexOf('job:') === 0) tvGoJob(a.slice(4));
+    else if (a.indexOf('q:') === 0) { tv.on = 1; tv.step = +a.slice(2); tvView = 'step'; tvMode = ''; tvEdit = true; tvWorkYes = null; tvOpenUi(); }
+    else if (a.indexOf('c:') === 0) { if (tvIsOpen) tvCloseUi(); tvHomeY = window.pageYOffset || 0; track('extra-ch-' + a.slice(2)); location.hash = '#k-' + a.slice(2); }
+    else if (a === 'a:notes') { var nf = $('nt-fab'); if (nf) nf.click(); }
+    else if (a === 'a:share') openShare();
+    else if (a === 'a:tip') tipApp('tip');
+    else if (a === 'a:pots') plOpen('pots');   /* een extra pensioen is een Pro-functie: het slot opent het Pro-venster */
+    else if (a === 'a:fb') openFb('idea', '');   /* testversie 6: de tip staat alleen hier, onder Over */
+    else if (a === 'a:lang') { $('intro').classList.add('tv-land'); openIntro(0); }
+    else if (a === 'a:intro') { $('intro').classList.remove('tv-land'); openIntro(1); }
+  });
+  TRK['core-route-start'] = ['basis', 'Versie 26: route gestart'];
+  TRK['core-route-3'] = ['basis', 'Versie 26: vierde vraag van de route bereikt'];
+  TRK['core-route-done'] = ['basis', 'Versie 26: route tot het eind doorlopen'];
+  TRK['core-route-close'] = ['basis', 'Versie 26: route tussentijds gesloten'];
+  TRK['core-job-later'] = ['basis', 'Versie 26: opzoekwerk ingepland (Ik zoek het later op)'];
+  TRK['core-job-cal'] = ['basis', 'Versie 26: agendabestand gemaakt'];
+  TRK['core-job-self'] = ['basis', 'Versie 26: link naar jezelf gestuurd'];
+  TRK['core-job-done'] = ['basis', 'Versie 26: opzoekwerk afgerond'];
+  tvChs().forEach(function (c) { TRK['extra-ch-' + c.id] = ['extra', 'Versie 26: hoofdstuk ' + c.id + ' geopend']; });
+  var finishUpdateTv = finishUpdate;
+  finishUpdate = function () { finishUpdateTv(); tvCalc(); tvHome(); tvEmpty(); tvIntroText(); tvFocusKeep(); };
+  tvIntroText();
+  $('reset').addEventListener('click', function () { setTimeout(function () { tv = tvFresh(); tvSave(); tvTouched = {}; tvToHome(true); tvHome(); openIntro(1); }, 0); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && tvFocusCh && !tvIsOpen && !document.querySelector('.modal:not([hidden])')) tvToHome(false); });
+  (function () { var pk = document.querySelector('input[name="s-portfolio"]'), kn = pk && pk.closest('.knob'), sec = $('sec-pf'), at = $('pf'); if (kn && sec && at) { kn.classList.add('tv-pfpick'); sec.insertBefore(kn, at); } })();   /* ronde 3: kiezen en vergelijken staan bij elkaar */
+  /* ronde 4: uitleg hoort achter de i. Extra velden krijgen een i, en losse regels onder een keuze verhuizen naar de i die er al staat. */
+  IB.push(['names', '[data-t="h.names1"],[data-t="h.names2"]'], ['runUntil', '[data-t="h.runUntil"]'], ['inlSplit', '[data-t="h.inlegSplit"]']);
+  ['names', 'runUntil', 'inlSplit'].forEach(function (k) { TRK['extra-info-' + k] = ['extra', 'Uitleg (ⓘ) geopend: ' + k]; });
+  ibMake();
+  function tvBehindI(ib, ids) {
+    var b = document.querySelector('.ib[data-ib="' + ib + '"]'), box = b && $(b.getAttribute('aria-controls')); if (!box) return;
+    ids.forEach(function (id) { var e = $(id); if (e && e.parentNode !== box) box.appendChild(e); });
+  }
+  tvBehindI('curve', ['curve-cap', 'curve-delta', 'curve-hint']); tvBehindI('pfcmp', ['pf-sub']); tvBehindI('koop', ['kp-sub']);
+  /* geslacht staat bij de naam */
+  (function () { var q = document.querySelectorAll('#snel .qp'), pc = document.querySelectorAll('#step-2 .pcard'); for (var i = 0; i < q.length && i < pc.length; i++) { var nf = pc[i].querySelector(':scope > .field'); if (nf) pc[i].insertBefore(q[i], nf.nextSibling); } })();
+  /* het slotje van wat in de testversie open staat is een open slotje */
+  var PL_OPEN = '<svg class="pl-lock pl-open" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/><path d="M5.3 7V4.4a2.7 2.7 0 0 1 5.2-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  (function () { var N = { en: 'A different amount per period', nl: 'Per periode een ander bedrag', de: 'Je Zeitraum ein anderer Betrag', fr: 'Un montant différent par période', es: 'Un importe distinto por periodo' }; Object.keys(N).forEach(function (l) { if (PLT[l] && PLT[l].f && PLT[l].f.period) PLT[l].f.period[0] = N[l]; }); })();
+  tvReady = true;
+  tvFocusApply();
+  if (firstDone) tvCalc();
+  (function () {
+    if (!ui.introSeen) return;
+    var m = /[?&]klus=(pen|sp)\b/.exec(location.search || '');
+    if (m && tvGoJob(m[1])) return;
+    if (!tv.on || tv.closed || tv.fin) return;
+    tvCur(); tvView = 'step'; tvHello = tvRet; tvOpenUi();
+  })();
 })();
 
 </script>

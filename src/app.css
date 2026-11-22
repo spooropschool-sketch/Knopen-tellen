@@ -2132,3 +2132,338 @@ html.is-boot #opb-card, html.is-boot .home-grid { display: none !important; }
 .ex-try { margin: 6px 0 4px; }
 .ex-try[hidden], .ov-ex[hidden] { display: none; }
 .ov-ex { align-self: flex-start; margin-top: 4px; }
+
+/* testversie 3: de hele app rond je telling. Thuis (tvh), de route (tvr), een hoofdstuk (tvc) */
+/* testversie 4: de tabbladen zijn terug (Overzicht, Invullen, Kladblok, Over); Inzicht zit als vakken in de cockpit */
+html.tv3 .mini, html.tv3 .nt-fab, html.tv3 #tab-insight { display: none !important; }
+html.tv3 #tab-notes { display: flex; order: 3; }
+html.tv3 #tab-about { order: 4; }
+html.tv3 .tabs { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+/* delen en doorsturen staan op een telefoon in de lijst onderaan; zo blijft de naam bovenaan heel */
+@media (max-width: 560px) { html.tv3 .tb-right .share-app, html.tv3 .tb-right .share-open { display: none !important; } }
+html.tv3 .wrap { max-width: 720px; padding-bottom: 64px; }
+html.tv3:not(.tvc-on) #page-overview > :not(#tvh), html.tv3:not(.tvc-on) #page-input > :not(#tvi), html.tv3:not(.tvc-on) #page-about > :not(#tva) { display: none !important; }
+html.tvc-on #tvh, html.tvc-on #tvi, html.tvc-on #tva, html.tvc-on .topbar { display: none !important; }
+.tvc-hide { display: none !important; }
+html.tv3 .home-grid, html.tv3 .about-grid { display: block; }
+html.tv3 .home-main, html.tv3 .about-grid { display: flex; flex-direction: column; gap: 16px; }
+html.tv3 #ab-faq, html.tv3 #ab-story-h, html.tv3 #pl-h, html.tv3 #btn-tour, html[data-tvc="big"] #big-box > summary { display: none !important; }
+html.tv3 .opb-act, html.tv3 #snel .ec-img, html.tv3 #snel .eyebrow, html.tv3 #snel-h, html.tv3 #snel .snel-body > .sub, html.tv3 #ex-try { display: none !important; }
+html.tvr-on, html.tvr-on body { overflow: hidden; }
+.tvr[hidden], .tvc[hidden], .tvc-t[hidden], .tvc-empty[hidden], .tv-delta[hidden], .tv-bar[hidden] { display: none; }
+
+/* je telling: hetzelfde blok thuis, in de route en boven een hoofdstuk */
+.tv-pic { padding: 14px 16px 12px; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 18px; box-shadow: 0 10px 24px -18px rgba(0, 0, 0, 0.45); }
+.tv-k { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.tv-big { margin: 2px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.tv-big b { font: 600 38px/1.1 var(--f-num); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; transition: opacity 0.2s; }
+.tv-big span { font-size: 15px; color: var(--muted); }
+.tv-pic.calc .tv-big b { opacity: 0.45; }
+.tv-delta { margin-left: auto; padding: 3px 10px; border-radius: 99px; font-style: normal; font-weight: 700; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tv-delta.up, .tvh-d.up { color: var(--good); }
+.tv-delta.down, .tvh-d.down { color: var(--warn); }
+.tv-delta.up { background: color-mix(in srgb, var(--good) 14%, var(--surface)); }
+.tv-delta.down { background: color-mix(in srgb, var(--warn) 16%, var(--surface)); }
+.tv-bar { height: 12px; margin: 10px 0 0; border-radius: 99px; background: var(--surface2); overflow: hidden; }
+.tv-bar i { display: block; height: 100%; border-radius: 99px; background: var(--copper); transition: width 0.6s var(--ease, ease); }
+.tv-bar.ok i { background: var(--good); }
+.tv-line { margin: 8px 0 0; min-height: 21px; font-size: 15px; line-height: 1.4; color: var(--ink2); }
+.tv-line.ok { color: var(--good); font-weight: 600; }
+
+/* thuis */
+.tvh { max-width: 680px; margin: 0 auto; }
+.tvh-k { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--copper); }
+.tvh-k .tvr-tag { margin-left: auto; color: var(--muted); }
+.tvh-q { margin: 0 0 16px; font: 600 28px/1.15 var(--f-display); text-wrap: balance; }
+.tvh-status:empty { display: none; }
+.tvh-status { display: flex; flex-direction: column; gap: 10px; margin: 12px 0 0; }
+.tvh-box { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 14px; border-radius: 14px; background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.tvh-box p { flex: 1 1 200px; margin: 0; font-size: 15px; line-height: 1.45; font-weight: 600; }
+.tvh-box.job { border: 1.5px dashed color-mix(in srgb, var(--copper) 60%, transparent); background: color-mix(in srgb, var(--copper) 8%, var(--surface)); }
+.tvh-ag { flex: 1 1 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 0 14px; }
+.tvh-ag .btn.link { min-height: 38px; padding: 6px 2px; font-size: 14.5px; }
+.tvh-ag > .btn:first-child { margin-right: 4px; }
+.tvh-box.job + .tvh-box.job { margin-top: -4px; }
+.tvh-hint { margin: 0; padding: 0 2px; font-size: 15px; line-height: 1.45; color: var(--ink2); }
+.tvh-g { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 28px 2px 10px; font: 700 13px/1.2 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tvh-g span { font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
+.tvh-rows { display: flex; flex-direction: column; gap: 8px; }
+.tvh-row { box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 10px 12px 10px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color 0.15s, transform 0.15s var(--ease, ease); }
+button.tvh-row:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+button.tvh-row:active { transform: scale(0.99); }
+button.tvh-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tvh-row.fix { cursor: default; }
+.tvh-row .tvr-dot { flex: none; width: 28px; height: 28px; }
+.tvh-tx { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.tvh-tx b { font-size: 16px; font-weight: 600; line-height: 1.3; }
+.tvh-tx span { font-size: 14px; line-height: 1.35; color: var(--muted); overflow-wrap: anywhere; }
+.tvh-row.done .tvh-tx span { color: var(--ink2); }
+.tvh-d { flex: none; font-weight: 700; font-size: 15px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tvh-row .tag { flex: none; }
+.tvh-ch { flex: none; font-size: 22px; line-height: 1; color: var(--muted); }
+.tvh-row.fix .tvh-ch { display: none; }
+.tvh-note { margin: 26px 2px 0; font-size: 13px; line-height: 1.45; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .tvh-row.flash { animation: tvh-flash 1.4s ease-out; }
+  .tvr:not([hidden]) .tvr-wrap, html.tvc-on .tvc-t, html.tvc-on .page:not([hidden]) { animation: tv-in 0.22s ease-out; }
+}
+@keyframes tvh-flash { 0%, 35% { background: var(--accent-soft); border-color: var(--accent); } 100% { background: var(--surface); } }
+@keyframes tv-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* een hoofdstuk: terug, je telling in het klein, en één onderdeel */
+.tvc { position: sticky; top: 0; z-index: 55; margin: 0 0 14px; padding: max(6px, env(safe-area-inset-top, 0px)) 0 10px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.tvc-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
+.tvc-back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 14px 6px 8px; margin-left: -8px; border: 0; border-radius: 12px; background: none; color: var(--accent); font: 600 16px var(--f-body); cursor: pointer; }
+.tvc-back span:first-child { font-size: 24px; line-height: 1; }
+.tvc-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.tvc .tv-pic { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.tvc .tv-k, .tvc .tv-line { display: none; }
+.tvc .tv-big { margin: 0; }
+.tvc .tv-big b { font-size: 27px; }
+.tvc .tv-bar { height: 8px; margin-top: 8px; }
+.tvc-t { margin: 0 0 18px; }
+.tvc-t h1 { margin: 0 0 6px; font: 600 28px/1.15 var(--f-display); text-wrap: balance; }
+.tvc-t p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--ink2); }
+.tvc-empty { margin: 18px 0 0; padding: 16px; border-radius: 14px; background: var(--surface2); }
+.tvc-empty p { margin: 0 0 12px; }
+
+/* de route: één vraag per scherm */
+.tvr { position: fixed; inset: 0; z-index: 85; background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.tvr-wrap { box-sizing: border-box; max-width: 560px; min-height: 100%; margin: 0 auto; padding: max(10px, env(safe-area-inset-top, 0px)) 18px max(28px, env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; }
+.tvr-head { display: flex; align-items: center; gap: 10px; min-height: 46px; }
+.tvr-tag { flex: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--copper); }
+.tvr-dots { flex: 1 1 auto; min-width: 0; display: flex; justify-content: center; gap: 4px; }
+.tvr-dots .tvr-dot { flex: 0 1 20px; width: auto; height: auto; min-width: 11px; aspect-ratio: 1; }
+.tvr-dot { flex: none; box-sizing: border-box; display: block; width: 20px; height: 20px; border-radius: 50%; border: 2px dashed color-mix(in srgb, var(--muted) 55%, transparent); }
+img.tvr-dot { border: 0; }
+.tvr-dot.cur { border-style: solid; border-color: var(--accent); background: var(--accent-soft); }
+img.tvr-dot.cur { outline: 2px solid var(--accent); outline-offset: 1px; }
+.tvr-dot.wait { border-style: solid; border-color: var(--copper); }
+.tvr-x { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 24px; line-height: 1; cursor: pointer; }
+.tvr .tv-pic { position: sticky; top: 8px; z-index: 2; margin: 8px 0 20px; }
+.tvr-body { flex: 1 1 auto; display: flex; flex-direction: column; }
+.tvr-n { margin: 0 0 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.tvr-goal { margin: 0 0 12px; font-size: 15px; line-height: 1.45; color: var(--ink2); }
+.tvr-q { margin: 0 0 8px; font: 600 24px/1.2 var(--f-display); text-wrap: balance; outline: none; }
+.tvr-h { margin: 0 0 16px; font-size: 15px; line-height: 1.45; color: var(--ink2); }
+.tvr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.tvr-chip, .tvr-choice { box-sizing: border-box; min-height: 48px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: 600 16px var(--f-body); cursor: pointer; }
+.tvr-chip.on, .tvr-choice.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.tvr-chip.lvl { flex: 1 1 96px; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: left; }
+.tvr-chip.lvl span { font-size: 14px; font-weight: 500; color: var(--ink2); }
+.tvr-stack { display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px; }
+.tvr-stack.two { flex-direction: row; }
+.tvr-stack.two .tvr-choice { flex: 1 1 0; text-align: center; }
+.tvr-choice { width: 100%; min-height: 56px; text-align: left; font-size: 17px; }
+.tvr-fs { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.tvr-field { display: flex; flex-direction: column; gap: 5px; margin: 0 0 16px; font-size: 14px; color: var(--ink2); }
+.tvr-fl { font-size: 14px; color: var(--ink2); }
+.tvr-inrow { display: flex; align-items: center; gap: 8px; }
+.tvr-in { box-sizing: border-box; width: 170px; max-width: 100%; min-height: 50px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); font: 600 19px var(--f-body); }
+.tvr-in:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.tvr-dt { width: 240px; font-size: 16px; font-weight: 500; }
+.tvr-st { display: flex; flex-direction: column; gap: 6px; margin: 0 0 18px; }
+.tvr-stc { display: flex; align-items: center; gap: 12px; }
+.tvr-st button { flex: none; width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 28px; line-height: 1; cursor: pointer; }
+.tvr-st output { min-width: 62px; text-align: center; font: 600 36px/1 var(--f-num); font-variant-numeric: tabular-nums; }
+.tvr-nav { display: flex; gap: 10px; margin: 6px 0 0; }
+.tvr-nav .btn.primary { flex: 1 1 auto; min-height: 52px; font-size: 16px; }
+.tvr-where { margin: 0 0 16px; padding: 12px 14px; border-radius: 14px; background: var(--surface2); font-size: 15px; line-height: 1.5; }
+.tvr-where p { margin: 0 0 4px; }
+.tvr-where ol { margin: 0; padding-left: 20px; }
+.tvr-where a { color: var(--accent); font-weight: 600; }
+.tvr-need { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: var(--warn); }
+.tvr-filled { margin: 0 0 14px; font-size: 17px; font-weight: 600; }
+.tvr-own { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin: 0 0 10px; }
+.tvr-own .tvr-field { margin: 0; }
+.tvr-ag { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+@media (min-width: 700px) {
+  .tvr-wrap { padding-top: 28px; }
+  .tvr-q { font-size: 28px; }
+  .tvh-q, .tvc-t h1 { font-size: 34px; }
+}
+@media (max-width: 380px) {
+  .tv-big b { font-size: 33px; }
+  .tvr-chip { padding-inline: 12px; }
+  .tvh-q, .tvc-t h1 { font-size: 25px; }
+}
+
+/* testversie 4: de cockpit (tvk), de pagina Invullen (tvi) en de pagina Over (tva) */
+#tvh-pic { cursor: pointer; }
+/* de cockpit is één kolom; een klus die pas later aan de beurt is zakt tot onder de cijfers, zodat de grafiek en de cijfers bovenaan blijven */
+.tvh { display: flex; flex-direction: column; }
+.tvh-hero, .tvk { display: contents; }
+.tvk-fan { margin-top: 14px; }
+.tvh-status.low { order: 3; margin-top: 18px; }
+.tvk > :nth-child(n+4) { order: 4; }
+.tvi, .tva { max-width: 680px; margin: 0 auto; }
+.tvk .tvh-g { margin: 20px 2px 8px; }
+.tvk-fan { display: block; box-sizing: border-box; width: 100%; padding: 12px 14px 10px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color 0.15s; }
+.tvk-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 14.5px; }
+.tvk-h b { font-weight: 700; }
+.tvk-zoom { flex: none; font-size: 12.5px; font-weight: 600; color: var(--accent); }
+.tvk-fan svg { display: block; width: 100%; height: 92px; margin-top: 10px; overflow: visible; }
+.tvk-band { fill: color-mix(in srgb, var(--accent) 22%, transparent); stroke: none; }
+.tvk-mid { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.tvk-stop { stroke: var(--copper); stroke-width: 1.4; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.tvk-ax { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tvk-cap { display: flex; justify-content: space-between; margin-top: 5px; font-size: 12.5px; color: var(--muted); }
+.tvk-ph { display: block; padding: 20px 0 12px; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.tvk-nums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tvk-num { display: flex; flex-direction: column; gap: 6px; box-sizing: border-box; min-height: 76px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color 0.15s; }
+.tvk-num span { font-size: 12.5px; line-height: 1.3; font-weight: 600; color: var(--muted); }
+.tvk-num b { margin-top: auto; font-size: 20px; line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tvk-num b.pos { color: var(--good); }
+.tvk-num b.neg { color: var(--bad); }
+.tvk-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tvk-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; box-sizing: border-box; padding: 10px 12px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color 0.15s; }
+.tvk-card img { width: 56px; height: 56px; object-fit: contain; }
+.tvk-card b { font-size: 14.5px; line-height: 1.3; font-weight: 700; }
+.tvk-card .tag { position: absolute; top: 10px; right: 10px; }
+.tvk-fan:hover, .tvk-num:hover, .tvk-card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.tvk-fan:focus-visible, .tvk-num:focus-visible, .tvk-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (min-width: 620px) { .tvk-nums, .tvk-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } .tvk-fan svg { height: 120px; } }
+.tvi-top { margin: 6px 2px 14px; }
+.tvi-top h1 { margin: 0 0 6px; font: 600 28px/1.15 var(--f-display); text-wrap: balance; }
+.tvi-top p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); }
+.tvi-pic { padding: 12px 14px 10px; }
+.tvi-pic .tv-big b { font-size: 30px; }
+.tvi-pic .tv-k { display: none; }
+.tvi .tvh-g:first-child, .tva .tvh-g:first-child { margin-top: 18px; }
+
+/* testversie 5: rust. Eén kop per hoofdstuk, uitleg ingeklapt, vraagschermen kalmer, minder dubbele ingangen */
+.tvc-t { margin: 0 2px 12px; }
+.tvc-tr { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 32px; }
+.tvc-t h1 { margin: 0; font: 700 13px/1.2 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-wrap: initial; }
+#tvc-s { display: none; }
+.tvc-more { flex: none; min-height: 32px; padding: 4px 2px; font-size: 13.5px; }
+html[data-tvc="uit"]:not(.tvc-more) :is(#opb-card .opb-span, #opb-card .opb-split, #opb-card .opb-note, #opb-card .opb-more, #status-card .scope, #status-card .verdict-text, #status-card .srcline),
+html[data-tvc="doen"]:not(.tvc-more) #opb-play .opb-note,
+html[data-tvc="loop"]:not(.tvc-more) :is(.panel-head .sub, .srcline),
+html[data-tvc="lad"]:not(.tvc-more) :is(.panel-head .sub, .panel-head .nb, .srcline) { display: none !important; }
+html[data-tvc="uit"]:not(.tvc-more) #kpis { display: none !important; }
+html[data-tvc="lad"]:not(.tvc-more) #sec-ladder .panel-head.has-nb { display: block; }
+html[data-tvc="lad"] #sec-ladder .panel-head h2 { text-align: left; }
+/* vraagschermen: de vraag is een rustig label tussen de telling en de antwoorden; de teller alleen voor schermlezers */
+.tvr-n:not(.hello) { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.tvr-q { margin: 0 0 4px; font: 600 19px/1.3 var(--f-body); }
+.tvr-h { margin: 0 0 14px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+.tvr-links { display: flex; flex-wrap: wrap; gap: 0 18px; margin: 0 0 14px; }
+.tvr-links .btn.link { min-height: 36px; height: auto; padding: 6px 2px; font-size: 14px; text-align: left; white-space: normal; }
+/* cockpit: Verder kijken is ondergeschikt aan de cijfers: vier kleine vakken, zonder grote tekening */
+.tvk-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.tvk-card { flex-direction: row; align-items: center; gap: 10px; min-height: 50px; padding: 8px 10px; background: transparent; }
+.tvk-card img { flex: none; width: 28px; height: 28px; }
+.tvk-card b { font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+.tvk-card .tag { position: static; margin-left: auto; flex: none; }
+/* Invullen: geen kop met uitleg; Meer meetellen is ondergeschikt aan je knopen */
+.tvi .tvi-top { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tvh-g.sub { margin-top: 32px; font-size: 12px; }
+.tvh-rows.sub { gap: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tvh-rows.sub .tvh-row { min-height: 44px; padding: 8px 10px 8px 12px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.tvh-rows.sub .tvh-row + .tvh-row { border-top: 1px solid var(--line); }
+.tvh-rows.sub .tvh-tx b { font-size: 14.5px; font-weight: 500; color: var(--ink2); }
+.tvh-rows.sub .tvh-tx span { display: none; }
+.tvh-rows.sub .tvh-d { font-size: 13.5px; }
+/* testversie 5, bijgewerkt: drie instellingen terug, pensioen op je rekening met ingangsleeftijd */
+html[data-tvc="basis"] #snel .ec-img, html[data-tvc="basis"] #snel .snel-body > :not(.snel-grid), html[data-tvc="basis"] #snel .snel-grid > :not(.qp):not(.curve-f):not(#inl-per), html[data-tvc="basis"] #snel .qp > .field { display: none !important; }
+html[data-tvc="basis"] #snel .snel-grid { display: flex; flex-direction: column; gap: 18px; }
+html[data-tvc="basis"] #snel .qp::before { content: attr(data-tvlab); display: block; margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--ink); }
+html[data-tvc="pot"]:not(.tvc-more) #pots-box :is(.pots-s, .hint) { display: none !important; }
+.tvr-pen { margin: 0 0 6px; }
+.tvr-pen .tvr-field { margin-bottom: 8px; }
+.tvr-gross { margin: 0 0 16px; }
+.tvr-gross summary { display: inline-block; padding: 6px 2px; font-size: 14px; font-weight: 600; color: var(--accent); cursor: pointer; list-style: none; }
+.tvr-gross summary::-webkit-details-marker { display: none; }
+.tvr-gross[open] summary { color: var(--ink2); }
+.tvr-gin { margin-top: 6px; padding: 12px 14px 4px; border: 1px dashed var(--line); border-radius: 12px; }
+.tvr-gin .tvr-in { width: 140px; min-height: 44px; font-size: 17px; }
+.tvr-gin .tvr-gp { width: 84px; }
+.tvr-go { margin: 0 0 10px; font-size: 14.5px; font-weight: 600; color: var(--good); }
+.tvr-go:empty { display: none; }
+.tvr-pen .tvr-st { margin-bottom: 12px; }
+.tvr-pen .tvr-st button { width: 44px; height: 44px; font-size: 22px; }
+.tvr-pen .tvr-st output { min-width: 50px; font-size: 26px; }
+
+/* testversie 6: eenduidige knopen op Invullen, een welkomstscherm dat eerst zegt wat de app doet */
+.tvh-st { flex: none; display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 999px; font-size: 12.5px; font-weight: 600; line-height: 1.2; white-space: nowrap; }
+.tvh-st.ok { background: color-mix(in srgb, var(--good) 14%, transparent); color: var(--good); }
+.tvh-st.ok::before { content: "\2713"; font-weight: 700; }
+.tvh-st.todo { border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line)); color: var(--accent); }
+.tvh-st.wait { background: color-mix(in srgb, var(--copper) 16%, transparent); color: var(--copper); }
+.tvr-pn { margin: 2px 0 0; font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+.tvr-pn:empty { display: none; }
+.tv-in { margin: 0 0 18px; }
+.tv-in h2 { margin: 0 0 8px; font: 600 26px/1.15 var(--f-display); text-wrap: balance; }
+.tv-in p { margin: 0 0 10px; font-size: 16px; line-height: 1.45; color: var(--ink2); }
+.tv-in ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.tv-in li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.4; }
+.tv-in li::before { content: ""; position: absolute; left: 2px; top: 0.45em; width: 9px; height: 9px; border-radius: 50%; background: var(--copper); }
+html.tv3 #intro-s1 > .sub { display: none; }
+/* de tekst onder het wiel maakte het scherm in het Duits en Frans een paar pixels te breed */
+html.tv3 .slot, html.tv3 .slot-sub { grid-template-columns: minmax(0, 1fr); }
+html.tv3 #intro-s1 > #intro-h { margin: 22px 0 10px; font: 600 17px/1.3 var(--f-body); text-align: center; }
+
+
+/* testversie 6: geen koffie, en de tip alleen onder Over > Delen */
+html.tv3 .support-card, html.tv3 .sup-sh, html.tv3 .sup-pl, html.tv3 .sup-ab, html.tv3 .fb-line, html.tv3 .fb-card, html.tv3 .duo, html.tv3 a.kofi { display: none !important; }
+
+/* testversie 6: alle Pro-labels als slotje */
+html.tv3 .pro-tag { padding: 0; border: 0; gap: 0; opacity: 1; background: none !important; color: var(--copper) !important; }
+html.tv3 .pro-tag > span, html.tv3 .pro-tag .pl-clock { display: none !important; }
+html.tv3 .pro-tag .pl-lock { display: block !important; width: 14px; height: 14px; }
+html.tv3 .pro-tag .pl-lock rect, html.tv3 .tv-lock .pl-lock rect { fill: currentColor; stroke: none; }
+html.tv3 .tv-lock { display: inline-flex; align-items: center; margin-left: 6px; color: var(--copper); vertical-align: -0.1em; }
+html.tv3 .tv-lock .pl-lock { width: 14px; height: 14px; fill: none; stroke: currentColor; }
+html.tv3 .tvk-card .tv-lock { margin: 0; }
+
+/* testversie 6, ronde 3: één uitgang (kruisje), één knop per bestemming, schermen passend bij hun knop */
+.opb-sec { display: contents; }
+html.tv3 .opb-sec-mix { display: none !important; }   /* ronde 5: de plus/min-rijen staan er weer (afspraak voor de jongste groepen: uitnodigen om te proberen); de beleggingstegels blijven weg, kiezen doe je in Je portefeuille */
+html.tv3 #tvh-pic { cursor: default; }
+html.tv3 div.tvk-fan { cursor: default; }
+html.tv3 div.tvk-fan:hover { border-color: var(--line); }
+html.tv3 .tvk-num.wide { grid-column: 1 / -1; min-height: 64px; }
+html.tv3 .tvk-facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 6px 2px 0; font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+html.tv3 .tvk-facts:empty { display: none; }
+html.tv3 .tvk-facts b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+html[data-tvc="tax"] #step-4 > .card > .knob, html[data-tvc="tax"] #step-4 > .card > .only2 { display: none !important; }
+html[data-tvc="run"] #step-4 > .card > .tdrop { display: none !important; }
+html[data-tvc="sp2"] #step-3 details[data-pd^="pensAan"] { display: none !important; }
+html[data-tvc="nm"] #step-2 .pcard > .opb-q, html[data-tvc="nm"] #step-2 .pcard > .wk { display: none !important; }
+html[data-tvc="pp"] #step-2 .pcard > .field:not(.opb-q) { display: none !important; }
+html[data-tvc="pp"]:not(.is-opb) #step-2 .wk-one > .field:first-child { display: none !important; }
+html.tv3 #intro.tv-land .ip-lang { display: none !important; }
+html.tv3 #sec-pf .tv-pfpick { margin: 4px 0 18px; }
+
+/* testversie 6, ronde 4: uitleg staat achter een i; naam en geslacht bij elkaar; open slotje voor wat open staat */
+html.tv3 .tvc-tr { justify-content: flex-start; gap: 6px; }
+.tvc-i { position: relative; display: inline-grid; place-items: center; flex: none; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--accent); cursor: pointer; }
+.tvc-i::after { content: ""; position: absolute; inset: -9px; }
+.tvc-i svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tvc-i:hover, .tvc-i[aria-expanded="true"] { background: var(--accent-soft); }
+.tvc-i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+html.tvc-on:not(.tvc-more) main.wrap .pots-in > .hint, html.tvc-on:not(.tvc-more) main.wrap #big-list .hint, html.tvc-on:not(.tvc-more) main.wrap .sl-rate .hint,
+html.tvc-on:not(.tvc-more) main.wrap #tbl > .hint, html.tvc-on:not(.tvc-more) main.wrap .panel-head > .sub, html.tvc-on:not(.tvc-more) main.wrap .panel-head > div > .sub { display: none !important; }
+html.tv3 .ipop > .zk-cap, html.tv3 .ipop > .zk-d, html.tv3 .ipop > .sub { margin: 0 0 8px; }
+html.tv3 .pro-tag .pl-open, html.tv3 .tv-lock.is-open .pl-lock:not(.pl-open) { display: none !important; }
+html.tv3 #step-2 .pcard > .qp { display: none; }
+html[data-tvc="nm"] #step-2 .pcard > .qp { display: block; margin-top: 16px; }
+html[data-tvc="nm"] #step-2 .pcard > .qp > .field { display: none !important; }
+html[data-tvc="nm"] #step-2 .pcard > .qp::before { content: attr(data-tvlab); display: block; margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--ink); }
+
+/* testversie 6, ronde 5: status in de vraag valt op; Grote uitgave later netjes uitgelijnd; extra pensioen op slot */
+.tvr-filled.is-st { display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; padding: 12px 14px; border-radius: 14px; background: color-mix(in srgb, var(--good) 12%, transparent); border: 1px solid color-mix(in srgb, var(--good) 35%, transparent); font-size: 17px; }
+.tvr-fs { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--good); color: var(--card, #fff); font-size: 13px; font-weight: 700; white-space: nowrap; }
+.tvr-fs::before { content: "\2713"; }
+.tvr-filled b { font-weight: 700; color: var(--ink); }
+.tvr-links .tv-lock { margin-left: 6px; }
+html.tv3 #big-list .inl-row { display: grid; grid-template-columns: auto 72px auto 1fr 40px; align-items: center; gap: 10px 8px; margin: 0 0 14px; }
+html.tv3 #big-list .inl-row > input[data-f="a"] { grid-column: 1 / 5; width: 100%; min-width: 0; }
+html.tv3 #big-list .inl-row > input.inl-a { width: 100%; }
+html.tv3 #big-list .inl-row > .per-x { grid-column: 5; justify-self: end; }
+html.tv3 #big-box .pots-in { padding-top: 14px; }
+
+/* versie 26: de testlabels zijn weg; dankwoord bij de intro */
+.tvr-tag:empty { display: none; }
+.tv-in .tv-thanks { margin: 14px 0 0; padding-left: 14px; border-left: 3px solid var(--copper); font-size: 14px; line-height: 1.45; color: var(--ink2); }
