@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=70a6062d">
+<link rel="stylesheet" href="/app.css?v=06a4089c">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -350,6 +350,7 @@
     </footer>
   </section>
 
+  <div class="tvc-foot" id="tvc-foot" hidden></div>
 </main>
 
 <div class="tvr" id="tvr" role="dialog" aria-modal="true" aria-labelledby="tvr-q" hidden></div>
@@ -513,7 +514,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/de.js?v=97519339"></script>
+<script src="/i18n/de.js?v=9b6cf14c"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4065,13 +4066,13 @@ var TRK = {
   KOFI = '';   /* testversie 6: geen koffie-opties */
   /* testversie 6: Pro-functies tonen een slotje in plaats van het woord Pro */
   function tvLock(open) { return '<span class="tv-lock' + (open ? ' is-open' : '') + '" role="img" title="' + esc(t1('pro.tip')) + '" aria-label="' + esc(t1('pro.tip')) + '">' + (open ? PL_OPEN : PL_LOCK) + '</span>'; }
-  function tvFresh() { return { on: 0, step: 0, done: {}, led: {}, base: null, baseSp: 0, tot: null, jobs: {}, closed: 0, fin: 0, last: 0, ctx: '', stopAuto: 0, hint: 0, snap: null }; }
+  function tvFresh() { return { on: 0, step: 0, done: {}, led: {}, base: null, baseSp: 0, tot: null, jobs: {}, closed: 0, fin: 0, last: 0, ctx: '', stopAuto: 0, hint: 0, snap: null, vf: {} }; }
   var tv = tvFresh();
   (function () {
     try {
       var o = JSON.parse(localStorage.getItem(TVKEY) || 'null'); if (!o || typeof o !== 'object') return;
       ['on', 'step', 'closed', 'fin', 'last', 'baseSp', 'base', 'tot', 'stopAuto', 'hint'].forEach(function (k) { if (typeof o[k] === 'number' && isFinite(o[k])) tv[k] = o[k]; });
-      ['done', 'led', 'jobs', 'snap'].forEach(function (k) { if (o[k] && typeof o[k] === 'object') tv[k] = o[k]; });
+      ['done', 'led', 'jobs', 'snap', 'vf'].forEach(function (k) { if (o[k] && typeof o[k] === 'object') tv[k] = o[k]; });
       if (typeof o.ctx === 'string') tv.ctx = o.ctx;
       /* testversie 6, ronde 3: het scherm Beleggen, belasting en looptijd is gesplitst; wat er al stond verhuist mee */
       if (tv.snap && typeof tv.snap.basis === 'string' && tv.snap.nm === undefined) { var ob2 = tv.snap.basis.split('|'); if (ob2.length >= 4) { tv.snap.nm = ob2.slice(0, 2).join('|'); tv.snap.basis = ob2.slice(2).join('|'); } }
@@ -4401,6 +4402,14 @@ var TRK = {
     var S = tvSteps(), m = S.length, q = tvCur(), i = tv.step + 1;
     $('tvr-tag').textContent = ''; $('tvr-x').setAttribute('aria-label', t1('tv.close'));
     $('tvr-dots').innerHTML = S.map(function (x, k) { return tv.done[x.id] ? tvKnoop(k, k === tv.step ? 'cur' : '') : '<span class="tvr-dot' + (k === tv.step ? ' cur' : (x.job && tv.jobs[x.id] ? ' wait' : '')) + '"></span>'; }).join('');
+    if (tvView === 'offer') {
+      var RL = tvRefs().filter(function (c) { return !tv.vf[c.id]; }).slice(0, 3);
+      body.innerHTML = '<p class="tvr-n">' + esc(t1('tv.n', { i: m, m: m })) + '</p><h2 class="tvr-q" id="tvr-q" tabindex="-1">' + esc(t1('tv.ref.offerH')) + '</h2><p class="tvr-h">' + esc(t1('tv.ref.offerP')) + '</p>' +
+        '<ol class="tvr-refl">' + RL.map(function (c) { return '<li>' + esc(tvChTitle(c)) + (c.pro ? tvLock() : '') + '</li>'; }).join('') + '</ol>' +
+        '<div class="tvr-nav ref"><button type="button" class="btn primary" data-tvr="refgo">' + esc(t1('tv.ref.go')) + '</button><button type="button" class="btn ghost" data-tvr="refskip">' + esc(t1('tv.ref.skip')) + '</button></div>';
+      tvHello = false; el.scrollTop = 0; var hd0 = $('tvr-q'); if (hd0) { try { hd0.focus({ preventScroll: true }); } catch (e) {} }
+      return;
+    }
     body.innerHTML = '<p class="tvr-n' + (tvHello ? ' hello' : '') + '">' + esc(tvHello ? t1('tv.hello', { i: i, m: m }) : t1('tv.n', { i: i, m: m })) + '</p>' +
       (tv.step === 0 && ui.goal && !tvEdit && !tvHello ? '<p class="tvr-goal">“' + esc(gtx(ui.goal, '.t')) + '” ' + esc(t1('tv.goal1')) + '</p>' : '') + tvStepHtml(q);
     tvHello = false; tvNeed = false;
@@ -4419,7 +4428,7 @@ var TRK = {
   }
   function tvCloseUi() {
     tvFlush(); clearTimeout(tvTyp);
-    $('tvr').hidden = true; tvIsOpen = false; tvMode = ''; tvEdit = false; document.documentElement.classList.remove('tvr-on');
+    $('tvr').hidden = true; tvIsOpen = false; tvMode = ''; tvEdit = false; if (tvView === 'offer') tvView = 'step'; document.documentElement.classList.remove('tvr-on');
     tvHome(); tvTop();
   }
   function tvTabOf(c) { return c ? ({ meer: 'input', over: 'about' }[c.g] || 'overview') : 'overview'; }
@@ -4443,7 +4452,11 @@ var TRK = {
     var S = tvSteps(), q = tvCur();
     tvMode = ''; tvWorkYes = null;
     if (tvEdit) { tvFlash = q ? q.id : ''; tvSave(); tvCloseUi(); return; }
-    if (tv.step >= S.length - 1) { if (!tv.fin) { tv.fin = 1; track('core-route-done'); } tvSave(); tvCloseUi(); tvToHome(true); return; }
+    if (tv.step >= S.length - 1) {
+      var first = !tv.fin; if (!tv.fin) { tv.fin = 1; track('core-route-done'); } tvSave();
+      if (first && tvRefFirst()) { tvView = 'offer'; tvBody(); tvTop(); track('extra-ref-offer'); return; }   /* testversie 7: eerste keer klaar, dan het aanbod om te verfijnen */
+      tvCloseUi(); tvToHome(true); return;
+    }
     tv.step++; if (tv.step === 3) track('core-route-3');
     tvSave(); tvBody(); tvTop();
   }
@@ -4521,6 +4534,31 @@ var TRK = {
     return k ? t1(k) : '';
   }
   function tvNoStud() { return !state.opbouw && !slCount(); }
+  /* testversie 7: Invullen in drie lagen. Je basis (de vragen van de route), Verfijn je uitkomst (per leeftijdsgroep een eigen
+     volgorde, gratis eerst en Pro achteraan) en Zo rekenen we (de aannames, klein met hun waarde). Niets valt weg: wat niet in de
+     volgorde van een groep staat, komt achteraan bij Verfijn. */
+  var TV_ASM = ['tax', 'run', 'aan'], TV_REFO = [['debt', 'nm', 'big', 'pp', 'basis'], ['nm', 'debt', 'pp', 'big', 'basis', 'pot'], ['pp', 'nm', 'debt', 'big', 'basis', 'pot']];
+  var tvRefLeft = -1;   /* na de route: nog zoveel keer Volgende in het rijtje; -1 = vrij doorlopen */
+  function tvRefs() {
+    var have = {}, L = TV_REFO[state.opbouw ? Math.min(band(), 1) : 2].slice();
+    tvChs().forEach(function (c) { if (c.g === 'meer' && !c.hide && TV_ASM.indexOf(c.id) < 0) have[c.id] = c; });
+    L = L.filter(function (id) { return have[id]; });
+    Object.keys(have).forEach(function (id) { if (L.indexOf(id) < 0) L.push(id); });
+    if (ui.goal === 'debtfree') L.sort(function (x, y) { return (y === 'debt') - (x === 'debt'); });   /* wie wil weten wanneer hij schuldenvrij is, ziet Schulden bovenaan */
+    return L.map(function (id) { return have[id]; });
+  }
+  function tvIsRef(id) { return tvRefs().some(function (c) { return c.id === id; }); }
+  function tvRefNext(id) { var L = tvRefs(), i, k = -1; for (i = 0; i < L.length; i++) if (L[i].id === id) k = i; for (i = k + 1; i < L.length; i++) if (!tv.vf[L[i].id]) return L[i]; return null; }
+  function tvRefFirst() { var L = tvRefs(); for (var i = 0; i < L.length; i++) if (!tv.vf[L[i].id]) return L[i]; return null; }
+  function tvRefMark(id) { if (!tv.vf[id]) { tv.vf[id] = 1; tvSave(); track('extra-ref-done'); } }
+  /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
+  function tvRefFoot(ch) {
+    var f = $('tvc-foot'); if (!f) return;
+    var on = !!(ch && tvIsRef(ch.id)); f.hidden = !on; if (!on) { f.innerHTML = ''; return; }
+    var nx = tvRefLeft === 0 ? null : tvRefNext(ch.id);
+    f.innerHTML = '<button type="button" class="btn ' + (nx ? 'ghost' : 'primary') + '" data-tvref="done">' + esc(t1('tv.ready')) + '</button>' +
+      (nx ? '<button type="button" class="btn primary" data-tvref="next:' + nx.id + '">' + esc(t1('tv.ref.next', { x: tvChTitle(nx) })) + '</button>' : '');
+  }
   function tvEls(c) {
     var pg = $('page-' + c.page), out = []; if (!pg) return out;
     c.sel.forEach(function (s) { Array.prototype.forEach.call(pg.querySelectorAll(s), function (e) { out.push(e); }); });
@@ -4573,6 +4611,8 @@ var TRK = {
     if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld staat hier onder de naam, met een eigen label */
     root.classList.remove('tvc-more'); var mb = $('tvc-more'); mb.hidden = true; mb.innerHTML = IB_SVG; mb.setAttribute('aria-label', t1('ib.more')); mb.setAttribute('aria-expanded', 'false'); if (ch) { tvMoreSync(); setTimeout(tvMoreSync, 700); setTimeout(tvMoreSync, 2000); }
     $('tvc').hidden = !ch; $('tvc-t').hidden = !ch;
+    if (!ch) tvRefLeft = -1;
+    tvRefFoot(ch);
     if (!ch) { tvHome(); tvTop(); return; }
     var pg = $('page-' + ch.page), keep = tvEls(ch);
     if (!keep.length) Array.prototype.forEach.call(pg.children, function (s) { s.classList.add('tvc-hide'); });
@@ -4682,14 +4722,16 @@ var TRK = {
         '<a class="btn link" target="_blank" rel="noopener" href="' + esc(tvGcal(q.id, j.t)) + '">' + esc(t1('tv.when.g')) + '</a>' + (canShareLink() ? '<button type="button" class="btn link" data-tvj="file:' + q.id + '">' + esc(t1('tv.when.file')) + '</button>' : '') +
         '<button type="button" class="btn link" data-tvj="self:' + q.id + '">' + esc(t1('tv.when.self')) + '</button></div></div>';
     });
+    var rf = tv.fin && !wait.length ? tvRefFirst() : null;   /* testversie 7: na de route één tip voor een scherpere uitkomst */
+    if (rf) st += '<div class="tvh-box ref"><p>' + esc(t1('tv.ref.tipP')) + '</p><button type="button" class="btn ghost" data-tvh="c:' + rf.id + '">' + esc(tvChTitle(rf)) + (rf.pro ? tvLock() : '') + '</button></div>';
     if (tv.fin && !tv.hint && !wait.length) st += '<p class="tvh-hint">' + esc(t1('tv.home.hint', { t: t1('tab.input') })) + '</p>';
     var sb = $('tvh-status'); if (sb.getAttribute('data-s') !== st) { sb.innerHTML = st; sb.setAttribute('data-s', st); }
     sb.classList.toggle('low', wait.length > 0 && !(tv.on && !tv.fin) && wait.every(function (q) { return tv.jobs[q.id].t > Date.now(); }));   /* testversie 4: nog niet aan de beurt, dan onder de cijfers */
     /* je knopen: de vragen van de route, met wat elk antwoord bijdraagt */
     S.forEach(function (q) { ids[q.id] = 1; }); C.forEach(function (c) { ids[c.id] = 1; });
     Object.keys(tv.led).forEach(function (k) { if (!ids[k]) oth += tv.led[k]; });
-    h += '<h2 class="tvh-g">' + esc(t1('tv.g.knopen')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
-    function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
+    h += '<h2 class="tvh-g">' + esc(t1('tv.g.basis')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
+    function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + (o.lock ? tvLock() : '') + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
     function adds(d) { return d ? t1(d > 0 ? 'tv.row.up' : 'tv.row.down', { v: eur(Math.abs(d)) }) : ''; }
     function join(a, b) { return a && b ? a + ' · ' + b : (a || b); }
     /* ronde 4: waar een vast staatspensioen bestaat, staat de knoop er altijd, ook als er nog niets van meetelt; anders is het scherm met ingangsleeftijd en aan/uit niet te bereiken */
@@ -4705,9 +4747,15 @@ var TRK = {
     if (oth) h += '<div class="tvh-row fix"><span class="tvr-dot"></span><span class="tvh-tx"><b>' + esc(t1('tv.fin.oth')) + '</b></span>' + tvDelta(oth) + '</div>';
     h += '</div>';
     function chRow(c) { return tvRow({ act: 'c:' + c.id, t: tvChTitle(c), s: tvChSub(c), r: tvDelta(tv.led[c.id] || 0) + (c.pro ? tvLock() : '') }); }
-    /* Invullen: je knopen en wat er nog meer kan meetellen, als brede balken */
-    h += '<h2 class="tvh-g sub">' + esc(t1('tv.g.meer')) + '</h2><div class="tvh-rows sub">';
-    C.forEach(function (c) { if (c.g === 'meer' && !c.hide) h += chRow(c); });   /* het scherm AOW en pensioen hoort bij de knoop AOW; waar die knoop niet bestaat, staat het er niet */
+    /* testversie 7: verfijnen met dezelfde knopen als de basis (Optioneel tot je er iets mee doet), daarna de aannames klein met hun waarde */
+    var R = tvRefs(), rn = R.filter(function (c) { return tv.vf[c.id]; }).length;
+    h += '<h2 class="tvh-g">' + esc(t1('tv.g.ref')) + '<span>' + esc(t1('tv.g.count', { n: rn, m: R.length })) + '</span></h2><p class="tvh-gs">' + esc(t1('tv.g.refS')) + '</p><div class="tvh-rows">';
+    R.forEach(function (c, i) {
+      var ok = !!tv.vf[c.id];
+      h += kRow({ act: 'c:' + c.id, cls: ok ? 'done' : 'open', ic: ok ? tvKnoop(i + S.length + 1) : '<span class="tvr-dot"></span>', t: tvChTitle(c), lock: c.pro, s: join(tvChSub(c), adds(tv.led[c.id] || 0)), st: ok ? 'ok' : 'opt' });
+    });
+    h += '</div><h2 class="tvh-g sub">' + esc(t1('tv.g.asm')) + '</h2><div class="tvh-rows sub asm">';
+    C.forEach(function (c) { if (TV_ASM.indexOf(c.id) >= 0) h += tvRow({ act: 'c:' + c.id, t: tvChTitle(c), s: tvChSub(c), r: tvDelta(tv.led[c.id] || 0) }); });
     h += '</div>';
     var L = $('tvh-list'); if (L.getAttribute('data-s') !== h) { L.innerHTML = h; L.setAttribute('data-s', h); }
     /* Over: uitleg, privacy en delen */
@@ -4739,7 +4787,10 @@ var TRK = {
     if ((b = T0.closest('[data-tvr]'))) {
       var a = b.getAttribute('data-tvr');
       if (a === 'next') tvNext(); else if (a === 'prev') tvPrev();
+      else if (a === 'close' && tvView === 'offer') { tvView = 'step'; track('extra-ref-offer-skip'); tvCloseUi(); tvToHome(true); }
       else if (a === 'close') { if (!tv.fin) { tv.closed = 1; tvSave(); track('core-route-close'); } tvCloseUi(); }
+      else if (a === 'refskip') { tvView = 'step'; track('extra-ref-offer-skip'); tvCloseUi(); tvToHome(true); }
+      else if (a === 'refgo') { var f1 = tvRefFirst(); tvView = 'step'; track('extra-ref-offer-go'); tvCloseUi(); if (f1) { tvRefLeft = 2; tvHomeY = 0; navTo('#k-' + f1.id, 1); } else tvToHome(true); }
       return;
     }
     if ((b = T0.closest('[data-tvr-chip]')) && q) {
@@ -4810,6 +4861,12 @@ var TRK = {
     var T0 = ev.target, b; if (!T0.closest) return;
     if ((b = T0.closest('[data-tvj]'))) { var pj = b.getAttribute('data-tvj').split(':'); if (pj[0] === 'self') tvSelf(pj[1]); else if (tv.jobs[pj[1]]) tvIcs(pj[1], tv.jobs[pj[1]].t); return; }
     if (T0.closest('#tvc-back') || T0.closest('[data-tvc-home]')) { tvToHome(false); return; }
+    if ((b = T0.closest('[data-tvref]'))) {   /* testversie 7: Klaar of Volgende onder een verfijnscherm */
+      var rv = b.getAttribute('data-tvref'); if (tvFocusCh) tvRefMark(tvFocusCh.id);
+      if (rv === 'done') { tvRefLeft = -1; tvToHome(false); }
+      else { if (tvRefLeft > 0) tvRefLeft--; track('extra-ref-next'); navTo('#k-' + rv.slice(5), 1, true); }
+      return;
+    }
     if (T0.closest('#tvc-more')) { var mo = document.documentElement.classList.toggle('tvc-more'); $('tvc-more').setAttribute('aria-expanded', mo ? 'true' : 'false'); if (tvFocusCh && tvFocusCh.id === 'uit') { try { renderOpb(); } catch (e) {} } return; }
     /* de link naar de disclaimer opent het hoofdstuk Privacy en disclaimer (de pagina Over is nu een lijst) */
     if (T0.closest('[data-disc-go]')) { ev.preventDefault(); navTo('#k-priv', 1); return; }
@@ -4851,6 +4908,11 @@ var TRK = {
   $('wipe-yes').addEventListener('click', wipeAll);
   $('wipe').addEventListener('click', function (ev) { if (ev.target === $('wipe')) closeWipe(); });
   TRK['extra-wipe'] = ['extra', 'Alles gewist (Opnieuw beginnen onder Over)'];
+  TRK['extra-ref-offer'] = ['extra', 'Testversie 7: aanbod om te verfijnen na de route getoond'];
+  TRK['extra-ref-offer-go'] = ['extra', 'Testversie 7: aanbod verfijnen aangenomen'];
+  TRK['extra-ref-offer-skip'] = ['extra', 'Testversie 7: aanbod verfijnen overgeslagen'];
+  TRK['extra-ref-done'] = ['extra', 'Testversie 7: een verfijnknoop telt mee'];
+  TRK['extra-ref-next'] = ['extra', 'Testversie 7: Volgende onder een verfijnscherm'];
   TRK['core-route-start'] = ['basis', 'Versie 26: route gestart'];
   TRK['core-route-3'] = ['basis', 'Versie 26: vierde vraag van de route bereikt'];
   TRK['core-route-done'] = ['basis', 'Versie 26: route tot het eind doorlopen'];
@@ -4864,6 +4926,7 @@ var TRK = {
   finishUpdate = function () { finishUpdateTv(); tvCalc(); tvHome(); tvEmpty(); tvIntroText(); tvFocusKeep(); };
   tvIntroText();
   $('reset').addEventListener('click', function () { setTimeout(function () { tv = tvFresh(); tvSave(); tvTouched = {}; tvToHome(true); tvHome(); openIntro(1); }, 0); });
+  document.addEventListener('change', function (ev) { var ch = tvFocusCh, e = ev.target; if (ch && e && e.closest && e.closest('main.wrap') && tvIsRef(ch.id)) tvRefMark(ch.id); }, true);   /* iets aangepast in een verfijnscherm: die knoop telt mee */
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && tvFocusCh && !tvIsOpen && !document.querySelector('.modal:not([hidden])')) tvToHome(false); });
   (function () { var pk = document.querySelector('input[name="s-portfolio"]'), kn = pk && pk.closest('.knob'), sec = $('sec-pf'), at = $('pf'); if (kn && sec && at) { kn.classList.add('tv-pfpick'); sec.insertBefore(kn, at); } })();   /* ronde 3: kiezen en vergelijken staan bij elkaar */
   /* ronde 4: uitleg hoort achter de i. Extra velden krijgen een i, en losse regels onder een keuze verhuizen naar de i die er al staat. */
@@ -4903,9 +4966,9 @@ var TRK = {
     } catch (e) {}
   }
   /* naar een ander scherm. Ging er net een venster of vraag dicht, dan neemt dat scherm de plek van die stap in (geen lege stap terug) */
-  function navTo(h, kn) {
+  function navTo(h, kn, swap) {   /* swap: dit scherm vervangt het huidige (Volgende onder een verfijnscherm); het kruisje gaat dan terug naar waar je begon */
     try {
-      var rep = ovDepth() > 0 && !ovOpen().length;
+      var rep = (swap && !ovDepth()) || (ovDepth() > 0 && !ovOpen().length);
       if (location.hash === h) return;
       if (rep) location.replace(h); else location.hash = h;
       history.replaceState(kn ? { kn: 1 } : null, '', location.href);

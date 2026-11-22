@@ -2482,3 +2482,15 @@ html.tv3 #big-box .pots-in { padding-top: 14px; }
 .btn.danger:hover { filter: brightness(1.08); }
 .wipe-actions { flex-wrap: wrap; }
 .wipe-actions .btn { flex: 1 1 140px; }
+
+/* testversie 7: Invullen in drie lagen (Je basis, Verfijn je uitkomst, Zo rekenen we) */
+.tvh-gs { margin: -4px 2px 12px; font-size: 14.5px; line-height: 1.4; color: var(--ink2); }
+.tvh-st.opt { border: 1px dashed color-mix(in srgb, var(--muted) 70%, transparent); color: var(--ink2); }
+.tvh-rows.sub.asm .tvh-tx span { display: block; font-size: 13px; }
+.tvh-box.ref .btn { display: inline-flex; align-items: center; }
+.tvc-foot { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 8px; }
+.tvc-foot .btn { flex: 1 1 150px; min-width: 0; white-space: normal; }
+.tvr-refl { margin: 0 0 20px; padding-left: 22px; font-size: 16px; line-height: 1.5; }
+.tvr-refl li { margin: 0 0 4px; }
+.tvr-nav.ref { flex-direction: column; align-items: stretch; }
+.tvr-nav.ref .btn { width: 100%; min-height: 50px; white-space: normal; }
