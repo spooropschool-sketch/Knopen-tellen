@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=dbbf63c7">
+<link rel="stylesheet" href="/app.css?v=2fd35691">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -2979,7 +2979,7 @@ var TRK = {
   var canHost = /^https?:$/.test(location.protocol) && window.top === window;
   function showInstall(on) { var b = $('btn-install'); if (b) { b.hidden = !(on && canHost && !isStandalone()); b.title = b.getAttribute('aria-label') || ''; } }
   window.addEventListener('beforeinstallprompt', function (ev) { ev.preventDefault(); instEv = ev; showInstall(true); });
-  window.addEventListener('appinstalled', function () { instEv = null; showInstall(false); });
+  window.addEventListener('appinstalled', function () { instEv = null; showInstall(false); if (TV) setTimeout(tvHome, 60); });
   showInstall(true);
   function openInst(kind) {
     $('inst-steps').innerHTML = t1(kind === 'ios' ? 'inst.ios' : 'inst.other');
@@ -3010,7 +3010,7 @@ var TRK = {
   $('rel').addEventListener('click', function (ev) { if (ev.target === $('rel')) closeRel(); });
   $('inst-close').addEventListener('click', closeInst);
   $('inst').addEventListener('click', function (ev) { if (ev.target === $('inst')) closeInst(); });
-  if (/^(www\.)?countingbuttons\.com$/.test(location.hostname)) { try { fetch('https://countingbuttons.goatcounter.com/counter/TOTAL.json').then(function (x) { return x.ok ? x.json() : null; }).then(function (j) { var el = $('visits'); if (j && j.count && el) { el.textContent = t1('vis.n', { n: j.count }); el.hidden = false; trustVis = j.count; renderTrust(); } }).catch(function () {}); } catch (e) {} }
+  if (/^(www\.)?countingbuttons\.com$/.test(location.hostname)) { try { fetch('https://countingbuttons.goatcounter.com/counter/TOTAL.json').then(function (x) { return x.ok ? x.json() : null; }).then(function (j) { var el = $('visits'); if (j && j.count && el) { el.textContent = t1('vis.n', { n: j.count }); el.hidden = false; trustVis = j.count; renderTrust(); if (TV) tvHome(); } }).catch(function () {}); } catch (e) {} }
   if (canHost && 'serviceWorker' in navigator) { try { navigator.serviceWorker.register('/sw.js').catch(function () {}); } catch (e) {} }
   function trap(container, ev) {
     var f = Array.prototype.filter.call(container.querySelectorAll('button, summary, a[href], input, select, textarea'), function (e) { return e.offsetParent !== null; });
@@ -4574,6 +4574,15 @@ var TRK = {
   }
 
   /* ---- thuis: je telling en de inhoudsopgave ---- */
+  /* versie 26: de regel "Bijgewerkt, bronnen, gebruikers" (in versie 25 onder het Overzicht en in de voet van Over) staat weer op Overzicht en Over */
+  function tvTrustLine() {
+    var m = /(\d{4})-(\d{2})/.exec(APPV), dt = '', n = $('sources') ? $('sources').querySelectorAll('a').length : 0, p;
+    try { dt = new Date(+m[1], +m[2] - 1, 1).toLocaleDateString(loc(), { month: 'long', year: 'numeric' }); } catch (e) { dt = m ? m[2] + '-' + m[1] : ''; }
+    p = [esc(t1('trust.upd', { date: dt }))];
+    if (n) p.push('<button type="button" class="tvh-lk" data-tvh="c:over">' + esc(t1('trust.src', { n: n })) + '</button>');
+    if (trustVis) p.push(esc(t1('vis.n', { n: trustVis })));
+    return '<p class="tvh-trust">' + p.join(' · ') + '</p>';
+  }
   function tvRow(o) {
     return '<button type="button" class="tvh-row' + (o.cls ? ' ' + o.cls : '') + '" data-tvh="' + o.act + '">' + (o.ic || '') + '<span class="tvh-tx"><b>' + esc(o.t) + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span>' + (o.r || '') + '<span class="tvh-ch" aria-hidden="true">›</span></button>';
   }
@@ -4672,7 +4681,7 @@ var TRK = {
     /* Over: uitleg, privacy en delen */
     var ha = '<div class="tvh-rows">';
     C.forEach(function (c) { if (c.g === 'over') ha += chRow(c); });
-    ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div>';
+    ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + ($('btn-install') && !$('btn-install').hidden ? tvRow({ act: 'a:install', t: t1('inst.btn'), s: t1('inst.sub') }) : '') + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div>' + tvTrustLine();
     var LA = $('tva-list'); if (LA.getAttribute('data-s') !== ha) { LA.innerHTML = ha; LA.setAttribute('data-s', ha); }
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
     var hk = '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
@@ -4681,7 +4690,7 @@ var TRK = {
     }).join('') + '<p class="tvk-facts">' + tvNums().filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.more')) + '</h2><div class="tvk-cards">';
     C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/' + TVK_IMG[c.id] + '.webp" alt="" loading="lazy" width="120" height="120"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });
-    hk += '</div><p class="tvh-note">' + esc(t1('disc.line')) + '</p>';
+    hk += '</div><p class="tvh-note">' + esc(t1('disc.line')) + '</p>' + tvTrustLine();
     var K = $('tvk'); if (K.getAttribute('data-s') !== hk) { K.innerHTML = hk; K.setAttribute('data-s', hk); }
     if (tvFlash) setTimeout(function () { tvFlash = ''; }, 50);
   }
@@ -4786,6 +4795,7 @@ var TRK = {
     else if (a === 'a:notes') { var nf = $('nt-fab'); if (nf) nf.click(); }
     else if (a === 'a:share') openShare();
     else if (a === 'a:tip') tipApp('tip');
+    else if (a === 'a:install') { var ib = $('btn-install'); if (ib) ib.click(); }   /* versie 26: dezelfde knop als in de bovenbalk */
     else if (a === 'a:pots') plOpen('pots');   /* een extra pensioen is een Pro-functie: het slot opent het Pro-venster */
     else if (a === 'a:fb') openFb('idea', '');   /* testversie 6: de tip staat alleen hier, onder Over */
     else if (a === 'a:lang') { $('intro').classList.add('tv-land'); openIntro(0); }
