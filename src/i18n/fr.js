@@ -152,7 +152,7 @@ I18N.fr = {
   'tour.8.h': 'Affiner', 'tour.8.p': 'Envie de plus de précision ? En cinq étapes courtes, ajoutez retraites, revenus d’appoint et vos propres choix. Ensuite, jouez avec les curseurs.',
   'taxNote.NL': 'Box 3 : impôt sur un rendement supposé du patrimoine au-delà de l’abattement. Choisissez un scénario dans Choix.',
   'taxNote.BE': 'Dès 2026, la Belgique taxe les plus-values sur actifs financiers à 10 %, avec environ 10 000 € exonérés par personne et par an. Dividendes et intérêts sont imposés à part ; c’est une approximation.',
-  'taxNote.DE': 'Abgeltungsteuer 25 % plus contribution de solidarité (26,375 %) sur les revenus au-delà de l’abattement de 1 000 € par personne. Impôt d’Église non inclus.',
+  'taxNote.DE': 'Abgeltungsteuer 25 % plus contribution de solidarité (26,375 %) sur les revenus au-delà de l’abattement de 1 000 € par personne. Impôt d’Église non inclus. Pour les fonds d’actions, 30 % des revenus sont exonérés (Teilfreistellung) ; le taux revient alors à environ 18,5 %.',
   'taxNote.FR': 'Prélèvement forfaitaire unique (PFU) de 31,4 % sur les revenus et plus-values de placement dès 2026. Un PEA ou une assurance-vie peut être moins cher après la durée de détention.',
   'taxNote.ES': 'Les revenus de l’épargne sont imposés de 19 % à 30 % selon le montant ; 21 % sert de moyenne.',
   'taxNote.IT': '26 % sur les revenus et plus-values de placement (12,5 % sur les obligations d’État).',
@@ -468,11 +468,11 @@ Object.assign(I18N.fr, {
 });
 Object.assign(I18N.fr, {
 "lp.enough.h1": "Mon argent suffira-t-il quand j’arrêterai de travailler ?",
-"lp.enough.intro": "Saisissez votre âge, votre épargne et votre budget mensuel. Vous voyez aussitôt la probabilité que votre argent dure jusqu’à votre âge final, retraites comprises.",
+"lp.enough.intro": "Saisissez votre âge, votre épargne et votre budget mensuel. Vous voyez aussitôt la probabilité que votre argent dure jusqu’à l’âge que vous choisissez, retraites comprises.",
 "lp.enough.title": "Mon argent suffira-t-il à la retraite ? | Button Counter",
-"lp.enough.desc": "Calculez la probabilité que votre épargne dure jusqu’à votre âge final, avec la retraite publique, la retraite complémentaire, les impôts et l’inflation. Sans compte, vos données restent sur votre appareil.",
+"lp.enough.desc": "Calculez la probabilité que votre épargne dure jusqu’à l’âge que vous choisissez, avec la retraite publique, la retraite complémentaire, les impôts et l’inflation. Sans compte, vos données restent sur votre appareil.",
 "lp.spend.h1": "Combien puis-je dépenser par mois quand j’arrêterai de travailler ?",
-"lp.spend.intro": "Saisissez votre épargne et vos retraites. Button Counter montre le montant mensuel que vous pouvez dépenser avec de bonnes chances que votre argent dure jusqu’à votre âge final.",
+"lp.spend.intro": "Saisissez votre épargne et vos retraites. Button Counter montre le montant mensuel que vous pouvez dépenser avec de bonnes chances que votre argent dure jusqu’à l’âge que vous choisissez.",
 "lp.spend.title": "Combien puis-je dépenser par mois à la retraite ? | Button Counter",
 "lp.spend.desc": "Voyez quel budget mensuel votre épargne et vos retraites peuvent supporter, et la probabilité que cela suffise. Sans compte.",
 "lp.earlier.h1": "Puis-je arrêter de travailler plus tôt ?",
@@ -733,3 +733,77 @@ Object.assign(I18N.fr, {"rel.23.n7": "Des explications derrière un ⓘ : vous l
 /* versie 26.1: bovenste knoop */ Object.assign(I18N.fr, {"tv.row.had": "avec ce que vous aviez déjà saisi", "tv.fin.had": "Déjà saisi avant de commencer"});
 /* testversie 7: Invullen in drie lagen */ Object.assign(I18N.fr, {"tv.g.basis": "Vos bases", "tv.g.ref": "Affinez votre résultat", "tv.g.refS": "Pas nécessaire pour un résultat, mais il sera plus précis.", "tv.g.asm": "Comment nous calculons", "tv.st.opt": "Facultatif", "tv.ref.next": "Suivant : {x}", "tv.ref.offerH": "Votre premier résultat est prêt", "tv.ref.offerP": "Vous le voulez plus précis ? Parcourez alors aussi ces boutons. Ce n'est pas nécessaire pour votre résultat.", "tv.ref.go": "Oui, affiner", "tv.ref.skip": "Pas maintenant, voir mon résultat", "tv.ref.tipP": "Prochaine étape pour un résultat plus précis"});
 /* versie 27: Wat is er nieuw */ Object.assign(I18N.fr, {"rel.27.v": "Version 27 · novembre 2026 · à nouveau merci à toutes celles et ceux qui ont réfléchi avec nous", "rel.27.n1": "Saisir comporte trois niveaux : Vos bases, Affinez votre résultat et Comment nous calculons.", "rel.27.n2": "Vous affinez avec les mêmes boutons que vos bases. Ils ne sont pas nécessaires pour un résultat, mais le rendent plus précis. Chaque tranche d'âge a son propre ordre.", "rel.27.n3": "Dès que vous avez votre premier résultat, vous pouvez affiner quelques boutons. Sous chaque écran figurent Terminé et Suivant.", "rel.27.n4": "Le bouton retour de votre téléphone ferme maintenant une question, une fenêtre ou vos notes, comme la croix. L'application reste ouverte.", "rel.27.f1": "La croix est toujours en haut à droite.", "rel.27.f2": "Dans chaque tranche d'âge, le premier bouton porte le nom de votre pension de l'État.", "rel.27.f3": "Trajectoire des dépenses et épargne par période ont un cadenas, car elles font partie de Pro.", "rel.27.f4": "À partir de 50 ans, Dettes n'affiche plus de prêt étudiant, sauf si vous en aviez déjà saisi un.", "rel.27.f5": "Sur un écran étroit, les mots longs ne décalent plus la page."});
+/* versie 28: inschatting per land bij belasting, hints bij het staatspensioen (Spanje, VS), Wat is er nieuw */ Object.assign(I18N.fr, {"tax.est": "{InCountry}, c’est notre estimation. Si c’est différent pour vous, modifiez-la.", "spTip.ES": "En Espagne, la pension est versée en 14 paiements par an. Indiquez donc le montant mensuel multiplié par 14 et divisé par 12.", "spTip.US": "Indiquez le montant pour l’âge auquel vous demanderez la prestation. Votre Social Security Statement le donne pour neuf âges, de 62 à 70 ans.", "rel.28.v": "Version 28 · novembre 2026", "rel.28.n1": "Pour l’impôt, l’app indique désormais qu’il s’agit de notre estimation pour votre pays. L’Allemagne, l’Espagne et les États-Unis ont des explications en plus sur l’impôt et la retraite publique."});
+/* vraagpagina's in deze taal (qp.<naam>.*). Elke pagina bestaat alleen in deze taal: de andere talen hebben eigen vragen, geen vertalingen.
+   slug = webadres, goal = wielvraag, country = land waarin de pagina opent (alleen bij een pagina over één land),
+   h1 = de vraag, a = het korte antwoord, btn = de knop, fq en fa = de veelgestelde vraag en het antwoord (ook in de FAQ van de app).
+   Een naam tussen accolades is een getal dat veroudert: zie QPN en CTRY in src/index.html. Bron van de teksten: het document
+   "Knopenteller — zeven nieuwe vraagpagina's" van 25 november 2026. */
+Object.assign(I18N.fr, {
+  "site.qs": "Autres questions",
+
+  "qp.fr-combien.slug": "combien-faut-il-pour-la-retraite",
+  "qp.fr-combien.goal": "enough",
+  "qp.fr-combien.h1": "Combien faut-il pour prendre sa retraite\u202f?",
+  "qp.fr-combien.a": "Il n’existe pas de chiffre unique. Tout dépend de trois choses\u202f: ce que vous voulez dépenser chaque mois, la durée pendant laquelle votre argent doit tenir et ce qui rentrera encore plus tard, comme votre retraite de base et votre complémentaire. Les règles simples ne regardent que le premier point. Button Counter réunit les trois, avec l’impôt et l’inflation, et montre le capital qui suffit dans 9 cas sur 10.",
+  "qp.fr-combien.btn": "Calculer mon besoin",
+  "qp.fr-combien.fq": "De quel capital ai-je besoin pour ma retraite\u202f?",
+  "qp.fr-combien.fa": "Cela dépend de votre budget mensuel, de votre âge de départ, de vos pensions et de l’impôt sur vos placements. Button Counter réunit ces éléments et montre le capital nécessaire pour que votre argent tienne dans 9 cas sur 10.",
+
+  "qp.fr-duree.slug": "combien-de-temps-dure-mon-capital",
+  "qp.fr-duree.goal": "enough",
+  "qp.fr-duree.h1": "Combien de temps mon capital va-t-il durer\u202f?",
+  "qp.fr-duree.a": "Cela dépend de ce que vous retirez chaque mois, de la façon dont votre argent est placé et des pensions qui s’y ajoutent. Un calcul simple suppose un rendement fixe. En réalité, les rendements varient et les prix montent. Button Counter calcule donc un grand nombre de scénarios et montre la probabilité que votre argent tienne jusqu’à l’âge que vous choisissez.",
+  "qp.fr-duree.btn": "Voir l’évolution de mon capital",
+  "qp.fr-duree.fq": "Combien de temps mon épargne peut-elle durer à la retraite\u202f?",
+  "qp.fr-duree.fa": "Cela dépend de vos retraits mensuels, de vos pensions, de vos placements et de l’inflation. Button Counter montre l’évolution de votre capital année après année et la probabilité qu’il suffise.",
+
+  "qp.fr-60-ans.slug": "partir-a-la-retraite-a-60-ans",
+  "qp.fr-60-ans.goal": "earlier",
+  "qp.fr-60-ans.h1": "Puis-je partir à la retraite à 60 ans\u202f?",
+  "qp.fr-60-ans.a": "L’âge légal se situe entre {frAgeMin} et {frAgeMax} selon votre année de naissance (situation en {frStand}, après la suspension de la réforme, hors carrières longues). Arrêter de travailler à 60 ans reste possible si votre épargne couvre les années jusqu’à vos pensions. Ce sont les années les plus coûteuses\u202f: rien ne rentre et votre capital porte tout. Avec moins de trimestres, votre pension sera aussi plus basse. Indiquez dans Button Counter le montant de votre simulation sur info-retraite.fr et déplacez votre âge d’arrêt.",
+  "qp.fr-60-ans.btn": "Essayer un départ à 60 ans",
+  "qp.fr-60-ans.fq": "Peut-on arrêter de travailler avant l’âge légal\u202f?",
+  "qp.fr-60-ans.fa": "Oui, si votre épargne finance les années sans pension. Button Counter montre année par année ce qui rentre et ce que votre capital doit couvrir, et la probabilité que votre argent suffise.",
+
+  "qp.fr-4-pour-cent.slug": "regle-des-4-pour-cent-france",
+  "qp.fr-4-pour-cent.goal": "spend",
+  "qp.fr-4-pour-cent.h1": "La règle des 4\u00a0% fonctionne-t-elle en France\u202f?",
+  "qp.fr-4-pour-cent.a": "La règle des 4\u00a0% vient d’études américaines. Elle dit\u202f: la première année, vous retirez 4\u00a0% de votre capital, puis vous ajustez ce montant à l’inflation. En France, il lui manque deux choses. Elle ignore vos pensions de retraite, qui paieront plus tard une partie de vos dépenses. Et elle oublie l’impôt sur vos gains\u202f: {frTax} au prélèvement forfaitaire unique en {frTaxYear}, souvent moins dans un PEA ou une assurance-vie. Button Counter tient compte des deux.",
+  "qp.fr-4-pour-cent.btn": "Faire le calcul pour moi",
+  "qp.fr-4-pour-cent.fq": "Peut-on appliquer la règle des 4\u00a0% en France\u202f?",
+  "qp.fr-4-pour-cent.fa": "Comme repère, oui. Mais elle ne compte ni vos pensions, ni l’impôt sur vos gains, ni la durée de votre propre retraite. Button Counter les intègre et montre ce que vous pouvez dépenser chaque mois.",
+
+  "qp.fr-epargner.slug": "combien-epargner-pour-la-retraite",
+  "qp.fr-epargner.goal": "retire",
+  "qp.fr-epargner.h1": "Combien épargner par mois pour sa retraite\u202f?",
+  "qp.fr-epargner.a": "Il n’y a pas de pourcentage magique. Le bon montant dépend de votre âge, de ce que vous avez déjà mis de côté, du budget que vous visez et de vos futures pensions. Plus vous commencez tôt, moins l’effort mensuel est lourd. Button Counter part de votre objectif et montre ce que chaque euro de plus par mois change pour plus tard.",
+  "qp.fr-epargner.btn": "Voir ce que mon épargne apporte",
+  "qp.fr-epargner.fq": "Combien faut-il mettre de côté chaque mois pour la retraite\u202f?",
+  "qp.fr-epargner.fa": "Cela dépend de votre âge, de votre épargne actuelle, de votre objectif et de vos pensions. Dans Button Counter, vous modifiez votre versement mensuel et voyez aussitôt ce qu’il apporte plus tard.",
+
+  "qp.fr-rentes.slug": "vivre-de-ses-rentes",
+  "qp.fr-rentes.goal": "free",
+  "qp.fr-rentes.h1": "Vivre de ses rentes\u202f: quel capital faut-il\u202f?",
+  "qp.fr-rentes.a": "On lit souvent\u202f: 25 fois vos dépenses annuelles. Ce chiffre vient de la règle des 4\u00a0%. Il oublie que vos pensions de retraite commenceront un jour et prendront le relais d’une partie de vos dépenses. Avant cette date, il vous faut un capital plus important\u202f; après, moins. Un seul chiffre ne convient donc jamais tout à fait. Button Counter calcule année par année, avec vos pensions, l’impôt et l’inflation.",
+  "qp.fr-rentes.btn": "Calculer mon capital",
+  "qp.fr-rentes.fq": "Quel capital faut-il pour devenir rentier\u202f?",
+  "qp.fr-rentes.fa": "Cela dépend de vos dépenses, de votre âge et des pensions que vous toucherez plus tard. Button Counter montre si votre capital suffit, avant comme après le début de vos pensions.",
+
+  "qp.fr-tard.slug": "epargner-tard-pour-la-retraite",
+  "qp.fr-tard.goal": "retire",
+  "qp.fr-tard.h1": "Commencer à épargner à 40 ou 50 ans\u202f: est-ce trop tard\u202f?",
+  "qp.fr-tard.a": "Non. À 45 ou 50 ans, il vous reste souvent quinze ans ou plus avant la retraite. C’est assez pour qu’un versement régulier fasse une vraie différence. Vos pensions paieront aussi une bonne part de vos dépenses plus tard\u202f; votre épargne n’a pas à tout porter. La question n’est pas de savoir si cela vaut la peine, mais ce que cela rapporte. Button Counter montre ce que chaque euro de plus par mois représente plus tard.",
+  "qp.fr-tard.btn": "Voir ce que cela rapporte encore",
+  "qp.fr-tard.fq": "Est-il trop tard pour préparer sa retraite à 50 ans\u202f?",
+  "qp.fr-tard.fa": "Non. Même avec quinze ans devant vous, un montant fixe par mois compte, en plus de vos pensions. Dans Button Counter, vous augmentez votre versement et voyez aussitôt ce qu’il apporte par mois plus tard.",
+
+  "qp.fr-pension-legale.slug": "pension-legale-suffisante",
+  "qp.fr-pension-legale.goal": "enough",
+  "qp.fr-pension-legale.country": "BE",
+  "qp.fr-pension-legale.h1": "Ma pension légale suffira-t-elle\u202f?",
+  "qp.fr-pension-legale.a": "En Belgique, l’âge légal de la pension est de {beAge} et passe à {beAgeNext} en {beAgeFrom}. Le montant dépend de votre carrière et de votre statut. Pour beaucoup, il reste nettement sous le dernier salaire. La différence doit venir d’une pension complémentaire, d’une épargne-pension ou de votre propre capital. Reprenez vos montants sur mypension.be, indiquez-les dans Button Counter et voyez ce que votre épargne doit ajouter.",
+  "qp.fr-pension-legale.btn": "Voir ce qui manque",
+  "qp.fr-pension-legale.fq": "Ma pension légale sera-t-elle suffisante\u202f?",
+  "qp.fr-pension-legale.fa": "Comparez-la au budget mensuel que vous visez. Button Counter montre ce que votre pension complémentaire et votre épargne doivent ajouter, et la probabilité que cela tienne."
+});

@@ -153,7 +153,7 @@ I18N.en = {
   'tour.8.h': 'Fine-tune', 'tour.8.p': 'Want it more precise? In five short steps you add pensions, side income and your own choices. Then play with the sliders.',
   'taxNote.NL': 'Box 3: tax on an assumed return on wealth above the tax-free allowance. Choose a scenario under Choices.',
   'taxNote.BE': 'From 2026 Belgium taxes capital gains on financial assets at 10%, with about €10,000 tax-free per person per year. Dividends and interest are taxed separately; this is an approximation.',
-  'taxNote.DE': 'Abgeltungsteuer 25% plus solidarity surcharge (26.375%) on returns above the saver’s allowance of €1,000 per person. Church tax is not included.',
+  'taxNote.DE': 'Abgeltungsteuer 25% plus solidarity surcharge (26.375%) on returns above the saver’s allowance of €1,000 per person. Church tax is not included. For equity funds 30% of the income is tax-free (Teilfreistellung), which brings the rate to about 18.5%.',
   'taxNote.FR': 'Flat tax (PFU) of 31.4% on investment income and gains from 2026. A PEA or assurance-vie can be cheaper after the holding period.',
   'taxNote.ES': 'Savings income is taxed at 19% to 30% depending on the amount; 21% is used as an average.',
   'taxNote.IT': '26% on investment income and gains (12.5% on government bonds).',
@@ -468,12 +468,12 @@ Object.assign(I18N.en, {
 "faq.a7": "<p>A simple calculator answers one sum, such as how long an amount lasts or how much tax you pay on savings. Button Counter puts everything in one plan: your savings, your pension and state pension, work per period, one or two people and the rules of your country. Instead of one number you see the chance that your money is enough, based on 4,000 simulations. Every number shows whether it comes from a source, is an assumption or was entered by you.</p>",
 "trust.upd": "Updated {date}",
 "trust.src": "{n} sources",
-"lp.enough.h1": "Will my money last when I stop working?",
-"lp.enough.intro": "Enter your age, your savings and your monthly budget. You see straight away the chance that your money lasts until your end age, with your pensions included.",
-"lp.enough.title": "Will my money last when I stop working? | Button Counter",
-"lp.enough.desc": "Calculate the chance that your savings last until your end age, with state pension, pension, tax and inflation. No account; your data stays on your own device.",
+"lp.enough.h1": "Will my money last in retirement?",
+"lp.enough.intro": "Enter your age, your savings and your monthly budget. You see straight away the chance that your money lasts to the age you choose, with your pensions included.",
+"lp.enough.title": "Will my money last in retirement? | Button Counter",
+"lp.enough.desc": "Calculate the chance that your savings last to the age you choose, with Social Security or State Pension, workplace pension, tax and inflation. No account; your data stays on your own device.",
 "lp.spend.h1": "How much can I spend each month when I stop working?",
-"lp.spend.intro": "Enter your savings and your pensions. Button Counter shows the monthly amount you can spend with a good chance that your money lasts until your end age.",
+"lp.spend.intro": "Enter your savings and your pensions. Button Counter shows the monthly amount you can spend with a good chance that your money lasts to the age you choose.",
 "lp.spend.title": "How much can I spend each month in retirement? | Button Counter",
 "lp.spend.desc": "See which monthly budget your savings and pensions can support, and the chance that it is enough. No account needed.",
 "lp.earlier.h1": "Can I stop working earlier?",
@@ -729,3 +729,86 @@ Object.assign(I18N.en, {"rel.23.n7": "Explanations behind an ⓘ: read the backg
 /* versie 26.1: bovenste knoop */ Object.assign(I18N.en, {"tv.row.had": "including what you had already filled in", "tv.fin.had": "Filled in before you started"});
 /* testversie 7: Invullen in drie lagen */ Object.assign(I18N.en, {"tv.g.basis": "Your basics", "tv.g.ref": "Sharpen your result", "tv.g.refS": "Not needed for a result. It does make it sharper.", "tv.g.asm": "How we calculate", "tv.st.opt": "Optional", "tv.ref.next": "Next: {x}", "tv.ref.offerH": "Your first result is ready", "tv.ref.offerP": "Want it sharper? Then go through these buttons too. You don't need them for your result.", "tv.ref.go": "Yes, sharpen it", "tv.ref.skip": "Not now, show my result", "tv.ref.tipP": "Next step for a sharper result"});
 /* versie 27: Wat is er nieuw */ Object.assign(I18N.en, {"rel.27.v": "Version 27 · November 2026 · once again, thanks to everyone who thought along", "rel.27.n1": "Fine-tune now has three layers: Your basics, Sharpen your result and How we calculate.", "rel.27.n2": "You sharpen your result with the same buttons as your basics. You don't need them for a result, but they make it sharper. Each age group gets its own order.", "rel.27.n3": "Once you have your first result, you can sharpen it straight away with a few buttons. Each screen has Done and Next at the bottom.", "rel.27.n4": "Your phone's back button now closes a question, a window or your notes, just like the cross. The app stays open.", "rel.27.f1": "The cross is always at the top right.", "rel.27.f2": "In every age group, the top button is named after your state pension.", "rel.27.f3": "Spending path and saving per period show a lock, because they are part of Pro.", "rel.27.f4": "For 50 and over, Debts no longer shows a student loan, unless you had already entered one.", "rel.27.f5": "On a narrow screen, long words no longer push the page sideways."});
+/* versie 28: inschatting per land bij belasting, hints bij het staatspensioen (Spanje, VS), Wat is er nieuw */ Object.assign(I18N.en, {"tax.est": "This is our estimate {forCountry}. If it is different for you, change it.", "spTip.ES": "In Spain the pension is paid in 14 instalments a year. So enter the monthly amount times 14, divided by 12.", "spTip.US": "Enter the amount for the age you plan to claim. Your Social Security Statement shows it for nine ages, from 62 to 70.", "rel.28.v": "Version 28 · November 2026", "rel.28.n1": "The tax setting now says that it is our estimate for your country. Germany, Spain and the United States have extra notes on tax and state pension."});
+/* vraagpagina's in deze taal (qp.<naam>.*). Elke pagina bestaat alleen in deze taal: de andere talen hebben eigen vragen, geen vertalingen.
+   slug = webadres, goal = wielvraag, country = land waarin de pagina opent (alleen bij een pagina over één land),
+   h1 = de vraag, a = het korte antwoord, btn = de knop, fq en fa = de veelgestelde vraag en het antwoord (ook in de FAQ van de app).
+   Een naam tussen accolades is een getal dat veroudert: zie QPN en CTRY in src/index.html. Bron van de teksten: het document
+   "Knopenteller — zeven nieuwe vraagpagina's" van 25 november 2026. */
+Object.assign(I18N.en, {
+  "site.qs": "More questions",
+
+  "qp.en-need.slug": "how-much-do-i-need-to-retire",
+  "qp.en-need.goal": "enough",
+  "qp.en-need.h1": "How much do I need to retire comfortably?",
+  "qp.en-need.a": "There is no single number. It depends on what you spend each month, how long the money has to last and what still comes in later: Social Security or a State Pension and any workplace pension. Rules such as “25 times your spending” only look at the first part. Button Counter puts all three together, with tax and inflation, and shows the savings that get you there in 9 out of 10 scenarios.",
+  "qp.en-need.btn": "Work out my number",
+  "qp.en-need.fq": "How much money do I need to retire?",
+  "qp.en-need.fa": "It differs per person. It depends on your monthly budget, the age you stop working, your Social Security or State Pension and the tax on your investments. Button Counter combines them and shows the savings you need for your money to last in 9 out of 10 scenarios.",
+
+  "qp.en-how-long.slug": "how-long-will-my-money-last",
+  "qp.en-how-long.goal": "enough",
+  "qp.en-how-long.h1": "How long will my money last in retirement?",
+  "qp.en-how-long.a": "That depends on how much you take out each month, how your money is invested and what your pensions add. A simple calculator assumes a fixed return. In real life returns move up and down and prices rise. Button Counter runs many possible paths and shows the chance that your money lasts to the age you choose.",
+  "qp.en-how-long.btn": "See how my money holds up",
+  "qp.en-how-long.fq": "How long will my savings last in retirement?",
+  "qp.en-how-long.fa": "It depends on your monthly withdrawals, your pensions, your investments and inflation. Button Counter shows year by year how your savings develop and the chance that they last.",
+
+  "qp.en-retire-62.slug": "can-i-retire-at-62",
+  "qp.en-retire-62.goal": "earlier",
+  "qp.en-retire-62.h1": "Can I retire at 62?",
+  "qp.en-retire-62.a": "You can claim Social Security from 62, but the monthly amount is permanently lower: about {ssCut} less than at 67 if you were born in 1960 or later. Stopping at 62 also means five more years of living on your savings, and health insurance to pay for until Medicare starts at 65. Whether that works depends on your savings and your budget. In Button Counter you enter the benefit for the age you plan to claim (your Social Security statement lists it) and move your stopping age to see the difference.",
+  "qp.en-retire-62.btn": "Try stopping at 62",
+  "qp.en-retire-62.fq": "Can I afford to retire at 62?",
+  "qp.en-retire-62.fa": "It depends on your savings, your monthly budget and the lower Social Security benefit you get at 62. Enter the benefit your statement shows for that age and set your stopping age to 62. Button Counter shows the chance that your money lasts.",
+
+  "qp.en-4-percent.slug": "is-the-4-percent-rule-safe",
+  "qp.en-4-percent.goal": "spend",
+  "qp.en-4-percent.h1": "Is the 4% rule still safe?",
+  "qp.en-4-percent.a": "The 4% rule says you can take 4% of your savings in the first year of retirement and raise that amount with inflation each year. It comes from US market history and a 30-year retirement. Morningstar’s research for {swrYear} puts the safe starting rate at {swr}. The rule leaves out two things that matter for you: income that starts later, such as Social Security or a State Pension, and the tax you pay on returns. Button Counter includes both.",
+  "qp.en-4-percent.btn": "See what I can spend",
+  "qp.en-4-percent.fq": "Does the 4% rule still work?",
+  "qp.en-4-percent.fa": "As a rough guide, yes. It ignores Social Security or a State Pension, tax on your returns and how long your own retirement lasts. Button Counter adds those and shows a monthly amount with the chance that your money lasts.",
+
+  "qp.en-80-percent.slug": "80-percent-rule-retirement",
+  "qp.en-80-percent.goal": "spend",
+  "qp.en-80-percent.h1": "Does the 80% rule work?",
+  "qp.en-80-percent.a": "The 80% rule says you need about 80% of your pre-retirement income once you stop working. It is a starting point, not a plan. Some people spend far less, because the mortgage is paid off and they no longer save for retirement. Others spend more, on travel or health care. Your own budget tells you more than a percentage of your salary. Enter it in Button Counter and see whether your savings and pensions can carry it.",
+  "qp.en-80-percent.btn": "Test my own budget",
+  "qp.en-80-percent.fq": "How much of my income will I need in retirement?",
+  "qp.en-80-percent.fa": "A common guide is about 80% of what you earned before. Your real number depends on your housing costs, health care and plans. In Button Counter you enter the monthly budget you want and see whether it holds.",
+
+  "qp.en-1000-month.slug": "1000-a-month-rule",
+  "qp.en-1000-month.goal": "spend",
+  "qp.en-1000-month.h1": "How much do I need for $1,000 a month in retirement?",
+  "qp.en-1000-month.a": "A popular rule says $240,000 in savings for every $1,000 a month. That assumes you take out 5% a year. With the more cautious 4% it becomes $300,000. Both numbers ignore tax, inflation over a long retirement and Social Security, which may already cover part of what you need. Button Counter starts from the monthly amount you want and shows the savings needed to reach it in 9 out of 10 scenarios.",
+  "qp.en-1000-month.btn": "Start from my monthly amount",
+  "qp.en-1000-month.fq": "How much savings do I need for $1,000 a month?",
+  "qp.en-1000-month.fa": "About $240,000 if you withdraw 5% a year, or $300,000 at 4%. What you really need depends on your other income, tax and how long the money has to last. Button Counter works it out for your situation.",
+
+  "qp.en-late.slug": "started-saving-late",
+  "qp.en-late.goal": "retire",
+  "qp.en-late.h1": "I started saving late. Can I still catch up?",
+  "qp.en-late.a": "Yes. At 45 or 50 you often still have fifteen to twenty years before you stop working. That is enough time for regular saving to make a real difference. Social Security or a State Pension will also cover part of your spending later, so your savings do not have to do all the work. The useful question is how much each extra amount per month adds. Button Counter shows that as you change it.",
+  "qp.en-late.btn": "See what extra saving adds",
+  "qp.en-late.fq": "Is it too late to start saving for retirement at 50?",
+  "qp.en-late.fa": "No. Even with fifteen years to go, a fixed monthly amount adds up, next to Social Security or a State Pension. In Button Counter you tap plus on what you set aside and see what it adds to your monthly income later.",
+
+  "qp.en-state-pension.slug": "is-the-state-pension-enough",
+  "qp.en-state-pension.goal": "enough",
+  "qp.en-state-pension.country": "GB",
+  "qp.en-state-pension.h1": "Is the State Pension enough to live on?",
+  "qp.en-state-pension.a": "The full new State Pension is {gbWk} a week in {gbTaxYr}, about {gbYr} a year. The Retirement Living Standards put a minimum lifestyle for one person at {rlsMin} a year and a moderate one at {rlsMod}. On its own the State Pension falls just short of the minimum and well short of moderate. The gap has to come from a workplace pension or savings. Button Counter fills in the State Pension for you and shows what your own pots need to add.",
+  "qp.en-state-pension.btn": "See my gap",
+  "qp.en-state-pension.fq": "Can you live on the State Pension alone?",
+  "qp.en-state-pension.fa": "The full new State Pension is about {gbYr} a year in {gbTaxYr}. That is just under what the Retirement Living Standards call a minimum lifestyle for one person ({rlsMin}). Button Counter shows how much your workplace pension and savings need to add for the budget you want.",
+
+  "qp.en-social-security.slug": "can-i-live-on-social-security-alone",
+  "qp.en-social-security.goal": "enough",
+  "qp.en-social-security.country": "US",
+  "qp.en-social-security.h1": "Can I live on Social Security alone?",
+  "qp.en-social-security.a": "The average retired worker gets about {ssAvg} a month from Social Security in {ssYear}. Your own benefit depends on your earnings record and the age you claim: at 62 it is about {ssCut} lower than at 67. Whether that is enough depends on your budget and on what your savings can add. Enter your own benefit from your Social Security statement in Button Counter and see the gap.",
+  "qp.en-social-security.btn": "Check my numbers",
+  "qp.en-social-security.fq": "Is Social Security enough to retire on?",
+  "qp.en-social-security.fa": "The average retirement benefit is about {ssAvg} a month in {ssYear}. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last."
+});

@@ -152,7 +152,7 @@ I18N.de = {
   'tour.8.h': 'Verfeinern', 'tour.8.p': 'Genauer gewünscht? In fünf kurzen Schritten ergänzen Sie Renten, Nebenverdienst und eigene Entscheidungen. Danach können Sie an den Reglern drehen.',
   'taxNote.NL': 'Box 3: Steuer auf eine angenommene Rendite des Vermögens über dem Freibetrag. Wählen Sie ein Szenario unter Entscheidungen.',
   'taxNote.BE': 'Ab 2026 besteuert Belgien Kursgewinne auf Finanzanlagen mit 10 %, mit etwa 10.000 € steuerfrei pro Person und Jahr. Dividenden und Zinsen werden gesondert besteuert; dies ist eine Näherung.',
-  'taxNote.DE': 'Abgeltungsteuer 25 % plus Solidaritätszuschlag (26,375 %) auf Erträge über dem Sparer-Pauschbetrag von 1.000 € pro Person. Kirchensteuer nicht enthalten.',
+  'taxNote.DE': 'Abgeltungsteuer 25 % plus Solidaritätszuschlag (26,375 %) auf Erträge über dem Sparer-Pauschbetrag von 1.000 € pro Person. Kirchensteuer nicht enthalten. Bei Aktienfonds sind 30 % der Erträge steuerfrei (Teilfreistellung); der Satz liegt dann bei etwa 18,5 %.',
   'taxNote.FR': 'Pauschalsteuer (PFU) von 31,4 % auf Kapitalerträge und Gewinne ab 2026. Ein PEA oder eine Assurance-vie kann nach der Haltedauer günstiger sein.',
   'taxNote.ES': 'Kapitalerträge werden je nach Höhe mit 19 % bis 30 % besteuert; 21 % dient als Durchschnitt.',
   'taxNote.IT': '26 % auf Kapitalerträge und Gewinne (12,5 % auf Staatsanleihen).',
@@ -468,15 +468,15 @@ Object.assign(I18N.de, {
 });
 Object.assign(I18N.de, {
 "lp.enough.h1": "Reicht mein Geld, wenn ich aufhöre zu arbeiten?",
-"lp.enough.intro": "Geben Sie Ihr Alter, Ihr Erspartes und Ihr Monatsbudget ein. Sie sehen sofort, wie groß die Chance ist, dass Ihr Geld bis zu Ihrem Endalter reicht, mit Ihren Renten eingerechnet.",
+"lp.enough.intro": "Geben Sie Ihr Alter, Ihr Erspartes und Ihr Monatsbudget ein. Sie sehen sofort, wie groß die Chance ist, dass Ihr Geld bis zu dem Alter reicht, das Sie wählen, mit Ihren Renten eingerechnet.",
 "lp.enough.title": "Reicht mein Geld, wenn ich aufhöre zu arbeiten? | Button Counter",
-"lp.enough.desc": "Berechnen Sie die Chance, dass Ihr Erspartes bis zu Ihrem Endalter reicht, mit gesetzlicher Rente, Betriebsrente, Steuern und Inflation. Ohne Konto, Ihre Daten bleiben auf Ihrem Gerät.",
+"lp.enough.desc": "Berechnen Sie die Chance, dass Ihr Erspartes bis zu dem Alter reicht, das Sie wählen, mit gesetzlicher Rente, Betriebsrente, Steuern und Inflation. Ohne Konto, Ihre Daten bleiben auf Ihrem Gerät.",
 "lp.spend.h1": "Wie viel kann ich pro Monat ausgeben, wenn ich aufhöre zu arbeiten?",
-"lp.spend.intro": "Geben Sie Ihr Erspartes und Ihre Renten ein. Button Counter zeigt, welchen Betrag Sie pro Monat ausgeben können, damit Ihr Geld mit guter Chance bis zu Ihrem Endalter reicht.",
+"lp.spend.intro": "Geben Sie Ihr Erspartes und Ihre Renten ein. Button Counter zeigt, welchen Betrag Sie pro Monat ausgeben können, damit Ihr Geld mit guter Chance bis zu dem Alter reicht, das Sie wählen.",
 "lp.spend.title": "Wie viel kann ich im Ruhestand pro Monat ausgeben? | Button Counter",
 "lp.spend.desc": "Sehen Sie, welches Monatsbudget Ihr Erspartes und Ihre Renten tragen können und wie groß die Chance ist, dass es reicht. Ohne Konto.",
 "lp.earlier.h1": "Kann ich früher aufhören zu arbeiten?",
-"lp.earlier.intro": "Probieren Sie ein anderes Ausstiegsalter oder weniger Arbeit aus und sehen Sie sofort, was es für die Chance bedeutet, dass Ihr Geld reicht. Sie können auch zwei Pläne nebeneinanderstellen.",
+"lp.earlier.intro": "Probieren Sie einen anderen Rentenbeginn oder weniger Arbeit aus und sehen Sie sofort, was es für die Chance bedeutet, dass Ihr Geld reicht. Sie können auch zwei Pläne nebeneinanderstellen.",
 "lp.earlier.title": "Früher in Rente gehen? Rechnen Sie es durch | Button Counter",
 "lp.earlier.desc": "Berechnen Sie, was früher aufhören oder weniger arbeiten für Ihr Erspartes und Ihre Renten bedeutet, mit den Regeln Ihres Landes. Ohne Konto.",
 "lp.abroad.h1": "Was ist mein Geld in einem anderen Land wert?",
@@ -729,3 +729,68 @@ Object.assign(I18N.de, {"rel.23.n7": "Erklärungen hinter einem ⓘ: Den Hinterg
 /* versie 26.1: bovenste knoop */ Object.assign(I18N.de, {"tv.row.had": "mit dem, was Sie schon eingetragen hatten", "tv.fin.had": "Schon eingetragen, bevor Sie anfingen"});
 /* testversie 7: Invullen in drie lagen */ Object.assign(I18N.de, {"tv.g.basis": "Ihre Grundlage", "tv.g.ref": "Ergebnis verfeinern", "tv.g.refS": "Für ein Ergebnis nicht nötig. Aber es wird genauer.", "tv.g.asm": "So rechnen wir", "tv.st.opt": "Optional", "tv.ref.next": "Weiter: {x}", "tv.ref.offerH": "Ihr erstes Ergebnis steht", "tv.ref.offerP": "Möchten Sie es genauer? Dann gehen Sie noch diese Knöpfe durch. Für Ihr Ergebnis ist das nicht nötig.", "tv.ref.go": "Ja, verfeinern", "tv.ref.skip": "Jetzt nicht, Ergebnis zeigen", "tv.ref.tipP": "Nächster Schritt für ein genaueres Ergebnis"});
 /* versie 27: Wat is er nieuw */ Object.assign(I18N.de, {"rel.27.v": "Version 27 · November 2026 · wieder mit Dank an alle, die mitgedacht haben", "rel.27.n1": "Eingeben hat drei Ebenen: Ihre Grundlage, Ergebnis verfeinern und So rechnen wir.", "rel.27.n2": "Sie verfeinern mit denselben Knöpfen wie Ihre Grundlage. Für ein Ergebnis sind sie nicht nötig, aber es wird genauer. Jede Altersgruppe hat ihre eigene Reihenfolge.", "rel.27.n3": "Sobald Ihr erstes Ergebnis steht, können Sie gleich einige Knöpfe verfeinern. Unter jedem Bildschirm stehen Fertig und Weiter.", "rel.27.n4": "Die Zurück-Taste Ihres Telefons schließt jetzt eine Frage, ein Fenster oder Ihre Notizen, genau wie das Kreuz. Die App bleibt offen.", "rel.27.f1": "Das Kreuz steht überall oben rechts.", "rel.27.f2": "Der oberste Knopf heißt in jeder Altersgruppe nach Ihrer staatlichen Rente.", "rel.27.f3": "Ausgabenverlauf und Sparen pro Zeitraum haben ein Schloss, weil sie zu Pro gehören.", "rel.27.f4": "Ab 50 steht unter Schulden kein Studienkredit mehr, es sei denn, Sie hatten schon einen eingetragen.", "rel.27.f5": "Auf einem schmalen Bildschirm schieben lange Wörter die Seite nicht mehr zur Seite."});
+/* versie 28: inschatting per land bij belasting, hints bij het staatspensioen (Spanje, VS), Wat is er nieuw */ Object.assign(I18N.de, {"tax.est": "So schätzen wir es {inCountry} ein. Ist es bei Ihnen anders, passen Sie es an.", "spTip.ES": "In Spanien wird die Rente in 14 Zahlungen pro Jahr ausgezahlt. Tragen Sie deshalb den Monatsbetrag mal 14 geteilt durch 12 ein.", "spTip.US": "Tragen Sie den Betrag für das Alter ein, in dem Sie die Leistung beantragen. Ihr Social Security Statement nennt ihn für neun Altersstufen, von 62 bis 70.", "rel.28.v": "Version 28 · November 2026", "rel.28.n1": "Bei der Steuer steht jetzt, dass es unsere Einschätzung für Ihr Land ist. Deutschland, Spanien und die Vereinigten Staaten haben zusätzliche Hinweise zu Steuer und gesetzlicher Rente."});
+/* vraagpagina's in deze taal (qp.<naam>.*). Elke pagina bestaat alleen in deze taal: de andere talen hebben eigen vragen, geen vertalingen.
+   slug = webadres, goal = wielvraag, country = land waarin de pagina opent (alleen bij een pagina over één land),
+   h1 = de vraag, a = het korte antwoord, btn = de knop, fq en fa = de veelgestelde vraag en het antwoord (ook in de FAQ van de app).
+   Een naam tussen accolades is een getal dat veroudert: zie QPN en CTRY in src/index.html. Bron van de teksten: het document
+   "Knopenteller — zeven nieuwe vraagpagina's" van 25 november 2026. */
+Object.assign(I18N.de, {
+  "site.qs": "Weitere Fragen",
+
+  "qp.de-bedarf.slug": "wie-viel-geld-brauche-ich-im-ruhestand",
+  "qp.de-bedarf.goal": "enough",
+  "qp.de-bedarf.h1": "Wie viel Geld brauche ich im Ruhestand?",
+  "qp.de-bedarf.a": "Eine feste Zahl gibt es nicht. Es kommt auf drei Dinge an: was Sie im Monat ausgeben möchten, wie lange das Geld reichen muss und was später noch hereinkommt, etwa die gesetzliche Rente und eine Betriebsrente. Faustregeln wie „80 Prozent des letzten Nettoeinkommens“ sehen nur den ersten Punkt. Button Counter rechnet alle drei zusammen, mit Steuer und Inflation, und zeigt, welches Vermögen in 9 von 10 Fällen reicht.",
+  "qp.de-bedarf.btn": "Meinen Bedarf berechnen",
+  "qp.de-bedarf.fq": "Wie viel Geld brauche ich für die Rente?",
+  "qp.de-bedarf.fa": "Das ist bei jedem anders. Es hängt von Ihrem Monatsbudget, Ihrem Rentenbeginn, Ihrer gesetzlichen Rente und der Steuer auf Kapitalerträge ab. Button Counter führt diese Punkte zusammen und zeigt, welches Vermögen Sie brauchen, damit Ihr Geld in 9 von 10 Fällen reicht.",
+
+  "qp.de-rentenluecke.slug": "rentenluecke-berechnen",
+  "qp.de-rentenluecke.goal": "retire",
+  "qp.de-rentenluecke.h1": "Wie groß ist meine Rentenlücke?",
+  "qp.de-rentenluecke.a": "Die Rentenlücke ist der Betrag, der Ihnen im Ruhestand jeden Monat fehlt: Ihr Wunschbudget minus gesetzliche Rente, Betriebsrente und andere feste Einkünfte. Die Zahlen in Ihrer Renteninformation sind Bruttowerte. Kranken- und Pflegeversicherung gehen noch ab, je nach Höhe auch Steuern. Was dann fehlt, muss aus Ihrem Ersparten kommen. Button Counter zeigt, wie groß die Lücke ist und ob Ihr Vermögen sie schließt.",
+  "qp.de-rentenluecke.btn": "Meine Rentenlücke ansehen",
+  "qp.de-rentenluecke.fq": "Wie berechne ich meine Rentenlücke?",
+  "qp.de-rentenluecke.fa": "Ziehen Sie von Ihrem gewünschten Monatsbudget Ihre Nettorente und andere feste Einkünfte ab. Button Counter rechnet zusätzlich mit Inflation und Steuer und zeigt, ob Ihr Erspartes die Lücke schließt.",
+
+  "qp.de-wie-lange.slug": "wie-lange-reicht-mein-geld",
+  "qp.de-wie-lange.goal": "enough",
+  "qp.de-wie-lange.h1": "Wie lange reicht mein Geld?",
+  "qp.de-wie-lange.a": "Das hängt davon ab, wie viel Sie monatlich entnehmen, wie Ihr Geld angelegt ist und was an Rente dazukommt. Ein einfacher Entnahmeplan rechnet mit einem festen Zins. In Wirklichkeit schwanken die Erträge, und die Preise steigen. Button Counter rechnet deshalb viele mögliche Verläufe durch und zeigt die Chance, dass Ihr Geld bis zu dem Alter reicht, das Sie wählen.",
+  "qp.de-wie-lange.btn": "Meinen Verlauf ansehen",
+  "qp.de-wie-lange.fq": "Wie lange reichen meine Ersparnisse im Ruhestand?",
+  "qp.de-wie-lange.fa": "Das hängt von Ihrer monatlichen Entnahme, Ihren Renten, der Geldanlage und der Inflation ab. Button Counter zeigt Jahr für Jahr, wie sich Ihr Vermögen entwickelt, und wie groß die Chance ist, dass es reicht.",
+
+  "qp.de-mit-63.slug": "mit-63-in-rente",
+  "qp.de-mit-63.goal": "earlier",
+  "qp.de-mit-63.h1": "Kann ich mit 63 in Rente gehen?",
+  "qp.de-mit-63.a": "Mit {deCutYears} Versicherungsjahren können Sie ab {deCutAge} in Rente gehen, allerdings mit Abschlag: {deCut} Prozent für jeden Monat vor Ihrer Regelaltersgrenze. Bei vier Jahren sind das {deCutMax} Prozent, und zwar dauerhaft. Dazu kommen die Jahre, in denen Sie keine Beiträge mehr zahlen. Ob das aufgeht, hängt von Ihrem Ersparten und Ihrem Budget ab. Tragen Sie in Button Counter die Rente ein, die Ihre Rentenauskunft für diesen Beginn nennt, und verschieben Sie Ihren Rentenbeginn. Stand {deStand}; über Änderungen an diesen Regeln wird diskutiert.",
+  "qp.de-mit-63.btn": "Mit 63 durchrechnen",
+  "qp.de-mit-63.fq": "Kann ich es mir leisten, mit 63 in Rente zu gehen?",
+  "qp.de-mit-63.fa": "Das hängt von Ihrem Ersparten, Ihrem Monatsbudget und der gekürzten Rente ab. Tragen Sie die Rente für den früheren Beginn ein und stellen Sie Ihren Rentenbeginn auf 63. Button Counter zeigt die Chance, dass Ihr Geld reicht.",
+
+  "qp.de-4-prozent.slug": "4-prozent-regel-deutschland",
+  "qp.de-4-prozent.goal": "spend",
+  "qp.de-4-prozent.h1": "Funktioniert die 4-Prozent-Regel in Deutschland?",
+  "qp.de-4-prozent.a": "Die 4-Prozent-Regel stammt aus US-amerikanischen Studien. Sie besagt: Im ersten Jahr entnehmen Sie 4 Prozent Ihres Vermögens und passen den Betrag danach an die Inflation an. Für Deutschland fehlen zwei Dinge. Die Regel kennt Ihre gesetzliche Rente nicht, die später einen Teil der Ausgaben trägt. Und sie rechnet ohne Abgeltungsteuer auf Ihre Erträge. Button Counter berücksichtigt beides.",
+  "qp.de-4-prozent.btn": "Für mich durchrechnen",
+  "qp.de-4-prozent.fq": "Gilt die 4-Prozent-Regel auch in Deutschland?",
+  "qp.de-4-prozent.fa": "Als grobe Faustregel ja. Sie lässt aber die gesetzliche Rente, die Abgeltungsteuer und die Dauer Ihres eigenen Ruhestands außer Acht. Button Counter rechnet damit und zeigt, was Sie monatlich ausgeben können.",
+
+  "qp.de-etf-tagesgeld.slug": "etf-sparplan-oder-tagesgeld",
+  "qp.de-etf-tagesgeld.goal": "invest",
+  "qp.de-etf-tagesgeld.h1": "ETF-Sparplan oder Tagesgeld: Was bringt mehr fürs Alter?",
+  "qp.de-etf-tagesgeld.a": "Tagesgeld ist sicher, wächst aber kaum schneller als die Preise. Ein breit gestreuter ETF-Sparplan bringt im Durchschnitt mehr, schwankt aber. Je mehr Zeit Sie haben, desto weniger fallen die Schwankungen ins Gewicht. Eine feste Aufteilung gibt es nicht. Button Counter stellt vier Mischungen nebeneinander, von nur Sparen bis überwiegend Aktien, und zeigt, was Sie später monatlich ausgeben können.",
+  "qp.de-etf-tagesgeld.btn": "Sparen und Anlegen vergleichen",
+  "qp.de-etf-tagesgeld.fq": "Soll ich fürs Alter sparen oder anlegen?",
+  "qp.de-etf-tagesgeld.fa": "Das hängt davon ab, wie lange Sie das Geld nicht brauchen und wie viel Schwankung Sie aushalten. Button Counter rechnet vier Mischungen durch und zeigt für jede, was Sie später zur Verfügung haben. Das ist keine Anlageberatung; es zeigt den Unterschied.",
+
+  "qp.de-mit-50.slug": "altersvorsorge-mit-50",
+  "qp.de-mit-50.goal": "retire",
+  "qp.de-mit-50.h1": "Mit 50 noch fürs Alter vorsorgen: Lohnt sich das?",
+  "qp.de-mit-50.a": "Ja. Mit 50 haben Sie oft noch fünfzehn Jahre oder mehr bis zur Rente. Das reicht, damit ein fester Monatsbetrag einen Unterschied macht. Außerdem trägt die gesetzliche Rente später einen Teil Ihrer Ausgaben; Ihr Erspartes muss nicht alles leisten. Die Frage ist nicht, ob es sich lohnt, sondern wie viel es bringt. Button Counter zeigt, was jeder zusätzliche Euro im Monat später bedeutet.",
+  "qp.de-mit-50.btn": "Sehen, was es noch bringt",
+  "qp.de-mit-50.fq": "Ist es mit 50 zu spät für die Altersvorsorge?",
+  "qp.de-mit-50.fa": "Nein. Auch mit fünfzehn Jahren bis zur Rente macht ein fester Monatsbetrag einen Unterschied, zusätzlich zur gesetzlichen Rente. In Button Counter erhöhen Sie Ihren Sparbetrag und sehen sofort, was das später pro Monat bringt."
+});

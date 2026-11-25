@@ -26,7 +26,12 @@ COUNTRY = {'en': 'GB', 'nl': 'NL', 'de': 'DE', 'fr': 'FR', 'es': 'ES'}
 TODAY = datetime.date.today().isoformat()
 BUNDLE_VER = {}
 CSS_TAG = '<link rel="stylesheet" href="app.css">'
-# landingspagina per vraag (doel), in alle vijf talen
+# Vraagpagina's zijn er in twee soorten.
+# 1. LANDING: vier pagina's die in alle vijf talen bestaan, één per wielvraag (teksten: lp.<wielvraag>.* in elke taal).
+# 2. Pagina's die in één taal bestaan (teksten: qp.<naam>.* alleen in src/i18n/<die taal>.js). Meerdere pagina's mogen naar
+#    dezelfde wielvraag leiden. Het bouwscript leest ze uit de teksten van elke taal (zie extract en qpages); een pagina
+#    toevoegen is dus alleen een blok tekst toevoegen. Zo'n pagina verwijst in hreflang alleen naar zichzelf, en de taalkeuze
+#    gaat er naar de startpagina van de gekozen taal.
 LANDING = {
     'enough': {'nl': 'is-mijn-geld-genoeg', 'en': 'will-my-money-last', 'de': 'reicht-mein-geld', 'fr': 'mon-argent-suffira-t-il', 'es': 'me-llegara-el-dinero'},
     'spend': {'nl': 'hoeveel-kan-ik-per-maand-uitgeven', 'en': 'how-much-can-i-spend-in-retirement', 'de': 'wie-viel-kann-ich-im-ruhestand-ausgeben', 'fr': 'combien-depenser-a-la-retraite', 'es': 'cuanto-puedo-gastar-al-jubilarme'},
@@ -37,6 +42,12 @@ LANDING = {
 
 # texts that are the same in every language on purpose (no translation needed)
 LANGUAGE_NEUTRAL = {'brand', 'p.n1', 'p.n2', 'u.cur', 'u.pct'}
+# Texts of question pages that exist in one language only. They are the one exception to "every language has every text":
+# they are not checked against the other languages and are not copied into another language's bundle as an English fallback.
+ONE_LANGUAGE = re.compile(r'^qp\.')
+QP_PARTS = ('slug', 'goal', 'h1', 'a', 'btn', 'fq', 'fa')
+QP_GOALS = ('enough', 'spend', 'earlier', 'free', 'invest', 'retire')   # wielvragen waar een pagina naar mag leiden
+RESERVED = {'nl', 'de', 'fr', 'es', 'en', 'src', 'tools', 'tests', 'img', 'fonts', 'i18n'}
 
 
 def lp_path(goal, lang):
@@ -46,6 +57,40 @@ def lp_path(goal, lang):
 
 def url(lang):
     return SITE + ('/' if lang == 'en' else '/%s/' % lang)
+
+
+def qp_path(p):
+    return '/%s/' % p['slug'] if p['lang'] == 'en' else '/%s/%s/' % (p['lang'], p['slug'])
+
+
+def qpages(data):
+    """The question pages that exist in one language, in the order of the texts, checked."""
+    out, problems, seen = [], [], {lp_path(g, l): 'lp.%s (%s)' % (g, l) for g in LANDING for l in LANDING[g]}
+    for lang in LANGS:
+        for p in data[lang]['qp']:
+            p = dict(p, lang=lang)
+            name = 'qp.%s (%s)' % (p['id'], lang)
+            gaps = [k for k in QP_PARTS if not p.get(k)]
+            if gaps:
+                problems.append('%s: missing %s' % (name, ', '.join(gaps)))
+                continue
+            if p['goal'] not in QP_GOALS:
+                problems.append('%s: unknown wheel question "%s"' % (name, p['goal']))
+            if not re.match(r'^[a-z0-9]+(-[a-z0-9]+)*$', p['slug']) or (lang == 'en' and p['slug'] in RESERVED):
+                problems.append('%s: address "%s" is not usable' % (name, p['slug']))
+            if '{' in ''.join(p[k] for k in ('h1', 'a', 'btn', 'fq', 'fa')):
+                problems.append('%s: a number between braces has no value (see QPN in src/index.html)' % name)
+            path = qp_path(p)
+            if path in seen:
+                problems.append('%s: address %s is already used by %s' % (name, path, seen[path]))
+            seen[path] = name
+            out.append(p)
+    ids = [p['id'] for p in out]
+    for i in sorted(set(x for x in ids if ids.count(x) > 1)):
+        problems.append('qp.%s: the same name is used in more than one language' % i)
+    if problems:
+        sys.exit('Question pages, build stopped:\n  ' + '\n  '.join(problems))
+    return out
 
 
 def extract():
@@ -81,19 +126,20 @@ def extract():
               document.querySelectorAll('[data-t-aria]').forEach(e => { aria[e.getAttribute('data-t-aria')] = e.getAttribute('aria-label') || ''; });
               const faq = [...document.querySelectorAll('.faq-i')].map(d => [d.querySelector('summary').textContent.trim(), d.querySelector('.faq-a').textContent.trim()]);
               const lp = {}; Object.keys(I18N[document.documentElement.lang] || {}).forEach(k => { if (k.startsWith('lp.')) lp[k] = I18N[document.documentElement.lang][k]; });
+              const qp = window.__qp ? window.__qp() : [], faqQp = document.getElementById('faq-qp') ? document.getElementById('faq-qp').innerHTML : '';
               const used = new Set();
               document.querySelectorAll('[data-t],[data-t-alt],[data-t-aria]').forEach(e => ['data-t', 'data-t-alt', 'data-t-aria'].forEach(a => { const k = e.getAttribute(a); if (k) used.add(k); }));
               const L = I18N[document.documentElement.lang] || {};
               const missing = [...used].filter(k => L[k] === undefined).sort();
               const jsMissing = jsKeys.filter(k => L[k] === undefined).sort();
               const relMissing = Object.keys(I18N.en).filter(k => /^rel\\.\\d+\\./.test(k) && L[k] === undefined).sort();
-              return { i18n: L, t, alt, aria, faq, lp, missing, jsMissing, relMissing, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
+              return { i18n: L, t, alt, aria, faq, lp, qp, faqQp, missing, jsMissing, relMissing, title: document.documentElement.getAttribute('data-seo-title'), desc: document.querySelector('meta[name="description"]').content, lang: document.documentElement.lang };
             }""", js_keys)
             assert not errs, errs
             assert data['lang'] == lang, (lang, data['lang'])
             # Every text shown on the page, and every release note, needs its own translation in every language.
             # Without it the app silently falls back to English, so stop the build instead.
-            gaps = [k for k in data['missing'] + data['jsMissing'] if k not in LANGUAGE_NEUTRAL] + data['relMissing']
+            gaps = [k for k in data['missing'] + data['jsMissing'] if k not in LANGUAGE_NEUTRAL and not ONE_LANGUAGE.match(k)] + data['relMissing']
             if gaps:
                 problems.append('%s: no translation for %s' % (lang, ', '.join(gaps)))
             out[lang] = data
@@ -125,9 +171,9 @@ def fill_body(body, d):
     return body
 
 
-def head_block(lang, d, goal=None):
+def head_block(lang, d, goal=None, qp=None):
     e = lambda s: html.escape(s, quote=True)
-    page = SITE + lp_path(goal, lang) if goal else url(lang)
+    page = SITE + qp_path(qp) if qp else (SITE + lp_path(goal, lang) if goal else url(lang))
     brand = 'Knopenteller' if lang == 'nl' else 'Button Counter'
     lines = [
         '<title>%s</title>' % e(d['title']),
@@ -135,7 +181,10 @@ def head_block(lang, d, goal=None):
         '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">',
         '<link rel="canonical" href="%s">' % page,
     ]
-    if goal:
+    if qp:
+        # a page that exists in one language points to itself only
+        lines.append('<link rel="alternate" hreflang="%s" href="%s">' % (lang, page))
+    elif goal:
         for l in LANDING[goal]:
             lines.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, SITE + lp_path(goal, l)))
         lines.append('<link rel="alternate" hreflang="x-default" href="%s">' % (SITE + lp_path(goal, 'en')))
@@ -174,11 +223,26 @@ def head_block(lang, d, goal=None):
                          'Five languages', 'No account, data stays in the browser']},
         {'@type': 'FAQPage', '@id': page + '#faq', 'inLanguage': lang,
          'mainEntity': [{'@type': 'Question', 'name': q,
-                         'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in d['faq']]},
+                         'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq_first(d['faq'], qp)]},
     ]
     ld = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False)
     lines.append('<script type="application/ld+json">%s</script>' % ld.replace('</', '<\\/'))
     return '\n'.join(lines)
+
+
+def faq_first(faq, qp):
+    """On a page that exists in one language its own question comes first."""
+    if not qp:
+        return faq
+    return [[qp['fq'], qp['fa']]] + [x for x in faq if x[0] != qp['fq']]
+
+
+def q_links(lang, d, pages):
+    """The question pages of this language, for the foot of every page in that language."""
+    items = [(lp_path(g, lang), d['lp']['lp.%s.h1' % g]) for g in LANDING] + [(qp_path(p), p['h1']) for p in pages if p['lang'] == lang]
+    label = html.escape(d['i18n']['site.qs'], quote=True)
+    return ('<nav class="site-qs" aria-label="%s"><b>%s</b>' % (label, label)
+            + ''.join('<a href="%s">%s</a>' % (h, html.escape(t)) for h, t in items) + '</nav>')
 
 
 def lang_links(lang):
@@ -211,7 +275,7 @@ def lang_bundle(lang, data):
     out = '/* Generated by tools/build.py from src/i18n/. Do not edit. */\nvar I18N=self.I18N||{};\nI18N.%s=%s;\n' % (lang, js(own))
     if lang != 'en':
         en = data['en']['i18n']
-        rest = {k: v for k, v in en.items() if own.get(k) in (None, '') or EN_ALWAYS.match(k)}
+        rest = {k: v for k, v in en.items() if (own.get(k) in (None, '') and not ONE_LANGUAGE.match(k)) or EN_ALWAYS.match(k)}
         out += 'I18N.en=%s;\n' % js(rest)
     return out
 
@@ -227,9 +291,20 @@ def split(src):
     return src[:i], src[i:j], src[j:]
 
 
-def build_page(src, lang, d, goal=None):
+def build_page(src, lang, d, goal=None, qp=None, pages=()):
     head, body, script = split(src)
-    if goal:
+    brand = 'Knopenteller' if lang == 'nl' else 'Button Counter'
+    if qp:
+        # a page that exists in one language: the question is the title, the answer from the FAQ the description;
+        # the block with question, short answer, button and FAQ is visible, and the old hero heading is no second h1
+        d = dict(d, title='%s | %s' % (qp['h1'], brand), desc=qp['fa'])
+        blank = '<section class="qp" id="qp" hidden></section>'
+        assert body.count(blank) == 1, 'question page block not found'
+        body = body.replace(blank, '<section class="qp" id="qp" aria-labelledby="qp-h">%s</section>' % qp['block'], 1)
+        hero = '<h1 id="ov-h" data-t="home.h1"></h1>'
+        assert body.count(hero) == 1, 'hero heading not found'
+        body = body.replace(hero, '<p class="hero-h1" id="ov-h" data-t="home.h1"></p>', 1)
+    elif goal:
         d = dict(d, title=d['lp']['lp.%s.title' % goal], desc=d['lp']['lp.%s.desc' % goal], t=dict(d['t'], **d['lp']))
         body = body.replace('data-t="home.h1"', 'data-t="lp.%s.h1"' % goal, 1)
         body = body.replace('<p class="lp-intro" id="lp-intro" hidden></p>', '<p class="lp-intro" id="lp-intro" data-t="lp.%s.intro"></p>' % goal, 1)
@@ -238,9 +313,13 @@ def build_page(src, lang, d, goal=None):
     head = re.sub(r'<meta (?:property="og:|name="twitter:)[^>]*>\n', '', head)
     head = re.sub(r'<meta name="description"[^>]*>\n', '', head)
     head = re.sub(r'<meta name="robots"[^>]*><!--TEMPLATE-ONLY-->\n', '', head)
-    head = re.sub(r'<title>[^<]*</title>', lambda m: head_block(lang, d, goal), head, count=1)
+    head = re.sub(r'<title>[^<]*</title>', lambda m: head_block(lang, d, goal, qp), head, count=1)
     # the root page follows the visitor's own language (and sends them on to /nl/ etc.); language pages are fixed
-    if goal:
+    if qp:
+        # only its own language has this page; for any other language the app goes to that language's start page
+        extra = ' data-lp-%s="%s"' % (lang, qp_path(qp)) + (' data-page-country="%s"' % qp['country'] if qp.get('country') else '')
+        head = head.replace('<html lang="en">', '<html lang="%s" class="qp-on" data-path-lang="%s" data-site="1" data-goal="%s" data-page="%s"%s>' % (lang, lang, qp['goal'], qp['id'], extra))
+    elif goal:
         alt = ''.join(' data-lp-%s="%s"' % (l, lp_path(goal, l)) for l in LANDING[goal])
         head = head.replace('<html lang="en">', '<html lang="%s" data-path-lang="%s" data-site="1" data-goal="%s"%s>' % (lang, lang, goal, alt))
     else:
@@ -258,6 +337,9 @@ def build_page(src, lang, d, goal=None):
     body = body.replace(tags, '<script src="/i18n/%s.js?v=%s"></script>\n' % (lang, BUNDLE_VER[lang]), 1)
     body = body.replace('<script src="model.js" data-model></script>', '<script src="/model.js?v=%s" data-model></script>' % ver(read_src('model.js')), 1)
     body = body.replace('<!--LANGLINKS-->', lang_links(lang))
+    body = body.replace('<!--QLINKS-->', q_links(lang, d, pages))
+    assert body.count('<div id="faq-qp"></div>') == 1, 'FAQ place for question pages not found'
+    body = body.replace('<div id="faq-qp"></div>', '<div id="faq-qp">%s</div>' % d['faqQp'], 1)
     # images: only the first one is above the fold
     first = [True]
     def img(m):
@@ -281,7 +363,7 @@ def build_artifact(src, d):
     keep = head[i:j]
     keep = re.sub(r'<meta name="robots"[^>]*><!--TEMPLATE-ONLY-->\n', '', keep)
     keep = re.sub(r'<meta name="description"[^>]*>\n', '<meta name="description" content="">\n', keep)
-    body = fill_body(body, d).replace('<body>', '', 1).replace('<!--LANGLINKS-->', '')
+    body = fill_body(body, d).replace('<body>', '', 1).replace('<!--LANGLINKS-->', '').replace('<!--QLINKS-->', '')
     script = script.replace('</body>', '').replace('</html>', '')
     return keep + '\n' + body + script
 
@@ -307,11 +389,14 @@ def main():
         text = lang_bundle(lang, data)
         BUNDLE_VER[lang] = ver(text)
         write('i18n/%s.js' % lang, text)
+    pages = qpages(data)
     for lang in LANGS:
-        write('index.html' if lang == 'en' else '%s/index.html' % lang, build_page(src, lang, data[lang]))
+        write('index.html' if lang == 'en' else '%s/index.html' % lang, build_page(src, lang, data[lang], pages=pages))
     for goal in LANDING:
         for lang in LANDING[goal]:
-            write(lp_path(goal, lang).strip('/') + '/index.html', build_page(src, lang, data[lang], goal))
+            write(lp_path(goal, lang).strip('/') + '/index.html', build_page(src, lang, data[lang], goal, pages=pages))
+    for p in pages:
+        write(qp_path(p).strip('/') + '/index.html', build_page(src, p['lang'], data[p['lang']], qp=p, pages=pages))
 
     alts = ''.join('    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>\n' % (l, url(l)) for l in LANGS)
     alts += '    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>\n' % url('en')
@@ -323,6 +408,9 @@ def main():
         lalts += '    <xhtml:link rel="alternate" hreflang="x-default" href="%s"/>\n' % (SITE + lp_path(goal, 'en'))
         for l in LANDING[goal]:
             sm += '  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n%s  </url>\n' % (SITE + lp_path(goal, l), TODAY, lalts)
+    for p in pages:
+        loc = SITE + qp_path(p)
+        sm += '  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n    <xhtml:link rel="alternate" hreflang="%s" href="%s"/>\n  </url>\n' % (loc, TODAY, p['lang'], loc)
     sm += '</urlset>\n'
     write('sitemap.xml', sm)
 
@@ -340,6 +428,7 @@ def main():
            'tool and does not give financial advice.\n\n' % SITE)
     ll += '## Pages\n\n' + ''.join('- [%s (%s)](%s): %s\n' % (data[l]['title'], NAMES[l], url(l), data[l]['desc']) for l in LANGS)
     ll += '\n## Question pages\n\n' + ''.join('- [%s](%s%s): %s\n' % (data[l]['lp']['lp.%s.h1' % g], SITE, lp_path(g, l), data[l]['lp']['lp.%s.desc' % g]) for g in LANDING for l in LANDING[g])
+    ll += ''.join('- [%s](%s%s): %s\n' % (p['h1'], SITE, qp_path(p), p['fa']) for p in pages)
     ll += '\n## Questions and answers\n\n' + ''.join('### %s\n\n%s\n\n' % (q, a) for q, a in en['faq'])
     ll += ('## Facts\n\n- Method: Monte Carlo simulation, 4,000 runs, three portfolios (defensive, balanced, aggressive), '
            'after costs, tax and inflation; all amounts in today\'s money.\n'

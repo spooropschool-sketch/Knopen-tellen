@@ -15,10 +15,10 @@ Button Counter is a free, single-page retirement calculator at https://countingb
 ## Question pages
 
 - [Is mijn geld genoeg als ik stop met werken?](https://countingbuttons.com/nl/is-mijn-geld-genoeg/): Bereken de kans dat je spaargeld genoeg is tot je eindleeftijd, met AOW, pensioen, box 3 en inflatie. Zonder account, je gegevens blijven op je eigen apparaat.
-- [Will my money last when I stop working?](https://countingbuttons.com/will-my-money-last/): Calculate the chance that your savings last until your end age, with state pension, pension, tax and inflation. No account; your data stays on your own device.
-- [Reicht mein Geld, wenn ich aufhöre zu arbeiten?](https://countingbuttons.com/de/reicht-mein-geld/): Berechnen Sie die Chance, dass Ihr Erspartes bis zu Ihrem Endalter reicht, mit gesetzlicher Rente, Betriebsrente, Steuern und Inflation. Ohne Konto, Ihre Daten bleiben auf Ihrem Gerät.
-- [Mon argent suffira-t-il quand j’arrêterai de travailler ?](https://countingbuttons.com/fr/mon-argent-suffira-t-il/): Calculez la probabilité que votre épargne dure jusqu’à votre âge final, avec la retraite publique, la retraite complémentaire, les impôts et l’inflation. Sans compte, vos données restent sur votre appareil.
-- [¿Me llegará el dinero cuando deje de trabajar?](https://countingbuttons.com/es/me-llegara-el-dinero/): Calcula la probabilidad de que tus ahorros duren hasta tu edad final, con pensión pública, pensión privada, impuestos e inflación. Sin cuenta, tus datos se quedan en tu dispositivo.
+- [Will my money last in retirement?](https://countingbuttons.com/will-my-money-last/): Calculate the chance that your savings last to the age you choose, with Social Security or State Pension, workplace pension, tax and inflation. No account; your data stays on your own device.
+- [Reicht mein Geld, wenn ich aufhöre zu arbeiten?](https://countingbuttons.com/de/reicht-mein-geld/): Berechnen Sie die Chance, dass Ihr Erspartes bis zu dem Alter reicht, das Sie wählen, mit gesetzlicher Rente, Betriebsrente, Steuern und Inflation. Ohne Konto, Ihre Daten bleiben auf Ihrem Gerät.
+- [Mon argent suffira-t-il quand j’arrêterai de travailler ?](https://countingbuttons.com/fr/mon-argent-suffira-t-il/): Calculez la probabilité que votre épargne dure jusqu’à l’âge que vous choisissez, avec la retraite publique, la retraite complémentaire, les impôts et l’inflation. Sans compte, vos données restent sur votre appareil.
+- [¿Me llegará el dinero cuando deje de trabajar?](https://countingbuttons.com/es/me-llegara-el-dinero/): Calcula la probabilidad de que tus ahorros duren hasta la edad que elijas, con pensión pública, pensión privada, impuestos e inflación. Sin cuenta, tus datos se quedan en tu dispositivo.
 - [Hoeveel kan ik per maand uitgeven als ik stop met werken?](https://countingbuttons.com/nl/hoeveel-kan-ik-per-maand-uitgeven/): Zie welk maandbudget je kunt aanhouden met je spaargeld, AOW en pensioen, en hoe groot de kans is dat het genoeg is. Zonder account.
 - [How much can I spend each month when I stop working?](https://countingbuttons.com/how-much-can-i-spend-in-retirement/): See which monthly budget your savings and pensions can support, and the chance that it is enough. No account needed.
 - [Wie viel kann ich pro Monat ausgeben, wenn ich aufhöre zu arbeiten?](https://countingbuttons.com/de/wie-viel-kann-ich-im-ruhestand-ausgeben/): Sehen Sie, welches Monatsbudget Ihr Erspartes und Ihre Renten tragen können und wie groß die Chance ist, dass es reicht. Ohne Konto.
@@ -34,6 +34,44 @@ Button Counter is a free, single-page retirement calculator at https://countingb
 - [Was ist mein Geld in einem anderen Land wert?](https://countingbuttons.com/de/rente-im-ausland/): Vergleichen Sie die Kaufkraft Ihres Monatsbudgets in 31 europäischen Ländern und prüfen Sie Ihren Plan mit den Regeln von zehn Ländern. Ohne Konto.
 - [Que vaut mon argent dans un autre pays ?](https://countingbuttons.com/fr/retraite-a-l-etranger/): Comparez le pouvoir d’achat de votre budget mensuel dans 31 pays européens et testez votre plan avec les règles de dix pays. Sans compte.
 - [¿Cuánto vale mi dinero en otro país?](https://countingbuttons.com/es/jubilarse-en-el-extranjero/): Compara el poder adquisitivo de tu presupuesto mensual en 31 países europeos y prueba tu plan con las normas de diez países. Sin cuenta.
+- [How much do I need to retire comfortably?](https://countingbuttons.com/how-much-do-i-need-to-retire/): It differs per person. It depends on your monthly budget, the age you stop working, your Social Security or State Pension and the tax on your investments. Button Counter combines them and shows the savings you need for your money to last in 9 out of 10 scenarios.
+- [How long will my money last in retirement?](https://countingbuttons.com/how-long-will-my-money-last/): It depends on your monthly withdrawals, your pensions, your investments and inflation. Button Counter shows year by year how your savings develop and the chance that they last.
+- [Can I retire at 62?](https://countingbuttons.com/can-i-retire-at-62/): It depends on your savings, your monthly budget and the lower Social Security benefit you get at 62. Enter the benefit your statement shows for that age and set your stopping age to 62. Button Counter shows the chance that your money lasts.
+- [Is the 4% rule still safe?](https://countingbuttons.com/is-the-4-percent-rule-safe/): As a rough guide, yes. It ignores Social Security or a State Pension, tax on your returns and how long your own retirement lasts. Button Counter adds those and shows a monthly amount with the chance that your money lasts.
+- [Does the 80% rule work?](https://countingbuttons.com/80-percent-rule-retirement/): A common guide is about 80% of what you earned before. Your real number depends on your housing costs, health care and plans. In Button Counter you enter the monthly budget you want and see whether it holds.
+- [How much do I need for $1,000 a month in retirement?](https://countingbuttons.com/1000-a-month-rule/): About $240,000 if you withdraw 5% a year, or $300,000 at 4%. What you really need depends on your other income, tax and how long the money has to last. Button Counter works it out for your situation.
+- [I started saving late. Can I still catch up?](https://countingbuttons.com/started-saving-late/): No. Even with fifteen years to go, a fixed monthly amount adds up, next to Social Security or a State Pension. In Button Counter you tap plus on what you set aside and see what it adds to your monthly income later.
+- [Is the State Pension enough to live on?](https://countingbuttons.com/is-the-state-pension-enough/): The full new State Pension is about £12,550 a year in 2026/27. That is just under what the Retirement Living Standards call a minimum lifestyle for one person (£13,900). Button Counter shows how much your workplace pension and savings need to add for the budget you want.
+- [Can I live on Social Security alone?](https://countingbuttons.com/can-i-live-on-social-security-alone/): The average retirement benefit is about $2,070 a month in 2026. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last.
+- [Hoeveel geld heb ik nodig om te stoppen met werken?](https://countingbuttons.com/nl/hoeveel-geld-nodig-om-te-stoppen-met-werken/): Dat verschilt per persoon. Het hangt af van je maandbudget, je leeftijd bij het stoppen, je AOW en pensioen en de belasting over je vermogen. Knopenteller zet die vier bij elkaar en laat zien welk bedrag je nodig hebt om het in 9 van de 10 gevallen te halen.
+- [Hoe groot is mijn gat tot de AOW als ik eerder stop?](https://countingbuttons.com/nl/gat-tot-de-aow-overbruggen/): In die jaren betaal je alles uit eigen geld. Hoe groot dat gat is, hangt af van je stopleeftijd, je AOW-leeftijd en je maandbudget. Knopenteller rekent het per jaar uit en laat zien of je spaargeld het tot de AOW volhoudt.
+- [Hoe tel ik mijn pensioen mee in mijn FIRE-doel?](https://countingbuttons.com/nl/pensioen-meetellen-in-fire/): Vul in wat je pensioen per maand oplevert en vanaf welke leeftijd. Knopenteller telt het vanaf dat moment mee en laat zien hoeveel vermogen je daarvoor en daarna nodig hebt. Je bedrag vind je op mijnpensioenoverzicht.nl.
+- [Hoeveel moet ik per maand sparen en hoeveel beleggen?](https://countingbuttons.com/nl/sparen-of-beleggen-per-maand/): Dat hangt af van hoe lang je het geld niet nodig hebt en hoeveel schommeling je aankunt. Knopenteller rekent vier mixen voor je door en laat per mix zien hoeveel je later te besteden hebt en hoe groot de kans is dat je je doel haalt. Het is geen advies; het laat het verschil zien.
+- [Klopt de 4%-regel ook in Nederland?](https://countingbuttons.com/nl/4-procent-regel-nederland/): Als ruwe vuistregel wel, maar hij mist je AOW, je pensioen en de belasting in box 3. Knopenteller rekent die mee en laat zien hoeveel je per maand kunt uitgeven, met de kans dat je geld het volhoudt.
+- [Wat scheelt één jaar eerder stoppen?](https://countingbuttons.com/nl/een-jaar-eerder-stoppen/): Meer dan één jaar aan uitgaven, omdat je ook een jaar minder inlegt en je geld een jaar langer mee moet. In Knopenteller verschuif je je stopleeftijd met plus en min en zie je meteen wat het met je maandbudget doet.
+- [Ik begin laat met sparen. Heeft het nog zin?](https://countingbuttons.com/nl/laat-beginnen-met-sparen/): Ja. Ook met tien of twintig jaar te gaan maakt een vast bedrag per maand verschil, zeker naast je AOW en pensioen. In Knopenteller tik je op plus bij wat je opzij legt en zie je meteen wat het later per maand oplevert.
+- [Wie viel Geld brauche ich im Ruhestand?](https://countingbuttons.com/de/wie-viel-geld-brauche-ich-im-ruhestand/): Das ist bei jedem anders. Es hängt von Ihrem Monatsbudget, Ihrem Rentenbeginn, Ihrer gesetzlichen Rente und der Steuer auf Kapitalerträge ab. Button Counter führt diese Punkte zusammen und zeigt, welches Vermögen Sie brauchen, damit Ihr Geld in 9 von 10 Fällen reicht.
+- [Wie groß ist meine Rentenlücke?](https://countingbuttons.com/de/rentenluecke-berechnen/): Ziehen Sie von Ihrem gewünschten Monatsbudget Ihre Nettorente und andere feste Einkünfte ab. Button Counter rechnet zusätzlich mit Inflation und Steuer und zeigt, ob Ihr Erspartes die Lücke schließt.
+- [Wie lange reicht mein Geld?](https://countingbuttons.com/de/wie-lange-reicht-mein-geld/): Das hängt von Ihrer monatlichen Entnahme, Ihren Renten, der Geldanlage und der Inflation ab. Button Counter zeigt Jahr für Jahr, wie sich Ihr Vermögen entwickelt, und wie groß die Chance ist, dass es reicht.
+- [Kann ich mit 63 in Rente gehen?](https://countingbuttons.com/de/mit-63-in-rente/): Das hängt von Ihrem Ersparten, Ihrem Monatsbudget und der gekürzten Rente ab. Tragen Sie die Rente für den früheren Beginn ein und stellen Sie Ihren Rentenbeginn auf 63. Button Counter zeigt die Chance, dass Ihr Geld reicht.
+- [Funktioniert die 4-Prozent-Regel in Deutschland?](https://countingbuttons.com/de/4-prozent-regel-deutschland/): Als grobe Faustregel ja. Sie lässt aber die gesetzliche Rente, die Abgeltungsteuer und die Dauer Ihres eigenen Ruhestands außer Acht. Button Counter rechnet damit und zeigt, was Sie monatlich ausgeben können.
+- [ETF-Sparplan oder Tagesgeld: Was bringt mehr fürs Alter?](https://countingbuttons.com/de/etf-sparplan-oder-tagesgeld/): Das hängt davon ab, wie lange Sie das Geld nicht brauchen und wie viel Schwankung Sie aushalten. Button Counter rechnet vier Mischungen durch und zeigt für jede, was Sie später zur Verfügung haben. Das ist keine Anlageberatung; es zeigt den Unterschied.
+- [Mit 50 noch fürs Alter vorsorgen: Lohnt sich das?](https://countingbuttons.com/de/altersvorsorge-mit-50/): Nein. Auch mit fünfzehn Jahren bis zur Rente macht ein fester Monatsbetrag einen Unterschied, zusätzlich zur gesetzlichen Rente. In Button Counter erhöhen Sie Ihren Sparbetrag und sehen sofort, was das später pro Monat bringt.
+- [Combien faut-il pour prendre sa retraite ?](https://countingbuttons.com/fr/combien-faut-il-pour-la-retraite/): Cela dépend de votre budget mensuel, de votre âge de départ, de vos pensions et de l’impôt sur vos placements. Button Counter réunit ces éléments et montre le capital nécessaire pour que votre argent tienne dans 9 cas sur 10.
+- [Combien de temps mon capital va-t-il durer ?](https://countingbuttons.com/fr/combien-de-temps-dure-mon-capital/): Cela dépend de vos retraits mensuels, de vos pensions, de vos placements et de l’inflation. Button Counter montre l’évolution de votre capital année après année et la probabilité qu’il suffise.
+- [Puis-je partir à la retraite à 60 ans ?](https://countingbuttons.com/fr/partir-a-la-retraite-a-60-ans/): Oui, si votre épargne finance les années sans pension. Button Counter montre année par année ce qui rentre et ce que votre capital doit couvrir, et la probabilité que votre argent suffise.
+- [La règle des 4 % fonctionne-t-elle en France ?](https://countingbuttons.com/fr/regle-des-4-pour-cent-france/): Comme repère, oui. Mais elle ne compte ni vos pensions, ni l’impôt sur vos gains, ni la durée de votre propre retraite. Button Counter les intègre et montre ce que vous pouvez dépenser chaque mois.
+- [Combien épargner par mois pour sa retraite ?](https://countingbuttons.com/fr/combien-epargner-pour-la-retraite/): Cela dépend de votre âge, de votre épargne actuelle, de votre objectif et de vos pensions. Dans Button Counter, vous modifiez votre versement mensuel et voyez aussitôt ce qu’il apporte plus tard.
+- [Vivre de ses rentes : quel capital faut-il ?](https://countingbuttons.com/fr/vivre-de-ses-rentes/): Cela dépend de vos dépenses, de votre âge et des pensions que vous toucherez plus tard. Button Counter montre si votre capital suffit, avant comme après le début de vos pensions.
+- [Commencer à épargner à 40 ou 50 ans : est-ce trop tard ?](https://countingbuttons.com/fr/epargner-tard-pour-la-retraite/): Non. Même avec quinze ans devant vous, un montant fixe par mois compte, en plus de vos pensions. Dans Button Counter, vous augmentez votre versement et voyez aussitôt ce qu’il apporte par mois plus tard.
+- [Ma pension légale suffira-t-elle ?](https://countingbuttons.com/fr/pension-legale-suffisante/): Comparez-la au budget mensuel que vous visez. Button Counter montre ce que votre pension complémentaire et votre épargne doivent ajouter, et la probabilité que cela tienne.
+- [¿Cuánto dinero necesito para jubilarme?](https://countingbuttons.com/es/cuanto-dinero-necesito-para-jubilarme/): Depende de tu presupuesto mensual, de la edad a la que dejes de trabajar, de tu pensión pública y de los impuestos sobre tus ahorros. Button Counter lo reúne y muestra el ahorro necesario para que tu dinero aguante en 9 de cada 10 casos.
+- [¿Cuánto me durará el dinero en la jubilación?](https://countingbuttons.com/es/cuanto-me-durara-el-dinero/): Depende de lo que retires al mes, de tu pensión, de tus inversiones y de la inflación. Button Counter muestra año a año cómo evoluciona tu patrimonio y la probabilidad de que sea suficiente.
+- [¿Puedo jubilarme antes de los 67?](https://countingbuttons.com/es/jubilarme-antes-de-los-67/): Sí, si tus ahorros cubren los años hasta que empiece tu pensión. Button Counter muestra año a año lo que entra y lo que tiene que salir de tus ahorros, y la probabilidad de que el dinero aguante.
+- [¿Funciona la regla del 4 % en España?](https://countingbuttons.com/es/regla-del-4-por-ciento-espana/): Como orientación, sí. Pero no incluye tu pensión pública, los impuestos sobre tus ganancias ni lo que dure tu propia jubilación. Button Counter los incluye y muestra lo que puedes gastar al mes.
+- [¿Cuánto debo ahorrar al mes para la jubilación?](https://countingbuttons.com/es/cuanto-ahorrar-al-mes-para-la-jubilacion/): Depende de tu edad, tus ahorros actuales, tu objetivo y tu pensión. En Button Counter cambias tu ahorro mensual y ves al instante lo que supone más adelante.
+- [¿Cuánto dinero hace falta para vivir de las rentas?](https://countingbuttons.com/es/vivir-de-las-rentas/): Depende de tus gastos, de tu edad y de la pensión que cobrarás más adelante. Button Counter muestra si tu patrimonio alcanza, antes y después de que empiece tu pensión.
+- [Empezar a ahorrar a los 40 o 50: ¿llego a tiempo?](https://countingbuttons.com/es/empezar-a-ahorrar-tarde/): No. Incluso con quince años por delante, una cantidad fija al mes se nota, además de tu pensión pública. En Button Counter subes tu ahorro mensual y ves al instante lo que añade más adelante.
 
 ## Questions and answers
 
@@ -68,6 +106,42 @@ Button Counter has no advertising and needs no account. Most of it is free and s
 ### Is this financial advice?
 
 No. Button Counter is a general calculation tool that gives estimates based on simplified rules and assumptions. It does not give advice about your personal situation. Check official sources and consult an independent, licensed adviser before you make important financial decisions.
+
+### How much money do I need to retire?
+
+It differs per person. It depends on your monthly budget, the age you stop working, your Social Security or State Pension and the tax on your investments. Button Counter combines them and shows the savings you need for your money to last in 9 out of 10 scenarios.
+
+### How long will my savings last in retirement?
+
+It depends on your monthly withdrawals, your pensions, your investments and inflation. Button Counter shows year by year how your savings develop and the chance that they last.
+
+### Can I afford to retire at 62?
+
+It depends on your savings, your monthly budget and the lower Social Security benefit you get at 62. Enter the benefit your statement shows for that age and set your stopping age to 62. Button Counter shows the chance that your money lasts.
+
+### Does the 4% rule still work?
+
+As a rough guide, yes. It ignores Social Security or a State Pension, tax on your returns and how long your own retirement lasts. Button Counter adds those and shows a monthly amount with the chance that your money lasts.
+
+### How much of my income will I need in retirement?
+
+A common guide is about 80% of what you earned before. Your real number depends on your housing costs, health care and plans. In Button Counter you enter the monthly budget you want and see whether it holds.
+
+### How much savings do I need for $1,000 a month?
+
+About $240,000 if you withdraw 5% a year, or $300,000 at 4%. What you really need depends on your other income, tax and how long the money has to last. Button Counter works it out for your situation.
+
+### Is it too late to start saving for retirement at 50?
+
+No. Even with fifteen years to go, a fixed monthly amount adds up, next to Social Security or a State Pension. In Button Counter you tap plus on what you set aside and see what it adds to your monthly income later.
+
+### Can you live on the State Pension alone?
+
+The full new State Pension is about £12,550 a year in 2026/27. That is just under what the Retirement Living Standards call a minimum lifestyle for one person (£13,900). Button Counter shows how much your workplace pension and savings need to add for the budget you want.
+
+### Is Social Security enough to retire on?
+
+The average retirement benefit is about $2,070 a month in 2026. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last.
 
 ## Facts
 

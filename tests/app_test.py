@@ -17,7 +17,11 @@ Controleert:
 - het doorstuurkaartje: weg na doorsturen, ook na herladen.
 
 Opnieuw opgebouwd op 18 november 2026: de eerste versie (17 november) ging verloren met de sessie waarin hij
-was gemaakt. Schrijft niets weg en verstuurt niets: het meten (GoatCounter) wordt in de test opgevangen.
+was gemaakt. Bijgewerkt op 25 november 2026 voor versie 26 en later: de app draait om je telling (cockpit, route met
+een vraag per scherm, hoofdstukken onder #k-...). De oude invulstappen, de goal-bar, het voorbeeldplan en het
+doorstuurkaartje staan sinds versie 26 niet meer in beeld; die controles zijn vervangen door hun tegenhanger in de
+huidige app (je vraag als kop van de cockpit, de stopleeftijd en de werkvraag in de route, de uitleg achter een i
+per hoofdstuk, delen via Over). Schrijft niets weg en verstuurt niets: het meten (GoatCounter) wordt in de test opgevangen.
 """
 import base64
 import functools
@@ -155,21 +159,14 @@ def main():
         ctx, pg, errs = open_page('/nl/', 'nl-NL')
         check('leeg overzicht: geen deelkoppen', pg.evaluate("[...document.querySelectorAll('.ch-head')].every(h => getComputedStyle(h).display === 'none')"))
         ctx.close()
-        # je vraag (goal-bar) alleen aan het eind van Invullen: niet bij stap 1 tot 4, wel bij stap 5 en bij alles in één overzicht
+        # je vraag staat als kop van de cockpit (versie 26: de goal-bar onder de oude invulstappen is weg)
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['50+'], 'NL', 'EUR'), 'nl-NL')
         pg.wait_for_timeout(300); pg.close()   # de app bewaart haar ui bij het sluiten; daarna pas de vraag zetten
-        ctx.add_init_script("(() => { try { const u = JSON.parse(localStorage.getItem('%s-ui') || '{}'); u.goal = 'retire'; u.mode = 'steps'; u.step = 1; localStorage.setItem('%s-ui', JSON.stringify(u)); } catch (e) {} })()" % (KEY, KEY))
+        ctx.add_init_script("(() => { try { const u = JSON.parse(localStorage.getItem('%s-ui') || '{}'); u.goal = 'earlier'; localStorage.setItem('%s-ui', JSON.stringify(u)); } catch (e) {} })()" % (KEY, KEY))
         pg = ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)))
-        pg.goto(base + '/nl/#input'); pg.wait_for_timeout(3000)
-        gvis = "() => { const g = document.getElementById('goal-bar'); return !g.hidden && getComputedStyle(g).display !== 'none'; }"
-        seen = []
-        for k in range(1, 6):
-            seen.append(pg.evaluate(gvis))
-            if k < 5:
-                pg.click('#step-next'); pg.wait_for_timeout(300)
-        check('je vraag: alleen bij stap 5 (niet bij 1-4)', seen == [False, False, False, False, True], seen)
-        pg.check('input[name=in-mode][value=all]', force=True); pg.wait_for_timeout(500)
-        check('je vraag: zichtbaar bij alles in één overzicht, onder de stappen', pg.evaluate(gvis) and pg.evaluate("document.getElementById('steps').compareDocumentPosition(document.getElementById('goal-bar')) === Node.DOCUMENT_POSITION_FOLLOWING"))
+        pg.goto(base + '/nl/#overview'); pg.wait_for_timeout(2500)
+        q = pg.evaluate("(() => { const e = document.getElementById('tvh-q'); return e && e.offsetParent ? e.textContent : ''; })()")
+        check('je vraag: staat als kop van de cockpit', q == '“Wat kost één jaar eerder stoppen?”', q)
         check('je vraag: geen scriptfouten', not errs, errs[:2])
         ctx.close()
 
@@ -186,21 +183,28 @@ def main():
         check('v25: AOW-regel noemt de AOW-leeftijd, niet de stopleeftijd', 'vanaf 68 jaar en 9 mnd' in v['inc'] and 'stopleeftijd' not in v['inc'], v['inc'])
         check('v25: disclaimer-regel onder de uitkomst', 'geen persoonlijk advies' in v['disc'])
         check('v25: geen "automatisch gekozen" meer', 'automatisch gekozen' not in v['all'])
-        pg.click('#tab-input'); pg.wait_for_timeout(600)
-        check('v25: stopleeftijd staat bij stap 1 en is leeg (doorwerken tot AOW)', pg.evaluate("(() => { const e = document.getElementById('q-stop'); return !!e.offsetParent && e.value === '' && !!e.closest('#step-1'); })()"))
-        pg.fill('#q-stop', '55'); pg.locator('#q-stop').blur()
-        pg.click('#tab-overview')
-        pg.wait_for_function("document.querySelector('#opb-card .opb-span') && document.querySelector('#opb-card .opb-span').innerText.includes('55')", timeout=60000)
+        # versie 26: de stopleeftijd is een vraag in de route; hij staat rond de pensioenleeftijd en gaat met min omlaag
+        pg.evaluate("location.hash = '#input'"); pg.wait_for_timeout(800)
+        n_stop = pg.evaluate("[...document.querySelectorAll('#page-input [data-tvh^=q\\\\:]')].findIndex(b => /stoppen/i.test(b.innerText))")
+        pg.click('#page-input [data-tvh="q:%d"]' % n_stop); pg.wait_for_timeout(600)
+        start = pg.evaluate("parseFloat((document.getElementById('tvr-o-stopLeeftijd') || {}).textContent || '0')")
+        check('v25: stopleeftijd is een vraag in de route en staat rond de pensioenleeftijd', 66 <= start <= 69, start)
+        for _ in range(20):
+            if pg.evaluate("parseFloat(document.getElementById('tvr-o-stopLeeftijd').textContent)") <= 55:
+                break
+            pg.click('#tvr [data-k="stopLeeftijd"] [data-tvr-st="-1"]'); pg.wait_for_timeout(150)
+        pg.click('#tvr [data-tvr="next"]'); pg.wait_for_timeout(600)
+        if pg.is_visible('#tvr-x'):
+            pg.click('#tvr-x'); pg.wait_for_timeout(400)
+        pg.wait_for_function("document.querySelector('#opb-card .opb-span') && document.querySelector('#opb-card .opb-span').textContent.includes('55')", timeout=60000)
         w = pg.evaluate("({ span: document.querySelector('#opb-card .opb-span').innerText, inc: document.querySelector('#opb-card .opb-inc').innerText, big: parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10), st: JSON.parse(localStorage.getItem('%s')).state })" % KEY)
         check('v25: stoppen op 55 rekent vanaf 55, AOW blijft op 68 jaar en 9 mnd', 'vanaf 55 jaar' in w['span'] and 'vanaf 68 jaar en 9 mnd' in w['inc'] and w['big'] < 2000, w['span'] + ' | ' + w['inc'])
         check('v25: onhaalbare wens: rekenkeuze is de mix met het hoogste bedrag bij 9 op de 10', w['big'] >= 900, w['big'])
         check('v25: stopleeftijd bewaard, pensioenleeftijd ongewijzigd', w['st'].get('stopLeeftijd') == 55 and abs(w['st'].get('pensioenLeeftijd', 0) - 68.75) < 0.01 and w['st'].get('autoPenAge') == 1, {k: w['st'].get(k) for k in ('stopLeeftijd', 'pensioenLeeftijd', 'autoPenAge')})
-        # grote uitgave later: € 100.000 op je 60e verlaagt het haalbare bedrag en staat onder de uitkomst
-        pg.click('#tab-input'); pg.wait_for_timeout(400)
-        pg.check('input[name=in-mode][value=all]', force=True); pg.wait_for_timeout(400)
-        pg.evaluate("document.getElementById('big-box').open = true")
+        # grote uitgave later: € 100.000 op je 60e verlaagt het haalbare bedrag en staat onder de uitkomst (versie 26: hoofdstuk Grote uitgave)
+        pg.evaluate("location.hash = '#k-big'"); pg.wait_for_timeout(800)
         pg.click('#big-add'); pg.fill('#big-a-0', '100000'); pg.locator('#big-a-0').blur()
-        pg.click('#tab-overview')
+        pg.evaluate("location.hash = '#k-uit'"); pg.wait_for_timeout(800)
         pg.wait_for_function("!document.getElementById('big-line').hidden && parseInt(document.querySelector('#opb-card .opb-big').innerText.replace(/[^0-9]/g, ''), 10) < %d" % w['big'], timeout=60000)
         bl = pg.evaluate("({ line: document.getElementById('big-line').innerText, l: JSON.parse(localStorage.getItem('%s')).lists.big })" % KEY)
         check('v25: grote uitgave verlaagt de uitkomst, staat erbij en is bewaard', '100.000' in bl['line'] and '60' in bl['line'] and bl['l'] == [{'a': 100000, 'f': 60}], bl)
@@ -208,35 +212,31 @@ def main():
         ctx.close()
         for wdt in (768, 1024):
             ctx = br.new_context(locale='nl-NL', viewport={'width': wdt, 'height': 900}); pg = ctx.new_page()
-            pg.goto(base + '/nl/#plan=' + plan_hash(fleur, 'NL', 'EUR')); pg.wait_for_selector('#opb-play .opb-st', timeout=60000); pg.wait_for_timeout(1500)
+            pg.goto(base + '/nl/#plan=' + plan_hash(fleur, 'NL', 'EUR')); pg.wait_for_timeout(1500)
+            if pg.is_visible('#rel-ok'):
+                pg.click('#rel-ok')
+            pg.evaluate("location.hash = '#k-doen'"); pg.wait_for_selector('#opb-play .opb-st', timeout=60000); pg.wait_for_timeout(1500)
             t = pg.evaluate("({ page: document.documentElement.scrollWidth <= innerWidth, st: [...document.querySelectorAll('.opb-st')].every(s => s.querySelector('.opb-st-c').getBoundingClientRect().right <= s.getBoundingClientRect().right + 0.5 && s.scrollWidth <= s.clientWidth) })")
             check('v25: tablet %d px: knoppen passen en de pagina schuift niet zijwaarts' % wdt, t['page'] and t['st'], t)
             ctx.close()
 
-        # ---------- voorbeeldplan (versie 25): één tik geeft een uitkomst, met melding; eigen cijfers wist het voorbeeld ----------
-        for band, want in ((1, ('80.000', '800')), (2, ('62 jaar', '450.000'))):
-            ctx = br.new_context(locale='nl-NL', viewport={'width': 390, 'height': 844}); pg = ctx.new_page(); errs = []
-            pg.on('pageerror', lambda e: errs.append(str(e)))
-            pg.goto(base + '/nl/'); pg.wait_for_timeout(1200); pg.click('#intro-next'); pg.wait_for_timeout(400)
-            pg.evaluate("document.querySelector('input[name=age-band][value=\"%d\"]').click()" % band); pg.wait_for_timeout(500)
-            pg.click('#slot-ok'); pg.wait_for_timeout(1200)
-            pg.click('#ex-try button')
-            pg.wait_for_function("!document.getElementById('ex-bar-ov').hidden", timeout=60000); pg.wait_for_timeout(4000)
-            e = pg.evaluate("({ bar: document.getElementById('ex-bar-ov').innerText, st: JSON.parse(localStorage.getItem('%s')).state, tryHidden: document.getElementById('ov-ex').hidden, wide: document.documentElement.scrollWidth <= innerWidth, all: document.getElementById('page-overview').innerText })" % KEY)
-            check('voorbeeld groep %d: melding met de bedragen, knop weg, pagina past' % band, 'Voorbeeld' in e['bar'] and all(w in e['bar'] for w in want) and e['tryHidden'] and e['wide'], e['bar'])
-            check('voorbeeld groep %d: er staat een uitkomst en geen kans onder 50%%' % band, e['st']['budget'] > 0 and e['st']['exBud'] == e['st']['budget'] and '<1%' not in e['all'] and 'Niet haalbaar' not in e['all'], e['all'][:200])
-            pg.click('#ex-bar-ov [data-ex-own]'); pg.wait_for_timeout(1500)
-            o = pg.evaluate("({ st: JSON.parse(localStorage.getItem('%s')).state, bar: document.getElementById('ex-bar-in').hidden, inp: !document.getElementById('page-input').hidden, tr: !document.getElementById('ex-try').hidden })" % KEY)
-            check('voorbeeld groep %d: eigen cijfers wist het voorbeeld en gaat naar Invullen' % band, o['st']['budget'] == 0 and o['st']['startkapitaal'] == 0 and o['st']['inleg'] == 0 and o['st']['leeftijdPaul'] in (42, 50) and o['st']['exBud'] == 0 and o['bar'] and o['inp'] and o['tr'], o)
-            check('voorbeeld groep %d: geen scriptfouten' % band, not errs, errs[:2])
-            ctx.close()
+        # ---------- voorbeeldplan (versie 25): staat sinds versie 26 bewust uit; de knoppen blijven verborgen ----------
+        ctx = br.new_context(locale='nl-NL', viewport={'width': 390, 'height': 844}); pg = ctx.new_page(); errs = []
+        pg.on('pageerror', lambda e: errs.append(str(e)))
+        pg.goto(base + '/nl/'); pg.wait_for_timeout(1200); pg.click('#intro-next'); pg.wait_for_timeout(400)
+        pg.evaluate("document.querySelector('input[name=age-band][value=\\'1\\']').click()"); pg.wait_for_timeout(500)
+        pg.click('#slot-ok'); pg.wait_for_timeout(1200)
+        e = pg.evaluate("['ov-ex', 'ex-try', 'ex-bar-ov', 'ex-bar-in'].every(id => { const x = document.getElementById(id); return !x || x.hidden || !x.offsetParent; })")
+        check('voorbeeldplan: staat uit sinds versie 26 (geen knop of melding in beeld)', e and not errs, errs[:2])
+        ctx.close()
 
         # ---------- deellink heen en terug ----------
         lists = {'perP': [], 'perD': [], 'pots': [{'n': 'Pot', 'w': 0, 'k': 'l', 'a': 25000, 'f': 67, 'u': 0, 'x': 0}],
                  'debts': [], 'stud': [], 'oth': [], 'inl': []}
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['35-49'], 'NL', 'EUR', lists), 'nl-NL', perms=['clipboard-read', 'clipboard-write'])
-        first = pg.evaluate("() => document.getElementById('opb-card').innerText")
-        pg.click('.share-open')
+        first = pg.evaluate("() => document.getElementById('opb-card').textContent")
+        pg.evaluate("location.hash = '#about'"); pg.wait_for_timeout(600)   # versie 26: delen staat onder Over
+        pg.click('#page-about [data-tvh="a:share"]')
         pg.wait_for_timeout(300)
         pg.click('#sh-link')
         pg.wait_for_timeout(300)
@@ -250,7 +250,7 @@ def main():
         check('deellink: bevat land, valuta en de pot', o.get('c') == 'NL' and o.get('u') == 'EUR' and len((o.get('l') or {}).get('pots', [])) == 1, o.get('c'))
         rel = link[link.index('/', link.index('//') + 2):]
         ctx, pg, errs = open_page(rel, 'en-US')
-        again = pg.evaluate("() => ({ txt: document.getElementById('opb-card').innerText, ctry: document.getElementById('q-country').value, cur: document.getElementById('s-cur').value })")
+        again = pg.evaluate("() => ({ txt: document.getElementById('opb-card').textContent, ctry: document.getElementById('q-country').value, cur: document.getElementById('s-cur').value })")
         check('deellink: Amerikaanse browser krijgt Nederland en euro', again['ctry'] == 'NL' and again['cur'] == 'EUR', again['ctry'] + ' ' + again['cur'])
         check('deellink: dezelfde uitkomst na openen', again['txt'] == first and not errs, errs[:1])
         ctx.close()
@@ -276,44 +276,49 @@ def main():
             check('welkomst (groep %s): eerst groep kiezen, daarna verder' % band, ok_open and blocked and r['closed'] and r['opb'] == want_opb and not errs, (ok_open, blocked, r, errs[:1]))
             ctx.close()
 
-        # ---------- werkvraag in stap 1 ----------
+        # ---------- werkvraag (versie 26: een vraag in de route, alleen voor 50-plus) ----------
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['50+'], 'NL', 'EUR'), 'nl-NL')
         pg.evaluate("() => { location.hash = '#input'; }")
         pg.wait_for_timeout(800)
-        shown = pg.evaluate("() => !document.getElementById('wk1-box').hidden")
-        pg.fill('#wk1-amt', '2500')
-        try:  # het leeftijdsveld verschijnt na de herberekening
-            pg.wait_for_function("() => !document.getElementById('wk1-till').hidden", timeout=8000)
-            till = True
-        except Exception:  # noqa: BLE001
-            till = False
-        pg.fill('#wk1-age', '64')
-        pg.wait_for_timeout(600)
+        n_work = pg.evaluate("[...document.querySelectorAll('#page-input [data-tvh^=q\\\\:]')].findIndex(b => /inkomen uit werk/i.test(b.innerText))")
+        shown = n_work >= 0
+        if shown:
+            pg.click('#page-input [data-tvh="q:%d"]' % n_work); pg.wait_for_timeout(500)
+            pg.click('#tvr [data-tvr-yn="1"]'); pg.wait_for_timeout(400)
+            pg.fill('#tvr-in-werkP', '2500'); pg.fill('#tvr-in-werkD', '1800')
+            pg.click('#tvr [data-tvr="next"]'); pg.wait_for_timeout(800)
         saved = pg.evaluate("() => { try { return JSON.parse(localStorage.getItem('%s')).state; } catch (e) { return {}; } }" % KEY)
-        check('werkvraag 50+: zichtbaar, leeftijd verschijnt, invoer bewaard',
-              shown and till and saved.get('werkP') == 2500 and saved.get('werkTotP') == 64 and not errs,
-              (shown, till, saved.get('werkP'), saved.get('werkTotP'), errs[:1]))
+        check('werkvraag 50+: een vraag in de route, invoer bewaard',
+              shown and saved.get('werkP') == 2500 and saved.get('werkD') == 1800 and not errs, (shown, saved.get('werkP'), saved.get('werkD'), errs[:1]))
         ctx.close()
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['18-34'], 'NL', 'EUR'), 'nl-NL')
         pg.evaluate("() => { location.hash = '#input'; }")
         pg.wait_for_timeout(800)
-        check('werkvraag 18-34: verborgen (wie spaart, werkt al)', pg.evaluate("() => document.getElementById('wk1-box').hidden") and not errs)
+        r = pg.evaluate("[...document.querySelectorAll('#page-input [data-tvh^=q\\\\:]')].map(b => b.innerText)")
+        check('werkvraag 18-34: niet in de route (wie spaart, werkt al); wel de stopleeftijd', not any('inkomen uit werk' in x.lower() for x in r) and any('stoppen' in x.lower() for x in r) and not errs, r)
         ctx.close()
 
         # ---------- uitleg achter een i en derde keuze bij man/vrouw ----------
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(dict(GROUPS['50+'], pensioenPaul=1200), 'NL', 'EUR'), 'nl-NL')
-        pg.evaluate("() => { location.hash = '#input'; }")
-        pg.wait_for_timeout(800)
-        pg.evaluate("() => { document.querySelector('input[name=\"in-mode\"][value=\"all\"]').click(); document.querySelectorAll('details').forEach(d => d.open = true); }")
-        pg.wait_for_timeout(2000)
+        # versie 26: de velden staan per hoofdstuk; tel de i's in alle hoofdstukken van Invullen en Inzicht bij elkaar
+        vis, loose = set(), 0
+        for ch in ['nm', 'pp', 'sp2', 'pot', 'debt', 'big', 'tax', 'run', 'basis', 'aan', 'mix']:
+            pg.evaluate("location.hash = '#k-%s'" % ch); pg.wait_for_timeout(700)
+            pg.evaluate("document.querySelectorAll('details').forEach(d => { if (d.offsetParent) d.open = true; })"); pg.wait_for_timeout(300)
+            rr = pg.evaluate("""() => ({ vis: [...document.querySelectorAll('.ib')].filter(b => b.offsetParent).map(b => b.dataset.ib),
+              loose: [...document.querySelectorAll('.page:not([hidden]) .hint')].filter(e => e.offsetParent && !e.closest('.ipop') && /Nibud|forfait|ingangsleeftijd|levensverwachting bij je leeftijd/.test(e.innerText)).length })""")
+            vis |= set(rr['vis']); loose += rr['loose']
+        pg.evaluate("location.hash = '#k-tax'"); pg.wait_for_timeout(700)
+        pg.evaluate("document.querySelectorAll('details').forEach(d => { if (d.offsetParent) d.open = true; })"); pg.wait_for_timeout(300)
         r = pg.evaluate("""() => {
           const vis = [...document.querySelectorAll('.ib')].filter(b => b.offsetParent).map(b => b.dataset.ib);
           const loose = [...document.querySelectorAll('.page:not([hidden]) .hint')].filter(e => e.offsetParent && !e.closest('.ipop') && /Nibud|forfait|ingangsleeftijd|levensverwachting bij je leeftijd/.test(e.innerText)).length;
           return { vis, loose, closed: [...document.querySelectorAll('.ipop')].every(p => p.hidden) };
         }""")
-        need = ['sex', 'spAge', 'spAmt', 'penAmt', 'penAge', 'pf', 'box3', 'eind', 'rest', 'infl', 'cost', 'cur']
+        # pensioen via werk vul je sinds versie 26 in de route in (met Hier vind je het); daar zijn penAmt en penAge geen veld met een i meer
+        need = ['sex', 'spAge', 'spAmt', 'pf', 'box3', 'eind', 'rest', 'infl', 'cost', 'cur']
         check('uitleg: een i bij elk achtergrondveld, kaders dicht, geen losse achtergrondtekst',
-              all(k in r['vis'] for k in need) and r['closed'] and r['loose'] == 0 and not errs, (sorted(set(need) - set(r['vis'])), r['loose']))
+              all(k in vis for k in need) and r['closed'] and loose == 0 and not errs, (sorted(set(need) - vis), loose))
         b = pg.locator('.ib[data-ib="box3"]').first
         b.click()
         pg.wait_for_timeout(300)
@@ -325,6 +330,7 @@ def main():
         check('uitleg: i opent het kader (een tegelijk), Escape sluit, geteld',
               o['open'] and o['exp'] == 'true' and o['txt'] > 40 and o['others'] == 1 and shut and 'extra-info-box3' in o['trk'], o)
         vals = []
+        pg.evaluate("location.hash = '#k-nm'"); pg.wait_for_timeout(700)
         for v in ['0', '1', '-1']:
             pg.check('input[name="q-geslD"][value="%s"]' % v, force=True)
             pg.wait_for_timeout(1500)
@@ -332,17 +338,12 @@ def main():
         check('man/vrouw: derde keuze "Anders" bewaart -1 (gemiddelde)', vals == [0, 1, -1] and not errs, vals)
         ctx.close()
 
-        # ---------- doorstuurkaartje ----------
+        # ---------- doorstuurkaartje: sinds versie 26 niet meer in beeld; de app doorsturen staat onder Over > Delen ----------
         ctx, pg, errs = open_page('/nl/#plan=' + plan_hash(GROUPS['18-34'], 'NL', 'EUR'), 'nl-NL')
-        pg.click('#tc-go')
-        pg.wait_for_timeout(500)
-        gone = pg.evaluate("() => document.getElementById('tip-card').hidden")
-        trk = pg.evaluate('() => window.__trkTest.slice()')
-        pg.reload()
-        pg.wait_for_timeout(2500)
-        still = pg.evaluate("() => document.getElementById('tip-card').hidden")
-        check('doorstuurkaartje: weg na doorsturen, ook na herladen, en geteld',
-              gone and still and 'reach-tip-card' in trk and not errs, (gone, still, trk))
+        card = pg.evaluate("() => { const c = document.getElementById('tip-card'); return !!(c && c.offsetParent); }")
+        pg.evaluate("location.hash = '#about'"); pg.wait_for_timeout(600)
+        row = pg.evaluate("() => !!document.querySelector('#page-about [data-tvh=\\'a:tip\\']')")
+        check('app doorsturen: geen kaartje in beeld, wel een rij onder Over', not card and row and not errs, (card, row, errs[:1]))
         ctx.close()
         br.close()
     srv.shutdown()

@@ -154,7 +154,7 @@ I18N.es = {
   'tour.8.h': 'Afinar', 'tour.8.p': '¿Lo quieres más preciso? En cinco pasos cortos añades pensiones, ingresos extra y tus propias decisiones. Luego juega con los controles.',
   'taxNote.NL': 'Box 3: impuesto sobre una rentabilidad supuesta del patrimonio por encima de la exención. Elige un escenario en Decisiones.',
   'taxNote.BE': 'Desde 2026 Bélgica grava las plusvalías de activos financieros al 10 %, con unos 10.000 € exentos por persona y año. Dividendos e intereses tributan aparte; es una aproximación.',
-  'taxNote.DE': 'Abgeltungsteuer del 25 % más recargo de solidaridad (26,375 %) sobre la rentabilidad por encima de la exención de 1.000 € por persona. No incluye el impuesto eclesiástico.',
+  'taxNote.DE': 'Abgeltungsteuer del 25 % más recargo de solidaridad (26,375 %) sobre la rentabilidad por encima de la exención de 1.000 € por persona. No incluye el impuesto eclesiástico. En los fondos de renta variable, el 30 % del rendimiento está exento (Teilfreistellung); el tipo queda entonces en torno al 18,5 %.',
   'taxNote.FR': 'Tipo único (PFU) del 31,4 % sobre rendimientos y plusvalías desde 2026. Un PEA o un seguro de vida puede salir más barato tras el periodo de permanencia.',
   'taxNote.ES': 'Las rentas del ahorro tributan del 19 % al 30 % según el importe; se usa un 21 % como media.',
   'taxNote.IT': '26 % sobre rendimientos y plusvalías (12,5 % en deuda pública).',
@@ -488,11 +488,11 @@ Object.assign(I18N.es, {
 });
 Object.assign(I18N.es, {
 "lp.enough.h1": "¿Me llegará el dinero cuando deje de trabajar?",
-"lp.enough.intro": "Introduce tu edad, tus ahorros y tu presupuesto mensual. Verás al instante la probabilidad de que tu dinero dure hasta tu edad final, con tus pensiones incluidas.",
+"lp.enough.intro": "Introduce tu edad, tus ahorros y tu presupuesto mensual. Verás al instante la probabilidad de que tu dinero dure hasta la edad que elijas, con tus pensiones incluidas.",
 "lp.enough.title": "¿Me llegará el dinero cuando deje de trabajar? | Button Counter",
-"lp.enough.desc": "Calcula la probabilidad de que tus ahorros duren hasta tu edad final, con pensión pública, pensión privada, impuestos e inflación. Sin cuenta, tus datos se quedan en tu dispositivo.",
+"lp.enough.desc": "Calcula la probabilidad de que tus ahorros duren hasta la edad que elijas, con pensión pública, pensión privada, impuestos e inflación. Sin cuenta, tus datos se quedan en tu dispositivo.",
 "lp.spend.h1": "¿Cuánto puedo gastar al mes cuando deje de trabajar?",
-"lp.spend.intro": "Introduce tus ahorros y tus pensiones. Button Counter muestra la cantidad mensual que puedes gastar con buenas probabilidades de que tu dinero dure hasta tu edad final.",
+"lp.spend.intro": "Introduce tus ahorros y tus pensiones. Button Counter muestra la cantidad mensual que puedes gastar con buenas probabilidades de que tu dinero dure hasta la edad que elijas.",
 "lp.spend.title": "¿Cuánto puedo gastar al mes al jubilarme? | Button Counter",
 "lp.spend.desc": "Mira qué presupuesto mensual pueden sostener tus ahorros y pensiones, y la probabilidad de que sea suficiente. Sin cuenta.",
 "lp.earlier.h1": "¿Puedo dejar de trabajar antes?",
@@ -750,3 +750,68 @@ Object.assign(I18N.es, {"rel.23.n7": "Explicaciones detrás de una ⓘ: lees el 
 /* versie 26.1: bovenste knoop */ Object.assign(I18N.es, {"tv.row.had": "con lo que ya habías rellenado", "tv.fin.had": "Ya rellenado antes de empezar"});
 /* testversie 7: Invullen in drie lagen */ Object.assign(I18N.es, {"tv.g.basis": "Tu base", "tv.g.ref": "Afina tu resultado", "tv.g.refS": "No hace falta para tener un resultado, pero será más preciso.", "tv.g.asm": "Así calculamos", "tv.st.opt": "Opcional", "tv.ref.next": "Siguiente: {x}", "tv.ref.offerH": "Ya tienes tu primer resultado", "tv.ref.offerP": "¿Lo quieres más preciso? Repasa también estos botones. No hacen falta para tu resultado.", "tv.ref.go": "Sí, afinar", "tv.ref.skip": "Ahora no, ver mi resultado", "tv.ref.tipP": "Siguiente paso para un resultado más preciso"});
 /* versie 27: Wat is er nieuw */ Object.assign(I18N.es, {"rel.27.v": "Versión 27 · noviembre de 2026 · de nuevo, gracias a todas las personas que han ayudado a pensar", "rel.27.n1": "Rellenar tiene tres niveles: Tu base, Afina tu resultado y Así calculamos.", "rel.27.n2": "Afinas con los mismos botones que tu base. No hacen falta para tener un resultado, pero lo hacen más preciso. Cada grupo de edad tiene su propio orden.", "rel.27.n3": "En cuanto tengas tu primer resultado, puedes afinar enseguida unos cuantos botones. Debajo de cada pantalla están Listo y Siguiente.", "rel.27.n4": "El botón de volver de tu móvil ahora cierra una pregunta, una ventana o tus notas, igual que la cruz. La app sigue abierta.", "rel.27.f1": "La cruz está siempre arriba a la derecha.", "rel.27.f2": "En cada grupo de edad, el primer botón lleva el nombre de tu pensión pública.", "rel.27.f3": "Evolución del gasto y ahorro por periodo tienen un candado, porque forman parte de Pro.", "rel.27.f4": "A partir de 50 años, Deudas ya no muestra el préstamo de estudios, salvo que ya hubieras introducido uno.", "rel.27.f5": "En una pantalla estrecha, las palabras largas ya no desplazan la página."});
+/* versie 28: inschatting per land bij belasting, hints bij het staatspensioen (Spanje, VS), Wat is er nieuw */ Object.assign(I18N.es, {"tax.est": "Es nuestra estimación {forCountry}. Si en tu caso es distinto, cámbiala.", "spTip.ES": "La pensión se cobra en 14 pagas al año. Por eso, introduce el importe mensual multiplicado por 14 y dividido entre 12.", "spTip.US": "Introduce el importe para la edad a la que pienses solicitarla. Tu Social Security Statement lo indica para nueve edades, de 62 a 70.", "rel.28.v": "Versión 28 · noviembre de 2026", "rel.28.n1": "En los impuestos ahora se indica que es nuestra estimación para tu país. Alemania, España y Estados Unidos tienen explicaciones adicionales sobre impuestos y pensión pública."});
+/* vraagpagina's in deze taal (qp.<naam>.*). Elke pagina bestaat alleen in deze taal: de andere talen hebben eigen vragen, geen vertalingen.
+   slug = webadres, goal = wielvraag, country = land waarin de pagina opent (alleen bij een pagina over één land),
+   h1 = de vraag, a = het korte antwoord, btn = de knop, fq en fa = de veelgestelde vraag en het antwoord (ook in de FAQ van de app).
+   Een naam tussen accolades is een getal dat veroudert: zie QPN en CTRY in src/index.html. Bron van de teksten: het document
+   "Knopenteller — zeven nieuwe vraagpagina's" van 25 november 2026. */
+Object.assign(I18N.es, {
+  "site.qs": "Más preguntas",
+
+  "qp.es-cuanto.slug": "cuanto-dinero-necesito-para-jubilarme",
+  "qp.es-cuanto.goal": "enough",
+  "qp.es-cuanto.h1": "¿Cuánto dinero necesito para jubilarme?",
+  "qp.es-cuanto.a": "No hay una cifra única. Depende de tres cosas: lo que quieres gastar al mes, cuánto tiempo tiene que durar el dinero y lo que seguirá entrando, sobre todo tu pensión pública. Las reglas rápidas solo miran lo primero. Button Counter junta las tres, con impuestos e inflación, y muestra el ahorro que basta en 9 de cada 10 casos.",
+  "qp.es-cuanto.btn": "Calcular mi cifra",
+  "qp.es-cuanto.fq": "¿Cuánto hay que tener ahorrado para jubilarse?",
+  "qp.es-cuanto.fa": "Depende de tu presupuesto mensual, de la edad a la que dejes de trabajar, de tu pensión pública y de los impuestos sobre tus ahorros. Button Counter lo reúne y muestra el ahorro necesario para que tu dinero aguante en 9 de cada 10 casos.",
+
+  "qp.es-durara.slug": "cuanto-me-durara-el-dinero",
+  "qp.es-durara.goal": "enough",
+  "qp.es-durara.h1": "¿Cuánto me durará el dinero en la jubilación?",
+  "qp.es-durara.a": "Depende de lo que saques cada mes, de cómo tengas invertido el dinero y de la pensión que se sume. Un cálculo sencillo supone una rentabilidad fija. En la realidad, la rentabilidad varía y los precios suben. Por eso Button Counter calcula muchos escenarios y muestra la probabilidad de que tu dinero llegue hasta la edad que elijas.",
+  "qp.es-durara.btn": "Ver cómo evoluciona mi dinero",
+  "qp.es-durara.fq": "¿Cuánto tiempo me durarán los ahorros al jubilarme?",
+  "qp.es-durara.fa": "Depende de lo que retires al mes, de tu pensión, de tus inversiones y de la inflación. Button Counter muestra año a año cómo evoluciona tu patrimonio y la probabilidad de que sea suficiente.",
+
+  "qp.es-antes-67.slug": "jubilarme-antes-de-los-67",
+  "qp.es-antes-67.goal": "earlier",
+  "qp.es-antes-67.h1": "¿Puedo jubilarme antes de los 67?",
+  "qp.es-antes-67.a": "Desde {esFrom} la edad ordinaria de jubilación es de {esAge} años, o de {esAgeAlt} si has cotizado {esYears} o más. La jubilación anticipada voluntaria permite adelantarla hasta dos años, con una reducción permanente de la pensión. Dejar de trabajar aún antes es posible si tus ahorros cubren los años sin pensión. Introduce en Button Counter el importe que te dé el simulador de la Seguridad Social para esa edad y mueve tu edad de retiro.",
+  "qp.es-antes-67.btn": "Probar una edad anterior",
+  "qp.es-antes-67.fq": "¿Puedo dejar de trabajar antes de la edad de jubilación?",
+  "qp.es-antes-67.fa": "Sí, si tus ahorros cubren los años hasta que empiece tu pensión. Button Counter muestra año a año lo que entra y lo que tiene que salir de tus ahorros, y la probabilidad de que el dinero aguante.",
+
+  "qp.es-4-por-ciento.slug": "regla-del-4-por-ciento-espana",
+  "qp.es-4-por-ciento.goal": "spend",
+  "qp.es-4-por-ciento.h1": "¿Funciona la regla del 4\u00a0% en España?",
+  "qp.es-4-por-ciento.a": "La regla del 4\u00a0% viene de estudios de Estados Unidos. Dice que el primer año retiras el 4\u00a0% de tu patrimonio y después ajustas esa cantidad a la inflación. En España le faltan dos cosas. No cuenta tu pensión pública, que más adelante pagará buena parte de tus gastos. Y no descuenta los impuestos sobre las ganancias, que tributan entre el {esTaxLo} y el {esTaxHi}. Button Counter tiene en cuenta las dos.",
+  "qp.es-4-por-ciento.btn": "Hacer mi cálculo",
+  "qp.es-4-por-ciento.fq": "¿Sirve la regla del 4\u00a0% en España?",
+  "qp.es-4-por-ciento.fa": "Como orientación, sí. Pero no incluye tu pensión pública, los impuestos sobre tus ganancias ni lo que dure tu propia jubilación. Button Counter los incluye y muestra lo que puedes gastar al mes.",
+
+  "qp.es-ahorrar.slug": "cuanto-ahorrar-al-mes-para-la-jubilacion",
+  "qp.es-ahorrar.goal": "retire",
+  "qp.es-ahorrar.h1": "¿Cuánto debo ahorrar al mes para la jubilación?",
+  "qp.es-ahorrar.a": "No hay un porcentaje mágico. La cantidad depende de tu edad, de lo que ya tienes ahorrado, del presupuesto que quieres y de tu futura pensión. Cuanto antes empieces, menor será el esfuerzo mensual. Button Counter parte de tu objetivo y muestra lo que cambia cada euro más al mes.",
+  "qp.es-ahorrar.btn": "Ver qué aporta mi ahorro",
+  "qp.es-ahorrar.fq": "¿Cuánto hay que ahorrar cada mes para jubilarse?",
+  "qp.es-ahorrar.fa": "Depende de tu edad, tus ahorros actuales, tu objetivo y tu pensión. En Button Counter cambias tu ahorro mensual y ves al instante lo que supone más adelante.",
+
+  "qp.es-rentas.slug": "vivir-de-las-rentas",
+  "qp.es-rentas.goal": "free",
+  "qp.es-rentas.h1": "¿Cuánto dinero hace falta para vivir de las rentas?",
+  "qp.es-rentas.a": "Se suele decir: 25 veces tus gastos anuales. Esa cifra sale de la regla del 4\u00a0%. Olvida que tu pensión pública empezará algún día y cubrirá parte de tus gastos. Antes de esa fecha necesitas más patrimonio; después, menos. Por eso una sola cifra nunca encaja del todo. Button Counter calcula año a año, con tu pensión, los impuestos y la inflación.",
+  "qp.es-rentas.btn": "Calcular mi patrimonio",
+  "qp.es-rentas.fq": "¿Qué patrimonio necesito para vivir de las rentas?",
+  "qp.es-rentas.fa": "Depende de tus gastos, de tu edad y de la pensión que cobrarás más adelante. Button Counter muestra si tu patrimonio alcanza, antes y después de que empiece tu pensión.",
+
+  "qp.es-tarde.slug": "empezar-a-ahorrar-tarde",
+  "qp.es-tarde.goal": "retire",
+  "qp.es-tarde.h1": "Empezar a ahorrar a los 40 o 50: ¿llego a tiempo?",
+  "qp.es-tarde.a": "Sí. A los 45 o 50 años sueles tener quince años o más antes de jubilarte. Es tiempo suficiente para que un ahorro constante se note. Además, tu pensión pública pagará buena parte de tus gastos; tus ahorros no tienen que cubrirlo todo. La pregunta no es si merece la pena, sino cuánto aporta. Button Counter muestra lo que supone cada euro más al mes.",
+  "qp.es-tarde.btn": "Ver qué aporta todavía",
+  "qp.es-tarde.fq": "¿Es tarde para empezar a ahorrar para la jubilación a los 50?",
+  "qp.es-tarde.fa": "No. Incluso con quince años por delante, una cantidad fija al mes se nota, además de tu pensión pública. En Button Counter subes tu ahorro mensual y ves al instante lo que añade más adelante."
+});

@@ -155,7 +155,7 @@ I18N.nl = {
   'tour.8.h': 'Verfijnen', 'tour.8.p': 'Wil je het preciezer? In vijf korte stappen vul je ook pensioen, bijverdienen en je eigen keuzes in. Daarna kun je schuiven met de knoppen.',
   'taxNote.NL': 'Box 3: belasting over een verondersteld rendement op vermogen boven de heffingsvrije voet. Kies een scenario bij Keuzes.',
   'taxNote.BE': 'Vanaf 2026 belast België meerwaarden op financiële activa met 10%, met ongeveer €10.000 vrijgesteld per persoon per jaar. Dividenden en rente worden apart belast; dit is een benadering.',
-  'taxNote.DE': 'Abgeltungsteuer 25% plus solidariteitstoeslag (26,375%) over rendement boven de spaarvrijstelling van €1.000 per persoon. Kerkbelasting niet meegenomen.',
+  'taxNote.DE': 'Abgeltungsteuer 25% plus solidariteitstoeslag (26,375%) over rendement boven de spaarvrijstelling van €1.000 per persoon. Kerkbelasting niet meegenomen. Bij aandelenfondsen is 30% van de opbrengst vrijgesteld (Teilfreistellung); het tarief komt dan uit op ongeveer 18,5%.',
   'taxNote.FR': 'Vlaktaks (PFU) van 31,4% op beleggingsinkomen en winsten vanaf 2026. Een PEA of assurance-vie kan na de looptijd goedkoper zijn.',
   'taxNote.ES': 'Spaarinkomen wordt belast met 19% tot 30%, afhankelijk van het bedrag; 21% is het gemiddelde dat de app gebruikt.',
   'taxNote.IT': '26% op beleggingsinkomen en winsten (12,5% op staatsobligaties).',
@@ -750,3 +750,68 @@ Object.assign(I18N.nl, {"rel.23.n7": "Uitleg achter een ⓘ: de achtergrond bij 
 /* versie 26.1: bovenste knoop */ Object.assign(I18N.nl, {"tv.row.had": "samen met wat je al had ingevuld", "tv.fin.had": "Al ingevuld voor je begon"});
 /* testversie 7: Invullen in drie lagen */ Object.assign(I18N.nl, {"tv.g.basis": "Je basis", "tv.g.ref": "Verfijn je uitkomst", "tv.g.refS": "Niet nodig voor je uitkomst. Wel voor een scherpere.", "tv.g.asm": "Zo rekenen we", "tv.st.opt": "Optioneel", "tv.ref.next": "Volgende: {x}", "tv.ref.offerH": "Je eerste uitkomst staat er", "tv.ref.offerP": "Wil je hem scherper? Loop dan nog deze knopen door. Voor je uitkomst is het niet nodig.", "tv.ref.go": "Ja, verfijnen", "tv.ref.skip": "Nu niet, toon mijn uitkomst", "tv.ref.tipP": "Volgende stap voor een scherpere uitkomst"});
 /* versie 27: Wat is er nieuw */ Object.assign(I18N.nl, {"rel.27.v": "Versie 27 · november 2026 · opnieuw met dank aan iedereen die meedacht", "rel.27.n1": "Invullen heeft drie lagen: Je basis, Verfijn je uitkomst en Zo rekenen we.", "rel.27.n2": "Verfijnen doe je met dezelfde knopen als je basis. Ze zijn niet nodig voor je uitkomst, maar maken hem scherper. Elke leeftijdsgroep krijgt een eigen volgorde.", "rel.27.n3": "Heb je je eerste uitkomst, dan kun je meteen een paar knopen verfijnen. Onder elk scherm staan Klaar en Volgende.", "rel.27.n4": "De terugknop van je telefoon sluit nu een vraag, een venster of het kladblok, net als het kruisje. De app blijft open.", "rel.27.f1": "Het kruisje staat overal rechtsboven.", "rel.27.f2": "De bovenste knoop heet in elke leeftijdsgroep naar je staatspensioen, zoals AOW.", "rel.27.f3": "Uitgavenverloop en sparen per periode hebben een slotje, omdat ze bij Pro horen.", "rel.27.f4": "Bij 50-plus staat er geen studieschuld meer onder Schulden, tenzij je er al een had ingevuld.", "rel.27.f5": "Op een smal scherm schuiven lange woorden de pagina niet meer opzij."});
+/* versie 28: inschatting per land bij belasting, hints bij het staatspensioen (Spanje, VS), Wat is er nieuw */ Object.assign(I18N.nl, {"tax.est": "Dit is onze inschatting {forCountry}. Is het voor jou anders, pas het dan aan.", "spTip.ES": "In Spanje krijg je het pensioen in 14 betalingen per jaar. Vul daarom het maandbedrag keer 14 gedeeld door 12 in.", "spTip.US": "Vul het bedrag in voor de leeftijd waarop je aanvraagt. Je Social Security Statement noemt het voor negen leeftijden, van 62 tot en met 70.", "rel.28.v": "Versie 28 · november 2026", "rel.28.n1": "Bij belasting staat nu dat het onze inschatting voor jouw land is. Duitsland, Spanje en de Verenigde Staten kregen extra uitleg bij belasting en staatspensioen."});
+/* vraagpagina's in deze taal (qp.<naam>.*). Elke pagina bestaat alleen in deze taal: de andere talen hebben eigen vragen, geen vertalingen.
+   slug = webadres, goal = wielvraag, country = land waarin de pagina opent (alleen bij een pagina over één land),
+   h1 = de vraag, a = het korte antwoord, btn = de knop, fq en fa = de veelgestelde vraag en het antwoord (ook in de FAQ van de app).
+   Een naam tussen accolades is een getal dat veroudert: zie QPN en CTRY in src/index.html. Bron van de teksten: het document
+   "Knopenteller — zeven nieuwe vraagpagina's" van 25 november 2026. */
+Object.assign(I18N.nl, {
+  "site.qs": "Meer vragen",
+
+  "qp.nl-nodig.slug": "hoeveel-geld-nodig-om-te-stoppen-met-werken",
+  "qp.nl-nodig.goal": "earlier",
+  "qp.nl-nodig.h1": "Hoeveel geld heb ik nodig om te stoppen met werken?",
+  "qp.nl-nodig.a": "Dat hangt af van drie dingen: wat je per maand wilt uitgeven, hoe lang je geld mee moet gaan en wat er later nog binnenkomt. De meeste rekenregels kijken alleen naar het eerste. Ze vergeten dat je AOW en pensioen later een groot deel overnemen. Daardoor schatten ze het bedrag vaak te hoog of te laag in. Knopenteller rekent alle drie mee, ook de belasting over je spaargeld en de inflatie.",
+  "qp.nl-nodig.btn": "Reken uit wat jij nodig hebt",
+  "qp.nl-nodig.fq": "Hoeveel geld heb ik nodig om te stoppen met werken?",
+  "qp.nl-nodig.fa": "Dat verschilt per persoon. Het hangt af van je maandbudget, je leeftijd bij het stoppen, je AOW en pensioen en de belasting over je vermogen. Knopenteller zet die vier bij elkaar en laat zien welk bedrag je nodig hebt om het in 9 van de 10 gevallen te halen.",
+
+  "qp.nl-gat-aow.slug": "gat-tot-de-aow-overbruggen",
+  "qp.nl-gat-aow.goal": "earlier",
+  "qp.nl-gat-aow.h1": "Hoe groot is mijn gat tot de AOW als ik eerder stop?",
+  "qp.nl-gat-aow.a": "Stop je bijvoorbeeld op je 48e, dan leef je bijna twintig jaar van je eigen geld voordat je AOW begint. Je pensioen start vaak ook pas op je AOW-leeftijd. Dat zijn de duurste jaren van je plan: er komt niets bij en je spaargeld moet alles dragen. Daarna wordt het rustiger, omdat AOW en pensioen een deel overnemen. Knopenteller laat per jaar zien wat er binnenkomt en wat er uit je spaargeld moet komen.",
+  "qp.nl-gat-aow.btn": "Bekijk jouw gat tot de AOW",
+  "qp.nl-gat-aow.fq": "Hoe overbrug ik de jaren tot mijn AOW?",
+  "qp.nl-gat-aow.fa": "In die jaren betaal je alles uit eigen geld. Hoe groot dat gat is, hangt af van je stopleeftijd, je AOW-leeftijd en je maandbudget. Knopenteller rekent het per jaar uit en laat zien of je spaargeld het tot de AOW volhoudt.",
+
+  "qp.nl-fire-pensioen.slug": "pensioen-meetellen-in-fire",
+  "qp.nl-fire-pensioen.goal": "free",
+  "qp.nl-fire-pensioen.h1": "Hoe tel ik mijn pensioen mee in mijn FIRE-doel?",
+  "qp.nl-fire-pensioen.a": "Op forums zie je er allerlei manieren voor, van een vast bedrag eraf halen tot het pensioen helemaal negeren. Het probleem is dat je pensioen pas later begint. Tot die tijd heb je een groter vermogen nodig, daarna een kleiner. Eén getal als doel klopt dus nooit helemaal. Knopenteller rekent per jaar met wat je pensioen en AOW opleveren, zodat je doel past bij jouw situatie.",
+  "qp.nl-fire-pensioen.btn": "Tel je pensioen mee",
+  "qp.nl-fire-pensioen.fq": "Hoe neem ik mijn pensioen mee in een FIRE-berekening?",
+  "qp.nl-fire-pensioen.fa": "Vul in wat je pensioen per maand oplevert en vanaf welke leeftijd. Knopenteller telt het vanaf dat moment mee en laat zien hoeveel vermogen je daarvoor en daarna nodig hebt. Je bedrag vind je op mijnpensioenoverzicht.nl.",
+
+  "qp.nl-sparen-beleggen.slug": "sparen-of-beleggen-per-maand",
+  "qp.nl-sparen-beleggen.goal": "invest",
+  "qp.nl-sparen-beleggen.h1": "Hoeveel moet ik per maand sparen en hoeveel beleggen?",
+  "qp.nl-sparen-beleggen.a": "Een vaste verdeling bestaat niet. Sparen is zeker, maar groeit nauwelijks harder dan de inflatie. Beleggen groeit gemiddeld meer, maar schommelt. Hoe langer je de tijd hebt, hoe minder die schommelingen uitmaken. Knopenteller laat voor vier mixen naast elkaar zien wat je later per maand kunt uitgeven, van alleen sparen tot vooral beleggen.",
+  "qp.nl-sparen-beleggen.btn": "Vergelijk sparen en beleggen",
+  "qp.nl-sparen-beleggen.fq": "Moet ik sparen of beleggen?",
+  "qp.nl-sparen-beleggen.fa": "Dat hangt af van hoe lang je het geld niet nodig hebt en hoeveel schommeling je aankunt. Knopenteller rekent vier mixen voor je door en laat per mix zien hoeveel je later te besteden hebt en hoe groot de kans is dat je je doel haalt. Het is geen advies; het laat het verschil zien.",
+
+  "qp.nl-4-procent.slug": "4-procent-regel-nederland",
+  "qp.nl-4-procent.goal": "spend",
+  "qp.nl-4-procent.h1": "Klopt de 4%-regel ook in Nederland?",
+  "qp.nl-4-procent.a": "De 4%-regel komt uit Amerikaans onderzoek. Hij zegt dat je elk jaar ongeveer 4% van je vermogen kunt opnemen. In Nederland mist hij twee dingen. Hij houdt geen rekening met je AOW en pensioen, die later een deel van je uitgaven betalen. En hij vergeet de belasting over je vermogen in box 3, die elk jaar van je rendement af gaat. Knopenteller rekent beide mee.",
+  "qp.nl-4-procent.btn": "Reken het voor jezelf uit",
+  "qp.nl-4-procent.fq": "Kan ik de 4%-regel gebruiken in Nederland?",
+  "qp.nl-4-procent.fa": "Als ruwe vuistregel wel, maar hij mist je AOW, je pensioen en de belasting in box 3. Knopenteller rekent die mee en laat zien hoeveel je per maand kunt uitgeven, met de kans dat je geld het volhoudt.",
+
+  "qp.nl-jaar-eerder.slug": "een-jaar-eerder-stoppen",
+  "qp.nl-jaar-eerder.goal": "earlier",
+  "qp.nl-jaar-eerder.h1": "Wat scheelt één jaar eerder stoppen?",
+  "qp.nl-jaar-eerder.a": "Eén jaar eerder stoppen kost meer dan één jaar uitgaven. Je legt een jaar minder in, je geld heeft een jaar minder om te groeien en het moet een jaar langer meegaan. Die drie tellen bij elkaar op. Knopenteller laat het verschil direct zien: tik op min bij je stopleeftijd en kijk wat er met je maandbudget gebeurt.",
+  "qp.nl-jaar-eerder.btn": "Probeer een jaar eerder",
+  "qp.nl-jaar-eerder.fq": "Hoeveel kost het om een jaar eerder te stoppen met werken?",
+  "qp.nl-jaar-eerder.fa": "Meer dan één jaar aan uitgaven, omdat je ook een jaar minder inlegt en je geld een jaar langer mee moet. In Knopenteller verschuif je je stopleeftijd met plus en min en zie je meteen wat het met je maandbudget doet.",
+
+  "qp.nl-laat-beginnen.slug": "laat-beginnen-met-sparen",
+  "qp.nl-laat-beginnen.goal": "retire",
+  "qp.nl-laat-beginnen.h1": "Ik begin laat met sparen. Heeft het nog zin?",
+  "qp.nl-laat-beginnen.a": "Ja. Wie op zijn 45e begint, heeft vaak nog twintig jaar of meer tot zijn pensioen. Dat is genoeg tijd om verschil te maken. Bovendien betalen AOW en pensioen later een flink deel van je uitgaven, dus je spaargeld hoeft niet alles te dragen. De vraag is niet of het zin heeft, maar hoeveel het oplevert. Knopenteller laat zien wat elke euro per maand extra later betekent.",
+  "qp.nl-laat-beginnen.btn": "Kijk wat het nog oplevert",
+  "qp.nl-laat-beginnen.fq": "Heeft sparen voor later nog zin als ik pas laat begin?",
+  "qp.nl-laat-beginnen.fa": "Ja. Ook met tien of twintig jaar te gaan maakt een vast bedrag per maand verschil, zeker naast je AOW en pensioen. In Knopenteller tik je op plus bij wat je opzij legt en zie je meteen wat het later per maand oplevert."
+});
