@@ -801,7 +801,7 @@ Object.assign(I18N.nl, {
 
   "qp.nl-jaar-eerder.slug": "een-jaar-eerder-stoppen",
   "qp.nl-jaar-eerder.goal": "earlier",
-  "qp.nl-jaar-eerder.h1": "Wat scheelt één jaar eerder stoppen?",
+  "qp.nl-jaar-eerder.h1": "Vervroegd pensioen: wat kost één jaar eerder stoppen?",
   "qp.nl-jaar-eerder.a": "Eén jaar eerder stoppen kost meer dan één jaar uitgaven. Je legt een jaar minder in, je geld heeft een jaar minder om te groeien en het moet een jaar langer meegaan. Die drie tellen bij elkaar op. Knopenteller laat het verschil direct zien: tik op min bij je stopleeftijd en kijk wat er met je maandbudget gebeurt.",
   "qp.nl-jaar-eerder.btn": "Probeer een jaar eerder",
   "qp.nl-jaar-eerder.fq": "Hoeveel kost het om een jaar eerder te stoppen met werken?",
@@ -809,7 +809,7 @@ Object.assign(I18N.nl, {
 
   "qp.nl-laat-beginnen.slug": "laat-beginnen-met-sparen",
   "qp.nl-laat-beginnen.goal": "retire",
-  "qp.nl-laat-beginnen.h1": "Ik begin laat met sparen. Heeft het nog zin?",
+  "qp.nl-laat-beginnen.h1": "Laat begonnen met pensioen opbouwen: heeft het nog zin?",
   "qp.nl-laat-beginnen.a": "Ja. Wie op zijn 45e begint, heeft vaak nog twintig jaar of meer tot zijn pensioen. Dat is genoeg tijd om verschil te maken. Bovendien betalen AOW en pensioen later een flink deel van je uitgaven, dus je spaargeld hoeft niet alles te dragen. De vraag is niet of het zin heeft, maar hoeveel het oplevert. Knopenteller laat zien wat elke euro per maand extra later betekent.",
   "qp.nl-laat-beginnen.btn": "Kijk wat het nog oplevert",
   "qp.nl-laat-beginnen.fq": "Heeft sparen voor later nog zin als ik pas laat begin?",

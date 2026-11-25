@@ -760,7 +760,7 @@ Object.assign(I18N.fr, {
 
   "qp.fr-60-ans.slug": "partir-a-la-retraite-a-60-ans",
   "qp.fr-60-ans.goal": "earlier",
-  "qp.fr-60-ans.h1": "Puis-je partir à la retraite à 60 ans\u202f?",
+  "qp.fr-60-ans.h1": "Retraite anticipée : puis-je partir à la retraite à 60 ans ?",
   "qp.fr-60-ans.a": "L’âge légal se situe entre {frAgeMin} et {frAgeMax} selon votre année de naissance (situation en {frStand}, après la suspension de la réforme, hors carrières longues). Arrêter de travailler à 60 ans reste possible si votre épargne couvre les années jusqu’à vos pensions. Ce sont les années les plus coûteuses\u202f: rien ne rentre et votre capital porte tout. Avec moins de trimestres, votre pension sera aussi plus basse. Indiquez dans Button Counter le montant de votre simulation sur info-retraite.fr et déplacez votre âge d’arrêt.",
   "qp.fr-60-ans.btn": "Essayer un départ à 60 ans",
   "qp.fr-60-ans.fq": "Peut-on arrêter de travailler avant l’âge légal\u202f?",
@@ -776,7 +776,7 @@ Object.assign(I18N.fr, {
 
   "qp.fr-epargner.slug": "combien-epargner-pour-la-retraite",
   "qp.fr-epargner.goal": "retire",
-  "qp.fr-epargner.h1": "Combien épargner par mois pour sa retraite\u202f?",
+  "qp.fr-epargner.h1": "Épargne retraite : combien épargner par mois ?",
   "qp.fr-epargner.a": "Il n’y a pas de pourcentage magique. Le bon montant dépend de votre âge, de ce que vous avez déjà mis de côté, du budget que vous visez et de vos futures pensions. Plus vous commencez tôt, moins l’effort mensuel est lourd. Button Counter part de votre objectif et montre ce que chaque euro de plus par mois change pour plus tard.",
   "qp.fr-epargner.btn": "Voir ce que mon épargne apporte",
   "qp.fr-epargner.fq": "Combien faut-il mettre de côté chaque mois pour la retraite\u202f?",
@@ -801,7 +801,7 @@ Object.assign(I18N.fr, {
   "qp.fr-pension-legale.slug": "pension-legale-suffisante",
   "qp.fr-pension-legale.goal": "enough",
   "qp.fr-pension-legale.country": "BE",
-  "qp.fr-pension-legale.h1": "Ma pension légale suffira-t-elle\u202f?",
+  "qp.fr-pension-legale.h1": "Montant de ma pension : est-ce suffisant ?",
   "qp.fr-pension-legale.a": "En Belgique, l’âge légal de la pension est de {beAge} et passe à {beAgeNext} en {beAgeFrom}. Le montant dépend de votre carrière et de votre statut. Pour beaucoup, il reste nettement sous le dernier salaire. La différence doit venir d’une pension complémentaire, d’une épargne-pension ou de votre propre capital. Reprenez vos montants sur mypension.be, indiquez-les dans Button Counter et voyez ce que votre épargne doit ajouter.",
   "qp.fr-pension-legale.btn": "Voir ce qui manque",
   "qp.fr-pension-legale.fq": "Ma pension légale sera-t-elle suffisante\u202f?",

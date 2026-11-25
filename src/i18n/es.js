@@ -777,7 +777,7 @@ Object.assign(I18N.es, {
 
   "qp.es-antes-67.slug": "jubilarme-antes-de-los-67",
   "qp.es-antes-67.goal": "earlier",
-  "qp.es-antes-67.h1": "¿Puedo jubilarme antes de los 67?",
+  "qp.es-antes-67.h1": "Jubilación anticipada: ¿puedo jubilarme antes de los 67?",
   "qp.es-antes-67.a": "Desde {esFrom} la edad ordinaria de jubilación es de {esAge} años, o de {esAgeAlt} si has cotizado {esYears} o más. La jubilación anticipada voluntaria permite adelantarla hasta dos años, con una reducción permanente de la pensión. Dejar de trabajar aún antes es posible si tus ahorros cubren los años sin pensión. Introduce en Button Counter el importe que te dé el simulador de la Seguridad Social para esa edad y mueve tu edad de retiro.",
   "qp.es-antes-67.btn": "Probar una edad anterior",
   "qp.es-antes-67.fq": "¿Puedo dejar de trabajar antes de la edad de jubilación?",
@@ -801,7 +801,7 @@ Object.assign(I18N.es, {
 
   "qp.es-rentas.slug": "vivir-de-las-rentas",
   "qp.es-rentas.goal": "free",
-  "qp.es-rentas.h1": "¿Cuánto dinero hace falta para vivir de las rentas?",
+  "qp.es-rentas.h1": "Vivir de rentas: ¿cuánto dinero hace falta?",
   "qp.es-rentas.a": "Se suele decir: 25 veces tus gastos anuales. Esa cifra sale de la regla del 4\u00a0%. Olvida que tu pensión pública empezará algún día y cubrirá parte de tus gastos. Antes de esa fecha necesitas más patrimonio; después, menos. Por eso una sola cifra nunca encaja del todo. Button Counter calcula año a año, con tu pensión, los impuestos y la inflación.",
   "qp.es-rentas.btn": "Calcular mi patrimonio",
   "qp.es-rentas.fq": "¿Qué patrimonio necesito para vivir de las rentas?",

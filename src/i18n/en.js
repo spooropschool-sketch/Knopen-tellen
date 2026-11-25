@@ -740,7 +740,7 @@ Object.assign(I18N.en, {
 
   "qp.en-need.slug": "how-much-do-i-need-to-retire",
   "qp.en-need.goal": "enough",
-  "qp.en-need.h1": "How much do I need to retire comfortably?",
+  "qp.en-need.h1": "How much do I need to retire?",
   "qp.en-need.a": "There is no single number. It depends on what you spend each month, how long the money has to last and what still comes in later: Social Security or a State Pension and any workplace pension. Rules such as “25 times your spending” only look at the first part. Button Counter puts all three together, with tax and inflation, and shows the savings that get you there in 9 out of 10 scenarios.",
   "qp.en-need.btn": "Work out my number",
   "qp.en-need.fq": "How much money do I need to retire?",
@@ -748,7 +748,7 @@ Object.assign(I18N.en, {
 
   "qp.en-how-long.slug": "how-long-will-my-money-last",
   "qp.en-how-long.goal": "enough",
-  "qp.en-how-long.h1": "How long will my money last in retirement?",
+  "qp.en-how-long.h1": "How long will my money last?",
   "qp.en-how-long.a": "That depends on how much you take out each month, how your money is invested and what your pensions add. A simple calculator assumes a fixed return. In real life returns move up and down and prices rise. Button Counter runs many possible paths and shows the chance that your money lasts to the age you choose.",
   "qp.en-how-long.btn": "See how my money holds up",
   "qp.en-how-long.fq": "How long will my savings last in retirement?",

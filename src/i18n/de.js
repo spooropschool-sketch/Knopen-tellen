@@ -756,7 +756,7 @@ Object.assign(I18N.de, {
 
   "qp.de-wie-lange.slug": "wie-lange-reicht-mein-geld",
   "qp.de-wie-lange.goal": "enough",
-  "qp.de-wie-lange.h1": "Wie lange reicht mein Geld?",
+  "qp.de-wie-lange.h1": "Entnahmeplan: Wie lange reicht mein Geld?",
   "qp.de-wie-lange.a": "Das hängt davon ab, wie viel Sie monatlich entnehmen, wie Ihr Geld angelegt ist und was an Rente dazukommt. Ein einfacher Entnahmeplan rechnet mit einem festen Zins. In Wirklichkeit schwanken die Erträge, und die Preise steigen. Button Counter rechnet deshalb viele mögliche Verläufe durch und zeigt die Chance, dass Ihr Geld bis zu dem Alter reicht, das Sie wählen.",
   "qp.de-wie-lange.btn": "Meinen Verlauf ansehen",
   "qp.de-wie-lange.fq": "Wie lange reichen meine Ersparnisse im Ruhestand?",
@@ -764,7 +764,7 @@ Object.assign(I18N.de, {
 
   "qp.de-mit-63.slug": "mit-63-in-rente",
   "qp.de-mit-63.goal": "earlier",
-  "qp.de-mit-63.h1": "Kann ich mit 63 in Rente gehen?",
+  "qp.de-mit-63.h1": "Rente mit 63: Kann ich früher in Rente gehen?",
   "qp.de-mit-63.a": "Mit {deCutYears} Versicherungsjahren können Sie ab {deCutAge} in Rente gehen, allerdings mit Abschlag: {deCut} Prozent für jeden Monat vor Ihrer Regelaltersgrenze. Bei vier Jahren sind das {deCutMax} Prozent, und zwar dauerhaft. Dazu kommen die Jahre, in denen Sie keine Beiträge mehr zahlen. Ob das aufgeht, hängt von Ihrem Ersparten und Ihrem Budget ab. Tragen Sie in Button Counter die Rente ein, die Ihre Rentenauskunft für diesen Beginn nennt, und verschieben Sie Ihren Rentenbeginn. Stand {deStand}; über Änderungen an diesen Regeln wird diskutiert.",
   "qp.de-mit-63.btn": "Mit 63 durchrechnen",
   "qp.de-mit-63.fq": "Kann ich es mir leisten, mit 63 in Rente zu gehen?",
@@ -788,7 +788,7 @@ Object.assign(I18N.de, {
 
   "qp.de-mit-50.slug": "altersvorsorge-mit-50",
   "qp.de-mit-50.goal": "retire",
-  "qp.de-mit-50.h1": "Mit 50 noch fürs Alter vorsorgen: Lohnt sich das?",
+  "qp.de-mit-50.h1": "Altersvorsorge mit 50: Lohnt sich das noch?",
   "qp.de-mit-50.a": "Ja. Mit 50 haben Sie oft noch fünfzehn Jahre oder mehr bis zur Rente. Das reicht, damit ein fester Monatsbetrag einen Unterschied macht. Außerdem trägt die gesetzliche Rente später einen Teil Ihrer Ausgaben; Ihr Erspartes muss nicht alles leisten. Die Frage ist nicht, ob es sich lohnt, sondern wie viel es bringt. Button Counter zeigt, was jeder zusätzliche Euro im Monat später bedeutet.",
   "qp.de-mit-50.btn": "Sehen, was es noch bringt",
   "qp.de-mit-50.fq": "Ist es mit 50 zu spät für die Altersvorsorge?",
