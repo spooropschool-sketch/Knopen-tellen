@@ -230,6 +230,21 @@ def main():
         check('voorbeeldplan: staat uit sinds versie 26 (geen knop of melding in beeld)', e and not errs, errs[:2])
         ctx.close()
 
+        # ---------- versie 28: Wat is er nieuw ook als de geïnstalleerde app op / opent en doorstuurt naar /nl/ ----------
+        for start in ('/', '/nl/'):
+            ctx = br.new_context(locale='nl-NL', viewport={'width': 390, 'height': 844})
+            uiv = json.dumps({'introSeen': True, 'step': 1, 'goal': 'enough', 'mode': '', 'stepsDone': False, 'relSeen': 27, 'band': 2})
+            ctx.add_init_script("if (!sessionStorage.getItem('t28')) { sessionStorage.setItem('t28', '1'); localStorage.setItem('buttons-v4-01-ui', %s); localStorage.setItem('buttons-v4-01-prefs', %s); }"
+                                % (json.dumps(uiv), json.dumps(json.dumps({'lang': 'nl', 'country': 'NL'}))))
+            pg = ctx.new_page(); errs = []
+            pg.on('pageerror', lambda e: errs.append(str(e)))
+            pg.route('**/gc.zgo.at/**', lambda r: r.abort())
+            pg.goto(base + start); pg.wait_for_timeout(1800)
+            r = pg.evaluate("() => ({ url: location.pathname, rel: !document.getElementById('rel').hidden, txt: document.getElementById('rel-vers').textContent })")
+            want = pg.evaluate("() => I18N.nl['rel.28.v']")
+            check('v28: bezoeker van versie 27 opent %s: Wat is er nieuw toont versie 28' % start, r['url'] == '/nl/' and r['rel'] and want in r['txt'] and not errs, (r['url'], r['rel'], errs[:1]))
+            ctx.close()
+
         # ---------- versie 28: het doorstuur-icoon staat op een telefoon weer bovenaan (de exportknop niet) ----------
         for wdt in (390, 320):
             ctx = br.new_context(locale='nl-NL', viewport={'width': wdt, 'height': 760}, permissions=['clipboard-read', 'clipboard-write'])

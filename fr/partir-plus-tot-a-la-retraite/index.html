@@ -648,6 +648,7 @@
   var prefs = { lang: 'en', country: 'GB', cur: 'GBP' };
   var KEY = 'buttons-v4-01';
   var SITE = document.documentElement.getAttribute('data-site') === '1';
+  var LEAVING = false;   /* versie 28: deze pagina stuurt door naar de pagina van je taal; dan niets als gezien opslaan (anders sloeg Wat is er nieuw over bij het openen van de geïnstalleerde app) */
   (function detect() {
     var nav = 'en';
     try { nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en'; } catch (e) {}
@@ -669,7 +670,7 @@
     } catch (e) {}
     var pl = document.documentElement.getAttribute('data-path-lang');
     if (pl && LANGS.indexOf(pl) >= 0) prefs.lang = pl;
-    else if (SITE && prefs.lang !== 'en') { try { location.replace('/' + prefs.lang + '/' + location.search + location.hash); } catch (e) {} }
+    else if (SITE && prefs.lang !== 'en') { try { LEAVING = true; location.replace('/' + prefs.lang + '/' + location.search + location.hash); } catch (e) { LEAVING = false; } }
   })();
   var LPG = document.documentElement.getAttribute('data-goal') || '';
   var LPP = document.documentElement.getAttribute('data-page') || '';   /* vraagpagina die in één taal bestaat: haar naam (qp.<naam>.* in de teksten van die taal); leeg op de vier pagina's in vijf talen */
@@ -3078,6 +3079,7 @@ var TRK = {
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
+    if (LEAVING) return;
     var list = relMissed(); if (!list.length) return;
     $('rel-vers').innerHTML = list.map(function (r) {
       return '<section class="rel-ver"><span class="rel-v">' + t1('rel.' + r.v + '.v') + '</span>' +
@@ -3290,7 +3292,8 @@ var TRK = {
     }
     ui.introSeen = true; if (typeof ui.relSeen !== 'number') ui.relSeen = REL_LAST; saveUi(); showGoal(); track('reach-landing-' + (LPP || LPG));
     if (!lpFirst) openRel();
-  } else if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(0); } else openRel();
+  } else if (LEAVING) { /* doorsturen naar de pagina van je taal: die laat het welkomstvenster of Wat is er nieuw zien */ }
+  else if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(0); } else openRel();
 
   /* ================= Pro op slot (meetfase: Pro komt eraan) =================
      Pro-functies zijn zichtbaar maar zitten op slot. Een tik opent een venster waarin
