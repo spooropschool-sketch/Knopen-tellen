@@ -4,7 +4,8 @@ Draait vanzelf via .github/workflows/nieuwsradar.yml (GitHub Actions). Zoekt in 
 op een paar woorden per onderwerp en telt hoeveel verschillende media er de afgelopen twee dagen over schreven.
 Schrijven er duidelijk meer media over dan gewoonlijk, dan maakt het een issue in de repository aan.
 GitHub stuurt daarvan een mail en een melding in de GitHub-app. In het issue staan de koppen, de vraagpagina
-die erbij past, een kant-en-klaar berichtje voor de redactie en een korte post.
+die erbij past en een kant-en-klaar berichtje voor de redactie (Frans, Duits, Spaans: met Nederlandse vertaling eronder).
+Alleen bij Nederlands nieuws ook een korte LinkedIn-post.
 
 Gebruik:
   python3 tools/nieuwsradar.py                 # echt draaien (in GitHub Actions)
@@ -71,6 +72,8 @@ TEKST = {
     'en': ('Regarding your article “{kop}”: readers who want to know what it means for them can work it out in a few minutes at {link}. It is an independent calculator with no account; the numbers stay on their own device.',
            '{Onderwerp} is in the news again ({bron}). What does it mean for you? Work it out in a few minutes: {link}'),
 }
+VERTAAL = {'fr', 'de', 'es'}   # bericht in de taal van het land, met Nederlandse vertaling eronder
+MET_POST = {'nl'}             # LinkedIn-post alleen in het Nederlands; Engels alleen het bericht voor de redactie
 LANDNAAM = {'NL': 'Nederland', 'BE': 'België', 'FR': 'Frankrijk', 'DE': 'Duitsland', 'ES': 'Spanje', 'US': 'VS', 'GB': 'VK'}
 
 
@@ -141,7 +144,11 @@ def blok(o, arts):
     for a in top[:6]:
         regels.append('- [%s](%s) · %s' % (a['kop'].replace('[', '(').replace(']', ')'), a['link'], a['bron']))
     regels += ['', '**Berichtje voor de redactie** (adres staat meestal onder Contact of Redactie op de site van het medium):', '',
-               '> ' + pitch.format(**v), '', '**Korte post** (LinkedIn of elders):', '', '> ' + post.format(**v), '']
+               '> ' + pitch.format(**v), '']
+    if t in VERTAAL:   # Frans, Duits, Spaans: Nederlandse vertaling eronder, zodat Paul weet wat hij verstuurt
+        regels += ['*Vertaling (Nederlands):*', '', '> ' + TEKST['nl'][0].format(**v), '']
+    if t in MET_POST:  # alleen Nederlands: ook een korte post voor LinkedIn
+        regels += ['**Korte post** (LinkedIn):', '', '> ' + post.format(**v), '']
     return '\n'.join(regels)
 
 

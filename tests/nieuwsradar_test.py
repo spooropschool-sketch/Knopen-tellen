@@ -76,9 +76,16 @@ def main():
         check('dag 8: melding met vraagpagina, koppen, berichtje en post in de taal van het land',
               'https://countingbuttons.com/nl/gat-tot-de-aow-overbruggen/' in out and 'Bij uw artikel “Nieuws over de AOW' in out
               and 'Zu Ihrem Artikel „Nieuws over die Rente mit 63' in out and '(9 media)' in out and '@spooropschool-sketch' in out, out[:600])
+        nl, de = out.split('## die Rente mit 63')[0], out.split('## die Rente mit 63')[1]
+        check('dag 8: Nederlands: bericht voor de redactie en LinkedIn-post, geen vertaling', 'Bij uw artikel' in nl and '**Korte post** (LinkedIn)' in nl and 'Vertaling' not in nl, nl[-400:])
+        check('dag 8: Duits: bericht in het Duits met Nederlandse vertaling eronder, geen post',
+              de.index('Zu Ihrem Artikel') < de.index('*Vertaling (Nederlands):*') < de.index('Bij uw artikel “Nieuws over die Rente mit 63') and 'Korte post' not in de, de[-500:])
         check('dag 8: oud bericht (4 dagen) telt niet mee', 'Oude Krant' not in out)
         code, out = dag(tmp, stand, nu0 + timedelta(days=8), {'nl-aow': 10, 'us-ss': 9, 'de-63': 6})
         check('dag 9: dezelfde drukte binnen 3 dagen geeft geen nieuwe melding', 'Nieuwsradar 20' not in out, out[:200])
+        code, out = dag(tmp, stand, nu0 + timedelta(days=12), {'nl-aow': 3, 'us-ss': 40})
+        check('dag 13: Engels: alleen het bericht voor de redactie, geen post en geen vertaling',
+              'Regarding your article' in out and 'Korte post' not in out and 'Vertaling' not in out, out[:400])
         s = json.load(open(stand, encoding='utf-8'))
         check('stand: telling per dag en laatste melding bewaard', s['hist']['nl-aow']['2026-12-04'] == 10 and s['gemeld']['nl-aow']['aantal'] == 9, s.get('gemeld'))
 
