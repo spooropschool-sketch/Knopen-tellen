@@ -230,6 +230,30 @@ def main():
         check('voorbeeldplan: staat uit sinds versie 26 (geen knop of melding in beeld)', e and not errs, errs[:2])
         ctx.close()
 
+        # ---------- versie 28: het doorstuur-icoon staat op een telefoon weer bovenaan (de exportknop niet) ----------
+        for wdt in (390, 320):
+            ctx = br.new_context(locale='nl-NL', viewport={'width': wdt, 'height': 760}, permissions=['clipboard-read', 'clipboard-write'])
+            ctx.add_init_script('window.__trkTest = []; try { delete Navigator.prototype.share; } catch (e) {}')
+            pg = ctx.new_page(); errs = []
+            pg.on('pageerror', lambda e: errs.append(str(e)))
+            pg.route('**/gc.zgo.at/**', lambda r: r.abort())
+            pg.goto(base + '/nl/'); pg.wait_for_timeout(1200); pg.click('#intro-next'); pg.wait_for_timeout(400)
+            pg.evaluate("document.querySelector('input[name=age-band][value=\\'2\\']').click()"); pg.wait_for_timeout(400)
+            pg.click('#slot-ok'); pg.wait_for_timeout(1000)
+            for sel in ('#tvr-x', '#rel-ok'):
+                if pg.is_visible(sel):
+                    pg.click(sel); pg.wait_for_timeout(300)
+            t = pg.evaluate("""() => { const v = s => { const e = document.querySelector('.tb-right ' + s); return !!(e && e.offsetParent); };
+              const w = document.querySelector('.topbar .wordmark');
+              return { app: v('.share-app'), exp: v('.share-open'), ov: document.documentElement.scrollWidth > innerWidth + 1, cut: w.scrollWidth > w.clientWidth + 1 }; }""")
+            pg.click('.tb-right .share-app'); pg.wait_for_timeout(500)
+            clip = pg.evaluate('navigator.clipboard.readText()')
+            trk = pg.evaluate('window.__trkTest.slice()')
+            check('v28: %d px: doorstuur-icoon bovenaan, exportknop niet, naam heel, niet te breed' % wdt, t['app'] and not t['exp'] and not t['ov'] and not t['cut'], t)
+            check('v28: %d px: tik stuurt de app door (meetpunt reach-tip-app, link met campagne tip)' % wdt,
+                  'reach-tip-app' in trk and 'utm_campaign=tip' in clip and '#plan=' not in clip and not errs, (trk, clip[:80], errs[:1]))
+            ctx.close()
+
         # ---------- deellink heen en terug ----------
         lists = {'perP': [], 'perD': [], 'pots': [{'n': 'Pot', 'w': 0, 'k': 'l', 'a': 25000, 'f': 67, 'u': 0, 'x': 0}],
                  'debts': [], 'stud': [], 'oth': [], 'inl': []}

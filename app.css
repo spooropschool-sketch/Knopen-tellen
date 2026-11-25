@@ -2139,8 +2139,8 @@ html.tv3 .mini, html.tv3 .nt-fab, html.tv3 #tab-insight { display: none !importa
 html.tv3 #tab-notes { display: flex; order: 3; }
 html.tv3 #tab-about { order: 4; }
 html.tv3 .tabs { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-/* delen en doorsturen staan op een telefoon in de lijst onderaan; zo blijft de naam bovenaan heel */
-@media (max-width: 560px) { html.tv3 .tb-right .share-app, html.tv3 .tb-right .share-open { display: none !important; } }
+/* delen staat op een telefoon in de lijst onderaan; doorsturen (share-app) staat sinds versie 28 weer bovenaan */
+@media (max-width: 560px) { html.tv3 .tb-right .share-open { display: none !important; } }
 html.tv3 .wrap { max-width: 720px; padding-bottom: 64px; }
 html.tv3:not(.tvc-on) #page-overview > :not(#tvh):not(#qp), html.tv3:not(.tvc-on) #page-input > :not(#tvi), html.tv3:not(.tvc-on) #page-about > :not(#tva) { display: none !important; }
 html.tvc-on #tvh, html.tvc-on #tvi, html.tvc-on #tva, html.tvc-on .topbar { display: none !important; }
