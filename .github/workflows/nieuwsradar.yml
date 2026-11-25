@@ -1,0 +1,42 @@
+# Nieuwsradar: elke ochtend het nieuws nalopen op de onderwerpen van de vraagpagina's (tools/nieuwsradar.py).
+# Bij opvallend nieuws komt er een issue in deze repository; GitHub stuurt daarvan een mail en een melding.
+name: Nieuwsradar
+
+on:
+  schedule:
+    - cron: '17 5 * * *'   # elke dag rond 6.17 uur Nederlandse wintertijd (7.17 uur zomertijd)
+  workflow_dispatch: {}     # met de hand starten via Actions > Nieuwsradar > Run workflow
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: nieuwsradar
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - name: Stand van gisteren ophalen
+        uses: actions/cache/restore@v4
+        with:
+          path: .nieuwsradar
+          key: nieuwsradar-${{ github.run_id }}
+          restore-keys: nieuwsradar-
+      - name: Nieuws nalopen
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIEUWSRADAR_STAND: .nieuwsradar/stand.json
+        run: python3 tools/nieuwsradar.py
+      - name: Stand bewaren
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .nieuwsradar
+          key: nieuwsradar-${{ github.run_id }}
