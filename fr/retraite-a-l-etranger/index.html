@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=03912604">
+<link rel="stylesheet" href="/app.css?v=aab16466">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -519,7 +519,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=b647b137"></script>
+<script src="/i18n/fr.js?v=a692beae"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4663,7 +4663,7 @@ var TRK = {
     if (c.id === 'per') return t1('tv.c.per');
     if (c.id === 'sp2') return cap1(spName());
     if (c.id === 'pp' && !state.opbouw) return t1('tv.c.pp50');
-    if (c.id === 'pp' && two()) return t1('tv.c.pp2');
+    if (c.id === 'pp' && two() && !TV) return t1('tv.c.pp2');   /* testversie 8: de verdeling van de inleg verandert de uitkomst niet en staat niet meer op dit scherm (Paul, 28 nov) */
     return c.id === 'priv' ? t1('priv.h') + ' · ' + t1('disc.h') : t1(k);
   }
   function tvChSub(c) {
@@ -4788,6 +4788,9 @@ var TRK = {
     if (!tvFocusCh || tvFocusCh.id !== 'pp') return;
     var cards = document.querySelectorAll('#step-2 > .cols2 > .pcard'), vis = [];
     Array.prototype.forEach.call(cards, function (pc) { if (pc.offsetParent || !pc.classList.contains('only2') || two()) vis.push(pc); });
+    var c2 = document.querySelector('#step-2 > .cols2'), ix = c2 && c2.querySelector(':scope > .pp-intro');
+    if (c2 && !ix) { ix = document.createElement('p'); ix.className = 'tvp-ex pp-intro'; c2.insertBefore(ix, c2.firstChild); }
+    if (ix) ix.textContent = t1(two() ? 'tv.pp.intro2' : 'tv.pp.intro');
     vis.forEach(function (pc, i) {
       var s = i ? 'D' : 'P', hd = pc.querySelector(':scope > .pp-head'), wk = pc.querySelector('.wk'), yn = wk && wk.querySelector('.pp-yn');
       if (!hd) { hd = document.createElement('button'); hd.type = 'button'; hd.className = 'pp-head'; pc.insertBefore(hd, pc.firstChild); }
@@ -4803,9 +4806,9 @@ var TRK = {
       }
       pc.classList.toggle('pp-nowk', !yes);
       var parts = [];
-      if (two() && inl > 0) parts.push(t1('tv.pp.save', { v: eur(inl) }));
+      /* testversie 8: de inlegverdeling staat niet meer op dit scherm */
       parts.push(yes ? (wv > 0 ? t1('tv.pp.work', { v: eur(wv), a: fmtAge(state['werkTot' + s] || 0) }) : (per ? t1('wk.h') : '')) : t1('tv.pp.nowork'));
-      var done = (two() ? inl > 0 : true) && (!yes || wv > 0 || per) || !!tvPp.seen[i], open = tvPp.open === i;
+      var done = !yes || wv > 0 || per || !!tvPp.seen[i], open = tvPp.open === i;
       var nm = (pc.querySelector('h3') || {}).textContent || '';
       var hh = (done ? tvKnoop(i ? 4 : 0) : '<span class="tvr-dot"></span>') + '<span class="pp-tx"><b>' + esc(nm) + '</b><span>' + esc(parts.filter(Boolean).join(' · ')) + '</span></span><svg class="pp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
       if (hd.getAttribute('data-s') !== hh) { hd.innerHTML = hh; hd.setAttribute('data-s', hh); }

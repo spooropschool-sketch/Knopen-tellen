@@ -2757,3 +2757,8 @@ html[data-tvc="curve"] #snel .snel-grid, html[data-tvc="per"] #snel .snel-grid {
 #debts-box.tvp-open > summary .pots-h::after { content: ""; }
 html[data-tvc="debt"] #debts-box .pots-in { display: none !important; }
 html[data-tvc="pot"] #pots-box .pots-in { display: none !important; }
+/* testversie 8: per persoon gaat alleen over bijverdienen; de inlegverdeling (verandert de uitkomst niet) staat er niet; geen slotje boven het uitgavenverloop */
+html[data-tvc="pp"] #step-2 .pcard .field.opb-q { display: none !important; }
+.pp-intro { grid-column: 1 / -1; margin: 0 0 4px; }
+html[data-tvc="curve"] .curve-f .ftop .pro-tag, html[data-tvc="curve"] .curve-f .curve-intro { display: none !important; }
+html[data-tvc="pp"] #step-2 .pcard .wk { border-top: 0 !important; margin-top: 0 !important; padding-top: 0 !important; }
