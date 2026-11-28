@@ -807,3 +807,4 @@ Object.assign(I18N.de, {"iq.p": "Wählen Sie Ihre Frage. Ein paar kurze Fragen, 
 Object.assign(I18N.de, {"tv.pic.quiet": "{x} zählt schon mit: {v} pro Monat. Jede Antwort zählt dazu.", "tv.q.pers": "Sind Sie allein oder haben Sie einen Partner?", "tv.v.one": "Allein", "tv.v.two": "Mit Partner"});
 Object.assign(I18N.de, {"tv.q.stop_2": "In welchem Alter möchten Sie selbst aufhören zu arbeiten?", "tv.q.age": "Wie alt sind Sie?", "tv.q.age_2": "Wie alt sind Sie beide?"});
 Object.assign(I18N.de, {"tv.pic.sofar": "Mit Ihren bisherigen Antworten."});
+Object.assign(I18N.de, {"tv.h.bud": "Das wird Ihr Ziel: was Sie pro Monat ausgeben."});
