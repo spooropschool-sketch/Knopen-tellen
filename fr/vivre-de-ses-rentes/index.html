@@ -2908,7 +2908,7 @@ var TRK = {
   var introBand = 2, ageTouched = false;
   function bandOf(a) { return a < 35 ? 0 : (a < 50 ? 1 : 2); }
   var BAND_AGE = [27, 42, 57];   /* alleen een richtleeftijd per groep; de precieze leeftijd vul je zelf in bij Invullen */
-  function gtx(g, suf) { return t1((GTXT[g] || 'goal.5') + suf); }
+  function gtx(g, suf) { if (suf === '.t' && typeof ui.iq === 'number' && ['rich', 'retire', 'enough'][ui.iq] === g) return t1('iq.q' + ui.iq); return t1((GTXT[g] || 'goal.5') + suf); }   /* testversie 8: wie via een vraagknop begon, ziet die vraag terug */
   function goalTarget(g) {
     if (g === 'rich' || g === 'free') return { hash: '#overview', id: 'opb-card' };
     if (g === 'retire') return { hash: '#overview', id: 'status-card' };
@@ -3022,14 +3022,14 @@ var TRK = {
     w.addEventListener('keydown', function (ev) {
       if (ev.key === 'ArrowDown') { ev.preventDefault(); slotStep(1); }
       else if (ev.key === 'ArrowUp') { ev.preventDefault(); slotStep(-1); }
-      else if (ev.key === 'Enter') { ev.preventDefault(); pickGoal(slotG()[slotIdx]); }
+      else if (ev.key === 'Enter') { ev.preventDefault(); delete ui.iq; pickGoal(slotG()[slotIdx]); }
     });
   })();
   /* zonder gekozen leeftijdsgroep zou iedereen ongemerkt in de groep 50-plus belanden: vraag er eerst om */
   $('slot-ok').addEventListener('click', function () {
     var any = false; each('input[name="age-band"]', function (r) { if (r.checked) any = true; });
     if (!any) { var ab = $('agebox'), an = $('age-need'); if (ab) { ab.classList.add('need'); ab.scrollIntoView({ block: 'center' }); } if (an) an.hidden = false; var r0 = document.querySelector('input[name="age-band"]'); if (r0) r0.focus({ preventScroll: true }); return; }
-    pickGoal(slotG()[slotIdx]);
+    delete ui.iq; pickGoal(slotG()[slotIdx]);
   });
   /* leeftijd als groep: geen exacte leeftijd aan het begin; -1 = nog niets gekozen (dan de vragen voor 50+) */
   function bandSet(b) {
@@ -3614,6 +3614,7 @@ var TRK = {
   TRK['extra-studyloan'] = ['extra', 'Studieschuld ingevuld (restschuld en maandbedrag)'];
   TRK['extra-studyloan-rate'] = ['extra', 'Rente studieschuld zelf aangepast'];
   TRK['pro-sl-teaser'] = ['pro', 'Teaser Aflossen of beleggen op de studieschuldkaart getikt'];
+  TRK['core-route-again'] = ['basis', 'Route opnieuw gestart vanuit de welkomst, met bestaande antwoorden (testversie 8)'];
   TRK['reach-start-quick'] = ['bereik', 'Welkom: snelle start, leeftijd getikt (testversie 8)'];
   TRK['reach-start-other'] = ['bereik', 'Welkom: liever een andere vraag (testversie 8)'];
   TRK['reach-goal-debtfree'] = ['bereik', 'Welkom: kies doel Wanneer ben ik schuldenvrij'];
@@ -4297,7 +4298,7 @@ var TRK = {
     ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
     /* testversie 8: op het eerste vraagscherm is de telling klein en zegt ze alleen wat er al meetelt; de vraag krijgt de aandacht.
        Na het eerste antwoord verschijnt het grote bedrag. */
-    var quiet = host.id === 'tvr-pic' && tv.step === 0 && !tvEdit && tv.tot !== null;
+    var quiet = host.id === 'tvr-pic' && tv.step === 0 && !tvEdit && tv.tot !== null && !Object.keys(tv.led).some(function (k) { return tv.led[k]; });
     host.classList.toggle('tv-quiet', quiet);
     if (quiet) { ln.textContent = tv.baseSp && T > 0 ? t1('tv.pic.quiet', { x: cap1(spName()), v: eur(T), k: g('.tv-k').textContent.toLowerCase() }) : t1('tv.pic.zero'); ln.className = 'tv-line'; }
   }
@@ -4816,7 +4817,7 @@ var TRK = {
       bt.addEventListener('click', function () {
         if (iqBusy) return; iqBusy = true;
         ageTouched = true; bandSet(bnd); bt.classList.add('on');
-        setTimeout(function () { iqBusy = false; bt.classList.remove('on'); track('reach-start-quick'); pickGoal(IQ_GOAL[bnd]); }, 180);
+        setTimeout(function () { iqBusy = false; bt.classList.remove('on'); track('reach-start-quick'); ui.iq = bnd; pickGoal(IQ_GOAL[bnd]); }, 180);
       });
       pk.appendChild(bt);
     });
@@ -4912,7 +4913,8 @@ var TRK = {
   /* ---- start en terugkomst ---- */
   function tvStart() {
     if (exEmpty()) { tv = tvFresh(); tv.on = 1; tv.last = Date.now(); tvChg = ''; tvView = 'step'; tvMode = ''; tvEdit = false; tvTouched = {}; tvWorkYes = null; tv.stopAuto = 1; tvStopSync(); tvSave(); track('core-route-start'); tvWant = true; }
-    else tvSave();   /* testversie 6: de introductie opnieuw doen wist niet meer wat elk antwoord bijdraagt */
+    else { tv.step = 0; tvView = 'step'; tvMode = ''; tvEdit = false; tvSave(); track('core-route-again'); tvWant = true; }   /* testversie 6: de introductie opnieuw doen wist niet meer wat elk antwoord bijdraagt.
+       testversie 8: wie (opnieuw) een vraag kiest, begint altijd bij de eerste vraag van de route, met zijn antwoorden er nog in, en niet op het Overzicht (Paul, 28 nov) */
   }
   function tvAfterIntro() { if (tvWant) { tvWant = false; tvOpenUi(); } else tvHome(); }
 
