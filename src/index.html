@@ -4302,6 +4302,10 @@ var TRK = {
     /* testversie 8: bij de eerste vraag (alleen of met partner) is er nog niets van jou te tellen, dus geen telling.
        Na je antwoord verschijnt ze, met wat er al meetelt (Paul, 28 nov) */
     host.classList.toggle('tv-hide', host.id === 'tvr-pic' && tv.step === 0 && !tvEdit);
+    /* testversie 8: telt alleen het staatspensioen nog mee, dan een klein vak: label en bedrag, zonder zin, zodat de vraag de aandacht krijgt (Paul, 28 nov) */
+    var onlySp = host.id === 'tvr-pic' && state.opbouw && tv.baseSp && T > 0 && !tvEdit && !Object.keys(tv.led).some(function (k) { return tv.led[k] && k !== 'pers'; });
+    host.classList.toggle('tv-base', onlySp);
+    if (onlySp) { g('.tv-k').textContent = t1(two() ? 'tv.pic.spK2' : 'tv.pic.spK', { x: cap1(spName()) }); ln.textContent = ''; }
   }
   function tvTop() {
     if (!tvReady) return;

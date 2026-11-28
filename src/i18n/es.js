@@ -840,3 +840,4 @@ Object.assign(I18N.es, {"iq.ctry": "Calculas para {c} · cambiar"});
 Object.assign(I18N.es, {"iq.ctry": "País: {c} · cambiar"});
 
 /* testversie 8: telling na alleen of met partner */ Object.assign(I18N.es, {"tv.pic.base2": "{x} de los dos ya cuenta. El resto lo sumas tú."});
+/* testversie 8: klein vak met alleen het staatspensioen */ Object.assign(I18N.es, {"tv.pic.spK": "{x}, al mes más adelante", "tv.pic.spK2": "{x} de los dos, al mes más adelante"});

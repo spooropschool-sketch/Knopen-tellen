@@ -840,3 +840,4 @@ Object.assign(I18N.nl, {"iq.ctry": "Je rekent voor {c} · wijzig"});
 Object.assign(I18N.nl, {"iq.ctry": "Land: {c} · wijzig"});
 
 /* testversie 8: telling na alleen of met partner */ Object.assign(I18N.nl, {"tv.pic.base2": "{x} voor jullie twee telt al mee. De rest tel je er zelf bij."});
+/* testversie 8: klein vak met alleen het staatspensioen */ Object.assign(I18N.nl, {"tv.pic.spK": "{x}, later per maand", "tv.pic.spK2": "{x} voor jullie samen, later per maand"});
