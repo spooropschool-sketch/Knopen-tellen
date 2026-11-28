@@ -2686,8 +2686,8 @@ html.tv3 .tvk-card img { display: block; width: 20px; height: 20px; }
 html.tv3 .tvk-card b { font-size: 14.5px; font-weight: 500; }
 html.tv3 .tvk-card::after { display: none; }
 .tv-hide { display: none !important; }
-.tv-pic.tv-base { padding: 10px 16px; }
-.tv-pic.tv-base .tv-big { margin: 0; }
-.tv-pic.tv-base .tv-big b { font-size: 26px; }
-.tv-pic.tv-base .tv-big span { font-size: 14px; }
-.tv-pic.tv-base .tv-line, .tv-pic.tv-base .tv-bar { display: none; }
+/* testversie 8: in de route is het vak bij elke vraag even hoog; de balk staat er altijd (leeg tot je een doel kiest) en het plusje wringt zich ernaast */
+html.tv3 #tvr-pic .tv-big { min-height: 44px; }
+html.tv3 #tvr-pic .tv-big { flex-wrap: nowrap; }
+html.tv3 #tvr-pic .tv-big span { white-space: nowrap; }
+html.tv3 #tvr-pic .tv-delta { margin-left: auto; flex: none; }

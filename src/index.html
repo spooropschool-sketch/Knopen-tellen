@@ -4290,8 +4290,8 @@ var TRK = {
     if (tv.tot === null) g('.tv-num').textContent = '…'; else tvAnim(g('.tv-num'), tv.tot);
     dl.hidden = !d || tvWaiting;
     if (d) { dl.textContent = tvSigned(d); dl.className = 'tv-delta ' + (d > 0 ? 'up' : 'down'); }
-    bar.hidden = !(w > 0);
-    if (w > 0) g('.tv-fill').style.width = Math.max(2, Math.min(100, T / w * 100)).toFixed(1) + '%';
+    bar.hidden = !(w > 0) && host.id !== 'tvr-pic';
+    g('.tv-fill').style.width = w > 0 ? Math.max(2, Math.min(100, T / w * 100)).toFixed(1) + '%' : '0';
     bar.classList.toggle('ok', w > 0 && T >= w);
     var fg = g('.tvo-fg'); host.classList.toggle('ring', !!fg && w > 0);
     if (fg) { fg.setAttribute('stroke-dasharray', (w > 0 ? Math.max(1.5, Math.min(100, T / w * 100)) : 0).toFixed(1) + ' 100'); fg.classList.toggle('ok', w > 0 && T >= w); }
@@ -4301,11 +4301,11 @@ var TRK = {
        Na het eerste antwoord verschijnt het grote bedrag. */
     /* testversie 8: bij de eerste vraag (alleen of met partner) is er nog niets van jou te tellen, dus geen telling.
        Na je antwoord verschijnt ze, met wat er al meetelt (Paul, 28 nov) */
-    host.classList.toggle('tv-hide', host.id === 'tvr-pic' && tv.step === 0 && !tvEdit);
+    /* testversie 8: het vak is overal even groot, vanaf de eerste vraag; alleen het label vertelt wat er telt (Paul, 28 nov) */
     /* testversie 8: telt alleen het staatspensioen nog mee, dan een klein vak: label en bedrag, zonder zin, zodat de vraag de aandacht krijgt (Paul, 28 nov) */
     var onlySp = host.id === 'tvr-pic' && state.opbouw && tv.baseSp && T > 0 && !tvEdit && !Object.keys(tv.led).some(function (k) { return tv.led[k] && k !== 'pers'; });
     host.classList.toggle('tv-base', onlySp);
-    if (onlySp) { g('.tv-k').textContent = t1(two() ? 'tv.pic.spK2' : 'tv.pic.spK', { x: cap1(spName()) }); ln.textContent = ''; }
+    if (onlySp) { g('.tv-k').textContent = t1(two() ? 'tv.pic.spK2' : 'tv.pic.spK', { x: cap1(spName()) }); if (!(w > 0)) ln.textContent = ''; }
   }
   function tvTop() {
     if (!tvReady) return;
