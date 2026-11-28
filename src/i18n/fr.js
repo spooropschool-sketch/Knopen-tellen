@@ -821,3 +821,4 @@ Object.assign(I18N.fr, {"tv.pic.quiet": "{x} compte déjà : {v} par mois. Chaqu
 Object.assign(I18N.fr, {"tv.q.stop_2": "À quel âge souhaitez-vous personnellement arrêter de travailler ?", "tv.q.age": "Quel âge avez-vous ?", "tv.q.age_2": "Quel âge avez-vous, tous les deux ?"});
 Object.assign(I18N.fr, {"tv.pic.sofar": "Avec vos réponses jusqu’ici."});
 Object.assign(I18N.fr, {"tv.h.bud": "Ce sera votre objectif : ce que vous dépensez par mois."});
+Object.assign(I18N.fr, {"tv.i.bud": "Indiquez ce que vous dépensez aujourd’hui par mois, en montants d’aujourd’hui. Nous tenons compte nous-mêmes de la hausse des prix d’ici là."});

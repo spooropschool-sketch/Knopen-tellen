@@ -808,3 +808,4 @@ Object.assign(I18N.de, {"tv.pic.quiet": "{x} zählt schon mit: {v} pro Monat. Je
 Object.assign(I18N.de, {"tv.q.stop_2": "In welchem Alter möchten Sie selbst aufhören zu arbeiten?", "tv.q.age": "Wie alt sind Sie?", "tv.q.age_2": "Wie alt sind Sie beide?"});
 Object.assign(I18N.de, {"tv.pic.sofar": "Mit Ihren bisherigen Antworten."});
 Object.assign(I18N.de, {"tv.h.bud": "Das wird Ihr Ziel: was Sie pro Monat ausgeben."});
+Object.assign(I18N.de, {"tv.i.bud": "Geben Sie ein, was Sie heute pro Monat ausgeben, in heutigen Beträgen. Preissteigerungen bis dahin rechnen wir selbst mit ein."});

@@ -851,3 +851,4 @@ Object.assign(I18N.en, {"tv.pic.quiet": "{x} already counts: {v} a month. Every 
 Object.assign(I18N.en, {"tv.q.stop_2": "At what age do you personally want to stop working?", "tv.q.age": "How old are you?", "tv.q.age_2": "How old are you both?"});
 Object.assign(I18N.en, {"tv.pic.sofar": "With your answers so far."});
 Object.assign(I18N.en, {"tv.h.bud": "This becomes your goal: what you spend per month."});
+Object.assign(I18N.en, {"tv.i.bud": "Enter what you spend per month now, in today’s amounts. We take price rises until later into account ourselves."});

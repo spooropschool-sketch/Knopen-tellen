@@ -830,3 +830,4 @@ Object.assign(I18N.es, {"tv.q.bud_2": "¿Cuánto queréis poder gastar al mes m�
 Object.assign(I18N.es, {"tv.q.cap_2": "¿Cuánto tenéis ahora en ahorros e inversiones?", "tv.q.inl_2": "¿Cuánto apartáis cada mes?", "tv.q.stop_2": "¿A qué edad quieres dejar de trabajar tú?", "tv.q.age": "¿Cuántos años tienes?", "tv.q.age_2": "¿Cuántos años tenéis?"});
 Object.assign(I18N.es, {"tv.pic.sofar": "Con tus respuestas hasta ahora."});
 Object.assign(I18N.es, {"tv.h.bud": "Este será tu objetivo: lo que gastas al mes."});
+Object.assign(I18N.es, {"tv.i.bud": "Indica lo que gastas ahora al mes, en importes de hoy. Nosotros tenemos en cuenta la subida de precios hasta entonces."});

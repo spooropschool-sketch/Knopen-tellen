@@ -830,3 +830,4 @@ Object.assign(I18N.nl, {"tv.q.bud_2": "Wat willen jullie later per maand te best
 Object.assign(I18N.nl, {"tv.q.cap_2": "Hoeveel spaargeld en beleggingen hebben jullie nu?", "tv.q.inl_2": "Hoeveel leggen jullie per maand opzij?", "tv.q.stop_2": "Op welke leeftijd wil jij stoppen met werken?", "tv.q.age": "Hoe oud ben je?", "tv.q.age_2": "Hoe oud zijn jullie?"});
 Object.assign(I18N.nl, {"tv.pic.sofar": "Met je antwoorden tot nu toe."});
 Object.assign(I18N.nl, {"tv.h.bud": "Dit wordt je doel: wat je per maand uitgeeft."});
+Object.assign(I18N.nl, {"tv.i.bud": "Vul in wat je nu per maand uitgeeft, in bedragen van vandaag. Prijsstijgingen tot later rekenen we zelf mee."});
