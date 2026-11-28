@@ -815,3 +815,6 @@ Object.assign(I18N.nl, {
   "qp.nl-laat-beginnen.fq": "Heeft sparen voor later nog zin als ik pas laat begin?",
   "qp.nl-laat-beginnen.fa": "Ja. Ook met tien of twintig jaar te gaan maakt een vast bedrag per maand verschil, zeker naast je AOW en pensioen. In Knopenteller tik je op plus bij wat je opzij legt en zie je meteen wat het later per maand oplevert."
 });
+
+/* testversie 8: snelle start */
+Object.assign(I18N.nl, {"iq.h": "Hoeveel kun jij later per maand uitgeven?", "iq.tap": "Tik op je leeftijd en reken het uit in twee minuten. Je precieze leeftijd vul je later in.", "iq.other": "Liever met een andere vraag beginnen?"});

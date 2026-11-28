@@ -794,3 +794,6 @@ Object.assign(I18N.de, {
   "qp.de-mit-50.fq": "Ist es mit 50 zu spät für die Altersvorsorge?",
   "qp.de-mit-50.fa": "Nein. Auch mit fünfzehn Jahren bis zur Rente macht ein fester Monatsbetrag einen Unterschied, zusätzlich zur gesetzlichen Rente. In Button Counter erhöhen Sie Ihren Sparbetrag und sehen sofort, was das später pro Monat bringt."
 });
+
+/* testversie 8: snelle start */
+Object.assign(I18N.de, {"iq.h": "Wie viel können Sie später pro Monat ausgeben?", "iq.tap": "Tippen Sie auf Ihr Alter und rechnen Sie es in zwei Minuten aus. Ihr genaues Alter geben Sie später ein.", "iq.other": "Lieber mit einer anderen Frage beginnen?"});

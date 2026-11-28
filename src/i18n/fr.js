@@ -807,3 +807,6 @@ Object.assign(I18N.fr, {
   "qp.fr-pension-legale.fq": "Ma pension légale sera-t-elle suffisante\u202f?",
   "qp.fr-pension-legale.fa": "Comparez-la au budget mensuel que vous visez. Button Counter montre ce que votre pension complémentaire et votre épargne doivent ajouter, et la probabilité que cela tienne."
 });
+
+/* testversie 8: snelle start */
+Object.assign(I18N.fr, {"iq.h": "Combien pourrez-vous dépenser chaque mois plus tard ?", "iq.tap": "Touchez votre âge et faites le calcul en deux minutes. Votre âge exact, vous l’indiquerez plus tard.", "iq.other": "Vous préférez commencer par une autre question ?"});

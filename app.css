@@ -2519,3 +2519,10 @@ html.qp-on #tvh { display: none; }
 .site-qs a:hover { color: var(--accent); text-decoration: underline; }
 /* versie 28: onder de uitleg bij belasting één zin dat het onze inschatting is */
 .tax-est { display: block; margin-top: 6px; }
+
+/* testversie 8: snelle start in de welkomst */
+#intro-s1.iq #intro-h, #intro-s1.iq #slot, #intro-s1.iq .age-note { display: none; }
+#intro-s1:not(.iq) .iq-tap, #intro-s1:not(.iq) #iq-other { display: none; }
+.iq-tap { margin: 2px 0 0; text-align: center; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.iq-other { display: block; max-width: 100%; white-space: normal; text-align: center; margin: 4px auto 0; min-height: 44px; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+#intro-s1.iq .agebox .age-seg .seg-opt span { padding: 15px 4px; font-size: 17px; font-weight: 600; }

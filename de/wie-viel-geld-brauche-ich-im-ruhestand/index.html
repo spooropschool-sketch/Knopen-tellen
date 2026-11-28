@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=8788b880">
+<link rel="stylesheet" href="/app.css?v=61911edb">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -512,7 +512,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/de.js?v=d8beac29"></script>
+<script src="/i18n/de.js?v=a37e16b8"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -2889,7 +2889,7 @@ var TRK = {
     setTimeout(function () { var f = $(n === 0 ? 'country-intro' : 'slot-window'); if (n !== 0 && $('slot-window')) { $('slot-window').classList.remove('nudge'); void $('slot-window').offsetWidth; $('slot-window').classList.add('nudge'); if (typeof slotBuild === 'function') slotBuild(); } if (f) f.focus({ preventScroll: true }); var mc = $('intro-card'); if (mc) mc.scrollTop = 0; }, 30);
   }
   function openIntro(step) {
-    lastFocus = document.activeElement;
+    lastFocus = document.activeElement; if (typeof iqReset === 'function') iqReset();
     ageTouched = false; bandSet(ui.introSeen ? bandOf(state.leeftijdPaul || 50) : -1);
     if ($('slot-cyl') && typeof SLN === 'number') slotBuild();
     $('intro').hidden = false;
@@ -3613,6 +3613,8 @@ var TRK = {
   TRK['extra-studyloan'] = ['extra', 'Studieschuld ingevuld (restschuld en maandbedrag)'];
   TRK['extra-studyloan-rate'] = ['extra', 'Rente studieschuld zelf aangepast'];
   TRK['pro-sl-teaser'] = ['pro', 'Teaser Aflossen of beleggen op de studieschuldkaart getikt'];
+  TRK['reach-start-quick'] = ['bereik', 'Welkom: snelle start, leeftijd getikt (testversie 8)'];
+  TRK['reach-start-other'] = ['bereik', 'Welkom: liever een andere vraag (testversie 8)'];
   TRK['reach-goal-debtfree'] = ['bereik', 'Welkom: kies doel Wanneer ben ik schuldenvrij'];
   TRK['reach-goal-abroadY'] = ['bereik', 'Welkom: kies doel Studeren, werken of wonen in het buitenland'];
   TRK['reach-goal-move'] = ['bereik', 'Welkom: kies doel Verhuizen met je gezin'];
@@ -4778,10 +4780,32 @@ var TRK = {
   (function () {
     var s1 = $('intro-s1'); if (!s1 || !$('agebox') || !$('intro-h')) return;
     var b = document.createElement('div'); b.className = 'tv-in'; b.id = 'tv-in';
-    b.innerHTML = '<h2 data-t="tv.in.h"></h2><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul><p class="tv-thanks" data-t="intro.thanks"></p>';
+    b.innerHTML = '<h2 data-t="iq.h"></h2><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul><p class="tv-thanks" data-t="intro.thanks"></p>';
     s1.insertBefore(b, s1.firstChild); s1.insertBefore($('agebox'), $('intro-h'));
+    /* testversie 8: snelle start. Eén vraag bovenaan; een tik op je leeftijd start meteen de route.
+       Het wiel staat achter "Liever met een andere vraag beginnen?" en werkt dan zoals voorheen (leeftijd + wiel + bevestigen). */
+    var tp = document.createElement('p'); tp.className = 'iq-tap'; tp.setAttribute('data-t', 'iq.tap');
+    $('agebox').appendChild(tp);
+    var ob = document.createElement('button'); ob.type = 'button'; ob.className = 'btn link iq-other'; ob.id = 'iq-other'; ob.setAttribute('data-t', 'iq.other'); ob.setAttribute('aria-expanded', 'false');
+    s1.insertBefore(ob, $('intro-h'));
+    s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other');
+    ob.addEventListener('click', function () {
+      s1.classList.remove('iq'); ob.setAttribute('aria-expanded', 'true'); track('reach-start-other');
+      if (typeof slotBuild === 'function') slotBuild();
+      setTimeout(function () { var h = $('intro-h'); if (h) h.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 30);
+    });
+    var iqBusy = false;
+    each('input[name="age-band"]', function (r) {
+      r.addEventListener('click', function () {
+        if (!s1.classList.contains('iq') || iqBusy) return;
+        var bnd = parseInt(this.value, 10); iqBusy = true;
+        ageTouched = true; bandSet(bnd);
+        setTimeout(function () { iqBusy = false; track('reach-start-quick'); pickGoal(bnd === 2 ? 'spend' : 'unsure'); }, 220);
+      });
+    });
   })();
-  function tvIntroText() { each('#tv-in [data-t]', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
+  function iqReset() { var s1 = $('intro-s1'), ob = $('iq-other'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
+  function tvIntroText() { each('#tv-in [data-t], #intro-s1 .iq-tap, #iq-other', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
   var renderFanTv = renderFan; renderFan = function () { renderFanTv(); if (tvReady) tvHome(); };
   function tvHome() {
     var host = $('tvh'); if (!host || !tvReady) return;

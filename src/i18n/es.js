@@ -815,3 +815,6 @@ Object.assign(I18N.es, {
   "qp.es-tarde.fq": "¿Es tarde para empezar a ahorrar para la jubilación a los 50?",
   "qp.es-tarde.fa": "No. Incluso con quince años por delante, una cantidad fija al mes se nota, además de tu pensión pública. En Button Counter subes tu ahorro mensual y ves al instante lo que añade más adelante."
 });
+
+/* testversie 8: snelle start */
+Object.assign(I18N.es, {"iq.h": "¿Cuánto podrás gastar al mes más adelante?", "iq.tap": "Toca tu edad y calcúlalo en dos minutos. Tu edad exacta la indicas después.", "iq.other": "¿Prefieres empezar con otra pregunta?"});

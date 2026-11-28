@@ -812,3 +812,6 @@ Object.assign(I18N.en, {
   "qp.en-social-security.fq": "Is Social Security enough to retire on?",
   "qp.en-social-security.fa": "The average retirement benefit is about {ssAvg} a month in {ssYear}. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last."
 });
+
+/* testversie 8: snelle start */
+Object.assign(I18N.en, {"iq.h": "How much can you spend each month later on?", "iq.tap": "Tap your age and work it out in two minutes. You can add your exact age later.", "iq.other": "Rather start with a different question?"});
