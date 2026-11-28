@@ -855,3 +855,4 @@ Object.assign(I18N.en, {"tv.i.bud": "Enter what you spend per month now, in toda
 Object.assign(I18N.en, {"tv.ref.go": "Refine my result", "q.stopTwo": "This is about you. For your partner, their own pension age applies."});
 Object.assign(I18N.en, {"tv.c.nm": "Sex", "tv.cs.nm": "Your sex sets the life expectancy we use"});
 Object.assign(I18N.en, {"tv.ref.sketch": "This is still a sketch. The more you fill in, the sharper your result."});
+Object.assign(I18N.en, {"tv.pic.of": "of {w}", "tv.pic.togo": "{d} to go.", "tv.pic.ok": "Goal reached: {d} to spare.", "tv.ref.sketch": "The more you fill in, the sharper your result."});

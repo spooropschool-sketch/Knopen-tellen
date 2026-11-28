@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=11cd977a">
+<link rel="stylesheet" href="/app.css?v=2e1f2689">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/es.js?v=b76c1f8a"></script>
+<script src="/i18n/es.js?v=e43de47b"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4286,7 +4286,7 @@ var TRK = {
     if (!host.querySelector('.tv-num')) host.innerHTML = '<p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>';
     var g = function (c) { return host.querySelector(c); }, dl = g('.tv-delta'), bar = g('.tv-bar'), ln = g('.tv-line'), w = state.budget, T = tv.tot || 0, d = id ? (tv.led[id] || 0) : 0;
     g('.tv-k').textContent = state.opbouw ? t1('tv.pic.opb', { a: tvAgeTxt(stopAge()), y: fmtAge(stopAge()) }) + (two() ? ' (' + nm1() + ')' : '') : t1('tv.pic.now');
-    g('.tv-pm').textContent = t1('tv.pic.pm');
+    g('.tv-pm').textContent = w > 0 ? t1('tv.pic.of', { w: eur(w) }) : t1('tv.pic.pm');   /* testversie 8: het doel staat klein naast het bedrag (Paul, 28 nov) */
     host.classList.toggle('calc', tvWaiting);
     if (tv.tot === null) g('.tv-num').textContent = '…'; else tvAnim(g('.tv-num'), tv.tot);
     dl.hidden = !d || tvWaiting;
