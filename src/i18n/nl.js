@@ -841,3 +841,4 @@ Object.assign(I18N.nl, {"iq.ctry": "Land: {c} · wijzig"});
 
 /* testversie 8: telling na alleen of met partner */ Object.assign(I18N.nl, {"tv.pic.base2": "{x} voor jullie twee telt al mee. De rest tel je er zelf bij."});
 /* testversie 8: klein vak met alleen het staatspensioen */ Object.assign(I18N.nl, {"tv.pic.spK": "{x}, later per maand", "tv.pic.spK2": "{x} voor jullie samen, later per maand"});
+/* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.nl, {"tv.pp.q": "Nog inkomen na het stoppen?", "tv.pp.save": "{v} per maand opzij", "tv.pp.work": "bijverdienen {v} tot {a}", "tv.pp.nowork": "geen inkomen na het stoppen"});

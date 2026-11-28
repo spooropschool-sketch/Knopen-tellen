@@ -2695,3 +2695,21 @@ html.tv3 #tvr-pic .tv-delta { margin-left: auto; flex: none; }
 html.tv3 #tvr-pic { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 4px 2px 0 !important; margin-bottom: 18px !important; }
 html.tv3 #tvr-body { flex: 0 0 auto !important; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px 12px 14px; margin: 0 -4px; box-shadow: 0 14px 30px -22px rgba(0, 0, 0, 0.6); }
 html.tv3 #tvr-body .tvr-q { font-size: 22px !important; }
+/* testversie 8: inleg en bijverdienen per persoon, als kaarten die je openklapt (Paul, 28 nov) */
+html[data-tvc="pp"] #step-2 .pcard > h3, html[data-tvc="pp"] #step-2 .pcard .tag, html[data-tvc="pp"] #step-2 .wk-h { display: none !important; }
+.pp-head { display: none; }
+html[data-tvc="pp"] .pp-head { display: flex; align-items: center; gap: 12px; width: 100%; margin: 0; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+html[data-tvc="pp"] .pp-head .tvr-dot { width: 26px; height: 26px; }
+.pp-tx { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pp-tx b { font-size: 16px; font-weight: 700; }
+.pp-tx span { font-size: 13.5px; color: var(--muted); line-height: 1.35; }
+.pp-chev { flex: none; width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s; }
+.pp-head[aria-expanded="true"] .pp-chev { transform: rotate(180deg); }
+html[data-tvc="pp"] #step-2 .pcard.pp-shut > :not(.pp-head) { display: none !important; }
+html[data-tvc="pp"] #step-2 .pcard:not(.pp-shut) > .pp-head { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+html[data-tvc="pp"] #step-2 .pcard.pp-nowk .wk > :not(.pp-yn) { display: none !important; }
+.pp-yn[hidden] { display: none; }
+.pp-q { margin: 4px 0 8px; font-size: 15px; font-weight: 600; }
+.pp-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.pp-o { min-height: 46px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface2); color: var(--ink); font: 600 15px var(--f-body, inherit); cursor: pointer; }
+.pp-o.on { border: 2px solid var(--accent); background: var(--accent-soft); }

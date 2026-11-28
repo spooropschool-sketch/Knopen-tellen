@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=d15e598d">
+<link rel="stylesheet" href="/app.css?v=aeaa0a48">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/en.js?v=015595ca"></script>
+<script src="/i18n/en.js?v=3e233207"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4694,8 +4694,52 @@ var TRK = {
   }
   var TVC_MORE = { uit: 1, doen: 1, loop: 1, lad: 1, pot: 1 };   /* hoofdstukken waar de uitleg is ingeklapt */
   /* ronde 5: een herberekening zet de klassen van sommige kaarten terug; verberg dan opnieuw wat niet bij het open scherm hoort (zonder de uitleg dicht te klappen) */
+  /* testversie 8: inleg en bijverdienen per persoon stap voor stap (Paul, 28 nov).
+     Elke persoon is een kaart die je openklapt; dicht zie je in één regel wat er staat, en een knoopje als hij klaar is.
+     Bijverdienen begint met Nee of Ja; pas bij Ja komen de velden. */
+  var tvPp = { open: 0, seen: {}, yes: {} };
+  function tvPpSync() {
+    if (!tvFocusCh || tvFocusCh.id !== 'pp') return;
+    var cards = document.querySelectorAll('#step-2 > .cols2 > .pcard'), vis = [];
+    Array.prototype.forEach.call(cards, function (pc) { if (pc.offsetParent || !pc.classList.contains('only2') || two()) vis.push(pc); });
+    vis.forEach(function (pc, i) {
+      var s = i ? 'D' : 'P', hd = pc.querySelector(':scope > .pp-head'), wk = pc.querySelector('.wk'), yn = wk && wk.querySelector('.pp-yn');
+      if (!hd) { hd = document.createElement('button'); hd.type = 'button'; hd.className = 'pp-head'; pc.insertBefore(hd, pc.firstChild); }
+      hd.setAttribute('data-pp', i);
+      var per = ((lists['per' + s] || []).length > 0), wv = state['werk' + s] || 0, inp = $('inl-p' + (i + 1)), inl = inp ? (+String(inp.value).replace(/\D/g, '') || 0) : 0;
+      if (tvPp.yes[s] === undefined) tvPp.yes[s] = per || wv > 0;
+      var yes = per || tvPp.yes[s];
+      if (wk && !yn) { yn = document.createElement('div'); yn.className = 'pp-yn'; wk.insertBefore(yn, wk.firstChild); }
+      if (yn) {
+        yn.hidden = per;
+        var q = t1('tv.pp.q'), h = '<p class="pp-q">' + esc(q) + '</p><div class="pp-opts"><button type="button" class="pp-o' + (yes ? '' : ' on') + '" data-ppyn="' + s + ':0">' + esc(t1('tv.v.no')) + '</button><button type="button" class="pp-o' + (yes ? ' on' : '') + '" data-ppyn="' + s + ':1">' + esc(t1('tv.v.yes')) + '</button></div>';
+        if (yn.getAttribute('data-s') !== h) { yn.innerHTML = h; yn.setAttribute('data-s', h); }
+      }
+      pc.classList.toggle('pp-nowk', !yes);
+      var parts = [];
+      if (two() && inl > 0) parts.push(t1('tv.pp.save', { v: eur(inl) }));
+      parts.push(yes ? (wv > 0 ? t1('tv.pp.work', { v: eur(wv), a: fmtAge(state['werkTot' + s] || 0) }) : (per ? t1('wk.h') : '')) : t1('tv.pp.nowork'));
+      var done = (two() ? inl > 0 : true) && (!yes || wv > 0 || per) || !!tvPp.seen[i], open = tvPp.open === i;
+      var nm = (pc.querySelector('h3') || {}).textContent || '';
+      var hh = (done ? tvKnoop(i ? 4 : 0) : '<span class="tvr-dot"></span>') + '<span class="pp-tx"><b>' + esc(nm) + '</b><span>' + esc(parts.filter(Boolean).join(' · ')) + '</span></span><svg class="pp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+      if (hd.getAttribute('data-s') !== hh) { hd.innerHTML = hh; hd.setAttribute('data-s', hh); }
+      hd.setAttribute('aria-expanded', open ? 'true' : 'false');
+      pc.classList.toggle('pp-shut', !open);
+    });
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest && ev.target.closest('.pp-head, [data-ppyn]'); if (!b || !tvFocusCh || tvFocusCh.id !== 'pp') return;
+    if (b.classList.contains('pp-head')) { var i = +b.getAttribute('data-pp'); if (tvPp.open >= 0 && tvPp.open !== i) tvPp.seen[tvPp.open] = 1; tvPp.open = tvPp.open === i ? -1 : i; if (tvPp.open < 0) tvPp.seen[i] = 1; tvPpSync(); return; }
+    var a = b.getAttribute('data-ppyn').split(':'), sx = a[0], y = a[1] === '1';
+    tvPp.yes[sx] = y;
+    var f = $('n-werk' + sx);
+    if (!y && f && (state['werk' + sx] || 0) > 0) { f.value = '0'; f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true })); }
+    tvPpSync();
+    if (y && f) setTimeout(function () { try { f.focus(); } catch (e) {} }, 30);
+  });
   function tvFocusKeep() {
     var ch = tvFocusCh; if (!tvReady || !ch) return;
+    tvPpSync();
     var pg = $('page-' + ch.page), keep = tvEls(ch); if (!pg) return;
     var sbx = $('stud-box'); if (sbx) sbx.hidden = ch.id === 'debt' && tvNoStud();
     if (!keep.length) { Array.prototype.forEach.call(pg.children, function (s) { s.classList.add('tvc-hide'); }); return; }
@@ -4735,6 +4779,7 @@ var TRK = {
     $('tvc-h').textContent = tvChTitle(ch); $('tvc-s').textContent = tvChSub(ch); $('tvc-s').hidden = !tvChSub(ch);
     var n0 = $('tvc-pic').querySelector('.tv-num'); if (n0) n0._tvV = undefined;
     tvTop(); tvEmpty();
+    if (ch.id === 'pp') { tvPp = { open: 0, seen: {}, yes: {} }; tvPpSync(); }
     /* de uitkomstkaart is getekend terwijl hij verborgen was: opnieuw tekenen, zodat de labels onder de balk elkaar niet overlappen */
     if (ch.id === 'uit' && firstDone) { try { renderOpb(); } catch (e) {} }
   }

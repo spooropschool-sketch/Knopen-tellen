@@ -841,3 +841,4 @@ Object.assign(I18N.es, {"iq.ctry": "País: {c} · cambiar"});
 
 /* testversie 8: telling na alleen of met partner */ Object.assign(I18N.es, {"tv.pic.base2": "{x} de los dos ya cuenta. El resto lo sumas tú."});
 /* testversie 8: klein vak met alleen het staatspensioen */ Object.assign(I18N.es, {"tv.pic.spK": "{x}, al mes más adelante", "tv.pic.spK2": "{x} de los dos, al mes más adelante"});
+/* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.es, {"tv.pp.q": "¿Algún ingreso después de dejar de trabajar?", "tv.pp.save": "{v} ahorrados al mes", "tv.pp.work": "ingresos {v} hasta los {a}", "tv.pp.nowork": "sin ingresos después de dejar de trabajar"});
