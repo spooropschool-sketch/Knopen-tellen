@@ -43,6 +43,9 @@ Button Counter is a free, single-page retirement calculator at https://countingb
 - [I started saving late. Can I still catch up?](https://countingbuttons.com/started-saving-late/): No. Even with fifteen years to go, a fixed monthly amount adds up, next to Social Security or a State Pension. In Button Counter you tap plus on what you set aside and see what it adds to your monthly income later.
 - [Is the State Pension enough to live on?](https://countingbuttons.com/is-the-state-pension-enough/): The full new State Pension is about £12,550 a year in 2026/27. That is just under what the Retirement Living Standards call a minimum lifestyle for one person (£13,900). Button Counter shows how much your workplace pension and savings need to add for the budget you want.
 - [Can I live on Social Security alone?](https://countingbuttons.com/can-i-live-on-social-security-alone/): The average retirement benefit is about $2,070 a month in 2026. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last.
+- [Am I on track for retirement in my 40s?](https://countingbuttons.com/am-i-on-track-for-retirement/): Compare what you will be able to spend each month later with what you want to spend. Button Counter works that out from your savings, what you set aside each month and your expected pension, and shows what an extra amount or a different stopping age changes.
+- [How much should I save each month for retirement?](https://countingbuttons.com/how-much-should-i-save-for-retirement/): It depends on your goal and your timeline, not on one rule. In Button Counter you set what you put aside each month and see what it adds to what you can spend later, next to your pension and Social Security or State Pension.
+- [Should I save or invest for retirement?](https://countingbuttons.com/save-or-invest-for-retirement/): Over long periods, investments have usually grown more than savings accounts, with ups and downs along the way. Button Counter shows what different mixes could mean for your monthly income later, so you can see the difference for yourself. It is not financial advice.
 - [Hoeveel geld heb ik nodig om te stoppen met werken?](https://countingbuttons.com/nl/hoeveel-geld-nodig-om-te-stoppen-met-werken/): Dat verschilt per persoon. Het hangt af van je maandbudget, je leeftijd bij het stoppen, je AOW en pensioen en de belasting over je vermogen. Knopenteller zet die vier bij elkaar en laat zien welk bedrag je nodig hebt om het in 9 van de 10 gevallen te halen.
 - [Hoe groot is mijn gat tot de AOW als ik eerder stop?](https://countingbuttons.com/nl/gat-tot-de-aow-overbruggen/): In die jaren betaal je alles uit eigen geld. Hoe groot dat gat is, hangt af van je stopleeftijd, je AOW-leeftijd en je maandbudget. Knopenteller rekent het per jaar uit en laat zien of je spaargeld het tot de AOW volhoudt.
 - [Hoe tel ik mijn pensioen mee in mijn FIRE-doel?](https://countingbuttons.com/nl/pensioen-meetellen-in-fire/): Vul in wat je pensioen per maand oplevert en vanaf welke leeftijd. Knopenteller telt het vanaf dat moment mee en laat zien hoeveel vermogen je daarvoor en daarna nodig hebt. Je bedrag vind je op mijnpensioenoverzicht.nl.
@@ -142,6 +145,18 @@ The full new State Pension is about £12,550 a year in 2026/27. That is just und
 ### Is Social Security enough to retire on?
 
 The average retirement benefit is about $2,070 a month in 2026. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last.
+
+### How do I know if I am on track for retirement?
+
+Compare what you will be able to spend each month later with what you want to spend. Button Counter works that out from your savings, what you set aside each month and your expected pension, and shows what an extra amount or a different stopping age changes.
+
+### How much should I save per month for retirement?
+
+It depends on your goal and your timeline, not on one rule. In Button Counter you set what you put aside each month and see what it adds to what you can spend later, next to your pension and Social Security or State Pension.
+
+### Is it better to save or invest for retirement?
+
+Over long periods, investments have usually grown more than savings accounts, with ups and downs along the way. Button Counter shows what different mixes could mean for your monthly income later, so you can see the difference for yourself. It is not financial advice.
 
 ## Facts
 

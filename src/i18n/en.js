@@ -812,3 +812,31 @@ Object.assign(I18N.en, {
   "qp.en-social-security.fq": "Is Social Security enough to retire on?",
   "qp.en-social-security.fa": "The average retirement benefit is about {ssAvg} a month in {ssYear}. Compare your own benefit with the monthly budget you want. Button Counter shows how much your savings need to add and the chance that they last."
 });
+
+/* vraagpagina's voor 35 tot 49 (Instagram), 28 nov 2026 */
+Object.assign(I18N.en, {
+ "qp.en-on-track.slug": "am-i-on-track-for-retirement",
+ "qp.en-on-track.goal": "retire",
+ "qp.en-on-track.band": "1",
+ "qp.en-on-track.h1": "Am I on track for retirement in my 40s?",
+ "qp.en-on-track.a": "Rules of thumb say you should have a set multiple of your salary saved by 40 or 45. They skip what really decides it: what you want to spend later, when you want to stop working, and what Social Security, a State Pension or a workplace pension will pay. Button Counter puts those together. In a few short questions you see what you can spend each month later on, and what changes it.",
+ "qp.en-on-track.btn": "Check if I am on track",
+ "qp.en-on-track.fq": "How do I know if I am on track for retirement?",
+ "qp.en-on-track.fa": "Compare what you will be able to spend each month later with what you want to spend. Button Counter works that out from your savings, what you set aside each month and your expected pension, and shows what an extra amount or a different stopping age changes.",
+ "qp.en-save-monthly.slug": "how-much-should-i-save-for-retirement",
+ "qp.en-save-monthly.goal": "retire",
+ "qp.en-save-monthly.band": "1",
+ "qp.en-save-monthly.h1": "How much should I save each month for retirement?",
+ "qp.en-save-monthly.a": "No single percentage fits everyone. The right amount depends on what you want to spend later, when you want to stop working, and how much your pension and Social Security or State Pension will cover. Button Counter starts from those answers. Tap plus or minus on what you set aside each month and you see straight away what it adds to your monthly income later.",
+ "qp.en-save-monthly.btn": "See what my monthly saving adds",
+ "qp.en-save-monthly.fq": "How much should I save per month for retirement?",
+ "qp.en-save-monthly.fa": "It depends on your goal and your timeline, not on one rule. In Button Counter you set what you put aside each month and see what it adds to what you can spend later, next to your pension and Social Security or State Pension.",
+ "qp.en-save-or-invest.slug": "save-or-invest-for-retirement",
+ "qp.en-save-or-invest.goal": "invest",
+ "qp.en-save-or-invest.band": "1",
+ "qp.en-save-or-invest.h1": "Should I save or invest for retirement?",
+ "qp.en-save-or-invest.a": "Over ten or twenty years, money in a savings account and money that is invested can end up far apart, especially once inflation is counted. Investing also brings ups and downs along the way. Button Counter does not tell you what to do. It shows side by side what a cautious, a balanced and a more growth-focused mix could mean for what you can spend later.",
+ "qp.en-save-or-invest.btn": "Compare saving and investing",
+ "qp.en-save-or-invest.fq": "Is it better to save or invest for retirement?",
+ "qp.en-save-or-invest.fa": "Over long periods, investments have usually grown more than savings accounts, with ups and downs along the way. Button Counter shows what different mixes could mean for your monthly income later, so you can see the difference for yourself. It is not financial advice."
+});
