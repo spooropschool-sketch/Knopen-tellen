@@ -833,3 +833,4 @@ Object.assign(I18N.nl, {"tv.h.bud": "Dit wordt je doel: wat je per maand uitgeef
 Object.assign(I18N.nl, {"tv.i.bud": "Vul in wat je nu per maand uitgeeft, in bedragen van vandaag. Prijsstijgingen tot later rekenen we zelf mee."});
 Object.assign(I18N.nl, {"tv.ref.go": "Uitkomst verfijnen", "q.stopTwo": "Dit gaat over jou. Voor je partner telt de eigen pensioenleeftijd."});
 Object.assign(I18N.nl, {"tv.c.nm": "Geslacht", "tv.cs.nm": "Je geslacht bepaalt met welke levensverwachting we rekenen"});
+Object.assign(I18N.nl, {"tv.ref.sketch": "Dit is nog een schets. Hoe meer je invult, hoe scherper je uitkomst."});

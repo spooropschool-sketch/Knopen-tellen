@@ -833,3 +833,4 @@ Object.assign(I18N.es, {"tv.h.bud": "Este será tu objetivo: lo que gastas al me
 Object.assign(I18N.es, {"tv.i.bud": "Indica lo que gastas ahora al mes, en importes de hoy. Nosotros tenemos en cuenta la subida de precios hasta entonces."});
 Object.assign(I18N.es, {"tv.ref.go": "Afinar mi resultado", "q.stopTwo": "Esto es sobre ti. Para tu pareja cuenta su propia edad de jubilación."});
 Object.assign(I18N.es, {"tv.c.nm": "Sexo", "tv.cs.nm": "Tu sexo fija la esperanza de vida con la que calculamos"});
+Object.assign(I18N.es, {"tv.ref.sketch": "Esto todavía es un boceto. Cuanto más rellenes, más preciso será tu resultado."});

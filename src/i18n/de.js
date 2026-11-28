@@ -811,3 +811,4 @@ Object.assign(I18N.de, {"tv.h.bud": "Das wird Ihr Ziel: was Sie pro Monat ausgeb
 Object.assign(I18N.de, {"tv.i.bud": "Geben Sie ein, was Sie heute pro Monat ausgeben, in heutigen Beträgen. Preissteigerungen bis dahin rechnen wir selbst mit ein."});
 Object.assign(I18N.de, {"tv.ref.go": "Ergebnis verfeinern", "q.stopTwo": "Hier geht es um Sie. Für Ihren Partner gilt das eigene Rentenalter."});
 Object.assign(I18N.de, {"tv.c.nm": "Geschlecht", "tv.cs.nm": "Ihr Geschlecht bestimmt die Lebenserwartung, mit der wir rechnen"});
+Object.assign(I18N.de, {"tv.ref.sketch": "Das ist noch eine Skizze. Je mehr Sie ausfüllen, desto genauer Ihr Ergebnis."});

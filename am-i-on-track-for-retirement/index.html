@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=d8322025">
+<link rel="stylesheet" href="/app.css?v=9bf182a7">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/en.js?v=df881a55"></script>
+<script src="/i18n/en.js?v=68031138"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4862,7 +4862,7 @@ var TRK = {
     });
     var rf = tv.fin && !wait.length ? tvRefFirst() : null;   /* testversie 7: na de route één tip voor een scherpere uitkomst */
     /* testversie 8: dezelfde knop als op het keuzescherm na de route, zodat je de keuze herkent die je liet liggen */
-    if (rf) st += '<div class="tvh-box ref"><button type="button" class="btn primary" data-tvh="c:' + rf.id + '">' + esc(t1('tv.ref.go')) + '</button><p class="tvh-ref-next">' + esc(t1('tv.ref.next', { x: tvChTitle(rf) })) + (rf.pro ? tvLock() : '') + '</p></div>';
+    if (rf) st += '<div class="tvh-box ref"><p>' + esc(t1('tv.ref.sketch')) + '</p><button type="button" class="btn primary" data-tvh="c:' + rf.id + '">' + esc(t1('tv.ref.go')) + '</button></div>';   /* Paul: "Volgende: schulden" spreekt wie geen schulden heeft niet aan */
     if (tv.fin && !tv.hint && !wait.length) st += '<p class="tvh-hint">' + esc(t1('tv.home.hint', { t: t1('tab.input') })) + '</p>';
     var sb = $('tvh-status'); if (sb.getAttribute('data-s') !== st) { sb.innerHTML = st; sb.setAttribute('data-s', st); }
     sb.classList.toggle('low', wait.length > 0 && !(tv.on && !tv.fin) && wait.every(function (q) { return tv.jobs[q.id].t > Date.now(); }));   /* testversie 4: nog niet aan de beurt, dan onder de cijfers */
@@ -4905,7 +4905,7 @@ var TRK = {
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
     var hk = '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.num')) + '</h2><div class="tvk-nums">' + tvNums().map(function (x) {
-      return x.a ? '<button type="button" class="tvk-num' + (x.w ? ' wide' : '') + '" data-tvh="' + x.a + '"><span>' + esc(x.l) + '</span><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b></button>' : '';
+      return x.a ? '<button type="button" class="tvk-num' + (x.w ? ' wide' : '') + '" data-tvh="' + x.a + '"><span>' + esc(x.l) + '</span><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b><svg class="tvk-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' : '';
     }).join('') + '<p class="tvk-facts">' + tvNums().filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.more')) + '</h2><div class="tvk-cards">';
     C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/' + TVK_IMG[c.id] + '.webp" alt="" loading="lazy" width="120" height="120"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });

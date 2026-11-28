@@ -2574,3 +2574,8 @@ html.qp-on #tvh { display: none; }
 
 /* testversie 8: naamveld weg */
 html.tv3 .nm-f { display: none !important; }
+
+/* testversie 8: cijfervakken zien er aantikbaar uit */
+.tvk-num { position: relative; padding-right: 30px; }
+.tvk-num .tvk-go { position: absolute; right: 10px; top: 50%; width: 16px; height: 16px; margin-top: -8px; fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.tvh-box.ref p { margin: 0 0 10px; }
