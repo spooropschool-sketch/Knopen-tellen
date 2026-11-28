@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=61911edb">
+<link rel="stylesheet" href="/app.css?v=66b395be">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -306,6 +306,7 @@
     <section class="card panel about-story" id="about-story" aria-labelledby="ab-story-h">
       <h2 id="ab-story-h" data-t="about.h">La idea detrás de Button Counter</h2>
       <div class="ab-story" data-t="about.body"><p class="ab-lead">Button Counter empezó como un proyecto personal. No solo quería saber dónde estaba, sino también qué podía hacer para llegar adonde quería.</p><p>Así que me puse a calcular. Puse mi propia situación en orden y cambié una sola cosa cada vez.</p><p class="ab-ifs"><span>¿Y si aporto más?</span><span>¿Y si sigo trabajando más tiempo?</span><span>¿Y si invierto de otra forma?</span></p><p>Tras cada cambio veía qué efecto tenía. Así descubrí qué estrategia me encaja mejor, no solo para decidir adónde quería llegar, sino también para llegar.</p><p class="ab-turn">Esa misma visión quiero dártela también a ti.</p><p>Por eso mis propios cálculos se convirtieron en una app para cualquiera que se haga la misma pregunta. Si estás empezando, en plena construcción o con la jubilación ya a la vista: introduces tu situación y pruebas qué marca la diferencia.</p><p>Y como se trata de tu dinero, todo se queda en tu propio navegador.</p><p class="ab-close">Porque no se trata solo de lo que construyes, sino sobre todo de lo que puedes hacer con ello.</p></div>
+      <p class="tv-thanks ab-thanks" data-t="intro.thanks">Gracias a todas las personas que han ayudado a pensar: cada comentario mejora esta app.</p>
     </section>
     <div class="about-grid">
       <section class="card panel faq" id="faq" aria-labelledby="ab-faq">
@@ -512,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/es.js?v=d53acc20"></script>
+<script src="/i18n/es.js?v=55692752"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4780,15 +4781,20 @@ var TRK = {
   (function () {
     var s1 = $('intro-s1'); if (!s1 || !$('agebox') || !$('intro-h')) return;
     var b = document.createElement('div'); b.className = 'tv-in'; b.id = 'tv-in';
-    b.innerHTML = '<h2 data-t="iq.h"></h2><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul><p class="tv-thanks" data-t="intro.thanks"></p>';
+    b.innerHTML = '<h2 data-t="iq.h"></h2><p class="iq-p"><span data-t="iq.p"></span><button type="button" class="ib iq-ib" id="iq-ib" aria-expanded="false" aria-controls="iq-more" data-t-aria="ib.more">' + IB_SVG + '</button></p>' +
+      '<div class="iq-more" id="iq-more"><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul></div><p class="tv-thanks" data-t="intro.thanks"></p>';
     s1.insertBefore(b, s1.firstChild); s1.insertBefore($('agebox'), $('intro-h'));
     /* testversie 8: snelle start. Eén vraag bovenaan; een tik op je leeftijd start meteen de route.
        Het wiel staat achter "Liever met een andere vraag beginnen?" en werkt dan zoals voorheen (leeftijd + wiel + bevestigen). */
     var tp = document.createElement('p'); tp.className = 'iq-tap'; tp.setAttribute('data-t', 'iq.tap');
     $('agebox').appendChild(tp);
+    /* testversie 8, ronde 2: rustiger start. Alleen de vraag, één korte regel en de leeftijdsknoppen; de uitleg zit achter het i'tje,
+       het dankwoord staat onder Over. */
+    $('iq-ib').setAttribute('aria-label', t1('ib.more'));
+    $('iq-ib').addEventListener('click', function () { var m = $('iq-more'), open = !m.classList.contains('open'); m.classList.toggle('open', open); this.setAttribute('aria-expanded', open ? 'true' : 'false'); if (open) track('extra-info-start'); });
     var ob = document.createElement('button'); ob.type = 'button'; ob.className = 'btn link iq-other'; ob.id = 'iq-other'; ob.setAttribute('data-t', 'iq.other'); ob.setAttribute('aria-expanded', 'false');
     s1.insertBefore(ob, $('intro-h'));
-    s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other');
+    s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other'); var ip = b.querySelector('[data-t="iq.p"]'); if (ip) ip.textContent = t1('iq.p');
     ob.addEventListener('click', function () {
       s1.classList.remove('iq'); ob.setAttribute('aria-expanded', 'true'); track('reach-start-other');
       if (typeof slotBuild === 'function') slotBuild();
@@ -4804,7 +4810,7 @@ var TRK = {
       });
     });
   })();
-  function iqReset() { var s1 = $('intro-s1'), ob = $('iq-other'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
+  function iqReset() { var s1 = $('intro-s1'), ob = $('iq-other'), m = $('iq-more'), ib = $('iq-ib'); if (m) m.classList.remove('open'); if (ib) ib.setAttribute('aria-expanded', 'false'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
   function tvIntroText() { each('#tv-in [data-t], #intro-s1 .iq-tap, #iq-other', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
   var renderFanTv = renderFan; renderFan = function () { renderFanTv(); if (tvReady) tvHome(); };
   function tvHome() {

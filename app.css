@@ -2526,3 +2526,17 @@ html.qp-on #tvh { display: none; }
 .iq-tap { margin: 2px 0 0; text-align: center; font-size: 14px; line-height: 1.45; color: var(--muted); }
 .iq-other { display: block; max-width: 100%; white-space: normal; text-align: center; margin: 4px auto 0; min-height: 44px; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
 #intro-s1.iq .agebox .age-seg .seg-opt span { padding: 15px 4px; font-size: 17px; font-weight: 600; }
+
+/* testversie 8, ronde 2: rustiger start */
+.iq-p { display: flex; align-items: center; gap: 6px; margin: 6px 0 0; }
+.iq-ib { width: 32px; height: 32px; flex: none; }
+.iq-ib svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+#intro-s1 .iq-more { display: none; }
+#intro-s1 .iq-more.open, #intro-s1:not(.iq) .iq-more { display: block; }
+#intro-s1.iq .tv-in .tv-thanks, #intro-s1.iq .age-q, #intro-s1.iq .iq-tap, #intro-s1.iq .intro-more { display: none; }
+#intro-s1:not(.iq) .iq-p .iq-ib { display: none; }
+#intro-s1.iq .agebox { margin-top: 20px; }
+.ab-thanks { margin-top: 14px; }
+
+.iq-p > span { flex: 1 1 auto; }
+#intro-s1.iq .agebox { margin-top: 14px; }

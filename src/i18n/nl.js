@@ -818,3 +818,5 @@ Object.assign(I18N.nl, {
 
 /* testversie 8: snelle start */
 Object.assign(I18N.nl, {"iq.h": "Hoeveel kun jij later per maand uitgeven?", "iq.tap": "Tik op je leeftijd en reken het uit in twee minuten. Je precieze leeftijd vul je later in.", "iq.other": "Liever met een andere vraag beginnen?"});
+
+Object.assign(I18N.nl, {"iq.p": "Tik op je leeftijd om te beginnen. Een paar korte vragen, geen account."});

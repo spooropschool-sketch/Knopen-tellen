@@ -810,3 +810,5 @@ Object.assign(I18N.fr, {
 
 /* testversie 8: snelle start */
 Object.assign(I18N.fr, {"iq.h": "Combien pourrez-vous dépenser chaque mois plus tard ?", "iq.tap": "Touchez votre âge et faites le calcul en deux minutes. Votre âge exact, vous l’indiquerez plus tard.", "iq.other": "Vous préférez commencer par une autre question ?"});
+
+Object.assign(I18N.fr, {"iq.p": "Touchez votre âge pour commencer. Quelques questions courtes, sans compte."});
