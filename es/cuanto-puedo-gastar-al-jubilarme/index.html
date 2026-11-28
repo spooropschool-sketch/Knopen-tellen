@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=9bf182a7">
+<link rel="stylesheet" href="/app.css?v=11cd977a">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -4517,6 +4517,8 @@ var TRK = {
     var hd = $('tvr-q'); if (hd) { try { hd.focus({ preventScroll: true }); } catch (e) {} }
   }
   document.addEventListener('click', function (ev) { var b = ev.target.closest ? ev.target.closest('[data-tvr-ib]') : null; if (!b) return; var m = b.parentNode.nextElementSibling; if (!m) return; m.hidden = !m.hidden; b.setAttribute('aria-expanded', m.hidden ? 'false' : 'true'); if (!m.hidden) track('extra-info-bud'); });
+  var tvBasisOpen = false;
+  document.addEventListener('toggle', function (ev) { if (ev.target && ev.target.id === 'tvh-fold') tvBasisOpen = ev.target.open; }, true);
   function tvOpenUi() {
     var el = $('tvr'); if (!el) return;
     if (!$('tvr-body')) el.innerHTML = '<div class="tvr-wrap"><header class="tvr-head"><span class="tvr-tag" id="tvr-tag"></span><div class="tvr-dots" id="tvr-dots" aria-hidden="true"></div><button type="button" class="tvr-x" id="tvr-x" data-tvr="close">×</button></header>' +
@@ -4874,7 +4876,11 @@ var TRK = {
     /* je knopen: de vragen van de route, met wat elk antwoord bijdraagt */
     S.forEach(function (q) { ids[q.id] = 1; }); C.forEach(function (c) { ids[c.id] = 1; });
     Object.keys(tv.led).forEach(function (k) { if (!ids[k]) oth += tv.led[k]; });
-    h += '<h2 class="tvh-g">' + esc(t1('tv.g.basis')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span></h2><div class="tvh-rows">';
+    /* testversie 8: zijn alle basisvragen beantwoord, dan klapt de basis in (met een vinkje), zodat verfijnen bovenaan in beeld komt (Paul, 28 nov) */
+    var bAll = n >= m && m > 0;
+    var bHead = esc(t1('tv.g.basis')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span>';
+    if (bAll) h += '<details class="tvh-fold" id="tvh-fold"' + (tvBasisOpen ? ' open' : '') + '><summary><h2 class="tvh-g"><svg class="tvh-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>' + bHead + '<svg class="tvh-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></h2></summary><div class="tvh-rows">';
+    else h += '<h2 class="tvh-g">' + bHead + '</h2><div class="tvh-rows">';
     function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + (o.lock ? tvLock() : '') + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
     function adds(d) { return d ? t1(d > 0 ? 'tv.row.up' : 'tv.row.down', { v: eur(Math.abs(d)) }) : ''; }
     function join(a, b) { return a && b ? a + ' · ' + b : (a || b); }
@@ -4889,7 +4895,7 @@ var TRK = {
         s: join(done || q.job ? tvAnswer(q) : '', adds(d)), st: done ? 'ok' : (parked ? 'wait' : 'todo') });
     });
     if (oth) h += '<div class="tvh-row fix"><span class="tvr-dot"></span><span class="tvh-tx"><b>' + esc(t1('tv.fin.oth')) + '</b></span>' + tvDelta(oth) + '</div>';
-    h += '</div>';
+    h += '</div>' + (bAll ? '</details>' : '');
     function chRow(c) { return tvRow({ act: 'c:' + c.id, t: tvChTitle(c), s: tvChSub(c), r: tvDelta(tv.led[c.id] || 0) + (c.pro ? tvLock() : '') }); }
     /* testversie 7: verfijnen met dezelfde knopen als de basis (Optioneel tot je er iets mee doet), daarna de aannames klein met hun waarde */
     var R = tvRefs(), rn = R.filter(function (c) { return tv.vf[c.id]; }).length;

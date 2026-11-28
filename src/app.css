@@ -2579,3 +2579,13 @@ html.tv3 .nm-f { display: none !important; }
 .tvk-num { position: relative; padding-right: 30px; }
 .tvk-num .tvk-go { position: absolute; right: 10px; top: 50%; width: 16px; height: 16px; margin-top: -8px; fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .tvh-box.ref p { margin: 0 0 10px; }
+
+/* testversie 8: basis ingeklapt als alles is beantwoord */
+.tvh-fold > summary { list-style: none; cursor: pointer; }
+.tvh-fold > summary::-webkit-details-marker { display: none; }
+.tvh-fold > summary .tvh-g { display: flex; align-items: center; gap: 8px; }
+.tvh-fold > summary .tvh-g > span { margin-left: auto; }
+.tvh-check { width: 20px; height: 20px; flex: none; fill: var(--accent); stroke: var(--surface); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.tvh-check circle { stroke: none; }
+.tvh-chev { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+.tvh-fold[open] .tvh-chev { transform: rotate(180deg); }
