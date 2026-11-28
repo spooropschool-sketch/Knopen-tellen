@@ -2633,3 +2633,8 @@ html.tv3 .tvh-hint { display: none; }
 html.tv3 .tv-bar i { background: #7FA58E; }
 html.tv3 .tv-bar.ok i { background: var(--good); }
 html.tv3 .tvk-num b.neg { color: var(--ink); }
+
+/* testversie 8: land en taal klein onderaan de welkomst */
+.iq-ctry { display: block; margin: 2px auto 0; min-height: 40px; font-size: 13.5px; color: var(--muted); text-decoration: none; }
+#intro-s1:not(.iq) .iq-ctry { display: none; }
+html.tv3 .btn.link.iq-ctry { color: var(--muted); font-weight: 500; }

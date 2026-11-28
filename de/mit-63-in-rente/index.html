@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=c339a407">
+<link rel="stylesheet" href="/app.css?v=d151a3fe">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/de.js?v=0af4ecdd"></script>
+<script src="/i18n/de.js?v=8fba8a81"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -2882,7 +2882,7 @@ var TRK = {
   /* ================= introductie ================= */
   var lastFocus = null, langTouched = false;
   function introStep(n) {
-    $('intro-s0').hidden = n !== 0; $('intro-s1').hidden = n !== 1;
+    $('intro-s0').hidden = n !== 0; $('intro-s1').hidden = n !== 1; if (n === 1 && typeof iqCtry === 'function') setTimeout(iqCtry, 0);
     var ib = $('intro-brand');
     if (n === 0) { ib.removeAttribute('data-t'); ib.setAttribute('data-t-en', 'brand'); ib.textContent = t1('brand'); }
     else { ib.removeAttribute('data-t-en'); ib.setAttribute('data-t', 'brand'); ib.textContent = t1('brand'); }
@@ -2896,7 +2896,7 @@ var TRK = {
     $('intro').hidden = false;
     introStep(step === 0 ? 0 : 1);
   }
-  $('intro-next').addEventListener('click', function () { introStep(1); });
+  $('intro-next').addEventListener('click', function () { introStep(1); if (typeof iqCtry === 'function') iqCtry(); });
   function closeIntro(thenTour) {
     $('intro').hidden = true;
     ui.introSeen = true; saveUi(); savePrefs();
@@ -3289,7 +3289,7 @@ var TRK = {
     ui.introSeen = true; if (typeof ui.relSeen !== 'number') ui.relSeen = REL_LAST; saveUi(); showGoal(); track('reach-landing-' + (LPP || LPG));
     if (!lpFirst) openRel();
   } else if (LEAVING) { /* doorsturen naar de pagina van je taal: die laat het welkomstvenster of Wat is er nieuw zien */ }
-  else if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(0); } else openRel();
+  else if (!ui.introSeen || planFromLink) { if (typeof ui.relSeen !== 'number') { ui.relSeen = REL_LAST; saveUi(); } if (!ui.introSeen) openIntro(1); } else openRel();   /* testversie 8: geen apart scherm voor land en taal; die staan klein onderaan de welkomst (Paul, 28 nov) */
 
   /* ================= Pro op slot (meetfase: Pro komt eraan) =================
      Pro-functies zijn zichtbaar maar zitten op slot. Een tik opent een venster waarin
@@ -4805,6 +4805,9 @@ var TRK = {
     $('iq-ib').addEventListener('click', function () { var m = $('iq-more'), open = !m.classList.contains('open'); m.classList.toggle('open', open); this.setAttribute('aria-expanded', open ? 'true' : 'false'); if (open) track('extra-info-start'); });
     var ob = document.createElement('button'); ob.type = 'button'; ob.className = 'btn link iq-other'; ob.id = 'iq-other'; ob.setAttribute('data-t', 'iq.other'); ob.setAttribute('aria-expanded', 'false');
     s1.insertBefore(ob, $('intro-h'));
+    var cb = document.createElement('button'); cb.type = 'button'; cb.className = 'btn link iq-ctry'; cb.id = 'iq-ctry';
+    s1.insertBefore(cb, $('intro-h'));
+    cb.addEventListener('click', function () { introStep(0); });
     s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other'); each('#tv-in [data-t], .iq-picks [data-t]', function (e) { e.textContent = t1(e.getAttribute('data-t')); });
     ob.addEventListener('click', function () {
       s1.classList.remove('iq'); ob.setAttribute('aria-expanded', 'true'); track('reach-start-other');
@@ -4836,7 +4839,8 @@ var TRK = {
       });
     });
   })();
-  function iqReset() { var s1 = $('intro-s1'), ob = $('iq-other'), m = $('iq-more'), ib = $('iq-ib'); if (m) m.classList.remove('open'); if (ib) ib.setAttribute('aria-expanded', 'false'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
+  function iqCtry() { var cb = $('iq-ctry'), sel = $('country-intro'); if (!cb || !sel || sel.selectedIndex < 0) return; cb.textContent = t1('iq.ctry', { c: sel.options[sel.selectedIndex].text }); }
+  function iqReset() { iqCtry(); var s1 = $('intro-s1'), ob = $('iq-other'), m = $('iq-more'), ib = $('iq-ib'); if (m) m.classList.remove('open'); if (ib) ib.setAttribute('aria-expanded', 'false'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
   function tvIntroText() { each('#tv-in [data-t], .iq-picks [data-t], #intro-s1 .iq-tap, #iq-other', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
   var renderFanTv = renderFan; renderFan = function () { renderFanTv(); if (tvReady) tvHome(); };
   function tvHome() {

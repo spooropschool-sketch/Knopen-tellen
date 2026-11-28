@@ -836,3 +836,5 @@ Object.assign(I18N.nl, {"tv.c.nm": "Geslacht", "tv.cs.nm": "Je geslacht bepaalt 
 Object.assign(I18N.nl, {"tv.ref.sketch": "Dit is nog een schets. Hoe meer je invult, hoe scherper je uitkomst."});
 Object.assign(I18N.nl, {"tv.pic.of": "van {w}", "tv.pic.togo": "Nog {d} te gaan.", "tv.pic.ok": "Je doel is gehaald: {d} over.", "tv.ref.sketch": "Hoe meer je invult, hoe scherper je uitkomst."});
 Object.assign(I18N.nl, {"tv.ref.sharp": "Maak je uitkomst scherper", "tv.g.basis2": "Je basis", "tv.g.basisDone": "Alle {n} vragen beantwoord"});
+Object.assign(I18N.nl, {"iq.ctry": "Je rekent voor {c} · wijzig"});
+Object.assign(I18N.nl, {"iq.ctry": "Land: {c} · wijzig"});

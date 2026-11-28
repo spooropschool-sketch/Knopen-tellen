@@ -814,3 +814,5 @@ Object.assign(I18N.de, {"tv.c.nm": "Geschlecht", "tv.cs.nm": "Ihr Geschlecht bes
 Object.assign(I18N.de, {"tv.ref.sketch": "Das ist noch eine Skizze. Je mehr Sie ausfüllen, desto genauer Ihr Ergebnis."});
 Object.assign(I18N.de, {"tv.pic.of": "von {w}", "tv.pic.togo": "Es fehlen noch {d}.", "tv.pic.ok": "Ziel erreicht: {d} übrig.", "tv.ref.sketch": "Je mehr Sie ausfüllen, desto genauer Ihr Ergebnis."});
 Object.assign(I18N.de, {"tv.ref.sharp": "Ergebnis genauer machen", "tv.g.basis2": "Ihre Basis", "tv.g.basisDone": "Alle {n} Fragen beantwortet"});
+Object.assign(I18N.de, {"iq.ctry": "Sie rechnen für {c} · ändern"});
+Object.assign(I18N.de, {"iq.ctry": "Land: {c} · ändern"});

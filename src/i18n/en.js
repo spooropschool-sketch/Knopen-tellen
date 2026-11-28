@@ -857,3 +857,5 @@ Object.assign(I18N.en, {"tv.c.nm": "Sex", "tv.cs.nm": "Your sex sets the life ex
 Object.assign(I18N.en, {"tv.ref.sketch": "This is still a sketch. The more you fill in, the sharper your result."});
 Object.assign(I18N.en, {"tv.pic.of": "of {w}", "tv.pic.togo": "{d} to go.", "tv.pic.ok": "Goal reached: {d} to spare.", "tv.ref.sketch": "The more you fill in, the sharper your result."});
 Object.assign(I18N.en, {"tv.ref.sharp": "Sharpen your result", "tv.g.basis2": "Your basics", "tv.g.basisDone": "All {n} questions answered"});
+Object.assign(I18N.en, {"iq.ctry": "Calculating for {c} · change"});
+Object.assign(I18N.en, {"iq.ctry": "Country: {c} · change"});
