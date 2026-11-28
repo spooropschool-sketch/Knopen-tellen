@@ -4694,6 +4694,8 @@ var TRK = {
     if (tvRefFwd.length) tvRefs().forEach(function (c) { if (c.id === tvRefFwd[tvRefFwd.length - 1]) nx = c; });
     /* testversie 8: Terug en Volgende, net als in de route; sluiten doe je met de X (die telt als Klaar). Klaar staat er alleen op het laatste scherm (Paul, 28 nov) */
     var pv = tvRefHist.length ? tvRefHist[tvRefHist.length - 1] : '';
+    if (!pv) { var RL = tvRefs(); for (var ri = 1; ri < RL.length; ri++) if (RL[ri].id === ch.id) pv = RL[ri - 1].id; }   /* niet via Volgende gekomen: het scherm ervoor in het rijtje */
+    if (!pv) pv = 'home';   /* het eerste scherm: terug naar waar je vandaan kwam */
     f.innerHTML = (pv ? '<button type="button" class="btn ghost tvc-prev" data-tvref="prev:' + pv + '">' + esc(t1('tv.prev')) + '</button>' : '') +
       (nx ? '<button type="button" class="btn primary" data-tvref="next:' + nx.id + '">' + esc(t1('tv.ref.next', { x: tvChTitle(nx) })) + '</button>'
           : '<button type="button" class="btn primary" data-tvref="done">' + esc(t1('tv.ready')) + '</button>');
@@ -5108,6 +5110,7 @@ var TRK = {
     if ((b = T0.closest('[data-tvref]'))) {   /* testversie 7: Klaar of Volgende onder een verfijnscherm */
       var rv = b.getAttribute('data-tvref'); if (tvFocusCh) tvRefMark(tvFocusCh.id);
       if (rv === 'done') { tvRefLeft = -1; tvRefHist = []; tvRefFwd = []; tvToHome(false); }
+      else if (rv === 'prev:home') { tvRefHist = []; tvRefFwd = []; tvToHome(false); }
       else if (rv.indexOf('prev:') === 0) { tvRefHist.pop(); if (tvFocusCh) tvRefFwd.push(tvFocusCh.id); if (tvRefLeft >= 0) tvRefLeft++; track('extra-ref-prev'); navTo('#k-' + rv.slice(5), 1, true); }
       else { if (tvFocusCh) tvRefHist.push(tvFocusCh.id); if (tvRefFwd.length && tvRefFwd[tvRefFwd.length - 1] === rv.slice(5)) tvRefFwd.pop(); else tvRefFwd = []; if (tvRefLeft > 0) tvRefLeft--; track('extra-ref-next'); navTo('#k-' + rv.slice(5), 1, true); }
       return;
