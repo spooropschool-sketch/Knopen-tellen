@@ -514,7 +514,7 @@
 </div>
 
 <script src="/model.js?v=b8be8ccd" data-model></script>
-<script src="/i18n/de.js?v=360e2393"></script>
+<script src="/i18n/de.js?v=d5a830f8"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -778,7 +778,7 @@
     stopLeeftijd: 0,   /* leeftijd waarop je stopt met werken (opbouw); 0 = op je pensioenleeftijd (versie 25) */
     exCap: 0, exBud: 0, exInl: 0, exAge: 0   /* voorbeeldplan (versie 25): de bedragen die de knop 'Probeer eerst een voorbeeld' heeft ingevuld; 0 = geen voorbeeld */
   };
-  var APPV = '28 · 2026-11', TV = true;   /* versie 26: de hele app rond je telling (was testversie 6); versie 27: Invullen in drie lagen (was testversie 7); versie 28: inschatting per land bij belasting, hints bij staatspensioen */
+  var APPV = '29 · 2026-11', TV = true;   /* versie 29: snelle start, telling bij elke vraag, Overzicht als ring, één Pro-patroon (was testversie 8); versie 26: de hele app rond je telling (was testversie 6); versie 27: Invullen in drie lagen (was testversie 7); versie 28: inschatting per land bij belasting, hints bij staatspensioen */
   document.documentElement.classList.add('tv3');
   var state = {};
   /* stopleeftijd in de opbouw: zelf gekozen, of anders de leeftijd waarop je pensioen ingaat */
@@ -3073,7 +3073,7 @@ var TRK = {
     else openInst(isIOS ? 'ios' : 'other');
   });
   /* versies met hun punten; nieuwe versie = regel bovenaan toevoegen plus teksten rel.<v>.* */
-  var RELEASES = [{ v: 28, n: 1, f: 0 }, { v: 27, n: 4, f: 5 }, { v: 26, n: 7, f: 0 }, { v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
+  var RELEASES = [{ v: 29, n: 6, f: 2 }, { v: 28, n: 1, f: 0 }, { v: 27, n: 4, f: 5 }, { v: 26, n: 7, f: 0 }, { v: 25, n: 8, f: 0 }, { v: 24, n: 2, f: 0 }, { v: 23, n: 7, f: 0 }, { v: 22, n: 3, f: 0 }, { v: 21, n: 6, f: 0 }, { v: 20, n: 7, f: 0 }, { v: 19, n: 1, f: 0 }, { v: 18, n: 2, f: 0 }, { v: 17, n: 2, f: 0 }, { v: 16, n: 3, f: 0 }, { v: 15, n: 1, f: 0 }, { v: 14, n: 2, f: 0 },{ v: 12, n: 1, f: 0 }, { v: 11, n: 1, f: 0 }, { v: 9, n: 2, f: 0 }, { v: 8, n: 2, f: 0 }, { v: 7, n: 6, f: 5 }], REL_LAST = RELEASES[0].v;
   function relMissed() { var seen = typeof ui.relSeen === 'number' ? ui.relSeen : 6; return RELEASES.filter(function (r) { return r.v > seen; }); }
   function relList(r, kind, cnt) { var h = ''; for (var i = 1; i <= cnt; i++) h += '<li>' + t1('rel.' + r.v + '.' + kind + i) + '</li>'; return h; }
   function openRel() {
