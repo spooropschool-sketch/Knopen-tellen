@@ -2629,3 +2629,7 @@ html.tv3 .tvk-card .tv-lock { margin-left: 6px; }
 html.tv3 .tvh-st.opt { display: none; }
 /* de pijltjes laten al zien dat je kunt tikken */
 html.tv3 .tvh-hint { display: none; }
+/* testversie 8: geen rood bij je doel. De balk vult in salie en wordt pas groen als je doel gehaald is; "Onder je doel" in een neutrale kleur (Paul, 28 nov) */
+html.tv3 .tv-bar i { background: #7FA58E; }
+html.tv3 .tv-bar.ok i { background: var(--good); }
+html.tv3 .tvk-num b.neg { color: var(--ink); }
