@@ -848,3 +848,4 @@ Object.assign(I18N.nl, {"tv.pro.curveS": "Onderzoek in Nederland, het Verenigd K
 Object.assign(I18N.nl, {"pl.pMore": "Meer dan € 29"});
 /* testversie 8: Pro-kaart ontwerp C */ Object.assign(I18N.nl, {"tv.pro.h": "Nog één stap naar het hele beeld", "tv.pro.cta": "Maak je plan compleet · {p}", "tv.pro.once": "Eenmalig, geen abonnement."});
 /* testversie 8: Pro-venster als echte aankoop, eerlijk na de tik */ Object.assign(I18N.nl, {"pl.inPro": "In Pro zit:", "pl.fakeH": "Pro is nog in de maak", "pl.fake": "Er is niets afgerekend. Dank je: met je tik help je bepalen wat er als eerste in komt. De basis blijft altijd gratis."});
+Object.assign(I18N.nl, {"tv.curve.ex": "Onderzoek in Nederland, het Verenigd Koninkrijk en de Verenigde Staten laat zien: hoe ouder mensen worden, hoe minder ze gemiddeld uitgeven. Vlak rekent zonder die daling. Typisch en Sterk dalend rekenen ermee, en dan heb je vaak flink minder nodig."});

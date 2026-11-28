@@ -2723,9 +2723,15 @@ html[data-tvc="pp"] #step-2 .pcard.pp-nowk .wk > :not(.pp-yn) { display: none !i
 .tvp-tx span { font-size: 13.5px; line-height: 1.4; color: var(--ink2); }
 .tvp-go { grid-column: 1 / -1; min-height: 46px; border: 0; border-radius: 99px; background: var(--copper); color: var(--bg); font-weight: 700; }
 /* de Pro-regels in de schermen zelf zijn knoppen, geen losse groene tekst */
-html.tv3 .inl-pro, html.tv3 .wk-tog:has(.pro-tag) { display: flex !important; align-items: center; justify-content: space-between; gap: 10px; width: 100%; box-sizing: border-box; min-height: 48px; margin-top: 10px; padding: 10px 14px; border: 1px dashed var(--copper); border-radius: 14px; background: transparent; color: var(--ink); font-weight: 600; text-decoration: none; text-align: left; }
+html.tv3 .inl-pro, html.tv3 .wk-tog:has(.pro-tag) { display: flex !important; align-items: center; justify-content: space-between; gap: 10px; width: 100%; box-sizing: border-box; min-height: 48px; margin-top: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface2); color: var(--ink); font-weight: 600; text-decoration: none; text-align: left; }
 /* testversie 8: uitgavenverloop en sparen per periode tonen alleen de Pro-kaart */
-html[data-tvc="curve"] #snel, html[data-tvc="per"] #snel, html[data-tvc="curve"] #tvc-more, html[data-tvc="per"] #tvc-more, html[data-tvc="curve"] #tvc-empty, html[data-tvc="per"] #tvc-empty { display: none !important; }
+/* testversie 8: uitgavenverloop en sparen per periode tonen hun eigen knoppen, met uitleg; de Pro-kaart opent bij een slotje */
+html[data-tvc="curve"] #snel .ec-img, html[data-tvc="curve"] #snel .snel-body > :not(.snel-grid), html[data-tvc="curve"] #snel .snel-grid > :not(.curve-f),
+html[data-tvc="per"] #snel .ec-img, html[data-tvc="per"] #snel .snel-body > :not(.snel-grid), html[data-tvc="per"] #snel .snel-grid > :not(#inl-per),
+html[data-tvc="curve"] #tvc-empty, html[data-tvc="per"] #tvc-empty { display: none !important; }
+html[data-tvc="curve"] #snel .snel-grid, html[data-tvc="per"] #snel .snel-grid { display: flex; flex-direction: column; gap: 18px; }
+.tvp-ex { margin: 6px 0 12px; font-size: 14.5px; line-height: 1.45; color: var(--ink2); }
+.tvp-slot2 { margin-top: 12px; }
 .tvc-pro.solo { margin-top: 8px; }
 .tvc-pro.solo .tvp-card { padding: 18px 16px; }
 .tvc-pro.solo .tvp-tx b { font-size: 18px; }

@@ -869,3 +869,4 @@ Object.assign(I18N.en, {"tv.pro.curveS": "Research in the Netherlands, the UK an
 Object.assign(I18N.en, {"pl.pMore": "More than €29"});
 /* testversie 8: Pro-kaart ontwerp C */ Object.assign(I18N.en, {"tv.pro.h": "One step to the full picture", "tv.pro.cta": "Complete your plan · {p}", "tv.pro.once": "One-time, no subscription."});
 /* testversie 8: Pro-venster als echte aankoop, eerlijk na de tik */ Object.assign(I18N.en, {"pl.inPro": "Pro includes:", "pl.fakeH": "Pro is still being built", "pl.fake": "Nothing has been charged. Thank you: your tap helps decide what goes in first. The basics stay free."});
+Object.assign(I18N.en, {"tv.curve.ex": "Research in the Netherlands, the UK and the US shows that the older people get, the less they spend on average. Flat ignores that decline. Typical and Strong decline include it, and you then often need quite a bit less."});

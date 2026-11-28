@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=4df94466">
+<link rel="stylesheet" href="/app.css?v=03912604">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -519,7 +519,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=e450573a"></script>
+<script src="/i18n/fr.js?v=b647b137"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -3484,6 +3484,14 @@ var TRK = {
   document.addEventListener('click', function (ev) {
     if (!ev.target.closest || ev.target.closest('.pl-modal')) return;
     var t = ev.target, w = null, g = t.closest('.pl-gate'), pt = t.closest('.pro-tag');
+    /* testversie 8 (Paul, 28 nov): overal hetzelfde patroon. Je ziet wat er is; een tik op iets met een slotje klapt daar de Pro-kaart open */
+    if (tvFocusCh && ['curve', 'per', 'pp'].indexOf(tvFocusCh.id) >= 0) {
+      var an = null, ww = null, so = t.closest('.curve-f .seg-opt');
+      if (so) { var si = so.querySelector('input'); if (si && si.value !== '0') { an = so.closest('.curve-f'); ww = 'spend-curve'; } }
+      else if (t.closest('.inl-pro')) { an = $('inl-per'); ww = 'period'; }
+      else { var wt = t.closest('.wk-tog'); if (wt && wt.querySelector('.pro-tag')) { an = wt.parentNode; ww = 'period'; } }
+      if (an) { ev.preventDefault(); ev.stopPropagation(); tvProToggle(an, ww); return; }
+    }
     if (pt) w = pt.getAttribute('data-pro');
     else if (g) w = g.getAttribute('data-pl');
     else if (t.closest('[data-tvpro]')) w = t.closest('[data-tvpro]').getAttribute('data-tvpro');
@@ -4690,7 +4698,7 @@ var TRK = {
   function tvRefMark(id) { if (!tv.vf[id]) { tv.vf[id] = 1; tvSave(); track('extra-ref-done'); } }
   /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
   /* testversie 8: in de verfijnschermen kom je een paar keer langs Pro, met een echte knop (Paul, 28 nov) */
-  var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans' };
+  var TV_PRO = {};   /* testversie 8: geen losse Pro-kaarten meer onder een scherm; de kaart opent waar je op een slotje tikt (Paul, 28 nov) */
   var TV_PROBOX = { debt: ['debts-box', 'debts'], pot: ['pots-box', 'pots'] };   /* hier opent de kaart pas als je het onderdeel met het slotje openklapt (Paul, 28 nov) */   /* schulden: de kaart opent onder Grote schulden (Paul, 28 nov) */
   var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* schermen die alleen uit de Pro-kaart bestaan: één zin uitleg erbij */   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
   function proPrice() { return prefs.lang === 'nl' ? '€ 29' : (prefs.lang === 'en' ? '€29' : '29 €'); }
@@ -4700,6 +4708,21 @@ var TRK = {
     h.classList.toggle('solo', !!TV_PROTX[ch.id]);
     h.innerHTML = tvProHtml(w, ch.id);
     track('pro-1-zien-' + w);
+  }
+  function tvProToggle(box, w) {
+    var sl = box.querySelector(':scope > .tvp-slot2');
+    if (sl) { sl.remove(); return; }
+    sl = document.createElement('div'); sl.className = 'tvp-slot2'; sl.innerHTML = tvProHtml(w, ''); box.appendChild(sl);
+    track('pro-1-zien-' + w); track('pro-2-slot-' + w);
+  }
+  /* uitleg bij de knoppen zelf, zodat je leest wat het is voordat je een slotje ziet */
+  function tvProExplain(ch) {
+    each('.tvp-slot2', function (e) { e.remove(); });
+    var cf = document.querySelector('#snel .curve-f'), ip = $('inl-per');
+    if (cf && !cf.querySelector('.tvp-ex')) { var a = document.createElement('p'); a.className = 'tvp-ex'; var ft = cf.querySelector('.ftop'); if (ft) ft.insertAdjacentElement('afterend', a); else cf.insertBefore(a, cf.firstChild); }
+    if (ip && !ip.querySelector('.tvp-ex')) { var b = document.createElement('p'); b.className = 'tvp-ex'; ip.insertBefore(b, ip.firstChild); }
+    var e1 = cf && cf.querySelector('.tvp-ex'), e2 = ip && ip.querySelector('.tvp-ex');
+    if (e1) e1.textContent = t1('tv.curve.ex'); if (e2) e2.textContent = t1('inl.proWhy');
   }
   function tvProHtml(w, cid) {
     var T = plT();
@@ -4843,6 +4866,7 @@ var TRK = {
     var n0 = $('tvc-pic').querySelector('.tv-num'); if (n0) n0._tvV = undefined;
     tvTop(); tvEmpty();
     if (ch.id === 'pp') { tvPp = { open: 0, seen: {}, yes: {} }; tvPpSync(); }
+    tvProExplain(ch);
     /* de uitkomstkaart is getekend terwijl hij verborgen was: opnieuw tekenen, zodat de labels onder de balk elkaar niet overlappen */
     if (ch.id === 'uit' && firstDone) { try { renderOpb(); } catch (e) {} }
   }
