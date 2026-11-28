@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=66b395be">
+<link rel="stylesheet" href="/app.css?v=03aca082">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -518,7 +518,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/de.js?v=3ae7f065"></script>
+<script src="/i18n/de.js?v=381b6520"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4786,7 +4786,7 @@ var TRK = {
   (function () {
     var s1 = $('intro-s1'); if (!s1 || !$('agebox') || !$('intro-h')) return;
     var b = document.createElement('div'); b.className = 'tv-in'; b.id = 'tv-in';
-    b.innerHTML = '<h2 data-t="iq.h"></h2><p class="iq-p"><span data-t="iq.p"></span><button type="button" class="ib iq-ib" id="iq-ib" aria-expanded="false" aria-controls="iq-more" data-t-aria="ib.more">' + IB_SVG + '</button></p>' +
+    b.innerHTML = '<h2 data-t="home.h1"></h2><p class="iq-p"><span data-t="iq.p"></span><button type="button" class="ib iq-ib" id="iq-ib" aria-expanded="false" aria-controls="iq-more" data-t-aria="ib.more">' + IB_SVG + '</button></p>' +
       '<div class="iq-more" id="iq-more"><p data-t="tv.in.p"></p><ul><li data-t="tv.in.1"></li><li data-t="tv.in.2"></li><li data-t="tv.in.3"></li></ul></div><p class="tv-thanks" data-t="intro.thanks"></p>';
     s1.insertBefore(b, s1.firstChild); s1.insertBefore($('agebox'), $('intro-h'));
     /* testversie 8: snelle start. Eén vraag bovenaan; een tik op je leeftijd start meteen de route.
@@ -4799,13 +4799,27 @@ var TRK = {
     $('iq-ib').addEventListener('click', function () { var m = $('iq-more'), open = !m.classList.contains('open'); m.classList.toggle('open', open); this.setAttribute('aria-expanded', open ? 'true' : 'false'); if (open) track('extra-info-start'); });
     var ob = document.createElement('button'); ob.type = 'button'; ob.className = 'btn link iq-other'; ob.id = 'iq-other'; ob.setAttribute('data-t', 'iq.other'); ob.setAttribute('aria-expanded', 'false');
     s1.insertBefore(ob, $('intro-h'));
-    s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other'); var ip = b.querySelector('[data-t="iq.p"]'); if (ip) ip.textContent = t1('iq.p');
+    s1.classList.add('iq'); tp.textContent = t1('iq.tap'); ob.textContent = t1('iq.other'); each('#tv-in [data-t], .iq-picks [data-t]', function (e) { e.textContent = t1(e.getAttribute('data-t')); });
     ob.addEventListener('click', function () {
       s1.classList.remove('iq'); ob.setAttribute('aria-expanded', 'true'); track('reach-start-other');
       if (typeof slotBuild === 'function') slotBuild();
       setTimeout(function () { var h = $('intro-h'); if (h) h.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 30);
     });
     var iqBusy = false;
+    /* testversie 8, ronde 3: drie vraagknoppen, elk met een eigen leeftijdsgroep (Paul, 28 nov) */
+    var IQ_GOAL = ['rich', 'retire', 'enough'];
+    var pk = document.createElement('div'); pk.className = 'iq-picks'; pk.setAttribute('role', 'group');
+    [0, 1, 2].forEach(function (bnd) {
+      var bt = document.createElement('button'); bt.type = 'button'; bt.className = 'iq-pick'; bt.setAttribute('data-band', bnd);
+      bt.innerHTML = '<b data-t="iq.q' + bnd + '"></b><span data-t="iq.a' + bnd + '"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+      bt.addEventListener('click', function () {
+        if (iqBusy) return; iqBusy = true;
+        ageTouched = true; bandSet(bnd); bt.classList.add('on');
+        setTimeout(function () { iqBusy = false; bt.classList.remove('on'); track('reach-start-quick'); pickGoal(IQ_GOAL[bnd]); }, 180);
+      });
+      pk.appendChild(bt);
+    });
+    s1.insertBefore(pk, $('agebox'));
     each('input[name="age-band"]', function (r) {
       r.addEventListener('click', function () {
         if (!s1.classList.contains('iq') || iqBusy) return;
@@ -4816,7 +4830,7 @@ var TRK = {
     });
   })();
   function iqReset() { var s1 = $('intro-s1'), ob = $('iq-other'), m = $('iq-more'), ib = $('iq-ib'); if (m) m.classList.remove('open'); if (ib) ib.setAttribute('aria-expanded', 'false'); if (s1) s1.classList.add('iq'); if (ob) ob.setAttribute('aria-expanded', 'false'); }
-  function tvIntroText() { each('#tv-in [data-t], #intro-s1 .iq-tap, #iq-other', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
+  function tvIntroText() { each('#tv-in [data-t], .iq-picks [data-t], #intro-s1 .iq-tap, #iq-other', function (e) { e.textContent = t1(e.getAttribute('data-t')); }); }
   var renderFanTv = renderFan; renderFan = function () { renderFanTv(); if (tvReady) tvHome(); };
   function tvHome() {
     var host = $('tvh'); if (!host || !tvReady) return;

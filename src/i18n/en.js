@@ -842,3 +842,6 @@ Object.assign(I18N.en, {
 });
 
 Object.assign(I18N.en, {"iq.p": "Tap your age to start. A few short questions, no account.", "iq.h": "How much can you spend each month later on?", "iq.tap": "Tap your age and work it out in two minutes. You can add your exact age later.", "iq.other": "Rather start with a different question?"});
+
+/* testversie 8, ronde 3 */
+Object.assign(I18N.en, {"iq.p": "Pick your question. A few short questions, no account.", "iq.q0": "What will my saving add up to?", "iq.a0": "Age 18–34", "iq.q1": "Am I on track?", "iq.a1": "Age 35–49", "iq.q2": "Will my money be enough?", "iq.a2": "Age 50 and over"});

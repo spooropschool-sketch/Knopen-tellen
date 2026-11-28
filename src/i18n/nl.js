@@ -820,3 +820,6 @@ Object.assign(I18N.nl, {
 Object.assign(I18N.nl, {"iq.h": "Hoeveel kun jij later per maand uitgeven?", "iq.tap": "Tik op je leeftijd en reken het uit in twee minuten. Je precieze leeftijd vul je later in.", "iq.other": "Liever met een andere vraag beginnen?"});
 
 Object.assign(I18N.nl, {"iq.p": "Tik op je leeftijd om te beginnen. Een paar korte vragen, geen account."});
+
+/* testversie 8, ronde 3 */
+Object.assign(I18N.nl, {"iq.p": "Kies je vraag. Een paar korte vragen, geen account.", "iq.q0": "Wat levert sparen me op?", "iq.a0": "18–34 jaar", "iq.q1": "Ben ik op schema?", "iq.a1": "35–49 jaar", "iq.q2": "Is mijn geld genoeg?", "iq.a2": "50 jaar en ouder"});

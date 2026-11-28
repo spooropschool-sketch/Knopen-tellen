@@ -812,3 +812,6 @@ Object.assign(I18N.fr, {
 Object.assign(I18N.fr, {"iq.h": "Combien pourrez-vous dépenser chaque mois plus tard ?", "iq.tap": "Touchez votre âge et faites le calcul en deux minutes. Votre âge exact, vous l’indiquerez plus tard.", "iq.other": "Vous préférez commencer par une autre question ?"});
 
 Object.assign(I18N.fr, {"iq.p": "Touchez votre âge pour commencer. Quelques questions courtes, sans compte."});
+
+/* testversie 8, ronde 3 */
+Object.assign(I18N.fr, {"iq.p": "Choisissez votre question. Quelques questions courtes, sans compte.", "iq.q0": "Que me rapporte mon épargne ?", "iq.a0": "18–34 ans", "iq.q1": "Suis-je sur la bonne voie ?", "iq.a1": "35–49 ans", "iq.q2": "Mon argent suffira-t-il ?", "iq.a2": "50 ans et plus"});
