@@ -3614,6 +3614,7 @@ var TRK = {
   TRK['extra-studyloan'] = ['extra', 'Studieschuld ingevuld (restschuld en maandbedrag)'];
   TRK['extra-studyloan-rate'] = ['extra', 'Rente studieschuld zelf aangepast'];
   TRK['pro-sl-teaser'] = ['pro', 'Teaser Aflossen of beleggen op de studieschuldkaart getikt'];
+  TRK['extra-ref-prev'] = ['extra', 'Terug getikt onder een verfijnscherm (testversie 8)'];
   TRK['core-route-again'] = ['basis', 'Route opnieuw gestart vanuit de welkomst, met bestaande antwoorden (testversie 8)'];
   TRK['reach-start-quick'] = ['bereik', 'Welkom: snelle start, leeftijd getikt (testversie 8)'];
   TRK['reach-start-other'] = ['bereik', 'Welkom: liever een andere vraag (testversie 8)'];
@@ -4684,13 +4685,18 @@ var TRK = {
       '<button type="button" class="btn tvp-go" data-tvpro="' + w + '">' + esc(t1('tv.pro.cta', { p: proPrice() })) + '</button><small class="tvp-s">' + esc(t1('tv.pro.once')) + '</small></div>';
     track('pro-1-zien-' + w);
   }
+  var tvRefHist = [], tvRefFwd = [];   /* tvRefFwd: waar je vandaan kwam met Terug, zodat Volgende daar weer heen gaat */   /* de verfijnschermen die je met Volgende achter je liet, voor Terug */
   function tvRefFoot(ch) {
     tvProCard(ch);
     var f = $('tvc-foot'); if (!f) return;
     var on = !!(ch && tvIsRef(ch.id)); f.hidden = !on; if (!on) { f.innerHTML = ''; return; }
     var nx = tvRefLeft === 0 ? null : tvRefNext(ch.id);
-    f.innerHTML = '<button type="button" class="btn ' + (nx ? 'ghost' : 'primary') + '" data-tvref="done">' + esc(t1('tv.ready')) + '</button>' +
-      (nx ? '<button type="button" class="btn primary" data-tvref="next:' + nx.id + '">' + esc(t1('tv.ref.next', { x: tvChTitle(nx) })) + '</button>' : '');
+    if (tvRefFwd.length) tvRefs().forEach(function (c) { if (c.id === tvRefFwd[tvRefFwd.length - 1]) nx = c; });
+    /* testversie 8: Terug en Volgende, net als in de route; sluiten doe je met de X (die telt als Klaar). Klaar staat er alleen op het laatste scherm (Paul, 28 nov) */
+    var pv = tvRefHist.length ? tvRefHist[tvRefHist.length - 1] : '';
+    f.innerHTML = (pv ? '<button type="button" class="btn ghost tvc-prev" data-tvref="prev:' + pv + '">' + esc(t1('tv.prev')) + '</button>' : '') +
+      (nx ? '<button type="button" class="btn primary" data-tvref="next:' + nx.id + '">' + esc(t1('tv.ref.next', { x: tvChTitle(nx) })) + '</button>'
+          : '<button type="button" class="btn primary" data-tvref="done">' + esc(t1('tv.ready')) + '</button>');
   }
   function tvEls(c) {
     var pg = $('page-' + c.page), out = []; if (!pg) return out;
@@ -4788,7 +4794,7 @@ var TRK = {
     if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld heeft hier een eigen label */
     root.classList.remove('tvc-more'); var mb = $('tvc-more'); mb.hidden = true; mb.innerHTML = IB_SVG; mb.setAttribute('aria-label', t1('ib.more')); mb.setAttribute('aria-expanded', 'false'); if (ch) { tvMoreSync(); setTimeout(tvMoreSync, 700); setTimeout(tvMoreSync, 2000); }
     $('tvc').hidden = !ch; $('tvc-t').hidden = !ch;
-    if (!ch) tvRefLeft = -1;
+    if (!ch) { tvRefLeft = -1; tvRefHist = []; tvRefFwd = []; }
     tvRefFoot(ch);
     if (!ch) { tvHome(); tvTop(); return; }
     var pg = $('page-' + ch.page), keep = tvEls(ch);
@@ -5098,11 +5104,12 @@ var TRK = {
   document.addEventListener('click', function (ev) {
     var T0 = ev.target, b; if (!T0.closest) return;
     if ((b = T0.closest('[data-tvj]'))) { var pj = b.getAttribute('data-tvj').split(':'); if (pj[0] === 'self') tvSelf(pj[1]); else if (tv.jobs[pj[1]]) tvIcs(pj[1], tv.jobs[pj[1]].t); return; }
-    if (T0.closest('#tvc-back') || T0.closest('[data-tvc-home]')) { tvToHome(false); return; }
+    if (T0.closest('#tvc-back') || T0.closest('[data-tvc-home]')) { if (T0.closest('#tvc-back') && tvFocusCh && tvIsRef(tvFocusCh.id)) { tvRefMark(tvFocusCh.id); tvRefLeft = -1; } tvRefHist = []; tvRefFwd = []; tvToHome(false); return; }
     if ((b = T0.closest('[data-tvref]'))) {   /* testversie 7: Klaar of Volgende onder een verfijnscherm */
       var rv = b.getAttribute('data-tvref'); if (tvFocusCh) tvRefMark(tvFocusCh.id);
-      if (rv === 'done') { tvRefLeft = -1; tvToHome(false); }
-      else { if (tvRefLeft > 0) tvRefLeft--; track('extra-ref-next'); navTo('#k-' + rv.slice(5), 1, true); }
+      if (rv === 'done') { tvRefLeft = -1; tvRefHist = []; tvRefFwd = []; tvToHome(false); }
+      else if (rv.indexOf('prev:') === 0) { tvRefHist.pop(); if (tvFocusCh) tvRefFwd.push(tvFocusCh.id); if (tvRefLeft >= 0) tvRefLeft++; track('extra-ref-prev'); navTo('#k-' + rv.slice(5), 1, true); }
+      else { if (tvFocusCh) tvRefHist.push(tvFocusCh.id); if (tvRefFwd.length && tvRefFwd[tvRefFwd.length - 1] === rv.slice(5)) tvRefFwd.pop(); else tvRefFwd = []; if (tvRefLeft > 0) tvRefLeft--; track('extra-ref-next'); navTo('#k-' + rv.slice(5), 1, true); }
       return;
     }
     if (T0.closest('#tvc-more')) { var mo = document.documentElement.classList.toggle('tvc-more'); $('tvc-more').setAttribute('aria-expanded', mo ? 'true' : 'false'); if (tvFocusCh && tvFocusCh.id === 'uit') { try { renderOpb(); } catch (e) {} } return; }

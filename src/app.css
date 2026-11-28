@@ -2744,3 +2744,4 @@ html[data-tvc="curve"] #snel, html[data-tvc="per"] #snel, html[data-tvc="curve"]
 .tvp-go { width: 100%; }
 .tvp-s { display: block; margin-top: 9px; text-align: center; font-size: 12.5px; color: var(--muted); }
 .tvc-pro.solo .tvp-h { font-size: 19px; }
+.tvc-foot .btn.tvc-prev { flex: 0 0 auto; padding-left: 22px; padding-right: 22px; }
