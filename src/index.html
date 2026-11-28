@@ -3474,6 +3474,15 @@ var TRK = {
     else if (t.closest('[data-tvpro]')) w = t.closest('[data-tvpro]').getAttribute('data-tvpro');
     else if (t.closest('[data-sl-pro]')) { w = 'plans'; track('pro-sl-teaser'); }
     else if (t.closest('#pots-box > summary')) w = 'pots';
+    else if (t.closest('#debts-box > summary') && tvFocusCh && tvFocusCh.id === 'debt') {   /* testversie 8: in het schuldenscherm klapt Grote schulden open met de Pro-kaart */
+      ev.preventDefault(); ev.stopPropagation();
+      var db = $('debts-box'), sl = db.querySelector('.tvp-slot');
+      if (!sl) { sl = document.createElement('div'); sl.className = 'tvp-slot'; db.querySelector('summary').insertAdjacentElement('afterend', sl); }
+      var op = !db.classList.contains('tvp-open'); db.classList.toggle('tvp-open', op); db.open = op;
+      sl.innerHTML = op ? tvProHtml('debts', 'debt') : '';
+      if (op) { track('pro-1-zien-debts'); track('pro-2-slot-debts'); }
+      return;
+    }
     else if (t.closest('#debts-box > summary')) w = 'debts';
     else if (t.closest('#sh-print')) w = 'print';
     else if (t.closest('#sh-copy')) w = 'summary';
@@ -4666,24 +4675,27 @@ var TRK = {
   function tvRefMark(id) { if (!tv.vf[id]) { tv.vf[id] = 1; tvSave(); track('extra-ref-done'); } }
   /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
   /* testversie 8: in de verfijnschermen kom je een paar keer langs Pro, met een echte knop (Paul, 28 nov) */
-  var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans', pot: 'pots', debt: 'debts' };
+  var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans', pot: 'pots' };   /* schulden: de kaart opent onder Grote schulden (Paul, 28 nov) */
   var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* schermen die alleen uit de Pro-kaart bestaan: één zin uitleg erbij */   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
   function proPrice() { return prefs.lang === 'nl' ? '€ 29' : (prefs.lang === 'en' ? '€29' : '29 €'); }
   function tvProCard(ch) {
     var h = $('tvc-pro'); if (!h) return;
     var w = ch && TV_PRO[ch.id]; h.hidden = !w; if (!w) { h.innerHTML = ''; return; }
+    h.classList.toggle('solo', !!TV_PROTX[ch.id]);
+    h.innerHTML = tvProHtml(w, ch.id);
+    track('pro-1-zien-' + w);
+  }
+  function tvProHtml(w, cid) {
     var T = plT();
     /* testversie 8, ontwerp C (Paul, 28 nov): wat je al hebt met een vinkje, wat Pro toevoegt gestippeld, en één vaste prijs.
        De vinkjes komen uit je eigen invulling, nooit een vast rijtje. */
-    var X = TV_PROTX[ch.id], ok = [], pro = [w].concat(['spend-curve', 'plans', 'debts', 'pots'].filter(function (k) { return k !== w; })).slice(0, 3);
+    var X = TV_PROTX[cid], ok = [], pro = [w].concat(['spend-curve', 'plans', 'debts', 'pots'].filter(function (k) { return k !== w; })).slice(0, 3);
     var S = tvSteps(); if (S.length && S.every(function (q) { return tv.done[q.id]; })) ok.push(t1('tv.g.basis2'));
     tvRefs().forEach(function (c) { if (tv.vf[c.id] && !c.pro && !TV_PROTX[c.id]) ok.push(tvChTitle(c)); });
     ok = ok.slice(0, 3);
-    h.classList.toggle('solo', !!X);
-    h.innerHTML = '<div class="tvp-card"><b class="tvp-h">' + esc(t1('tv.pro.h')) + '</b>' + (X ? '<p class="tvp-p">' + esc(t1(X[1])) + '</p>' : '') +
+    return '<div class="tvp-card"><b class="tvp-h">' + esc(t1('tv.pro.h')) + '</b>' + (X ? '<p class="tvp-p">' + esc(t1(X[1])) + '</p>' : '') +
       '<ul class="tvp-ck">' + ok.map(function (x) { return '<li class="ok">' + esc(x) + '</li>'; }).join('') + pro.map(function (k) { return '<li class="pro">' + esc(T.f[k][0]) + '</li>'; }).join('') + '</ul>' +
       '<button type="button" class="btn tvp-go" data-tvpro="' + w + '">' + esc(t1('tv.pro.cta', { p: proPrice() })) + '</button><small class="tvp-s">' + esc(t1('tv.pro.once')) + '</small></div>';
-    track('pro-1-zien-' + w);
   }
   var tvRefHist = [], tvRefFwd = [];   /* tvRefFwd: waar je vandaan kwam met Terug, zodat Volgende daar weer heen gaat */   /* de verfijnschermen die je met Volgende achter je liet, voor Terug */
   function tvRefFoot(ch) {
