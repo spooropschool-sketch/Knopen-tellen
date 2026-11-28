@@ -831,3 +831,5 @@ Object.assign(I18N.nl, {"tv.q.cap_2": "Hoeveel spaargeld en beleggingen hebben j
 Object.assign(I18N.nl, {"tv.pic.sofar": "Met je antwoorden tot nu toe."});
 Object.assign(I18N.nl, {"tv.h.bud": "Dit wordt je doel: wat je per maand uitgeeft."});
 Object.assign(I18N.nl, {"tv.i.bud": "Vul in wat je nu per maand uitgeeft, in bedragen van vandaag. Prijsstijgingen tot later rekenen we zelf mee."});
+Object.assign(I18N.nl, {"tv.ref.go": "Uitkomst verfijnen", "q.stopTwo": "Dit gaat over jou. Voor je partner telt de eigen pensioenleeftijd."});
+Object.assign(I18N.nl, {"tv.c.nm": "Geslacht", "tv.cs.nm": "Je geslacht bepaalt met welke levensverwachting we rekenen"});

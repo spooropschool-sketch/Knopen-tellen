@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=343bbab6">
+<link rel="stylesheet" href="/app.css?v=d8322025">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -518,7 +518,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=f75de992"></script>
+<script src="/i18n/fr.js?v=1d4fc521"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -2731,7 +2731,7 @@ var TRK = {
 
   /* ================= stappen ================= */
   var ui = { introSeen: false, step: 1, goal: '', mode: '', stepsDone: false };
-  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; ui.mode = su.mode === 'all' || su.mode === 'steps' ? su.mode : ''; ui.stepsDone = !!su.stepsDone; if (typeof su.relSeen === 'number') ui.relSeen = su.relSeen; ui.tipCard = !!su.tipCard; } } catch (e) {}
+  try { var su = JSON.parse(localStorage.getItem(KEY + '-ui') || 'null'); if (su) { ui.introSeen = !!su.introSeen; ui.step = parseInt(su.step, 10) || 1; ui.goal = su.goal || ''; ui.mode = su.mode === 'all' || su.mode === 'steps' ? su.mode : ''; ui.stepsDone = !!su.stepsDone; if (typeof su.relSeen === 'number') ui.relSeen = su.relSeen; ui.tipCard = !!su.tipCard; if (typeof su.iq === 'number') ui.iq = su.iq; } } catch (e) {}
   try { if (su && (su.band === 0 || su.band === 1 || su.band === 2)) ui.band = su.band; } catch (e) {}
   /* De stappen zijn de rondleiding voor de eerste keer. Wie ze één keer doorlopen heeft, krijgt daarna standaard
      alles in één overzicht; de keuze blijft altijd te wisselen. */
@@ -4637,7 +4637,7 @@ var TRK = {
   /* testversie 7: Invullen in drie lagen. Je basis (de vragen van de route), Verfijn je uitkomst (per leeftijdsgroep een eigen
      volgorde, gratis eerst en Pro achteraan) en Zo rekenen we (de aannames, klein met hun waarde). Niets valt weg: wat niet in de
      volgorde van een groep staat, komt achteraan bij Verfijn. */
-  var TV_ASM = ['tax', 'run', 'aan'], TV_REFO = [['debt', 'nm', 'big', 'pp', 'basis'], ['nm', 'debt', 'pp', 'big', 'basis', 'pot'], ['pp', 'nm', 'debt', 'big', 'basis', 'pot']];
+  var TV_ASM = ['tax', 'run', 'aan'], TV_REFO = [['debt', 'big', 'pp', 'basis', 'nm'], ['debt', 'pp', 'big', 'basis', 'pot', 'nm'], ['pp', 'debt', 'big', 'basis', 'pot', 'nm']];   /* testversie 8: verfijnen begint met wat de uitkomst het meest verandert; naam en geslacht als laatste (Paul, 28 nov) */
   var tvRefLeft = -1;   /* na de route: nog zoveel keer Volgende in het rijtje; -1 = vrij doorlopen */
   function tvRefs() {
     var have = {}, L = TV_REFO[state.opbouw ? Math.min(band(), 1) : 2].slice();
@@ -4708,7 +4708,7 @@ var TRK = {
     each('.tvc-hide', function (e) { e.classList.remove('tvc-hide'); });
     root.classList.toggle('tvc-on', !!ch); if (ch) root.setAttribute('data-tvc', ch.id); else root.removeAttribute('data-tvc');
     var sbx = $('stud-box'); if (sbx) sbx.hidden = !!(ch && ch.id === 'debt' && tvNoStud());   /* versie 26.1: bij 50-plus geen studieschuld, tenzij er al een staat */
-    if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld staat hier onder de naam, met een eigen label */
+    if (ch && ch.id === 'nm') each('.pcard .qp', function (e) { e.setAttribute('data-tvlab', t1('f.sex')); });   /* het geslachtsveld heeft hier een eigen label */
     root.classList.remove('tvc-more'); var mb = $('tvc-more'); mb.hidden = true; mb.innerHTML = IB_SVG; mb.setAttribute('aria-label', t1('ib.more')); mb.setAttribute('aria-expanded', 'false'); if (ch) { tvMoreSync(); setTimeout(tvMoreSync, 700); setTimeout(tvMoreSync, 2000); }
     $('tvc').hidden = !ch; $('tvc-t').hidden = !ch;
     if (!ch) tvRefLeft = -1;
@@ -4855,7 +4855,7 @@ var TRK = {
     $('tvi-h').textContent = t1('tab.input'); $('tvi-s').textContent = t1('tv.in.s'); $('tva-h').textContent = t1('tv.g.over');
     var S = tvSteps(), m = S.length, n = S.filter(function (q) { return tv.done[q.id]; }).length, wait = S.filter(function (q) { return q.job && !tv.done[q.id] && tv.jobs[q.id]; }), st = '', h = '', ids = {}, oth = 0, C = tvChs();
     $('tvh-k').textContent = t1('tv.home.k'); $('tvh-tag').textContent = '';
-    var qt = ui.goal ? '“' + gtx(ui.goal, '.t') + '”' : t1('home.h1'); if ($('tvh-q').textContent !== qt) $('tvh-q').textContent = qt;
+    var qt = t1('home.h1');   /* testversie 8: de startvraag is alleen een activatievraag en staat niet boven het Overzicht (Paul, 28 nov) */ if ($('tvh-q').textContent !== qt) $('tvh-q').textContent = qt;
     /* onder de telling: waar je was, of wat er klaarligt */
     if (ui.introSeen && tv.on && !tv.fin) st += '<div class="tvh-box"><p>' + esc(t1('tv.home.goS', { i: tv.step + 1, m: m })) + '</p><button type="button" class="btn primary" data-tvh="route">' + esc(t1('tv.home.go')) + '</button></div>';
     else if (ui.introSeen && !tv.on && n === 0) st += '<div class="tvh-box"><p>' + esc(t1('tv.home.startS')) + '</p><button type="button" class="btn primary" data-tvh="start">' + esc(t1('tv.home.start', { m: m })) + '</button></div>';
@@ -4866,7 +4866,8 @@ var TRK = {
         '<button type="button" class="btn link" data-tvj="self:' + q.id + '">' + esc(t1('tv.when.self')) + '</button></div></div>';
     });
     var rf = tv.fin && !wait.length ? tvRefFirst() : null;   /* testversie 7: na de route één tip voor een scherpere uitkomst */
-    if (rf) st += '<div class="tvh-box ref"><p>' + esc(t1('tv.ref.tipP')) + '</p><button type="button" class="btn ghost" data-tvh="c:' + rf.id + '">' + esc(tvChTitle(rf)) + (rf.pro ? tvLock() : '') + '</button></div>';
+    /* testversie 8: dezelfde knop als op het keuzescherm na de route, zodat je de keuze herkent die je liet liggen */
+    if (rf) st += '<div class="tvh-box ref"><button type="button" class="btn primary" data-tvh="c:' + rf.id + '">' + esc(t1('tv.ref.go')) + '</button><p class="tvh-ref-next">' + esc(t1('tv.ref.next', { x: tvChTitle(rf) })) + (rf.pro ? tvLock() : '') + '</p></div>';
     if (tv.fin && !tv.hint && !wait.length) st += '<p class="tvh-hint">' + esc(t1('tv.home.hint', { t: t1('tab.input') })) + '</p>';
     var sb = $('tvh-status'); if (sb.getAttribute('data-s') !== st) { sb.innerHTML = st; sb.setAttribute('data-s', st); }
     sb.classList.toggle('low', wait.length > 0 && !(tv.on && !tv.fin) && wait.every(function (q) { return tv.jobs[q.id].t > Date.now(); }));   /* testversie 4: nog niet aan de beurt, dan onder de cijfers */
@@ -5085,6 +5086,7 @@ var TRK = {
   }
   tvBehindI('curve', ['curve-cap', 'curve-delta', 'curve-hint']); tvBehindI('pfcmp', ['pf-sub']); tvBehindI('koop', ['kp-sub']);
   /* geslacht staat bij de naam */
+  each('#step-2 .field', function (f) { if (f.querySelector('input[id^="nm-"]')) f.classList.add('nm-f'); });   /* testversie 8: geen naamveld meer (Paul, 28 nov); bestaande namen blijven werken */
   (function () { var q = document.querySelectorAll('#snel .qp'), pc = document.querySelectorAll('#step-2 .pcard'); for (var i = 0; i < q.length && i < pc.length; i++) { var nf = pc[i].querySelector(':scope > .field'); if (nf) pc[i].insertBefore(q[i], nf.nextSibling); } })();
   /* het slotje van wat in de testversie open staat is een open slotje */
   var PL_OPEN = '<svg class="pl-lock pl-open" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor" stroke="none"/><path d="M5.3 7V4.4a2.7 2.7 0 0 1 5.2-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';

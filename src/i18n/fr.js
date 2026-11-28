@@ -822,3 +822,5 @@ Object.assign(I18N.fr, {"tv.q.stop_2": "À quel âge souhaitez-vous personnellem
 Object.assign(I18N.fr, {"tv.pic.sofar": "Avec vos réponses jusqu’ici."});
 Object.assign(I18N.fr, {"tv.h.bud": "Ce sera votre objectif : ce que vous dépensez par mois."});
 Object.assign(I18N.fr, {"tv.i.bud": "Indiquez ce que vous dépensez aujourd’hui par mois, en montants d’aujourd’hui. Nous tenons compte nous-mêmes de la hausse des prix d’ici là."});
+Object.assign(I18N.fr, {"tv.ref.go": "Affiner mon résultat", "q.stopTwo": "Il s’agit de vous. Pour votre partenaire, c’est son propre âge de retraite qui compte."});
+Object.assign(I18N.fr, {"tv.c.nm": "Sexe", "tv.cs.nm": "Votre sexe fixe l’espérance de vie utilisée"});

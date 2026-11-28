@@ -2567,3 +2567,10 @@ html.qp-on #tvh { display: none; }
 .iq-pick svg { grid-column: 3; }
 .iq-pick.k-sage { --kc: #7FA58E; } .iq-pick.k-terra { --kc: #C0704E; } .iq-pick.k-slate { --kc: #6F8296; }
 .iq-pick:active { transform: scale(.99); }
+
+/* testversie 8: verfijnen op het Overzicht */
+.tvh-box.ref .btn.primary { width: 100%; }
+.tvh-ref-next { margin: 8px 0 0; font-size: 14px; color: var(--muted); text-align: center; }
+
+/* testversie 8: naamveld weg */
+html.tv3 .nm-f { display: none !important; }

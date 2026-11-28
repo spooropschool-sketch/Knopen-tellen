@@ -831,3 +831,5 @@ Object.assign(I18N.es, {"tv.q.cap_2": "¿Cuánto tenéis ahora en ahorros e inve
 Object.assign(I18N.es, {"tv.pic.sofar": "Con tus respuestas hasta ahora."});
 Object.assign(I18N.es, {"tv.h.bud": "Este será tu objetivo: lo que gastas al mes."});
 Object.assign(I18N.es, {"tv.i.bud": "Indica lo que gastas ahora al mes, en importes de hoy. Nosotros tenemos en cuenta la subida de precios hasta entonces."});
+Object.assign(I18N.es, {"tv.ref.go": "Afinar mi resultado", "q.stopTwo": "Esto es sobre ti. Para tu pareja cuenta su propia edad de jubilación."});
+Object.assign(I18N.es, {"tv.c.nm": "Sexo", "tv.cs.nm": "Tu sexo fija la esperanza de vida con la que calculamos"});
