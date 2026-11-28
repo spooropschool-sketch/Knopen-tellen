@@ -2685,3 +2685,4 @@ html.tv3 .tvk-card:last-child { border-bottom: 1px solid var(--line); }
 html.tv3 .tvk-card img { display: block; width: 20px; height: 20px; }
 html.tv3 .tvk-card b { font-size: 14.5px; font-weight: 500; }
 html.tv3 .tvk-card::after { display: none; }
+.tv-hide { display: none !important; }

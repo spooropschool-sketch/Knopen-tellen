@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=69ee2b09">
+<link rel="stylesheet" href="/app.css?v=4715a378">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=64361411"></script>
+<script src="/i18n/fr.js?v=9b49fa3b"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4157,7 +4157,7 @@ var TRK = {
   (function () {
     try {
       var o = JSON.parse(localStorage.getItem(TVKEY) || 'null'); if (!o || typeof o !== 'object') return;
-      ['on', 'step', 'closed', 'fin', 'last', 'baseSp', 'base', 'tot', 'stopAuto', 'hint'].forEach(function (k) { if (typeof o[k] === 'number' && isFinite(o[k])) tv[k] = o[k]; });
+      ['on', 'step', 'closed', 'fin', 'last', 'seen', 'baseSp', 'base', 'tot', 'stopAuto', 'hint'].forEach(function (k) { if (typeof o[k] === 'number' && isFinite(o[k])) tv[k] = o[k]; });
       ['done', 'led', 'jobs', 'snap', 'vf'].forEach(function (k) { if (o[k] && typeof o[k] === 'object') tv[k] = o[k]; });
       if (typeof o.ctx === 'string') tv.ctx = o.ctx;
       /* testversie 6, ronde 3: het scherm Beleggen, belasting en looptijd is gesplitst; wat er al stond verhuist mee */
@@ -4169,7 +4169,7 @@ var TRK = {
   var tvRet = false, tvChg = '', tvWaiting = false, tvMode = '', tvView = 'step', tvEdit = false, tvSeq = 0, tvTyp = 0, tvIsOpen = false, tvHello = false, tvWant = false, tvTouched = {}, tvTyped = {}, tvWorkYes = null, tvNeed = false, tvFlash = '';
   var tvFocusCh, tvReady, tvHomeY;   /* zonder beginwaarde: de pagina-wissel (go) loopt al één keer voordat dit blok aan de beurt is */
   try { if (tv.last && !sessionStorage.getItem(TVKEY)) tvRet = true; sessionStorage.setItem(TVKEY, '1'); } catch (e) {}
-  function tvSave() { try { localStorage.setItem(TVKEY, JSON.stringify(tv)); } catch (e) {} }
+  function tvSave() { tv.seen = Date.now(); try { localStorage.setItem(TVKEY, JSON.stringify(tv)); } catch (e) {} }
   /* inlog per land, alleen waar de gekoppelde site een persoonlijk overzicht is; elders een algemene stap */
   var TV_LOGIN = { pen: { NL: 'DigiD', BE: 'itsme / eID', DE: 'Personalausweis + Steuer-ID' }, sp: { BE: 'itsme / eID', FR: 'FranceConnect', ES: 'Cl@ve', IT: 'SPID / CIE', PT: 'Chave Móvel Digital', US: 'Login.gov / ID.me' } };
 
@@ -4299,13 +4299,13 @@ var TRK = {
     bar.classList.toggle('ok', w > 0 && T >= w);
     var fg = g('.tvo-fg'); host.classList.toggle('ring', !!fg && w > 0);
     if (fg) { fg.setAttribute('stroke-dasharray', (w > 0 ? Math.max(1.5, Math.min(100, T / w * 100)) : 0).toFixed(1) + ' 100'); fg.classList.toggle('ok', w > 0 && T >= w); }
-    ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (Object.keys(tv.led).some(function (k) { return tv.led[k]; }) ? t1('tv.pic.sofar') : (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '')) : t1('tv.pic.zero')));
+    ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (Object.keys(tv.led).some(function (k) { return tv.led[k] && k !== 'pers'; }) ? t1('tv.pic.sofar') : (tv.baseSp ? t1(two() ? 'tv.pic.base2' : 'tv.pic.base', { x: cap1(spName()) }) : '')) : t1('tv.pic.zero')));
     ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
     /* testversie 8: op het eerste vraagscherm is de telling klein en zegt ze alleen wat er al meetelt; de vraag krijgt de aandacht.
        Na het eerste antwoord verschijnt het grote bedrag. */
-    var quiet = host.id === 'tvr-pic' && tv.step === 0 && !tvEdit && tv.tot !== null && !Object.keys(tv.led).some(function (k) { return tv.led[k]; });
-    host.classList.toggle('tv-quiet', quiet);
-    if (quiet) { ln.textContent = tv.baseSp && T > 0 ? t1('tv.pic.quiet', { x: cap1(spName()), v: eur(T), k: g('.tv-k').textContent.toLowerCase() }) : t1('tv.pic.zero'); ln.className = 'tv-line'; }
+    /* testversie 8: bij de eerste vraag (alleen of met partner) is er nog niets van jou te tellen, dus geen telling.
+       Na je antwoord verschijnt ze, met wat er al meetelt (Paul, 28 nov) */
+    host.classList.toggle('tv-hide', host.id === 'tvr-pic' && tv.step === 0 && !tvEdit);
   }
   function tvTop() {
     if (!tvReady) return;
@@ -5161,7 +5161,8 @@ var TRK = {
     var m = /[?&]klus=(pen|sp)\b/.exec(location.search || '');
     if (m && tvGoJob(m[1])) return;
     if (!tv.on || tv.closed || tv.fin) return;
-    tvCur(); tvView = 'step'; tvHello = tvRet; tvOpenUi();
+    /* testversie 8: 'welkom terug' alleen als je echt terugkomt: na een half uur weg, en met al iets beantwoord */
+    tvCur(); tvView = 'step'; tvHello = tvRet && Object.keys(tv.done || {}).length > 0 && !(tv.seen && Date.now() - tv.seen < 18e5); tvOpenUi();
   })();
 })();
 

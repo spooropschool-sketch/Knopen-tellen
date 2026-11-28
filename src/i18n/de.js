@@ -816,3 +816,5 @@ Object.assign(I18N.de, {"tv.pic.of": "von {w}", "tv.pic.togo": "Es fehlen noch {
 Object.assign(I18N.de, {"tv.ref.sharp": "Ergebnis genauer machen", "tv.g.basis2": "Ihre Basis", "tv.g.basisDone": "Alle {n} Fragen beantwortet"});
 Object.assign(I18N.de, {"iq.ctry": "Sie rechnen für {c} · ändern"});
 Object.assign(I18N.de, {"iq.ctry": "Land: {c} · ändern"});
+
+/* testversie 8: telling na alleen of met partner */ Object.assign(I18N.de, {"tv.pic.base2": "{x} für Sie beide zählt schon mit. Den Rest zählen Sie selbst dazu."});

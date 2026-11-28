@@ -838,3 +838,5 @@ Object.assign(I18N.es, {"tv.pic.of": "de {w}", "tv.pic.togo": "Faltan {d}.", "tv
 Object.assign(I18N.es, {"tv.ref.sharp": "Afina tu resultado", "tv.g.basis2": "Tu base", "tv.g.basisDone": "Las {n} preguntas respondidas"});
 Object.assign(I18N.es, {"iq.ctry": "Calculas para {c} · cambiar"});
 Object.assign(I18N.es, {"iq.ctry": "País: {c} · cambiar"});
+
+/* testversie 8: telling na alleen of met partner */ Object.assign(I18N.es, {"tv.pic.base2": "{x} de los dos ya cuenta. El resto lo sumas tú."});

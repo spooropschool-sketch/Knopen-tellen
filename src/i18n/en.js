@@ -859,3 +859,5 @@ Object.assign(I18N.en, {"tv.pic.of": "of {w}", "tv.pic.togo": "{d} to go.", "tv.
 Object.assign(I18N.en, {"tv.ref.sharp": "Sharpen your result", "tv.g.basis2": "Your basics", "tv.g.basisDone": "All {n} questions answered"});
 Object.assign(I18N.en, {"iq.ctry": "Calculating for {c} · change"});
 Object.assign(I18N.en, {"iq.ctry": "Country: {c} · change"});
+
+/* testversie 8: telling na alleen of met partner */ Object.assign(I18N.en, {"tv.pic.base2": "{x} for the two of you already counts. You add the rest yourself."});
