@@ -844,3 +844,5 @@ Object.assign(I18N.es, {"iq.ctry": "País: {c} · cambiar"});
 /* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.es, {"tv.pp.q": "¿Algún ingreso después de dejar de trabajar?", "tv.pp.save": "{v} ahorrados al mes", "tv.pp.work": "ingresos {v} hasta los {a}", "tv.pp.nowork": "sin ingresos después de dejar de trabajar"});
 Object.assign(I18N.es, {"big.who": "La edad es la tuya."});
 Object.assign(I18N.es, {"tv.pro.go": "Ver Pro"});
+Object.assign(I18N.es, {"tv.pro.curveS": "Estudios en los Países Bajos, el Reino Unido y Estados Unidos muestran que, cuanto mayores somos, menos gastamos de media. Pro calcula con esa evolución. A menudo necesitas bastante menos."});
+Object.assign(I18N.es, {"pl.pMore": "Más de 29 €"});

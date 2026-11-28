@@ -2724,3 +2724,9 @@ html[data-tvc="pp"] #step-2 .pcard.pp-nowk .wk > :not(.pp-yn) { display: none !i
 .tvp-go { grid-column: 1 / -1; min-height: 46px; border: 0; border-radius: 99px; background: var(--copper); color: var(--bg); font-weight: 700; }
 /* de Pro-regels in de schermen zelf zijn knoppen, geen losse groene tekst */
 html.tv3 .inl-pro, html.tv3 .wk-tog:has(.pro-tag) { display: flex !important; align-items: center; justify-content: space-between; gap: 10px; width: 100%; box-sizing: border-box; min-height: 48px; margin-top: 10px; padding: 10px 14px; border: 1px dashed var(--copper); border-radius: 14px; background: transparent; color: var(--ink); font-weight: 600; text-decoration: none; text-align: left; }
+/* testversie 8: uitgavenverloop en sparen per periode tonen alleen de Pro-kaart */
+html[data-tvc="curve"] #snel, html[data-tvc="per"] #snel, html[data-tvc="curve"] #tvc-more, html[data-tvc="per"] #tvc-more, html[data-tvc="curve"] #tvc-empty, html[data-tvc="per"] #tvc-empty { display: none !important; }
+.tvc-pro.solo { margin-top: 8px; }
+.tvc-pro.solo .tvp-card { padding: 18px 16px; }
+.tvc-pro.solo .tvp-tx b { font-size: 18px; }
+.tvc-pro.solo .tvp-tx span { font-size: 15px; }

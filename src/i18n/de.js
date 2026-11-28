@@ -822,3 +822,5 @@ Object.assign(I18N.de, {"iq.ctry": "Land: {c} · ändern"});
 /* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.de, {"tv.pp.q": "Noch Einkommen nach dem Aufhören?", "tv.pp.save": "{v} pro Monat zurückgelegt", "tv.pp.work": "Zuverdienst {v} bis {a}", "tv.pp.nowork": "kein Einkommen nach dem Aufhören"});
 Object.assign(I18N.de, {"big.who": "Gemeint ist Ihr Alter."});
 Object.assign(I18N.de, {"tv.pro.go": "Pro ansehen"});
+Object.assign(I18N.de, {"tv.pro.curveS": "Studien aus den Niederlanden, Großbritannien und den USA zeigen: Je älter Menschen werden, desto weniger geben sie im Schnitt aus. Pro rechnet mit diesem Verlauf. Oft brauchen Sie dann deutlich weniger."});
+Object.assign(I18N.de, {"pl.pMore": "Mehr als 29 €"});

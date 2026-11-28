@@ -844,3 +844,5 @@ Object.assign(I18N.nl, {"iq.ctry": "Land: {c} · wijzig"});
 /* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.nl, {"tv.pp.q": "Nog inkomen na het stoppen?", "tv.pp.save": "{v} per maand opzij", "tv.pp.work": "bijverdienen {v} tot {a}", "tv.pp.nowork": "geen inkomen na het stoppen"});
 Object.assign(I18N.nl, {"big.who": "De leeftijd is die van jou."});
 Object.assign(I18N.nl, {"tv.pro.go": "Bekijk Pro"});
+Object.assign(I18N.nl, {"tv.pro.curveS": "Onderzoek in Nederland, het Verenigd Koninkrijk en de Verenigde Staten laat zien: hoe ouder mensen worden, hoe minder ze gemiddeld uitgeven. Pro rekent met dat verloop. Vaak heb je dan flink minder nodig."});
+Object.assign(I18N.nl, {"pl.pMore": "Meer dan € 29"});

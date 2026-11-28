@@ -835,3 +835,5 @@ Object.assign(I18N.fr, {"iq.ctry": "Pays : {c} · modifier"});
 /* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.fr, {"tv.pp.q": "Encore un revenu après l’arrêt ?", "tv.pp.save": "{v} mis de côté par mois", "tv.pp.work": "revenu {v} jusqu’à {a}", "tv.pp.nowork": "pas de revenu après l’arrêt"});
 Object.assign(I18N.fr, {"big.who": "L’âge est le vôtre."});
 Object.assign(I18N.fr, {"tv.pro.go": "Voir Pro"});
+Object.assign(I18N.fr, {"tv.pro.curveS": "Des études aux Pays-Bas, au Royaume-Uni et aux États-Unis montrent qu’en vieillissant, on dépense en moyenne de moins en moins. Pro calcule avec cette évolution. Il vous faut souvent nettement moins."});
+Object.assign(I18N.fr, {"pl.pMore": "Plus de 29 €"});
