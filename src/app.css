@@ -2594,3 +2594,9 @@ html.tv3 .nm-f { display: none !important; }
 html.tv3 #tvh-q { display: none; }
 .tvh-k .kdot { background: radial-gradient(circle at 35% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 35%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 35% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), radial-gradient(circle at 65% 65%, var(--on-accent) 0 1.2px, transparent 1.6px), var(--accent); }
 html.tv3 .tvh-k { color: var(--accent); }
+.tvh-box.ref p { text-align: center; font-size: 15px; font-weight: 500; line-height: 1.4; text-wrap: balance; }
+/* testversie 8: verfijnknop zonder kader, even breed als de kaarten (Paul, 28 nov) */
+.tvh-box.ref { display: block; padding: 0; background: none; border: 0; border-radius: 0; }
+.tvh-box.ref p { margin: 2px 0 8px; font-size: 14px; font-weight: 400; color: var(--muted); text-align: center; }
+.tvh-box.ref .btn.primary { display: flex; justify-content: center; width: 100%; min-height: 52px; font-size: 16px; }
+html.tv3 .tvh-hint { font-size: 14px; color: var(--muted); }
