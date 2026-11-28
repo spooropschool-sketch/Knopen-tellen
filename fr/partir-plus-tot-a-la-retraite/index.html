@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=aab16466">
+<link rel="stylesheet" href="/app.css?v=a8f26082">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -518,8 +518,8 @@
   </div>
 </div>
 
-<script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=a692beae"></script>
+<script src="/model.js?v=b8be8ccd" data-model></script>
+<script src="/i18n/fr.js?v=2c19a8ef"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -1991,6 +1991,7 @@
     }
     var W = Math.max(280, host.clientWidth - 8), H = W < 480 ? 280 : 340;
     var ymax = Math.max(maxP90 * 1.12, capEff() * 1.05) * Math.pow(1.45, -fanZoom);
+    if (!(ymax > 0)) ymax = 1000;   /* testversie 8: zonder vermogen (nog geen spaargeld ingevuld) geen deling door nul */
     var ftk = niceTicks(0, ymax, 4).ticks, ml = labW(ftk), mr = 14, mt = 16, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
     function x(i) { return ml + (i / N) * pw; }
     function y(v) { return mt + (1 - v / ymax) * ph; }
@@ -4670,11 +4671,12 @@ var TRK = {
     if (c.id === 'mix') return portStat(effIdx()).n + (state.portfolio ? '' : ' (' + t1('w.autoPicked') + ')');
     if (c.id === 'tax') return isNL() ? (($('b3-cur') || {}).textContent || '') : taxLabel();
     if (c.id === 'run') return t1('tv.cs.run', { a: fmtAge(state.eindleeftijd) });
-    if (c.id === 'pp') return t1(state.opbouw ? (two() ? 'tv.cs.pp2' : 'tv.cs.pp') : 'tv.cs.pp50');
+    if (c.id === 'pp') return t1(state.opbouw ? (two() && !TV ? 'tv.cs.pp2' : 'tv.cs.pp') : 'tv.cs.pp50');   /* testversie 8: de inlegverdeling staat niet meer op dit scherm */
     if (c.id === 'aan') return t1('tv.cs.aan', { i: num(state.inflatie, 2) + '%', k: num(state.kosten, 2) + '%' });
     if (c.id === 'curve') return t1('f.curve');
     if (c.id === 'per') return t1('inl.h');   /* versie 26.1: de oude regel noemde nog het geslacht */
     if (c.id === 'debt' && tvNoStud()) return t1('oth.h') + ' · ' + t1('debt.h');
+    if (c.id === 'debt' && band() === 0) return t1('sl.h') + ' · ' + t1('oth.h');   /* testversie 8: bij de jongste groep staat Grote schulden niet op het scherm */
     var k = { basis: 'tv.cs.basis', nm: 'tv.cs.nm', sp2: 'tv.cs.sp2', pot: 'tv.cs.pot', debt: 'tv.cs.debt', big: 'big.s', uit: 'tv.cs.uit', doen: 'ch.s2', loop: 'ch.s3', mix: 'next.pfS', lad: 'next.ldS', koop: 'next.kpS', plan: 'tv.cs.plan', over: 'tv.cs.over' }[c.id];
     return k ? t1(k) : '';
   }
@@ -4790,7 +4792,8 @@ var TRK = {
     Array.prototype.forEach.call(cards, function (pc) { if (pc.offsetParent || !pc.classList.contains('only2') || two()) vis.push(pc); });
     var c2 = document.querySelector('#step-2 > .cols2'), ix = c2 && c2.querySelector(':scope > .pp-intro');
     if (c2 && !ix) { ix = document.createElement('p'); ix.className = 'tvp-ex pp-intro'; c2.insertBefore(ix, c2.firstChild); }
-    if (ix) ix.textContent = t1(two() ? 'tv.pp.intro2' : 'tv.pp.intro');
+    var o5 = !state.opbouw;   /* 50-plus: het gaat om werk nu, tot een leeftijd; niet om bijverdienen na het stoppen */
+    if (ix) ix.textContent = t1((o5 ? 'tv.pp.intro50' : 'tv.pp.intro') + (two() ? '2' : ''));
     vis.forEach(function (pc, i) {
       var s = i ? 'D' : 'P', hd = pc.querySelector(':scope > .pp-head'), wk = pc.querySelector('.wk'), yn = wk && wk.querySelector('.pp-yn');
       if (!hd) { hd = document.createElement('button'); hd.type = 'button'; hd.className = 'pp-head'; pc.insertBefore(hd, pc.firstChild); }
@@ -4801,13 +4804,13 @@ var TRK = {
       if (wk && !yn) { yn = document.createElement('div'); yn.className = 'pp-yn'; wk.insertBefore(yn, wk.firstChild); }
       if (yn) {
         yn.hidden = per;
-        var q = t1('tv.pp.q'), h = '<p class="pp-q">' + esc(q) + '</p><div class="pp-opts"><button type="button" class="pp-o' + (yes ? '' : ' on') + '" data-ppyn="' + s + ':0">' + esc(t1('tv.v.no')) + '</button><button type="button" class="pp-o' + (yes ? ' on' : '') + '" data-ppyn="' + s + ':1">' + esc(t1('tv.v.yes')) + '</button></div>';
+        var q = t1(o5 ? 'tv.q.work' : 'tv.pp.q'), h = '<p class="pp-q">' + esc(q) + '</p><div class="pp-opts"><button type="button" class="pp-o' + (yes ? '' : ' on') + '" data-ppyn="' + s + ':0">' + esc(t1('tv.v.no')) + '</button><button type="button" class="pp-o' + (yes ? ' on' : '') + '" data-ppyn="' + s + ':1">' + esc(t1('tv.v.yes')) + '</button></div>';
         if (yn.getAttribute('data-s') !== h) { yn.innerHTML = h; yn.setAttribute('data-s', h); }
       }
       pc.classList.toggle('pp-nowk', !yes);
       var parts = [];
       /* testversie 8: de inlegverdeling staat niet meer op dit scherm */
-      parts.push(yes ? (wv > 0 ? t1('tv.pp.work', { v: eur(wv), a: fmtAge(state['werkTot' + s] || 0) }) : (per ? t1('wk.h') : '')) : t1('tv.pp.nowork'));
+      parts.push(yes ? (wv > 0 ? t1(o5 ? 'tv.pp.work50' : 'tv.pp.work', { v: eur(wv), a: fmtAge(state['werkTot' + s] || 0) }) : (per ? t1('wk.h') : '')) : t1(o5 ? 'tv.pp.nowork50' : 'tv.pp.nowork'));
       var done = !yes || wv > 0 || per || !!tvPp.seen[i], open = tvPp.open === i;
       var nm = (pc.querySelector('h3') || {}).textContent || '';
       var hh = (done ? tvKnoop(i ? 4 : 0) : '<span class="tvr-dot"></span>') + '<span class="pp-tx"><b>' + esc(nm) + '</b><span>' + esc(parts.filter(Boolean).join(' · ')) + '</span></span><svg class="pp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
@@ -5060,7 +5063,7 @@ var TRK = {
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
     var NU = state.budget > 0 ? tvNums() : [], loop = NU.filter(function (x) { return x.a === 'c:loop'; })[0];
     var hk = (!fanSrc || !(state.budget > 0)) ? '' : '<button type="button" class="tvk-fan" data-tvh="c:loop"><span class="tvk-h"><img class="tvk-kn" src="/img/knoop-sage.webp" alt="" width="96" height="96"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</button>';
-    if (loop && hk) hk = hk.replace('</span></span></button>', '</span><b class="tvk-capv">' + esc(loop.v) + (state.opbouw && loop.v !== '–' ? ' ' + esc(t1('tv.v.at', { a: Math.round(stopAge()) })) : '') + '</b></span></button>');   /* testversie 8: zonder doel geen lege grafiek (Paul, 28 nov) */   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
+    if (loop && hk) hk = hk.replace('</span></span></button>', '</span><b class="tvk-capv">' + esc(loop.v) + (loop.v !== '–' ? ' ' + esc(t1('tv.v.at', { a: Math.round(state.opbouw ? stopAge() : state.eindleeftijd) })) : '') + '</b></span></button>');   /* testversie 8: zonder doel geen lege grafiek (Paul, 28 nov) */   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
     if (state.budget > 0) {   /* testversie 8: zonder doel geen rij met streepjes (Paul, 28 nov) */
     /* testversie 8: twee rustige tegels met een knoop; het vermogen als je stopt staat in de grafiek */
     var tk = ['slate', 'terra'], ti = 0;

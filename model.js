@@ -134,6 +134,7 @@ function runModel(p) {
   }
   function required(budget) {
     if (!feasible(1e8, budget)) return Infinity;
+    if (feasible(0, budget)) return 0;   /* testversie 8: niets nodig is 0, niet een piepklein bedrag dat naar 1.000 wordt afgerond */
     var lo = 0, hi = 1e8;
     for (var k = 0; k < 50; k++) {
       var mid = (lo + hi) / 2;

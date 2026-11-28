@@ -88,7 +88,7 @@
  "3 opbouw, 27, legt 600 opzij": {
   "model": {
    "N": 63,
-   "req0": 8.881784197001252e-8,
+   "req0": 0,
    "maxBudget": 3013.510729456925,
    "emptyAt": null,
    "sumDraws": -34632,
@@ -105,7 +105,7 @@
   "heavy": {
    "adv": {
     "c90": 178000,
-    "req0": 8.881784197001252e-8,
+    "req0": 0,
     "pf": 1,
     "eind": 90,
     "long": {
@@ -131,7 +131,7 @@
  "4 opbouw, stel 42/40": {
   "model": {
    "N": 50,
-   "req0": 8.881784197001252e-8,
+   "req0": 0,
    "maxBudget": 4209.526429406765,
    "emptyAt": null,
    "sumDraws": 65616,

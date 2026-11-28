@@ -2432,7 +2432,7 @@ html[data-tvc="run"] #step-4 > .card > .tdrop { display: none !important; }
 html[data-tvc="sp2"] #step-3 details[data-pd^="pensAan"] { display: none !important; }
 html[data-tvc="nm"] #step-2 .pcard > .opb-q, html[data-tvc="nm"] #step-2 .pcard > .wk { display: none !important; }
 html[data-tvc="pp"] #step-2 .pcard > .field:not(.opb-q) { display: none !important; }
-html[data-tvc="pp"]:not(.is-opb) #step-2 .wk-one > .field:first-child { display: none !important; }
+/* testversie 8: het bedragveld staat er bij 50-plus weer, omdat het scherm nu zelf vraagt of je nog inkomen uit werk hebt */
 html.tv3 #intro.tv-land .ip-lang { display: none !important; }
 html.tv3 #sec-pf .tv-pfpick { margin: 4px 0 18px; }
 
