@@ -2554,3 +2554,8 @@ html.qp-on #tvh { display: none; }
 .iq-pick.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 #intro-s1.iq .tv-in { margin-bottom: 0; }
 #intro-s1.iq .iq-picks { margin-top: 16px; }
+
+/* testversie 8, ronde 4: rustig eerste vraagscherm */
+.tv-quiet .tv-k, .tv-quiet .tv-big, .tv-quiet .tv-bar { display: none !important; }
+.tv-quiet .tv-line { margin: 0; font-size: 14px; color: var(--muted); }
+#tvr-pic.tv-quiet { padding-top: 10px; padding-bottom: 10px; }

@@ -4291,6 +4291,11 @@ var TRK = {
     bar.classList.toggle('ok', w > 0 && T >= w);
     ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '') : t1('tv.pic.zero')));
     ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
+    /* testversie 8: op het eerste vraagscherm is de telling klein en zegt ze alleen wat er al meetelt; de vraag krijgt de aandacht.
+       Na het eerste antwoord verschijnt het grote bedrag. */
+    var quiet = host.id === 'tvr-pic' && tv.step === 0 && !tvEdit && tv.tot !== null;
+    host.classList.toggle('tv-quiet', quiet);
+    if (quiet) { ln.textContent = tv.baseSp && T > 0 ? t1('tv.pic.quiet', { x: cap1(spName()), v: eur(T), k: g('.tv-k').textContent.toLowerCase() }) : t1('tv.pic.zero'); ln.className = 'tv-line'; }
   }
   function tvTop() {
     if (!tvReady) return;
@@ -4493,7 +4498,7 @@ var TRK = {
       return;
     }
     body.innerHTML = '<p class="tvr-n' + (tvHello ? ' hello' : '') + '">' + esc(tvHello ? t1('tv.hello', { i: i, m: m }) : t1('tv.n', { i: i, m: m })) + '</p>' +
-      (tv.step === 0 && ui.goal && !tvEdit && !tvHello ? '<p class="tvr-goal">“' + esc(gtx(ui.goal, '.t')) + '” ' + esc(t1('tv.goal1')) + '</p>' : '') + tvStepHtml(q);
+      tvStepHtml(q);   /* testversie 8: de startvraag is alleen een activatievraag en staat niet meer boven de route (Paul, 28 nov) */
     tvHello = false; tvNeed = false;
     tvChips();
     el.scrollTop = 0;

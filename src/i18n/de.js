@@ -802,3 +802,7 @@ Object.assign(I18N.de, {"iq.p": "Tippen Sie auf Ihr Alter, um zu beginnen. Ein p
 
 /* testversie 8, ronde 3 */
 Object.assign(I18N.de, {"iq.p": "Wählen Sie Ihre Frage. Ein paar kurze Fragen, kein Konto.", "iq.q0": "Was bringt mir Sparen?", "iq.a0": "18–34 Jahre", "iq.q1": "Bin ich auf Kurs?", "iq.a1": "35–49 Jahre", "iq.q2": "Reicht mein Geld?", "iq.a2": "50 Jahre und älter"});
+
+/* testversie 8, ronde 4 */
+Object.assign(I18N.de, {"tv.pic.quiet": "{x} zählt schon mit: {v} pro Monat. Jede Antwort zählt dazu.", "tv.q.pers": "Sind Sie allein oder haben Sie einen Partner?", "tv.v.one": "Allein", "tv.v.two": "Mit Partner"});
+Object.assign(I18N.de, {"tv.q.stop_2": "In welchem Alter möchten Sie selbst aufhören zu arbeiten?", "tv.q.age": "Wie alt sind Sie?", "tv.q.age_2": "Wie alt sind Sie beide?"});

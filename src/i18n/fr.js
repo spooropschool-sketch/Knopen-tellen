@@ -815,3 +815,7 @@ Object.assign(I18N.fr, {"iq.p": "Touchez votre âge pour commencer. Quelques que
 
 /* testversie 8, ronde 3 */
 Object.assign(I18N.fr, {"iq.p": "Choisissez votre question. Quelques questions courtes, sans compte.", "iq.q0": "Que me rapporte mon épargne ?", "iq.a0": "18–34 ans", "iq.q1": "Suis-je sur la bonne voie ?", "iq.a1": "35–49 ans", "iq.q2": "Mon argent suffira-t-il ?", "iq.a2": "50 ans et plus"});
+
+/* testversie 8, ronde 4 */
+Object.assign(I18N.fr, {"tv.pic.quiet": "{x} compte déjà : {v} par mois. Chaque réponse s’y ajoute.", "tv.q.pers": "Vous êtes seul, ou en couple ?", "tv.v.one": "Seul", "tv.v.two": "En couple"});
+Object.assign(I18N.fr, {"tv.q.stop_2": "À quel âge souhaitez-vous personnellement arrêter de travailler ?", "tv.q.age": "Quel âge avez-vous ?", "tv.q.age_2": "Quel âge avez-vous, tous les deux ?"});

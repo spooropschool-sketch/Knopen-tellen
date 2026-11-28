@@ -845,3 +845,7 @@ Object.assign(I18N.en, {"iq.p": "Tap your age to start. A few short questions, n
 
 /* testversie 8, ronde 3 */
 Object.assign(I18N.en, {"iq.p": "Pick your question. A few short questions, no account.", "iq.q0": "What will my saving add up to?", "iq.a0": "Age 18–34", "iq.q1": "Am I on track?", "iq.a1": "Age 35–49", "iq.q2": "Will my money be enough?", "iq.a2": "Age 50 and over"});
+
+/* testversie 8, ronde 4 */
+Object.assign(I18N.en, {"tv.pic.quiet": "{x} already counts: {v} a month. Every answer adds to it.", "tv.q.pers": "Are you on your own, or do you have a partner?", "tv.v.one": "On my own", "tv.v.two": "With a partner"});
+Object.assign(I18N.en, {"tv.q.stop_2": "At what age do you personally want to stop working?", "tv.q.age": "How old are you?", "tv.q.age_2": "How old are you both?"});

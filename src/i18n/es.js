@@ -823,3 +823,8 @@ Object.assign(I18N.es, {"iq.p": "Toca tu edad para empezar. Unas preguntas corta
 
 /* testversie 8, ronde 3 */
 Object.assign(I18N.es, {"iq.p": "Elige tu pregunta. Unas preguntas cortas, sin cuenta.", "iq.q0": "¿Qué me aporta ahorrar?", "iq.a0": "18–34 años", "iq.q1": "¿Voy por buen camino?", "iq.a1": "35–49 años", "iq.q2": "¿Me llegará el dinero?", "iq.a2": "50 años o más"});
+
+/* testversie 8, ronde 4 */
+Object.assign(I18N.es, {"tv.pic.quiet": "{x} ya cuenta: {v} al mes. Cada respuesta se suma.", "tv.q.pers": "¿Estás solo, o tienes pareja?", "tv.v.one": "Solo", "tv.v.two": "Con pareja"});
+Object.assign(I18N.es, {"tv.q.bud_2": "¿Cuánto queréis poder gastar al mes más adelante?", "tv.q.budNow_2": "¿Cuánto queréis poder gastar al mes?"});
+Object.assign(I18N.es, {"tv.q.cap_2": "¿Cuánto tenéis ahora en ahorros e inversiones?", "tv.q.inl_2": "¿Cuánto apartáis cada mes?", "tv.q.stop_2": "¿A qué edad quieres dejar de trabajar tú?", "tv.q.age": "¿Cuántos años tienes?", "tv.q.age_2": "¿Cuántos años tenéis?"});
