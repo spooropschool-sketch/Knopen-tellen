@@ -819,3 +819,4 @@ Object.assign(I18N.fr, {"iq.p": "Choisissez votre question. Quelques questions c
 /* testversie 8, ronde 4 */
 Object.assign(I18N.fr, {"tv.pic.quiet": "{x} compte déjà : {v} par mois. Chaque réponse s’y ajoute.", "tv.q.pers": "Vous êtes seul, ou en couple ?", "tv.v.one": "Seul", "tv.v.two": "En couple"});
 Object.assign(I18N.fr, {"tv.q.stop_2": "À quel âge souhaitez-vous personnellement arrêter de travailler ?", "tv.q.age": "Quel âge avez-vous ?", "tv.q.age_2": "Quel âge avez-vous, tous les deux ?"});
+Object.assign(I18N.fr, {"tv.pic.sofar": "Avec vos réponses jusqu’ici."});

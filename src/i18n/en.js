@@ -849,3 +849,4 @@ Object.assign(I18N.en, {"iq.p": "Pick your question. A few short questions, no a
 /* testversie 8, ronde 4 */
 Object.assign(I18N.en, {"tv.pic.quiet": "{x} already counts: {v} a month. Every answer adds to it.", "tv.q.pers": "Are you on your own, or do you have a partner?", "tv.v.one": "On my own", "tv.v.two": "With a partner"});
 Object.assign(I18N.en, {"tv.q.stop_2": "At what age do you personally want to stop working?", "tv.q.age": "How old are you?", "tv.q.age_2": "How old are you both?"});
+Object.assign(I18N.en, {"tv.pic.sofar": "With your answers so far."});

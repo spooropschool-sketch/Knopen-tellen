@@ -828,3 +828,4 @@ Object.assign(I18N.es, {"iq.p": "Elige tu pregunta. Unas preguntas cortas, sin c
 Object.assign(I18N.es, {"tv.pic.quiet": "{x} ya cuenta: {v} al mes. Cada respuesta se suma.", "tv.q.pers": "¿Estás solo, o tienes pareja?", "tv.v.one": "Solo", "tv.v.two": "Con pareja"});
 Object.assign(I18N.es, {"tv.q.bud_2": "¿Cuánto queréis poder gastar al mes más adelante?", "tv.q.budNow_2": "¿Cuánto queréis poder gastar al mes?"});
 Object.assign(I18N.es, {"tv.q.cap_2": "¿Cuánto tenéis ahora en ahorros e inversiones?", "tv.q.inl_2": "¿Cuánto apartáis cada mes?", "tv.q.stop_2": "¿A qué edad quieres dejar de trabajar tú?", "tv.q.age": "¿Cuántos años tienes?", "tv.q.age_2": "¿Cuántos años tenéis?"});
+Object.assign(I18N.es, {"tv.pic.sofar": "Con tus respuestas hasta ahora."});

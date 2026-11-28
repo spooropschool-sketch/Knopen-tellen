@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=ec8e0dea">
+<link rel="stylesheet" href="/app.css?v=343bbab6">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -518,7 +518,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=352c9d79"></script>
+<script src="/i18n/fr.js?v=9135d6e0"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4298,7 +4298,7 @@ var TRK = {
     bar.hidden = !(w > 0);
     if (w > 0) g('.tv-fill').style.width = Math.max(2, Math.min(100, T / w * 100)).toFixed(1) + '%';
     bar.classList.toggle('ok', w > 0 && T >= w);
-    ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '') : t1('tv.pic.zero')));
+    ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (Object.keys(tv.led).some(function (k) { return tv.led[k]; }) ? t1('tv.pic.sofar') : (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '')) : t1('tv.pic.zero')));
     ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
     /* testversie 8: op het eerste vraagscherm is de telling klein en zegt ze alleen wat er al meetelt; de vraag krijgt de aandacht.
        Na het eerste antwoord verschijnt het grote bedrag. */
@@ -4816,7 +4816,8 @@ var TRK = {
     var pk = document.createElement('div'); pk.className = 'iq-picks'; pk.setAttribute('role', 'group');
     [0, 1, 2].forEach(function (bnd) {
       var bt = document.createElement('button'); bt.type = 'button'; bt.className = 'iq-pick'; bt.setAttribute('data-band', bnd);
-      bt.innerHTML = '<b data-t="iq.q' + bnd + '"></b><span data-t="iq.a' + bnd + '"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+      bt.className += ' k-' + ['sage', 'terra', 'slate'][bnd];
+      bt.innerHTML = '<img class="iq-knoop" src="/img/knoop-' + ['sage', 'terra', 'slate'][bnd] + '.webp" alt="" width="40" height="40"><b data-t="iq.q' + bnd + '"></b><span data-t="iq.a' + bnd + '"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
       bt.addEventListener('click', function () {
         if (iqBusy) return; iqBusy = true;
         ageTouched = true; bandSet(bnd); bt.classList.add('on');

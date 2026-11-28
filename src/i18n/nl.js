@@ -828,3 +828,4 @@ Object.assign(I18N.nl, {"iq.p": "Kies je vraag. Een paar korte vragen, geen acco
 Object.assign(I18N.nl, {"tv.pic.quiet": "{x} telt al mee: {v} per maand. Elk antwoord telt erbij.", "tv.q.pers": "Ben je alleen, of heb je een partner?", "tv.v.one": "Alleen", "tv.v.two": "Met partner"});
 Object.assign(I18N.nl, {"tv.q.bud_2": "Wat willen jullie later per maand te besteden hebben?", "tv.q.budNow_2": "Wat willen jullie per maand te besteden hebben?"});
 Object.assign(I18N.nl, {"tv.q.cap_2": "Hoeveel spaargeld en beleggingen hebben jullie nu?", "tv.q.inl_2": "Hoeveel leggen jullie per maand opzij?", "tv.q.stop_2": "Op welke leeftijd wil jij stoppen met werken?", "tv.q.age": "Hoe oud ben je?", "tv.q.age_2": "Hoe oud zijn jullie?"});
+Object.assign(I18N.nl, {"tv.pic.sofar": "Met je antwoorden tot nu toe."});
