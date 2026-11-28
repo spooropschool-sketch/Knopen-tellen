@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=084a64c1">
+<link rel="stylesheet" href="/app.css?v=a415c0ef">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -513,7 +513,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/fr.js?v=7701d84a"></script>
+<script src="/i18n/fr.js?v=b5911efb"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -4864,7 +4864,7 @@ var TRK = {
     });
     var rf = tv.fin && !wait.length ? tvRefFirst() : null;   /* testversie 7: na de route één tip voor een scherpere uitkomst */
     /* testversie 8: dezelfde knop als op het keuzescherm na de route, zodat je de keuze herkent die je liet liggen */
-    if (rf) st += '<div class="tvh-box ref"><p>' + esc(t1('tv.ref.sketch')) + '</p><button type="button" class="btn primary" data-tvh="c:' + rf.id + '">' + esc(t1('tv.ref.go')) + '</button></div>';   /* Paul: "Volgende: schulden" spreekt wie geen schulden heeft niet aan */
+    if (rf) st += '<div class="tvh-box ref"><button type="button" class="btn primary" data-tvh="c:' + rf.id + '">' + esc(t1('tv.ref.sharp')) + '</button></div>';   /* testversie 8: één element in plaats van zin + knop */
     if (tv.fin && !tv.hint && !wait.length) st += '<p class="tvh-hint">' + esc(t1('tv.home.hint', { t: t1('tab.input') })) + '</p>';
     var sb = $('tvh-status'); if (sb.getAttribute('data-s') !== st) { sb.innerHTML = st; sb.setAttribute('data-s', st); }
     sb.classList.toggle('low', wait.length > 0 && !(tv.on && !tv.fin) && wait.every(function (q) { return tv.jobs[q.id].t > Date.now(); }));   /* testversie 4: nog niet aan de beurt, dan onder de cijfers */
@@ -4874,7 +4874,7 @@ var TRK = {
     /* testversie 8: zijn alle basisvragen beantwoord, dan klapt de basis in (met een vinkje), zodat verfijnen bovenaan in beeld komt (Paul, 28 nov) */
     var bAll = n >= m && m > 0;
     var bHead = esc(t1('tv.g.basis')) + '<span>' + esc(t1('tv.g.count', { n: n + (spFlat() ? 1 : 0), m: m + (spFlat() ? 1 : 0) })) + '</span>';
-    if (bAll) h += '<details class="tvh-fold" id="tvh-fold"' + (tvBasisOpen ? ' open' : '') + '><summary><h2 class="tvh-g"><svg class="tvh-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>' + bHead + '<svg class="tvh-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></h2></summary><div class="tvh-rows">';
+    if (bAll) h += '<details class="tvh-fold" id="tvh-fold"' + (tvBasisOpen ? ' open' : '') + '><summary class="tvh-fold-s"><svg class="tvh-check" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg><span class="tvh-tx"><b>' + esc(t1('tv.g.basis2')) + '</b><span>' + esc(t1('tv.g.basisDone', { n: n + (spFlat() ? 1 : 0) })) + '</span></span><svg class="tvh-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary><div class="tvh-rows">';
     else h += '<h2 class="tvh-g">' + bHead + '</h2><div class="tvh-rows">';
     function kRow(o) { return '<button type="button" class="tvh-row ' + o.cls + '" data-tvh="' + o.act + '">' + o.ic + '<span class="tvh-tx"><b>' + esc(o.t) + (o.lock ? tvLock() : '') + '</b>' + (o.s ? '<span>' + esc(o.s) + '</span>' : '') + '</span><span class="tvh-st ' + o.st + '">' + esc(t1('tv.st.' + o.st)) + '</span><span class="tvh-ch" aria-hidden="true">›</span></button>'; }
     function adds(d) { return d ? t1(d > 0 ? 'tv.row.up' : 'tv.row.down', { v: eur(Math.abs(d)) }) : ''; }

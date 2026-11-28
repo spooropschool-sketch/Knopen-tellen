@@ -2600,3 +2600,32 @@ html.tv3 .tvh-k { color: var(--accent); }
 .tvh-box.ref p { margin: 2px 0 8px; font-size: 14px; font-weight: 400; color: var(--muted); text-align: center; }
 .tvh-box.ref .btn.primary { display: flex; justify-content: center; width: 100%; min-height: 52px; font-size: 16px; }
 html.tv3 .tvh-hint { font-size: 14px; color: var(--muted); }
+
+/* testversie 8, rust op Overzicht en Invullen (28 nov) */
+.tvh-box.ref .btn.primary { min-height: 52px; }
+/* Je cijfers: één kaart met regels */
+html.tv3 .tvk-nums { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+html.tv3 .tvk-num { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 54px; padding: 12px 40px 12px 16px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; }
+html.tv3 .tvk-num span { font-size: 15px; font-weight: 500; color: var(--ink2); }
+html.tv3 .tvk-num b { margin-top: 0; font-size: 18px; }
+html.tv3 .tvk-facts { margin: 0; padding: 12px 16px; font-size: 14px; }
+/* Verder kijken: één kaart met regels, zonder iconen */
+html.tv3 .tvk-cards { display: block !important; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+html.tv3 .tvk-card { width: 100%; min-height: 54px; padding: 12px 40px 12px 16px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; }
+html.tv3 .tvk-card:last-child { border-bottom: 0; }
+html.tv3 .tvk-card img { display: none; }
+html.tv3 .tvk-card b { font-size: 15px; font-weight: 500; }
+html.tv3 .tvk-card::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; margin-top: -5px; border-right: 2px solid var(--accent); border-top: 2px solid var(--accent); transform: rotate(45deg); }
+html.tv3 .tvk-card .tv-lock { margin-left: 6px; }
+/* Invullen: ingeklapte basis als gewone kaart */
+.tvh-fold { margin-top: 14px; }
+.tvh-fold > summary.tvh-fold-s { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.tvh-fold[open] > summary.tvh-fold-s { margin-bottom: 8px; }
+.tvh-fold-s .tvh-tx { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.tvh-fold-s .tvh-tx b { font-size: 16px; }
+.tvh-fold-s .tvh-tx span { font-size: 14px; color: var(--muted); }
+.tvh-fold-s .tvh-check { width: 26px; height: 26px; }
+/* Verfijnen: geen "Optioneel"-labels; de kop zegt al dat het niet nodig is */
+html.tv3 .tvh-st.opt { display: none; }
+/* de pijltjes laten al zien dat je kunt tikken */
+html.tv3 .tvh-hint { display: none; }

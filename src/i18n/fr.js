@@ -826,3 +826,4 @@ Object.assign(I18N.fr, {"tv.ref.go": "Affiner mon résultat", "q.stopTwo": "Il s
 Object.assign(I18N.fr, {"tv.c.nm": "Sexe", "tv.cs.nm": "Votre sexe fixe l’espérance de vie utilisée"});
 Object.assign(I18N.fr, {"tv.ref.sketch": "Ce n’est encore qu’une esquisse. Plus vous complétez, plus votre résultat est précis."});
 Object.assign(I18N.fr, {"tv.pic.of": "sur {w}", "tv.pic.togo": "Encore {d} à trouver.", "tv.pic.ok": "Objectif atteint : {d} en plus.", "tv.ref.sketch": "Plus vous complétez, plus votre résultat est précis."});
+Object.assign(I18N.fr, {"tv.ref.sharp": "Affiner votre résultat", "tv.g.basis2": "Vos bases", "tv.g.basisDone": "Les {n} questions sont répondues"});
