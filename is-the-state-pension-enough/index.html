@@ -3399,7 +3399,7 @@ var TRK = {
     TRK['pro-1-zien-' + k] = ['pro', 'Pro-functie in beeld: ' + k];
     TRK['pro-2-slot-' + k] = ['pro', 'Op het slot getikt (venster open): ' + k];
     TRK['pro-3-wil-' + k] = ['pro', '"Dit wil ik" getikt: ' + k];
-    TRK['pro-3-wil-29'] = ['pro', '"Dit wil ik" getikt bij de vaste prijs van 29 (testversie 8)'];
+    TRK['pro-3-wil-1499'] = ['pro', '"Dit wil ik" getikt bij de vaste prijs van 14,99 (testversie 8)'];
   });
   ['0', '3', '5', '10', '15', '29', '30'].forEach(function (p) { TRK['pro-4-prijs-' + p] = ['pro', 'Pro eenmalig waard: ' + (p === '30' ? 'meer dan 29' : p)]; });
   document.documentElement.classList.add('pro-locked');
@@ -3457,7 +3457,7 @@ var TRK = {
     if (b) { track('pro-4-prijs-' + b.getAttribute('data-pl-p')); $('pl-s2').hidden = true; $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); }
   });
   $('pl-close').addEventListener('click', plClose);
-  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); track('pro-3-wil-29'); $('pl-s1').hidden = true; $('pl-s2').hidden = true;
+  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); track('pro-3-wil-1499'); $('pl-s1').hidden = true; $('pl-s2').hidden = true;
     ['pl-why', 'pl-lh', 'pl-list'].forEach(function (id) { $(id).hidden = true; }); $('pl-h2').textContent = t1('pl.fakeH');
     $('pl-bye').textContent = t1('pl.fake'); $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); });
   document.addEventListener('keydown', function (ev) {
@@ -4677,7 +4677,7 @@ var TRK = {
   /* testversie 7: Invullen in drie lagen. Je basis (de vragen van de route), Verfijn je uitkomst (per leeftijdsgroep een eigen
      volgorde, gratis eerst en Pro achteraan) en Zo rekenen we (de aannames, klein met hun waarde). Niets valt weg: wat niet in de
      volgorde van een groep staat, komt achteraan bij Verfijn. */
-  var TV_ASM = ['tax', 'run', 'aan'], TV_REFO = [['debt', 'big', 'pp', 'curve', 'per', 'nm'], ['debt', 'pp', 'big', 'curve', 'per', 'pot', 'nm'], ['pp', 'debt', 'big', 'curve', 'per', 'pot', 'nm']];   /* testversie 8: verfijnen begint met wat de uitkomst het meest verandert; naam en geslacht als laatste (Paul, 28 nov) */
+  var TV_ASM = ['tax', 'run', 'aan'], TV_REFO = [['debt', 'big', 'pp', 'nm', 'curve', 'per'], ['debt', 'pp', 'big', 'nm', 'curve', 'per', 'pot'], ['pp', 'debt', 'big', 'nm', 'curve', 'per', 'pot']];   /* testversie 8: eerst alles wat gratis is (geslacht ook), de schermen met Pro achteraan (Paul, 28 nov) */   /* testversie 8: verfijnen begint met wat de uitkomst het meest verandert; naam en geslacht als laatste (Paul, 28 nov) */
   var tvRefLeft = -1;   /* na de route: nog zoveel keer Volgende in het rijtje; -1 = vrij doorlopen */
   function tvRefs() {
     var have = {}, L = TV_REFO[state.opbouw ? Math.min(band(), 1) : 2].slice();
@@ -4696,7 +4696,7 @@ var TRK = {
   var TV_PRO = {};   /* testversie 8: geen losse Pro-kaarten meer onder een scherm; de kaart opent waar je op een slotje tikt (Paul, 28 nov) */
   var TV_PROBOX = { debt: ['debts-box', 'debts'], pot: ['pots-box', 'pots'] };   /* hier opent de kaart pas als je het onderdeel met het slotje openklapt (Paul, 28 nov) */   /* schulden: de kaart opent onder Grote schulden (Paul, 28 nov) */
   var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* schermen die alleen uit de Pro-kaart bestaan: één zin uitleg erbij */   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
-  function proPrice() { return prefs.lang === 'nl' ? '€ 29' : (prefs.lang === 'en' ? '€29' : '29 €'); }
+  function proPrice() { return prefs.lang === 'nl' ? '€ 14,99' : (prefs.lang === 'en' ? '€14.99' : '14,99 €'); }   /* testversie 8: van 29 naar 14,99 (Paul, 28 nov) */
   function tvProCard(ch) {
     var h = $('tvc-pro'); if (!h) return;
     var w = ch && TV_PRO[ch.id]; h.hidden = !w; if (!w) { h.innerHTML = ''; return; }
