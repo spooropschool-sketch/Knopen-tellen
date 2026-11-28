@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=e2fb595c">
+<link rel="stylesheet" href="/app.css?v=69ee2b09">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -4283,7 +4283,10 @@ var TRK = {
   /* het blok 'je telling' staat op drie plekken (thuis, in de route, boven een hoofdstuk) en wordt overal door dezelfde functie getekend */
   function tvPaint(host, id) {
     if (!host) return;
-    if (!host.querySelector('.tv-num')) host.innerHTML = '<p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>';
+    if (!host.querySelector('.tv-num')) host.innerHTML = host.id === 'tvh-pic'
+      /* testversie 8: op het Overzicht staat je telling in een ring, als een grote knoop (ontwerp Ring, variant C; Paul, 28 nov) */
+      ? '<div class="tvo-ring"><svg class="tvo-svg" viewBox="0 0 240 240" aria-hidden="true" focusable="false"><circle class="tvo-disc" cx="120" cy="120" r="116"/><circle class="tvo-tr" cx="120" cy="120" r="98"/><circle class="tvo-fg" cx="120" cy="120" r="98" pathLength="100" stroke-dasharray="0 100" transform="rotate(-90 120 120)"/><circle class="tvo-in" cx="120" cy="120" r="80"/><circle class="tvo-hole" cx="107" cy="184" r="3.6"/><circle class="tvo-hole" cx="133" cy="184" r="3.6"/></svg><div class="tvo-tx"><p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p></div></div><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>'
+      : '<p class="tv-k"></p><p class="tv-big"><b class="tv-num">…</b><span class="tv-pm"></span><em class="tv-delta" hidden></em></p><div class="tv-bar" hidden><i class="tv-fill"></i></div><p class="tv-line"></p>';
     var g = function (c) { return host.querySelector(c); }, dl = g('.tv-delta'), bar = g('.tv-bar'), ln = g('.tv-line'), w = state.budget, T = tv.tot || 0, d = id ? (tv.led[id] || 0) : 0;
     g('.tv-k').textContent = state.opbouw ? t1('tv.pic.opb', { a: tvAgeTxt(stopAge()), y: fmtAge(stopAge()) }) + (two() ? ' (' + nm1() + ')' : '') : t1('tv.pic.now');
     g('.tv-pm').textContent = w > 0 ? t1('tv.pic.of', { w: eur(w) }) : t1('tv.pic.pm');   /* testversie 8: het doel staat klein naast het bedrag (Paul, 28 nov) */
@@ -4294,6 +4297,8 @@ var TRK = {
     bar.hidden = !(w > 0);
     if (w > 0) g('.tv-fill').style.width = Math.max(2, Math.min(100, T / w * 100)).toFixed(1) + '%';
     bar.classList.toggle('ok', w > 0 && T >= w);
+    var fg = g('.tvo-fg'); host.classList.toggle('ring', !!fg && w > 0);
+    if (fg) { fg.setAttribute('stroke-dasharray', (w > 0 ? Math.max(1.5, Math.min(100, T / w * 100)) : 0).toFixed(1) + ' 100'); fg.classList.toggle('ok', w > 0 && T >= w); }
     ln.textContent = tv.tot === null ? '' : (w > 0 ? (T >= w ? t1('tv.pic.ok', { w: eur(w), d: eur(T - w) }) : t1('tv.pic.togo', { w: eur(w), d: eur(w - T) })) : (T > 0 ? (Object.keys(tv.led).some(function (k) { return tv.led[k]; }) ? t1('tv.pic.sofar') : (tv.baseSp ? t1('tv.pic.base', { x: cap1(spName()) }) : '')) : t1('tv.pic.zero')));
     ln.className = 'tv-line' + (w > 0 ? (T >= w ? ' ok' : ' gap') : '');
     /* testversie 8: op het eerste vraagscherm is de telling klein en zegt ze alleen wat er al meetelt; de vraag krijgt de aandacht.
@@ -4756,6 +4761,7 @@ var TRK = {
   function tvDelta(d) { return d ? '<span class="tvh-d ' + (d > 0 ? 'up' : 'down') + '">' + esc(tvSigned(d)) + '</span>' : ''; }
   /* ---- testversie 4: de cockpit ---- */
   var TVK_IMG = { mix: 'portefeuilles', lad: 'stijl-gemiddeld', koop: 'koopkracht', plan: 'plannen-vergelijken' };
+  var TVK_KN = { mix: 'sage', lad: 'butter', koop: 'lilac', plan: 'rose' };   /* testversie 8: elk vervolg een eigen knoopkleur */
   /* mini-waaier: dezelfde simulatie als de grote grafiek (gekozen mix, in geld van nu), 10% tot 90% met de middenlijn */
   function tvMiniFan() {
     if (!fanSrc || !(state.budget > 0)) return '<span class="tvk-ph">' + esc(t1('tv.ck.empty')) + '</span>';
@@ -4913,14 +4919,18 @@ var TRK = {
     ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + ($('btn-install') && !$('btn-install').hidden ? tvRow({ act: 'a:install', t: t1('inst.btn'), s: t1('inst.sub') }) : '') + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.wipe')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:wipe', cls: 'danger', t: t1('wipe.row'), s: t1('wipe.rowS') }) + '</div>' + tvTrustLine();
     var LA = $('tva-list'); if (LA.getAttribute('data-s') !== ha) { LA.innerHTML = ha; LA.setAttribute('data-s', ha); }
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
-    var hk = (!fanSrc || !(state.budget > 0)) ? '' : '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* testversie 8: zonder doel geen lege grafiek (Paul, 28 nov) */   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
+    var NU = state.budget > 0 ? tvNums() : [], loop = NU.filter(function (x) { return x.a === 'c:loop'; })[0];
+    var hk = (!fanSrc || !(state.budget > 0)) ? '' : '<button type="button" class="tvk-fan" data-tvh="c:loop"><span class="tvk-h"><img class="tvk-kn" src="/img/knoop-sage.webp" alt="" width="96" height="96"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</button>';
+    if (loop && hk) hk = hk.replace('</span></span></button>', '</span><b class="tvk-capv">' + esc(loop.v) + (state.opbouw && loop.v !== '–' ? ' ' + esc(t1('tv.v.at', { a: Math.round(stopAge()) })) : '') + '</b></span></button>');   /* testversie 8: zonder doel geen lege grafiek (Paul, 28 nov) */   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
     if (state.budget > 0) {   /* testversie 8: zonder doel geen rij met streepjes (Paul, 28 nov) */
-    hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.num')) + '</h2><div class="tvk-nums">' + tvNums().map(function (x) {
-      return x.a ? '<button type="button" class="tvk-num' + (x.w ? ' wide' : '') + '" data-tvh="' + x.a + '"><span>' + esc(x.l) + '</span><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b><svg class="tvk-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' : '';
-    }).join('') + '<p class="tvk-facts">' + tvNums().filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
+    /* testversie 8: twee rustige tegels met een knoop; het vermogen als je stopt staat in de grafiek */
+    var tk = ['slate', 'terra'], ti = 0;
+    hk += '<div class="tvk-nums">' + NU.map(function (x) {
+      return x.a && x.a !== 'c:loop' ? '<button type="button" class="tvk-num" data-tvh="' + x.a + '"><img class="tvk-kn" src="/img/knoop-' + tk[ti++ % 2] + '.webp" alt="" width="96" height="96"><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b><span>' + esc(x.l) + '</span></button>' : '';
+    }).join('') + '<p class="tvk-facts">' + NU.filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
     }
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.more')) + '</h2><div class="tvk-cards">';
-    C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/' + TVK_IMG[c.id] + '.webp" alt="" loading="lazy" width="120" height="120"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });
+    C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/knoop-' + TVK_KN[c.id] + '.webp" alt="" loading="lazy" width="96" height="96"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });
     hk += '</div><p class="tvh-note">' + esc(t1('disc.line')) + '</p>' + tvTrustLine();
     var K = $('tvk'); if (K.getAttribute('data-s') !== hk) { K.innerHTML = hk; K.setAttribute('data-s', hk); }
     if (tvFlash) setTimeout(function () { tvFlash = ''; }, 50);
