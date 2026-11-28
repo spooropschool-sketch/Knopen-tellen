@@ -36,7 +36,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=d151a3fe">
+<link rel="stylesheet" href="/app.css?v=e2fb595c">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -4913,10 +4913,12 @@ var TRK = {
     ha += '</div><h2 class="tvh-g">' + esc(t1('tv.g.again')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:intro', t: t1('tv.a.intro'), s: t1('tv.a.introS') }) + tvRow({ act: 'a:lang', t: t1('tv.a.lang'), s: t1('tv.a.langS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.share')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:share', t: t1('sh.h') }) + tvRow({ act: 'a:tip', t: t1('tc.btn') }) + ($('btn-install') && !$('btn-install').hidden ? tvRow({ act: 'a:install', t: t1('inst.btn'), s: t1('inst.sub') }) : '') + tvRow({ act: 'a:fb', t: t1('duo.tip'), s: t1('duo.tipS') }) + '</div><h2 class="tvh-g">' + esc(t1('tv.g.wipe')) + '</h2><div class="tvh-rows">' + tvRow({ act: 'a:wipe', cls: 'danger', t: t1('wipe.row'), s: t1('wipe.rowS') }) + '</div>' + tvTrustLine();
     var LA = $('tva-list'); if (LA.getAttribute('data-s') !== ha) { LA.innerHTML = ha; LA.setAttribute('data-s', ha); }
     /* Overzicht: de cockpit. Alles klein; tik en het wordt groot (een hoofdstuk of een vraag) */
-    var hk = '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
+    var hk = (!fanSrc || !(state.budget > 0)) ? '' : '<div class="tvk-fan"><span class="tvk-h"><b>' + esc(t1('fan.h')) + '</b></span>' + tvMiniFan() + '</div>';   /* testversie 8: zonder doel geen lege grafiek (Paul, 28 nov) */   /* ronde 3: alleen om te kijken; het vak eronder opent het grote beeld */
+    if (state.budget > 0) {   /* testversie 8: zonder doel geen rij met streepjes (Paul, 28 nov) */
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.num')) + '</h2><div class="tvk-nums">' + tvNums().map(function (x) {
       return x.a ? '<button type="button" class="tvk-num' + (x.w ? ' wide' : '') + '" data-tvh="' + x.a + '"><span>' + esc(x.l) + '</span><b' + (x.c ? ' class="' + x.c + '"' : '') + '>' + esc(x.v) + '</b><svg class="tvk-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' : '';
     }).join('') + '<p class="tvk-facts">' + tvNums().filter(function (x) { return !x.a; }).map(function (x) { return '<span>' + esc(x.l) + ' <b>' + esc(x.v) + '</b></span>'; }).join('') + '</p></div>';
+    }
     hk += '<h2 class="tvh-g">' + esc(t1('tv.ck.more')) + '</h2><div class="tvk-cards">';
     C.forEach(function (c) { if (c.g === 'zien' && TVK_IMG[c.id]) hk += '<button type="button" class="tvk-card" data-tvh="c:' + c.id + '"><img src="/img/' + TVK_IMG[c.id] + '.webp" alt="" loading="lazy" width="120" height="120"><b>' + esc(tvChTitle(c)) + '</b>' + (c.pro ? tvLock() : '') + '</button>'; });
     hk += '</div><p class="tvh-note">' + esc(t1('disc.line')) + '</p>' + tvTrustLine();
