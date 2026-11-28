@@ -3395,6 +3395,7 @@ var TRK = {
     TRK['pro-1-zien-' + k] = ['pro', 'Pro-functie in beeld: ' + k];
     TRK['pro-2-slot-' + k] = ['pro', 'Op het slot getikt (venster open): ' + k];
     TRK['pro-3-wil-' + k] = ['pro', '"Dit wil ik" getikt: ' + k];
+    TRK['pro-3-wil-29'] = ['pro', '"Dit wil ik" getikt bij de vaste prijs van 29 (testversie 8)'];
   });
   ['0', '3', '5', '10', '15', '29', '30'].forEach(function (p) { TRK['pro-4-prijs-' + p] = ['pro', 'Pro eenmalig waard: ' + (p === '30' ? 'meer dan 29' : p)]; });
   document.documentElement.classList.add('pro-locked');
@@ -3431,7 +3432,7 @@ var TRK = {
     track('pro-2-slot-' + w);
     $('pl-h2').textContent = T.title; $('pl-why').textContent = T.f[w][1]; $('pl-wip').textContent = T.wip; $('pl-lh').textContent = T.list;
     $('pl-list').innerHTML = PL_ORDER.map(function (k) { return '<li' + (k === w ? ' class="cur"' : '') + '>' + esc(T.f[k][0]) + '</li>'; }).join('');
-    $('pl-want').textContent = T.want; $('pl-close').textContent = T.close;
+    $('pl-want').textContent = T.want + ' · ' + proPrice(); $('pl-close').textContent = T.close;   /* testversie 8: één vaste prijs in plaats van een peiling */
     $('pl-thanks').textContent = T.thanks; $('pl-only').textContent = T.only; $('pl-bye').textContent = T.bye;
     /* testversie 8: de prijsvraag toetst de prijsrichting uit het businessplan, €15 tot €29 eenmalig (Paul, 28 nov) */
     var P = [['0', T.p0], ['15', '€ 15'], ['29', '€ 29'], ['30', t1('pl.pMore')]];
@@ -3448,7 +3449,7 @@ var TRK = {
     if (b) { track('pro-4-prijs-' + b.getAttribute('data-pl-p')); $('pl-s2').hidden = true; $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); }
   });
   $('pl-close').addEventListener('click', plClose);
-  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); $('pl-s1').hidden = true; $('pl-s2').hidden = false; var f = $('pl-prices').querySelector('button'); if (f) f.focus({ preventScroll: true }); });
+  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); track('pro-3-wil-29'); $('pl-s1').hidden = true; $('pl-s2').hidden = true; $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); });
   document.addEventListener('keydown', function (ev) {
     if (plM.hidden) return;
     if (ev.key === 'Escape') { ev.stopPropagation(); plClose(); } else if (ev.key === 'Tab') { ev.stopPropagation(); trap(plM, ev); }
@@ -4665,15 +4666,22 @@ var TRK = {
   /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
   /* testversie 8: in de verfijnschermen kom je een paar keer langs Pro, met een echte knop (Paul, 28 nov) */
   var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans', pot: 'pots', debt: 'debts' };
-  var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
+  var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* schermen die alleen uit de Pro-kaart bestaan: één zin uitleg erbij */   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
+  function proPrice() { return prefs.lang === 'nl' ? '€ 29' : (prefs.lang === 'en' ? '€29' : '29 €'); }
   function tvProCard(ch) {
     var h = $('tvc-pro'); if (!h) return;
     var w = ch && TV_PRO[ch.id]; h.hidden = !w; if (!w) { h.innerHTML = ''; return; }
     var T = plT();
-    var X = TV_PROTX[ch.id] || ['', ''], tt = X[0] ? t1(X[0]) : T.f[w][0], ss = X[1] ? t1(X[1]) : T.f[w][1];
-    h.classList.toggle('solo', !!TV_PROTX[ch.id]);
-    h.innerHTML = '<div class="tvp-card"><img src="img/pro-slot.webp" alt="" width="96" height="96"><div class="tvp-tx"><b>' + esc(tt) + '</b><span>' + esc(ss) + '</span></div>' +
-      '<button type="button" class="btn tvp-go" data-tvpro="' + w + '">' + esc(t1('tv.pro.go')) + '</button></div>';
+    /* testversie 8, ontwerp C (Paul, 28 nov): wat je al hebt met een vinkje, wat Pro toevoegt gestippeld, en één vaste prijs.
+       De vinkjes komen uit je eigen invulling, nooit een vast rijtje. */
+    var X = TV_PROTX[ch.id], ok = [], pro = [w].concat(['spend-curve', 'plans', 'debts', 'pots'].filter(function (k) { return k !== w; })).slice(0, 3);
+    var S = tvSteps(); if (S.length && S.every(function (q) { return tv.done[q.id]; })) ok.push(t1('tv.g.basis2'));
+    tvRefs().forEach(function (c) { if (tv.vf[c.id] && !c.pro && !TV_PROTX[c.id]) ok.push(tvChTitle(c)); });
+    ok = ok.slice(0, 3);
+    h.classList.toggle('solo', !!X);
+    h.innerHTML = '<div class="tvp-card"><b class="tvp-h">' + esc(t1('tv.pro.h')) + '</b>' + (X ? '<p class="tvp-p">' + esc(t1(X[1])) + '</p>' : '') +
+      '<ul class="tvp-ck">' + ok.map(function (x) { return '<li class="ok">' + esc(x) + '</li>'; }).join('') + pro.map(function (k) { return '<li class="pro">' + esc(T.f[k][0]) + '</li>'; }).join('') + '</ul>' +
+      '<button type="button" class="btn tvp-go" data-tvpro="' + w + '">' + esc(t1('tv.pro.cta', { p: proPrice() })) + '</button><small class="tvp-s">' + esc(t1('tv.pro.once')) + '</small></div>';
     track('pro-1-zien-' + w);
   }
   function tvRefFoot(ch) {

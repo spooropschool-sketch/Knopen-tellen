@@ -846,3 +846,4 @@ Object.assign(I18N.nl, {"big.who": "De leeftijd is die van jou."});
 Object.assign(I18N.nl, {"tv.pro.go": "Bekijk Pro"});
 Object.assign(I18N.nl, {"tv.pro.curveS": "Onderzoek in Nederland, het Verenigd Koninkrijk en de Verenigde Staten laat zien: hoe ouder mensen worden, hoe minder ze gemiddeld uitgeven. Pro rekent met dat verloop. Vaak heb je dan flink minder nodig."});
 Object.assign(I18N.nl, {"pl.pMore": "Meer dan € 29"});
+/* testversie 8: Pro-kaart ontwerp C */ Object.assign(I18N.nl, {"tv.pro.h": "Nog één stap naar het hele beeld", "tv.pro.cta": "Maak je plan compleet · {p}", "tv.pro.once": "Eenmalig, geen abonnement."});

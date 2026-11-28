@@ -867,3 +867,4 @@ Object.assign(I18N.en, {"big.who": "The age is yours."});
 Object.assign(I18N.en, {"tv.pro.go": "See Pro"});
 Object.assign(I18N.en, {"tv.pro.curveS": "Research in the Netherlands, the UK and the US shows that the older people get, the less they spend on average. Pro calculates with that pattern. You often need quite a bit less."});
 Object.assign(I18N.en, {"pl.pMore": "More than €29"});
+/* testversie 8: Pro-kaart ontwerp C */ Object.assign(I18N.en, {"tv.pro.h": "One step to the full picture", "tv.pro.cta": "Complete your plan · {p}", "tv.pro.once": "One-time, no subscription."});
