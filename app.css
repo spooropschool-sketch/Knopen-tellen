@@ -2691,3 +2691,7 @@ html.tv3 #tvr-pic .tv-big { min-height: 44px; }
 html.tv3 #tvr-pic .tv-big { flex-wrap: nowrap; }
 html.tv3 #tvr-pic .tv-big span { white-space: nowrap; }
 html.tv3 #tvr-pic .tv-delta { margin-left: auto; flex: none; }
+/* testversie 8, variant C (Paul, 28 nov): in de route is de teller een rustige regel zonder kader; de vraag staat in een eigen kaart */
+html.tv3 #tvr-pic { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 4px 2px 0 !important; margin-bottom: 18px !important; }
+html.tv3 #tvr-body { flex: 0 0 auto !important; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px 12px 14px; margin: 0 -4px; box-shadow: 0 14px 30px -22px rgba(0, 0, 0, 0.6); }
+html.tv3 #tvr-body .tvr-q { font-size: 22px !important; }
