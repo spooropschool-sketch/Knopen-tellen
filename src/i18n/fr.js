@@ -838,3 +838,4 @@ Object.assign(I18N.fr, {"tv.pro.go": "Voir Pro"});
 Object.assign(I18N.fr, {"tv.pro.curveS": "Des études aux Pays-Bas, au Royaume-Uni et aux États-Unis montrent qu’en vieillissant, on dépense en moyenne de moins en moins. Pro calcule avec cette évolution. Il vous faut souvent nettement moins."});
 Object.assign(I18N.fr, {"pl.pMore": "Plus de 29 €"});
 /* testversie 8: Pro-kaart ontwerp C */ Object.assign(I18N.fr, {"tv.pro.h": "Encore une étape vers la vue complète", "tv.pro.cta": "Complétez votre plan · {p}", "tv.pro.once": "Paiement unique, sans abonnement."});
+/* testversie 8: Pro-venster als echte aankoop, eerlijk na de tik */ Object.assign(I18N.fr, {"pl.inPro": "Pro comprend :", "pl.fakeH": "Pro est encore en préparation", "pl.fake": "Rien n’a été facturé. Merci : votre clic aide à choisir ce qui viendra en premier. La base reste gratuite."});

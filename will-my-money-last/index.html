@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=b493dae8">
+<link rel="stylesheet" href="/app.css?v=4df94466">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -519,7 +519,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/en.js?v=c595b5d0"></script>
+<script src="/i18n/en.js?v=4656722c"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -3449,6 +3449,10 @@ var TRK = {
     if (prefs.lang === 'en') P[1][1] = '€15', P[2][1] = '€29';
     $('pl-prices').innerHTML = P.map(function (p) { return '<button type="button" data-pl-p="' + p[0] + '">' + esc(p[1]) + '</button>'; }).join('');
     $('pl-s1').hidden = false; $('pl-s2').hidden = true; $('pl-bye').hidden = true;
+    /* testversie 8 (Paul, 28 nov): het venster doet alsof Pro er al is, zodat een tik op 'Dit wil ik' een echt koopbesluit meet.
+       Pas na die tik staat er eerlijk dat Pro nog in de maak is en dat er niets is afgerekend. Geen e-mailadres. */
+    $('pl-h2').textContent = 'Pro'; $('pl-wip').hidden = true; $('pl-lh').textContent = t1('pl.inPro');
+    ['pl-why', 'pl-lh', 'pl-list'].forEach(function (id) { $(id).hidden = false; });
     plBack = document.activeElement; plM.hidden = false; $('pl-want').focus({ preventScroll: true });
   }
   function plClose() { plM.hidden = true; if (plBack && plBack.focus) plBack.focus({ preventScroll: true }); }
@@ -3458,7 +3462,9 @@ var TRK = {
     if (b) { track('pro-4-prijs-' + b.getAttribute('data-pl-p')); $('pl-s2').hidden = true; $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); }
   });
   $('pl-close').addEventListener('click', plClose);
-  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); track('pro-3-wil-29'); $('pl-s1').hidden = true; $('pl-s2').hidden = true; $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); });
+  $('pl-want').addEventListener('click', function () { track('pro-3-wil-' + plCur); track('pro-3-wil-29'); $('pl-s1').hidden = true; $('pl-s2').hidden = true;
+    ['pl-why', 'pl-lh', 'pl-list'].forEach(function (id) { $(id).hidden = true; }); $('pl-h2').textContent = t1('pl.fakeH');
+    $('pl-bye').textContent = t1('pl.fake'); $('pl-bye').hidden = false; $('pl-close').focus({ preventScroll: true }); });
   document.addEventListener('keydown', function (ev) {
     if (plM.hidden) return;
     if (ev.key === 'Escape') { ev.stopPropagation(); plClose(); } else if (ev.key === 'Tab') { ev.stopPropagation(); trap(plM, ev); }
@@ -3482,16 +3488,16 @@ var TRK = {
     else if (g) w = g.getAttribute('data-pl');
     else if (t.closest('[data-tvpro]')) w = t.closest('[data-tvpro]').getAttribute('data-tvpro');
     else if (t.closest('[data-sl-pro]')) { w = 'plans'; track('pro-sl-teaser'); }
-    else if (t.closest('#pots-box > summary')) w = 'pots';
-    else if (t.closest('#debts-box > summary') && tvFocusCh && tvFocusCh.id === 'debt') {   /* testversie 8: in het schuldenscherm klapt Grote schulden open met de Pro-kaart */
+    else if (tvFocusCh && TV_PROBOX[tvFocusCh.id] && t.closest('#' + TV_PROBOX[tvFocusCh.id][0] + ' > summary')) {   /* testversie 8: Grote schulden en Extra pensioen of pot klappen open met de Pro-kaart */
       ev.preventDefault(); ev.stopPropagation();
-      var db = $('debts-box'), sl = db.querySelector('.tvp-slot');
+      var PB = TV_PROBOX[tvFocusCh.id], db = $(PB[0]), sl = db.querySelector('.tvp-slot');
       if (!sl) { sl = document.createElement('div'); sl.className = 'tvp-slot'; db.querySelector('summary').insertAdjacentElement('afterend', sl); }
       var op = !db.classList.contains('tvp-open'); db.classList.toggle('tvp-open', op); db.open = op;
-      sl.innerHTML = op ? tvProHtml('debts', 'debt') : '';
-      if (op) { track('pro-1-zien-debts'); track('pro-2-slot-debts'); }
+      sl.innerHTML = op ? tvProHtml(PB[1], tvFocusCh.id) : '';
+      if (op) { track('pro-1-zien-' + PB[1]); track('pro-2-slot-' + PB[1]); }
       return;
     }
+    else if (t.closest('#pots-box > summary')) w = 'pots';
     else if (t.closest('#debts-box > summary')) w = 'debts';
     else if (t.closest('#sh-print')) w = 'print';
     else if (t.closest('#sh-copy')) w = 'summary';
@@ -4684,7 +4690,8 @@ var TRK = {
   function tvRefMark(id) { if (!tv.vf[id]) { tv.vf[id] = 1; tvSave(); track('extra-ref-done'); } }
   /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
   /* testversie 8: in de verfijnschermen kom je een paar keer langs Pro, met een echte knop (Paul, 28 nov) */
-  var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans', pot: 'pots' };   /* schulden: de kaart opent onder Grote schulden (Paul, 28 nov) */
+  var TV_PRO = { curve: 'spend-curve', per: 'period', lad: 'spend-curve', pp: 'plans' };
+  var TV_PROBOX = { debt: ['debts-box', 'debts'], pot: ['pots-box', 'pots'] };   /* hier opent de kaart pas als je het onderdeel met het slotje openklapt (Paul, 28 nov) */   /* schulden: de kaart opent onder Grote schulden (Paul, 28 nov) */
   var TV_PROTX = { curve: ['', 'tv.pro.curveS'], per: ['inl.h', 'inl.proWhy'] };   /* schermen die alleen uit de Pro-kaart bestaan: één zin uitleg erbij */   /* eigen tekst waar het Pro-scherm het hele hoofdstuk is */
   function proPrice() { return prefs.lang === 'nl' ? '€ 29' : (prefs.lang === 'en' ? '€29' : '29 €'); }
   function tvProCard(ch) {

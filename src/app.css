@@ -2747,6 +2747,7 @@ html[data-tvc="curve"] #snel, html[data-tvc="per"] #snel, html[data-tvc="curve"]
 .tvc-foot .btn.tvc-prev { flex: 0 0 auto; padding-left: 22px; padding-right: 22px; }
 /* testversie 8: Pro-kaart onder Grote schulden */
 .tvp-slot { display: none; }
-#debts-box.tvp-open .tvp-slot { display: block; margin: 4px 12px 12px; }
+#debts-box.tvp-open .tvp-slot, #pots-box.tvp-open .tvp-slot { display: block; margin: 4px 12px 12px; }
 #debts-box.tvp-open > summary .pots-h::after { content: ""; }
 html[data-tvc="debt"] #debts-box .pots-in { display: none !important; }
+html[data-tvc="pot"] #pots-box .pots-in { display: none !important; }
