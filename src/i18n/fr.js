@@ -833,3 +833,5 @@ Object.assign(I18N.fr, {"iq.ctry": "Pays : {c} · modifier"});
 /* testversie 8: telling na alleen of met partner */ Object.assign(I18N.fr, {"tv.pic.base2": "{x} pour vous deux compte déjà. Vous ajoutez le reste vous-même."});
 /* testversie 8: klein vak met alleen het staatspensioen */ Object.assign(I18N.fr, {"tv.pic.spK": "{x}, par mois plus tard", "tv.pic.spK2": "{x} pour vous deux, par mois plus tard"});
 /* testversie 8: inleg en bijverdienen per persoon stap voor stap */ Object.assign(I18N.fr, {"tv.pp.q": "Encore un revenu après l’arrêt ?", "tv.pp.save": "{v} mis de côté par mois", "tv.pp.work": "revenu {v} jusqu’à {a}", "tv.pp.nowork": "pas de revenu après l’arrêt"});
+Object.assign(I18N.fr, {"big.who": "L’âge est le vôtre."});
+Object.assign(I18N.fr, {"tv.pro.go": "Voir Pro"});

@@ -41,7 +41,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-600.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-400.woff" crossorigin>
 <link rel="preload" as="font" type="font/woff" href="/fonts/inter-600.woff" crossorigin>
-<link rel="stylesheet" href="/app.css?v=aeaa0a48">
+<link rel="stylesheet" href="/app.css?v=39e82d0c">
 <link rel="preload" as="image" href="/img/hero-overzicht.webp" fetchpriority="high">
 <script data-goatcounter="https://countingbuttons.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -354,6 +354,7 @@
     </footer>
   </section>
 
+  <div class="tvc-pro" id="tvc-pro" hidden></div>
   <div class="tvc-foot" id="tvc-foot" hidden></div>
 </main>
 
@@ -518,7 +519,7 @@
 </div>
 
 <script src="/model.js?v=19d6d156" data-model></script>
-<script src="/i18n/es.js?v=76532f83"></script>
+<script src="/i18n/es.js?v=1c02883b"></script>
 <script>
 (function () {
   /* ================= landen, talen en gegevens ================= */
@@ -3477,6 +3478,7 @@ var TRK = {
     var t = ev.target, w = null, g = t.closest('.pl-gate'), pt = t.closest('.pro-tag');
     if (pt) w = pt.getAttribute('data-pro');
     else if (g) w = g.getAttribute('data-pl');
+    else if (t.closest('[data-tvpro]')) w = t.closest('[data-tvpro]').getAttribute('data-tvpro');
     else if (t.closest('[data-sl-pro]')) { w = 'plans'; track('pro-sl-teaser'); }
     else if (t.closest('#pots-box > summary')) w = 'pots';
     else if (t.closest('#debts-box > summary')) w = 'debts';
@@ -4067,7 +4069,7 @@ var TRK = {
         return '<div class="inl-row">' + numIn('big-a-' + i, A + ' data-f="a" aria-label="' + esc(t1('big.amt')) + '"', r.a, true) + '<span class="unit">' + esc(curSym()) + '</span><span>' + esc(t1('big.at')) + '</span>' +
           '<input type="text" inputmode="numeric" maxlength="3" class="inl-a" ' + A + ' data-f="f" value="' + r.f + '" aria-label="' + esc(t1('big.at')) + '"><span>' + esc(t1('u.years')) + '</span>' +
           '<button type="button" class="per-x" data-big-del="' + i + '" aria-label="' + esc(t1('big.del')) + '">✕</button></div>';
-      }).join('') + (R.length < 3 ? '<button type="button" class="btn ghost sm" id="big-add">' + esc(t1('big.add')) + '</button>' : '') + (two() ? '<p class="hint">' + esc(t1('q.stopTwo')) + '</p>' : '');
+      }).join('') + (R.length < 3 ? '<button type="button" class="btn ghost sm" id="big-add">' + esc(t1('big.add')) + '</button>' : '') + (two() && R.length ? '<p class="hint">' + esc(t1('big.who')) + '</p>' : '');   /* testversie 8: eigen zin; die over de stopleeftijd hoorde hier niet (Paul, 28 nov) */
     }
     var on = bigOn(), n = $('big-n'); if (n) { n.hidden = !on.length; n.textContent = on.length; }
     var ln = $('big-line');
@@ -4663,7 +4665,18 @@ var TRK = {
   function tvRefFirst() { var L = tvRefs(); for (var i = 0; i < L.length; i++) if (!tv.vf[L[i].id]) return L[i]; return null; }
   function tvRefMark(id) { if (!tv.vf[id]) { tv.vf[id] = 1; tvSave(); track('extra-ref-done'); } }
   /* onder een verfijnscherm: Klaar, en Volgende naar de eerstvolgende knoop die nog open staat */
+  /* testversie 8: in de verfijnschermen kom je een paar keer langs Pro, met een echte knop (Paul, 28 nov) */
+  var TV_PRO = { basis: 'spend-curve', lad: 'spend-curve', pp: 'plans', pot: 'pots', debt: 'debts' };
+  function tvProCard(ch) {
+    var h = $('tvc-pro'); if (!h) return;
+    var w = ch && TV_PRO[ch.id]; h.hidden = !w; if (!w) { h.innerHTML = ''; return; }
+    var T = plT();
+    h.innerHTML = '<div class="tvp-card"><img src="/img/pro-slot.webp" alt="" width="96" height="96"><div class="tvp-tx"><b>' + esc(T.f[w][0]) + '</b><span>' + esc(T.f[w][1]) + '</span></div>' +
+      '<button type="button" class="btn tvp-go" data-tvpro="' + w + '">' + esc(t1('tv.pro.go')) + '</button></div>';
+    track('pro-1-zien-' + w);
+  }
   function tvRefFoot(ch) {
+    tvProCard(ch);
     var f = $('tvc-foot'); if (!f) return;
     var on = !!(ch && tvIsRef(ch.id)); f.hidden = !on; if (!on) { f.innerHTML = ''; return; }
     var nx = tvRefLeft === 0 ? null : tvRefNext(ch.id);
